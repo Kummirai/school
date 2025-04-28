@@ -10,11 +10,20 @@
 
 <div class="list-group">
     {% for video in videos %}
-    <div class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{ video.title }}</h5>
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">{{ video.title }}</h5>
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ video.url }}" target="_blank" class="btn btn-outline-danger btn-sm">
+                    <i class="bi bi-play-circle"></i> Watch Video
+                </a>
+                <small class="text-muted">
+                    {% if video.duration %}
+                    {{ video.duration }} mins
+                    {% endif %}
+                </small>
+            </div>
         </div>
-        <a href="{{ video.url }}" target="_blank" class="btn btn-sm btn-success mt-2">Watch Video</a>
     </div>
     {% endfor %}
 </div>
