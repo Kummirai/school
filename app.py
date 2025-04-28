@@ -2,9 +2,36 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from functools import wraps
+import psycopg2
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+load_dotenv()  # Load environment variables from .env file
+
+app = Flask(__name__)
+
+# PostgreSQL configuration
+def get_db_connection():
+    conn = psycopg2.connect(
+        host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        port=os.getenv('DB_PORT')
+    )
+    return conn
+
+@app.route('/')
+def home():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT version();')
+    db_version = cur.fetchone()
+    cur.close()
+    conn.close()
+    return f'PostgreSQL version: {db_version[0]}'
 
 # Mock database (replace with real database in production)
 # User database structure
@@ -72,24 +99,6 @@ def login_required(f):
 def home():
     return render_template('home.html')
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-        
-#         # Check if user exists and password matches
-#         user_data = users.get(username)
-#         if user_data and check_password_hash(user_data['password'], password):
-#             session['username'] = username
-#             session['role'] = user_data['role']  # Store user role in session
-#             flash('Logged in successfully!', 'success')
-#             next_page = request.args.get('next')
-#             return redirect(next_page or url_for('tutorials_home'))
-#         else:
-#             flash('Invalid username or password', 'danger')
-    
-#     return render_template('auth/login.html')
 
 # And your login route sets the role properly:
 @app.route('/login', methods=['GET', 'POST'])
