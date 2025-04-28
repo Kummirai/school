@@ -97,7 +97,8 @@ def get_all_categories():
     categories = cur.fetchall()
     cur.close()
     conn.close()
-    return 
+    return categories
+
 def get_category_name(category_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -141,8 +142,6 @@ def delete_student_by_id(student_id):
     conn.commit()
     cur.close()
     conn.close()
-
-
 
 @app.context_processor
 def inject_categories():
@@ -306,7 +305,13 @@ def tutorial_language(category_id):
     if not videos:
         flash('Tutorial category not found', 'danger')
         return redirect(url_for('tutorials_home'))
-    return render_template('tutorials/language.html', videos=videos)
+    
+    # Get the category name
+    category_name = get_category_name(category_id)
+    
+    return render_template('tutorials/language.html', 
+                         videos=videos,
+                         category={'id': category_id, 'name': category_name})
 
 # Admin dashboard
 @app.route('/admin')
