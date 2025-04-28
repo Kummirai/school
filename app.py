@@ -233,7 +233,6 @@ def add_tutorial():
                 flash('All fields are required', 'danger')
                 return redirect(url_for('add_tutorial'))
             
-            # Add validation for URL format if needed
             add_video(title, url, category_id)
             flash('Tutorial added successfully', 'success')
             return redirect(url_for('manage_tutorials'))
@@ -241,6 +240,10 @@ def add_tutorial():
         except Exception as e:
             flash(f'Error adding tutorial: {str(e)}', 'danger')
             return redirect(url_for('add_tutorial'))
+    
+    # GET request - show the form
+    categories = get_all_categories()
+    return render_template('admin/add_tutorial.html', categories=categories)
     
     # GET request - show the form
     categories = get_all_categories()

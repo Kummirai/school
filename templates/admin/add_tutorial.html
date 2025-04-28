@@ -5,17 +5,17 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">Add New Tutorial</h1>
-    
+
     <div class="card">
         <div class="card-body">
             <form method="POST">
                 <div class="mb-3">
-                    <label for="language" class="form-label">Language/Category</label>
-                    <select class="form-select" id="language" name="language" required>
-                        {% for language in languages %}
-                        <option value="{{ language }}">{{ language|capitalize }}</option>
+                    <label for="category_id" class="form-label">Category</label>
+                    <select class="form-select" id="category_id" name="category_id" required>
+                        <option value="" disabled selected>Select a category</option>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
                         {% endfor %}
-                        <option value="new">Create New Category</option>
                     </select>
                 </div>
                 <div class="mb-3">
