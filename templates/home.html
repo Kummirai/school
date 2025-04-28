@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron bg-light p-5 rounded-lg">
+    <h1 class="display-4">Welcome {% if 'username' in session %}back, {{ session['username'] }}{% else %}to
+        MiltonTutor<span class="fw-bold text-dark">&plus;</span>{% endif %}</h1>
+    <p class="lead">
+        {% if 'username' in session %}
+        Continue your learning journey with our tutorials.
+        {% else %}
+        Your one-stop resource for learning web development and programming.
+        {% endif %}
+    </p>
+    <hr class="my-4">
+
+    {% if 'username' not in session %}
+    <p>Login to access our full library of video tutorials.</p>
+    <a class="btn btn-danger btn-lg" href="{{ url_for('login') }}" role="button">Login to Access Tutorials</a>
+    {% else %}
+    <a class="btn btn-danger btn-lg" href="{{ url_for('tutorials_home') }}" role="button">
+        <i class="bi bi-collection-play"></i> Browse Tutorials
+    </a>
+    {% endif %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <h5 class="card-title">HTML</h5>
+                <p class="card-text">Learn the building blocks of web pages with our comprehensive HTML tutorials.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <h5 class="card-title">CSS</h5>
+                <p class="card-text">Make your websites beautiful with our CSS styling tutorials.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <h5 class="card-title">JavaScript</h5>
+                <p class="card-text">Add interactivity to your websites with JavaScript programming.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <h5 class="card-title">Python</h5>
+                <p class="card-text">Learn Python programming from basics to web development with Flask.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <h5 class="card-title">Microsoft Office</h5>
+                <p class="card-text">Master Microsoft Office the tools that power the world.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

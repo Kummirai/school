@@ -1,0 +1,49 @@
+/* Sticky footer styles */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Viewport height */
+}
+
+main {
+    flex: 1;  /* This makes the main content grow to push footer down */
+}
+
+footer {
+    margin-top: auto;  /* Pushes footer to bottom */
+}
+
+/* Optional: Add some spacing */
+footer {
+    padding: 1rem 0;
+}
+
+
+.jumbotron {
+    background-color: #f8f9fa;
+    border-radius: 0.3rem;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,.1);
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
