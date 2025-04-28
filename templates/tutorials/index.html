@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ category_name }}</h5>
-                    <a href="{{ url_for('tutorial_language', category_id=category_data.id) }}" class="btn btn-primary">
+                    <a href="{{ url_for('tutorial_language', category_id=category_data.id) }}" class="btn btn-danger">
                         View Tutorials ({{ category_data.videos|length }})
                     </a>
                 </div>
