@@ -377,8 +377,8 @@ if __name__ == '__main__':
 #     # Enable Flask debug features
 #     app.debug = True  # Enables auto-reloader and debugger
     
-#     # Initialize database
-#     initialize_database()
+    # Initialize database
+    # initialize_database()
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # # Run the development server
+    # app.run(host='0.0.0.0', port=5000)
