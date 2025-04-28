@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Tutorials{% endblock %}
-
 {% block content %}
-<h1 class="mb-4">Available Tutorials</h1>
-
-<div class="row">
-    {% for lang, data in tutorials.items() %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">{{ data.title }}</h5>
-                <p class="card-text">{{ data.videos|length }} video tutorials available</p>
-                <a href="{{ url_for('tutorial_language', language=lang) }}" class="btn btn-danger">View Tutorials</a>
+<div class="container mt-4">
+    <h2>Tutorial Categories</h2>
+    <div class="row">
+        {% for category_name, category_data in tutorials.items() %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category_name }}</h5>
+                    <a href="{{ url_for('tutorial_language', category_id=category_data.id) }}" class="btn btn-primary">
+                        View Tutorials ({{ category_data.videos|length }})
+                    </a>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

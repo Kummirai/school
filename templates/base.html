@@ -33,18 +33,15 @@
                                 Tutorials
                             </a>
                             <ul class="dropdown-menu">
+                                {% if categories %}
+                                {% for category in categories %}
                                 <li><a class="dropdown-item"
-                                        href="{{ url_for('tutorial_language', language='html') }}">HTML</a></li>
-                                <li><a class="dropdown-item"
-                                        href="{{ url_for('tutorial_language', language='css') }}">CSS</a></li>
-                                <li><a class="dropdown-item"
-                                        href="{{ url_for('tutorial_language', language='javascript') }}">JavaScript</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="{{ url_for('tutorial_language', language='python') }}">Python</a></li>
-                                <li><a class="dropdown-item"
-                                        href="{{ url_for('tutorial_language', language='microsoft') }}">Microsoft</a>
-                                </li>
+                                        href="{{ url_for('tutorial_language', category_id=category[0]) }}">{{
+                                        category[1] }}</a></li>
+                                {% endfor %}
+                                {% else %}
+                                <li><span class="dropdown-item text-muted">No tutorials available</span></li>
+                                {% endif %}
                             </ul>
                         </li>
                         {% endif %}
@@ -60,8 +57,7 @@
                                 <li><a class="dropdown-item" href="{{ url_for('manage_students') }}">Manage Students</a>
                                 </li>
                                 <li><a class="dropdown-item" href="{{ url_for('manage_tutorials') }}">Manage
-                                        Tutorials</a>
-                                </li>
+                                        Tutorials</a></li>
                             </ul>
                         </li>
                         {% endif %}
