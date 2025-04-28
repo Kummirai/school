@@ -10,7 +10,8 @@ load_dotenv()
 
 # Create Flask app
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY')
+#app.secret_key = os.getenv('FLASK_SECRET_KEY')
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 
 if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
@@ -240,10 +241,6 @@ def add_tutorial():
         except Exception as e:
             flash(f'Error adding tutorial: {str(e)}', 'danger')
             return redirect(url_for('add_tutorial'))
-    
-    # GET request - show the form
-    categories = get_all_categories()
-    return render_template('admin/add_tutorial.html', categories=categories)
     
     # GET request - show the form
     categories = get_all_categories()
