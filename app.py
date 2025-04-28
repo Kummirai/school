@@ -328,7 +328,7 @@ def tutorial_language(category_id):
 @admin_required
 def admin_dashboard():
     students = get_students()
-    categories = get_all_categories()
+    categories = get_all_videos()
     return render_template('admin/dashboard.html', student_count=len(students), category_count=len(categories))
 
 @app.route('/admin/students')
