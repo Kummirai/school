@@ -23,7 +23,8 @@ def get_db_connection():
         database=os.getenv('DB_NAME'),
         user=os.getenv('DB_USER'),
         password=os.getenv('DB_PASSWORD'),
-        port=os.getenv('DB_PORT')
+        port=os.getenv('DB_PORT'),
+        sslmode='require'
     )
     return conn
 
@@ -360,5 +361,6 @@ def forbidden(e):
     return render_template('errors/403.html'), 403
 
 if __name__ == '__main__':
-    initialize_database()  # <- create tables if they don't exist
-    app.run(debug=True)
+    from waitress import serve
+    initialize_database()
+    serve(app, host="0.0.0.0", port=5000)
