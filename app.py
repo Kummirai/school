@@ -59,6 +59,7 @@ def initialize_database():
     )
     ''')
 
+
     conn.commit()
 
     # Check if there are any users
