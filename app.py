@@ -268,10 +268,6 @@ def delete_tutorial(video_id):
 def home():
     return render_template('home.html')
 
-@app.route('/')
-def home():
-    return redirect("https://miltontutorpluschool.onrender.com", code=301)
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
