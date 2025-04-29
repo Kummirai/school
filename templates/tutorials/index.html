@@ -8,7 +8,7 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title fw-light">{{ category_name }}</h6>
+                    <h6 class="card-title fw-normal">{{ category_name }}</h6>
                     <a href="{{ url_for('tutorial_language', category_id=category_data.id) }}" class="btn btn-danger">
                         View Tutorials ({{ category_data.videos|length }})
                     </a>
