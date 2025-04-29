@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="jumbotron bg-light p-2 rounded-lg">
-    <h1 class="display-3">Welcome {% if 'username' in session %}back, {{ session['username'] }}{% else %}to
+    <h1 class="display-3">Welcome {% if 'username' in session %}back, <span class="text-danger">{{ session['username'] }}</span>{% else %}to
         MiltonTutor<span class="fw-bold text-warning">&plus;</span>{% endif %}</h1>
     <p class="lead">
         {% if 'username' in session %}
