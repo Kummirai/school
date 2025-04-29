@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 import psycopg2
@@ -267,6 +267,10 @@ def delete_tutorial(video_id):
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/')
+def home():
+    return redirect("https://miltontutorpluschool.onrender.com", code=301)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
