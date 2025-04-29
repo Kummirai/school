@@ -2,13 +2,13 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Tutorial Categories</h2>
+    <h2 class="fs-5">Tutorial Categories</h2>
     <div class="row">
         {% for category_name, category_data in tutorials.items() %}
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ category_name }}</h5>
+                    <h6 class="card-title fw-light">{{ category_name }}</h6>
                     <a href="{{ url_for('tutorial_language', category_id=category_data.id) }}" class="btn btn-danger">
                         View Tutorials ({{ category_data.videos|length }})
                     </a>
