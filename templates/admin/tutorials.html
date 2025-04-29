@@ -50,6 +50,7 @@
             <tbody>
                 <!-- In your admin/tutorials.html template -->
                 {% for video in videos %}
+                    {% if video[3] == language %}
                 <tr>
                     <td>{{ video[1] }}</td> <!-- title -->
                     <td>{{ video[3] }}</td> <!-- category_name -->
@@ -58,6 +59,7 @@
                             class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
+                    {%endif%}
                 {% endfor %}
             </tbody>
         </table>
