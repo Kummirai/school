@@ -14,62 +14,14 @@
         <div class="card-body">
             <h5 class="card-title fs-6">{{ video.title }}</h5>
             <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#videoModal{{ loop.index }}">
+                <a href="{{ video.url }}" target="_blank" class="btn btn-outline-danger btn-sm">
                     <i class="bi bi-play-circle"></i> Watch Video
-                </button>
+                </a>
                 <small class="text-muted">
                     {% if video.duration %}
                     {{ video.duration }} mins
                     {% endif %}
                 </small>
-            </div>
-        </div>
-    </div>
-
-    <!-- Video Modal -->
-    <div class="modal fade" id="videoModal{{ loop.index }}" tabindex="-1"
-        aria-labelledby="videoModalLabel{{ loop.index }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel{{ loop.index }}">{{ video.title }}</h5>
-                    <button type="button" class="btn-close" data-bs-close="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="ratio ratio-16x9">
-                        {% if 'youtube.com/watch?v=' in video.url %}
-                        {# Handle YouTube URLs #}
-                        {% set video_id = video.url.split('v=')[1].split('&')[0] %}
-                        <iframe src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                        {% elif 'youtu.be/' in video.url %}
-                        {# Handle YouTube short URLs #}
-                        {% set video_id = video.url.split('youtu.be/')[1].split('?')[0] %}
-                        <iframe src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                        {% elif 'vimeo.com' in video.url %}
-                        {# Handle Vimeo URLs #}
-                        {% set video_id = video.url.split('vimeo.com/')[1].split('?')[0] %}
-                        <iframe src="https://player.vimeo.com/video/{{ video_id }}" frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                        {% elif video.url.endswith(('.mp4', '.webm', '.ogg')) %}
-                        {# Handle direct video files #}
-                        <video controls style="width: 100%">
-                            <source src="{{ video.url }}" type="video/{{ video.url.split('.')[-1] }}">
-                            Your browser does not support the video tag.
-                        </video>
-                        {% else %}
-                        {# Fallback to direct iframe embedding #}
-                        <iframe src="{{ video.url }}" frameborder="0" allowfullscreen></iframe>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
             </div>
         </div>
     </div>
