@@ -26,6 +26,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
                         </li>
+                        {% if 'username' in session and session.role == 'student' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('view_sessions') }}">Book Sessions</a>
+                        </li>
+                        {% endif %}
                         {% if 'username' in session %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="tutorialsDropdown" role="button"

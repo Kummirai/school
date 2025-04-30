@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Tutorial Sessions</h2>
+    
+    {% if bookings %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="h5">Your Booked Sessions</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date & Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking[1] }}</td>
+                            <td>{{ booking[2].strftime('%Y-%m-%d %H:%M') }} to {{ booking[3].strftime('%H:%M') }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('cancel_booking_route', booking_id=booking[0]) }}" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="h5">Available Sessions</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date & Time</th>
+                            <th>Availability</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in sessions %}
+                        <tr>
+                            <td>{{ session[1] }}</td>
+                            <td>{{ session[2] or 'No description' }}</td>
+                            <td>{{ session[3].strftime('%Y-%m-%d %H:%M') }} to {{ session[4].strftime('%H:%M') }}</td>
+                            <td>{{ session[6] }}/{{ session[5] }}</td>
+                            <td>
+                                {% if session[6] < session[5] %}
+                                <form method="POST" action="{{ url_for('book_session_route', session_id=session[0]) }}" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-primary">Book</button>
+                                </form>
+                                {% else %}
+                                <span class="text-danger">Full</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

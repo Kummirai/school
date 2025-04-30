@@ -32,8 +32,49 @@
                     <div class="d-grid gap-2">
                         <a href="{{ url_for('add_student') }}" class="btn btn-light">Add Student</a>
                         <a href="{{ url_for('add_tutorial') }}" class="btn btn-light">Add Tutorial</a>
+                        <a href="{{ url_for('add_session') }}" class="btn btn-light">Add Session</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Sessions Section -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2 class="h5">Upcoming Sessions</h2>
+        </div>
+        <div class="card-body">
+            {% if upcoming_sessions %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date & Time</th>
+                            <th>Bookings</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in upcoming_sessions %}
+                        <tr>
+                            <td>{{ session[1] }}</td>
+                            <td>{{ session[2].strftime('%Y-%m-%d %H:%M') }} to {{ session[3].strftime('%H:%M') }}</td>
+                            <td>{{ session[4] }}/{{ session[5] }}</td>
+                            <td>
+                                <a href="{{ url_for('manage_sessions') }}" class="btn btn-sm btn-info">View</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p>No upcoming sessions scheduled.</p>
+            {% endif %}
+            <div class="text-end">
+                <a href="{{ url_for('manage_sessions') }}" class="btn btn-primary">View All Sessions</a>
             </div>
         </div>
     </div>

@@ -60,6 +60,31 @@ def initialize_database():
     )
     ''')
 
+    # Create tutorial_sessions table
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS tutorial_sessions (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        start_time TIMESTAMP NOT NULL,
+        end_time TIMESTAMP NOT NULL,
+        max_students INTEGER NOT NULL
+    )
+    ''')
+
+    # Create student_bookings table
+    # In your initialize_database() function
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS student_bookings (
+        id SERIAL PRIMARY KEY,
+        student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        session_id INTEGER NOT NULL REFERENCES tutorial_sessions(id) ON DELETE CASCADE,
+        booking_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        status VARCHAR(50) DEFAULT 'confirmed',
+        CONSTRAINT unique_booking UNIQUE (student_id, session_id)
+    )
+    ''')
+
     conn.commit()
 
     # Check if there are any users
@@ -90,7 +115,29 @@ def get_user_by_username(username):
     user = cur.fetchone()
     cur.close()
     conn.close()
-    return user
+    if user:
+        return {
+            'id': user[0],
+            'username': user[1],
+            'password': user[2],
+            'role': user[3]
+        }
+    return None
+
+def get_student_bookings(student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT sb.id, ts.title, ts.start_time, ts.end_time
+        FROM student_bookings sb
+        JOIN tutorial_sessions ts ON sb.session_id = ts.id
+        WHERE sb.student_id = %s AND ts.start_time > NOW()
+        ORDER BY ts.start_time
+    ''', (student_id,))
+    bookings = cur.fetchall()
+    cur.close()
+    conn.close()
+    return bookings
 
 def get_all_categories():
     conn = get_db_connection()
@@ -151,6 +198,121 @@ def delete_student_by_id(student_id):
     cur.close()
     conn.close()
 
+def get_all_sessions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT ts.id, ts.title, ts.description, ts.start_time, ts.end_time, ts.max_students,
+            COUNT(sb.id) as booked_count
+        FROM tutorial_sessions ts
+        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
+        GROUP BY ts.id
+        ORDER BY ts.start_time
+    ''')
+    sessions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return sessions
+
+def get_upcoming_sessions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT ts.id, ts.title, ts.start_time, ts.end_time,
+               COUNT(sb.id) as booked_count, ts.max_students
+        FROM tutorial_sessions ts
+        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
+        WHERE ts.start_time > NOW()
+        GROUP BY ts.id
+        ORDER BY ts.start_time
+        LIMIT 5
+    ''')
+    sessions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return sessions
+
+def get_student_bookings(student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT sb.id, ts.title, ts.start_time, ts.end_time
+        FROM student_bookings sb
+        JOIN tutorial_sessions ts ON sb.session_id = ts.id
+        WHERE sb.student_id = %s AND ts.start_time > NOW()
+        ORDER BY ts.start_time
+    ''', (student_id,))
+    bookings = cur.fetchall()
+    cur.close()
+    conn.close()
+    return bookings
+
+def create_session(title, description, start_time, end_time, max_students):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        INSERT INTO tutorial_sessions (title, description, start_time, end_time, max_students)
+        VALUES (%s, %s, %s, %s, %s)
+        RETURNING id
+    ''', (title, description, start_time, end_time, max_students))
+    session_id = cur.fetchone()[0]
+    conn.commit()
+    cur.close()
+    conn.close()
+    return session_id
+
+def book_session(student_id, session_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Check if session exists and has available spots
+    cur.execute('''
+        SELECT COUNT(sb.id), ts.max_students
+        FROM tutorial_sessions ts
+        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
+        WHERE ts.id = %s
+        GROUP BY ts.id
+    ''', (session_id,))
+    result = cur.fetchone()
+    
+    if not result or result[0] >= result[1]:
+        cur.close()
+        conn.close()
+        return False
+    
+    # Check if student already booked this session
+    cur.execute('''
+        SELECT id FROM student_bookings 
+        WHERE student_id = %s AND session_id = %s
+    ''', (student_id, session_id))
+    if cur.fetchone():
+        cur.close()
+        conn.close()
+        return False
+    
+    # Create booking
+    cur.execute('''
+        INSERT INTO student_bookings (student_id, session_id)
+        VALUES (%s, %s)
+    ''', (student_id, session_id))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return True
+
+def cancel_booking(booking_id, student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        DELETE FROM student_bookings
+        WHERE id = %s AND student_id = %s
+    ''', (booking_id, student_id))
+    affected_rows = cur.rowcount
+    conn.commit()
+    cur.close()
+    conn.close()
+    return affected_rows > 0
+
 @app.context_processor
 def inject_categories():
     if 'username' in session:
@@ -174,6 +336,93 @@ def admin_required(f):
             return render_template('errors/403.html'), 403
         return f(*args, **kwargs)
     return decorated_function
+
+# Student session booking routes
+@app.route('/sessions/book/<int:session_id>', methods=['POST'])
+@login_required
+def book_session_route(session_id):
+    if session.get('role') != 'student':
+        flash('Only students can book sessions', 'danger')
+        return redirect(url_for('view_sessions'))
+    
+    student_id = session.get('user_id')
+    if not student_id:
+        flash('User not properly authenticated', 'danger')
+        return redirect(url_for('view_sessions'))
+    
+    if book_session(student_id, session_id):
+        flash('Session booked successfully!', 'success')
+    else:
+        flash('Could not book session. It might be full or you already booked it.', 'danger')
+    return redirect(url_for('view_sessions'))
+
+@app.route('/sessions/cancel/<int:booking_id>', methods=['POST'])
+@login_required
+def cancel_booking_route(booking_id):
+    if cancel_booking(booking_id, session.get('user_id')):
+        flash('Booking cancelled successfully', 'success')
+    else:
+        flash('Could not cancel booking', 'danger')
+    return redirect(url_for('view_sessions'))
+
+# Admin session management routes
+@app.route('/sessions')
+@login_required
+def view_sessions():
+    student_id = session.get('user_id')
+    if not student_id:
+        flash('User not properly authenticated', 'danger')
+        return redirect(url_for('login'))
+    
+    sessions = get_all_sessions()
+    student_bookings = get_student_bookings(student_id)
+    return render_template('sessions/list.html', 
+                         sessions=sessions, 
+                         bookings=student_bookings)
+
+
+@app.route('/admin/sessions')
+@login_required
+@admin_required
+def manage_sessions():
+    sessions = get_all_sessions()
+    upcoming_sessions = get_upcoming_sessions()
+    return render_template('admin/sessions.html', 
+                         sessions=sessions,
+                         upcoming_sessions=upcoming_sessions)
+
+@app.route('/admin/sessions/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_session():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+        max_students = request.form.get('max_students')
+        
+        try:
+            create_session(title, description, start_time, end_time, int(max_students))
+            flash('Session created successfully', 'success')
+            return redirect(url_for('manage_sessions'))
+        except Exception as e:
+            flash(f'Error creating session: {str(e)}', 'danger')
+    
+    return render_template('admin/add_session.html')
+
+@app.route('/admin/sessions/delete/<int:session_id>')
+@login_required
+@admin_required
+def delete_session(session_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('DELETE FROM tutorial_sessions WHERE id = %s', (session_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    flash('Session deleted successfully', 'success')
+    return redirect(url_for('manage_sessions'))
 
 # Add these helper functions
 def get_all_videos():
@@ -273,9 +522,10 @@ def login():
         password = request.form['password']
 
         user = get_user_by_username(username)
-        if user and check_password_hash(user[2], password):
+        if user and check_password_hash(user['password'], password):  # Changed from user[2] to user['password']
             session['username'] = username
-            session['role'] = user[3]
+            session['user_id'] = user['id']  # Accessing id from dictionary
+            session['role'] = user['role']
             flash('Logged in successfully!', 'success')
             next_page = request.args.get('next')
             return redirect(next_page or url_for('tutorials_home'))
@@ -326,8 +576,12 @@ def tutorial_language(category_id):
 @admin_required
 def admin_dashboard():
     students = get_students()
-    categories = get_all_videos()
-    return render_template('admin/dashboard.html', student_count=len(students), category_count=len(categories))
+    categories = get_all_categories()
+    upcoming_sessions = get_upcoming_sessions()
+    return render_template('admin/dashboard.html', 
+                         student_count=len(students), 
+                         category_count=len(categories),
+                         upcoming_sessions=upcoming_sessions)
 
 @app.route('/admin/students')
 @login_required
