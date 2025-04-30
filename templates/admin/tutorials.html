@@ -75,6 +75,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
     <!-- Modals for each video -->
     {% for video in videos %}
@@ -117,6 +118,33 @@
                 </div>
             </div>
         </div>
+=======
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- In your admin/tutorials.html template -->
+                {% for video in videos %}
+                    {% if video[3] == language %}
+                <tr>
+                    <td>{{ video[1] }}</td> <!-- title -->
+                    <td>{{ video[3] }}</td> <!-- category_name -->
+                    <td>
+                        <a href="{{ url_for('delete_tutorial', video_id=video[0]) }}"
+                            class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                    {%endif%}
+                {% endfor %}
+            </tbody>
+        </table>
+>>>>>>> parent of ba54a39 (Refactor tutorials table header: replace URL column with Category for improved clarity)
     </div>
     {% endif %}
     {% endfor %}
