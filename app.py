@@ -24,7 +24,7 @@ def get_db_connection():
         user=os.getenv('DB_USER'),
         password=os.getenv('DB_PASSWORD'),
         port=os.getenv('DB_PORT'),
-        sslmode='require'
+        # sslmode='require'
     )
     return conn
 
@@ -366,17 +366,17 @@ def delete_student(student_id):
 def forbidden(e):
     return render_template('errors/403.html'), 403
 
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
