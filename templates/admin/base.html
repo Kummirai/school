@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fs-4">{% block admin_title %}{% endblock %}</h1>
+        <div>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-sm btn-outline-secondary">Dashboard</a>
+            <a href="{{ url_for('manage_students') }}" class="btn btn-sm btn-outline-secondary">Students</a>
+            <a href="{{ url_for('manage_tutorials') }}" class="btn btn-sm btn-outline-secondary">Tutorials</a>
+            <a href="{{ url_for('manage_sessions') }}" class="btn btn-sm btn-outline-secondary">Sessions</a>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    {% block admin_content %}{% endblock %}
+</div>
+{% endblock %}
