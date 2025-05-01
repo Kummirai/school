@@ -5,140 +5,149 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Manage Tutorial Sessions</h2>
         <a href="{{ url_for('add_session') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Add New Session
+            <i class="fas fa-plus me-1"></i> New Session
         </a>
     </div>
 
-    <!-- Upcoming Sessions Section -->
-    <div class="mb-5">
-        <h3 class="h4 mb-3">Upcoming Sessions</h3>
-        {% if upcoming_sessions %}
-        <div class="row">
-            {% for session in upcoming_sessions %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">{{ session[1] }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="far fa-calendar-alt me-2"></i>
-                                <span>{{ session[2].strftime('%a, %b %d, %Y') }}</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="far fa-clock me-2"></i>
-                                <span>{{ session[2].strftime('%I:%M %p') }} - {{ session[3].strftime('%I:%M %p')
-                                    }}</span>
-                            </div>
+    <!-- Upcoming Sessions Cards -->
+    <div class="card mb-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="h5 mb-0">Upcoming Sessions</h3>
+            <span class="badge bg-primary">{{ upcoming_sessions|length }} upcoming</span>
+        </div>
+        <div class="card-body">
+            {% if upcoming_sessions %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for session in upcoming_sessions %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
                         </div>
-
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <span>Bookings:</span>
-                                <span>{{ session[4] }}/{{ session[5] }}</span>
-                            </div>
-                            <!-- <div class="progress" style="height: 8px;">
-                                <div class="progress-bar bg-{{ 'success' if session[4] < session[5] else 'danger' }}"
-                                    role="progressbar" style="width: {{ (session[4]/session[5])*100 }}%">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="far fa-calendar-alt text-muted me-2"></i>
+                                    <small>{{ session[2].strftime('%a, %b %d') }}</small>
                                 </div>
-                            </div> -->
+                                <div class="d-flex align-items-center">
+                                    <i class="far fa-clock text-muted me-2"></i>
+                                    <small>{{ session[2].strftime('%I:%M %p') }} - {{ session[3].strftime('%I:%M %p')
+                                        }}</small>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small">Bookings:</span>
+                                <span class="badge bg-{{ 'success' if session[4] < session[5] else 'danger' }}">
+                                    {{ session[4] }}/{{ session[5] }}
+                                </span>
+                            </div>
+                            <div class="progress mt-2" style="height: 6px;">
+                                <div class="progress-bar bg-{{ 'success' if session[4] < session[5] else 'danger' }}"
+                                    style="width: {{ (session[4]/session[5])*100 }}%"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-sm btn-outline-info me-2">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <a href="{{ url_for('delete_session', session_id=session[0]) }}"
-                                class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <div class="d-flex justify-content-end">
+                                <a href="#" class="btn btn-sm btn-outline-primary me-2">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            {% else %}
+            <div class="alert alert-info mb-0">No upcoming sessions found</div>
+            {% endif %}
         </div>
-        {% else %}
-        <div class="alert alert-info">No upcoming sessions found</div>
-        {% endif %}
     </div>
 
-    <!-- All Sessions Section -->
-    <div class="mb-4">
-        <h3 class="h4 mb-3">All Sessions</h3>
-        {% if sessions %}
-        <div class="row">
-            {% for session in sessions %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div
-                        class="card-header {{ 'bg-primary text-white' if session[6] < session[5] else 'bg-secondary text-white' }}">
-                        <h5 class="mb-0">{{ session[1] }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-muted small mb-3">
-                            {{ session[2] or 'No description provided' }}
-                        </p>
-
-                        <div class="mb-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="far fa-calendar-alt me-2"></i>
-                                <span>{{ session[3].strftime('%b %d, %Y') }}</span>
+    <!-- All Sessions Cards -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="h5 mb-0">All Sessions</h3>
+        </div>
+        <div class="card-body">
+            {% if sessions %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for session in sessions %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if session[2] %}
+                            <p class="card-text small text-muted mb-3">{{ session[2]|truncate(100) }}</p>
+                            {% endif %}
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="far fa-calendar-alt text-muted me-2"></i>
+                                    <small>{{ session[3].strftime('%b %d, %Y') }}</small>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="far fa-clock text-muted me-2"></i>
+                                    <small>{{ session[3].strftime('%I:%M %p') }} - {{ session[4].strftime('%I:%M %p')
+                                        }}</small>
+                                </div>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <i class="far fa-clock me-2"></i>
-                                <span>{{ session[3].strftime('%I:%M %p') }} - {{ session[4].strftime('%I:%M %p')
-                                    }}</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small">Status:</span>
+                                <span class="badge bg-{{ 'success' if session[6] < session[5] else 'secondary' }}">
+                                    {{ session[6] }}/{{ session[5] }}
+                                </span>
                             </div>
                         </div>
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-{{ 'success' if session[6] < session[5] else 'danger' }}">
-                                {{ session[6] }}/{{ session[5] }} booked
-                            </span>
-                            <small class="text-muted">
-                                {% if session[3] > now %}
-                                <i class="fas fa-circle text-success"></i> Upcoming
-                                {% else %}
-                                <i class="fas fa-circle text-secondary"></i> Past
-                                {% endif %}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-sm btn-outline-info me-2">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <a href="{{ url_for('delete_session', session_id=session[0]) }}"
-                                class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <div class="d-flex justify-content-end">
+                                <a href="#" class="btn btn-sm btn-outline-primary me-2">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            {% else %}
+            <div class="alert alert-info mb-0">No sessions found</div>
+            {% endif %}
         </div>
-        {% else %}
-        <div class="alert alert-info">No sessions found</div>
-        {% endif %}
     </div>
 </div>
 
 <style>
     .card {
-        transition: transform 0.2s ease-in-out;
+        transition: transform 0.2s;
     }
 
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
     }
 
     .progress {
-        background-color: #e9ecef;
+        background-color: #f0f0f0;
+    }
+
+    .card-header {
+        padding: 0.75rem 1.25rem;
+    }
+
+    @media (max-width: 767.98px) {
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
     }
 </style>
 {% endblock %}
