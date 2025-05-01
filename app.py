@@ -24,7 +24,7 @@ def get_db_connection():
         user=os.getenv('DB_USER'),
         password=os.getenv('DB_PASSWORD'),
         port=os.getenv('DB_PORT'),
-        sslmode='require'
+        # sslmode='require'
     )
     return conn
 
@@ -380,6 +380,34 @@ def view_sessions():
                          sessions=sessions, 
                          bookings=student_bookings)
 
+# Add this new route to app.py
+@app.route('/admin/sessions/bookings/<int:session_id>')
+@login_required
+@admin_required
+def view_session_bookings(session_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Get session details
+    cur.execute('SELECT title FROM tutorial_sessions WHERE id = %s', (session_id,))
+    session_title = cur.fetchone()[0]
+    
+    # Get users who booked this session
+    cur.execute('''
+        SELECT u.id, u.username 
+        FROM student_bookings sb
+        JOIN users u ON sb.student_id = u.id
+        WHERE sb.session_id = %s
+    ''', (session_id,))
+    booked_users = cur.fetchall()
+    
+    cur.close()
+    conn.close()
+    
+    return render_template('admin/session_bookings.html', 
+                         session_title=session_title,
+                         booked_users=booked_users)
+
 
 @app.route('/admin/sessions')
 @login_required
@@ -620,17 +648,17 @@ def delete_student(student_id):
 def forbidden(e):
     return render_template('errors/403.html'), 403
 
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
