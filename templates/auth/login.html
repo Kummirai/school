@@ -3,10 +3,10 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="d-flex align-items-center justify-content-center" style="height: 100%;">
-    <div class="card p-4  shadow-lg" style="max-width: 400px; width: 100%; background-color: #ffffff; border: none;">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%; background-color: #ffffff; border: none;">
         <div class="text-center mb-4">
-            <i class="bi bi-mortarboard-fill navbar-brand-icon text-dark" style="font-size: 4rem;"></i>
+            <i class="bi bi-mortarboard-fill text-dark" style="font-size: 4rem;"></i>
             <h2 class="fw-bold text-dark mt-2">MiltonTutor+</h2>
             <p class="text-secondary mb-0 small">Login to your account</p>
         </div>
@@ -27,4 +27,17 @@
         </form>
     </div>
 </div>
+
+<style>
+    /* Hide navbar and footer for login page */
+    .navbar,
+    footer {
+        display: none !important;
+    }
+
+    /* Ensure the wrapper takes full height */
+    .wrapper {
+        min-height: 100vh;
+    }
+</style>
 {% endblock %}
