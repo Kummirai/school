@@ -46,34 +46,76 @@
         </div>
         <div class="card-body">
             {% if upcoming_sessions %}
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Date & Time</th>
-                            <th>Bookings</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for session in upcoming_sessions %}
-                        <tr>
-                            <td>{{ session[1] }}</td>
-                            <td>{{ session[2].strftime('%Y-%m-%d %H:%M') }} to {{ session[3].strftime('%H:%M') }}</td>
-                            <td>{{ session[4] }}/{{ session[5] }}</td>
-                            <td>
-                                <a href="{{ url_for('manage_sessions') }}" class="btn btn-sm btn-info">View</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="accordion" id="upcomingSessionsAccordion">
+                {# First, group sessions by grade/course #}
+                {% set grouped_sessions = {} %}
+                {% for session in upcoming_sessions %}
+                {# Extract grade/course from title (assuming format like "Grade 10 Math" or "CS101") #}
+                {% set parts = session[1].split() %}
+                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science'] %}
+                {% set group_name = parts[0] ~ ' ' ~ parts[1] %}
+                {% else %}
+                {% set group_name = 'Other Classes' %}
+                {% endif %}
+
+                {% if group_name not in grouped_sessions %}
+                {% set _ = grouped_sessions.update({group_name: []}) %}
+                {% endif %}
+                {% set _ = grouped_sessions[group_name].append(session) %}
+                {% endfor %}
+
+                {# Now create accordion items for each group #}
+                {% for group_name, group_sessions in grouped_sessions.items() %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="upcomingHeading{{ loop.index }}">
+                        <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#upcomingCollapse{{ loop.index }}"
+                            aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                            aria-controls="upcomingCollapse{{ loop.index }}">
+                            {{ group_name }} ({{ group_sessions|length }} sessions)
+                        </button>
+                    </h2>
+                    <div id="upcomingCollapse{{ loop.index }}"
+                        class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                        aria-labelledby="upcomingHeading{{ loop.index }}" data-bs-parent="#upcomingSessionsAccordion">
+                        <div class="accordion-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Date & Time</th>
+                                            <th>Bookings</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for session in group_sessions %}
+                                        <tr>
+                                            <td>{{ session[1] }}</td>
+                                            <td>{{ session[2].strftime('%Y-%m-%d %H:%M') }} to {{
+                                                session[3].strftime('%H:%M') }}</td>
+                                            <td>{{ session[4] }}/{{ session[5] }}</td>
+                                            <td>
+                                                <a href="{{ url_for('view_session_bookings', session_id=session[0]) }}"
+                                                    class="btn btn-sm btn-info me-1">View Bookings</a>
+                                                <a href="{{ url_for('manage_sessions') }}"
+                                                    class="btn btn-sm btn-secondary">Manage</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
             {% else %}
             <p>No upcoming sessions scheduled.</p>
             {% endif %}
-            <div class="text-end">
+            <div class="text-end mt-3">
                 <a href="{{ url_for('manage_sessions') }}" class="btn btn-primary">View All Sessions</a>
             </div>
         </div>
