@@ -319,6 +319,10 @@ def inject_categories():
         return {'categories': get_all_categories()}
     return {}
 
+@app.route('/video-conference')
+def video_conference():
+    return render_template('live_session.html')  # We'll create this file next
+
 # Decorators
 def login_required(f):
     @wraps(f)
