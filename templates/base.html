@@ -31,7 +31,7 @@
                         </li>
                         {% if 'username' in session and session.role == 'student' %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('view_sessions') }}">Book Sessions</a>
+                            <a class="nav-link" href="{{ url_for('view_sessions') }}">Book A Class</a>
                         </li>
                         {% endif %}
                         {% if 'username' in session %}
