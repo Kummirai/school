@@ -17,47 +17,84 @@
         </div>
         <div class="card-body">
             {% if upcoming_sessions %}
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="accordion" id="upcomingSessionsAccordion">
+                {# Group upcoming sessions by grade/course #}
+                {% set upcoming_grouped = {} %}
                 {% for session in upcoming_sessions %}
-                <div class="col">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-light">
-                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="far fa-calendar-alt text-muted me-2"></i>
-                                    <small>{{ session[2].strftime('%a, %b %d') }}</small>
+                {% set parts = session[1].split() %}
+                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science'] %}
+                {% set group_name = parts[0] ~ ' ' ~ parts[1] %}
+                {% else %}
+                {% set group_name = 'Other Classes' %}
+                {% endif %}
+
+                {% if group_name not in upcoming_grouped %}
+                {% set _ = upcoming_grouped.update({group_name: []}) %}
+                {% endif %}
+                {% set _ = upcoming_grouped[group_name].append(session) %}
+                {% endfor %}
+
+                {# Create accordion items for each group #}
+                {% for group_name, group_sessions in upcoming_grouped.items() %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="upcomingHeading{{ loop.index }}">
+                        <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#upcomingCollapse{{ loop.index }}"
+                            aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                            aria-controls="upcomingCollapse{{ loop.index }}">
+                            {{ group_name }} ({{ group_sessions|length }} sessions)
+                        </button>
+                    </h2>
+                    <div id="upcomingCollapse{{ loop.index }}"
+                        class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                        aria-labelledby="upcomingHeading{{ loop.index }}" data-bs-parent="#upcomingSessionsAccordion">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                                {% for session in group_sessions %}
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <i class="far fa-calendar-alt text-muted me-2"></i>
+                                                    <small>{{ session[2].strftime('%a, %b %d') }}</small>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="far fa-clock text-muted me-2"></i>
+                                                    <small>{{ session[2].strftime('%I:%M %p') }} - {{
+                                                        session[3].strftime('%I:%M %p') }}</small>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="small">Bookings:</span>
+                                                <span
+                                                    class="badge bg-{{ 'success' if session[4] < session[5] else 'danger' }}">
+                                                    {{ session[4] }}/{{ session[5] }}
+                                                </span>
+                                            </div>
+                                            <div class="progress mt-2" style="height: 6px;">
+                                                <div class="progress-bar bg-{{ 'success' if session[4] < session[5] else 'danger' }}"
+                                                    style="width: {{ (session[4]/session[5])*100 }}%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-white border-0 pt-0">
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ url_for('view_session_bookings', session_id=session[0]) }}"
+                                                    class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
+                                                    class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="far fa-clock text-muted me-2"></i>
-                                    <small>{{ session[2].strftime('%I:%M %p') }} - {{ session[3].strftime('%I:%M %p')
-                                        }}</small>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="small">Bookings:</span>
-                                <span class="badge bg-{{ 'success' if session[4] < session[5] else 'danger' }}">
-                                    {{ session[4] }}/{{ session[5] }}
-                                </span>
-                            </div>
-                            <div class="progress mt-2" style="height: 6px;">
-                                <div class="progress-bar bg-{{ 'success' if session[4] < session[5] else 'danger' }}"
-                                    style="width: {{ (session[4]/session[5])*100 }}%"></div>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-white border-0 pt-0">
-                            <div class="d-flex justify-content-end">
-                                <!-- Change this line in sessions.html -->
-                                <a href="{{ url_for('view_session_bookings', session_id=session[0]) }}"
-                                    class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
-                                    class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -77,44 +114,84 @@
         </div>
         <div class="card-body">
             {% if sessions %}
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="accordion" id="allSessionsAccordion">
+                {# Group all sessions by grade/course #}
+                {% set all_grouped = {} %}
                 {% for session in sessions %}
-                <div class="col">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-light">
-                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
-                        </div>
-                        <div class="card-body">
-                            {% if session[2] %}
-                            <p class="card-text small text-muted mb-3">{{ session[2]|truncate(100) }}</p>
-                            {% endif %}
-                            <div class="mb-3">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="far fa-calendar-alt text-muted me-2"></i>
-                                    <small>{{ session[3].strftime('%b %d, %Y') }}</small>
+                {% set parts = session[1].split() %}
+                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science', 'css', 'python', 'html'] %}
+                {% set group_name = parts[0] ~ ' ' ~ parts[1] %}
+                {% else %}
+                {% set group_name = 'Other Classes' %}
+                {% endif %}
+
+                {% if group_name not in all_grouped %}
+                {% set _ = all_grouped.update({group_name: []}) %}
+                {% endif %}
+                {% set _ = all_grouped[group_name].append(session) %}
+                {% endfor %}
+
+                {# Create accordion items for each group #}
+                {% for group_name, group_sessions in all_grouped.items() %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="allHeading{{ loop.index }}">
+                        <button class="accordion-button" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#allCollapse{{ loop.index }}"
+                            aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                            aria-controls="allCollapse{{ loop.index }}">
+                            {{ group_name }} ({{ group_sessions|length }} sessions)
+                        </button>
+                    </h2>
+                    <div id="allCollapse{{ loop.index }}"
+                        class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                        aria-labelledby="allHeading{{ loop.index }}" data-bs-parent="#allSessionsAccordion">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                                {% for session in group_sessions %}
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h5 class="card-title mb-0">{{ session[1] }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            {% if session[2] %}
+                                            <p class="card-text small text-muted mb-3">{{ session[2]|truncate(100) }}
+                                            </p>
+                                            {% endif %}
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <i class="far fa-calendar-alt text-muted me-2"></i>
+                                                    <small>{{ session[3].strftime('%b %d, %Y') }}</small>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="far fa-clock text-muted me-2"></i>
+                                                    <small>{{ session[3].strftime('%I:%M %p') }} - {{
+                                                        session[4].strftime('%I:%M %p') }}</small>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="small">Status:</span>
+                                                <span
+                                                    class="badge bg-{{ 'success' if session[6] < session[5] else 'secondary' }}">
+                                                    {{ session[6] }}/{{ session[5] }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-white border-0 pt-0">
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ url_for('view_session_bookings', session_id=session[0]) }}"
+                                                    class="btn btn-sm btn-outline-primary me-2">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
+                                                    class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="far fa-clock text-muted me-2"></i>
-                                    <small>{{ session[3].strftime('%I:%M %p') }} - {{ session[4].strftime('%I:%M %p')
-                                        }}</small>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="small">Status:</span>
-                                <span class="badge bg-{{ 'success' if session[6] < session[5] else 'secondary' }}">
-                                    {{ session[6] }}/{{ session[5] }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-white border-0 pt-0">
-                            <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ url_for('delete_session', session_id=session[0]) }}"
-                                    class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -150,6 +227,17 @@
             padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
         }
+    }
+
+    /* Accordion styling */
+    .accordion-button:not(.collapsed) {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: rgba(0, 0, 0, .125);
     }
 </style>
 {% endblock %}
