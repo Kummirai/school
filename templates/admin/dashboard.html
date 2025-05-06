@@ -33,7 +33,87 @@
                         <a href="{{ url_for('add_student') }}" class="btn btn-light">Add Student</a>
                         <a href="{{ url_for('add_tutorial') }}" class="btn btn-light">Add Tutorial</a>
                         <a href="{{ url_for('add_session') }}" class="btn btn-light">Add Session</a>
+                        {% if session.role == 'admin' %}
+                        <a href="{{ url_for('add_assignment') }}" class="btn btn-success">
+                            <i class="bi bi-plus-circle"></i> Create Assignment
+                        </a>
+                        {% endif %}
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Assignments Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-journal-check me-2"></i>Your Assignments
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if assignments %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Total Marks</th>
+                                    <th>Deadline</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for assignment in assignments %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ url_for('assignment_detail', assignment_id=assignment.id) }}"
+                                            class="text-decoration-none">
+                                            {{ assignment.title }}
+                                        </a>
+                                    </td>
+                                    <td>{{ assignment.subject }}</td>
+                                    <td>{{ assignment.class }}</td>
+                                    <td>{{ assignment.total_marks }}</td>
+                                    <td>
+                                        {% if assignment.deadline %}
+                                        {{ assignment.deadline.strftime('%d %b %Y') }}
+                                        <span class="badge 
+                                                {% if assignment.deadline > current_time %}
+                                                    bg-success
+                                                {% else %}
+                                                    bg-danger
+                                                {% endif %}">
+                                            {% if assignment.deadline > current_time %}
+                                            Active
+                                            {% else %}
+                                            Expired
+                                            {% endif %}
+                                        </span>
+                                        {% else %}
+                                        No deadline
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if assignment.submitted %}
+                                        <span class="badge bg-success">Submitted</span>
+                                        {% else %}
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>No assignments found.
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -52,7 +132,8 @@
                 {% for session in upcoming_sessions %}
                 {# Extract grade/course from title (assuming format like "Grade 10 Math" or "CS101") #}
                 {% set parts = session[1].split() %}
-                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science', 'html', 'css', 'python'] %}
+                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science', 'html', 'css',
+                'python'] %}
                 {% set group_name = parts[0] ~ ' ' ~ parts[1] %}
                 {% else %}
                 {% set group_name = 'Other Classes' %}
@@ -68,8 +149,8 @@
                 {% for group_name, group_sessions in grouped_sessions.items() %}
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="upcomingHeading{{ loop.index }}">
-                        <button class="accordion-button" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#upcomingCollapse{{ loop.index }}"
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#upcomingCollapse{{ loop.index }}"
                             aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
                             aria-controls="upcomingCollapse{{ loop.index }}">
                             {{ group_name }} ({{ group_sessions|length }} sessions)
