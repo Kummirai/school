@@ -312,6 +312,7 @@ def cancel_booking(booking_id, student_id):
     cur.close()
     conn.close()
     return affected_rows > 0
+    
 
 @app.context_processor
 def inject_categories():
@@ -547,6 +548,11 @@ def delete_tutorial(video_id):
 def home():
     return render_template('home.html')
 
+@app.route('/math-curriculum')
+@login_required
+def math_curriculum():
+    return render_template('math_curriculum.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -560,7 +566,7 @@ def login():
             session['role'] = user['role']
             flash('Logged in successfully!', 'success')
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('tutorials_home'))
+            return redirect(next_page or url_for('home'))
         else:
             flash('Invalid username or password', 'danger')
 
