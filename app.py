@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 import os
 import psycopg2
 from dotenv import load_dotenv
@@ -12,6 +13,11 @@ load_dotenv()
 app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
+
+
+# Configure upload folder in your app
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
@@ -47,6 +53,34 @@ def initialize_database():
     CREATE TABLE IF NOT EXISTS tutorial_categories (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL
+    )
+    ''')
+
+      # Add these new tables for assignment system
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS assignments (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        subject VARCHAR(100) NOT NULL,
+        class VARCHAR(50) NOT NULL,
+        total_marks INTEGER NOT NULL,
+        deadline TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS assignment_submissions (
+        id SERIAL PRIMARY KEY,
+        assignment_id INTEGER REFERENCES assignments(id) ON DELETE CASCADE,
+        student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        submission_text TEXT,
+        file_path VARCHAR(255),
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        marks_obtained INTEGER,
+        feedback TEXT,
+        CONSTRAINT unique_submission UNIQUE (assignment_id, student_id)
     )
     ''')
     
@@ -108,6 +142,63 @@ def initialize_database():
 
 
 # Helpers
+def get_all_assignments():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM assignments ORDER BY deadline')
+    assignments = cur.fetchall()
+    cur.close()
+    conn.close()
+    return assignments
+
+def get_assignment_by_id(assignment_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM assignments WHERE id = %s', (assignment_id,))
+    assignment = cur.fetchone()
+    cur.close()
+    conn.close()
+    return assignment
+
+def get_student_submissions(student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT a.title, a.subject, a.deadline, s.submitted_at, 
+               s.marks_obtained, a.total_marks, s.feedback
+        FROM assignment_submissions s
+        JOIN assignments a ON s.assignment_id = a.id
+        WHERE s.student_id = %s
+        ORDER BY a.deadline DESC
+    ''', (student_id,))
+    submissions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return submissions
+
+def submit_assignment(assignment_id, student_id, submission_text, file_path=None):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            INSERT INTO assignment_submissions 
+            (assignment_id, student_id, submission_text, file_path)
+            VALUES (%s, %s, %s, %s)
+            ON CONFLICT (assignment_id, student_id) 
+            DO UPDATE SET submission_text = EXCLUDED.submission_text,
+                          file_path = EXCLUDED.file_path,
+                          submitted_at = CURRENT_TIMESTAMP
+        ''', (assignment_id, student_id, submission_text, file_path))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error submitting assignment: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
 def get_user_by_username(username):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -548,10 +639,16 @@ def delete_tutorial(video_id):
 def home():
     return render_template('home.html')
 
+#Curriculums
 @app.route('/math-curriculum')
 @login_required
 def math_curriculum():
     return render_template('math_curriculum.html')
+
+@app.route('/science_curriculum')
+@login_required
+def science_curriculum():
+    return render_template('science_curriculum.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -657,6 +754,129 @@ def delete_student(student_id):
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('errors/403.html'), 403
+
+# Student assignment routes
+@app.route('/assignments')
+@login_required
+def view_assignments():
+    if session.get('role') != 'student':
+        flash('Only students can view assignments', 'danger')
+        return redirect(url_for('home'))
+    
+    assignments = get_all_assignments()
+    return render_template('assignments/list.html', assignments=assignments)
+
+@app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
+@login_required
+def view_assignment(assignment_id):
+    if session.get('role') != 'student':
+        flash('Only students can view assignments', 'danger')
+        return redirect(url_for('home'))
+    
+    assignment = get_assignment_by_id(assignment_id)
+    if not assignment:
+        flash('Assignment not found', 'danger')
+        return redirect(url_for('view_assignments'))
+    
+    if request.method == 'POST':
+        submission_text = request.form.get('submission_text', '')
+        # Handle file upload if needed
+        file_path = None
+        if 'assignment_file' in request.files:
+            file = request.files['assignment_file']
+            if file.filename != '':
+                filename = secure_filename(file.filename)
+                file_path = os.path.join('uploads', filename)
+                file.save(os.path.join(app.static_folder, file_path))
+        
+        if submit_assignment(assignment_id, session['user_id'], submission_text, file_path):
+            flash('Assignment submitted successfully!', 'success')
+        else:
+            flash('Error submitting assignment', 'danger')
+        return redirect(url_for('view_assignment', assignment_id=assignment_id))
+    
+    return render_template('assignments/view.html', assignment=assignment)
+
+@app.route('/assignments/submissions')
+@login_required
+def view_submissions():
+    if session.get('role') != 'student':
+        flash('Only students can view submissions', 'danger')
+        return redirect(url_for('home'))
+    
+    submissions = get_student_submissions(session['user_id'])
+    return render_template('assignments/submissions.html', submissions=submissions)
+
+# Admin assignment management routes
+@app.route('/admin/assignments')
+@login_required
+@admin_required
+def manage_assignments():
+    assignments = get_all_assignments()
+    return render_template('admin/assignments/list.html', assignments=assignments)
+
+@app.route('/admin/assignments/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_assignment():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        subject = request.form.get('subject')
+        class_ = request.form.get('class')
+        total_marks = request.form.get('total_marks')
+        deadline = request.form.get('deadline')
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+        try:
+            cur.execute('''
+                INSERT INTO assignments 
+                (title, description, subject, class, total_marks, deadline)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            ''', (title, description, subject, class_, total_marks, deadline))
+            conn.commit()
+            flash('Assignment created successfully', 'success')
+            return redirect(url_for('manage_assignments'))
+        except Exception as e:
+            conn.rollback()
+            flash(f'Error creating assignment: {str(e)}', 'danger')
+        finally:
+            cur.close()
+            conn.close()
+    
+    return render_template('admin/assignments/add.html')
+
+@app.route('/admin/assignments/submissions/<int:assignment_id>')
+@login_required
+@admin_required
+def view_assignment_submissions(assignment_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Get assignment details
+    cur.execute('SELECT title FROM assignments WHERE id = %s', (assignment_id,))
+    assignment = cur.fetchone()
+    if not assignment:
+        flash('Assignment not found', 'danger')
+        return redirect(url_for('manage_assignments'))
+    
+    # Get submissions
+    cur.execute('''
+        SELECT u.username, s.submitted_at, s.marks_obtained, s.feedback
+        FROM assignment_submissions s
+        JOIN users u ON s.student_id = u.id
+        WHERE s.assignment_id = %s
+        ORDER BY s.submitted_at DESC
+    ''', (assignment_id,))
+    submissions = cur.fetchall()
+    
+    cur.close()
+    conn.close()
+    
+    return render_template('admin/assignments/submissions.html',
+                         assignment_title=assignment[0],
+                         submissions=submissions)
 
 if __name__ == '__main__':
     from waitress import serve

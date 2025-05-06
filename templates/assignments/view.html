@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ assignment[1] }}</h2>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <span class="badge bg-primary">{{ assignment[3] }}</span>
+            <span class="badge bg-secondary">{{ assignment[4] }}</span>
+        </div>
+        <div class="col-md-6 text-end">
+            <span class="text-muted">Due: {{ assignment[6].strftime('%Y-%m-%d %H:%M') }}</span>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Assignment Details</h5>
+            <div class="card-text">{{ assignment[2]|safe }}</div>
+            <hr>
+            <p><strong>Total Marks:</strong> {{ assignment[5] }}</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Submit Your Work</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="submission_text" class="form-label">Your Answers</label>
+                    <textarea class="form-control" id="submission_text" name="submission_text" rows="10" required></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="assignment_file" class="form-label">Supporting Files (Optional)</label>
+                    <input class="form-control" type="file" id="assignment_file" name="assignment_file">
+                    <div class="form-text">PDF, DOCX, or image files (max 5MB)</div>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-primary">Submit Assignment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

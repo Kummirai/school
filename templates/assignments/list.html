@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Assignments</h2>
+    
+    <div class="list-group">
+        {% for assignment in assignments %}
+        <a href="{{ url_for('view_assignment', assignment_id=assignment[0]) }}" 
+           class="list-group-item list-group-item-action flex-column align-items-start 
+                  {% if assignment[6] and assignment[6] < current_time %}list-group-item-danger{% endif %}">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ assignment[1] }}</h5>
+                <small>{{ assignment[3] }}</small>
+            </div>
+            <p class="mb-1">{{ assignment[2]|truncate(100) }}</p>
+            <div class="d-flex justify-content-between">
+                <small>Due: {{ assignment[6].strftime('%Y-%m-%d %H:%M') }}</small>
+                <small>{{ assignment[5] }} points</small>
+            </div>
+        </a>
+        {% else %}
+        <div class="alert alert-info">No assignments available at this time.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
