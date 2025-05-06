@@ -760,6 +760,11 @@ def math_curriculum():
 def science_curriculum():
     return render_template('science_curriculum.html')
 
+@app.route('/english_curriculum')
+@login_required
+def english_curriculum():
+    return render_template('english_curriculum.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
