@@ -35,7 +35,7 @@ def get_db_connection():
         user=os.getenv('DB_USER'),
         password=os.getenv('DB_PASSWORD'),
         port=os.getenv('DB_PORT'),
-        sslmode='require'
+        # sslmode='require'
     )
     return conn
 
@@ -68,11 +68,19 @@ def initialize_database():
         title VARCHAR(255) NOT NULL,
         description TEXT,
         subject VARCHAR(100) NOT NULL,
-        class VARCHAR(50) NOT NULL,
         total_marks INTEGER NOT NULL,
         deadline TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
+    ''')
+
+    # Add this new table for assignment-user relationships
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS assignment_users (
+            assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
+            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            PRIMARY KEY (assignment_id, user_id)
+        )
     ''')
 
     cur.execute('''
@@ -156,61 +164,19 @@ def get_all_assignments():
     conn.close()
     return assignments
 
-# def get_assignments_for_user(user_id):
-#     """Get assignments using class from session instead of database"""
-#     conn = get_db_connection()
-#     cur = conn.cursor()
-#     try:
-#         # Get class from session instead of database
-#         user_class = session.get('class', 'default_class')
-#         print(user_class)
-#         cur.execute('''
-#             SELECT id, title, subject, deadline, total_marks 
-#             FROM assignments 
-#             WHERE class = %s
-#             ORDER BY deadline
-#         ''', (user_class,))
-#         return cur.fetchall()
-#     finally:
-#         cur.close()
-#         conn.close()
 
 def get_assignments_for_user(user_id):
-    """
-    Get assignments for the current user's class
-    Args:
-        user_id (int): The ID of the current user
-        
-    Returns:
-        list: List of assignment tuples or empty list on error
-    """
-    conn = None
-    cur = None
+    """Get assignments assigned to a specific user"""
+    conn = get_db_connection()
+    cur = conn.cursor()
     try:
-        # Get the user's class - first try session, then database fallback
-        user_class = session.get('class')
-        print(user_class)
-        
-        if not user_class:
-            # Fallback to database if not in session
-            conn = get_db_connection()
-            cur = conn.cursor()
-            cur.execute('SELECT class FROM users WHERE id = %s', (user_id,))
-            result = cur.fetchone()
-            user_class = result[0] if result else 'default_class'
-            session['class'] = user_class  # Store in session for future requests
-        
-        # Get assignments for the class
-        if not conn:  # Reuse connection if we already have one
-            conn = get_db_connection()
-            cur = conn.cursor()
-            
         cur.execute('''
-            SELECT id, title, subject, deadline, total_marks, description
-            FROM assignments 
-            WHERE class = %s
-            ORDER BY deadline
-        ''', (user_class,))
+            SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.description
+            FROM assignments a
+            JOIN assignment_users au ON a.id = au.assignment_id
+            WHERE au.user_id = %s
+            ORDER BY a.deadline
+        ''', (user_id,))
         
         assignments = []
         for row in cur.fetchall():
@@ -225,16 +191,43 @@ def get_assignments_for_user(user_id):
             })
             
         return assignments
-        
     except Exception as e:
         app.logger.error(f"Error getting assignments for user {user_id}: {str(e)}")
-        return []  # Return empty list on error
-        
+        return []
     finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
+        cur.close()
+        conn.close()
+
+def add_assignment(title, description, subject, total_marks, deadline, assigned_users):
+    """Create a new assignment and assign it to specific users"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Create the assignment
+        cur.execute('''
+            INSERT INTO assignments 
+            (title, description, subject, total_marks, deadline)
+            VALUES (%s, %s, %s, %s, %s)
+            RETURNING id
+        ''', (title, description, subject, total_marks, deadline))
+        assignment_id = cur.fetchone()[0]
+        
+        # Assign to selected users
+        for user_id in assigned_users:
+            cur.execute('''
+                INSERT INTO assignment_users (assignment_id, user_id)
+                VALUES (%s, %s)
+            ''', (assignment_id, user_id))
+        
+        conn.commit()
+        return assignment_id
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        cur.close()
+        conn.close()
+
 
 def get_assignment_details(assignment_id):
     """Get full details for a specific assignment"""
@@ -958,7 +951,85 @@ def view_submissions():
     submissions = get_student_submissions(session['user_id'])
     return render_template('assignments/submissions.html', submissions=submissions)
 
-# Admin assignment management routes
+@app.route('/admin/assignments/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_assignment_route():
+    if request.method == 'POST':
+        try:
+            # Get form data
+            title = request.form.get('title', '').strip()
+            description = request.form.get('description', '').strip()
+            subject = request.form.get('subject', '').strip()
+            total_marks = request.form.get('total_marks', '').strip()
+            deadline_str = request.form.get('deadline', '').strip()
+            assigned_users = request.form.getlist('assigned_users')
+
+            # Validate required fields
+            if not all([title, description, subject, total_marks, deadline_str]):
+                flash('All fields are required', 'danger')
+                return redirect(url_for('add_assignment'))
+
+            # Convert and validate total marks
+            try:
+                total_marks = int(total_marks)
+                if total_marks <= 0:
+                    flash('Total marks must be positive', 'danger')
+                    return redirect(url_for('add_assignment'))
+            except ValueError:
+                flash('Total marks must be a number', 'danger')
+                return redirect(url_for('add_assignment'))
+
+            # Validate deadline
+            try:
+                deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
+                if deadline <= datetime.now():
+                    flash('Deadline must be in the future', 'danger')
+                    return redirect(url_for('add_assignment'))
+            except ValueError:
+                flash('Invalid deadline format', 'danger')
+                return redirect(url_for('add_assignment'))
+
+            # Validate student selection
+            if not assigned_users:
+                flash('Please select at least one student', 'danger')
+                return redirect(url_for('add_assignment'))
+
+            # Verify all student IDs are valid
+            valid_student_ids = {str(student[0]) for student in get_students()}  # Get current valid IDs
+            print(valid_student_ids)
+
+            for user_username in assigned_users:
+                if user_username not in valid_student_ids:
+                    flash('Invalid student selection', 'danger')
+                    return redirect(url_for('add_assignment'))
+
+            # Convert to integers
+            assigned_users = [int(user_id) for user_id in assigned_users]
+
+            # Create assignment
+            assignment_id = add_assignment(
+                title=title,
+                description=description,
+                subject=subject,
+                total_marks=total_marks,
+                deadline=deadline,
+                assigned_users=assigned_users
+            )
+
+            flash('Assignment created successfully!', 'success')
+            return redirect(url_for('manage_assignments'))
+
+        except Exception as e:
+            flash(f'Error creating assignment: {str(e)}', 'danger')
+            app.logger.error(f"Assignment creation error: {str(e)}")
+    
+    # GET request - show form with students
+    students = get_students()
+    print(students)
+    return render_template('admin/assignments/add.html', students=students)
+    
+
 @app.route('/admin/assignments')
 @login_required
 @admin_required
@@ -967,72 +1038,33 @@ def manage_assignments():
     cur = conn.cursor()
     try:
         cur.execute('''
-            SELECT a.id, a.title, a.subject, a.class, 
-                   a.deadline, a.total_marks, a.created_at,
+            SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.created_at,
+                   COUNT(au.user_id) as assigned_count,
                    COUNT(s.id) as submission_count
             FROM assignments a
+            LEFT JOIN assignment_users au ON a.id = au.assignment_id
             LEFT JOIN assignment_submissions s ON a.id = s.assignment_id
             GROUP BY a.id
             ORDER BY a.deadline
         ''')
         
-        # Convert tuples to dictionaries for safer template access
         assignments = []
         for row in cur.fetchall():
             assignments.append({
                 'id': row[0],
                 'title': row[1],
                 'subject': row[2],
-                'class': row[3],
-                'deadline': row[4],
-                'total_marks': row[5],
-                'created_at': row[6],
+                'deadline': row[3],
+                'total_marks': row[4],
+                'created_at': row[5],
+                'assigned_count': row[6],
                 'submission_count': row[7]
             })
         
-        return render_template('admin/assignments/list.html', 
-                            assignments=assignments)
+        return render_template('admin/assignments/list.html', assignments=assignments)
     finally:
         cur.close()
         conn.close()
-
-@app.route('/admin/assignments/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def add_assignment():
-    if request.method == 'POST':
-        try:
-            deadline = datetime.strptime(request.form['deadline'], '%Y-%m-%dT%H:%M')
-            
-            conn = get_db_connection()
-            cur = conn.cursor()
-            cur.execute('''
-                INSERT INTO assignments 
-                (title, description, subject, class, total_marks, deadline)
-                VALUES (%s, %s, %s, %s, %s, %s)
-                RETURNING id
-            ''', (
-                request.form['title'],
-                request.form['description'],
-                request.form['subject'],
-                request.form['class'],
-                int(request.form['total_marks']),
-                deadline
-            ))
-            assignment_id = cur.fetchone()[0]
-            conn.commit()
-            flash('Assignment created successfully!', 'success')
-            return redirect(url_for('manage_assignments'))
-        except ValueError as e:
-            flash('Invalid input values', 'danger')
-        except Exception as e:
-            flash(f'Database error: {str(e)}', 'danger')
-            conn.rollback()
-        finally:
-            cur.close()
-            conn.close()
-    
-    return render_template('admin/assignments/add.html')
 
 @app.route('/admin/assignments/<int:assignment_id>/submissions')
 @login_required
@@ -1095,17 +1127,17 @@ def dashboard():
                             assignments=[], 
                             current_time=datetime.utcnow())
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)

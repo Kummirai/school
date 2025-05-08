@@ -34,7 +34,7 @@
                         <a href="{{ url_for('add_tutorial') }}" class="btn btn-light">Add Tutorial</a>
                         <a href="{{ url_for('add_session') }}" class="btn btn-light">Add Session</a>
                         {% if session.role == 'admin' %}
-                        <a href="{{ url_for('add_assignment') }}" class="btn btn-success">
+                        <a href="{{ url_for('add_assignment_route') }}" class="btn btn-success">
                             <i class="bi bi-plus-circle"></i> Create Assignment
                         </a>
                         {% endif %}
