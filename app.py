@@ -268,13 +268,27 @@ def get_student_submissions(student_id):
     cur = conn.cursor()
     cur.execute('''
         SELECT a.title, a.subject, a.deadline, s.submitted_at, 
-               s.marks_obtained, a.total_marks, s.feedback
+               s.marks_obtained, a.total_marks, s.feedback, s.file_path
         FROM assignment_submissions s
         JOIN assignments a ON s.assignment_id = a.id
         WHERE s.student_id = %s
         ORDER BY a.deadline DESC
     ''', (student_id,))
-    submissions = cur.fetchall()
+    
+    # Convert tuples to dictionaries with meaningful keys
+    submissions = []
+    for row in cur.fetchall():
+        submissions.append({
+            'title': row[0],
+            'subject': row[1],
+            'deadline': row[2],
+            'submitted_at': row[3],
+            'marks_obtained': row[4],
+            'total_marks': row[5],
+            'feedback': row[6],
+            'file_path': row[7]
+        })
+    
     cur.close()
     conn.close()
     return submissions
