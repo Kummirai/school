@@ -3,46 +3,64 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Your Submissions</h2>
-    
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Assignment</th>
-                    <th>Subject</th>
-                    <th>Submitted</th>
-                    <th>Status</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for submission in submissions %}
-                <tr>
-                    <td>{{ submission[0] }}</td>
-                    <td>{{ submission[1] }}</td>
-                    <td>{{ submission[3].strftime('%Y-%m-%d') }}</td>
-                    <td>
-                        {% if submission[4] is not none %}
-                            <span class="badge bg-success">Graded</span>
+
+    {% if submissions %}
+    <div class="row">
+        {% for submission in submissions %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ submission.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ submission.subject }}</h6>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Submitted:</span>
+                        <span>{{ submission.submitted_at.strftime('%Y-%m-%d') }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">File:</span>
+                        {% if submission.file_path %}
+                        <a href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
+                            target="_blank" class="btn btn-sm btn-outline-primary">
+                            Download
+                        </a>
                         {% else %}
-                            <span class="badge bg-warning text-dark">Pending</span>
+                        <span>-</span>
                         {% endif %}
-                    </td>
-                    <td>
-                        {% if submission[4] is not none %}
-                            {{ submission[4] }}/{{ submission[5] }}
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Status:</span>
+                        {% if submission.marks_obtained is not none %}
+                        <span class="badge bg-success">Graded</span>
                         {% else %}
-                            -
+                        <span class="badge bg-warning text-dark">Pending</span>
                         {% endif %}
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center">No submissions found</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Score:</span>
+                        {% if submission.marks_obtained is not none %}
+                        <span>{{ submission.marks_obtained }}/{{ submission.total_marks }}</span>
+                        {% else %}
+                        <span>-</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-2">
+                        <span class="text-muted">Feedback:</span>
+                        <p class="mt-1">{{ submission.feedback or '-' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
+    {% else %}
+    <div class="alert alert-info">
+        No submissions found.
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -5,43 +5,43 @@
     <h2>Your Assignments</h2>
 
     {% if assignments %}
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Subject</th>
-                    <th>Deadline</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for assignment in assignments %}
-                <tr>
-                    <td>
+    <div class="row">
+        {% for assignment in assignments %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
                         <a href="{{ url_for('view_assignment', assignment_id=assignment.id) }}">
                             {{ assignment.title }}
                         </a>
-                    </td>
-                    <td>{{ assignment.subject }}</td>
-                    <td>
-                        {{ assignment.deadline.strftime('%Y-%m-%d %H:%M') }}
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ assignment.subject }}</h6>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Deadline:</span>
+                        <span>{{ assignment.deadline.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Status:</span>
                         <span
                             class="badge {% if assignment.status == 'active' %}bg-success{% else %}bg-danger{% endif %}">
                             {{ assignment.status|capitalize }}
                         </span>
-                    </td>
-                    <td>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Submission:</span>
                         {% if assignment.submitted %}
                         <span class="badge bg-success">Submitted</span>
                         {% else %}
                         <span class="badge bg-warning text-dark">Pending</span>
                         {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     {% else %}
     <div class="alert alert-info">
