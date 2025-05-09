@@ -24,30 +24,39 @@
                         <th>Student</th>
                         <th>Submitted</th>
                         <th>Status</th>
+                        <th>Score</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for submission in submissions %}
                     <tr>
-                        <td>{{ submission[1] }}</td>
-                        <td>{{ submission[2].strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>{{ submission[0] }}</td> <!-- username -->
+                        <td>{{ submission[1].strftime('%Y-%m-%d %H:%M') }}</td> <!-- submitted_at -->
                         <td>
-                            {% if submission[3] is not none %}
-                                <span class="badge bg-success">Graded ({{ submission[3] }})</span>
+                            {% if submission[2] is not none %}
+                            <span class="badge bg-success">Graded</span>
                             {% else %}
-                                <span class="badge bg-warning text-dark">Pending</span>
+                            <span class="badge bg-warning text-dark">Pending</span>
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary" title="View/Grade">
+                            {% if submission[2] is not none %}
+                            {{ submission[2] }} <!-- marks_obtained -->
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('grade_submission', assignment_id=assignment_id, student_id=submission[3]) }}"
+                                class="btn btn-sm btn-primary" title="View/Grade">
                                 <i class="bi bi-eye"></i> Review
                             </a>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="4" class="text-center">No submissions yet</td>
+                        <td colspan="5" class="text-center">No submissions yet</td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -155,6 +155,77 @@ def initialize_database():
 
 
 # Helpers
+# Add this helper function to get user by ID
+def get_user_by_id(user_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, username FROM users WHERE id = %s', (user_id,))
+    user = cur.fetchone()
+    cur.close()
+    conn.close()
+    if user:
+        return {'id': user[0], 'username': user[1]}
+
+def get_submission_for_grading(assignment_id, student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get submission details
+        cur.execute('''
+            SELECT s.id, s.submission_text, s.file_path, s.submitted_at, 
+                   s.marks_obtained, s.feedback, u.username
+            FROM assignment_submissions s
+            JOIN users u ON s.student_id = u.id
+            WHERE s.assignment_id = %s AND s.student_id = %s
+        ''', (assignment_id, student_id))
+        submission = cur.fetchone()
+        
+        if not submission:
+            return None
+            
+        # Get assignment details
+        cur.execute('SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
+        assignment = cur.fetchone()
+        
+        return {
+            'submission': {
+                'id': submission[0],
+                'submission_text': submission[1],
+                'file_path': submission[2],
+                'submitted_at': submission[3],
+                'marks_obtained': submission[4],
+                'feedback': submission[5],
+                'username': submission[6]
+            },
+            'assignment': {
+                'id': assignment[0],
+                'title': assignment[1],
+                'total_marks': assignment[2]
+            }
+        }
+    finally:
+        cur.close()
+        conn.close()
+
+def update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            UPDATE assignment_submissions
+            SET marks_obtained = %s, feedback = %s
+            WHERE assignment_id = %s AND student_id = %s
+        ''', (marks_obtained, feedback, assignment_id, student_id))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        app.logger.error(f"Error updating grade: {str(e)}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
 def get_all_assignments():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1088,15 +1159,15 @@ def view_assignment_submissions(assignment_id):
     cur = conn.cursor()
     try:
         # Get assignment details
-        cur.execute('SELECT title FROM assignments WHERE id = %s', (assignment_id,))
+        cur.execute('SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
         assignment = cur.fetchone()
         if not assignment:
             flash('Assignment not found', 'danger')
             return redirect(url_for('manage_assignments'))
         
-        # Get submissions
+        # Get submissions with student IDs
         cur.execute('''
-            SELECT u.username, s.submitted_at, s.marks_obtained, s.feedback
+            SELECT u.username, s.submitted_at, s.marks_obtained, u.id as student_id, s.feedback
             FROM assignment_submissions s
             JOIN users u ON s.student_id = u.id
             WHERE s.assignment_id = %s
@@ -1105,7 +1176,8 @@ def view_assignment_submissions(assignment_id):
         submissions = cur.fetchall()
         
         return render_template('admin/assignments/submissions.html',
-                            assignment_title=assignment[0],
+                            assignment_title=assignment[1],
+                            assignment_id=assignment_id,
                             submissions=submissions)
     finally:
         cur.close()
@@ -1140,6 +1212,78 @@ def dashboard():
         return render_template('dashboard.html', 
                             assignments=[], 
                             current_time=datetime.utcnow())
+    
+# Add these new routes to app.py
+
+@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def grade_submission(assignment_id, student_id):
+    # Get student details
+    student = get_user_by_id(student_id)
+    if not student:
+        flash('Student not found', 'danger')
+        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+    
+    # Get submission and assignment details
+    data = get_submission_for_grading(assignment_id, student_id)
+    if not data:
+        flash('Submission not found', 'danger')
+        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+    
+    if request.method == 'POST':
+        marks_obtained = request.form.get('marks_obtained')
+        feedback = request.form.get('feedback', '')
+        
+        try:
+            marks_obtained = float(marks_obtained)
+            if marks_obtained < 0 or marks_obtained > data['assignment']['total_marks']:
+                flash('Invalid marks value', 'danger')
+                return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
+            
+            if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
+                flash('Grade submitted successfully', 'success')
+                return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+            else:
+                flash('Error submitting grade', 'danger')
+        except ValueError:
+            flash('Invalid marks format', 'danger')
+    
+    return render_template('admin/assignments/grade.html',
+                         assignment_id=assignment_id,
+                         student=student,
+                         submission=data['submission'],
+                         assignment=data['assignment'])
+
+@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/submit-grade', methods=['POST'])
+@login_required
+@admin_required
+def submit_grade(assignment_id, student_id):
+    marks_obtained = request.form.get('marks_obtained')
+    feedback = request.form.get('feedback', '')
+    
+    try:
+        marks_obtained = float(marks_obtained)
+        
+        # Get assignment to validate max marks
+        assignment = get_assignment_details(assignment_id)
+        if not assignment:
+            flash('Assignment not found', 'danger')
+            return redirect(url_for('manage_assignments'))
+        
+        if marks_obtained < 0 or marks_obtained > assignment[4]:  # total_marks is at index 4
+            flash('Invalid marks value', 'danger')
+            return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
+        
+        if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
+            flash('Grade submitted successfully', 'success')
+        else:
+            flash('Error submitting grade', 'danger')
+    except ValueError:
+        flash('Invalid marks format', 'danger')
+    
+    return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+
     
 if __name__ == '__main__':
     from waitress import serve
