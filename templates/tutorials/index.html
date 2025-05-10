@@ -6,13 +6,13 @@
     <div class="row g-4">
         {% for category_name, category_data in tutorials.items() %}
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-header bg-danger text-white py-3">
+            <div class="card h-100 border shadow-sm">
+                <div class="card-header bg-white text-danger py-3">
                     <h5 class="card-title mb-0 fw-semibold">
                         <i class="bi bi-collection-play me-2"></i>{{ category_name }}
                     </h5>
                 </div>
-                <div class="card-body d-flex flex-column border border-muted">
+                <div class="card-body d-flex flex-column">
                     <div class="mb-3">
                         <div class="ratio ratio-16x9 mb-3 rounded overflow-hidden">
                             <div class="bg-danger d-flex align-items-center justify-content-center">
