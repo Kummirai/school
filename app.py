@@ -9,7 +9,6 @@ from datetime import datetime
 from flask import render_template
 from flask_login import current_user, login_required
 
-
 # Load environment variables
 load_dotenv()
 
@@ -29,15 +28,24 @@ if not app.secret_key:
 
 # Database connection
 def get_db_connection():
-    conn = psycopg2.connect(
-        host=os.getenv('DB_HOST'),
-        database=os.getenv('DB_NAME'),
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        port=os.getenv('DB_PORT'),
-        sslmode='require'
-    )
-    return conn
+    try:
+        conn = psycopg2.connect(
+            host=os.getenv('host'),
+            database=os.getenv('dbname'),
+            user=os.getenv('user'),
+            password=os.getenv('password'),
+            port=os.getenv('5432'),
+            # sslmode='require'
+        )
+        print("✅ Successfully connected to Supabase!")
+        return conn
+    except Exception as e:
+        print(f"❌ Connection failed: {e}")
+        raise
+
+# Example usage
+# client = get_db_connection()
+# result = client.table('users').select("*").execute()
 
 def initialize_database():
     conn = get_db_connection()
