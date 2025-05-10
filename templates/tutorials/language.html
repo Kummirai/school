@@ -14,14 +14,14 @@
     <div class="row g-4">
         {% for video in videos %}
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm hover-effect">
+            <div class="card h-100 border shadow-sm hover-effect">
                 {% if video.thumbnail %}
                 <img src="{{ video.thumbnail }}" class="card-img-top" alt="{{ video.title }}"
                     style="height: 180px; object-fit: cover;">
                 {% else %}
-                <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                <div class="card-img-top bg-danger d-flex align-items-center justify-content-center"
                     style="height: 180px;">
-                    <i class="bi bi-play-circle-fill text-danger" style="font-size: 3rem;"></i>
+                    <i class="bi bi-play-circle-fill text-white" style="font-size: 3rem;"></i>
                 </div>
                 {% endif %}
 
