@@ -877,19 +877,24 @@ def logout():
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
 
+# @app.route('/tutorials')
+# @login_required
+# def tutorials_home():
+#     categories = get_all_categories()
+#     # Create a dictionary with category data
+#     tutorials_dict = {
+#         category[1]: {  # Using category name as key
+#             'id': category[0],  # category id
+#             'videos': get_videos_by_category(category[0])  # videos for this category
+#         }
+#         for category in categories
+#     }
+#     return render_template('tutorials/index.html', tutorials=tutorials_dict, categories=categories)
+
 @app.route('/tutorials')
 @login_required
 def tutorials_home():
-    categories = get_all_categories()
-    # Create a dictionary with category data
-    tutorials_dict = {
-        category[1]: {  # Using category name as key
-            'id': category[0],  # category id
-            'videos': get_videos_by_category(category[0])  # videos for this category
-        }
-        for category in categories
-    }
-    return render_template('tutorials/index.html', tutorials=tutorials_dict, categories=categories)
+    return render_template('tutorials/video_tutorials.html')
 
 @app.route('/tutorials/<int:category_id>')
 @login_required
@@ -1293,17 +1298,17 @@ def submit_grade(assignment_id, student_id):
     return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
 
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
