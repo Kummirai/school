@@ -11629,6 +11629,1131 @@
       "subject": "Life Orientation",
       "youtubeId": "oznjLN_rVqM",
       "thumbnail": "https://img.youtube.com/vi/oznjLN_rVqM/mqdefault.jpg"
-    }
-  ]
+    },
+    {
+    "id": 1295,
+    "title": "Introduction to Python Course | Python for beginners",
+    "description": "Introduction to Python Course | Python for beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "6i3EGqOBRiU",
+    "thumbnail": "https://img.youtube.com/vi/6i3EGqOBRiU/mqdefault.jpg"
+  },
+  {
+    "id": 1296,
+    "title": "Introduction to Python Programming | Python for Beginners #lec1",
+    "description": "Introduction to Python Programming | Python for Beginners #lec1",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "DInMru2Eq6E",
+    "thumbnail": "https://img.youtube.com/vi/DInMru2Eq6E/mqdefault.jpg"
+  },
+  {
+    "id": 1297,
+    "title": "History of Python | Python Tutorials for Beginners #lec2",
+    "description": "History of Python | Python Tutorials for Beginners #lec2",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "1UzSDMJRh8c",
+    "thumbnail": "https://img.youtube.com/vi/1UzSDMJRh8c/mqdefault.jpg"
+  },
+  {
+    "id": 1298,
+    "title": "Download and Install Python (3.10.6) and Pycharm | Python Tutorials for Beginners #lec3",
+    "description": "Download and Install Python (3.10.6) and Pycharm | Python Tutorials for Beginners #lec3",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "La1BdF_sunw",
+    "thumbnail": "https://img.youtube.com/vi/La1BdF_sunw/mqdefault.jpg"
+  },
+  {
+    "id": 1299,
+    "title": "Writing First Python Program | Printing to Console in Python | Python Tutorials for Beginners #lec4",
+    "description": "Writing First Python Program | Printing to Console in Python | Python Tutorials for Beginners #lec4",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "lygaoUnJKF4",
+    "thumbnail": "https://img.youtube.com/vi/lygaoUnJKF4/mqdefault.jpg"
+  },
+  {
+    "id": 1300,
+    "title": "P_05 Coding Exercises for Beginners in Python - Exercise #1",
+    "description": "P_05 Coding Exercises for Beginners in Python - Exercise #1",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "FP6qQgJI5f4",
+    "thumbnail": "https://img.youtube.com/vi/FP6qQgJI5f4/mqdefault.jpg"
+  },
+  {
+    "id": 1301,
+    "title": "P_06 print() function & String concatenation(using +) in Python | Python Tutorials for Beginners",
+    "description": "P_06 print() function & String concatenation(using +) in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "6Nu9cvINQLk",
+    "thumbnail": "https://img.youtube.com/vi/6Nu9cvINQLk/mqdefault.jpg"
+  },
+  {
+    "id": 1302,
+    "title": "P_07 Input function in Python | Take User Input in Python | Python Tutorials for Beginners",
+    "description": "P_07 Input function in Python | Take User Input in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "sa97IyIOHxU",
+    "thumbnail": "https://img.youtube.com/vi/sa97IyIOHxU/mqdefault.jpg"
+  },
+  {
+    "id": 1303,
+    "title": "P_08 Variables in Python | Python Tutorials for Beginners",
+    "description": "P_08 Variables in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "a43BIxiZ5EM",
+    "thumbnail": "https://img.youtube.com/vi/a43BIxiZ5EM/mqdefault.jpg"
+  },
+  {
+    "id": 1304,
+    "title": "P_09 Coding Exercises for Beginners in Python | Exercise #2 | Program to swap two numbers",
+    "description": "P_09 Coding Exercises for Beginners in Python | Exercise #2 | Program to swap two numbers",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "A8aYYz6YGCA",
+    "thumbnail": "https://img.youtube.com/vi/A8aYYz6YGCA/mqdefault.jpg"
+  },
+  {
+    "id": 1305,
+    "title": "P_10 Variable Naming Rules in Python | Python Tutorials for Beginners",
+    "description": "P_10 Variable Naming Rules in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Vn4RuZ4Y2M0",
+    "thumbnail": "https://img.youtube.com/vi/Vn4RuZ4Y2M0/mqdefault.jpg"
+  },
+  {
+    "id": 1306,
+    "title": "P_11 Data Types in Python | Python Tutorials for Beginners",
+    "description": "P_11 Data Types in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "TTepNRy0wj8",
+    "thumbnail": "https://img.youtube.com/vi/TTepNRy0wj8/mqdefault.jpg"
+  },
+  {
+    "id": 1307,
+    "title": "P_12 Type Checking, Type Error and Type Conversion | Type Casting in Python",
+    "description": "P_12 Type Checking, Type Error and Type Conversion | Type Casting in Python",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "_WY-p2ZKv9Q",
+    "thumbnail": "https://img.youtube.com/vi/_WY-p2ZKv9Q/mqdefault.jpg"
+  },
+  {
+    "id": 1308,
+    "title": "P_13 Coding Exercises for Beginners in Python | Exercise #3 | Program to add digits of a number",
+    "description": "P_13 Coding Exercises for Beginners in Python | Exercise #3 | Program to add digits of a number",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "b7QWOgVjj1M",
+    "thumbnail": "https://img.youtube.com/vi/b7QWOgVjj1M/mqdefault.jpg"
+  },
+  {
+    "id": 1309,
+    "title": "P_14 Operators in Python | Arithmetic Operators | Python Tutorials for Beginners",
+    "description": "P_14 Operators in Python | Arithmetic Operators | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "kvVPeBBZdtM",
+    "thumbnail": "https://img.youtube.com/vi/kvVPeBBZdtM/mqdefault.jpg"
+  },
+  {
+    "id": 1310,
+    "title": "P_15 Operators in Python | Assignment and Comparison Operators | Python Tutorials for Beginners",
+    "description": "P_15 Operators in Python | Assignment and Comparison Operators | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "ELNIUknegOE",
+    "thumbnail": "https://img.youtube.com/vi/ELNIUknegOE/mqdefault.jpg"
+  },
+  {
+    "id": 1311,
+    "title": "Operators in Python | Logical Operators | Python Tutorials for Beginners #lec16",
+    "description": "Operators in Python | Logical Operators | Python Tutorials for Beginners #lec16",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "-Mx5popgTtE",
+    "thumbnail": "https://img.youtube.com/vi/-Mx5popgTtE/mqdefault.jpg"
+  },
+  {
+    "id": 1312,
+    "title": "Operators in Python | Bitwise Operators | Python Tutorials for Beginners #lec17",
+    "description": "Operators in Python | Bitwise Operators | Python Tutorials for Beginners #lec17",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "XbjQ-heGd58",
+    "thumbnail": "https://img.youtube.com/vi/XbjQ-heGd58/mqdefault.jpg"
+  },
+  {
+    "id": 1313,
+    "title": "Identity Operators in Python | Python Tutorials for Beginners #lec18",
+    "description": "Identity Operators in Python | Python Tutorials for Beginners #lec18",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "BG3lg589HRE",
+    "thumbnail": "https://img.youtube.com/vi/BG3lg589HRE/mqdefault.jpg"
+  },
+  {
+    "id": 1314,
+    "title": "Membership Operators in Python | Python Tutorials for Beginners #lec19",
+    "description": "Membership Operators in Python | Python Tutorials for Beginners #lec19",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "MHl0Jj15crA",
+    "thumbnail": "https://img.youtube.com/vi/MHl0Jj15crA/mqdefault.jpg"
+  },
+  {
+    "id": 1315,
+    "title": "Coding Exercise for Beginners in Python | Exercise #4 | Python for Beginners #lec20",
+    "description": "Coding Exercise for Beginners in Python | Exercise #4 | Python for Beginners #lec20",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "0kLylf5uNNc",
+    "thumbnail": "https://img.youtube.com/vi/0kLylf5uNNc/mqdefault.jpg"
+  },
+  {
+    "id": 1316,
+    "title": "round() function in Python | Python Tutorials for Beginners #lec21",
+    "description": "round() function in Python | Python Tutorials for Beginners #lec21",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "CLjw2nCMpSY",
+    "thumbnail": "https://img.youtube.com/vi/CLjw2nCMpSY/mqdefault.jpg"
+  },
+  {
+    "id": 1317,
+    "title": "f-Strings in Python | Python Tutorials for Beginners #lec22",
+    "description": "f-Strings in Python | Python Tutorials for Beginners #lec22",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "xGkF9Y38Gsc",
+    "thumbnail": "https://img.youtube.com/vi/xGkF9Y38Gsc/mqdefault.jpg"
+  },
+  {
+    "id": 1318,
+    "title": "Coding Exercise for Beginners in Python| Exercise 5 | Python for Beginners #lec23",
+    "description": "Coding Exercise for Beginners in Python| Exercise 5 | Python for Beginners #lec23",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "O2V97JC8zOY",
+    "thumbnail": "https://img.youtube.com/vi/O2V97JC8zOY/mqdefault.jpg"
+  },
+  {
+    "id": 1319,
+    "title": "If & If Else Conditional Statements in Python | Python Tutorials for Beginners#lec24",
+    "description": "If & If Else Conditional Statements in Python | Python Tutorials for Beginners#lec24",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "MMzXz7EDTZM",
+    "thumbnail": "https://img.youtube.com/vi/MMzXz7EDTZM/mqdefault.jpg"
+  },
+  {
+    "id": 1320,
+    "title": "Coding Exercise for Beginners in Python | Exercise 6| Python for Beginners #lec25",
+    "description": "Coding Exercise for Beginners in Python | Exercise 6| Python for Beginners #lec25",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "WOvtTLePD3M",
+    "thumbnail": "https://img.youtube.com/vi/WOvtTLePD3M/mqdefault.jpg"
+  },
+  {
+    "id": 1321,
+    "title": "Nested If Else & elif Statements in Python | Python Tutorials for Beginners #lec26",
+    "description": "Nested If Else & elif Statements in Python | Python Tutorials for Beginners #lec26",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "7498T9qPygI",
+    "thumbnail": "https://img.youtube.com/vi/7498T9qPygI/mqdefault.jpg"
+  },
+  {
+    "id": 1322,
+    "title": "P_27 Coding Exercise for Beginners in Python | Exercise 7 | Python Tutorials for Beginners",
+    "description": "P_27 Coding Exercise for Beginners in Python | Exercise 7 | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "a3n_9k06dY8",
+    "thumbnail": "https://img.youtube.com/vi/a3n_9k06dY8/mqdefault.jpg"
+  },
+  {
+    "id": 1323,
+    "title": "P_28 Coding Exercise for Beginners in Python | Exercise 8 | Python Tutorials for Beginners",
+    "description": "P_28 Coding Exercise for Beginners in Python | Exercise 8 | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "sY6j_UR3pGI",
+    "thumbnail": "https://img.youtube.com/vi/sY6j_UR3pGI/mqdefault.jpg"
+  },
+  {
+    "id": 1324,
+    "title": "P_29 Multiple if Statements in Python  | Python Tutorials for Beginners",
+    "description": "P_29 Multiple if Statements in Python  | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "O3MA3Hn7c2E",
+    "thumbnail": "https://img.youtube.com/vi/O3MA3Hn7c2E/mqdefault.jpg"
+  },
+  {
+    "id": 1325,
+    "title": "P_30 Coding Exercise for Beginners in Python | Exercise 9 | Python Tutorials for Beginners",
+    "description": "P_30 Coding Exercise for Beginners in Python | Exercise 9 | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "9OwSWGguQXs",
+    "thumbnail": "https://img.youtube.com/vi/9OwSWGguQXs/mqdefault.jpg"
+  },
+  {
+    "id": 1326,
+    "title": "P_31 Coding Exercise for Beginners in Python | Love Calculator | Python Tutorials for Beginners",
+    "description": "P_31 Coding Exercise for Beginners in Python | Love Calculator | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "iRF5AB1VRS8",
+    "thumbnail": "https://img.youtube.com/vi/iRF5AB1VRS8/mqdefault.jpg"
+  },
+  {
+    "id": 1327,
+    "title": "P_32 List in Python and List Functions | Python Tutorials for Beginners",
+    "description": "P_32 List in Python and List Functions | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "1tnFQDo05hQ",
+    "thumbnail": "https://img.youtube.com/vi/1tnFQDo05hQ/mqdefault.jpg"
+  },
+  {
+    "id": 1328,
+    "title": "P_33  Random Module in Python | Python Tutorials for Beginners",
+    "description": "P_33  Random Module in Python | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "khZKoe0_B0I",
+    "thumbnail": "https://img.youtube.com/vi/khZKoe0_B0I/mqdefault.jpg"
+  },
+  {
+    "id": 1329,
+    "title": "P_34 Coding Exercise for Beginners in Python | Heads or Tails | Python Tutorials for Beginners",
+    "description": "P_34 Coding Exercise for Beginners in Python | Heads or Tails | Python Tutorials for Beginners",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "7niNK-917fI",
+    "thumbnail": "https://img.youtube.com/vi/7niNK-917fI/mqdefault.jpg"
+  },
+  {
+    "id": 1330,
+    "title": "Coding Exercise for Beginners in Python |Exercise 12 | Python Tutorials for Beginners #lec35",
+    "description": "Coding Exercise for Beginners in Python |Exercise 12 | Python Tutorials for Beginners #lec35",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "ORMBycShqnc",
+    "thumbnail": "https://img.youtube.com/vi/ORMBycShqnc/mqdefault.jpg"
+  },
+  {
+    "id": 1331,
+    "title": "Fix Python Index Error:  List Index Out of Range | Python Tutorials for Beginners #lec36",
+    "description": "Fix Python Index Error:  List Index Out of Range | Python Tutorials for Beginners #lec36",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "wpmXETzX6xc",
+    "thumbnail": "https://img.youtube.com/vi/wpmXETzX6xc/mqdefault.jpg"
+  },
+  {
+    "id": 1332,
+    "title": "Nested List in Python | Python Tutorials for Beginners #lec37",
+    "description": "Nested List in Python | Python Tutorials for Beginners #lec37",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "KEpmUPxxjxI",
+    "thumbnail": "https://img.youtube.com/vi/KEpmUPxxjxI/mqdefault.jpg"
+  },
+  {
+    "id": 1333,
+    "title": "Coding Exercise for Beginners in Python |Exercise 13 | Python Tutorials for Beginners #lec38",
+    "description": "Coding Exercise for Beginners in Python |Exercise 13 | Python Tutorials for Beginners #lec38",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "jTIODDVCAus",
+    "thumbnail": "https://img.youtube.com/vi/jTIODDVCAus/mqdefault.jpg"
+  },
+  {
+    "id": 1334,
+    "title": "Python Project 1 | Rock Paper Scissors Game in Python | Python for Beginners #lec39",
+    "description": "Python Project 1 | Rock Paper Scissors Game in Python | Python for Beginners #lec39",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Qcefu1jVPds",
+    "thumbnail": "https://img.youtube.com/vi/Qcefu1jVPds/mqdefault.jpg"
+  },
+  {
+    "id": 1335,
+    "title": "Tuples in Python | Python Tutorials for Beginners #lec40",
+    "description": "Tuples in Python | Python Tutorials for Beginners #lec40",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "zLFituJxj6c",
+    "thumbnail": "https://img.youtube.com/vi/zLFituJxj6c/mqdefault.jpg"
+  },
+  {
+    "id": 1336,
+    "title": "Sets in Python | Python Tutorials for Beginners #lec41 Part1",
+    "description": "Sets in Python | Python Tutorials for Beginners #lec41 Part1",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "CTg_To0PwI8",
+    "thumbnail": "https://img.youtube.com/vi/CTg_To0PwI8/mqdefault.jpg"
+  },
+  {
+    "id": 1337,
+    "title": "Sets Methods in Python | Python Tutorials for Beginners | #Lec41 Part 2",
+    "description": "Sets Methods in Python | Python Tutorials for Beginners | #Lec41 Part 2",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "eEbTvbG3los",
+    "thumbnail": "https://img.youtube.com/vi/eEbTvbG3los/mqdefault.jpg"
+  },
+  {
+    "id": 1338,
+    "title": "Sets Methods in Python | Python Tutorials for Beginners #lec41 Part3",
+    "description": "Sets Methods in Python | Python Tutorials for Beginners #lec41 Part3",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "bniKXiB72lU",
+    "thumbnail": "https://img.youtube.com/vi/bniKXiB72lU/mqdefault.jpg"
+  },
+  {
+    "id": 1339,
+    "title": "Sets Methods in Python | Python Tutorials for Beginners #lec41 Part4",
+    "description": "Sets Methods in Python | Python Tutorials for Beginners #lec41 Part4",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "k1-ZjeIDnPo",
+    "thumbnail": "https://img.youtube.com/vi/k1-ZjeIDnPo/mqdefault.jpg"
+  },
+  {
+    "id": 1340,
+    "title": "For Loop in Python | Python Tutorials for Beginners #lec42",
+    "description": "For Loop in Python | Python Tutorials for Beginners #lec42",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "k4R7FwL2XYA",
+    "thumbnail": "https://img.youtube.com/vi/k4R7FwL2XYA/mqdefault.jpg"
+  },
+  {
+    "id": 1341,
+    "title": "For else in Python | Python Tutorials for Beginners #lec43",
+    "description": "For else in Python | Python Tutorials for Beginners #lec43",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "jDJ718e-YIw",
+    "thumbnail": "https://img.youtube.com/vi/jDJ718e-YIw/mqdefault.jpg"
+  },
+  {
+    "id": 1342,
+    "title": "Coding Exercise for Beginners in Python |Exercise 14 | Python Tutorials for Beginners #lec44",
+    "description": "Coding Exercise for Beginners in Python |Exercise 14 | Python Tutorials for Beginners #lec44",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "u-Ptydkqh7E",
+    "thumbnail": "https://img.youtube.com/vi/u-Ptydkqh7E/mqdefault.jpg"
+  },
+  {
+    "id": 1343,
+    "title": "Coding Exercise for Beginners in Python |Exercise 15 | Python Tutorials for Beginners #lec45",
+    "description": "Coding Exercise for Beginners in Python |Exercise 15 | Python Tutorials for Beginners #lec45",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "rzMdf7cmHc0",
+    "thumbnail": "https://img.youtube.com/vi/rzMdf7cmHc0/mqdefault.jpg"
+  },
+  {
+    "id": 1344,
+    "title": "Range function in Python | Python range() function |Python Tutorials for Beginners #lec46",
+    "description": "Range function in Python | Python range() function |Python Tutorials for Beginners #lec46",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "YNDgutH6gjs",
+    "thumbnail": "https://img.youtube.com/vi/YNDgutH6gjs/mqdefault.jpg"
+  },
+  {
+    "id": 1345,
+    "title": "Coding Exercise for Beginners in Python |Exercise 16 | Python Tutorials for Beginners #lec47",
+    "description": "Coding Exercise for Beginners in Python |Exercise 16 | Python Tutorials for Beginners #lec47",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "sI_Wb3JPQg8",
+    "thumbnail": "https://img.youtube.com/vi/sI_Wb3JPQg8/mqdefault.jpg"
+  },
+  {
+    "id": 1346,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 17 |Python for Beginners #lec48",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 17 |Python for Beginners #lec48",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "nxYOmS7p6qY",
+    "thumbnail": "https://img.youtube.com/vi/nxYOmS7p6qY/mqdefault.jpg"
+  },
+  {
+    "id": 1347,
+    "title": "Python Project 2 | Password Generator in Python | Python for Beginners #lec49",
+    "description": "Python Project 2 | Password Generator in Python | Python for Beginners #lec49",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "hGuA9WKTtRs",
+    "thumbnail": "https://img.youtube.com/vi/hGuA9WKTtRs/mqdefault.jpg"
+  },
+  {
+    "id": 1348,
+    "title": "While Loop in Python | Python Tutorials for Beginners #lec50",
+    "description": "While Loop in Python | Python Tutorials for Beginners #lec50",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "KOfCkEIxh_o",
+    "thumbnail": "https://img.youtube.com/vi/KOfCkEIxh_o/mqdefault.jpg"
+  },
+  {
+    "id": 1349,
+    "title": "Break Continue Pass in Python | Loop Control Statements | Python Tutorials for Beginners #lec51",
+    "description": "Break Continue Pass in Python | Loop Control Statements | Python Tutorials for Beginners #lec51",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "DpE5TJNNb9Q",
+    "thumbnail": "https://img.youtube.com/vi/DpE5TJNNb9Q/mqdefault.jpg"
+  },
+  {
+    "id": 1350,
+    "title": "Indentation in Python | Python Tutorials for Beginners #lec52",
+    "description": "Indentation in Python | Python Tutorials for Beginners #lec52",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "xVndqyPFu-k",
+    "thumbnail": "https://img.youtube.com/vi/xVndqyPFu-k/mqdefault.jpg"
+  },
+  {
+    "id": 1351,
+    "title": "Hangman Game for beginners |Introduction | Python Project for beginners #lec53",
+    "description": "Hangman Game for beginners |Introduction | Python Project for beginners #lec53",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "dIFRJe2uHB4",
+    "thumbnail": "https://img.youtube.com/vi/dIFRJe2uHB4/mqdefault.jpg"
+  },
+  {
+    "id": 1352,
+    "title": "Hangman Game for beginners |Flowchart | Python Project for beginners #lec54",
+    "description": "Hangman Game for beginners |Flowchart | Python Project for beginners #lec54",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "earqUEBeudg",
+    "thumbnail": "https://img.youtube.com/vi/earqUEBeudg/mqdefault.jpg"
+  },
+  {
+    "id": 1353,
+    "title": "Hangman Game in Python | Python Project #3 | Python Project for beginners #lec55",
+    "description": "Hangman Game in Python | Python Project #3 | Python Project for beginners #lec55",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "tMJbCWHAWQ4",
+    "thumbnail": "https://img.youtube.com/vi/tMJbCWHAWQ4/mqdefault.jpg"
+  },
+  {
+    "id": 1354,
+    "title": "Functions in Python | Introduction | Python for beginners #lec56",
+    "description": "Functions in Python | Introduction | Python for beginners #lec56",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "eezLhJ5oGYg",
+    "thumbnail": "https://img.youtube.com/vi/eezLhJ5oGYg/mqdefault.jpg"
+  },
+  {
+    "id": 1355,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 18| Python for Beginners #lec57",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 18| Python for Beginners #lec57",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "-gxUjXAG96U",
+    "thumbnail": "https://img.youtube.com/vi/-gxUjXAG96U/mqdefault.jpg"
+  },
+  {
+    "id": 1356,
+    "title": "Coding Exercise for Beginners in Python with solution |Exercise 19 | Python for Beginners #lec58",
+    "description": "Coding Exercise for Beginners in Python with solution |Exercise 19 | Python for Beginners #lec58",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "O79JMm7GFlA",
+    "thumbnail": "https://img.youtube.com/vi/O79JMm7GFlA/mqdefault.jpg"
+  },
+  {
+    "id": 1357,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 20 |Python for Beginners #lec59",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 20 |Python for Beginners #lec59",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "JpBamlGdb5I",
+    "thumbnail": "https://img.youtube.com/vi/JpBamlGdb5I/mqdefault.jpg"
+  },
+  {
+    "id": 1358,
+    "title": "Functions with Arguments in Python | Parameters vs Arguments | Python Tutorials for Beginners #lec60",
+    "description": "Functions with Arguments in Python | Parameters vs Arguments | Python Tutorials for Beginners #lec60",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "uY8QPE0dcSs",
+    "thumbnail": "https://img.youtube.com/vi/uY8QPE0dcSs/mqdefault.jpg"
+  },
+  {
+    "id": 1359,
+    "title": "Types of Arguments in Python | Python Tutorials for Beginners #lec61",
+    "description": "Types of Arguments in Python | Python Tutorials for Beginners #lec61",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "OCbSteqZsKQ",
+    "thumbnail": "https://img.youtube.com/vi/OCbSteqZsKQ/mqdefault.jpg"
+  },
+  {
+    "id": 1360,
+    "title": "*args and **kwargs in Python | Python Tutorials for Beginners #lec62",
+    "description": "*args and **kwargs in Python | Python Tutorials for Beginners #lec62",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "pY6mZ-RbBZg",
+    "thumbnail": "https://img.youtube.com/vi/pY6mZ-RbBZg/mqdefault.jpg"
+  },
+  {
+    "id": 1361,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 21 |Python for Beginners #lec63",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 21 |Python for Beginners #lec63",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "vvroag3Qds8",
+    "thumbnail": "https://img.youtube.com/vi/vvroag3Qds8/mqdefault.jpg"
+  },
+  {
+    "id": 1362,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 22 | Python for Beginners #lec64",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 22 | Python for Beginners #lec64",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "P2l6tzvHQWo",
+    "thumbnail": "https://img.youtube.com/vi/P2l6tzvHQWo/mqdefault.jpg"
+  },
+  {
+    "id": 1363,
+    "title": "Python Project #4 | Caesar Cipher Introduction - part1 | Python Project for beginners #lec65",
+    "description": "Python Project #4 | Caesar Cipher Introduction - part1 | Python Project for beginners #lec65",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "0heejX0rtII",
+    "thumbnail": "https://img.youtube.com/vi/0heejX0rtII/mqdefault.jpg"
+  },
+  {
+    "id": 1364,
+    "title": "Python Project for beginners #4| Caesar Cipher - Complete Code | Python for Beginners #lec66",
+    "description": "Python Project for beginners #4| Caesar Cipher - Complete Code | Python for Beginners #lec66",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "HWhUuO7VV1o",
+    "thumbnail": "https://img.youtube.com/vi/HWhUuO7VV1o/mqdefault.jpg"
+  },
+  {
+    "id": 1365,
+    "title": "Dictionaries in python | Dictionaries Built-in functions | Python Tutorials for Beginners #lec67",
+    "description": "Dictionaries in python | Dictionaries Built-in functions | Python Tutorials for Beginners #lec67",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "C29qMZb9HrA",
+    "thumbnail": "https://img.youtube.com/vi/C29qMZb9HrA/mqdefault.jpg"
+  },
+  {
+    "id": 1366,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 23 | Python for Beginners #lec68",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 23 | Python for Beginners #lec68",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "l-2HkbQymmM",
+    "thumbnail": "https://img.youtube.com/vi/l-2HkbQymmM/mqdefault.jpg"
+  },
+  {
+    "id": 1367,
+    "title": "Nested Dictionaries in Python | Python Tutorials for Beginners #lec69",
+    "description": "Nested Dictionaries in Python | Python Tutorials for Beginners #lec69",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "jakXbai-Wic",
+    "thumbnail": "https://img.youtube.com/vi/jakXbai-Wic/mqdefault.jpg"
+  },
+  {
+    "id": 1368,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 24 | Python for Beginners #lec70",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 24 | Python for Beginners #lec70",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "O1-whIFkco0",
+    "thumbnail": "https://img.youtube.com/vi/O1-whIFkco0/mqdefault.jpg"
+  },
+  {
+    "id": 1369,
+    "title": "Python Project for beginners #5| Silent Auction Program-part 1  | Python for Beginners #lec71",
+    "description": "Python Project for beginners #5| Silent Auction Program-part 1  | Python for Beginners #lec71",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "O_48EL9Zg0E",
+    "thumbnail": "https://img.youtube.com/vi/O_48EL9Zg0E/mqdefault.jpg"
+  },
+  {
+    "id": 1370,
+    "title": "Python Project for beginners #5| Silent Auction Program-Complete Code | Python for Beginners #lec72",
+    "description": "Python Project for beginners #5| Silent Auction Program-Complete Code | Python for Beginners #lec72",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "oS8FekoPFKM",
+    "thumbnail": "https://img.youtube.com/vi/oS8FekoPFKM/mqdefault.jpg"
+  },
+  {
+    "id": 1371,
+    "title": "Functions with Return Statement in Python | Python Tutorials for Beginners #lec73",
+    "description": "Functions with Return Statement in Python | Python Tutorials for Beginners #lec73",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "LF7gVwJP8BA",
+    "thumbnail": "https://img.youtube.com/vi/LF7gVwJP8BA/mqdefault.jpg"
+  },
+  {
+    "id": 1372,
+    "title": "Return Multiple values from a Function |Multiple return Statements| Python for Beginners #lec74",
+    "description": "Return Multiple values from a Function |Multiple return Statements| Python for Beginners #lec74",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "-tb0Ur5_pjU",
+    "thumbnail": "https://img.youtube.com/vi/-tb0Ur5_pjU/mqdefault.jpg"
+  },
+  {
+    "id": 1373,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 25 | Python for Beginners #lec75",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 25 | Python for Beginners #lec75",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "_LMhfUIWfiU",
+    "thumbnail": "https://img.youtube.com/vi/_LMhfUIWfiU/mqdefault.jpg"
+  },
+  {
+    "id": 1374,
+    "title": "print vs return in Python | What is the Difference?| Python Tutorials for Beginners #lec76",
+    "description": "print vs return in Python | What is the Difference?| Python Tutorials for Beginners #lec76",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "19PXDJCU3oc",
+    "thumbnail": "https://img.youtube.com/vi/19PXDJCU3oc/mqdefault.jpg"
+  },
+  {
+    "id": 1375,
+    "title": "Python Project for beginners #6| Calculator -Complete Code | Python for Beginners #lec77",
+    "description": "Python Project for beginners #6| Calculator -Complete Code | Python for Beginners #lec77",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "vlJ--mCPBCg",
+    "thumbnail": "https://img.youtube.com/vi/vlJ--mCPBCg/mqdefault.jpg"
+  },
+  {
+    "id": 1376,
+    "title": "local and Global Scope in Python | Python Tutorials for Beginners #lec78",
+    "description": "local and Global Scope in Python | Python Tutorials for Beginners #lec78",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "3iIq6gq_xRo",
+    "thumbnail": "https://img.youtube.com/vi/3iIq6gq_xRo/mqdefault.jpg"
+  },
+  {
+    "id": 1377,
+    "title": "Global keyword in Python | Modify a Global Variable | Python Tutorials for Beginners #lec79",
+    "description": "Global keyword in Python | Modify a Global Variable | Python Tutorials for Beginners #lec79",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "4mmqLhTxTVk",
+    "thumbnail": "https://img.youtube.com/vi/4mmqLhTxTVk/mqdefault.jpg"
+  },
+  {
+    "id": 1378,
+    "title": "Python Project for beginners #7| Guess The Number -Complete Code | Python for Beginners #lec80",
+    "description": "Python Project for beginners #7| Guess The Number -Complete Code | Python for Beginners #lec80",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "QXX2ySfwEBM",
+    "thumbnail": "https://img.youtube.com/vi/QXX2ySfwEBM/mqdefault.jpg"
+  },
+  {
+    "id": 1379,
+    "title": "Debugging in Python | Debugging Tips | Python Tutorials for Beginners #lec81",
+    "description": "Debugging in Python | Debugging Tips | Python Tutorials for Beginners #lec81",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "wxvYoQBCap4",
+    "thumbnail": "https://img.youtube.com/vi/wxvYoQBCap4/mqdefault.jpg"
+  },
+  {
+    "id": 1380,
+    "title": "Python Project for beginners #8| Higher Lower Game - Complete Code | Python for Beginners #lec82",
+    "description": "Python Project for beginners #8| Higher Lower Game - Complete Code | Python for Beginners #lec82",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "BbBUns9yDEM",
+    "thumbnail": "https://img.youtube.com/vi/BbBUns9yDEM/mqdefault.jpg"
+  },
+  {
+    "id": 1381,
+    "title": "Python Project for beginners #9| Coffee Machine Project | Python for Beginners #lec83",
+    "description": "Python Project for beginners #9| Coffee Machine Project | Python for Beginners #lec83",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "oREXmJPvLWk",
+    "thumbnail": "https://img.youtube.com/vi/oREXmJPvLWk/mqdefault.jpg"
+  },
+  {
+    "id": 1382,
+    "title": "OOP in Python | Object Oriented Programming | Python for Beginners #lec84",
+    "description": "OOP in Python | Object Oriented Programming | Python for Beginners #lec84",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Ic7ZBKqkS1E",
+    "thumbnail": "https://img.youtube.com/vi/Ic7ZBKqkS1E/mqdefault.jpg"
+  },
+  {
+    "id": 1383,
+    "title": "Classes and Objects in Python | OOP in Python | Python for Beginners #lec85",
+    "description": "Classes and Objects in Python | OOP in Python | Python for Beginners #lec85",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Gvm2Sg1rZek",
+    "thumbnail": "https://img.youtube.com/vi/Gvm2Sg1rZek/mqdefault.jpg"
+  },
+  {
+    "id": 1384,
+    "title": "Self and __init__() method in Python | Python Tutorials for Beginners #lec86",
+    "description": "Self and __init__() method in Python | Python Tutorials for Beginners #lec86",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "G6Bd6tJ9ft0",
+    "thumbnail": "https://img.youtube.com/vi/G6Bd6tJ9ft0/mqdefault.jpg"
+  },
+  {
+    "id": 1385,
+    "title": "Class Methods in Python | How to add Methods in Class | Python Tutorials for Beginners #lec87",
+    "description": "Class Methods in Python | How to add Methods in Class | Python Tutorials for Beginners #lec87",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "tJNsmm7ZUmk",
+    "thumbnail": "https://img.youtube.com/vi/tJNsmm7ZUmk/mqdefault.jpg"
+  },
+  {
+    "id": 1386,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 26 | Python for Beginners #lec88",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 26 | Python for Beginners #lec88",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "cezNT43xmAY",
+    "thumbnail": "https://img.youtube.com/vi/cezNT43xmAY/mqdefault.jpg"
+  },
+  {
+    "id": 1387,
+    "title": "Inheritance in Python | Python Tutorials for Beginners #lec89",
+    "description": "Inheritance in Python | Python Tutorials for Beginners #lec89",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "4SO3sScshvA",
+    "thumbnail": "https://img.youtube.com/vi/4SO3sScshvA/mqdefault.jpg"
+  },
+  {
+    "id": 1388,
+    "title": "Multiple Inheritance in Python | Python Tutorials for Beginners #lec90",
+    "description": "Multiple Inheritance in Python | Python Tutorials for Beginners #lec90",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Smlbgao6VL4",
+    "thumbnail": "https://img.youtube.com/vi/Smlbgao6VL4/mqdefault.jpg"
+  },
+  {
+    "id": 1389,
+    "title": "Multilevel Inheritance in Python | Python Tutorials for Beginners #lec91",
+    "description": "Multilevel Inheritance in Python | Python Tutorials for Beginners #lec91",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Fv1xFd3LzJo",
+    "thumbnail": "https://img.youtube.com/vi/Fv1xFd3LzJo/mqdefault.jpg"
+  },
+  {
+    "id": 1390,
+    "title": "Hierarchical Inheritance in Python | Python Tutorials for Beginners #lec92",
+    "description": "Hierarchical Inheritance in Python | Python Tutorials for Beginners #lec92",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "UYxJBJQZU-I",
+    "thumbnail": "https://img.youtube.com/vi/UYxJBJQZU-I/mqdefault.jpg"
+  },
+  {
+    "id": 1391,
+    "title": "Hybrid Inheritance in Python | Python Tutorials for Beginners #lec93",
+    "description": "Hybrid Inheritance in Python | Python Tutorials for Beginners #lec93",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "E6aDQWX-ASc",
+    "thumbnail": "https://img.youtube.com/vi/E6aDQWX-ASc/mqdefault.jpg"
+  },
+  {
+    "id": 1392,
+    "title": "Diamond Problem in Inheritance | MRO in Python | C3 Linearization Algorithm Python Programming#lec94",
+    "description": "Diamond Problem in Inheritance | MRO in Python | C3 Linearization Algorithm Python Programming#lec94",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "PSMYqfMP3Cs",
+    "thumbnail": "https://img.youtube.com/vi/PSMYqfMP3Cs/mqdefault.jpg"
+  },
+  {
+    "id": 1393,
+    "title": "File Handling in Python | Python Tutorials for Beginners #lec95",
+    "description": "File Handling in Python | Python Tutorials for Beginners #lec95",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "Sx1Hjr67xO0",
+    "thumbnail": "https://img.youtube.com/vi/Sx1Hjr67xO0/mqdefault.jpg"
+  },
+  {
+    "id": 1394,
+    "title": "Python Project for beginners| Quiz Game Project | Python for Beginners #lec96",
+    "description": "Python Project for beginners| Quiz Game Project | Python for Beginners #lec96",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "YhmF0NQO0LQ",
+    "thumbnail": "https://img.youtube.com/vi/YhmF0NQO0LQ/mqdefault.jpg"
+  },
+  {
+    "id": 1395,
+    "title": "Modules in Python | Python Tutorials for Beginners #lec97",
+    "description": "Modules in Python | Python Tutorials for Beginners #lec97",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "L6BoHn8NdX4",
+    "thumbnail": "https://img.youtube.com/vi/L6BoHn8NdX4/mqdefault.jpg"
+  },
+  {
+    "id": 1396,
+    "title": "Abstraction in Python | Python OOP Concepts| Python Tutorials for Beginners #lec98",
+    "description": "Abstraction in Python | Python OOP Concepts| Python Tutorials for Beginners #lec98",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "TenfEct8AxM",
+    "thumbnail": "https://img.youtube.com/vi/TenfEct8AxM/mqdefault.jpg"
+  },
+  {
+    "id": 1397,
+    "title": "Abstract Class & Abstract Method in Python | Python Tutorials for Beginners #lec99",
+    "description": "Abstract Class & Abstract Method in Python | Python Tutorials for Beginners #lec99",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "64tJdFVh1Vs",
+    "thumbnail": "https://img.youtube.com/vi/64tJdFVh1Vs/mqdefault.jpg"
+  },
+  {
+    "id": 1398,
+    "title": "Access Modifiers in Python | Public Protected Private Access Specifiers |Python for Beginners#lec100",
+    "description": "Access Modifiers in Python | Public Protected Private Access Specifiers |Python for Beginners#lec100",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "aF6usfcTYqQ",
+    "thumbnail": "https://img.youtube.com/vi/aF6usfcTYqQ/mqdefault.jpg"
+  },
+  {
+    "id": 1399,
+    "title": "Encapsulation in Python | Getters & Setters methods | Python Tutorials for Beginners #lec101",
+    "description": "Encapsulation in Python | Getters & Setters methods | Python Tutorials for Beginners #lec101",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "fjIUS1jlVkA",
+    "thumbnail": "https://img.youtube.com/vi/fjIUS1jlVkA/mqdefault.jpg"
+  },
+  {
+    "id": 1400,
+    "title": "Polymorphism in Python | Introduction | Python Tutorials for Beginners #lec102",
+    "description": "Polymorphism in Python | Introduction | Python Tutorials for Beginners #lec102",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "UPT4Q_sTOpY",
+    "thumbnail": "https://img.youtube.com/vi/UPT4Q_sTOpY/mqdefault.jpg"
+  },
+  {
+    "id": 1401,
+    "title": "Duck Typing in Python| Python Tutorials for beginners #lec103",
+    "description": "Duck Typing in Python| Python Tutorials for beginners #lec103",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "mbpHqb04BI8",
+    "thumbnail": "https://img.youtube.com/vi/mbpHqb04BI8/mqdefault.jpg"
+  },
+  {
+    "id": 1402,
+    "title": "Operator Overloading in Python | Polymorphism | Python Tutorials for Beginners #lec104",
+    "description": "Operator Overloading in Python | Polymorphism | Python Tutorials for Beginners #lec104",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "CGZJ-d4T5eQ",
+    "thumbnail": "https://img.youtube.com/vi/CGZJ-d4T5eQ/mqdefault.jpg"
+  },
+  {
+    "id": 1403,
+    "title": "Method Overloading and Method Overriding| Python Tutorials for Beginners #lec105",
+    "description": "Method Overloading and Method Overriding| Python Tutorials for Beginners #lec105",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "1gJQMSZ05HA",
+    "thumbnail": "https://img.youtube.com/vi/1gJQMSZ05HA/mqdefault.jpg"
+  },
+  {
+    "id": 1404,
+    "title": "Magic/Dunder Methods in Python | Python Tutorials #lec106",
+    "description": "Magic/Dunder Methods in Python | Python Tutorials #lec106",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "ZZ04bIag-HU",
+    "thumbnail": "https://img.youtube.com/vi/ZZ04bIag-HU/mqdefault.jpg"
+  },
+  {
+    "id": 1405,
+    "title": "Coding Exercise for Beginners in Python with solution | Exercise 27 | Python for Beginners #lec107",
+    "description": "Coding Exercise for Beginners in Python with solution | Exercise 27 | Python for Beginners #lec107",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "F7cm393pMYk",
+    "thumbnail": "https://img.youtube.com/vi/F7cm393pMYk/mqdefault.jpg"
+  },
+  {
+    "id": 1406,
+    "title": "pip & PyPI in python | Packages in Python | Python Tutorials for Beginners #lec108",
+    "description": "pip & PyPI in python | Packages in Python | Python Tutorials for Beginners #lec108",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "h2fu66y0_uA",
+    "thumbnail": "https://img.youtube.com/vi/h2fu66y0_uA/mqdefault.jpg"
+  },
+  {
+    "id": 1407,
+    "title": "Packages in Python | Python Tutorials for Beginners #lec109",
+    "description": "Packages in Python | Python Tutorials for Beginners #lec109",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "bcDMDlH3Vu8",
+    "thumbnail": "https://img.youtube.com/vi/bcDMDlH3Vu8/mqdefault.jpg"
+  },
+  {
+    "id": 1408,
+    "title": "If __name__ == '__main__ ' in Python | Python Tutorials for Beginners #lec110",
+    "description": "If __name__ == '__main__ ' in Python | Python Tutorials for Beginners #lec110",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "8qlf6Cg037o",
+    "thumbnail": "https://img.youtube.com/vi/8qlf6Cg037o/mqdefault.jpg"
+  },
+  {
+    "id": 1409,
+    "title": "Python Turtle Graphics Introduction | Python Tutorials for Beginners #lec111",
+    "description": "Python Turtle Graphics Introduction | Python Tutorials for Beginners #lec111",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "BxYR_sABIww",
+    "thumbnail": "https://img.youtube.com/vi/BxYR_sABIww/mqdefault.jpg"
+  },
+  {
+    "id": 1410,
+    "title": "Python Turtle graphics | part 2 | Python Tutorials for Beginners #lec112",
+    "description": "Python Turtle graphics | part 2 | Python Tutorials for Beginners #lec112",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "UmwQ1ROPYBs",
+    "thumbnail": "https://img.youtube.com/vi/UmwQ1ROPYBs/mqdefault.jpg"
+  },
+  {
+    "id": 1411,
+    "title": "Turtle Coding Exercise for Beginners in Python |Exercise 28 | Python for Beginners #lec113",
+    "description": "Turtle Coding Exercise for Beginners in Python |Exercise 28 | Python for Beginners #lec113",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "hkyQEaDg_gM",
+    "thumbnail": "https://img.youtube.com/vi/hkyQEaDg_gM/mqdefault.jpg"
+  },
+  {
+    "id": 1412,
+    "title": "Turtle Coding Exercise for Beginners in Python |Exercise 29 | Python for Beginners #lec114",
+    "description": "Turtle Coding Exercise for Beginners in Python |Exercise 29 | Python for Beginners #lec114",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "1u4yQe-1WN0",
+    "thumbnail": "https://img.youtube.com/vi/1u4yQe-1WN0/mqdefault.jpg"
+  },
+  {
+    "id": 1413,
+    "title": "Coding Exercise for Beginners in Python |Exercise 30 | Python for Beginners #lec115",
+    "description": "Coding Exercise for Beginners in Python |Exercise 30 | Python for Beginners #lec115",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "FFrBaOUgbgg",
+    "thumbnail": "https://img.youtube.com/vi/FFrBaOUgbgg/mqdefault.jpg"
+  },
+  {
+    "id": 1414,
+    "title": "Coding Exercise for Beginners in Python |Exercise 31 | Python for Beginners #lec116",
+    "description": "Coding Exercise for Beginners in Python |Exercise 31 | Python for Beginners #lec116",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "HiTbawXkcIA",
+    "thumbnail": "https://img.youtube.com/vi/HiTbawXkcIA/mqdefault.jpg"
+  },
+  {
+    "id": 1415,
+    "title": "Coding Exercise for Beginners in Python |Exercise 32 | Python for Beginners #lec118",
+    "description": "Coding Exercise for Beginners in Python |Exercise 32 | Python for Beginners #lec118",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "i0cbG0hlWg8",
+    "thumbnail": "https://img.youtube.com/vi/i0cbG0hlWg8/mqdefault.jpg"
+  },
+  {
+    "id": 1416,
+    "title": "Python Project for beginners #11| Turtle Race Project | Python for Beginners #lec119",
+    "description": "Python Project for beginners #11| Turtle Race Project | Python for Beginners #lec119",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "y38sbuRjhAs",
+    "thumbnail": "https://img.youtube.com/vi/y38sbuRjhAs/mqdefault.jpg"
+  },
+  {
+    "id": 1417,
+    "title": "Python Higher Order Functions | Python Tutorials for Beginners #lec120",
+    "description": "Python Higher Order Functions | Python Tutorials for Beginners #lec120",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "KKJ-Vvewu0w",
+    "thumbnail": "https://img.youtube.com/vi/KKJ-Vvewu0w/mqdefault.jpg"
+  },
+  {
+    "id": 1418,
+    "title": "Python Event Listeners | Python Tutorials for Beginners #lec121",
+    "description": "Python Event Listeners | Python Tutorials for Beginners #lec121",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "7dnk_wE79i4",
+    "thumbnail": "https://img.youtube.com/vi/7dnk_wE79i4/mqdefault.jpg"
+  },
+  {
+    "id": 1419,
+    "title": "Coding Exercise for Beginners in Python |Exercise 33 | Python for Beginners #lec122",
+    "description": "Coding Exercise for Beginners in Python |Exercise 33 | Python for Beginners #lec122",
+    "grade": "Grade Python",
+    "subject": "Python",
+    "youtubeId": "sql6iaFe5D4",
+    "thumbnail": "https://img.youtube.com/vi/sql6iaFe5D4/mqdefault.jpg"
+  } 
+]
 }
