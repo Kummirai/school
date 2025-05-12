@@ -17,7 +17,7 @@
               </select>
             </div>
             <div class="col-md-9">
-              <h3 id="currentSubjectDisplay" class="mb-0">
+              <h3 id="currentSubjectDisplay" class="mt-4">
                 <i class="bi bi-book me-2"></i>Mathematics
               </h3>
             </div>
@@ -404,6 +404,112 @@
 
   function validateSurds(setId, answers) {
     return QuizManager.validateSurds(setId, answers);
+  }
+
+  function updateFraction() {
+    const slider = document.getElementById("fractionSlider");
+    const valueDisplay = document.getElementById("fractionValue");
+    const value = slider.value;
+    valueDisplay.textContent = "1/" + value;
+    const circles = document.querySelectorAll(".fraction-circle");
+    circles.forEach((circle) => {
+      const filled = circle.querySelector("div");
+      filled.style.height = 100 / value + "%";
+    });
+  }
+  function findEquivalents() {
+    const num = parseInt(document.getElementById("numerator").value);
+    const den = parseInt(document.getElementById("denominator").value);
+    const container = document.getElementById("equivalentFractions");
+    container.innerHTML = "";
+    for (let i = 2; i <= 5; i++) {
+      const equivNum = num * i;
+      const equivDen = den * i;
+      const fraction = document.createElement("span");
+      fraction.className = "badge bg-secondary me-2 mb-2";
+      fraction.textContent = equivNum + "/" + equivDen;
+      container.appendChild(fraction);
+    }
+  }
+  function simplifyFraction() {
+    const num = parseInt(document.getElementById("simplifyNum").value);
+    const den = parseInt(document.getElementById("simplifyDen").value);
+    const gcd = greatestCommonDivisor(num, den);
+    const result = document.getElementById("simplifiedResult");
+    if (gcd === 1) {
+      result.textContent = num + "/" + den + " is already in simplest form";
+    } else {
+      result.textContent = "Simplified: " + num / gcd + "/" + den / gcd;
+    }
+  }
+  function greatestCommonDivisor(a, b) {
+    return b ? greatestCommonDivisor(b, a % b) : a;
+  }
+  function calculateFraction(operation) {
+    const num1 = parseInt(
+      document.getElementById(operation === "add" ? "addNum1" : "multNum1")
+        .value
+    );
+    const den1 = parseInt(
+      document.getElementById(operation === "add" ? "addDen1" : "multDen1")
+        .value
+    );
+    const num2 = parseInt(
+      document.getElementById(operation === "add" ? "addNum2" : "multNum2")
+        .value
+    );
+    const den2 = parseInt(
+      document.getElementById(operation === "add" ? "addDen2" : "multDen2")
+        .value
+    );
+    const resultElement = document.getElementById(
+      operation === "add" ? "addFractionResult" : "multFractionResult"
+    );
+    if (operation === "add") {
+      const commonDen = den1 * den2;
+      const newNum = num1 * den2 + num2 * den1;
+      const gcd = greatestCommonDivisor(newNum, commonDen);
+      resultElement.textContent =
+        "Result: " + newNum / gcd + "/" + commonDen / gcd;
+    } else {
+      const resultNum = num1 * num2;
+      const resultDen = den1 * den2;
+      const gcd = greatestCommonDivisor(resultNum, resultDen);
+      resultElement.textContent =
+        "Result: " + resultNum / gcd + "/" + resultDen / gcd;
+    }
+  }
+  function toggleQuestions(setId) {
+    const element = document.getElementById(setId);
+    if (element.style.display === "none") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  }
+  function validateFractionAnswers(setId, answers) {
+    let allCorrect = true;
+    for (let i = 1; i <= 5; i++) {
+      const answer = document.getElementById(setId + "-q" + i).value.trim();
+      const correctAnswer = answers[i - 1];
+      const questionElement = document.getElementById(
+        setId + "-q" + i
+      ).parentNode;
+      if (answer === correctAnswer) {
+        questionElement.style.color = "green";
+      } else {
+        questionElement.style.color = "red";
+        allCorrect = false;
+      }
+    }
+    const feedback = document.getElementById(setId + "-feedback");
+    if (allCorrect) {
+      feedback.textContent = "All answers correct!";
+      feedback.style.color = "green";
+    } else {
+      feedback.textContent = "Some answers incorrect. Try again!";
+      feedback.style.color = "red";
+    }
   }
 </script>
 
