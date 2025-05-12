@@ -1,0 +1,149 @@
+{
+  "subjects": {
+    "Mathematics": {
+      "7": {
+        "Whole Numbers": {
+          "title": "Whole Numbers",
+          "description": "Understanding and working with whole numbers, place values, and basic operations.",
+          "content": "<div class=\"card-header bg-primary text-white\"><h4>Whole Numbers Fundamentals</h4></div><div class=\"card-body\"><h5>Place Value System</h5><div class=\"interactive-diagram\" id=\"placeValueChart\"><div class=\"d-flex justify-content-center mb-3\"><div class=\"text-center mx-2\"><div class=\"fw-bold\">Millions</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"million\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Hundred Thousands</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"hundred-thousand\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Ten Thousands</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"ten-thousand\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Thousands</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"thousand\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Hundreds</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"hundred\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Tens</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"ten\" style=\"width: 50px;\"></div><div class=\"text-center mx-2\"><div class=\"fw-bold\">Units</div><input type=\"number\" class=\"form-control text-center place-value\" maxlength=\"1\" data-place=\"unit\" style=\"width: 50px;\"></div></div><button class=\"btn btn-primary\" onclick=\"updateNumber()\">Show Number</button><div class=\"mt-3 fw-bold\" id=\"numberOutput\">0</div></div><h5 class=\"mt-4\">Operations with Whole Numbers</h5><div class=\"row\"><div class=\"col-md-6\"><div class=\"card mb-3\"><div class=\"card-body\"><h6>Addition</h6><div class=\"interactive-diagram\"><div class=\"input-group mb-3\"><input type=\"number\" class=\"form-control\" id=\"addNum1\" placeholder=\"First number\"><span class=\"input-group-text\">+</span><input type=\"number\" class=\"form-control\" id=\"addNum2\" placeholder=\"Second number\"><button class=\"btn btn-primary\" onclick=\"calculate('add')\">=</button></div><div id=\"addResult\" class=\"fw-bold\"></div></div></div></div></div><div class=\"col-md-6\"><div class=\"card mb-3\"><div class=\"card-body\"><h6>Multiplication</h6><div class=\"interactive-diagram\"><div class=\"input-group mb-3\"><input type=\"number\" class=\"form-control\" id=\"multNum1\" placeholder=\"First number\"><span class=\"input-group-text\">×</span><input type=\"number\" class=\"form-control\" id=\"multNum2\" placeholder=\"Second number\"><button class=\"btn btn-primary\" onclick=\"calculate('multiply')\">=</button></div><div id=\"multResult\" class=\"fw-bold\"></div></div></div></div></div></div><h5 class=\"mt-4\">Practice Quiz</h5><div class=\"quiz-question mb-3\"><p>1. What is the value of the digit 7 in the number 3,742?</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">700</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">70</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">7,000</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">7</div></div></div></div>"
+        },
+        "Fractions": {
+          "title": "Fractions",
+          "description": "Understanding fractions, equivalent fractions, and operations with fractions.",
+          "content": "<div class=\"card mb-4 shadow-sm\"><div class=\"card-header bg-primary text-white\"><h4>Fractions Fundamentals</h4></div><div class=\"card-body\"><h5>Understanding Fractions</h5><div class=\"interactive-diagram mb-4\"><div class=\"fraction-visual d-flex justify-content-center mb-3\"><div class=\"text-center mx-3\"><div class=\"fraction-circle\" style=\"background-color: #ff6b6b; width: 100px; height: 100px; border-radius: 50%; position: relative; margin: 0 auto;\"><div style=\"position: absolute; width: 100%; height: 50%; background-color: #f8f9fa; border-radius: 50% 50% 0 0;\"></div><div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem;\">½</div></div><p class=\"mt-2\">1/2 (One Half)</p></div><div class=\"text-center mx-3\"><div class=\"fraction-circle\" style=\"background-color: #4ecdc4; width: 100px; height: 100px; border-radius: 50%; position: relative; margin: 0 auto;\"><div style=\"position: absolute; width: 100%; height: 75%; background-color: #f8f9fa; border-radius: 50% 50% 0 0;\"></div><div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem;\">¼</div></div><p class=\"mt-2\">1/4 (One Quarter)</p></div><div class=\"text-center mx-3\"><div class=\"fraction-circle\" style=\"background-color: #ffd166; width: 100px; height: 100px; border-radius: 50%; position: relative; margin: 0 auto;\"><div style=\"position: absolute; width: 100%; height: 25%; background-color: #f8f9fa; border-radius: 50% 50% 0 0;\"></div><div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem;\">¾</div></div><p class=\"mt-2\">3/4 (Three Quarters)</p></div></div><div class=\"fraction-slider mb-4\"><label for=\"fractionSlider\" class=\"form-label\">Adjust the fraction: <span id=\"fractionValue\">1/2</span></label><input type=\"range\" class=\"form-range\" min=\"1\" max=\"8\" value=\"2\" id=\"fractionSlider\" oninput=\"updateFraction()\"></div></div><h5 class=\"mt-4\">Equivalent Fractions</h5><div class=\"row mb-4\"><div class=\"col-md-6\"><div class=\"card\"><div class=\"card-body\"><h6>Find Equivalent Fractions</h6><div class=\"input-group mb-3\"><input type=\"number\" class=\"form-control\" id=\"numerator\" placeholder=\"Numerator\" value=\"1\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"denominator\" placeholder=\"Denominator\" value=\"2\"><button class=\"btn btn-primary\" onclick=\"findEquivalents()\">Find</button></div><div id=\"equivalentResults\" class=\"mt-2\"><p class=\"mb-1\">Equivalent to:</p><div class=\"d-flex flex-wrap\" id=\"equivalentFractions\"></div></div></div></div></div><div class=\"col-md-6\"><div class=\"card\"><div class=\"card-body\"><h6>Simplify Fractions</h6><div class=\"input-group mb-3\"><input type=\"number\" class=\"form-control\" id=\"simplifyNum\" placeholder=\"Numerator\" value=\"4\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"simplifyDen\" placeholder=\"Denominator\" value=\"8\"><button class=\"btn btn-primary\" onclick=\"simplifyFraction()\">Simplify</button></div><div id=\"simplifiedResult\" class=\"fw-bold mt-2\"></div></div></div></div></div><h5 class=\"mt-4\">Fraction Operations</h5><div class=\"row\"><div class=\"col-md-6\"><div class=\"card mb-3\"><div class=\"card-body\"><h6>Addition</h6><div class=\"fraction-operation\"><div class=\"input-group mb-2\"><input type=\"number\" class=\"form-control\" id=\"addNum1\" placeholder=\"Numerator\" value=\"1\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"addDen1\" placeholder=\"Denominator\" value=\"2\"><span class=\"input-group-text\">+</span><input type=\"number\" class=\"form-control\" id=\"addNum2\" placeholder=\"Numerator\" value=\"1\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"addDen2\" placeholder=\"Denominator\" value=\"4\"><button class=\"btn btn-primary\" onclick=\"calculateFraction('add')\">=</button></div><div id=\"addFractionResult\" class=\"fw-bold\"></div></div></div></div></div><div class=\"col-md-6\"><div class=\"card mb-3\"><div class=\"card-body\"><h6>Multiplication</h6><div class=\"fraction-operation\"><div class=\"input-group mb-2\"><input type=\"number\" class=\"form-control\" id=\"multNum1\" placeholder=\"Numerator\" value=\"1\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"multDen1\" placeholder=\"Denominator\" value=\"2\"><span class=\"input-group-text\">×</span><input type=\"number\" class=\"form-control\" id=\"multNum2\" placeholder=\"Numerator\" value=\"3\"><span class=\"input-group-text\">/</span><input type=\"number\" class=\"form-control\" id=\"multDen2\" placeholder=\"Denominator\" value=\"4\"><button class=\"btn btn-primary\" onclick=\"calculateFraction('multiply')\">=</button></div><div id=\"multFractionResult\" class=\"fw-bold\"></div></div></div></div></div></div><h5 class=\"mt-4\">Practice Quiz</h5><div class=\"quiz-question mb-3\"><p>1. Which of these fractions is equivalent to 2/3?</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">4/6</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">3/5</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">1/2</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">5/8</div></div><div class=\"quiz-question mb-3\"><p>2. What is 1/4 + 1/2?</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">3/4</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">2/6</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">1/6</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">2/8</div></div></div></div></div><script>function updateFraction(){const slider=document.getElementById('fractionSlider');const valueDisplay=document.getElementById('fractionValue');const value=slider.value;valueDisplay.textContent='1/'+value;const circles=document.querySelectorAll('.fraction-circle');circles.forEach(circle=>{const filled=circle.querySelector('div');filled.style.height=(100/value)+'%'});}function findEquivalents(){const num=parseInt(document.getElementById('numerator').value);const den=parseInt(document.getElementById('denominator').value);const container=document.getElementById('equivalentFractions');container.innerHTML='';for(let i=2;i<=5;i++){const equivNum=num*i;const equivDen=den*i;const fraction=document.createElement('span');fraction.className='badge bg-secondary me-2 mb-2';fraction.textContent=equivNum+'/'+equivDen;container.appendChild(fraction);}}function simplifyFraction(){const num=parseInt(document.getElementById('simplifyNum').value);const den=parseInt(document.getElementById('simplifyDen').value);const gcd=greatestCommonDivisor(num,den);const result=document.getElementById('simplifiedResult');if(gcd===1){result.textContent=num+'/'+den+' is already in simplest form';}else{result.textContent='Simplified: '+(num/gcd)+'/'+(den/gcd);}}function greatestCommonDivisor(a,b){return b?greatestCommonDivisor(b,a%b):a;}function calculateFraction(operation){const num1=parseInt(document.getElementById(operation==='add'?'addNum1':'multNum1').value);const den1=parseInt(document.getElementById(operation==='add'?'addDen1':'multDen1').value);const num2=parseInt(document.getElementById(operation==='add'?'addNum2':'multNum2').value);const den2=parseInt(document.getElementById(operation==='add'?'addDen2':'multDen2').value);const resultElement=document.getElementById(operation==='add'?'addFractionResult':'multFractionResult');if(operation==='add'){const commonDen=den1*den2;const newNum=num1*den2+num2*den1;const gcd=greatestCommonDivisor(newNum,commonDen);resultElement.textContent='Result: '+(newNum/gcd)+'/'+(commonDen/gcd);}else{const resultNum=num1*num2;const resultDen=den1*den2;const gcd=greatestCommonDivisor(resultNum,resultDen);resultElement.textContent='Result: '+(resultNum/gcd)+'/'+(resultDen/gcd);}}</script>"
+        },
+        "Decimals": {
+          "title": "Decimals",
+          "description": "Working with decimal numbers and their operations.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "8": {
+        "Algebra": {
+          "title": "Algebra Basics",
+          "description": "Introduction to algebraic expressions and equations.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Geometry": {
+          "title": "Geometry",
+          "description": "Basic geometric concepts and properties of shapes.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "9": {
+        "Functions": {
+          "title": "Functions",
+          "description": "Understanding relationships between variables and function representations.",
+          "content": "<div class=\"container py-5\">...</div>"
+        },
+        "Equations": {
+          "title": "Equations",
+          "description": "Solving linear and quadratic equations.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "10": {
+        "Rational and Irrational Numbers": {
+          "title": "Rational and Irrational Numbers",
+          "description": "Understanding the properties of rational and irrational numbers, and their classification in the number system.",
+          "content": "<div class=\"card mb-4 shadow-sm\"><div class=\"card-header bg-primary text-white\"><h4>Rational and Irrational Numbers</h4></div><div class=\"card-body\"><h5>Number Classification</h5><div class=\"venn-diagram mb-4\"><img src=\"images/number-sets-venn.png\" alt=\"Number Sets Venn Diagram\" class=\"img-fluid\"><p class=\"mt-2\">Venn diagram showing the relationship between natural numbers (N), whole numbers (N₀), integers (Z), rational numbers (Q), and real numbers (R)</p></div><h5 class=\"mt-4\">Practice Problems</h5><div class=\"quiz-question mb-3\"><p>1. The figure here shows the Venn diagram for the special sets N; N₀ and Z.<br>a) Where does the number −12/3 belong in the diagram?</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">In Z but not in N₀ or N</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">In N₀</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">In N</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">Outside all sets</div></div><div class=\"quiz-question mb-3\"><p>b) In the following list, there are two false statements and one true statement. Which of the statements is true?</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">i. Every integer is a natural number.</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">ii. Every natural number is a whole number.</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'incorrect')\">iii. There are no decimals in the whole numbers.</div></div><div class=\"quiz-question mb-3\"><p>2. State whether the following numbers are rational or irrational. If the number is rational, state whether it is a natural number, whole number or an integer.</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">a) −1/3 (Rational, not integer)</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">b) 0.651268962154862... (Irrational)</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">c) √9/3 (Rational, integer)</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">d) π² (Irrational)</div></div><div class=\"quiz-question mb-3\"><p>3. For each of the following numbers: write the next three digits and state whether the number is rational or irrational.</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">a) 1.15_ (150, Rational)</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">b) 2.121314... (15, Irrational)</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">c) 1.242244246... (248, Irrational)</div></div><div class=\"quiz-question mb-3\"><p>4. Write the following as fractions:</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">a) 0.1 = 1/10</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">b) 0.12 = 3/25</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">c) 0.58 = 29/50</div></div><div class=\"quiz-question mb-3\"><p>5. Write the following using the recurring decimal notation:</p><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">a) 0.1111111... = 0.\\overline{1}</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">b) 0.1212121212... = 0.\\overline{12}</div><div class=\"quiz-option\" onclick=\"checkAnswer(this, 'correct')\">c) 0.123123123123... = 0.\\overline{123}</div></div></div></div>"
+        },
+        "Trigonometry": {
+          "title": "Trigonometry",
+          "description": "Trigonometric functions and their applications.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Probability": {
+          "title": "Probability",
+          "description": "Basic probability concepts and calculations.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "11": {
+        "Calculus": {
+          "title": "Calculus Basics",
+          "description": "Introduction to differential and integral calculus.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Statistics": {
+          "title": "Statistics",
+          "description": "Data analysis and statistical methods.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "12": {
+        "Advanced Functions": {
+          "title": "Advanced Functions",
+          "description": "In-depth study of various mathematical functions.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Vectors": {
+          "title": "Vectors",
+          "description": "Vector mathematics and applications.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      }
+    },
+    "Physical Sciences": {
+      "10": {
+        "Chemical Bonding": {
+          "title": "Chemical Bonding",
+          "description": "Understanding different types of chemical bonds and their properties.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Motion": {
+          "title": "Motion",
+          "description": "Study of motion, velocity, and acceleration.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "11": {
+        "Electricity": {
+          "title": "Electricity",
+          "description": "Electrical circuits and principles.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Thermodynamics": {
+          "title": "Thermodynamics",
+          "description": "Heat and energy transfer.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "12": {
+        "Organic Chemistry": {
+          "title": "Organic Chemistry",
+          "description": "Study of carbon compounds.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Quantum Physics": {
+          "title": "Quantum Physics",
+          "description": "Introduction to quantum mechanics.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      }
+    },
+    "Life Sciences": {
+      "10": {
+        "Cells": {
+          "title": "Cell Biology",
+          "description": "Structure and function of cells.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "11": {
+        "Genetics": {
+          "title": "Genetics",
+          "description": "Principles of heredity.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "12": {
+        "Evolution": {
+          "title": "Evolution",
+          "description": "Theories of biological evolution.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      }
+    }
+  }
+}

@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Load videos if not already loaded
                 if (allVideos.length === 0) {
-                    const response = await fetch('scripts/video_tutorials.json');
+                    const response = await fetch('static/js/video_tutorials.json');
                     if (!response.ok) {
                         throw new Error('Failed to load videos');
                     }
