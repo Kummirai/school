@@ -1,134 +1,516 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="container mt-4">
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-md-3">
-                            <label for="subjectSelect" class="form-label">Select Subject:</label>
-                            <select class="form-select" id="subjectSelect">
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="Physical Sciences">Physical Sciences</option>
-                                <option value="Life Sciences">Life Sciences</option>
-                            </select>
-                        </div>
-                        <div class="col-md-9">
-                            <h3 id="currentSubjectDisplay" class="mb-0">
-                                <i class="bi bi-book me-2"></i>Mathematics
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-3">
+              <label for="subjectSelect" class="form-label"
+                >Select Subject:</label
+              >
+              <select class="form-select" id="subjectSelect">
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physical Sciences">Physical Sciences</option>
+                <option value="Life Sciences">Life Sciences</option>
+              </select>
             </div>
+            <div class="col-md-9">
+              <h3 id="currentSubjectDisplay" class="mt-4">
+                <i class="bi bi-book me-2"></i>Mathematics
+              </h3>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="accordion mb-4" id="gradesAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button bg-danger text-white" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseGrades" aria-expanded="true" aria-controls="collapseGrades">
-                            <i class="bi bi-mortarboard me-2"></i> Grades
-                        </button>
-                    </h2>
-                    <div id="collapseGrades" class="accordion-collapse collapse" data-bs-parent="#gradesAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush" id="gradeList">
-                                <!-- Grades will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="accordion mb-4" id="gradesAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button bg-danger text-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseGrades"
+              aria-expanded="true"
+              aria-controls="collapseGrades"
+            >
+              <i class="bi bi-mortarboard me-2"></i> Grades
+            </button>
+          </h2>
+          <div
+            id="collapseGrades"
+            class="accordion-collapse collapse"
+            data-bs-parent="#gradesAccordion"
+          >
+            <div class="accordion-body p-0">
+              <div class="list-group list-group-flush" id="gradeList">
+                <!-- Grades will be loaded here -->
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="accordion" id="topicsAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button bg-danger text-white" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTopics" aria-expanded="true" aria-controls="collapseTopics">
-                            <i class="bi bi-journal-bookmark me-2"></i> Topics
-                        </button>
-                    </h2>
-                    <div id="collapseTopics" class="accordion-collapse collapse" data-bs-parent="#topicsAccordion">
-                        <div class="accordion-body p-0">
-                            <div class="list-group list-group-flush" id="topicList">
-                                <!-- Topics will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="accordion" id="topicsAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button bg-danger text-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTopics"
+              aria-expanded="true"
+              aria-controls="collapseTopics"
+            >
+              <i class="bi bi-journal-bookmark me-2"></i> Topics
+            </button>
+          </h2>
+          <div
+            id="collapseTopics"
+            class="accordion-collapse collapse"
+            data-bs-parent="#topicsAccordion"
+          >
+            <div class="accordion-body p-0">
+              <div class="list-group list-group-flush" id="topicList">
+                <!-- Topics will be loaded here -->
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-md-9">
-            <div id="contentArea">
-                <div class="text-center py-5">
-                    <i class="bi bi-book" style="font-size: 3rem; color: #dc3545;"></i>
-                    <h2 class="mt-3">Welcome to Study Guides</h2>
-                    <p class="lead">Select a subject, grade, and topic to begin learning</p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-md-9">
+      <div id="contentArea">
+        <div class="text-center py-5">
+          <i class="bi bi-book" style="font-size: 3rem; color: #dc3545"></i>
+          <h2 class="mt-3">Welcome to Study Guides</h2>
+          <p class="lead">
+            Select a subject, grade, and topic to begin learning
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
-    .quiz-option {
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+  .quiz-option {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    .quiz-option:hover {
-        background-color: #f8f9fa;
-    }
+  .quiz-option:hover {
+    background-color: #f8f9fa;
+  }
 
-    .correct {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-    }
+  .correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
 
-    .incorrect {
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-    }
+  .incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
 
-    .subject-card {
-        transition: transform 0.2s;
-    }
+  .subject-card {
+    transition: transform 0.2s;
+  }
 
-    .subject-card:hover {
-        transform: translateY(-5px);
-    }
+  .subject-card:hover {
+    transform: translateY(-5px);
+  }
 
-    /* Custom accordion styling */
-    .accordion-button:not(.collapsed) {
-        color: white;
-        background-color: #dc3545;
-    }
+  /* Custom accordion styling */
+  .accordion-button:not(.collapsed) {
+    color: white;
+    background-color: #dc3545;
+  }
 
-    .accordion-button:focus {
-        box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
-    }
+  .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+  }
 
-    .list-group-item {
-        border-left: 0;
-        border-right: 0;
-    }
+  .list-group-item {
+    border-left: 0;
+    border-right: 0;
+  }
 
-    .list-group-item:first-child {
-        border-top: 0;
-    }
+  .list-group-item:first-child {
+    border-top: 0;
+  }
 
-    .list-group-item:last-child {
-        border-bottom: 0;
-    }
+  .list-group-item:last-child {
+    border-bottom: 0;
+  }
 </style>
+<script>
+  // Enhanced QuizManager with unanswered question handling
+  const QuizManager = {
+    // Toggle question sets with animation
+    toggleQuestions: function (setId) {
+      const set = document.getElementById(setId);
+      if (set) {
+        set.style.transition = "all 0.3s ease";
+        set.style.display = set.style.display === "none" ? "block" : "none";
+
+        if (set.style.display === "block") {
+          setTimeout(() => {
+            set.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 50);
+        }
+      }
+    },
+
+    // Handle answer selection with visual feedback
+    selectAnswer: function (option, correctType) {
+      if (!option || !correctType) return;
+
+      const questionDiv = option.closest(".quiz-question");
+      if (!questionDiv) return;
+
+      const options = questionDiv.querySelectorAll(".quiz-option");
+      const correctValue = correctType.toLowerCase();
+
+      options.forEach((opt) => {
+        opt.classList.remove("bg-success", "bg-danger");
+        if (opt === option) {
+          const isCorrect = opt.textContent
+            .toLowerCase()
+            .includes(correctValue);
+          opt.classList.add(isCorrect ? "bg-success" : "bg-danger");
+        }
+      });
+    },
+
+    // Validate all questions in a set with unanswered handling
+    validateSet: function (setId, correctAnswers) {
+      const set = document.getElementById(setId);
+      if (!set || !correctAnswers) return;
+
+      let score = 0;
+      const questions = set.querySelectorAll(".quiz-question");
+      const results = {
+        total: questions.length,
+        correct: 0,
+        incorrect: 0,
+        unanswered: 0,
+        details: [],
+      };
+
+      questions.forEach((question, index) => {
+        const answer = correctAnswers[index];
+        if (!answer) return;
+
+        let isCorrect = false;
+        let isAnswered = false;
+
+        // Handle multiple choice questions
+        if (question.querySelector(".quiz-option")) {
+          const options = question.querySelectorAll(".quiz-option");
+          let selectedOption = null;
+
+          // Check if any option was selected
+          options.forEach((opt) => {
+            if (
+              opt.classList.contains("bg-success") ||
+              opt.classList.contains("bg-danger")
+            ) {
+              selectedOption = opt;
+              isAnswered = true;
+            }
+          });
+
+          // If no option was selected, mark as unanswered
+          if (!selectedOption) {
+            results.unanswered++;
+            options.forEach((opt) => {
+              if (
+                opt.textContent.toLowerCase().includes(answer.toLowerCase())
+              ) {
+                opt.classList.add("bg-success");
+              }
+            });
+          }
+          // If option was selected, check correctness
+          else {
+            isCorrect = selectedOption.textContent
+              .toLowerCase()
+              .includes(answer.toLowerCase());
+            if (isCorrect) {
+              results.correct++;
+            } else {
+              results.incorrect++;
+              // Highlight correct answer
+              options.forEach((opt) => {
+                if (
+                  opt.textContent.toLowerCase().includes(answer.toLowerCase())
+                ) {
+                  opt.classList.add("bg-success");
+                }
+              });
+            }
+          }
+        }
+        // Handle input questions
+        else if (question.querySelector("input")) {
+          const input = question.querySelector("input");
+          const userAnswer = input.value.trim();
+          isAnswered = userAnswer !== "";
+
+          input.classList.remove("is-valid", "is-invalid");
+
+          if (!isAnswered) {
+            results.unanswered++;
+            input.classList.add("is-invalid");
+            // Show correct answer
+            const correctSpan = document.createElement("span");
+            correctSpan.className = "text-success ms-2 small";
+            correctSpan.textContent = `Correct: ${answer}`;
+            question.appendChild(correctSpan);
+          } else {
+            isCorrect = userAnswer === answer;
+            if (isCorrect) {
+              results.correct++;
+              input.classList.add("is-valid");
+            } else {
+              results.incorrect++;
+              input.classList.add("is-invalid");
+              // Show correct answer
+              const correctSpan = document.createElement("span");
+              correctSpan.className = "text-success ms-2 small";
+              correctSpan.textContent = `Correct: ${answer}`;
+              question.appendChild(correctSpan);
+            }
+          }
+        }
+
+        results.details.push({
+          question: index + 1,
+          correct: isCorrect,
+          answered: isAnswered,
+        });
+      });
+
+      // Display comprehensive results
+      const feedback = document.getElementById(`${setId}-feedback`);
+      if (feedback) {
+        const percentage = Math.round((results.correct / results.total) * 100);
+        feedback.innerHTML = `
+          <div class="alert ${
+            percentage === 100 ? "alert-success" : "alert-warning"
+          }">
+            <strong>Results:</strong> 
+            ${results.correct} correct, 
+            ${results.incorrect} incorrect,
+            ${results.unanswered} unanswered
+            (${percentage}%)
+            ${
+              percentage < 100
+                ? '<button class="btn btn-sm btn-outline-primary ms-2" onclick="QuizManager.showAnswers(\'' +
+                  setId +
+                  "')\">Show Answers</button>"
+                : ""
+            }
+          </div>
+        `;
+        feedback.scrollIntoView({ behavior: "smooth" });
+      }
+
+      return results;
+    },
+
+    // Show all correct answers
+    showAnswers: function (setId) {
+      const set = document.getElementById(setId);
+      if (!set) return;
+
+      set.querySelectorAll(".quiz-question").forEach((question) => {
+        // Clear previous feedback
+        const existingFeedback = question.querySelector(".text-success");
+        if (existingFeedback) {
+          existingFeedback.remove();
+        }
+
+        // For multiple choice
+        question.querySelectorAll(".quiz-option").forEach((opt) => {
+          opt.classList.remove("bg-success", "bg-danger");
+        });
+
+        // For input fields
+        question.querySelectorAll("input").forEach((input) => {
+          input.classList.remove("is-valid", "is-invalid");
+        });
+      });
+    },
+
+    // Helper functions for specific question types
+    validateRational: function (setId, answers) {
+      return this.validateSet(setId, answers);
+    },
+    validateRounding: function (setId, answers) {
+      return this.validateSet(setId, answers);
+    },
+    validateSurds: function (setId, answers) {
+      return this.validateSet(setId, answers);
+    },
+  };
+
+  // Global shortcuts for backward compatibility
+  function toggleQuestions(setId) {
+    QuizManager.toggleQuestions(setId);
+  }
+
+  function selectAnswer(option, correctType) {
+    QuizManager.selectAnswer(option, correctType);
+  }
+
+  function validateAnswers(setId, answers) {
+    return QuizManager.validateSet(setId, answers);
+  }
+
+  function validateQuestionSet(setId, answers) {
+    return QuizManager.validateSet(setId, answers);
+  }
+
+  function validateRationalSet(setId, answers) {
+    return QuizManager.validateRational(setId, answers);
+  }
+
+  function validateRoundingSet(setId, answers) {
+    return QuizManager.validateRounding(setId, answers);
+  }
+
+  function validateSurdsSet(setId, answers) {
+    return QuizManager.validateSurds(setId, answers);
+  }
+
+  // Add these aliases to handle both naming conventions
+  function validateRational(setId, answers) {
+    return QuizManager.validateRational(setId, answers);
+  }
+
+  function validateRounding(setId, answers) {
+    return QuizManager.validateRounding(setId, answers);
+  }
+
+  function validateSurds(setId, answers) {
+    return QuizManager.validateSurds(setId, answers);
+  }
+
+  function updateFraction() {
+    const slider = document.getElementById("fractionSlider");
+    const valueDisplay = document.getElementById("fractionValue");
+    const value = slider.value;
+    valueDisplay.textContent = "1/" + value;
+    const circles = document.querySelectorAll(".fraction-circle");
+    circles.forEach((circle) => {
+      const filled = circle.querySelector("div");
+      filled.style.height = 100 / value + "%";
+    });
+  }
+  function findEquivalents() {
+    const num = parseInt(document.getElementById("numerator").value);
+    const den = parseInt(document.getElementById("denominator").value);
+    const container = document.getElementById("equivalentFractions");
+    container.innerHTML = "";
+    for (let i = 2; i <= 5; i++) {
+      const equivNum = num * i;
+      const equivDen = den * i;
+      const fraction = document.createElement("span");
+      fraction.className = "badge bg-secondary me-2 mb-2";
+      fraction.textContent = equivNum + "/" + equivDen;
+      container.appendChild(fraction);
+    }
+  }
+  function simplifyFraction() {
+    const num = parseInt(document.getElementById("simplifyNum").value);
+    const den = parseInt(document.getElementById("simplifyDen").value);
+    const gcd = greatestCommonDivisor(num, den);
+    const result = document.getElementById("simplifiedResult");
+    if (gcd === 1) {
+      result.textContent = num + "/" + den + " is already in simplest form";
+    } else {
+      result.textContent = "Simplified: " + num / gcd + "/" + den / gcd;
+    }
+  }
+  function greatestCommonDivisor(a, b) {
+    return b ? greatestCommonDivisor(b, a % b) : a;
+  }
+  function calculateFraction(operation) {
+    const num1 = parseInt(
+      document.getElementById(operation === "add" ? "addNum1" : "multNum1")
+        .value
+    );
+    const den1 = parseInt(
+      document.getElementById(operation === "add" ? "addDen1" : "multDen1")
+        .value
+    );
+    const num2 = parseInt(
+      document.getElementById(operation === "add" ? "addNum2" : "multNum2")
+        .value
+    );
+    const den2 = parseInt(
+      document.getElementById(operation === "add" ? "addDen2" : "multDen2")
+        .value
+    );
+    const resultElement = document.getElementById(
+      operation === "add" ? "addFractionResult" : "multFractionResult"
+    );
+    if (operation === "add") {
+      const commonDen = den1 * den2;
+      const newNum = num1 * den2 + num2 * den1;
+      const gcd = greatestCommonDivisor(newNum, commonDen);
+      resultElement.textContent =
+        "Result: " + newNum / gcd + "/" + commonDen / gcd;
+    } else {
+      const resultNum = num1 * num2;
+      const resultDen = den1 * den2;
+      const gcd = greatestCommonDivisor(resultNum, resultDen);
+      resultElement.textContent =
+        "Result: " + resultNum / gcd + "/" + resultDen / gcd;
+    }
+  }
+  function toggleQuestions(setId) {
+    const element = document.getElementById(setId);
+    if (element.style.display === "none") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  }
+  function validateFractionAnswers(setId, answers) {
+    let allCorrect = true;
+    for (let i = 1; i <= 5; i++) {
+      const answer = document.getElementById(setId + "-q" + i).value.trim();
+      const correctAnswer = answers[i - 1];
+      const questionElement = document.getElementById(
+        setId + "-q" + i
+      ).parentNode;
+      if (answer === correctAnswer) {
+        questionElement.style.color = "green";
+      } else {
+        questionElement.style.color = "red";
+        allCorrect = false;
+      }
+    }
+    const feedback = document.getElementById(setId + "-feedback");
+    if (allCorrect) {
+      feedback.textContent = "All answers correct!";
+      feedback.style.color = "green";
+    } else {
+      feedback.textContent = "Some answers incorrect. Try again!";
+      feedback.style.color = "red";
+    }
+  }
+</script>
 
 {% endblock %}
