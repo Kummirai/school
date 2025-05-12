@@ -74,7 +74,7 @@ class StudyGuideApp {
         
         const grades = Object.keys(this.studyData.subjects[subjectName]).sort();
         this.dom.gradeList.innerHTML = grades.map(grade => `
-            <button class="btn btn-outline-primary w-100 mb-2 text-start 
+            <button class="btn btn-outline-secondary w-100 mb-2 text-start 
                 ${this.currentGrade === grade ? 'active' : ''}"
                 data-grade="${grade}">
                 <i class="bi bi-mortarboard me-2"></i>
@@ -104,7 +104,7 @@ class StudyGuideApp {
     renderTopicContent(topic) {
         this.dom.contentArea.innerHTML = `
             <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-dark text-white">
                     <h3><i class="bi bi-journal-text me-2"></i>${topic.title}</h3>
                     <p class="mb-0">${topic.description}</p>
                 </div>
