@@ -896,6 +896,11 @@ def logout():
 def tutorials_home():
     return render_template('tutorials/video_tutorials.html')
 
+@app.route('/study_guides')
+@login_required
+def studyguides_home():
+    return render_template('study_guides.html')
+
 @app.route('/tutorials/<int:category_id>')
 @login_required
 def tutorial_language(category_id):
@@ -1298,17 +1303,17 @@ def submit_grade(assignment_id, student_id):
     return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
 
     
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)
-
 if __name__ == '__main__':
-    # Enable Flask debug features
-    app.debug = True  # Enables auto-reloader and debugger
-    
-    # Initialize database
+    from waitress import serve
     initialize_database()
+    serve(app, host="0.0.0.0", port=5000)
+
+# if __name__ == '__main__':
+#     # Enable Flask debug features
+#     app.debug = True  # Enables auto-reloader and debugger
     
-    # Run the development server
-    app.run(host='0.0.0.0', port=5000)
+#     # Initialize database
+#     initialize_database()
+    
+#     # Run the development server
+#     app.run(host='0.0.0.0', port=5000)
