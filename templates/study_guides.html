@@ -130,5 +130,8 @@
         border-bottom: 0;
     }
 </style>
+<script>
+    function toggleQuestions(setId) { const set = document.getElementById(setId); set.style.display = set.style.display === 'none' ? 'block' : 'none'; } function selectAnswer(option, correctType) { const options = option.parentElement.querySelectorAll('.quiz-option'); options.forEach(opt => { opt.classList.remove('bg-success', 'bg-danger'); }); if (option.textContent.toLowerCase().includes(correctType)) { option.classList.add('bg-success'); } else { option.classList.add('bg-danger'); } } function validateAnswers(setId, correctAnswers) { const options = document.querySelectorAll(`#${setId} .quiz-option`); let score = 0; options.forEach((opt, index) => { const isCorrect = opt.classList.contains('bg-success'); if (isCorrect) score++; }); const feedback = document.getElementById(`${setId}-feedback`); feedback.textContent = `Score: ${score}/${correctAnswers.length}`; } function validateRounding(setId, correctAnswers) { const inputs = document.querySelectorAll(`#${setId} input`); let score = 0; inputs.forEach((input, index) => { if (input.value.trim() === correctAnswers[index]) { input.classList.add('is-valid'); score++; } else { input.classList.add('is-invalid'); } }); const feedback = document.getElementById(`${setId}-feedback`); feedback.textContent = `Score: ${score}/${correctAnswers.length}`; } function validateSurds(setId, correctAnswers) { validateRounding(setId, correctAnswers); }
+</script>
 
 {% endblock %}
