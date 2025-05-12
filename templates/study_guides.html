@@ -368,22 +368,41 @@
   function toggleQuestions(setId) {
     QuizManager.toggleQuestions(setId);
   }
+
   function selectAnswer(option, correctType) {
     QuizManager.selectAnswer(option, correctType);
   }
+
   function validateAnswers(setId, answers) {
     return QuizManager.validateSet(setId, answers);
   }
+
   function validateQuestionSet(setId, answers) {
     return QuizManager.validateSet(setId, answers);
   }
+
   function validateRationalSet(setId, answers) {
     return QuizManager.validateRational(setId, answers);
   }
+
   function validateRoundingSet(setId, answers) {
     return QuizManager.validateRounding(setId, answers);
   }
+
   function validateSurdsSet(setId, answers) {
+    return QuizManager.validateSurds(setId, answers);
+  }
+
+  // Add these aliases to handle both naming conventions
+  function validateRational(setId, answers) {
+    return QuizManager.validateRational(setId, answers);
+  }
+
+  function validateRounding(setId, answers) {
+    return QuizManager.validateRounding(setId, answers);
+  }
+
+  function validateSurds(setId, answers) {
     return QuizManager.validateSurds(setId, answers);
   }
 </script>
