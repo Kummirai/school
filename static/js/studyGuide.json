@@ -19,15 +19,16 @@
         }
       },
       "8": {
-        "Algebra": {
-          "title": "Algebra Basics",
-          "description": "Introduction to algebraic expressions and equations.",
-          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        "AlgebraicExpressions": {
+          "title": "Algebraic Expressions",
+          "description": "Mastering expansion, simplification, and evaluation of algebraic expressions.",
+          "content": "<div class=\"card mb-4 shadow-sm\"><div class=\"card-header bg-danger text-white\"><h4>Algebraic Expressions Practice</h4></div><div class=\"card-body\"><h5>Basic Expansion</h5><div class=\"exercise-set mb-4\"><h6>Expand the following expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>1. 2(x + 3) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q1\"></p></div><div class=\"quiz-question mb-3\"><p>2. 5(2y - 4) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q2\"></p></div><div class=\"quiz-question mb-3\"><p>3. -3(a + 7) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q3\"></p></div><div class=\"quiz-question mb-3\"><p>4. x(x + 5) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q4\"></p></div><div class=\"quiz-question mb-3\"><p>5. 2y(3y - 1) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q5\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>6. -a(4 - a) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q6\"></p></div><div class=\"quiz-question mb-3\"><p>7. 3(2b + c) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q7\"></p></div><div class=\"quiz-question mb-3\"><p>8. 4x(2x - 3) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q8\"></p></div><div class=\"quiz-question mb-3\"><p>9. -2(5 - 3k) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q9\"></p></div><div class=\"quiz-question mb-3\"><p>10. p(p + q) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q10\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkBasicExpansion()\">Check Answers</button> <span id=\"basic-feedback\" class=\"ml-2\"></span></div><h5>Intermediate Expansion</h5><div class=\"exercise-set mb-4\"><h6>Expand and simplify:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>11. 3(x + 2) + 4(x - 1) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q11\"></p></div><div class=\"quiz-question mb-3\"><p>12. 2(y - 3) - (y + 5) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q12\"></p></div><div class=\"quiz-question mb-3\"><p>13. a(2a + 1) + a(a - 3) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q13\"></p></div><div class=\"quiz-question mb-3\"><p>14. 4(2b - c) - 3(b + 2c) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q14\"></p></div><div class=\"quiz-question mb-3\"><p>15. x(x + 4) + 2(x² - 3) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q15\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>16. 5(1 - 2k) + 3(k + 2) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q16\"></p></div><div class=\"quiz-question mb-3\"><p>17. 2m(m - n) + m(3m + n) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q17\"></p></div><div class=\"quiz-question mb-3\"><p>18. 3(2p + 1) - (p - 4) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q18\"></p></div><div class=\"quiz-question mb-3\"><p>19. q(2q - r) - q(q + r) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q19\"></p></div><div class=\"quiz-question mb-3\"><p>20. 4(3x - 2y) + 2(x + y) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q20\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkIntermediateExpansion()\">Check Answers</button> <span id=\"intermediate-feedback\" class=\"ml-2\"></span></div><h5>Advanced Expansion</h5><div class=\"exercise-set mb-4\"><h6>Expand these more complex expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>21. (x + 2)(x + 3) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q21\"></p></div><div class=\"quiz-question mb-3\"><p>22. (y - 4)(y + 1) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q22\"></p></div><div class=\"quiz-question mb-3\"><p>23. (2a + 1)(3a - 2) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q23\"></p></div><div class=\"quiz-question mb-3\"><p>24. (3 - b)(2 + b) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q24\"></p></div><div class=\"quiz-question mb-3\"><p>25. (x + 5)² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q25\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>26. (2k - 3)² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q26\"></p></div><div class=\"quiz-question mb-3\"><p>27. (m + n)(m - n) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q27\"></p></div><div class=\"quiz-question mb-3\"><p>28. (2p + q)(3p - 2q) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q28\"></p></div><div class=\"quiz-question mb-3\"><p>29. (x + 3)(x² - 2x + 1) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q29\"></p></div><div class=\"quiz-question mb-3\"><p>30. (2a - 1)(3a² + a - 4) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q30\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkAdvancedExpansion()\">Check Answers</button> <span id=\"advanced-feedback\" class=\"ml-2\"></span></div><h5>Factorization</h5><div class=\"exercise-set mb-4\"><h6>Factorize these expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>31. 3x + 6 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q31\"></p></div><div class=\"quiz-question mb-3\"><p>32. 4y - 8 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q32\"></p></div><div class=\"quiz-question mb-3\"><p>33. a² + 5a = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q33\"></p></div><div class=\"quiz-question mb-3\"><p>34. 6b - 9b² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q34\"></p></div><div class=\"quiz-question mb-3\"><p>35. 2x² + 4xy = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q35\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>36. 12k + 15 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q36\"></p></div><div class=\"quiz-question mb-3\"><p>37. m² - mn = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q37\"></p></div><div class=\"quiz-question mb-3\"><p>38. 8p² + 12pq = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q38\"></p></div><div class=\"quiz-question mb-3\"><p>39. 9 - 3x = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q39\"></p></div><div class=\"quiz-question mb-3\"><p>40. 5x²y - 10xy² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q40\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkFactorization()\">Check Answers</button> <span id=\"factorization-feedback\" class=\"ml-2\"></span></div><h5>Evaluation</h5><div class=\"exercise-set mb-4\"><h6>Evaluate when x = 2, y = -1:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>41. 3x + y = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q41\"></p></div><div class=\"quiz-question mb-3\"><p>42. x² - 2y = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q42\"></p></div><div class=\"quiz-question mb-3\"><p>43. 2(x + y) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q43\"></p></div><div class=\"quiz-question mb-3\"><p>44. (x + 3)(y - 2) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q44\"></p></div><div class=\"quiz-question mb-3\"><p>45. x² + xy + y² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q45\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>46. 3x²y = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q46\"></p></div><div class=\"quiz-question mb-3\"><p>47. (2x - y)(x + y) = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q47\"></p></div><div class=\"quiz-question mb-3\"><p>48. 4y - x³ = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q48\"></p></div><div class=\"quiz-question mb-3\"><p>49. (x + y)² = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q49\"></p></div><div class=\"quiz-question mb-3\"><p>50. 5 - xy = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q50\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkEvaluation()\">Check Answers</button> <span id=\"evaluation-feedback\" class=\"ml-2\"></span></div></div></div>"
         },
-        "Geometry": {
-          "title": "Geometry",
-          "description": "Basic geometric concepts and properties of shapes.",
-          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        "ArithmeticExpressions": {
+          "title": "Arithmetic Expressions",
+          "description": "Practice calculating mixed operations with multiplication and addition.",
+          "content": "<div class=\"card mb-4 shadow-sm\"><div class=\"card-header bg-danger text-white\"><h4>Arithmetic Expression Practice</h4></div><div class=\"card-body\"><h5>Mixed Multiplication and Addition</h5><div class=\"exercise-set mb-4\"><h6>Calculate the following expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>1. 10 × 16 + 10 × 40 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q1\"></p></div><div class=\"quiz-question mb-3\"><p>2. 5 × 12 + 5 × 18 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q2\"></p></div><div class=\"quiz-question mb-3\"><p>3. 8 × 7 + 8 × 13 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q3\"></p></div><div class=\"quiz-question mb-3\"><p>4. 6 × 15 + 6 × 25 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q4\"></p></div><div class=\"quiz-question mb-3\"><p>5. 4 × 22 + 4 × 28 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q5\"></p></div><div class=\"quiz-question mb-3\"><p>6. 9 × 11 + 9 × 19 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q6\"></p></div><div class=\"quiz-question mb-3\"><p>7. 7 × 14 + 7 × 16 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q7\"></p></div><div class=\"quiz-question mb-3\"><p>8. 3 × 24 + 3 × 26 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q8\"></p></div><div class=\"quiz-question mb-3\"><p>9. 12 × 8 + 12 × 12 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q9\"></p></div><div class=\"quiz-question mb-3\"><p>10. 15 × 6 + 15 × 14 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q10\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>11. 11 × 9 + 11 × 11 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q11\"></p></div><div class=\"quiz-question mb-3\"><p>12. 13 × 5 + 13 × 15 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q12\"></p></div><div class=\"quiz-question mb-3\"><p>13. 14 × 7 + 14 × 13 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q13\"></p></div><div class=\"quiz-question mb-3\"><p>14. 16 × 4 + 16 × 16 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q14\"></p></div><div class=\"quiz-question mb-3\"><p>15. 18 × 3 + 18 × 17 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q15\"></p></div><div class=\"quiz-question mb-3\"><p>16. 20 × 8 + 20 × 12 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q16\"></p></div><div class=\"quiz-question mb-3\"><p>17. 25 × 6 + 25 × 14 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q17\"></p></div><div class=\"quiz-question mb-3\"><p>18. 30 × 5 + 30 × 15 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q18\"></p></div><div class=\"quiz-question mb-3\"><p>19. 35 × 4 + 35 × 16 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q19\"></p></div><div class=\"quiz-question mb-3\"><p>20. 40 × 7 + 40 × 13 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q20\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkSet1()\">Check Answers 1-20</button> <span id=\"set1-feedback\" class=\"ml-2\"></span></div><div class=\"exercise-set mb-4\"><h6>More challenging expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>21. 12 × 15 + 12 × 25 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q21\"></p></div><div class=\"quiz-question mb-3\"><p>22. 15 × 18 + 15 × 22 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q22\"></p></div><div class=\"quiz-question mb-3\"><p>23. 18 × 12 + 18 × 18 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q23\"></p></div><div class=\"quiz-question mb-3\"><p>24. 20 × 14 + 20 × 16 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q24\"></p></div><div class=\"quiz-question mb-3\"><p>25. 25 × 13 + 25 × 17 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q25\"></p></div><div class=\"quiz-question mb-3\"><p>26. 30 × 11 + 30 × 19 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q26\"></p></div><div class=\"quiz-question mb-3\"><p>27. 35 × 9 + 35 × 21 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q27\"></p></div><div class=\"quiz-question mb-3\"><p>28. 40 × 8 + 40 × 22 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q28\"></p></div><div class=\"quiz-question mb-3\"><p>29. 45 × 7 + 45 × 23 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q29\"></p></div><div class=\"quiz-question mb-3\"><p>30. 50 × 6 + 50 × 24 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q30\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>31. 11 × 24 + 11 × 26 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q31\"></p></div><div class=\"quiz-question mb-3\"><p>32. 13 × 22 + 13 × 28 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q32\"></p></div><div class=\"quiz-question mb-3\"><p>33. 17 × 19 + 17 × 21 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q33\"></p></div><div class=\"quiz-question mb-3\"><p>34. 19 × 17 + 19 × 23 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q34\"></p></div><div class=\"quiz-question mb-3\"><p>35. 23 × 16 + 23 × 24 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q35\"></p></div><div class=\"quiz-question mb-3\"><p>36. 27 × 14 + 27 × 26 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q36\"></p></div><div class=\"quiz-question mb-3\"><p>37. 29 × 13 + 29 × 27 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q37\"></p></div><div class=\"quiz-question mb-3\"><p>38. 31 × 12 + 31 × 28 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q38\"></p></div><div class=\"quiz-question mb-3\"><p>39. 33 × 11 + 33 × 29 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q39\"></p></div><div class=\"quiz-question mb-3\"><p>40. 37 × 10 + 37 × 30 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q40\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkSet2()\">Check Answers 21-40</button> <span id=\"set2-feedback\" class=\"ml-2\"></span></div><div class=\"exercise-set mb-4\"><h6>Advanced expressions:</h6><div class=\"row\"><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>41. 42 × 15 + 42 × 25 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q41\"></p></div><div class=\"quiz-question mb-3\"><p>42. 45 × 14 + 45 × 26 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q42\"></p></div><div class=\"quiz-question mb-3\"><p>43. 48 × 13 + 48 × 27 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q43\"></p></div><div class=\"quiz-question mb-3\"><p>44. 52 × 12 + 52 × 28 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q44\"></p></div><div class=\"quiz-question mb-3\"><p>45. 55 × 11 + 55 × 29 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q45\"></p></div></div><div class=\"col-md-6\"><div class=\"quiz-question mb-3\"><p>46. 60 × 10 + 60 × 30 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q46\"></p></div><div class=\"quiz-question mb-3\"><p>47. 65 × 9 + 65 × 31 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q47\"></p></div><div class=\"quiz-question mb-3\"><p>48. 70 × 8 + 70 × 32 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q48\"></p></div><div class=\"quiz-question mb-3\"><p>49. 75 × 7 + 75 × 33 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q49\"></p></div><div class=\"quiz-question mb-3\"><p>50. 80 × 6 + 80 × 34 = <input type=\"text\" class=\"form-control d-inline-block w-50\" id=\"q50\"></p></div></div></div><button class=\"btn btn-primary\" onclick=\"checkSet3()\">Check Answers 41-50</button> <span id=\"set3-feedback\" class=\"ml-2\"></span></div></div></div>",
+          "scripts": "<script></script>"
         }
       },
       "9": {
@@ -144,20 +145,99 @@
           "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
         }
       }
-    }
-  },
-  "Grade 10": {
-    "Mathematics": {
-      "Rational and Irrational Numbers": [
-        "Classify numbers as rational or irrational",
-        "Convert rational numbers to decimal form and vice versa",
-        "Approximate irrational numbers",
-        "Perform operations with rational and irrational numbers",
-        "Simplify expressions involving surds",
-        "Apply the laws of surds",
-        "Solve equations with surds",
-        "Recognize and use conjugates of surds"
-      ]
+    },
+    "Humanities": {
+      "10": {
+        "History": {
+          "title": "World History",
+          "description": "Overview of significant historical events.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Geography": {
+          "title": "Geography",
+          "description": "Study of Earth's landscapes and environments.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "11": {
+        "Philosophy": {
+          "title": "Philosophy",
+          "description": "Introduction to philosophical concepts.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "12": {
+        "Psychology": {
+          "title": "Psychology",
+          "description": "Study of the mind and behavior.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      }
+    },
+    "English": {
+      "7": {
+        "Reading Comprehension": {
+          "title": "Reading Comprehension",
+          "description": "Techniques for understanding and analyzing texts.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Vocabulary": {
+          "title": "Vocabulary",
+          "description": "Building a strong vocabulary.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "8": {
+        "Parts Of Speech": {
+          "title": "Parts of Speech: Verbs, Nouns, Pronouns",
+          "description": "Practice identifying verbs, nouns, and pronouns in sentences.",
+          "content": "<div class=\"card mb-4 shadow-sm\"><div class=\"card-header bg-primary text-white\"><h4>Identifying Parts of Speech</h4></div><div class=\"card-body\"><h5>Basic Identification</h5><div class=\"instruction-box mb-4 p-3 bg-light border rounded\"><p><strong>Instructions:</strong> For each sentence, identify the specified parts of speech. Click on the words that match the requested part of speech.</p></div><div class=\"interactive-exercise mb-4\"><h6>Exercise 1: Spot the Verbs</h6><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightVerb(this)\"><p>The cat jumps over the lazy dog.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightVerb(this)\"><p>She sings beautifully in the choir.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightVerb(this)\"><p>We will travel to Europe next summer.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightVerb(this)\"><p>He has finished his homework already.</p></div></div><div class=\"interactive-exercise mb-4\"><h6>Exercise 2: Find the Nouns</h6><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightNoun(this)\"><p>The teacher gave the students an assignment.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightNoun(this)\"><p>Paris is the capital of France.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightNoun(this)\"><p>Happiness and success are important goals.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightNoun(this)\"><p>My brother bought a new bicycle yesterday.</p></div></div><div class=\"interactive-exercise mb-4\"><h6>Exercise 3: Identify Pronouns</h6><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightPronoun(this)\"><p>She gave them the books they needed.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightPronoun(this)\"><p>This is ours, not yours.</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightPronoun(this)\"><p>Who will help me with this project?</p></div><div class=\"sentence-box p-3 mb-2 border rounded bg-white\" onclick=\"highlightPronoun(this)\"><p>Everybody enjoyed themselves at the party.</p></div></div><h5 class=\"mt-4\">Mixed Practice</h5><div class=\"mixed-practice mb-4\"><div class=\"card mb-3\"><div class=\"card-body\"><h6>Identify All Three</h6><div class=\"sentence-analysis mb-3\"><p class=\"sentence\">The quick brown fox jumps over the lazy dog.</p><div class=\"form-group\"><label>Verbs: <input type=\"text\" class=\"form-control\" placeholder=\"Enter verbs\"></label></div><div class=\"form-group\"><label>Nouns: <input type=\"text\" class=\"form-control\" placeholder=\"Enter nouns\"></label></div><div class=\"form-group\"><label>Pronouns: <input type=\"text\" class=\"form-control\" placeholder=\"Enter pronouns\"></label></div><button class=\"btn btn-primary mt-2\" onclick=\"checkAnswer(this)\">Check</button><div class=\"feedback mt-2\"></div></div></div></div></div><h5 class=\"mt-4\">Practice Problems</h5><div class=\"practice-sets\"><div class=\"mb-4\"><h6>Verb Identification (10 Questions)</h6><div class=\"quiz-question mb-3\"><p>1. The sun rises in the east. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter verb\"></p></div><div class=\"quiz-question mb-3\"><p>2. They have completed the project. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter verb\"></p></div><div class=\"quiz-question mb-3\"><p>3. Birds fly south for the winter. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter verb\"></p></div><button class=\"btn btn-primary\" onclick=\"validateAnswers('verbs', ['rises','have completed','fly'])\">Check Answers</button><div class=\"feedback mt-2\"></div></div><div class=\"mb-4\"><h6>Noun Identification (10 Questions)</h6><div class=\"quiz-question mb-3\"><p>1. The library has many interesting books. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter nouns\"></p></div><div class=\"quiz-question mb-3\"><p>2. London is a beautiful city. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter nouns\"></p></div><div class=\"quiz-question mb-3\"><p>3. Kindness and honesty are virtues. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter nouns\"></p></div><button class=\"btn btn-primary\" onclick=\"validateAnswers('nouns', ['library,books','London,city','Kindness,honesty,virtues'])\">Check Answers</button><div class=\"feedback mt-2\"></div></div><div class=\"mb-4\"><h6>Pronoun Identification (10 Questions)</h6><div class=\"quiz-question mb-3\"><p>1. She gave it to him yesterday. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter pronouns\"></p></div><div class=\"quiz-question mb-3\"><p>2. This is mine, not yours. <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter pronouns\"></p></div><div class=\"quiz-question mb-3\"><p>3. Who told you about that? <input type=\"text\" class=\"form-control d-inline-block w-25\" placeholder=\"Enter pronouns\"></p></div><button class=\"btn btn-primary\" onclick=\"validateAnswers('pronouns', ['She,it,him','This,mine,yours','Who,you,that'])\">Check Answers</button><div class=\"feedback mt-2\"></div></div></div></div></div>"
+        },
+        "Vocabulary": {
+          "title": "Vocabulary",
+          "description": "Building a strong vocabulary.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+
+      "9": {
+        "Reading Comprehension": {
+          "title": "Reading Comprehension",
+          "description": "Understanding and interpreting texts.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Vocabulary": {
+          "title": "Vocabulary",
+          "description": "Building a strong vocabulary.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "10": {
+        "Literature": {
+          "title": "Literature",
+          "description": "Study of various literary forms and genres.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        },
+        "Grammar": {
+          "title": "Grammar",
+          "description": "Fundamentals of English grammar.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "11": {
+        "Composition": {
+          "title": "Composition",
+          "description": "Writing skills and techniques.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      },
+      "12": {
+        "Creative Writing": {
+          "title": "Creative Writing",
+          "description": "Techniques for writing fiction and poetry.",
+          "content": "<div class=\"card mb-4 shadow-sm\">...</div>"
+        }
+      }
     }
   }
 }
