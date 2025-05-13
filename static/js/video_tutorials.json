@@ -16390,6 +16390,384 @@
     "subject": "Ms Word 101",
     "youtubeId": "1PPrZJB7Ryo",
     "thumbnail": "https://img.youtube.com/vi/1PPrZJB7Ryo/mqdefault.jpg"
+  },
+   {
+    "id": 1824,
+    "title": "Machine Learning Tutorial Python -1: What is Machine Learning?",
+    "description": "Machine Learning Tutorial Python -1: What is Machine Learning?",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "gmvvaobm7eQ",
+    "thumbnail": "https://img.youtube.com/vi/gmvvaobm7eQ/mqdefault.jpg"
+  },
+  {
+    "id": 1825,
+    "title": "Machine Learning Tutorial Python - 2: Linear Regression Single Variable",
+    "description": "Machine Learning Tutorial Python - 2: Linear Regression Single Variable",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "8jazNUpO3lQ",
+    "thumbnail": "https://img.youtube.com/vi/8jazNUpO3lQ/mqdefault.jpg"
+  },
+  {
+    "id": 1826,
+    "title": "Machine Learning Tutorial Python - 3: Linear Regression Multiple Variables",
+    "description": "Machine Learning Tutorial Python - 3: Linear Regression Multiple Variables",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "J_LnPL3Qg70",
+    "thumbnail": "https://img.youtube.com/vi/J_LnPL3Qg70/mqdefault.jpg"
+  },
+  {
+    "id": 1827,
+    "title": "Machine Learning Tutorial Python - 4: Gradient Descent and Cost Function",
+    "description": "Machine Learning Tutorial Python - 4: Gradient Descent and Cost Function",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "vsWrXfO3wWw",
+    "thumbnail": "https://img.youtube.com/vi/vsWrXfO3wWw/mqdefault.jpg"
+  },
+  {
+    "id": 1828,
+    "title": "Machine Learning Tutorial Python - 5: Save Model Using Joblib And Pickle",
+    "description": "Machine Learning Tutorial Python - 5: Save Model Using Joblib And Pickle",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "KfnhNlD8WZI",
+    "thumbnail": "https://img.youtube.com/vi/KfnhNlD8WZI/mqdefault.jpg"
+  },
+  {
+    "id": 1829,
+    "title": "Machine Learning Tutorial Python - 6: Dummy Variables & One Hot Encoding",
+    "description": "Machine Learning Tutorial Python - 6: Dummy Variables & One Hot Encoding",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "9yl6-HEY7_s",
+    "thumbnail": "https://img.youtube.com/vi/9yl6-HEY7_s/mqdefault.jpg"
+  },
+  {
+    "id": 1830,
+    "title": "Machine Learning Tutorial Python - 7: Training and Testing Data",
+    "description": "Machine Learning Tutorial Python - 7: Training and Testing Data",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "fwY9Qv96DJY",
+    "thumbnail": "https://img.youtube.com/vi/fwY9Qv96DJY/mqdefault.jpg"
+  },
+  {
+    "id": 1831,
+    "title": "Machine Learning Tutorial Python - 8:  Logistic Regression (Binary Classification)",
+    "description": "Machine Learning Tutorial Python - 8:  Logistic Regression (Binary Classification)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "zM4VZR0px8E",
+    "thumbnail": "https://img.youtube.com/vi/zM4VZR0px8E/mqdefault.jpg"
+  },
+  {
+    "id": 1832,
+    "title": "Machine Learning Tutorial Python - 8  Logistic Regression (Multiclass Classification)",
+    "description": "Machine Learning Tutorial Python - 8  Logistic Regression (Multiclass Classification)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "J5bXOOmkopc",
+    "thumbnail": "https://img.youtube.com/vi/J5bXOOmkopc/mqdefault.jpg"
+  },
+  {
+    "id": 1833,
+    "title": "Machine Learning Tutorial Python - 9  Decision Tree",
+    "description": "Machine Learning Tutorial Python - 9  Decision Tree",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "PHxYNGo8NcI",
+    "thumbnail": "https://img.youtube.com/vi/PHxYNGo8NcI/mqdefault.jpg"
+  },
+  {
+    "id": 1834,
+    "title": "Machine Learning Tutorial Python - 10  Support Vector Machine (SVM)",
+    "description": "Machine Learning Tutorial Python - 10  Support Vector Machine (SVM)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "FB5EdxAGxQg",
+    "thumbnail": "https://img.youtube.com/vi/FB5EdxAGxQg/mqdefault.jpg"
+  },
+  {
+    "id": 1835,
+    "title": "Machine Learning Tutorial Python - 11  Random Forest",
+    "description": "Machine Learning Tutorial Python - 11  Random Forest",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "ok2s1vV9XW0",
+    "thumbnail": "https://img.youtube.com/vi/ok2s1vV9XW0/mqdefault.jpg"
+  },
+  {
+    "id": 1836,
+    "title": "Machine Learning Tutorial Python 12 - K Fold Cross Validation",
+    "description": "Machine Learning Tutorial Python 12 - K Fold Cross Validation",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "gJo0uNL-5Qw",
+    "thumbnail": "https://img.youtube.com/vi/gJo0uNL-5Qw/mqdefault.jpg"
+  },
+  {
+    "id": 1837,
+    "title": "Machine Learning Tutorial Python - 13:  K Means Clustering Algorithm",
+    "description": "Machine Learning Tutorial Python - 13:  K Means Clustering Algorithm",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "EItlUEPCIzM",
+    "thumbnail": "https://img.youtube.com/vi/EItlUEPCIzM/mqdefault.jpg"
+  },
+  {
+    "id": 1838,
+    "title": "Machine Learning Tutorial Python - 14: Naive Bayes Classifier Algorithm Part 1",
+    "description": "Machine Learning Tutorial Python - 14: Naive Bayes Classifier Algorithm Part 1",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "PPeaRc-r1OI",
+    "thumbnail": "https://img.youtube.com/vi/PPeaRc-r1OI/mqdefault.jpg"
+  },
+  {
+    "id": 1839,
+    "title": "Machine Learning Tutorial Python - 15:  Naive Bayes Classifier Algorithm Part 2",
+    "description": "Machine Learning Tutorial Python - 15:  Naive Bayes Classifier Algorithm Part 2",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "nHIUYwN-5rM",
+    "thumbnail": "https://img.youtube.com/vi/nHIUYwN-5rM/mqdefault.jpg"
+  },
+  {
+    "id": 1840,
+    "title": "Machine Learning Tutorial Python - 16: Hyper parameter Tuning (GridSearchCV)",
+    "description": "Machine Learning Tutorial Python - 16: Hyper parameter Tuning (GridSearchCV)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "HdlDYng8g9s",
+    "thumbnail": "https://img.youtube.com/vi/HdlDYng8g9s/mqdefault.jpg"
+  },
+  {
+    "id": 1841,
+    "title": "Machine Learning Tutorial Python - 17: L1 and L2 Regularization | Lasso, Ridge Regression",
+    "description": "Machine Learning Tutorial Python - 17: L1 and L2 Regularization | Lasso, Ridge Regression",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "VqKq78PVO9g",
+    "thumbnail": "https://img.youtube.com/vi/VqKq78PVO9g/mqdefault.jpg"
+  },
+  {
+    "id": 1842,
+    "title": "Machine Learning Tutorial Python - 18: K nearest neighbors classification with python code",
+    "description": "Machine Learning Tutorial Python - 18: K nearest neighbors classification with python code",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "CQveSaMyEwM",
+    "thumbnail": "https://img.youtube.com/vi/CQveSaMyEwM/mqdefault.jpg"
+  },
+  {
+    "id": 1843,
+    "title": "Machine Learning Tutorial Python - 19: Principal Component Analysis (PCA) with Python Code",
+    "description": "Machine Learning Tutorial Python - 19: Principal Component Analysis (PCA) with Python Code",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "8klqIM9UvAc",
+    "thumbnail": "https://img.youtube.com/vi/8klqIM9UvAc/mqdefault.jpg"
+  },
+  {
+    "id": 1844,
+    "title": "Machine Learning Tutorial Python - 20: Bias vs Variance In Machine Learning",
+    "description": "Machine Learning Tutorial Python - 20: Bias vs Variance In Machine Learning",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "B01qMFMAgUQ",
+    "thumbnail": "https://img.youtube.com/vi/B01qMFMAgUQ/mqdefault.jpg"
+  },
+  {
+    "id": 1845,
+    "title": "Machine Learning Tutorial Python - 21: Ensemble Learning - Bagging",
+    "description": "Machine Learning Tutorial Python - 21: Ensemble Learning - Bagging",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "RtrBtAKwcxQ",
+    "thumbnail": "https://img.youtube.com/vi/RtrBtAKwcxQ/mqdefault.jpg"
+  },
+  {
+    "id": 1846,
+    "title": "Machine Learning & Data Science Project - 1 : Introduction (Real Estate Price Prediction Project)",
+    "description": "Machine Learning & Data Science Project - 1 : Introduction (Real Estate Price Prediction Project)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "rdfbcdP75KI",
+    "thumbnail": "https://img.youtube.com/vi/rdfbcdP75KI/mqdefault.jpg"
+  },
+  {
+    "id": 1847,
+    "title": "Machine Learning & Data Science Project - 2 : Data Cleaning (Real Estate Price Prediction Project)",
+    "description": "Machine Learning & Data Science Project - 2 : Data Cleaning (Real Estate Price Prediction Project)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "_drqJ9SFCgU",
+    "thumbnail": "https://img.youtube.com/vi/_drqJ9SFCgU/mqdefault.jpg"
+  },
+  {
+    "id": 1848,
+    "title": "Machine Learning & Data Science Project - 3 : Feature Engineering (Real Estate Price Prediction)",
+    "description": "Machine Learning & Data Science Project - 3 : Feature Engineering (Real Estate Price Prediction)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "gMoJIH0prL4",
+    "thumbnail": "https://img.youtube.com/vi/gMoJIH0prL4/mqdefault.jpg"
+  },
+  {
+    "id": 1849,
+    "title": "Machine Learning & Data Science Project - 4 : Outlier Removal (Real Estate Price Prediction Project)",
+    "description": "Machine Learning & Data Science Project - 4 : Outlier Removal (Real Estate Price Prediction Project)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "cbqZa_1vzcg",
+    "thumbnail": "https://img.youtube.com/vi/cbqZa_1vzcg/mqdefault.jpg"
+  },
+  {
+    "id": 1850,
+    "title": "Machine Learning & Data Science Project - 5 : Model Building (Real Estate Price Prediction Project)",
+    "description": "Machine Learning & Data Science Project - 5 : Model Building (Real Estate Price Prediction Project)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "oCiRv94GMEc",
+    "thumbnail": "https://img.youtube.com/vi/oCiRv94GMEc/mqdefault.jpg"
+  },
+  {
+    "id": 1851,
+    "title": "Machine Learning & Data Science Project - 6 : Python Flask Server (Real Estate Price Prediction)",
+    "description": "Machine Learning & Data Science Project - 6 : Python Flask Server (Real Estate Price Prediction)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "Q5JyawS8f5Q",
+    "thumbnail": "https://img.youtube.com/vi/Q5JyawS8f5Q/mqdefault.jpg"
+  },
+  {
+    "id": 1852,
+    "title": "Machine Learning & Data Science Project - 7 : Website or UI (Real Estate Price Prediction Project)",
+    "description": "Machine Learning & Data Science Project - 7 : Website or UI (Real Estate Price Prediction Project)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "rD2xumR98w8",
+    "thumbnail": "https://img.youtube.com/vi/rD2xumR98w8/mqdefault.jpg"
+  },
+  {
+    "id": 1853,
+    "title": "Deploy machine learning model to production AWS (Amazon EC2 instance)",
+    "description": "Deploy machine learning model to production AWS (Amazon EC2 instance)",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "q8NOmLD5pTU",
+    "thumbnail": "https://img.youtube.com/vi/q8NOmLD5pTU/mqdefault.jpg"
+  },
+  {
+    "id": 1854,
+    "title": "Data Science & Machine Learning Project - Part 1 Introduction | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 1 Introduction | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "qWXXHjV3JHI",
+    "thumbnail": "https://img.youtube.com/vi/qWXXHjV3JHI/mqdefault.jpg"
+  },
+  {
+    "id": 1855,
+    "title": "Data Science & Machine Learning Project - Part 2 Data Collection | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 2 Data Collection | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "m1dQ38qDABw",
+    "thumbnail": "https://img.youtube.com/vi/m1dQ38qDABw/mqdefault.jpg"
+  },
+  {
+    "id": 1856,
+    "title": "Data Science & Machine Learning Project - Part 3 Data Cleaning | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 3 Data Cleaning | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "kwKfWBb6frs",
+    "thumbnail": "https://img.youtube.com/vi/kwKfWBb6frs/mqdefault.jpg"
+  },
+  {
+    "id": 1857,
+    "title": "Data Science & Machine Learning Project - Part 4 Feature Engineering | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 4 Feature Engineering | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "sWAPtaBZKBQ",
+    "thumbnail": "https://img.youtube.com/vi/sWAPtaBZKBQ/mqdefault.jpg"
+  },
+  {
+    "id": 1858,
+    "title": "Data Science & Machine Learning Project - Part 5 Training a Model | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 5 Training a Model | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "5Uc_m9CRWro",
+    "thumbnail": "https://img.youtube.com/vi/5Uc_m9CRWro/mqdefault.jpg"
+  },
+  {
+    "id": 1859,
+    "title": "Data Science & Machine Learning Project - Part 6 Flask Server | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 6 Flask Server | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "NtNl97LlpOk",
+    "thumbnail": "https://img.youtube.com/vi/NtNl97LlpOk/mqdefault.jpg"
+  },
+  {
+    "id": 1860,
+    "title": "Data Science & Machine Learning Project - Part 7 Build Website | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 7 Build Website | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "idMKTkfeo4A",
+    "thumbnail": "https://img.youtube.com/vi/idMKTkfeo4A/mqdefault.jpg"
+  },
+  {
+    "id": 1861,
+    "title": "Data Science & Machine Learning Project - Part 8 Deployment & Exercise | Image Classification",
+    "description": "Data Science & Machine Learning Project - Part 8 Deployment & Exercise | Image Classification",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "W-PmvEeHioQ",
+    "thumbnail": "https://img.youtube.com/vi/W-PmvEeHioQ/mqdefault.jpg"
+  },
+  {
+    "id": 1862,
+    "title": "What is feature engineering | Feature Engineering Tutorial Python # 1",
+    "description": "What is feature engineering | Feature Engineering Tutorial Python # 1",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "pYVScuY-GPk",
+    "thumbnail": "https://img.youtube.com/vi/pYVScuY-GPk/mqdefault.jpg"
+  },
+  {
+    "id": 1863,
+    "title": "Outlier detection and removal using percentile | Feature engineering tutorial python # 2",
+    "description": "Outlier detection and removal using percentile | Feature engineering tutorial python # 2",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "7sJaRHF03K8",
+    "thumbnail": "https://img.youtube.com/vi/7sJaRHF03K8/mqdefault.jpg"
+  },
+  {
+    "id": 1864,
+    "title": "Outlier detection and removal: z score, standard deviation | Feature engineering tutorial python # 3",
+    "description": "Outlier detection and removal: z score, standard deviation | Feature engineering tutorial python # 3",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "KFuEAGR3HS4",
+    "thumbnail": "https://img.youtube.com/vi/KFuEAGR3HS4/mqdefault.jpg"
+  },
+  {
+    "id": 1865,
+    "title": "Outlier detection and removal using IQR | Feature engineering tutorial python # 4",
+    "description": "Outlier detection and removal using IQR | Feature engineering tutorial python # 4",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 102",
+    "youtubeId": "A3gClkblXK8",
+    "thumbnail": "https://img.youtube.com/vi/A3gClkblXK8/mqdefault.jpg"
   }
 ]
 }
