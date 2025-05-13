@@ -14266,6 +14266,1554 @@
     "subject": "Excel 102",
     "youtubeId": "RJFaC9Kyyns",
     "thumbnail": "https://img.youtube.com/vi/RJFaC9Kyyns/mqdefault.jpg"
-  } 
+  },
+  {
+    "id": 1588,
+    "title": "Introduction to HTML | An HTML5 Tutorial for Beginners",
+    "description": "Introduction to HTML | An HTML5 Tutorial for Beginners",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "P0EGYTb1cBs",
+    "thumbnail": "https://img.youtube.com/vi/P0EGYTb1cBs/mqdefault.jpg"
+  },
+  {
+    "id": 1589,
+    "title": "Head Tag in HTML | An HTML5 Head Element Tutorial",
+    "description": "Head Tag in HTML | An HTML5 Head Element Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "QRvA8Mp-uME",
+    "thumbnail": "https://img.youtube.com/vi/QRvA8Mp-uME/mqdefault.jpg"
+  },
+  {
+    "id": 1590,
+    "title": "HTML Tag Text Basics | HTML5 Element Text Tutorial",
+    "description": "HTML Tag Text Basics | HTML5 Element Text Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "tC56TakOjIE",
+    "thumbnail": "https://img.youtube.com/vi/tC56TakOjIE/mqdefault.jpg"
+  },
+  {
+    "id": 1591,
+    "title": "HTML Lists Tutorial | HTML5 List Types: Ordered, Unordered & Description",
+    "description": "HTML Lists Tutorial | HTML5 List Types: Ordered, Unordered & Description",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "gJWNA3Fduek",
+    "thumbnail": "https://img.youtube.com/vi/gJWNA3Fduek/mqdefault.jpg"
+  },
+  {
+    "id": 1592,
+    "title": "How to Add Links in HTML code | HTML5 Linking Tutorial",
+    "description": "How to Add Links in HTML code | HTML5 Linking Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "iMj-TbN7ydg",
+    "thumbnail": "https://img.youtube.com/vi/iMj-TbN7ydg/mqdefault.jpg"
+  },
+  {
+    "id": 1593,
+    "title": "How to Insert Images in HTML | An HTML5 Image Tutorial",
+    "description": "How to Insert Images in HTML | An HTML5 Image Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "0pBAfkZMKy0",
+    "thumbnail": "https://img.youtube.com/vi/0pBAfkZMKy0/mqdefault.jpg"
+  },
+  {
+    "id": 1594,
+    "title": "Semantic HTML Tags | HTML5 Semantic Elements Tutorial",
+    "description": "Semantic HTML Tags | HTML5 Semantic Elements Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "kX3TfdUqpuU",
+    "thumbnail": "https://img.youtube.com/vi/kX3TfdUqpuU/mqdefault.jpg"
+  },
+  {
+    "id": 1595,
+    "title": "How to Create Tables in HTML | HTML5 Table Tutorial",
+    "description": "How to Create Tables in HTML | HTML5 Table Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "e23RA_Uo99o",
+    "thumbnail": "https://img.youtube.com/vi/e23RA_Uo99o/mqdefault.jpg"
+  },
+  {
+    "id": 1596,
+    "title": "HTML Forms and Inputs | HTML5 Tutorial for Beginners",
+    "description": "HTML Forms and Inputs | HTML5 Tutorial for Beginners",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "frAGrGN00OA",
+    "thumbnail": "https://img.youtube.com/vi/frAGrGN00OA/mqdefault.jpg"
+  },
+  {
+    "id": 1597,
+    "title": "HTML5 Website Project for Beginners | First HTML Project Tutorial",
+    "description": "HTML5 Website Project for Beginners | First HTML Project Tutorial",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "T5PD8ofhiug",
+    "thumbnail": "https://img.youtube.com/vi/T5PD8ofhiug/mqdefault.jpg"
+  },
+  {
+    "id": 1598,
+    "title": "HTML Full Course for Beginners | Complete All-in-One Tutorial | 4 Hours",
+    "description": "HTML Full Course for Beginners | Complete All-in-One Tutorial | 4 Hours",
+    "grade": "Grade HTML",
+    "subject": "HTML 101",
+    "youtubeId": "mJgBOIoGihA",
+    "thumbnail": "https://img.youtube.com/vi/mJgBOIoGihA/mqdefault.jpg"
+  },
+  {
+    "id": 1599,
+    "title": "#0 Python for Beginners | Programming Tutorial",
+    "description": "#0 Python for Beginners | Programming Tutorial",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "QXeEoD0pB3E",
+    "thumbnail": "https://img.youtube.com/vi/QXeEoD0pB3E/mqdefault.jpg"
+  },
+  {
+    "id": 1600,
+    "title": "#1 Python Tutorial for Beginners | Introduction to Python",
+    "description": "#1 Python Tutorial for Beginners | Introduction to Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "hEgO047GxaQ",
+    "thumbnail": "https://img.youtube.com/vi/hEgO047GxaQ/mqdefault.jpg"
+  },
+  {
+    "id": 1601,
+    "title": "#2 Python Tutorial for Beginners | Python Installation | PyCharm",
+    "description": "#2 Python Tutorial for Beginners | Python Installation | PyCharm",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "CScxy0294SE",
+    "thumbnail": "https://img.youtube.com/vi/CScxy0294SE/mqdefault.jpg"
+  },
+  {
+    "id": 1602,
+    "title": "#3 Python Tutorial for Beginners | Getting Started with Python",
+    "description": "#3 Python Tutorial for Beginners | Getting Started with Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "DWgzHbglNIo",
+    "thumbnail": "https://img.youtube.com/vi/DWgzHbglNIo/mqdefault.jpg"
+  },
+  {
+    "id": 1603,
+    "title": "New Course | AI Powered DevOps with AWS | Live Course",
+    "description": "New Course | AI Powered DevOps with AWS | Live Course",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "SvnlwFRcfJo",
+    "thumbnail": "https://img.youtube.com/vi/SvnlwFRcfJo/mqdefault.jpg"
+  },
+  {
+    "id": 1604,
+    "title": "#4 Python Tutorial for Beginners | Variables in Python",
+    "description": "#4 Python Tutorial for Beginners | Variables in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "TqPzwenhMj0",
+    "thumbnail": "https://img.youtube.com/vi/TqPzwenhMj0/mqdefault.jpg"
+  },
+  {
+    "id": 1605,
+    "title": "#5 Python Tutorial for Beginners | List in Python",
+    "description": "#5 Python Tutorial for Beginners | List in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Eaz5e6M8tL4",
+    "thumbnail": "https://img.youtube.com/vi/Eaz5e6M8tL4/mqdefault.jpg"
+  },
+  {
+    "id": 1606,
+    "title": "#6 Python Tutorial for Beginners | Tuple | Set in Python",
+    "description": "#6 Python Tutorial for Beginners | Tuple | Set in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Mf7eFtbVxFM",
+    "thumbnail": "https://img.youtube.com/vi/Mf7eFtbVxFM/mqdefault.jpg"
+  },
+  {
+    "id": 1607,
+    "title": "Dictionary in Python",
+    "description": "Dictionary in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "2IsF7DEtVjg",
+    "thumbnail": "https://img.youtube.com/vi/2IsF7DEtVjg/mqdefault.jpg"
+  },
+  {
+    "id": 1608,
+    "title": "#7 Python Tutorial for Beginners | Python Set Path in Windows and Help",
+    "description": "#7 Python Tutorial for Beginners | Python Set Path in Windows and Help",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "4V14G5_CNGg",
+    "thumbnail": "https://img.youtube.com/vi/4V14G5_CNGg/mqdefault.jpg"
+  },
+  {
+    "id": 1609,
+    "title": "Premium Java and spring boot Courses",
+    "description": "Premium Java and spring boot Courses",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ifu2UlqIoYM",
+    "thumbnail": "https://img.youtube.com/vi/ifu2UlqIoYM/mqdefault.jpg"
+  },
+  {
+    "id": 1610,
+    "title": "#8 Python Tutorial for Beginners | Python Editor | Sublime Text",
+    "description": "#8 Python Tutorial for Beginners | Python Editor | Sublime Text",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "1U8TI16AR4s",
+    "thumbnail": "https://img.youtube.com/vi/1U8TI16AR4s/mqdefault.jpg"
+  },
+  {
+    "id": 1611,
+    "title": "#9 Python Tutorial for Beginners | More on Variables in Python",
+    "description": "#9 Python Tutorial for Beginners | More on Variables in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "_OZIAHg5i7M",
+    "thumbnail": "https://img.youtube.com/vi/_OZIAHg5i7M/mqdefault.jpg"
+  },
+  {
+    "id": 1612,
+    "title": "#10 Python Tutorial for Beginners | Data Types in Python",
+    "description": "#10 Python Tutorial for Beginners | Data Types in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "gCCVsvgR2KU",
+    "thumbnail": "https://img.youtube.com/vi/gCCVsvgR2KU/mqdefault.jpg"
+  },
+  {
+    "id": 1613,
+    "title": "#11 Python Tutorial for Beginners | Operators in Python",
+    "description": "#11 Python Tutorial for Beginners | Operators in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "v5MR5JnKcZI",
+    "thumbnail": "https://img.youtube.com/vi/v5MR5JnKcZI/mqdefault.jpg"
+  },
+  {
+    "id": 1614,
+    "title": "#12 Python Tutorial for Beginners | Number System Conversion in Python",
+    "description": "#12 Python Tutorial for Beginners | Number System Conversion in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "AWAjbtWBzGs",
+    "thumbnail": "https://img.youtube.com/vi/AWAjbtWBzGs/mqdefault.jpg"
+  },
+  {
+    "id": 1615,
+    "title": "Support Telusko",
+    "description": "Support Telusko",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Bwd9hr5Fz5E",
+    "thumbnail": "https://img.youtube.com/vi/Bwd9hr5Fz5E/mqdefault.jpg"
+  },
+  {
+    "id": 1616,
+    "title": "#13 Python Tutorial for Beginners | IDLE Previous Command | Clear Screen?",
+    "description": "#13 Python Tutorial for Beginners | IDLE Previous Command | Clear Screen?",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "UAMMEmga0WI",
+    "thumbnail": "https://img.youtube.com/vi/UAMMEmga0WI/mqdefault.jpg"
+  },
+  {
+    "id": 1617,
+    "title": "#14 Python Tutorial for Beginners | Python BitWise Operators",
+    "description": "#14 Python Tutorial for Beginners | Python BitWise Operators",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "PyfKCvHALj8",
+    "thumbnail": "https://img.youtube.com/vi/PyfKCvHALj8/mqdefault.jpg"
+  },
+  {
+    "id": 1618,
+    "title": "#15 Python Tutorial for Beginners | Import Math Functions in Python",
+    "description": "#15 Python Tutorial for Beginners | Import Math Functions in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "EkYrfV7M1ks",
+    "thumbnail": "https://img.youtube.com/vi/EkYrfV7M1ks/mqdefault.jpg"
+  },
+  {
+    "id": 1619,
+    "title": "#16 Python Tutorial for Beginners | Working with PyCharm | Run | Debug | Trace | py file",
+    "description": "#16 Python Tutorial for Beginners | Working with PyCharm | Run | Debug | Trace | py file",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "akcEaEH91gI",
+    "thumbnail": "https://img.youtube.com/vi/akcEaEH91gI/mqdefault.jpg"
+  },
+  {
+    "id": 1620,
+    "title": "#17 Python Tutorial for Beginners | Swap 2 Variables in Python",
+    "description": "#17 Python Tutorial for Beginners | Swap 2 Variables in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "3dpJrMtxYeo",
+    "thumbnail": "https://img.youtube.com/vi/3dpJrMtxYeo/mqdefault.jpg"
+  },
+  {
+    "id": 1621,
+    "title": "#18 Python Tutorial for Beginners | User input in Python | Command Line Input",
+    "description": "#18 Python Tutorial for Beginners | User input in Python | Command Line Input",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "4OX49nLNPEE",
+    "thumbnail": "https://img.youtube.com/vi/4OX49nLNPEE/mqdefault.jpg"
+  },
+  {
+    "id": 1622,
+    "title": "#19 Python Tutorial for Beginners | If Elif Else Statement in Python",
+    "description": "#19 Python Tutorial for Beginners | If Elif Else Statement in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "PqFKRqpHrjw",
+    "thumbnail": "https://img.youtube.com/vi/PqFKRqpHrjw/mqdefault.jpg"
+  },
+  {
+    "id": 1623,
+    "title": "#20 Python Tutorial for Beginners | While Loop in Python",
+    "description": "#20 Python Tutorial for Beginners | While Loop in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "HZARImviDxg",
+    "thumbnail": "https://img.youtube.com/vi/HZARImviDxg/mqdefault.jpg"
+  },
+  {
+    "id": 1624,
+    "title": "#21 Python Tutorial for Beginners | For Loop in Python",
+    "description": "#21 Python Tutorial for Beginners | For Loop in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "0ZvaDa8eT5s",
+    "thumbnail": "https://img.youtube.com/vi/0ZvaDa8eT5s/mqdefault.jpg"
+  },
+  {
+    "id": 1625,
+    "title": "#22 Python Tutorial for Beginners | Break Continue Pass in Python",
+    "description": "#22 Python Tutorial for Beginners | Break Continue Pass in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "yCZBnjF4_tU",
+    "thumbnail": "https://img.youtube.com/vi/yCZBnjF4_tU/mqdefault.jpg"
+  },
+  {
+    "id": 1626,
+    "title": "#22.1 Python Tutorial for Beginners | Break vs Continue vs Pass in Python part 2",
+    "description": "#22.1 Python Tutorial for Beginners | Break vs Continue vs Pass in Python part 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "JCRpVwtVL4I",
+    "thumbnail": "https://img.youtube.com/vi/JCRpVwtVL4I/mqdefault.jpg"
+  },
+  {
+    "id": 1627,
+    "title": "#23 Python Tutorial for Beginners | Printing Patterns in Python",
+    "description": "#23 Python Tutorial for Beginners | Printing Patterns in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "k8SXsT5TLxQ",
+    "thumbnail": "https://img.youtube.com/vi/k8SXsT5TLxQ/mqdefault.jpg"
+  },
+  {
+    "id": 1628,
+    "title": "#24 Python Tutorial for Beginners | For Else in Python",
+    "description": "#24 Python Tutorial for Beginners | For Else in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "38svC3U7hVo",
+    "thumbnail": "https://img.youtube.com/vi/38svC3U7hVo/mqdefault.jpg"
+  },
+  {
+    "id": 1629,
+    "title": "#25 Python Tutorial for Beginners | Prime Number in Python",
+    "description": "#25 Python Tutorial for Beginners | Prime Number in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "SpTAxH_Geow",
+    "thumbnail": "https://img.youtube.com/vi/SpTAxH_Geow/mqdefault.jpg"
+  },
+  {
+    "id": 1630,
+    "title": "#26 Python Tutorial for Beginners | Array in Python",
+    "description": "#26 Python Tutorial for Beginners | Array in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "6a39OjkCN5I",
+    "thumbnail": "https://img.youtube.com/vi/6a39OjkCN5I/mqdefault.jpg"
+  },
+  {
+    "id": 1631,
+    "title": "#27 Python Tutorial for Beginners | Array values from User in Python | Search in Array",
+    "description": "#27 Python Tutorial for Beginners | Array values from User in Python | Search in Array",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "9c9qhIcB3NA",
+    "thumbnail": "https://img.youtube.com/vi/9c9qhIcB3NA/mqdefault.jpg"
+  },
+  {
+    "id": 1632,
+    "title": "#28 Python Tutorial for Beginners | Why Numpy? Installing Numpy in Pycharm",
+    "description": "#28 Python Tutorial for Beginners | Why Numpy? Installing Numpy in Pycharm",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "8LlXhtfNZEQ",
+    "thumbnail": "https://img.youtube.com/vi/8LlXhtfNZEQ/mqdefault.jpg"
+  },
+  {
+    "id": 1633,
+    "title": "#29 Python Tutorial for Beginners | Ways of Creating Arrays in Numpy",
+    "description": "#29 Python Tutorial for Beginners | Ways of Creating Arrays in Numpy",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "NYPKbmE0H6E",
+    "thumbnail": "https://img.youtube.com/vi/NYPKbmE0H6E/mqdefault.jpg"
+  },
+  {
+    "id": 1634,
+    "title": "#30 Python Tutorial for Beginners | Copying an Array in Python",
+    "description": "#30 Python Tutorial for Beginners | Copying an Array in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "8sF85TyunQA",
+    "thumbnail": "https://img.youtube.com/vi/8sF85TyunQA/mqdefault.jpg"
+  },
+  {
+    "id": 1635,
+    "title": "#31 Python Tutorial for Beginners | Working with Matrix in Python",
+    "description": "#31 Python Tutorial for Beginners | Working with Matrix in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Blzp9iuhZqo",
+    "thumbnail": "https://img.youtube.com/vi/Blzp9iuhZqo/mqdefault.jpg"
+  },
+  {
+    "id": 1636,
+    "title": "#32 Python Tutorial for Beginners | Functions in Python",
+    "description": "#32 Python Tutorial for Beginners | Functions in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "BVfCWuca9nw",
+    "thumbnail": "https://img.youtube.com/vi/BVfCWuca9nw/mqdefault.jpg"
+  },
+  {
+    "id": 1637,
+    "title": "#33 Python Tutorial for Beginners | Function Arguments in Python",
+    "description": "#33 Python Tutorial for Beginners | Function Arguments in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ijXMGpoMkhQ",
+    "thumbnail": "https://img.youtube.com/vi/ijXMGpoMkhQ/mqdefault.jpg"
+  },
+  {
+    "id": 1638,
+    "title": "#34 Python Tutorial for Beginners | Types of Arguments in Python",
+    "description": "#34 Python Tutorial for Beginners | Types of Arguments in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "eci9iU_s6Ag",
+    "thumbnail": "https://img.youtube.com/vi/eci9iU_s6Ag/mqdefault.jpg"
+  },
+  {
+    "id": 1639,
+    "title": "#35 Python Tutorial for Beginners | Keyworded Variable Length Arguments in Python | **kwargs",
+    "description": "#35 Python Tutorial for Beginners | Keyworded Variable Length Arguments in Python | **kwargs",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "kB829ciAXo4",
+    "thumbnail": "https://img.youtube.com/vi/kB829ciAXo4/mqdefault.jpg"
+  },
+  {
+    "id": 1640,
+    "title": "#36 Python Tutorial for Beginners | Global Keyword in Python | Global vs Local Variable",
+    "description": "#36 Python Tutorial for Beginners | Global Keyword in Python | Global vs Local Variable",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "QYUbLevwgDQ",
+    "thumbnail": "https://img.youtube.com/vi/QYUbLevwgDQ/mqdefault.jpg"
+  },
+  {
+    "id": 1641,
+    "title": "#37 Python Tutorial for Beginners | Pass List to a Function in Python",
+    "description": "#37 Python Tutorial for Beginners | Pass List to a Function in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "fsAzeNZXvkE",
+    "thumbnail": "https://img.youtube.com/vi/fsAzeNZXvkE/mqdefault.jpg"
+  },
+  {
+    "id": 1642,
+    "title": "#38 Python Tutorial for Beginners | Fibonacci Sequence",
+    "description": "#38 Python Tutorial for Beginners | Fibonacci Sequence",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "7Sv4NmvdHcw",
+    "thumbnail": "https://img.youtube.com/vi/7Sv4NmvdHcw/mqdefault.jpg"
+  },
+  {
+    "id": 1643,
+    "title": "#39 Python Tutorial for Beginners | Factorial",
+    "description": "#39 Python Tutorial for Beginners | Factorial",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "gfhtaP5Wq7M",
+    "thumbnail": "https://img.youtube.com/vi/gfhtaP5Wq7M/mqdefault.jpg"
+  },
+  {
+    "id": 1644,
+    "title": "#40 Python Tutorial for Beginners | Recursion",
+    "description": "#40 Python Tutorial for Beginners | Recursion",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "XkL3SUioNvo",
+    "thumbnail": "https://img.youtube.com/vi/XkL3SUioNvo/mqdefault.jpg"
+  },
+  {
+    "id": 1645,
+    "title": "#41 Python Tutorial for Beginners | Factorial using Recursion",
+    "description": "#41 Python Tutorial for Beginners | Factorial using Recursion",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "TqqQld6m6A0",
+    "thumbnail": "https://img.youtube.com/vi/TqqQld6m6A0/mqdefault.jpg"
+  },
+  {
+    "id": 1646,
+    "title": "#42 Python Tutorial for Beginners | Anonymous Functions | Lambda",
+    "description": "#42 Python Tutorial for Beginners | Anonymous Functions | Lambda",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "hYzwCsKGRrg",
+    "thumbnail": "https://img.youtube.com/vi/hYzwCsKGRrg/mqdefault.jpg"
+  },
+  {
+    "id": 1647,
+    "title": "#43 Python Tutorial for Beginners | Filter Map Reduce",
+    "description": "#43 Python Tutorial for Beginners | Filter Map Reduce",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "kj850Y8y8FI",
+    "thumbnail": "https://img.youtube.com/vi/kj850Y8y8FI/mqdefault.jpg"
+  },
+  {
+    "id": 1648,
+    "title": "#44 Python Tutorial for Beginners | Decorators",
+    "description": "#44 Python Tutorial for Beginners | Decorators",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "yNzxXZfkLUA",
+    "thumbnail": "https://img.youtube.com/vi/yNzxXZfkLUA/mqdefault.jpg"
+  },
+  {
+    "id": 1649,
+    "title": "#45 Python Tutorial for Beginners | Modules",
+    "description": "#45 Python Tutorial for Beginners | Modules",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "1RuMJ53CKds",
+    "thumbnail": "https://img.youtube.com/vi/1RuMJ53CKds/mqdefault.jpg"
+  },
+  {
+    "id": 1650,
+    "title": "#46 Python Tutorial for Beginners | Special Variable __name__",
+    "description": "#46 Python Tutorial for Beginners | Special Variable __name__",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "pzNISmtmzcY",
+    "thumbnail": "https://img.youtube.com/vi/pzNISmtmzcY/mqdefault.jpg"
+  },
+  {
+    "id": 1651,
+    "title": "#47 Python Tutorial for Beginners | Special Variable __name__ part 2",
+    "description": "#47 Python Tutorial for Beginners | Special Variable __name__ part 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "7hjgRn-vfVQ",
+    "thumbnail": "https://img.youtube.com/vi/7hjgRn-vfVQ/mqdefault.jpg"
+  },
+  {
+    "id": 1652,
+    "title": "#48 Python Tutorial for Beginners | Object Oriented Programming | Introduction",
+    "description": "#48 Python Tutorial for Beginners | Object Oriented Programming | Introduction",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "gZwPdqC2Os0",
+    "thumbnail": "https://img.youtube.com/vi/gZwPdqC2Os0/mqdefault.jpg"
+  },
+  {
+    "id": 1653,
+    "title": "#49 Python Tutorial for Beginners | Class and Object",
+    "description": "#49 Python Tutorial for Beginners | Class and Object",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "8O5kX73OkIY",
+    "thumbnail": "https://img.youtube.com/vi/8O5kX73OkIY/mqdefault.jpg"
+  },
+  {
+    "id": 1654,
+    "title": "#50 Python Tutorial for Beginners | __init__ method",
+    "description": "#50 Python Tutorial for Beginners | __init__ method",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "WIP3-woodlU",
+    "thumbnail": "https://img.youtube.com/vi/WIP3-woodlU/mqdefault.jpg"
+  },
+  {
+    "id": 1655,
+    "title": "#51 Python Tutorial for Beginners | Constructor, Self and Comparing Objects",
+    "description": "#51 Python Tutorial for Beginners | Constructor, Self and Comparing Objects",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ic6wdPxcHc0",
+    "thumbnail": "https://img.youtube.com/vi/ic6wdPxcHc0/mqdefault.jpg"
+  },
+  {
+    "id": 1656,
+    "title": "#52 Python Tutorial for Beginners | Types of Variables",
+    "description": "#52 Python Tutorial for Beginners | Types of Variables",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "RSQjxL5WRNM",
+    "thumbnail": "https://img.youtube.com/vi/RSQjxL5WRNM/mqdefault.jpg"
+  },
+  {
+    "id": 1657,
+    "title": "#53 Python Tutorial for Beginners | Types of Methods",
+    "description": "#53 Python Tutorial for Beginners | Types of Methods",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "lVfGQOzzRCM",
+    "thumbnail": "https://img.youtube.com/vi/lVfGQOzzRCM/mqdefault.jpg"
+  },
+  {
+    "id": 1658,
+    "title": "#54 Python Tutorial for Beginners | Inner class",
+    "description": "#54 Python Tutorial for Beginners | Inner class",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "b7JzgybKvys",
+    "thumbnail": "https://img.youtube.com/vi/b7JzgybKvys/mqdefault.jpg"
+  },
+  {
+    "id": 1659,
+    "title": "#55 Python Tutorial for Beginners | Inheritance",
+    "description": "#55 Python Tutorial for Beginners | Inheritance",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Cn7AkDb4pIU",
+    "thumbnail": "https://img.youtube.com/vi/Cn7AkDb4pIU/mqdefault.jpg"
+  },
+  {
+    "id": 1660,
+    "title": "#56 Python Tutorial for Beginners | Constructor in Inheritance",
+    "description": "#56 Python Tutorial for Beginners | Constructor in Inheritance",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "6P-P879BcHQ",
+    "thumbnail": "https://img.youtube.com/vi/6P-P879BcHQ/mqdefault.jpg"
+  },
+  {
+    "id": 1661,
+    "title": "#57 Python Tutorial for Beginners | Introduction to Polymorphism",
+    "description": "#57 Python Tutorial for Beginners | Introduction to Polymorphism",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "P1vH3Pfw6BI",
+    "thumbnail": "https://img.youtube.com/vi/P1vH3Pfw6BI/mqdefault.jpg"
+  },
+  {
+    "id": 1662,
+    "title": "#58 Python Tutorial for Beginners | Duck Typing",
+    "description": "#58 Python Tutorial for Beginners | Duck Typing",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "CuK0g8OFzwo",
+    "thumbnail": "https://img.youtube.com/vi/CuK0g8OFzwo/mqdefault.jpg"
+  },
+  {
+    "id": 1663,
+    "title": "#59 Python Tutorial for Beginners | Operator Overloading | Polymorphism",
+    "description": "#59 Python Tutorial for Beginners | Operator Overloading | Polymorphism",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "9wd50TKv_OQ",
+    "thumbnail": "https://img.youtube.com/vi/9wd50TKv_OQ/mqdefault.jpg"
+  },
+  {
+    "id": 1664,
+    "title": "#60 Python Tutorial for Beginners | Method Overloading and Method Overriding",
+    "description": "#60 Python Tutorial for Beginners | Method Overloading and Method Overriding",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "CcTzTuIsoFk",
+    "thumbnail": "https://img.youtube.com/vi/CcTzTuIsoFk/mqdefault.jpg"
+  },
+  {
+    "id": 1665,
+    "title": "Abstract Class and Abstract Method in Python",
+    "description": "Abstract Class and Abstract Method in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "UDmJGvM-OUw",
+    "thumbnail": "https://img.youtube.com/vi/UDmJGvM-OUw/mqdefault.jpg"
+  },
+  {
+    "id": 1666,
+    "title": "#61 Python Tutorial for Beginners | Iterator",
+    "description": "#61 Python Tutorial for Beginners | Iterator",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Dyu08G2l71c",
+    "thumbnail": "https://img.youtube.com/vi/Dyu08G2l71c/mqdefault.jpg"
+  },
+  {
+    "id": 1667,
+    "title": "#62 Python Tutorial for Beginners | Generators",
+    "description": "#62 Python Tutorial for Beginners | Generators",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "mziIj4M_uwk",
+    "thumbnail": "https://img.youtube.com/vi/mziIj4M_uwk/mqdefault.jpg"
+  },
+  {
+    "id": 1668,
+    "title": "#63 Python Tutorial for Beginners | Exception Handling",
+    "description": "#63 Python Tutorial for Beginners | Exception Handling",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "6SPDvPK38tw",
+    "thumbnail": "https://img.youtube.com/vi/6SPDvPK38tw/mqdefault.jpg"
+  },
+  {
+    "id": 1669,
+    "title": "#64 Python Tutorial for Beginners | MultiThreading",
+    "description": "#64 Python Tutorial for Beginners | MultiThreading",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "GqHLztqy0PU",
+    "thumbnail": "https://img.youtube.com/vi/GqHLztqy0PU/mqdefault.jpg"
+  },
+  {
+    "id": 1670,
+    "title": "#65 Python Tutorial for Beginners | File handling",
+    "description": "#65 Python Tutorial for Beginners | File handling",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "aequTxAvQq4",
+    "thumbnail": "https://img.youtube.com/vi/aequTxAvQq4/mqdefault.jpg"
+  },
+  {
+    "id": 1671,
+    "title": "#66 Python Tutorial for Beginners | Comments",
+    "description": "#66 Python Tutorial for Beginners | Comments",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ECxZtt6n90E",
+    "thumbnail": "https://img.youtube.com/vi/ECxZtt6n90E/mqdefault.jpg"
+  },
+  {
+    "id": 1672,
+    "title": "#67 Python Tutorial for Beginners | is Python Compiled or Interpreted Language?",
+    "description": "#67 Python Tutorial for Beginners | is Python Compiled or Interpreted Language?",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "0BhSWyDEDC4",
+    "thumbnail": "https://img.youtube.com/vi/0BhSWyDEDC4/mqdefault.jpg"
+  },
+  {
+    "id": 1673,
+    "title": "Linear Search using Python | Python Tutorial for Beginners 68",
+    "description": "Linear Search using Python | Python Tutorial for Beginners 68",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "UldZOLylez4",
+    "thumbnail": "https://img.youtube.com/vi/UldZOLylez4/mqdefault.jpg"
+  },
+  {
+    "id": 1674,
+    "title": "#69 Python Tutorial for Beginners | Binary Search Using Python",
+    "description": "#69 Python Tutorial for Beginners | Binary Search Using Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "DE-ye0t0oxE",
+    "thumbnail": "https://img.youtube.com/vi/DE-ye0t0oxE/mqdefault.jpg"
+  },
+  {
+    "id": 1675,
+    "title": "#70 Python Tutorial for Beginners | Bubble Sort in python | List Sort",
+    "description": "#70 Python Tutorial for Beginners | Bubble Sort in python | List Sort",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Vca808JTbI8",
+    "thumbnail": "https://img.youtube.com/vi/Vca808JTbI8/mqdefault.jpg"
+  },
+  {
+    "id": 1676,
+    "title": "#71 Python Tutorial for Beginners | Selection Sort using Python",
+    "description": "#71 Python Tutorial for Beginners | Selection Sort using Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "5KjapFQNxUo",
+    "thumbnail": "https://img.youtube.com/vi/5KjapFQNxUo/mqdefault.jpg"
+  },
+  {
+    "id": 1677,
+    "title": "#72 MySQL Workbench Setup | Python Database Connection",
+    "description": "#72 MySQL Workbench Setup | Python Database Connection",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "WDEyt2VHpj4",
+    "thumbnail": "https://img.youtube.com/vi/WDEyt2VHpj4/mqdefault.jpg"
+  },
+  {
+    "id": 1678,
+    "title": "#73 Python Database Connection | MySQL",
+    "description": "#73 Python Database Connection | MySQL",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "vR5utJvN4JY",
+    "thumbnail": "https://img.youtube.com/vi/vR5utJvN4JY/mqdefault.jpg"
+  },
+  {
+    "id": 1679,
+    "title": "#74 Python | Git | PyCharm | GitHub",
+    "description": "#74 Python | Git | PyCharm | GitHub",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "UBLONzkmReE",
+    "thumbnail": "https://img.youtube.com/vi/UBLONzkmReE/mqdefault.jpg"
+  },
+  {
+    "id": 1680,
+    "title": "#75 Python Tutorial for Beginners |  Python GitHub Code Contribution",
+    "description": "#75 Python Tutorial for Beginners |  Python GitHub Code Contribution",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "udO6gSLXujU",
+    "thumbnail": "https://img.youtube.com/vi/udO6gSLXujU/mqdefault.jpg"
+  },
+  {
+    "id": 1681,
+    "title": "Zip Function in Python",
+    "description": "Zip Function in Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "qj-V2Ep4coY",
+    "thumbnail": "https://img.youtube.com/vi/qj-V2Ep4coY/mqdefault.jpg"
+  },
+  {
+    "id": 1682,
+    "title": "Socket Programming Using Python",
+    "description": "Socket Programming Using Python",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "u4kr7EFxAKk",
+    "thumbnail": "https://img.youtube.com/vi/u4kr7EFxAKk/mqdefault.jpg"
+  },
+  {
+    "id": 1683,
+    "title": "#76 Python Tutorial for Beginners |  Anaconda Setup",
+    "description": "#76 Python Tutorial for Beginners |  Anaconda Setup",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "kU_ZtZhmmEU",
+    "thumbnail": "https://img.youtube.com/vi/kU_ZtZhmmEU/mqdefault.jpg"
+  },
+  {
+    "id": 1684,
+    "title": "#77 Python Tutorial for Beginners |  Jupyter Notebook Setup",
+    "description": "#77 Python Tutorial for Beginners |  Jupyter Notebook Setup",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "5NU6w5VhmMc",
+    "thumbnail": "https://img.youtube.com/vi/5NU6w5VhmMc/mqdefault.jpg"
+  },
+  {
+    "id": 1685,
+    "title": "What after Python?",
+    "description": "What after Python?",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "6-F7nP1DwJs",
+    "thumbnail": "https://img.youtube.com/vi/6-F7nP1DwJs/mqdefault.jpg"
+  },
+  {
+    "id": 1686,
+    "title": "#1 Django tutorials | What is Django? | Python Web Framework",
+    "description": "#1 Django tutorials | What is Django? | Python Web Framework",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "SIyxjRJ8VNY",
+    "thumbnail": "https://img.youtube.com/vi/SIyxjRJ8VNY/mqdefault.jpg"
+  },
+  {
+    "id": 1687,
+    "title": "#2 Django tutorials | Setup",
+    "description": "#2 Django tutorials | Setup",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "VuETrwKYLTM",
+    "thumbnail": "https://img.youtube.com/vi/VuETrwKYLTM/mqdefault.jpg"
+  },
+  {
+    "id": 1688,
+    "title": "#3 Django tutorials | First App in Django - part 1",
+    "description": "#3 Django tutorials | First App in Django - part 1",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ykpuyNy5oUM",
+    "thumbnail": "https://img.youtube.com/vi/ykpuyNy5oUM/mqdefault.jpg"
+  },
+  {
+    "id": 1689,
+    "title": "#4 Django tutorials | First App Django - part 2",
+    "description": "#4 Django tutorials | First App Django - part 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "4UMs7DxWn_Q",
+    "thumbnail": "https://img.youtube.com/vi/4UMs7DxWn_Q/mqdefault.jpg"
+  },
+  {
+    "id": 1690,
+    "title": "#5 Django tutorials | Django Template Language | DTL",
+    "description": "#5 Django tutorials | Django Template Language | DTL",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "GNlIe5zvBeQ",
+    "thumbnail": "https://img.youtube.com/vi/GNlIe5zvBeQ/mqdefault.jpg"
+  },
+  {
+    "id": 1691,
+    "title": "#6 Django tutorials | Django Template Language - part 2",
+    "description": "#6 Django tutorials | Django Template Language - part 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Kz-G6GnumsI",
+    "thumbnail": "https://img.youtube.com/vi/Kz-G6GnumsI/mqdefault.jpg"
+  },
+  {
+    "id": 1692,
+    "title": "#7 Django tutorials | Addition of Two Numbers in Django",
+    "description": "#7 Django tutorials | Addition of Two Numbers in Django",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "_xBMAoDfydg",
+    "thumbnail": "https://img.youtube.com/vi/_xBMAoDfydg/mqdefault.jpg"
+  },
+  {
+    "id": 1693,
+    "title": "#8 Django tutorials | GET vs POST | HTTP Methods",
+    "description": "#8 Django tutorials | GET vs POST | HTTP Methods",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "QD4GlXtf-WU",
+    "thumbnail": "https://img.youtube.com/vi/QD4GlXtf-WU/mqdefault.jpg"
+  },
+  {
+    "id": 1694,
+    "title": "#9 Django tutorials | Model View Template in Django | MVT",
+    "description": "#9 Django tutorials | Model View Template in Django | MVT",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "GGkFg52Ot5o",
+    "thumbnail": "https://img.youtube.com/vi/GGkFg52Ot5o/mqdefault.jpg"
+  },
+  {
+    "id": 1695,
+    "title": "#10 Django tutorials | Static Files - 1",
+    "description": "#10 Django tutorials | Static Files - 1",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "K8Uem148uOU",
+    "thumbnail": "https://img.youtube.com/vi/K8Uem148uOU/mqdefault.jpg"
+  },
+  {
+    "id": 1696,
+    "title": "#11 Django tutorials | Static Files - 2",
+    "description": "#11 Django tutorials | Static Files - 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Tt3mgy2ECug",
+    "thumbnail": "https://img.youtube.com/vi/Tt3mgy2ECug/mqdefault.jpg"
+  },
+  {
+    "id": 1697,
+    "title": "#12 Django tutorials | Passing Dynamic Data in Html part 1",
+    "description": "#12 Django tutorials | Passing Dynamic Data in Html part 1",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Huk9tIRD_rQ",
+    "thumbnail": "https://img.youtube.com/vi/Huk9tIRD_rQ/mqdefault.jpg"
+  },
+  {
+    "id": 1698,
+    "title": "#13 Django tutorials | Passing Dynamic Data in Html - part 2",
+    "description": "#13 Django tutorials | Passing Dynamic Data in Html - part 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "cHBn87eRFwo",
+    "thumbnail": "https://img.youtube.com/vi/cHBn87eRFwo/mqdefault.jpg"
+  },
+  {
+    "id": 1699,
+    "title": "#14 Django tutorials | If Statement",
+    "description": "#14 Django tutorials | If Statement",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "nuW0o4-dSpo",
+    "thumbnail": "https://img.youtube.com/vi/nuW0o4-dSpo/mqdefault.jpg"
+  },
+  {
+    "id": 1700,
+    "title": "#15 Django tutorials | ORM | Object Relational Mapper | Theory",
+    "description": "#15 Django tutorials | ORM | Object Relational Mapper | Theory",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "7E1M1W9o7PA",
+    "thumbnail": "https://img.youtube.com/vi/7E1M1W9o7PA/mqdefault.jpg"
+  },
+  {
+    "id": 1701,
+    "title": "#16 Django tutorials | Postgres and PgAdmin Setup",
+    "description": "#16 Django tutorials | Postgres and PgAdmin Setup",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "d--mEqEUybA",
+    "thumbnail": "https://img.youtube.com/vi/d--mEqEUybA/mqdefault.jpg"
+  },
+  {
+    "id": 1702,
+    "title": "#17 Django tutorials | Models and Migrations",
+    "description": "#17 Django tutorials | Models and Migrations",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "69YkZqZgz9s",
+    "thumbnail": "https://img.youtube.com/vi/69YkZqZgz9s/mqdefault.jpg"
+  },
+  {
+    "id": 1703,
+    "title": "#18 Django tutorials | Re-Migration",
+    "description": "#18 Django tutorials | Re-Migration",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "sU7_reASCAw",
+    "thumbnail": "https://img.youtube.com/vi/sU7_reASCAw/mqdefault.jpg"
+  },
+  {
+    "id": 1704,
+    "title": "#19 Django tutorials | Admin Panel",
+    "description": "#19 Django tutorials | Admin Panel",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "iLhcV7t3zug",
+    "thumbnail": "https://img.youtube.com/vi/iLhcV7t3zug/mqdefault.jpg"
+  },
+  {
+    "id": 1705,
+    "title": "#20 Django tutorials | Add and Fetch data from Database",
+    "description": "#20 Django tutorials | Add and Fetch data from Database",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "ExTaxRmDnP8",
+    "thumbnail": "https://img.youtube.com/vi/ExTaxRmDnP8/mqdefault.jpg"
+  },
+  {
+    "id": 1706,
+    "title": "#21 Django tutorials | User Registration - 1",
+    "description": "#21 Django tutorials | User Registration - 1",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "6Q5OVCKufBU",
+    "thumbnail": "https://img.youtube.com/vi/6Q5OVCKufBU/mqdefault.jpg"
+  },
+  {
+    "id": 1707,
+    "title": "#22 Django tutorials | User Registration - 2",
+    "description": "#22 Django tutorials | User Registration - 2",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "JXBCw_4gwc0",
+    "thumbnail": "https://img.youtube.com/vi/JXBCw_4gwc0/mqdefault.jpg"
+  },
+  {
+    "id": 1708,
+    "title": "#23 Django tutorials | Passing Messages",
+    "description": "#23 Django tutorials | Passing Messages",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "Mf_97YaUKag",
+    "thumbnail": "https://img.youtube.com/vi/Mf_97YaUKag/mqdefault.jpg"
+  },
+  {
+    "id": 1709,
+    "title": "#24 Django tutorials | User login",
+    "description": "#24 Django tutorials | User login",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "teaeVbcT9BI",
+    "thumbnail": "https://img.youtube.com/vi/teaeVbcT9BI/mqdefault.jpg"
+  },
+  {
+    "id": 1710,
+    "title": "#25 Django Tutorials | User Logout",
+    "description": "#25 Django Tutorials | User Logout",
+    "grade": "Grade Python",
+    "subject": "Python 102",
+    "youtubeId": "iT15mk4y1iw",
+    "thumbnail": "https://img.youtube.com/vi/iT15mk4y1iw/mqdefault.jpg"
+  },
+  {
+    "id": 1711,
+    "title": "Solving Real-Life Problems in Excel",
+    "description": "Solving Real-Life Problems in Excel",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "5mMAGcZaItg",
+    "thumbnail": "https://img.youtube.com/vi/5mMAGcZaItg/mqdefault.jpg"
+  },
+  {
+    "id": 1712,
+    "title": "Excel: Getting Started",
+    "description": "Excel: Getting Started",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "lgIWIPDJuPo",
+    "thumbnail": "https://img.youtube.com/vi/lgIWIPDJuPo/mqdefault.jpg"
+  },
+  {
+    "id": 1713,
+    "title": "Excel: Creating and Opening Workbooks",
+    "description": "Excel: Creating and Opening Workbooks",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "EBGrJckHadw",
+    "thumbnail": "https://img.youtube.com/vi/EBGrJckHadw/mqdefault.jpg"
+  },
+  {
+    "id": 1714,
+    "title": "Excel: Saving and Sharing",
+    "description": "Excel: Saving and Sharing",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "IwSC5LUm5HE",
+    "thumbnail": "https://img.youtube.com/vi/IwSC5LUm5HE/mqdefault.jpg"
+  },
+  {
+    "id": 1715,
+    "title": "Excel: Cell Basics",
+    "description": "Excel: Cell Basics",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "6mSKsaquTAM",
+    "thumbnail": "https://img.youtube.com/vi/6mSKsaquTAM/mqdefault.jpg"
+  },
+  {
+    "id": 1716,
+    "title": "Excel: Modifying Columns, Rows, and Cells",
+    "description": "Excel: Modifying Columns, Rows, and Cells",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "9s0OdXiuqL0",
+    "thumbnail": "https://img.youtube.com/vi/9s0OdXiuqL0/mqdefault.jpg"
+  },
+  {
+    "id": 1717,
+    "title": "Excel: Formatting Cells",
+    "description": "Excel: Formatting Cells",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "etAMC0KRuBE",
+    "thumbnail": "https://img.youtube.com/vi/etAMC0KRuBE/mqdefault.jpg"
+  },
+  {
+    "id": 1718,
+    "title": "Excel: Understanding Number Formats",
+    "description": "Excel: Understanding Number Formats",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "fjyOG7Ls7BA",
+    "thumbnail": "https://img.youtube.com/vi/fjyOG7Ls7BA/mqdefault.jpg"
+  },
+  {
+    "id": 1719,
+    "title": "Excel: Working with Multiple Worksheets",
+    "description": "Excel: Working with Multiple Worksheets",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "qRShQc-v3LI",
+    "thumbnail": "https://img.youtube.com/vi/qRShQc-v3LI/mqdefault.jpg"
+  },
+  {
+    "id": 1720,
+    "title": "Excel: Using Find and Replace",
+    "description": "Excel: Using Find and Replace",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "hmizmgOjNYo",
+    "thumbnail": "https://img.youtube.com/vi/hmizmgOjNYo/mqdefault.jpg"
+  },
+  {
+    "id": 1721,
+    "title": "Excel: Page Layout and Printing",
+    "description": "Excel: Page Layout and Printing",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "8XcFTeCu98k",
+    "thumbnail": "https://img.youtube.com/vi/8XcFTeCu98k/mqdefault.jpg"
+  },
+  {
+    "id": 1722,
+    "title": "Excel: Intro to Formulas",
+    "description": "Excel: Intro to Formulas",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "xc14gFFyiTw",
+    "thumbnail": "https://img.youtube.com/vi/xc14gFFyiTw/mqdefault.jpg"
+  },
+  {
+    "id": 1723,
+    "title": "Excel: Creating More Complex Formulas",
+    "description": "Excel: Creating More Complex Formulas",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "J-W3thqtDpQ",
+    "thumbnail": "https://img.youtube.com/vi/J-W3thqtDpQ/mqdefault.jpg"
+  },
+  {
+    "id": 1724,
+    "title": "Excel: Relative and Absolute Cell References",
+    "description": "Excel: Relative and Absolute Cell References",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "iDg9s7BJ2m4",
+    "thumbnail": "https://img.youtube.com/vi/iDg9s7BJ2m4/mqdefault.jpg"
+  },
+  {
+    "id": 1725,
+    "title": "Excel: Functions",
+    "description": "Excel: Functions",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "-9d4m79twdA",
+    "thumbnail": "https://img.youtube.com/vi/-9d4m79twdA/mqdefault.jpg"
+  },
+  {
+    "id": 1726,
+    "title": "Excel: Freeze Panes and View Options",
+    "description": "Excel: Freeze Panes and View Options",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "zuhsUNBeNHw",
+    "thumbnail": "https://img.youtube.com/vi/zuhsUNBeNHw/mqdefault.jpg"
+  },
+  {
+    "id": 1727,
+    "title": "Excel: Sorting Data",
+    "description": "Excel: Sorting Data",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "Ep5q1cUhQas",
+    "thumbnail": "https://img.youtube.com/vi/Ep5q1cUhQas/mqdefault.jpg"
+  },
+  {
+    "id": 1728,
+    "title": "Excel: Filtering Data",
+    "description": "Excel: Filtering Data",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "_OdsZR_rL1U",
+    "thumbnail": "https://img.youtube.com/vi/_OdsZR_rL1U/mqdefault.jpg"
+  },
+  {
+    "id": 1729,
+    "title": "Excel: Groups and Subtotals",
+    "description": "Excel: Groups and Subtotals",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "7JJOBFSHbZk",
+    "thumbnail": "https://img.youtube.com/vi/7JJOBFSHbZk/mqdefault.jpg"
+  },
+  {
+    "id": 1730,
+    "title": "Excel: Tables",
+    "description": "Excel: Tables",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "iroIA8_3soo",
+    "thumbnail": "https://img.youtube.com/vi/iroIA8_3soo/mqdefault.jpg"
+  },
+  {
+    "id": 1731,
+    "title": "Excel: Charts",
+    "description": "Excel: Charts",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "_Wu7jYTr1Pk",
+    "thumbnail": "https://img.youtube.com/vi/_Wu7jYTr1Pk/mqdefault.jpg"
+  },
+  {
+    "id": 1732,
+    "title": "Excel: Conditional Formatting",
+    "description": "Excel: Conditional Formatting",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "zfQ8uOBoIj8",
+    "thumbnail": "https://img.youtube.com/vi/zfQ8uOBoIj8/mqdefault.jpg"
+  },
+  {
+    "id": 1733,
+    "title": "Excel: Comments and Co-authoring",
+    "description": "Excel: Comments and Co-authoring",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "eK23Fzttlyo",
+    "thumbnail": "https://img.youtube.com/vi/eK23Fzttlyo/mqdefault.jpg"
+  },
+  {
+    "id": 1734,
+    "title": "Excel: Inspecting and Protecting Workbooks",
+    "description": "Excel: Inspecting and Protecting Workbooks",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "fsXS_VSuBvs",
+    "thumbnail": "https://img.youtube.com/vi/fsXS_VSuBvs/mqdefault.jpg"
+  },
+  {
+    "id": 1735,
+    "title": "Excel: Intro to PivotTables",
+    "description": "Excel: Intro to PivotTables",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "N4K3xjM76kI",
+    "thumbnail": "https://img.youtube.com/vi/N4K3xjM76kI/mqdefault.jpg"
+  },
+  {
+    "id": 1736,
+    "title": "Excel: Doing More with PivotTables",
+    "description": "Excel: Doing More with PivotTables",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "FVzX4I88DBs",
+    "thumbnail": "https://img.youtube.com/vi/FVzX4I88DBs/mqdefault.jpg"
+  },
+  {
+    "id": 1737,
+    "title": "Excel: What-if Analysis",
+    "description": "Excel: What-if Analysis",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "STTYxT6iFio",
+    "thumbnail": "https://img.youtube.com/vi/STTYxT6iFio/mqdefault.jpg"
+  },
+  {
+    "id": 1738,
+    "title": "Excel Quick Tip: Add the Current Date to a Cell",
+    "description": "Excel Quick Tip: Add the Current Date to a Cell",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "LLmSAQ2PgVc",
+    "thumbnail": "https://img.youtube.com/vi/LLmSAQ2PgVc/mqdefault.jpg"
+  },
+  {
+    "id": 1739,
+    "title": "Excel Quick Tip: A Faster Way to Use the Fill Handle",
+    "description": "Excel Quick Tip: A Faster Way to Use the Fill Handle",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "Ww56q-BSSXw",
+    "thumbnail": "https://img.youtube.com/vi/Ww56q-BSSXw/mqdefault.jpg"
+  },
+  {
+    "id": 1740,
+    "title": "Excel Quick Tip: Two Ways to Use the Format Painter",
+    "description": "Excel Quick Tip: Two Ways to Use the Format Painter",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "LHSJJvkVrvA",
+    "thumbnail": "https://img.youtube.com/vi/LHSJJvkVrvA/mqdefault.jpg"
+  },
+  {
+    "id": 1741,
+    "title": "Excel Quick Tip: A Shortcut to AutoSum",
+    "description": "Excel Quick Tip: A Shortcut to AutoSum",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "4MxeY2m-hcI",
+    "thumbnail": "https://img.youtube.com/vi/4MxeY2m-hcI/mqdefault.jpg"
+  },
+  {
+    "id": 1742,
+    "title": "Excel Quick Tip: Quick Access Toolbar Shortcuts",
+    "description": "Excel Quick Tip: Quick Access Toolbar Shortcuts",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "fu9csgkl2Cc",
+    "thumbnail": "https://img.youtube.com/vi/fu9csgkl2Cc/mqdefault.jpg"
+  },
+  {
+    "id": 1743,
+    "title": "Excel Quick Tip: How to Quickly Duplicate a Sheet",
+    "description": "Excel Quick Tip: How to Quickly Duplicate a Sheet",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "wfswE2N-WyM",
+    "thumbnail": "https://img.youtube.com/vi/wfswE2N-WyM/mqdefault.jpg"
+  },
+  {
+    "id": 1744,
+    "title": "Excel Quick Tip: Jump to Any Sheet with a Shortcut",
+    "description": "Excel Quick Tip: Jump to Any Sheet with a Shortcut",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "OaC5PA5EVlM",
+    "thumbnail": "https://img.youtube.com/vi/OaC5PA5EVlM/mqdefault.jpg"
+  },
+  {
+    "id": 1745,
+    "title": "Excel Quick Tip: Select an Entire Row or Column",
+    "description": "Excel Quick Tip: Select an Entire Row or Column",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "Sy0II4ehFmM",
+    "thumbnail": "https://img.youtube.com/vi/Sy0II4ehFmM/mqdefault.jpg"
+  },
+  {
+    "id": 1746,
+    "title": "Excel Quick Tip: Find a Sum Without Using a Formula",
+    "description": "Excel Quick Tip: Find a Sum Without Using a Formula",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "De13B8sjebY",
+    "thumbnail": "https://img.youtube.com/vi/De13B8sjebY/mqdefault.jpg"
+  },
+  {
+    "id": 1747,
+    "title": "Excel Quick Tip: Why You Should Avoid Merging Cells",
+    "description": "Excel Quick Tip: Why You Should Avoid Merging Cells",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "8pRpG10X0UM",
+    "thumbnail": "https://img.youtube.com/vi/8pRpG10X0UM/mqdefault.jpg"
+  },
+  {
+    "id": 1748,
+    "title": "Excel Quick Tip: Using the Quick Analysis Tool",
+    "description": "Excel Quick Tip: Using the Quick Analysis Tool",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "l9m_nnJPA5o",
+    "thumbnail": "https://img.youtube.com/vi/l9m_nnJPA5o/mqdefault.jpg"
+  },
+  {
+    "id": 1749,
+    "title": "Excel Quick Tip: How to Make Charts Auto Update",
+    "description": "Excel Quick Tip: How to Make Charts Auto Update",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "a1osBWySSvk",
+    "thumbnail": "https://img.youtube.com/vi/a1osBWySSvk/mqdefault.jpg"
+  },
+  {
+    "id": 1750,
+    "title": "Excel Quick Tip: Use Transpose to Flip Data on its Side",
+    "description": "Excel Quick Tip: Use Transpose to Flip Data on its Side",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "IiuPdvjZfE4",
+    "thumbnail": "https://img.youtube.com/vi/IiuPdvjZfE4/mqdefault.jpg"
+  },
+  {
+    "id": 1751,
+    "title": "Excel Quick Tip: Absolute References with the F4 Key",
+    "description": "Excel Quick Tip: Absolute References with the F4 Key",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "SVPlRHK-XbI",
+    "thumbnail": "https://img.youtube.com/vi/SVPlRHK-XbI/mqdefault.jpg"
+  },
+  {
+    "id": 1752,
+    "title": "Excel Quick Tip: Add a New Row with a Shortcut",
+    "description": "Excel Quick Tip: Add a New Row with a Shortcut",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "RiGI5Z6vO_g",
+    "thumbnail": "https://img.youtube.com/vi/RiGI5Z6vO_g/mqdefault.jpg"
+  },
+  {
+    "id": 1753,
+    "title": "Excel Quick Tip: Use an Entire Column as a Cell Range",
+    "description": "Excel Quick Tip: Use an Entire Column as a Cell Range",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "7IFGingUNMI",
+    "thumbnail": "https://img.youtube.com/vi/7IFGingUNMI/mqdefault.jpg"
+  },
+  {
+    "id": 1754,
+    "title": "Excel Quick Tip: What are Named Ranges?",
+    "description": "Excel Quick Tip: What are Named Ranges?",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "7CHRJZ0Ryvw",
+    "thumbnail": "https://img.youtube.com/vi/7CHRJZ0Ryvw/mqdefault.jpg"
+  },
+  {
+    "id": 1755,
+    "title": "Excel Quick Tip: A Trick for Finding Inconsistent Data",
+    "description": "Excel Quick Tip: A Trick for Finding Inconsistent Data",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "Di7cvfPnqwo",
+    "thumbnail": "https://img.youtube.com/vi/Di7cvfPnqwo/mqdefault.jpg"
+  },
+  {
+    "id": 1756,
+    "title": "Office: Working with Icons",
+    "description": "Office: Working with Icons",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "c_vNW0q-HEE",
+    "thumbnail": "https://img.youtube.com/vi/c_vNW0q-HEE/mqdefault.jpg"
+  },
+  {
+    "id": 1757,
+    "title": "What's New in Office 2019",
+    "description": "What's New in Office 2019",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "ndaD7GLITmA",
+    "thumbnail": "https://img.youtube.com/vi/ndaD7GLITmA/mqdefault.jpg"
+  },
+  {
+    "id": 1758,
+    "title": "What is Office 365?",
+    "description": "What is Office 365?",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "LKLnpVmwifc",
+    "thumbnail": "https://img.youtube.com/vi/LKLnpVmwifc/mqdefault.jpg"
+  },
+  {
+    "id": 1759,
+    "title": "Office: Using the Draw Tab",
+    "description": "Office: Using the Draw Tab",
+    "grade": "Grade Excel",
+    "subject": "Excel 101",
+    "youtubeId": "L4TPfHitbKI",
+    "thumbnail": "https://img.youtube.com/vi/L4TPfHitbKI/mqdefault.jpg"
+  }
 ]
 }
