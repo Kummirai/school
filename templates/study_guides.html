@@ -487,30 +487,80 @@
       element.style.display = "none";
     }
   }
-  function validateFractionAnswers(setId, answers) {
-    let allCorrect = true;
-    for (let i = 1; i <= 5; i++) {
-      const answer = document.getElementById(setId + "-q" + i).value.trim();
-      const correctAnswer = answers[i - 1];
-      const questionElement = document.getElementById(
-        setId + "-q" + i
-      ).parentNode;
-      if (answer === correctAnswer) {
-        questionElement.style.color = "green";
-      } else {
-        questionElement.style.color = "red";
-        allCorrect = false;
-      }
+ function validateFractionAnswers(setId, answers) {
+  let allCorrect = true;
+  const feedbackDiv = document.getElementById(`${setId}-feedback`);
+  
+  // Check each question in the set
+  for (let i = 0; i < answers.length; i++) {
+    // Updated ID pattern to match your HTML structure
+    const inputId = `${setId.replace('Set', '')}-q${i+1}`;
+    const inputElement = document.getElementById(inputId);
+    
+    // Check if element exists before trying to access it
+    if (!inputElement) {
+      console.error(`Element with ID ${inputId} not found`);
+      continue;
     }
-    const feedback = document.getElementById(setId + "-feedback");
-    if (allCorrect) {
-      feedback.textContent = "All answers correct!";
-      feedback.style.color = "green";
+    
+    const userAnswer = inputElement.value.trim();
+    const correctAnswer = answers[i];
+    const questionElement = inputElement.parentNode;
+    
+    // Use the compareFractions function for proper fraction comparison
+    if (compareFractions(userAnswer, correctAnswer)) {
+      inputElement.classList.remove('is-invalid');
+      inputElement.classList.add('is-valid');
+      questionElement.style.color = "green";
     } else {
-      feedback.textContent = "Some answers incorrect. Try again!";
-      feedback.style.color = "red";
+      inputElement.classList.remove('is-valid');
+      inputElement.classList.add('is-invalid');
+      questionElement.style.color = "red";
+      allCorrect = false;
     }
   }
+  
+  // Provide feedback
+  if (feedbackDiv) {
+    if (allCorrect) {
+      feedbackDiv.textContent = "All answers correct! Great job! 🎉";
+      feedbackDiv.style.color = "green";
+    } else {
+      feedbackDiv.textContent = "Some answers incorrect. Try again! 💪";
+      feedbackDiv.style.color = "red";
+    }
+  }
+}
+
+// Helper function to compare fractions (accepts equivalent fractions)
+function compareFractions(userAnswer, correctAnswer) {
+  // Handle empty answers
+  if (!userAnswer) return false;
+  
+  // Handle whole numbers
+  if (userAnswer === correctAnswer) return true;
+  
+  // Parse fractions
+  const userParts = userAnswer.split('/');
+  const correctParts = correctAnswer.split('/');
+  
+  // If not a fraction format, do direct comparison
+  if (userParts.length !== 2 || correctParts.length !== 2) {
+    return userAnswer === correctAnswer;
+  }
+  
+  // Convert to numbers
+  const userNum = parseInt(userParts[0]);
+  const userDen = parseInt(userParts[1]);
+  const correctNum = parseInt(correctParts[0]);
+  const correctDen = parseInt(correctParts[1]);
+  
+  // Check for division by zero
+  if (userDen === 0 || correctDen === 0) return false;
+  
+  // Cross multiply to check equivalence
+  return (userNum * correctDen) === (correctNum * userDen);
+}
 </script>
 
 {% endblock %}
