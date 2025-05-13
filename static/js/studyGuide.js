@@ -23,7 +23,7 @@ class StudyGuideApp {
     // Configuration
     this.config = {
       subjects: {
-        Mathematics: { icon: "bi-calculator", color: "text-primary" },
+        Mathematics: { icon: "bi-calculator", color: "text-danger" },
         "Physical Sciences": { icon: "bi-atom", color: "text-danger" },
         "Life Sciences": { icon: "bi-biohazard", color: "text-success" },
       },
