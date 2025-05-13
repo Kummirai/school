@@ -15814,6 +15814,582 @@
     "subject": "Excel 101",
     "youtubeId": "L4TPfHitbKI",
     "thumbnail": "https://img.youtube.com/vi/L4TPfHitbKI/mqdefault.jpg"
+  },
+  {
+    "id": 1760,
+    "title": "Introduction to Machine Learning for Beginners [Part 1] | Machine Learning for Beginners",
+    "description": "Introduction to Machine Learning for Beginners [Part 1] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "6mSx_KJxcHI",
+    "thumbnail": "https://img.youtube.com/vi/6mSx_KJxcHI/mqdefault.jpg"
+  },
+  {
+    "id": 1761,
+    "title": "The history of Machine Learning [Part 2] | Machine Learning for Beginners",
+    "description": "The history of Machine Learning [Part 2] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "N6wxM4wZ7V0",
+    "thumbnail": "https://img.youtube.com/vi/N6wxM4wZ7V0/mqdefault.jpg"
+  },
+  {
+    "id": 1762,
+    "title": "Techniques for Machine Learning [Part 3] | Machine Learning for Beginners",
+    "description": "Techniques for Machine Learning [Part 3] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "4NGM0U2ZSHU",
+    "thumbnail": "https://img.youtube.com/vi/4NGM0U2ZSHU/mqdefault.jpg"
+  },
+  {
+    "id": 1763,
+    "title": "Setup your tools ready to build Machine Learning models [Part 4] | Machine Learning for Beginners",
+    "description": "Setup your tools ready to build Machine Learning models [Part 4] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "-DfeD2k2Kj0",
+    "thumbnail": "https://img.youtube.com/vi/-DfeD2k2Kj0/mqdefault.jpg"
+  },
+  {
+    "id": 1764,
+    "title": "Introduction to Regression models for Machine Learning [Part 5] | Machine Learning for Beginners",
+    "description": "Introduction to Regression models for Machine Learning [Part 5] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "XA3OaoW86R8",
+    "thumbnail": "https://img.youtube.com/vi/XA3OaoW86R8/mqdefault.jpg"
+  },
+  {
+    "id": 1765,
+    "title": "Set up Jupyter Notebooks to start building regression models [Pt 6] | Machine Learning for Beginners",
+    "description": "Set up Jupyter Notebooks to start building regression models [Pt 6] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "7E-jC8FLA2E",
+    "thumbnail": "https://img.youtube.com/vi/7E-jC8FLA2E/mqdefault.jpg"
+  },
+  {
+    "id": 1766,
+    "title": "Your First Linear Regression Project in Python [Part 7] | Machine Learning for Beginners",
+    "description": "Your First Linear Regression Project in Python [Part 7] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "2xkXL5EUpS0",
+    "thumbnail": "https://img.youtube.com/vi/2xkXL5EUpS0/mqdefault.jpg"
+  },
+  {
+    "id": 1767,
+    "title": "How to Analyze and Clean a Dataset [Part 8] | Machine Learning for Beginners",
+    "description": "How to Analyze and Clean a Dataset [Part 8] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "5qGjczWTrDQ",
+    "thumbnail": "https://img.youtube.com/vi/5qGjczWTrDQ/mqdefault.jpg"
+  },
+  {
+    "id": 1768,
+    "title": "How to Visualize Data with Matplotlib [Part 9] | Machine Learning for Beginners",
+    "description": "How to Visualize Data with Matplotlib [Part 9] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "SbUkxH6IJo0",
+    "thumbnail": "https://img.youtube.com/vi/SbUkxH6IJo0/mqdefault.jpg"
+  },
+  {
+    "id": 1769,
+    "title": "Understanding Linear Regression [Part 10] | Machine Learning for Beginners",
+    "description": "Understanding Linear Regression [Part 10] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "CRxFT8oTDMg",
+    "thumbnail": "https://img.youtube.com/vi/CRxFT8oTDMg/mqdefault.jpg"
+  },
+  {
+    "id": 1770,
+    "title": "Looking for Correlation: The Key to Linear Regression [Part 11] | Machine Learning for Beginners",
+    "description": "Looking for Correlation: The Key to Linear Regression [Part 11] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "uoRq-lW2eQo",
+    "thumbnail": "https://img.youtube.com/vi/uoRq-lW2eQo/mqdefault.jpg"
+  },
+  {
+    "id": 1771,
+    "title": "Linear and Polynomial Regression using Scikit-learn [Part 12] | Machine Learning for Beginners",
+    "description": "Linear and Polynomial Regression using Scikit-learn [Part 12] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "e4c_UP2fSjg",
+    "thumbnail": "https://img.youtube.com/vi/e4c_UP2fSjg/mqdefault.jpg"
+  },
+  {
+    "id": 1772,
+    "title": "Categorical Feature Predictions with Linear Regression [Part 13] | Machine Learning for Beginners",
+    "description": "Categorical Feature Predictions with Linear Regression [Part 13] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "DYGliioIAE0",
+    "thumbnail": "https://img.youtube.com/vi/DYGliioIAE0/mqdefault.jpg"
+  },
+  {
+    "id": 1773,
+    "title": "Understanding Logistic Regression for Machine Learning Classification  [Part 14] | ML for Beginners",
+    "description": "Understanding Logistic Regression for Machine Learning Classification  [Part 14] | ML for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "KpeCT6nEpBY",
+    "thumbnail": "https://img.youtube.com/vi/KpeCT6nEpBY/mqdefault.jpg"
+  },
+  {
+    "id": 1774,
+    "title": "Data Analysis and Preparation for Logistic Regression  [Part 15] | Machine Learning for Beginners",
+    "description": "Data Analysis and Preparation for Logistic Regression  [Part 15] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "B2X4H9vcXTs",
+    "thumbnail": "https://img.youtube.com/vi/B2X4H9vcXTs/mqdefault.jpg"
+  },
+  {
+    "id": 1775,
+    "title": "Logistic Regression for classification of data [Part 16] | Machine Learning for Beginners",
+    "description": "Logistic Regression for classification of data [Part 16] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "MmZS2otPrQ8",
+    "thumbnail": "https://img.youtube.com/vi/MmZS2otPrQ8/mqdefault.jpg"
+  },
+  {
+    "id": 1776,
+    "title": "Analyzing Logistic Regression Performance with ROC Curves [Part 17] | Machine Learning for Beginners",
+    "description": "Analyzing Logistic Regression Performance with ROC Curves [Part 17] | Machine Learning for Beginners",
+    "grade": "Grade Machine Learning",
+    "subject": "Machine Learning 101",
+    "youtubeId": "GApO575jTA0",
+    "thumbnail": "https://img.youtube.com/vi/GApO575jTA0/mqdefault.jpg"
+  },
+  {
+    "id": 1777,
+    "title": "Word: Getting Started",
+    "description": "Word: Getting Started",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "j-ZAVHk5SaU",
+    "thumbnail": "https://img.youtube.com/vi/j-ZAVHk5SaU/mqdefault.jpg"
+  },
+  {
+    "id": 1778,
+    "title": "Word: Creating and Opening Documents",
+    "description": "Word: Creating and Opening Documents",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "PafCMUVH_OA",
+    "thumbnail": "https://img.youtube.com/vi/PafCMUVH_OA/mqdefault.jpg"
+  },
+  {
+    "id": 1779,
+    "title": "Word: Saving and Sharing Documents",
+    "description": "Word: Saving and Sharing Documents",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "iHuFzz7Wvt4",
+    "thumbnail": "https://img.youtube.com/vi/iHuFzz7Wvt4/mqdefault.jpg"
+  },
+  {
+    "id": 1780,
+    "title": "Word: Text Basics",
+    "description": "Word: Text Basics",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "vmEzxQfVj5c",
+    "thumbnail": "https://img.youtube.com/vi/vmEzxQfVj5c/mqdefault.jpg"
+  },
+  {
+    "id": 1781,
+    "title": "Word: Formatting Text",
+    "description": "Word: Formatting Text",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "ViGf0RKbCyA",
+    "thumbnail": "https://img.youtube.com/vi/ViGf0RKbCyA/mqdefault.jpg"
+  },
+  {
+    "id": 1782,
+    "title": "Word: Using Find and Replace",
+    "description": "Word: Using Find and Replace",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "p3Ql9y3eEyo",
+    "thumbnail": "https://img.youtube.com/vi/p3Ql9y3eEyo/mqdefault.jpg"
+  },
+  {
+    "id": 1783,
+    "title": "Word: Indents and Tabs",
+    "description": "Word: Indents and Tabs",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "vJGYWVe52T4",
+    "thumbnail": "https://img.youtube.com/vi/vJGYWVe52T4/mqdefault.jpg"
+  },
+  {
+    "id": 1784,
+    "title": "Word: Line and Paragraph Spacing",
+    "description": "Word: Line and Paragraph Spacing",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "mXWvKHWe2Co",
+    "thumbnail": "https://img.youtube.com/vi/mXWvKHWe2Co/mqdefault.jpg"
+  },
+  {
+    "id": 1785,
+    "title": "Word: Lists",
+    "description": "Word: Lists",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "tyXahko-tX8",
+    "thumbnail": "https://img.youtube.com/vi/tyXahko-tX8/mqdefault.jpg"
+  },
+  {
+    "id": 1786,
+    "title": "Word: Links",
+    "description": "Word: Links",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "fqLQ1adyrjA",
+    "thumbnail": "https://img.youtube.com/vi/fqLQ1adyrjA/mqdefault.jpg"
+  },
+  {
+    "id": 1787,
+    "title": "Word: Page Layout",
+    "description": "Word: Page Layout",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "jgNpoksYOLE",
+    "thumbnail": "https://img.youtube.com/vi/jgNpoksYOLE/mqdefault.jpg"
+  },
+  {
+    "id": 1788,
+    "title": "Word: Printing",
+    "description": "Word: Printing",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "7bLQFTCsH8Y",
+    "thumbnail": "https://img.youtube.com/vi/7bLQFTCsH8Y/mqdefault.jpg"
+  },
+  {
+    "id": 1789,
+    "title": "Word: Breaks",
+    "description": "Word: Breaks",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "78fvQ9Ks8DA",
+    "thumbnail": "https://img.youtube.com/vi/78fvQ9Ks8DA/mqdefault.jpg"
+  },
+  {
+    "id": 1790,
+    "title": "Word: Columns",
+    "description": "Word: Columns",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "X1n2VG1yxFs",
+    "thumbnail": "https://img.youtube.com/vi/X1n2VG1yxFs/mqdefault.jpg"
+  },
+  {
+    "id": 1791,
+    "title": "Word: Headers and Footers",
+    "description": "Word: Headers and Footers",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "lNdjuIYuB3o",
+    "thumbnail": "https://img.youtube.com/vi/lNdjuIYuB3o/mqdefault.jpg"
+  },
+  {
+    "id": 1792,
+    "title": "Word: Page Numbers",
+    "description": "Word: Page Numbers",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "JDqPR98mIZM",
+    "thumbnail": "https://img.youtube.com/vi/JDqPR98mIZM/mqdefault.jpg"
+  },
+  {
+    "id": 1793,
+    "title": "Word: Pictures and Text Wrapping",
+    "description": "Word: Pictures and Text Wrapping",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "sqkEDw99szg",
+    "thumbnail": "https://img.youtube.com/vi/sqkEDw99szg/mqdefault.jpg"
+  },
+  {
+    "id": 1794,
+    "title": "Word: Formatting Pictures",
+    "description": "Word: Formatting Pictures",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "eC4bRXx9k6g",
+    "thumbnail": "https://img.youtube.com/vi/eC4bRXx9k6g/mqdefault.jpg"
+  },
+  {
+    "id": 1795,
+    "title": "Word: Shapes",
+    "description": "Word: Shapes",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "uJLhMtlypbQ",
+    "thumbnail": "https://img.youtube.com/vi/uJLhMtlypbQ/mqdefault.jpg"
+  },
+  {
+    "id": 1796,
+    "title": "Word: Text Boxes",
+    "description": "Word: Text Boxes",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "slateuunUhY",
+    "thumbnail": "https://img.youtube.com/vi/slateuunUhY/mqdefault.jpg"
+  },
+  {
+    "id": 1797,
+    "title": "Word: Aligning, Ordering, and Grouping Objects",
+    "description": "Word: Aligning, Ordering, and Grouping Objects",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "FjkkN9ysjps",
+    "thumbnail": "https://img.youtube.com/vi/FjkkN9ysjps/mqdefault.jpg"
+  },
+  {
+    "id": 1798,
+    "title": "Word: Tables",
+    "description": "Word: Tables",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "XNBrCEgzddw",
+    "thumbnail": "https://img.youtube.com/vi/XNBrCEgzddw/mqdefault.jpg"
+  },
+  {
+    "id": 1799,
+    "title": "Word: Charts",
+    "description": "Word: Charts",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "kiy81vkZQww",
+    "thumbnail": "https://img.youtube.com/vi/kiy81vkZQww/mqdefault.jpg"
+  },
+  {
+    "id": 1800,
+    "title": "Word: Check Spelling and Grammar",
+    "description": "Word: Check Spelling and Grammar",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "uzrpa-gwN1A",
+    "thumbnail": "https://img.youtube.com/vi/uzrpa-gwN1A/mqdefault.jpg"
+  },
+  {
+    "id": 1801,
+    "title": "Word: Track Changes and Comments",
+    "description": "Word: Track Changes and Comments",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "m7tmsWN6uH0",
+    "thumbnail": "https://img.youtube.com/vi/m7tmsWN6uH0/mqdefault.jpg"
+  },
+  {
+    "id": 1802,
+    "title": "Word: Inspecting and Protecting Documents",
+    "description": "Word: Inspecting and Protecting Documents",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "SlpIpWe_kNI",
+    "thumbnail": "https://img.youtube.com/vi/SlpIpWe_kNI/mqdefault.jpg"
+  },
+  {
+    "id": 1803,
+    "title": "Word: SmartArt Graphics",
+    "description": "Word: SmartArt Graphics",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "Hna1uJN1-qY",
+    "thumbnail": "https://img.youtube.com/vi/Hna1uJN1-qY/mqdefault.jpg"
+  },
+  {
+    "id": 1804,
+    "title": "Word: Applying and Modifying Styles",
+    "description": "Word: Applying and Modifying Styles",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "w2lES-5Ynbk",
+    "thumbnail": "https://img.youtube.com/vi/w2lES-5Ynbk/mqdefault.jpg"
+  },
+  {
+    "id": 1805,
+    "title": "Word: Mail Merge",
+    "description": "Word: Mail Merge",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "do9ujnZLIC4",
+    "thumbnail": "https://img.youtube.com/vi/do9ujnZLIC4/mqdefault.jpg"
+  },
+  {
+    "id": 1806,
+    "title": "Word Quick Tip: Add a Self-Updating Date Stamp to Your Doc",
+    "description": "Word Quick Tip: Add a Self-Updating Date Stamp to Your Doc",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "pX5bmlRjtas",
+    "thumbnail": "https://img.youtube.com/vi/pX5bmlRjtas/mqdefault.jpg"
+  },
+  {
+    "id": 1807,
+    "title": "Word Quick Tip: Reduce Eye Strain with Read Mode",
+    "description": "Word Quick Tip: Reduce Eye Strain with Read Mode",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "Wxn3-CvtkuI",
+    "thumbnail": "https://img.youtube.com/vi/Wxn3-CvtkuI/mqdefault.jpg"
+  },
+  {
+    "id": 1808,
+    "title": "Word Quick Tip: Inserting a Screenshot with Ease",
+    "description": "Word Quick Tip: Inserting a Screenshot with Ease",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "y0hBqkDeV4U",
+    "thumbnail": "https://img.youtube.com/vi/y0hBqkDeV4U/mqdefault.jpg"
+  },
+  {
+    "id": 1809,
+    "title": "Word Quick Tip: Shortcuts for Inserting Lists",
+    "description": "Word Quick Tip: Shortcuts for Inserting Lists",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "gZM5gpdGNOU",
+    "thumbnail": "https://img.youtube.com/vi/gZM5gpdGNOU/mqdefault.jpg"
+  },
+  {
+    "id": 1810,
+    "title": "Word Quick Tip: Pick Up Where You Left Off",
+    "description": "Word Quick Tip: Pick Up Where You Left Off",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "gzKa1y3QWy8",
+    "thumbnail": "https://img.youtube.com/vi/gzKa1y3QWy8/mqdefault.jpg"
+  },
+  {
+    "id": 1811,
+    "title": "Word Quick Tip: Translate Text Instantly",
+    "description": "Word Quick Tip: Translate Text Instantly",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "OiuI9n4PHNI",
+    "thumbnail": "https://img.youtube.com/vi/OiuI9n4PHNI/mqdefault.jpg"
+  },
+  {
+    "id": 1812,
+    "title": "Word Quick Tip: Basic Shortcuts for Text Formatting",
+    "description": "Word Quick Tip: Basic Shortcuts for Text Formatting",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "1AedOTStdgQ",
+    "thumbnail": "https://img.youtube.com/vi/1AedOTStdgQ/mqdefault.jpg"
+  },
+  {
+    "id": 1813,
+    "title": "Word Quick Tip: Using the Format Painter",
+    "description": "Word Quick Tip: Using the Format Painter",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "klwtyG1Ma2M",
+    "thumbnail": "https://img.youtube.com/vi/klwtyG1Ma2M/mqdefault.jpg"
+  },
+  {
+    "id": 1814,
+    "title": "Word Quick Tip: Clear All Formatting",
+    "description": "Word Quick Tip: Clear All Formatting",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "ZCl1N-5R_z8",
+    "thumbnail": "https://img.youtube.com/vi/ZCl1N-5R_z8/mqdefault.jpg"
+  },
+  {
+    "id": 1815,
+    "title": "Word Quick Tip: Recover Unsaved Documents",
+    "description": "Word Quick Tip: Recover Unsaved Documents",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "GsmtJTlav5o",
+    "thumbnail": "https://img.youtube.com/vi/GsmtJTlav5o/mqdefault.jpg"
+  },
+  {
+    "id": 1816,
+    "title": "Word Quick Tip: Recover a Corrupted File",
+    "description": "Word Quick Tip: Recover a Corrupted File",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "Ey_O5sOW63U",
+    "thumbnail": "https://img.youtube.com/vi/Ey_O5sOW63U/mqdefault.jpg"
+  },
+  {
+    "id": 1817,
+    "title": "Word Quick Tip: Linking Within a Document",
+    "description": "Word Quick Tip: Linking Within a Document",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "cPxH-pU_GsQ",
+    "thumbnail": "https://img.youtube.com/vi/cPxH-pU_GsQ/mqdefault.jpg"
+  },
+  {
+    "id": 1818,
+    "title": "Word Quick Tips: Basic Keyboard Shortcuts",
+    "description": "Word Quick Tips: Basic Keyboard Shortcuts",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "m63W-x0OKjE",
+    "thumbnail": "https://img.youtube.com/vi/m63W-x0OKjE/mqdefault.jpg"
+  },
+  {
+    "id": 1819,
+    "title": "Office: Using the Draw Tab",
+    "description": "Office: Using the Draw Tab",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "L4TPfHitbKI",
+    "thumbnail": "https://img.youtube.com/vi/L4TPfHitbKI/mqdefault.jpg"
+  },
+  {
+    "id": 1820,
+    "title": "Office: Working with Icons",
+    "description": "Office: Working with Icons",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "c_vNW0q-HEE",
+    "thumbnail": "https://img.youtube.com/vi/c_vNW0q-HEE/mqdefault.jpg"
+  },
+  {
+    "id": 1821,
+    "title": "What's New in Office 2019",
+    "description": "What's New in Office 2019",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "ndaD7GLITmA",
+    "thumbnail": "https://img.youtube.com/vi/ndaD7GLITmA/mqdefault.jpg"
+  },
+  {
+    "id": 1822,
+    "title": "What is Office 365?",
+    "description": "What is Office 365?",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "LKLnpVmwifc",
+    "thumbnail": "https://img.youtube.com/vi/LKLnpVmwifc/mqdefault.jpg"
+  },
+  {
+    "id": 1823,
+    "title": "Microsoft 365 for Mac: What's Different?",
+    "description": "Microsoft 365 for Mac: What's Different?",
+    "grade": "Grade Ms Word",
+    "subject": "Ms Word 101",
+    "youtubeId": "1PPrZJB7Ryo",
+    "thumbnail": "https://img.youtube.com/vi/1PPrZJB7Ryo/mqdefault.jpg"
   }
 ]
 }
