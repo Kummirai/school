@@ -58,6 +58,83 @@ const QuizManager = {
       let isAnswered = false;
 
       // ... (existing validation logic) ...
+      // Handle multiple choice questions
+      if (question.querySelector(".quiz-option")) {
+        const options = question.querySelectorAll(".quiz-option");
+        let selectedOption = null;
+
+        // Check if any option was selected
+        options.forEach((opt) => {
+          if (
+            opt.classList.contains("bg-success") ||
+            opt.classList.contains("bg-danger")
+          ) {
+            selectedOption = opt;
+            isAnswered = true;
+          }
+        });
+
+        // If no option was selected, mark as unanswered
+        if (!selectedOption) {
+          results.unanswered++;
+          options.forEach((opt) => {
+            if (opt.textContent.toLowerCase().includes(answer.toLowerCase())) {
+              opt.classList.add("bg-success");
+            }
+          });
+        }
+        // If option was selected, check correctness
+        else {
+          isCorrect = selectedOption.textContent
+            .toLowerCase()
+            .includes(answer.toLowerCase());
+          if (isCorrect) {
+            results.correct++;
+          } else {
+            results.incorrect++;
+            // Highlight correct answer
+            options.forEach((opt) => {
+              if (
+                opt.textContent.toLowerCase().includes(answer.toLowerCase())
+              ) {
+                opt.classList.add("bg-success");
+              }
+            });
+          }
+        }
+      }
+      // Handle input questions
+      else if (question.querySelector("input")) {
+        const input = question.querySelector("input");
+        const userAnswer = input.value.trim();
+        isAnswered = userAnswer !== "";
+
+        input.classList.remove("is-valid", "is-invalid");
+
+        if (!isAnswered) {
+          results.unanswered++;
+          input.classList.add("is-invalid");
+          // Show correct answer
+          const correctSpan = document.createElement("span");
+          correctSpan.className = "text-success ms-2 small";
+          correctSpan.textContent = `Correct: ${answer}`;
+          question.appendChild(correctSpan);
+        } else {
+          isCorrect = userAnswer === answer;
+          if (isCorrect) {
+            results.correct++;
+            input.classList.add("is-valid");
+          } else {
+            results.incorrect++;
+            input.classList.add("is-invalid");
+            // Show correct answer
+            const correctSpan = document.createElement("span");
+            correctSpan.className = "text-success ms-2 small";
+            correctSpan.textContent = `Correct: ${answer}`;
+            question.appendChild(correctSpan);
+          }
+        }
+      }
 
       results.details.push({
         question: index + 1,
