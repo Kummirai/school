@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title">
+                        <i class="bi bi-trophy-fill text-danger me-2"></i>
+                        Practice Leaderboard
+                    </h1>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label for="subjectFilter" class="form-label">Filter by Subject:</label>
+                            <select class="form-select" id="subjectFilter">
+                                <option value="">All Subjects</option>
+                                {% for subject in available_subjects %}
+                                <option value="{{ subject }}" {% if subject == current_subject %}selected{% endif %}>
+                                    {{ subject }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="topicFilter" class="form-label">Filter by Topic:</label>
+                            <select class="form-select" id="topicFilter" {% if not current_subject %}disabled{% endif %}>
+                                <option value="">All Topics</option>
+                                {% for topic in available_topics %}
+                                <option value="{{ topic }}" {% if topic == current_topic %}selected{% endif %}>
+                                    {{ topic }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    {% if leaderboard %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Subject</th>
+                                    <th>Topic</th>
+                                    <th>Score</th>
+                                    <th>Percentage</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in leaderboard %}
+                                <tr {% if entry.username == session.username %}class="table-success"{% endif %}>
+                                    <td>{{ loop.index }}</td>
+                                    <td>
+                                        {% if entry.username == session.username %}
+                                        <strong>You</strong>
+                                        {% else %}
+                                        {{ entry.username }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ entry.subject }}</td>
+                                    <td>{{ entry.topic }}</td>
+                                    <td>{{ entry.score }}/{{ entry.total_questions }}</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar 
+                                                {% if entry.percentage >= 80 %}bg-success
+                                                {% elif entry.percentage >= 50 %}bg-warning
+                                                {% else %}bg-danger
+                                                {% endif %}" 
+                                                role="progressbar" 
+                                                style="width: {{ entry.percentage }}%" 
+                                                aria-valuenow="{{ entry.percentage }}" 
+                                                aria-valuemin="0" 
+                                                aria-valuemax="100">
+                                                {{ entry.percentage }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ entry.completed_at.strftime('%Y-%m-%d') }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-emoji-frown" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3">No results found</h3>
+                        <p>Try adjusting your filters or complete some practice questions to appear on the leaderboard.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .progress {
+        min-width: 100px;
+    }
+    .progress-bar {
+        font-size: 0.8rem;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subjectFilter = document.getElementById('subjectFilter');
+    const topicFilter = document.getElementById('topicFilter');
+    
+    subjectFilter.addEventListener('change', function() {
+        const subject = this.value;
+        let url = '/leaderboard';
+        
+        if (subject) {
+            url += `?subject=${encodeURIComponent(subject)}`;
+            
+            // If there's a topic selected that might not belong to the new subject
+            const currentTopic = topicFilter.value;
+            if (currentTopic) {
+                // We'll let the server handle invalid topic-subject combinations
+                url += `&topic=${encodeURIComponent(currentTopic)}`;
+            }
+        }
+        
+        window.location.href = url;
+    });
+    
+    topicFilter.addEventListener('change', function() {
+        const topic = this.value;
+        const subject = subjectFilter.value;
+        let url = '/leaderboard';
+        
+        if (subject) {
+            url += `?subject=${encodeURIComponent(subject)}`;
+            if (topic) {
+                url += `&topic=${encodeURIComponent(topic)}`;
+            }
+        } else if (topic) {
+            // Shouldn't happen since topic filter is disabled when no subject is selected
+            url += `?topic=${encodeURIComponent(topic)}`;
+        }
+        
+        window.location.href = url;
+    });
+    
+    // Enable topic filter when subject is selected
+    if (subjectFilter.value) {
+        topicFilter.disabled = false;
+    }
+});
+</script>
+{% endblock %}

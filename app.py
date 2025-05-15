@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for
+from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 import os
@@ -80,6 +80,20 @@ def initialize_database():
         deadline TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
+    ''')
+
+        # Add this to the initialize_database() function
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS practice_scores (
+            id SERIAL PRIMARY KEY,
+            student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            subject VARCHAR(50) NOT NULL,
+            topic VARCHAR(100) NOT NULL,
+            score INTEGER NOT NULL,
+            total_questions INTEGER NOT NULL,
+            completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT unique_practice_attempt UNIQUE (student_id, subject, topic)
+        )
     ''')
 
     # Add this new table for assignment-user relationships
@@ -163,6 +177,85 @@ def initialize_database():
 
 
 # Helpers
+def record_practice_score(student_id, subject, topic, score, total_questions):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            INSERT INTO practice_scores 
+            (student_id, subject, topic, score, total_questions)
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (student_id, subject, topic) 
+            DO UPDATE SET 
+                score = EXCLUDED.score,
+                total_questions = EXCLUDED.total_questions,
+                completed_at = CURRENT_TIMESTAMP
+            WHERE practice_scores.score < EXCLUDED.score
+        ''', (student_id, subject, topic, score, total_questions))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error recording practice score: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+def get_leaderboard(subject=None, topic=None, limit=10):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        query = '''
+            SELECT 
+                u.username,
+                ps.subject,
+                ps.topic,
+                ps.score,
+                ps.total_questions,
+                ROUND((ps.score::float / ps.total_questions * 100), 2) as percentage,
+                ps.completed_at
+            FROM practice_scores ps
+            JOIN users u ON ps.student_id = u.id
+            WHERE u.role = 'student'
+        '''
+        params = []
+        
+        if subject:
+            query += ' AND ps.subject = %s'
+            params.append(subject)
+        if topic:
+            query += ' AND ps.topic = %s'
+            params.append(topic)
+            
+        query += '''
+            ORDER BY percentage DESC, ps.completed_at DESC
+            LIMIT %s
+        '''
+        params.append(limit)
+        
+        cur.execute(query, params)
+        
+        leaderboard = []
+        for row in cur.fetchall():
+            leaderboard.append({
+                'username': row[0],
+                'subject': row[1],
+                'topic': row[2],
+                'score': row[3],
+                'total_questions': row[4],
+                'percentage': row[5],
+                'completed_at': row[6]
+            })
+            
+        return leaderboard
+    except Exception as e:
+        print(f"Error getting leaderboard: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
 # Add this helper function to get user by ID
 def get_user_by_id(user_id):
     conn = get_db_connection()
@@ -1301,6 +1394,63 @@ def submit_grade(assignment_id, student_id):
         flash('Invalid marks format', 'danger')
     
     return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+
+@app.route('/leaderboard')
+@login_required
+def view_leaderboard():
+    subject = request.args.get('subject')
+    topic = request.args.get('topic')
+    
+    leaderboard = get_leaderboard(subject=subject, topic=topic)
+    
+    # Get available subjects for filter dropdown
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT DISTINCT subject FROM practice_scores ORDER BY subject')
+    available_subjects = [row[0] for row in cur.fetchall()]
+    
+    # Get available topics for selected subject
+    available_topics = []
+    if subject:
+        cur.execute('SELECT DISTINCT topic FROM practice_scores WHERE subject = %s ORDER BY topic', (subject,))
+        available_topics = [row[0] for row in cur.fetchall()]
+    
+    cur.close()
+    conn.close()
+    
+    return render_template('leaderboard.html',
+                         leaderboard=leaderboard,
+                         available_subjects=available_subjects,
+                         available_topics=available_topics,
+                         current_subject=subject,
+                         current_topic=topic)
+
+@app.route('/api/record-practice', methods=['POST'])
+@login_required
+def record_practice():
+    if session.get('role') != 'student':
+        return jsonify({'success': False, 'error': 'Only students can record practice'})
+    
+    data = request.get_json()
+    subject = data.get('subject')
+    topic = data.get('topic')
+    score = data.get('score')
+    total_questions = data.get('total_questions')
+    
+    if not all([subject, topic, score is not None, total_questions]):
+        return jsonify({'success': False, 'error': 'Missing required fields'})
+    
+    try:
+        success = record_practice_score(
+            student_id=session['user_id'],
+            subject=subject,
+            topic=topic,
+            score=score,
+            total_questions=total_questions
+        )
+        return jsonify({'success': success})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
     
 if __name__ == '__main__':
