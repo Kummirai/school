@@ -304,6 +304,31 @@ class StudyGuideApp {
       };
     }
   }
+
+  // Add this to studyGuide.js in the StudyGuideApp class
+  recordPracticeScore(subject, topic, score, totalQuestions) {
+    return fetch("/api/record-practice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        subject: subject,
+        topic: topic,
+        score: score,
+        total_questions: totalQuestions,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("Score recorded successfully");
+        } else {
+          console.error("Failed to record score:", data.error);
+        }
+        return data;
+      });
+  }
 }
 
 // Initialize application when DOM is loaded
