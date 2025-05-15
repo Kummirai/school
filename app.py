@@ -206,6 +206,7 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
+        # Main leaderboard query
         query = '''
             SELECT 
                 u.username,
@@ -229,7 +230,7 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
             query += ' AND ps.topic = %s'
             params.append(topic)
             
-        # Add time period filtering
+        # Time period filtering
         if time_period == 'week':
             query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'7 days\''
         elif time_period == 'month':
@@ -255,11 +256,31 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
                 'completed_at': row[6],
                 'user_id': row[7]
             })
+        
+        # Get current user's overall average if logged in
+        user_stats = None
+        if 'user_id' in session:
+            # Get average score across all attempts
+            cur.execute('''
+                SELECT 
+                    ROUND(AVG(score::numeric / total_questions * 100), 2) as avg_score,
+                    COUNT(*) as attempt_count
+                FROM practice_scores
+                WHERE student_id = %s
+            ''', (session['user_id'],))
+            avg_result = cur.fetchone()
             
-        return leaderboard
+            if avg_result and avg_result[0]:
+                user_stats = {
+                    'avg_score': avg_result[0],
+                    'attempt_count': avg_result[1]
+                }
+            
+        return leaderboard, user_stats
+        
     except Exception as e:
         print(f"Error getting leaderboard: {e}")
-        return []
+        return [], None
     finally:
         cur.close()
         conn.close()
@@ -1408,8 +1429,13 @@ def submit_grade(assignment_id, student_id):
 def view_leaderboard():
     subject = request.args.get('subject')
     topic = request.args.get('topic')
+    time_period = request.args.get('time', 'all')
     
-    leaderboard = get_leaderboard(subject=subject, topic=topic)
+    leaderboard, user_stats = get_leaderboard(
+        subject=subject, 
+        topic=topic, 
+        time_period=time_period
+    )
     
     # Get available subjects for filter dropdown
     conn = get_db_connection()
@@ -1420,18 +1446,31 @@ def view_leaderboard():
     # Get available topics for selected subject
     available_topics = []
     if subject:
-        cur.execute('SELECT DISTINCT topic FROM practice_scores WHERE subject = %s ORDER BY topic', (subject,))
+        cur.execute('''
+            SELECT DISTINCT topic FROM practice_scores 
+            WHERE subject = %s ORDER BY topic
+        ''', (subject,))
         available_topics = [row[0] for row in cur.fetchall()]
     
     cur.close()
     conn.close()
+    
+    # Calculate user's current rank
+    user_rank = None
+    if 'user_id' in session and leaderboard:
+        for i, entry in enumerate(leaderboard, 1):
+            if entry['user_id'] == session['user_id']:
+                user_rank = i
+                break
     
     return render_template('leaderboard.html',
                          leaderboard=leaderboard,
                          available_subjects=available_subjects,
                          available_topics=available_topics,
                          current_subject=subject,
-                         current_topic=topic)
+                         current_topic=topic,
+                         user_stats=user_stats,
+                         user_rank=user_rank)
 
 @app.route('/api/leaderboard-details')
 @login_required

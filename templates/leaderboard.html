@@ -2,16 +2,48 @@
 
 {% block content %}
 <div class="container mt-4">
+    <!-- Stats Header Card -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm border-0 bg-light">
+                <div class="card-body py-3">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <div class="d-flex align-items-center mb-3 mb-md-0">
+                            <i class="bi bi-trophy-fill text-warning fs-1 me-3"></i>
+                            <div>
+                                <h1 class="mb-0">Practice Leaderboard</h1>
+                                <p class="mb-0 text-muted">Track your progress and compete with peers</p>
+                            </div>
+                        </div>
+                        
+                        {% if user_stats %}
+                        <div class="d-flex flex-wrap justify-content-center gap-4 text-center">
+                            <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
+                                <div class="text-muted small">Your Rank</div>
+                                <div class="fs-2 fw-bold text-primary">{{ user_rank if user_rank else "N/A" }}</div>
+                            </div>
+                            <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
+                                <div class="text-muted small">Average Score</div>
+                                <div class="fs-2 fw-bold text-success">{{ user_stats.avg_score }}%</div>
+                            </div>
+                            <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
+                                <div class="text-muted small">Total Attempts</div>
+                                <div class="fs-2 fw-bold text-info">{{ user_stats.attempt_count }}</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters Card -->
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h1 class="card-title">
-                        <i class="bi bi-trophy-fill text-warning me-2"></i>
-                        Practice Leaderboard
-                    </h1>
-                    
-                    <div class="row mt-3">
+                    <div class="row">
                         <div class="col-md-4">
                             <label for="subjectFilter" class="form-label">Filter by Subject:</label>
                             <select class="form-select" id="subjectFilter">
@@ -37,9 +69,9 @@
                         <div class="col-md-4">
                             <label for="timeFilter" class="form-label">Time Period:</label>
                             <select class="form-select" id="timeFilter">
-                                <option value="all">All Time</option>
-                                <option value="week">This Week</option>
-                                <option value="month">This Month</option>
+                                <option value="all" {% if not request.args.get('time') or request.args.get('time') == 'all' %}selected{% endif %}>All Time</option>
+                                <option value="week" {% if request.args.get('time') == 'week' %}selected{% endif %}>This Week</option>
+                                <option value="month" {% if request.args.get('time') == 'month' %}selected{% endif %}>This Month</option>
                             </select>
                         </div>
                     </div>
@@ -48,69 +80,70 @@
         </div>
     </div>
 
+    <!-- Leaderboard Table -->
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-body">
                     {% if leaderboard %}
                     <div class="table-responsive">
-    <table class="table table-hover align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th class="text-nowrap">Rank</th>
-                <th class="text-nowrap">Student</th>
-                <th class="text-nowrap">Subject</th>
-                <th class="text-nowrap">Topic</th>
-                <th class="text-nowrap">Score</th>
-                <th class="text-nowrap">Performance</th>
-                <th class="text-nowrap">Date</th>
-                <th class="text-nowrap">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in leaderboard %}
-            <tr {% if entry.user_id == session.user_id %}class="table-success"{% endif %}>
-                <td>{{ loop.index }}</td>
-                <td>
-                    {% if entry.user_id == session.user_id %}
-                    <strong>You</strong>
-                    {% else %}
-                    {{ entry.username }}
-                    {% endif %}
-                </td>
-                <td>{{ entry.subject }}</td>
-                <td>{{ entry.topic }}</td>
-                <td>{{ entry.score }}/{{ entry.total_questions }}</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="progress flex-grow-1" style="height: 20px; min-width: 100px;">
-                            <div class="progress-bar 
-                                {% if entry.percentage >= 80 %}bg-success
-                                {% elif entry.percentage >= 50 %}bg-warning
-                                {% else %}bg-danger
-                                {% endif %}" 
-                                role="progressbar" 
-                                style="width: {{ entry.percentage }}%" 
-                                aria-valuenow="{{ entry.percentage }}" 
-                                aria-valuemin="0" 
-                                aria-valuemax="100">
-                            </div>
-                        </div>
-                        <span class="ms-2">{{ entry.percentage }}%</span>
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Subject</th>
+                                    <th>Topic</th>
+                                    <th>Score</th>
+                                    <th>Performance</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in leaderboard %}
+                                <tr {% if entry.user_id == session.user_id %}class="table-success"{% endif %}>
+                                    <td>{{ loop.index }}</td>
+                                    <td>
+                                        {% if entry.user_id == session.user_id %}
+                                        <strong>You</strong>
+                                        {% else %}
+                                        {{ entry.username }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ entry.subject }}</td>
+                                    <td>{{ entry.topic }}</td>
+                                    <td>{{ entry.score }}/{{ entry.total_questions }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress flex-grow-1" style="height: 20px;">
+                                                <div class="progress-bar 
+                                                    {% if entry.percentage >= 80 %}bg-success
+                                                    {% elif entry.percentage >= 50 %}bg-warning
+                                                    {% else %}bg-danger
+                                                    {% endif %}" 
+                                                    role="progressbar" 
+                                                    style="width: {{ entry.percentage }}%" 
+                                                    aria-valuenow="{{ entry.percentage }}" 
+                                                    aria-valuemin="0" 
+                                                    aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            <span class="ms-2">{{ entry.percentage }}%</span>
+                                        </div>
+                                    </td>
+                                    <td>{{ entry.completed_at.strftime('%Y-%m-%d') }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" 
+                                            onclick="viewDetails('{{ entry.user_id }}', '{{ entry.subject }}', '{{ entry.topic }}')">
+                                            <i class="bi bi-eye"></i> Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                </td>
-                <td>{{ entry.completed_at.strftime('%Y-%m-%d') }}</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary" 
-                        onclick="viewDetails('{{ entry.user_id }}', '{{ entry.subject }}', '{{ entry.topic }}')">
-                        <i class="bi bi-eye"></i> Details
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
 
                     <div class="d-flex justify-content-between mt-3">
                         <div>
@@ -135,25 +168,7 @@
     </div>
 </div>
 
-<!-- Details Modal -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailsModalLabel">Performance Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="detailsModalBody">
-                Loading details...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
+<!-- <style>
     .progress {
         min-width: 100px;
     }
@@ -174,6 +189,98 @@
         padding: 0.25rem 0.5rem;
     }
 }
+</style> -->
+
+<style>
+    /* Table Container */
+    .table-container {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        background: white;
+    }
+
+    /* Table Styling */
+    .table {
+        margin-bottom: 0;
+        background-color: white;
+    }
+    
+    .table thead {
+        background-color: #343a40; /* dark */
+        color: white;
+    }
+    
+    .table thead th {
+        padding: 14px 16px;
+        font-weight: 600;
+        border-bottom: 3px solid #dc3545; /* danger header border */
+    }
+    
+    .table tbody tr {
+        transition: all 0.2s ease;
+        background-color: white;
+    }
+    
+    .table tbody td {
+        padding: 12px 16px;
+        vertical-align: middle;
+        border-bottom: 2px solid rgba(220, 53, 69, 0.2); /* danger tint bottom border */
+    }
+    
+    .table tbody tr:hover td {
+        border-bottom-color: #dc3545; /* full danger color on hover */
+        background-color: #f8f9fa; /* slight gray on hover */
+    }
+    
+    /* Current User Highlight */
+    .table-success td {
+        background-color: rgba(220, 53, 69, 0.05) !important; /* very light danger tint */
+        border-bottom: 2px solid rgba(220, 53, 69, 0.5) !important;
+    }
+    
+    .table-success:hover td {
+        background-color: rgba(220, 53, 69, 0.08) !important;
+        border-bottom-color: #dc3545 !important;
+    }
+    
+    /* Progress Bar Styling */
+    .progress {
+        height: 22px;
+        background-color: #f8f9fa; /* light gray */
+        border: 1px solid #dee2e6;
+    }
+    
+    .progress-bar {
+        font-weight: 500;
+    }
+    
+    /* Button Styling */
+    .btn-outline-primary {
+        border-color: #343a40;
+        color: #343a40;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #343a40;
+        color: white;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 820px) {
+        .table thead th {
+            padding: 10px 12px;
+            font-size: 0.875rem;
+        }
+        
+        .table tbody td {
+            padding: 8px 10px;
+            border-bottom-width: 1px;
+            white-space: nowrap;
+        }
+
+        
+    }
 </style>
 
 <script>
