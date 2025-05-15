@@ -206,19 +206,16 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        # Main leaderboard query
+        # Calculate leaderboard based on (total score / number of attempts)
         query = '''
             SELECT 
+                u.id,
                 u.username,
-                ps.subject,
-                ps.topic,
-                ps.score,
-                ps.total_questions,
-                ROUND((ps.score::numeric / ps.total_questions * 100), 2) as percentage,
-                ps.completed_at,
-                u.id as user_id
-            FROM practice_scores ps
-            JOIN users u ON ps.student_id = u.id
+                ROUND(SUM(ps.score)::numeric / COUNT(ps.id), 2) as avg_score,
+                COUNT(ps.id) as attempt_count,
+                ROUND(AVG(ps.score::numeric / ps.total_questions * 100), 2) as avg_percentage
+            FROM users u
+            JOIN practice_scores ps ON u.id = ps.student_id
             WHERE u.role = 'student'
         '''
         params = []
@@ -230,41 +227,54 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
             query += ' AND ps.topic = %s'
             params.append(topic)
             
-        # Time period filtering
         if time_period == 'week':
             query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'7 days\''
         elif time_period == 'month':
             query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'30 days\''
             
         query += '''
-            ORDER BY percentage DESC, ps.completed_at DESC
-            LIMIT %s
+            GROUP BY u.id, u.username
+            HAVING COUNT(ps.id) > 0
+            ORDER BY avg_score DESC, attempt_count DESC
         '''
-        params.append(limit)
+        
+        if limit:
+            query += ' LIMIT %s'
+            params.append(limit)
         
         cur.execute(query, params)
         
         leaderboard = []
+        rank = 0
+        prev_avg = None
+        actual_rank = 0
+        
         for row in cur.fetchall():
+            # Handle ties in average score
+            if row[2] != prev_avg:
+                actual_rank = rank + 1
+            prev_avg = row[2]
+            rank += 1
+            
             leaderboard.append({
-                'username': row[0],
-                'subject': row[1],
-                'topic': row[2],
-                'score': row[3],
-                'total_questions': row[4],
-                'percentage': row[5],
-                'completed_at': row[6],
-                'user_id': row[7]
+                'user_id': row[0],
+                'username': row[1],
+                'avg_score': row[2],
+                'attempt_count': row[3],
+                'avg_percentage': row[4],
+                'rank': actual_rank
             })
         
-        # Get current user's overall average if logged in
+        # Get current user's stats if logged in
         user_stats = None
+        user_rank = None
         if 'user_id' in session:
-            # Get average score across all attempts
+            # Get user's total score divided by attempts
             cur.execute('''
                 SELECT 
-                    ROUND(AVG(score::numeric / total_questions * 100), 2) as avg_score,
-                    COUNT(*) as attempt_count
+                    ROUND(SUM(score)::numeric / COUNT(id), 2) as avg_score,
+                    COUNT(*) as attempt_count,
+                    ROUND(AVG(score::numeric / total_questions * 100), 2) as avg_percentage
                 FROM practice_scores
                 WHERE student_id = %s
             ''', (session['user_id'],))
@@ -273,14 +283,33 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
             if avg_result and avg_result[0]:
                 user_stats = {
                     'avg_score': avg_result[0],
-                    'attempt_count': avg_result[1]
+                    'attempt_count': avg_result[1],
+                    'avg_percentage': avg_result[2]
                 }
-            
-        return leaderboard, user_stats
+                
+                # Get user's rank based on (total score / attempts)
+                cur.execute('''
+                    WITH ranked_students AS (
+                        SELECT 
+                            student_id,
+                            SUM(score)::numeric / COUNT(id) as avg_score,
+                            DENSE_RANK() OVER (ORDER BY (SUM(score)::numeric / COUNT(id)) DESC) as rank
+                        FROM practice_scores
+                        GROUP BY student_id
+                    )
+                    SELECT rank 
+                    FROM ranked_students
+                    WHERE student_id = %s
+                ''', (session['user_id'],))
+                rank_result = cur.fetchone()
+                if rank_result:
+                    user_rank = rank_result[0]
+        
+        return leaderboard, user_stats, user_rank
         
     except Exception as e:
         print(f"Error getting leaderboard: {e}")
-        return [], None
+        return [], None, None
     finally:
         cur.close()
         conn.close()
@@ -1431,19 +1460,18 @@ def view_leaderboard():
     topic = request.args.get('topic')
     time_period = request.args.get('time', 'all')
     
-    leaderboard, user_stats = get_leaderboard(
+    leaderboard, user_stats, user_rank = get_leaderboard(
         subject=subject, 
         topic=topic, 
         time_period=time_period
     )
     
-    # Get available subjects for filter dropdown
+    # Get available subjects and topics
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT DISTINCT subject FROM practice_scores ORDER BY subject')
     available_subjects = [row[0] for row in cur.fetchall()]
     
-    # Get available topics for selected subject
     available_topics = []
     if subject:
         cur.execute('''
@@ -1454,14 +1482,6 @@ def view_leaderboard():
     
     cur.close()
     conn.close()
-    
-    # Calculate user's current rank
-    user_rank = None
-    if 'user_id' in session and leaderboard:
-        for i, entry in enumerate(leaderboard, 1):
-            if entry['user_id'] == session['user_id']:
-                user_rank = i
-                break
     
     return render_template('leaderboard.html',
                          leaderboard=leaderboard,
@@ -1476,41 +1496,67 @@ def view_leaderboard():
 @login_required
 def get_leaderboard_details():
     user_id = request.args.get('user_id')
-    subject = request.args.get('subject')
-    topic = request.args.get('topic')
     
-    if not all([user_id, subject, topic]):
-        return jsonify({'error': 'Missing parameters'}), 400
+    if not user_id:
+        return jsonify({'error': 'Missing user_id parameter'}), 400
     
     conn = get_db_connection()
     cur = conn.cursor()
     
     try:
-        # Get user info
+        # Get basic user info
         cur.execute('SELECT username FROM users WHERE id = %s', (user_id,))
         user = cur.fetchone()
         if not user:
             return jsonify({'error': 'User not found'}), 404
         
-        # Get performance stats
+        # Get overall stats (total score / attempts)
         cur.execute('''
             SELECT 
-                    MAX(score) as best_score,
-                    AVG(score) as avg_score,
-                    MAX(total_questions) as total_questions,
-                    COUNT(*) as attempts,
-                    MIN(completed_at) as first_attempt,
-                    MAX(completed_at) as last_attempt,
-                    MAX(ROUND((score::numeric / total_questions * 100), 2)) as best_percentage,
-                    AVG(ROUND((score::numeric / total_questions * 100), 2)) as avg_percentage
-                FROM practice_scores
-                WHERE student_id = %s AND subject = %s AND topic = %s
-                GROUP BY student_id, subject, topic
-        ''', (user_id, subject, topic))
+                ROUND(SUM(score)::numeric / COUNT(id), 2) as avg_score,
+                COUNT(*) as attempt_count,
+                ROUND(AVG(score::numeric / total_questions * 100), 2) as avg_percentage
+            FROM practice_scores
+            WHERE student_id = %s
+        ''', (user_id,))
+        overall_stats = cur.fetchone()
         
-        stats = cur.fetchone()
-        if not stats:
-            return jsonify({'error': 'No records found for this user and topic'}), 404
+        # Get global rank based on (total score / attempts)
+        cur.execute('''
+            WITH ranked_students AS (
+                SELECT 
+                    student_id,
+                    SUM(score)::numeric / COUNT(id) as avg_score,
+                    DENSE_RANK() OVER (ORDER BY (SUM(score)::numeric / COUNT(id)) DESC) as rank
+                FROM practice_scores
+                GROUP BY student_id
+            )
+            SELECT rank 
+            FROM ranked_students
+            WHERE student_id = %s
+        ''', (user_id,))
+        rank_result = cur.fetchone()
+        
+        # Get performance by subject
+        cur.execute('''
+            SELECT 
+                subject,
+                ROUND(SUM(score)::numeric / COUNT(id), 2) as avg_score,
+                COUNT(*) as attempt_count,
+                ROUND(AVG(score::numeric / total_questions * 100), 2) as avg_percentage
+            FROM practice_scores
+            WHERE student_id = %s
+            GROUP BY subject
+            ORDER BY avg_score DESC
+        ''', (user_id,))
+        subjects = []
+        for row in cur.fetchall():
+            subjects.append({
+                'subject': row[0],
+                'avg_score': row[1],
+                'attempt_count': row[2],
+                'avg_percentage': row[3]
+            })
         
         # Get history for chart
         cur.execute('''
@@ -1518,11 +1564,13 @@ def get_leaderboard_details():
                 score,
                 total_questions,
                 ROUND((score::numeric / total_questions * 100), 2) as percentage,
-                completed_at
+                completed_at,
+                subject,
+                topic
             FROM practice_scores
-            WHERE student_id = %s AND subject = %s AND topic = %s
+            WHERE student_id = %s
             ORDER BY completed_at
-        ''', (user_id, subject, topic))
+        ''', (user_id,))
         
         history = []
         for row in cur.fetchall():
@@ -1530,19 +1578,18 @@ def get_leaderboard_details():
                 'score': row[0],
                 'total_questions': row[1],
                 'percentage': row[2],
-                'date': row[3].strftime('%Y-%m-%d')
+                'date': row[3].strftime('%Y-%m-%d'),
+                'subject': row[4],
+                'topic': row[5]
             })
         
         return jsonify({
             'username': user[0],
-            'best_score': stats[0],
-            'avg_score': round(float(stats[1]), 2),
-            'total_questions': stats[2],
-            'attempts': stats[3],
-            'first_attempt': stats[4].strftime('%Y-%m-%d'),
-            'last_attempt': stats[5].strftime('%Y-%m-%d'),
-            'best_percentage': stats[6],
-            'avg_percentage': round(float(stats[7]), 2),
+            'avg_score': overall_stats[0] if overall_stats else 0,
+            'attempt_count': overall_stats[1] if overall_stats else 0,
+            'avg_percentage': overall_stats[2] if overall_stats else 0,
+            'rank': rank_result[0] if rank_result else None,
+            'subjects': subjects,
             'history': history
         })
         
@@ -1581,17 +1628,17 @@ def record_practice():
         return jsonify({'success': False, 'error': str(e)})
 
     
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)
-
 if __name__ == '__main__':
-    # Enable Flask debug features
-    app.debug = True  # Enables auto-reloader and debugger
-    
-    # Initialize database
+    from waitress import serve
     initialize_database()
+    serve(app, host="0.0.0.0", port=5000)
+
+# if __name__ == '__main__':
+#     # Enable Flask debug features
+#     app.debug = True  # Enables auto-reloader and debugger
     
-    # Run the development server
-    app.run(host='0.0.0.0', port=5000)
+#     # Initialize database
+#     initialize_database()
+    
+#     # Run the development server
+#     app.run(host='0.0.0.0', port=5000)
