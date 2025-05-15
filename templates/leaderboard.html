@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title">
+                        <i class="bi bi-trophy-fill text-warning me-2"></i>
+                        Practice Leaderboard
+                    </h1>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label for="subjectFilter" class="form-label">Filter by Subject:</label>
+                            <select class="form-select" id="subjectFilter">
+                                <option value="">All Subjects</option>
+                                {% for subject in available_subjects %}
+                                <option value="{{ subject }}" {% if subject == current_subject %}selected{% endif %}>
+                                    {{ subject }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="topicFilter" class="form-label">Filter by Topic:</label>
+                            <select class="form-select" id="topicFilter" {% if not current_subject %}disabled{% endif %}>
+                                <option value="">All Topics</option>
+                                {% for topic in available_topics %}
+                                <option value="{{ topic }}" {% if topic == current_topic %}selected{% endif %}>
+                                    {{ topic }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="timeFilter" class="form-label">Time Period:</label>
+                            <select class="form-select" id="timeFilter">
+                                <option value="all">All Time</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    {% if leaderboard %}
+                    <div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-nowrap">Rank</th>
+                <th class="text-nowrap">Student</th>
+                <th class="text-nowrap">Subject</th>
+                <th class="text-nowrap">Topic</th>
+                <th class="text-nowrap">Score</th>
+                <th class="text-nowrap">Performance</th>
+                <th class="text-nowrap">Date</th>
+                <th class="text-nowrap">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard %}
+            <tr {% if entry.user_id == session.user_id %}class="table-success"{% endif %}>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if entry.user_id == session.user_id %}
+                    <strong>You</strong>
+                    {% else %}
+                    {{ entry.username }}
+                    {% endif %}
+                </td>
+                <td>{{ entry.subject }}</td>
+                <td>{{ entry.topic }}</td>
+                <td>{{ entry.score }}/{{ entry.total_questions }}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="progress flex-grow-1" style="height: 20px; min-width: 100px;">
+                            <div class="progress-bar 
+                                {% if entry.percentage >= 80 %}bg-success
+                                {% elif entry.percentage >= 50 %}bg-warning
+                                {% else %}bg-danger
+                                {% endif %}" 
+                                role="progressbar" 
+                                style="width: {{ entry.percentage }}%" 
+                                aria-valuenow="{{ entry.percentage }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <span class="ms-2">{{ entry.percentage }}%</span>
+                    </div>
+                </td>
+                <td>{{ entry.completed_at.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" 
+                        onclick="viewDetails('{{ entry.user_id }}', '{{ entry.subject }}', '{{ entry.topic }}')">
+                        <i class="bi bi-eye"></i> Details
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <div>
+                            <span class="text-muted">Showing {{ leaderboard|length }} top results</span>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" onclick="refreshLeaderboard()">
+                                <i class="bi bi-arrow-clockwise"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-emoji-frown" style="font-size: 3rem;"></i>
+                        <h3 class="mt-3">No results found</h3>
+                        <p>Try adjusting your filters or complete some practice questions to appear on the leaderboard.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Performance Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detailsModalBody">
+                Loading details...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .progress {
+        min-width: 100px;
+    }
+    .progress-bar {
+        font-size: 0.8rem;
+    }
+    .table-success {
+        background-color: rgba(40, 167, 69, 0.1);
+    }
+
+    @media (max-width: 576px) {
+    .table th, .table td {
+        font-size: 0.875rem; /* Smaller text for compact view */
+        white-space: nowrap;
+    }
+    .table td button {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subjectFilter = document.getElementById('subjectFilter');
+    const topicFilter = document.getElementById('topicFilter');
+    const timeFilter = document.getElementById('timeFilter');
+    
+    // Initialize filters based on current URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentTimeFilter = urlParams.get('time') || 'all';
+    timeFilter.value = currentTimeFilter;
+    
+    // Handle filter changes
+    function updateFilters() {
+        const subject = subjectFilter.value;
+        const topic = topicFilter.value;
+        const time = timeFilter.value;
+        
+        let url = '/leaderboard';
+        let params = [];
+        
+        if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
+        if (topic) params.push(`topic=${encodeURIComponent(topic)}`);
+        if (time !== 'all') params.push(`time=${encodeURIComponent(time)}`);
+        
+        if (params.length > 0) {
+            url += '?' + params.join('&');
+        }
+        
+        window.location.href = url;
+    }
+    
+    subjectFilter.addEventListener('change', function() {
+        topicFilter.disabled = !this.value;
+        updateFilters();
+    });
+    
+    topicFilter.addEventListener('change', updateFilters);
+    timeFilter.addEventListener('change', updateFilters);
+});
+
+function viewDetails(userId, subject, topic) {
+    fetch(`/api/leaderboard-details?user_id=${userId}&subject=${encodeURIComponent(subject)}&topic=${encodeURIComponent(topic)}`)
+        .then(response => response.json())
+        .then(data => {
+            const modalBody = document.getElementById('detailsModalBody');
+            if (data.error) {
+                modalBody.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+            } else {
+                modalBody.innerHTML = `
+                    <h5>${data.username}'s Performance in ${subject} - ${topic}</h5>
+                    <p><strong>Best Score:</strong> ${data.best_score}/${data.total_questions} (${data.best_percentage}%)</p>
+                    <p><strong>Average Score:</strong> ${data.avg_score}/${data.total_questions} (${data.avg_percentage}%)</p>
+                    <p><strong>Attempts:</strong> ${data.attempts}</p>
+                    <p><strong>First Attempt:</strong> ${data.first_attempt}</p>
+                    <p><strong>Last Attempt:</strong> ${data.last_attempt}</p>
+                    
+                    <h6 class="mt-4">Progress Over Time</h6>
+                    <div class="progress-chart" style="height: 200px;">
+                        <!-- Chart would be rendered here with a proper charting library -->
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                `;
+                
+                // In a real implementation, you would initialize a chart here
+                initializeProgressChart(data.history);
+            }
+            
+            // Show the modal
+            const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            modal.show();
+        })
+        .catch(error => {
+            console.error('Error fetching details:', error);
+            document.getElementById('detailsModalBody').innerHTML = 
+                '<div class="alert alert-danger">Error loading details. Please try again.</div>';
+        });
+}
+
+function refreshLeaderboard() {
+    window.location.reload();
+}
+
+// This would be implemented with a charting library like Chart.js
+function initializeProgressChart(historyData) {
+    // Implementation would go here
+    console.log('Initializing chart with data:', historyData);
+}
+</script>
+{% endblock %}
