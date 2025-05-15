@@ -202,7 +202,7 @@ def record_practice_score(student_id, subject, topic, score, total_questions):
         cur.close()
         conn.close()
 
-def get_leaderboard(subject=None, topic=None, limit=10):
+def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
@@ -213,8 +213,9 @@ def get_leaderboard(subject=None, topic=None, limit=10):
                 ps.topic,
                 ps.score,
                 ps.total_questions,
-                ROUND((ps.score::float / ps.total_questions * 100), 2) as percentage,
-                ps.completed_at
+                ROUND((ps.score::numeric / ps.total_questions * 100), 2) as percentage,
+                ps.completed_at,
+                u.id as user_id
             FROM practice_scores ps
             JOIN users u ON ps.student_id = u.id
             WHERE u.role = 'student'
@@ -227,6 +228,12 @@ def get_leaderboard(subject=None, topic=None, limit=10):
         if topic:
             query += ' AND ps.topic = %s'
             params.append(topic)
+            
+        # Add time period filtering
+        if time_period == 'week':
+            query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'7 days\''
+        elif time_period == 'month':
+            query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'30 days\''
             
         query += '''
             ORDER BY percentage DESC, ps.completed_at DESC
@@ -245,7 +252,8 @@ def get_leaderboard(subject=None, topic=None, limit=10):
                 'score': row[3],
                 'total_questions': row[4],
                 'percentage': row[5],
-                'completed_at': row[6]
+                'completed_at': row[6],
+                'user_id': row[7]
             })
             
         return leaderboard
@@ -1325,7 +1333,6 @@ def dashboard():
                             current_time=datetime.utcnow())
     
 # Add these new routes to app.py
-
 @app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -1395,6 +1402,7 @@ def submit_grade(assignment_id, student_id):
     
     return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
 
+#Leaderboard routes
 @app.route('/leaderboard')
 @login_required
 def view_leaderboard():
@@ -1424,6 +1432,87 @@ def view_leaderboard():
                          available_topics=available_topics,
                          current_subject=subject,
                          current_topic=topic)
+
+@app.route('/api/leaderboard-details')
+@login_required
+def get_leaderboard_details():
+    user_id = request.args.get('user_id')
+    subject = request.args.get('subject')
+    topic = request.args.get('topic')
+    
+    if not all([user_id, subject, topic]):
+        return jsonify({'error': 'Missing parameters'}), 400
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    try:
+        # Get user info
+        cur.execute('SELECT username FROM users WHERE id = %s', (user_id,))
+        user = cur.fetchone()
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        # Get performance stats
+        cur.execute('''
+            SELECT 
+                    MAX(score) as best_score,
+                    AVG(score) as avg_score,
+                    MAX(total_questions) as total_questions,
+                    COUNT(*) as attempts,
+                    MIN(completed_at) as first_attempt,
+                    MAX(completed_at) as last_attempt,
+                    MAX(ROUND((score::numeric / total_questions * 100), 2)) as best_percentage,
+                    AVG(ROUND((score::numeric / total_questions * 100), 2)) as avg_percentage
+                FROM practice_scores
+                WHERE student_id = %s AND subject = %s AND topic = %s
+                GROUP BY student_id, subject, topic
+        ''', (user_id, subject, topic))
+        
+        stats = cur.fetchone()
+        if not stats:
+            return jsonify({'error': 'No records found for this user and topic'}), 404
+        
+        # Get history for chart
+        cur.execute('''
+            SELECT 
+                score,
+                total_questions,
+                ROUND((score::numeric / total_questions * 100), 2) as percentage,
+                completed_at
+            FROM practice_scores
+            WHERE student_id = %s AND subject = %s AND topic = %s
+            ORDER BY completed_at
+        ''', (user_id, subject, topic))
+        
+        history = []
+        for row in cur.fetchall():
+            history.append({
+                'score': row[0],
+                'total_questions': row[1],
+                'percentage': row[2],
+                'date': row[3].strftime('%Y-%m-%d')
+            })
+        
+        return jsonify({
+            'username': user[0],
+            'best_score': stats[0],
+            'avg_score': round(float(stats[1]), 2),
+            'total_questions': stats[2],
+            'attempts': stats[3],
+            'first_attempt': stats[4].strftime('%Y-%m-%d'),
+            'last_attempt': stats[5].strftime('%Y-%m-%d'),
+            'best_percentage': stats[6],
+            'avg_percentage': round(float(stats[7]), 2),
+            'history': history
+        })
+        
+    except Exception as e:
+        print(f"Error getting leaderboard details: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
+    finally:
+        cur.close()
+        conn.close()
 
 @app.route('/api/record-practice', methods=['POST'])
 @login_required
