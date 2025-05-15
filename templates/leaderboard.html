@@ -16,37 +16,52 @@
                             </div>
                         </div>
                         
-                        {% if user_stats %}
                         <div class="d-flex flex-wrap justify-content-center gap-4 text-center">
                             <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
-                                <div class="text-muted small">Your Rank</div>
-                                <div class="fs-2 fw-bold {% if user_rank <= 3 %}text-warning{% else %}text-primary{% endif %}">
-                                    {{ user_rank if user_rank else "N/A" }}
-                                    {% if user_rank == 1 %}<i class="bi bi-trophy-fill ms-1"></i>{% endif %}
-                                    {% if user_rank == 2 %}<i class="bi bi-award-fill ms-1"></i>{% endif %}
-                                    {% if user_rank == 3 %}<i class="bi bi-award ms-1"></i>{% endif %}
+    <div class="text-muted small">Your Rank</div>
+    <div class="fs-2 fw-bold {% if user_rank is not none and user_rank <= 3 %}text-warning{% elif user_rank is not none %}text-primary{% else %}text-secondary{% endif %}">
+        {% if user_stats %}
+            {{ user_rank if user_rank is not none else "N/A" }}
+            {% if user_rank == 1 %}<i class="bi bi-trophy-fill ms-1"></i>{% endif %}
+            {% if user_rank == 2 %}<i class="bi bi-award-fill ms-1"></i>{% endif %}
+            {% if user_rank == 3 %}<i class="bi bi-award ms-1"></i>{% endif %}
+        {% else %}
+            N/A
+        {% endif %}
+    </div>
+</div>
+                            <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
+                                <div class="text-muted small">Score/Attempt</div>
+                                <div class="fs-2 fw-bold {% if user_stats %}text-success{% else %}text-secondary{% endif %}">
+                                    {{ user_stats.avg_score|round(2) if user_stats else "0.00" }}
                                 </div>
                             </div>
                             <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
-                                <div class="text-muted small">Score/Attempt</div>
-                                <div class="fs-2 fw-bold text-success">{{ user_stats.avg_score|round(2) }}</div>
-                            </div>
-                            <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
                                 <div class="text-muted small">Attempts</div>
-                                <div class="fs-2 fw-bold text-info">{{ user_stats.attempt_count }}</div>
+                                <div class="fs-2 fw-bold {% if user_stats %}text-info{% else %}text-secondary{% endif %}">
+                                    {{ user_stats.attempt_count if user_stats else "0" }}
+                                </div>
                             </div>
                             <div class="px-3 py-2 bg-white rounded-3 shadow-sm">
                                 <div class="text-muted small">Success Rate</div>
-                                <div class="fs-2 fw-bold text-primary">{{ user_stats.avg_percentage|round(2) }}%</div>
+                                <div class="fs-2 fw-bold {% if user_stats %}text-primary{% else %}text-secondary{% endif %}">
+                                    {{ user_stats.avg_percentage|round(2) ~ '%' if user_stats else "0.00%" }}
+                                </div>
                             </div>
                         </div>
-                        {% endif %}
                     </div>
+                    {% if not user_stats %}
+                    <div class="alert alert-warning mt-3 mb-0">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        You haven't completed any practice attempts yet. Complete some questions to appear on the leaderboard!
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Rest of the template remains the same -->
     <!-- Filters Card -->
     <div class="row mb-4">
         <div class="col-md-12">
@@ -196,6 +211,7 @@
     </div>
 </div>
 
+<!-- Rest of the styles and scripts remain the same -->
 <style>
     .text-bronze {
         color: #cd7f32;
