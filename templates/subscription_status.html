@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Subscription Status{% endblock %} {%
+block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Your Subscription Status</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      {% if subscription %}
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3 class="h5">{{ subscription[1] }} Plan</h3>
+          <p class="mb-1">
+            <span class="fw-bold">R{{ "%.2f"|format(subscription[2]) }}</span>
+            per month
+          </p>
+          <p class="mb-1">
+            <span class="fw-bold">Status:</span>
+            <span
+              class="badge bg-{% if subscription[6] == 'paid' %}success{% else %}warning{% endif %}"
+            >
+              {{ subscription[6]|capitalize }}
+            </span>
+          </p>
+          <p class="mb-0">
+            <span class="fw-bold">Expires:</span> {{
+            subscription[4].strftime('%Y-%m-%d') }}
+          </p>
+        </div>
+        {% if subscription[6] != 'paid' %}
+        <a href="{{ url_for('subscribe') }}" class="btn btn-danger">
+          <i class="bi bi-credit-card me-1"></i> Complete Payment
+        </a>
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3 class="h5">No Active Subscription</h3>
+          <p class="mb-0">Subscribe to unlock all features</p>
+        </div>
+        <a href="{{ url_for('subscribe') }}" class="btn btn-danger">
+          <i class="bi bi-lightning me-1"></i> Subscribe Now
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
