@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block title %}Exam Results - {{ exam_details.title
+if exam_details else 'Result' }}{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Exam Results</h1>
+
+  {% if result %}
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="card-title h4 mb-3">
+        {{ exam_details.title if exam_details else 'Exam Details Not Available'
+        }}
+      </h2>
+      <p class="card-text">
+        <span class="fw-bold">Your Score:</span>
+        <span
+          class="fs-5 text-{% if result[3] >= 70 %}success{% elif result[3] >= 50 %}warning{% else %}danger{% endif %}"
+        >
+          {{ "%.2f"|format(result[3]) }}%
+        </span>
+      </p>
+      <p class="card-text">
+        <span class="fw-bold">Correct Answers:</span> {{ result[4] * (result[3]
+        / 100) | round | int }} out of {{ result[4] }} questions
+      </p>
+      <p class="card-text">
+        <span class="fw-bold">Completion Time:</span> {{
+        result[5].strftime('%Y-%m-%d %H:%M') }}
+      </p>
+    </div>
+  </div>
+
+  {% if exam_details and exam_details.questions %}
+  <h3 class="mb-3">Review Your Answers</h3>
+  <div class="alert alert-info" role="alert">
+    Note: This review shows the questions and correct answers based on the
+    current exam data.
+  </div>
+
+  {% for question in exam_details.questions %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">Question {{ loop.index }}</h6>
+      <p class="card-text">{{ question.text }}</p>
+
+      <div class="mt-3">
+        <p class="mb-1">
+          <span class="fw-bold">Correct Answer:</span>
+          <span class="text-success">{{ question.correct_answer }}</span>
+        </p>
+        {# To show the user's submitted answer, you would need to store it in
+        the database along with the result. This template currently only
+        displays the correct answer for review. #}
+        <p class="mb-1 text-muted">
+          Your submitted answer is not available for review.
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% elif exam_details %}
+  <div class="alert alert-warning" role="alert">
+    Exam details found, but no questions available for review.
+  </div>
+  {% else %}
+  <div class="alert alert-danger" role="alert">
+    Exam details could not be loaded for review.
+  </div>
+  {% endif %} {% else %}
+  <div class="alert alert-danger" role="alert">Exam result not found.</div>
+  {% endif %}
+
+  <div class="mt-4">
+    <a href="{{ url_for('exam_practice') }}" class="btn btn-secondary"
+      >Back to Exam List</a
+    >
+  </div>
+</div>
+{% endblock %}

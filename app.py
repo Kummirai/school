@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
+import json
 
 
 
@@ -74,6 +75,17 @@ def initialize_database():
             duration_days INTEGER NOT NULL
         )
     ''')
+
+    cur.execute('''
+            CREATE TABLE IF NOT EXISTS exam_results (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                exam_id INTEGER NOT NULL, -- Storing the JSON exam ID
+                score DECIMAL(5,2) NOT NULL, -- Store score as a percentage or points
+                total_questions INTEGER NOT NULL,
+                completion_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
 
     cur.execute('''
         CREATE TABLE IF NOT EXISTS subscriptions (
@@ -233,6 +245,22 @@ def initialize_database():
 
 
 # Helpers
+def load_exams_from_json(filepath='static/js/exams.json'):
+    """Loads exam data from a JSON file."""
+    try:
+        with open(filepath, 'r') as f:
+            exams_data = json.load(f)
+            return exams_data
+    except FileNotFoundError:
+        print(f"Error: Exam data file not found at {filepath}")
+        return []
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {filepath}. Check file format.")
+        return []
+    except Exception as e:
+        print(f"An unexpected error occurred loading exam data: {e}")
+        return []
+
 # Add this new helper function to app.py
 def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
     conn = get_db_connection()
@@ -1959,6 +1987,173 @@ def subscription_status():
 
     subscription = get_user_subscription(user_id)
     return render_template('subscription_status.html', subscription=subscription)
+
+@app.route('/exam_practice')
+@login_required # Assuming exam practice requires login
+# @student_required # Optional: if only students should access
+def exam_practice():
+    """Renders the exam practice page with data from exams.json."""
+    exams = load_exams_from_json('static/js/exams.json') # Adjust path if needed
+    print("DEBUG: Loaded exams:", exams)
+    return render_template('exam_practice.html', exams=exams)
+
+@app.route('/exam/<int:exam_id>')
+@login_required # Ensure user is logged in to take exams
+# @student_required # Optional: restrict to students
+def take_exam(exam_id):
+    """Loads a specific exam and renders the exam-taking page."""
+    exams = load_exams_from_json('static/js/exams.json') # Load all exams
+
+    # Find the exam with the matching ID
+    selected_exam = None
+    for exam in exams:
+        if exam.get('id') == exam_id:
+            selected_exam = exam
+            break
+
+    if selected_exam:
+        return render_template('take_exam.html', exam=selected_exam)
+    else:
+        flash('Exam not found.', 'danger')
+        return redirect(url_for('exam_practice')) # Redirect back if exam ID is invalid
+
+@app.route('/submit_exam/<int:exam_id>', methods=['POST'])
+@login_required # Ensure user is logged in
+# @student_required # Optional: restrict to students
+def submit_exam(exam_id):
+    """Handles the submission of an exam, grades it, and saves the result."""
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('User not logged in.', 'danger')
+        return redirect(url_for('login'))
+
+    # Load all exams from the JSON file
+    exams = load_exams_from_json('static/js/exams.json')
+
+    # Find the specific exam the user submitted
+    selected_exam = None
+    for exam in exams:
+        if exam.get('id') == exam_id:
+            selected_exam = exam
+            break
+
+    if not selected_exam:
+        flash('Exam not found.', 'danger')
+        return redirect(url_for('exam_practice')) # Redirect back if exam ID is invalid
+
+    # Get user's submitted answers
+    user_answers = request.form
+
+    # Grade the exam
+    correct_answers_count = 0
+    total_questions = len(selected_exam.get('questions', []))
+
+    if total_questions > 0:
+        for question in selected_exam.get('questions', []):
+            question_id_key = f"question_{question.get('id')}"
+            submitted_answer = user_answers.get(question_id_key)
+            correct_answer = question.get('correct_answer')
+
+            # Compare submitted answer with the correct answer
+            # Ensure comparison handles potential data type differences if necessary
+            if submitted_answer is not None and str(submitted_answer) == str(correct_answer):
+                correct_answers_count += 1
+
+        # Calculate score (as a percentage)
+        score = (correct_answers_count / total_questions) * 100
+    else:
+        score = 0 # Handle exams with no questions
+
+    print(f"User {user_id} submitted Exam {exam_id}. Score: {score:.2f}% ({correct_answers_count}/{total_questions} correct)")
+
+    # Save the result to the database
+    conn = get_db_connection()
+    cur = conn.cursor()
+    result_id = None
+    try:
+        cur.execute('''
+            INSERT INTO exam_results (user_id, exam_id, score, total_questions, completion_time)
+            VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP)
+            RETURNING id;
+        ''', (user_id, exam_id, score, total_questions))
+        result_id = cur.fetchone()[0]
+        conn.commit()
+        flash('Exam submitted and graded successfully!', 'success')
+
+        # Redirect to a results page
+        return redirect(url_for('exam_results', result_id=result_id))
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error saving exam result: {e}")
+        flash('Error saving exam result.', 'danger')
+        # Redirect to exam practice page or an error page
+        return redirect(url_for('exam_practice'))
+    finally:
+        cur.close()
+        conn.close()
+
+# *** Placeholder route for displaying exam results ***
+# You will implement the logic for this route and create the template next.
+
+# Placeholder route for displaying exam results
+@app.route('/exam_results/<int:result_id>')
+@login_required
+def exam_results(result_id):
+    """Fetches and displays the results of a completed exam."""
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('User not logged in.', 'danger')
+        return redirect(url_for('login'))
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    result = None
+    try:
+        # Fetch the specific exam result from the database
+        cur.execute('''
+            SELECT id, user_id, exam_id, score, total_questions, completion_time
+            FROM exam_results
+            WHERE id = %s AND user_id = %s; -- Ensure user can only see their own results
+        ''', (result_id, user_id))
+        result = cur.fetchone()
+
+    except Exception as e:
+        print(f"Error fetching exam result {result_id}: {e}")
+        flash('Error fetching exam results.', 'danger')
+        return redirect(url_for('exam_practice')) # Redirect if fetching fails
+    finally:
+        cur.close()
+        conn.close()
+
+    if not result:
+        flash('Exam result not found or you do not have permission to view it.', 'danger')
+        return redirect(url_for('exam_practice')) # Redirect if result not found
+
+    # Unpack result data
+    result_id, result_user_id, exam_json_id, score, total_questions, completion_time = result
+
+    # Load the exam details from the JSON file using the exam_json_id
+    exams = load_exams_from_json('static/js/exams.json')
+    exam_details = None
+    for exam in exams:
+        if exam.get('id') == exam_json_id:
+            exam_details = exam
+            break
+
+    if not exam_details:
+         # This case means the exam data in the JSON was changed/removed after the user took it
+        flash(f'Exam details for result ID {result_id} not found in JSON file.', 'warning')
+        # We can still show the basic score, but not question-by-question review
+        return render_template('exam_results.html',
+                               result=result, # Pass the basic result data
+                               exam_details=None) # Indicate exam details are missing
+
+
+    # Pass both the result data and exam details to the template
+    return render_template('exam_results.html',
+                           result=result,
+                           exam_details=exam_details)
 
     
 if __name__ == '__main__':

@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Take Exam - {{ exam.title }}{%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">{{ exam.title }}</h1>
+  <p class="text-muted">{{ exam.description }}</p>
+
+  <form action="{{ url_for('submit_exam', exam_id=exam.id) }}" method="POST">
+    {% for question in exam.questions %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Question {{ loop.index }}</h6>
+        <p class="card-text">{{ question.text }}</p>
+
+        <div class="form-group">
+          {% for option in question.options %}
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_{{ question.id }}"
+              id="option_{{ question.id }}_{{ loop.index }}"
+              value="{{ option }}"
+              required
+            />
+            <label
+              class="form-check-label"
+              for="option_{{ question.id }}_{{ loop.index }}"
+            >
+              {{ option }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success mt-4">Submit Exam</button>
+  </form>
+</div>
+{% endblock %}
