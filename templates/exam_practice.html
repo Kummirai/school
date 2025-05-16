@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Exam Practice{% endblock %} {% block
+content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Exam Practice Area</h1>
+
+  {% if exams %}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for exam in exams %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ exam.title }}</h5>
+          <p class="card-text">{{ exam.description }}</p>
+          <ul class="list-unstyled small text-muted">
+            <li>
+              <i class="bi bi-question-circle me-1"></i> {{ exam.questions_count
+              }} Questions
+            </li>
+            <li>
+              <i class="bi bi-clock me-1"></i> {{ exam.duration_minutes }}
+              Minutes
+            </li>
+            <li>
+              <i class="bi bi-bar-chart-fill me-1"></i> Difficulty: {{
+              exam.difficulty }}
+            </li>
+          </ul>
+          {# Link to start the exam - this route would need to be implemented #}
+          <a href="{{ url_for('take_exam', exam_id=exam.id) }}" class="btn btn-danger mt-3">Start Exam</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info" role="alert">
+    No exam practice materials are available at the moment.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

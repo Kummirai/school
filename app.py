@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
+import json
 
 
 
@@ -233,6 +234,22 @@ def initialize_database():
 
 
 # Helpers
+def load_exams_from_json(filepath='static/js/exams.json'):
+    """Loads exam data from a JSON file."""
+    try:
+        with open(filepath, 'r') as f:
+            exams_data = json.load(f)
+            return exams_data
+    except FileNotFoundError:
+        print(f"Error: Exam data file not found at {filepath}")
+        return []
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {filepath}. Check file format.")
+        return []
+    except Exception as e:
+        print(f"An unexpected error occurred loading exam data: {e}")
+        return []
+
 # Add this new helper function to app.py
 def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
     conn = get_db_connection()
@@ -1959,6 +1976,55 @@ def subscription_status():
 
     subscription = get_user_subscription(user_id)
     return render_template('subscription_status.html', subscription=subscription)
+
+@app.route('/exam_practice')
+@login_required # Assuming exam practice requires login
+# @student_required # Optional: if only students should access
+def exam_practice():
+    """Renders the exam practice page with data from exams.json."""
+    exams = load_exams_from_json('static/js/exams.json') # Adjust path if needed
+    print("DEBUG: Loaded exams:", exams)
+    return render_template('exam_practice.html', exams=exams)
+
+@app.route('/exam/<int:exam_id>')
+@login_required # Ensure user is logged in to take exams
+# @student_required # Optional: restrict to students
+def take_exam(exam_id):
+    """Loads a specific exam and renders the exam-taking page."""
+    exams = load_exams_from_json('static/js/exams.json') # Load all exams
+
+    # Find the exam with the matching ID
+    selected_exam = None
+    for exam in exams:
+        if exam.get('id') == exam_id:
+            selected_exam = exam
+            break
+
+    if selected_exam:
+        return render_template('take_exam.html', exam=selected_exam)
+    else:
+        flash('Exam not found.', 'danger')
+        return redirect(url_for('exam_practice')) # Redirect back if exam ID is invalid
+    
+@app.route('/submit_exam/<int:exam_id>', methods=['POST'])
+@login_required # Ensure user is logged in
+# @student_required # Optional: restrict to students
+def submit_exam(exam_id):
+    """Handles the submission of an exam."""
+    # In a real application, you would process the submitted answers here,
+    # grade the exam, save the results, and redirect the user to a results page.
+
+    print(f"Received submission for Exam ID: {exam_id}")
+    user_answers = request.form # This is an ImmutableMultiDict of the form data
+
+    # For now, just print the answers and redirect
+    for key, value in user_answers.items():
+        print(f"Question ID: {key}, Answer: {value}")
+
+    # *** Placeholder: Redirect somewhere after submission ***
+    # You will replace this with logic to show results or redirect appropriately
+    flash('Exam submitted successfully (grading not yet implemented).', 'info')
+    return redirect(url_for('exam_practice')) # Redirect back to the exam list for now
 
     
 if __name__ == '__main__':
