@@ -5,9 +5,11 @@ from werkzeug.utils import secure_filename
 import os
 import psycopg2
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
+
+
 
 # Load environment variables
 load_dotenv()
@@ -16,6 +18,7 @@ load_dotenv()
 app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
+app.jinja_env.globals.update(float=float)
 
 
 # Configure upload folder in your app
@@ -59,6 +62,42 @@ def initialize_database():
         password TEXT NOT NULL,
         role VARCHAR(50) NOT NULL
     )
+    ''')
+
+    # Subscription tables
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS subscription_plans (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) UNIQUE NOT NULL,
+            description TEXT,
+            price DECIMAL(10,2) NOT NULL,
+            duration_days INTEGER NOT NULL
+        )
+    ''')
+
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS subscriptions (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            plan_id INTEGER NOT NULL REFERENCES subscription_plans(id) ON DELETE CASCADE,
+            start_date TIMESTAMP NOT NULL,
+            end_date TIMESTAMP NOT NULL,
+            is_active BOOLEAN DEFAULT FALSE,
+            payment_status VARCHAR(50) DEFAULT 'pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS payments (
+            id SERIAL PRIMARY KEY,
+            subscription_id INTEGER NOT NULL REFERENCES subscriptions(id) ON DELETE CASCADE,
+            amount DECIMAL(10,2) NOT NULL,
+            payment_date TIMESTAMP NOT NULL,
+            transaction_id VARCHAR(255),
+            status VARCHAR(50) NOT NULL,
+            receipt_url VARCHAR(255)
+        )
     ''')
     
     # Create tutorial_categories table
@@ -156,6 +195,24 @@ def initialize_database():
 
     conn.commit()
 
+     # >>> ADDED: Check if subscription plans exist before inserting defaults
+    cur.execute('SELECT COUNT(*) FROM subscription_plans')
+    plan_count = cur.fetchone()[0]
+
+    if plan_count == 0:
+        # Insert default subscription plans if they don't exist
+        cur.execute('''
+            INSERT INTO subscription_plans (name, description, price, duration_days)
+            VALUES
+                ('Basic', 'Access to core tutorials and study guides', 99.99, 30),
+                ('Premium', 'Full access including live tutoring', 199.99, 30)
+        ''')
+        conn.commit() # Commit is done once at the end
+        print("✅ Default subscription plans inserted.")
+    else:
+        print("Subscription plans already exist, skipping default insert.")
+    # <<< END ADDED
+
     # Check if there are any users
     cur.execute('SELECT COUNT(*) FROM users')
     user_count = cur.fetchone()[0]
@@ -175,8 +232,104 @@ def initialize_database():
     conn.close()
 
 
-
 # Helpers
+# Add this new helper function to app.py
+def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            INSERT INTO subscriptions
+            (user_id, plan_id, start_date, end_date, is_active, payment_status)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            RETURNING id
+        ''', (user_id, plan_id, start_date, end_date, is_active, payment_status))
+        subscription_id = cur.fetchone()[0]
+        conn.commit()
+        return subscription_id
+    except Exception as e:
+        conn.rollback()
+        print(f"Error adding subscription: {e}")
+        return None
+    finally:
+        cur.close()
+        conn.close()
+
+def get_subscription_plans():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM subscription_plans')
+    plans = cur.fetchall()
+    cur.close()
+    conn.close()
+    return plans
+
+def get_user_subscription(user_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT s.id, p.name, p.price, s.start_date, s.end_date, s.is_active, s.payment_status
+        FROM subscriptions s
+        JOIN subscription_plans p ON s.plan_id = p.id
+        WHERE s.user_id = %s
+        ORDER BY s.end_date DESC
+        LIMIT 1
+    ''', (user_id,))
+    subscription = cur.fetchone()
+    cur.close()
+    conn.close()
+    return subscription
+
+def get_all_subscriptions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT s.id, u.username, p.name, p.price, s.start_date, s.end_date, 
+               s.is_active, s.payment_status, s.created_at
+        FROM subscriptions s
+        JOIN users u ON s.user_id = u.id
+        JOIN subscription_plans p ON s.plan_id = p.id
+        ORDER BY s.end_date DESC
+    ''')
+    subscriptions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return subscriptions
+
+def mark_subscription_as_paid(subscription_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            UPDATE subscriptions
+            SET payment_status = 'paid', is_active = TRUE
+            WHERE id = %s
+            RETURNING user_id, plan_id
+        ''', (subscription_id,))
+        result = cur.fetchone()
+        
+        if result:
+            user_id, plan_id = result
+            # Update user's role if needed (e.g., give premium access)
+            cur.execute('''
+                UPDATE users
+                SET role = CASE 
+                    WHEN %s = 2 THEN 'premium' 
+                    ELSE role 
+                END
+                WHERE id = %s
+            ''', (plan_id, user_id))
+        
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error marking subscription as paid: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
 def record_practice_score(student_id, subject, topic, score, total_questions):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -984,7 +1137,15 @@ def delete_tutorial(video_id):
 # Routes
 @app.route('/')
 def home():
-    return render_template('home.html')
+    # Initialize subscription to None
+    subscription = None
+    # Check if user is logged in and 'user_id' is in session
+    if 'user_id' in session:
+        # Call the function and pass the result to the template
+        subscription = get_user_subscription(session['user_id'])
+
+    # Pass the subscription variable to the render_template function
+    return render_template('home.html', subscription=subscription)
 
 #Curriculums
 @app.route('/math-curriculum')
@@ -1075,10 +1236,20 @@ def admin_dashboard():
     students = get_students()
     categories = get_all_categories()
     upcoming_sessions = get_upcoming_sessions()
+    
+    # Get active subscription count
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) FROM subscriptions WHERE is_active = TRUE")
+    active_subscriptions_count = cur.fetchone()[0]
+    cur.close()
+    conn.close()
+    
     return render_template('admin/dashboard.html', 
                          student_count=len(students), 
                          category_count=len(categories),
-                         upcoming_sessions=upcoming_sessions)
+                         upcoming_sessions=upcoming_sessions,
+                         active_subscriptions_count=active_subscriptions_count)
 
 @app.route('/admin/students')
 @login_required
@@ -1626,6 +1797,168 @@ def record_practice():
         return jsonify({'success': success})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
+    
+# Subscription routes
+@app.route('/subscribe')
+@login_required
+def subscribe():
+    plans = get_subscription_plans()
+    current_sub = get_user_subscription(session['user_id'])
+    return render_template('subscriptions/subscribe.html', 
+                         plans=plans,
+                         current_sub=current_sub)
+
+@app.route('/subscribe/<int:plan_id>', methods=['POST'])
+@login_required
+def create_subscription(plan_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    try:
+        # Get plan details
+        cur.execute('SELECT id, price, duration_days FROM subscription_plans WHERE id = %s', (plan_id,))
+        plan = cur.fetchone()
+        if not plan:
+            flash('Invalid subscription plan', 'danger')
+            return redirect(url_for('subscribe'))
+        
+        # Create subscription (payment will be marked as pending)
+        start_date = datetime.utcnow()
+        end_date = start_date + timedelta(days=plan[2])
+        
+        cur.execute('''
+            INSERT INTO subscriptions 
+            (user_id, plan_id, start_date, end_date, is_active, payment_status)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            RETURNING id
+        ''', (session['user_id'], plan_id, start_date, end_date, False, 'pending'))
+        
+        subscription_id = cur.fetchone()[0]
+        conn.commit()
+        
+        # In a real app, you would integrate with a payment gateway here
+        # For now, we'll just redirect to a confirmation page
+        return redirect(url_for('subscription_confirmation', subscription_id=subscription_id))
+        
+    except Exception as e:
+        conn.rollback()
+        flash('Error creating subscription: ' + str(e), 'danger')
+        return redirect(url_for('subscribe'))
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/subscription/confirmation/<int:subscription_id>')
+@login_required
+def subscription_confirmation(subscription_id):
+    return render_template('subscriptions/confirmation.html', subscription_id=subscription_id)
+
+# Admin subscription management
+@app.route('/admin/subscriptions')
+@login_required
+@admin_required
+def manage_subscriptions():
+    subscriptions = get_all_subscriptions()
+    return render_template('admin/subscriptions/list.html', subscriptions=subscriptions)
+
+@app.route('/admin/subscriptions/mark-paid/<int:subscription_id>', methods=['POST'])
+@login_required
+@admin_required
+def mark_subscription_paid(subscription_id):
+    if mark_subscription_as_paid(subscription_id):
+        flash('Subscription marked as paid', 'success')
+    else:
+        flash('Failed to mark subscription as paid', 'danger')
+    return redirect(url_for('manage_subscriptions'))
+
+# Add this new route to app.py
+@app.route('/admin/subscriptions/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def admin_add_subscription():
+    if request.method == 'POST':
+        try:
+            student_id = request.form.get('student_id')
+            plan_id = request.form.get('plan_id')
+            start_date_str = request.form.get('start_date')
+            duration_days = request.form.get('duration_days')
+            mark_paid = request.form.get('mark_paid') is not None # Checkbox value
+
+            if not all([student_id, plan_id, start_date_str, duration_days]):
+                flash('All fields are required', 'danger')
+                return redirect(url_for('admin_add_subscription'))
+
+            # Convert data types
+            student_id = int(student_id)
+            plan_id = int(plan_id)
+            duration_days = int(duration_days)
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+            end_date = start_date + timedelta(days=duration_days)
+
+            # Determine payment status and active status
+            payment_status = 'paid' if mark_paid else 'pending'
+            is_active = mark_paid # Subscription is active immediately if marked as paid
+
+            subscription_id = add_subscription_to_db(
+                user_id=student_id,
+                plan_id=plan_id,
+                start_date=start_date,
+                end_date=end_date,
+                is_active=is_active,
+                payment_status=payment_status
+            )
+
+            if subscription_id:
+                # If marked paid, update user role if necessary (e.g., grant premium access)
+                if is_active:
+                     conn = get_db_connection()
+                     cur = conn.cursor()
+                     try:
+                         cur.execute('SELECT name FROM subscription_plans WHERE id = %s', (plan_id,))
+                         plan_name = cur.fetchone()[0]
+                         if plan_name.lower() == 'premium': # Check plan name for role update
+                             cur.execute("UPDATE users SET role = 'premium' WHERE id = %s", (student_id,))
+                             conn.commit()
+                     except Exception as e:
+                         print(f"Error updating user role: {e}")
+                     finally:
+                         cur.close()
+                         conn.close()
+
+                flash('Subscription added successfully', 'success')
+                return redirect(url_for('manage_subscriptions'))
+            else:
+                flash('Error adding subscription', 'danger')
+
+        except ValueError:
+            flash('Invalid input data', 'danger')
+        except Exception as e:
+            flash(f'An unexpected error occurred: {str(e)}', 'danger')
+            app.logger.error(f"Admin add subscription error: {str(e)}")
+
+
+    # GET request
+    students = get_students()
+    plans = get_subscription_plans()
+    print("DEBUG: Rendering admin/add_subscription.html. Checking if 'float' is in globals:", 'float' in app.jinja_env.globals) # Add this line
+    return render_template('admin/add_subscription.html', students=students, plans=plans)
+
+@app.route('/subscription/status')
+@login_required
+def subscription_status():
+    # Ensure only students can access this page if needed, although login_required already restricts it
+    if session.get('role') != 'student':
+        flash('This page is only for students.', 'warning')
+        return redirect(url_for('home')) # Or wherever appropriate
+
+    user_id = session.get('user_id')
+    if not user_id:
+        # This case should be covered by @login_required, but as a fallback:
+        flash('User not logged in.', 'danger')
+        return redirect(url_for('login'))
+
+    subscription = get_user_subscription(user_id)
+    return render_template('subscription_status.html', subscription=subscription)
 
     
 if __name__ == '__main__':

@@ -1,0 +1,74 @@
+{% extends "admin/base.html" %} {% block title %}Add Subscription{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <h1 class="h3 mb-4">Add Subscription for Student</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form action="{{ url_for('admin_add_subscription') }}" method="POST">
+        <div class="mb-3">
+          <label for="student_id" class="form-label">Select Student</label>
+          <select
+            class="form-select"
+            id="student_id"
+            name="student_id"
+            required
+          >
+            <option value="">-- Select Student --</option>
+            {% for student in students %}
+            <option value="{{ student[0] }}">{{ student[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="plan_id" class="form-label"
+            >Select Subscription Plan</label
+          >
+          <select class="form-select" id="plan_id" name="plan_id" required>
+            <option value="">-- Select Plan --</option>
+            {% for plan in plans %}
+            <option value="{{ plan[0] }}">
+              {{ plan[1] }} (R{{ "%.2f" % float(plan[2]) }})
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="start_date" class="form-label">Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="start_date"
+            name="start_date"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="duration_days" class="form-label">Duration (Days)</label>
+          <input
+            type="number"
+            class="form-control"
+            id="duration_days"
+            name="duration_days"
+            min="1"
+            required
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="mark_paid"
+            name="mark_paid"
+            checked
+          />
+          <label class="form-check-label" for="mark_paid"
+            >Mark as Paid and Active</label
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Add Subscription</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

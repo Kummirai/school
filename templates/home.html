@@ -1,542 +1,615 @@
-{% extends "base.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-
-<!-- Hero Section -->
-<section class="hero-section" style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%} {# The rest of your home.html content #}
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
     background-size: cover;
     background-position: center;
     color: white;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 0;">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <div class="mb-4">
-                    <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
-                </div>
-                <h1 class="display-3 fw-bold mb-4">
-                    {% if 'username' in session %}
-                    Welcome back, <span class="text-warning">{{ session['username'] }}</span>
-                    {% else %}
-                    Master Skills with <span class="text-warning">MiltonTutor+</span>
-                    {% endif %}
-                </h1>
-                <p class="lead mb-5 fs-4">
-                    {% if 'username' in session %}
-                    <i class="bi bi-stars text-warning me-2"></i> Continue your learning journey with our comprehensive
-                    resources
-                    {% else %}
-                    <i class="bi bi-stars text-warning me-2"></i> Your one-stop platform for web development and exam
-                    preparation
-                    {% endif %}
-                </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    {% if 'username' not in session %}
-                    <a class="btn btn-danger btn-lg px-4 py-3 fw-bold" href="{{ url_for('login') }}" role="button">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
-                    </a>
-                    <a class="btn btn-outline-light btn-lg px-4 py-3 fw-bold" href="#features" role="button">
-                        <i class="bi bi-info-circle me-2"></i>Learn More
-                    </a>
-                    {% else %}
-                    <a class="btn btn-danger btn-lg px-4 py-3 fw-bold" href="{{ url_for('tutorials_home') }}"
-                        role="button">
-                        <i class="bi bi-collection-play me-2"></i>Browse Tutorials
-                    </a>
-                    <a class="btn btn-warning btn-lg px-4 py-3 fw-bold" href="{{url_for('studyguides_home')}}" role="button">
-                        <i class="bi bi-journal-bookmark me-2"></i>Practice Questions
-                    </a>
-                    {% endif %}
-                </div>
-
-                <!-- Scroll indicator -->
-                <div class="mt-5 pt-5">
-                    <a href="#features" class="text-white text-decoration-none">
-                        <div class="d-flex flex-column align-items-center">
-                            <span class="mb-2">Explore More</span>
-                            <i class="bi bi-chevron-down fs-4 animate-bounce"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
         </div>
+        <h1 class="display-3 fw-bold mb-4">
+          {% if 'username' in session %} Welcome back,
+          <span class="text-warning">{{ session['username'] }}</span> {% else %}
+          Master Skills with <span class="text-warning">MiltonTutor+</span>
+          {% endif %}
+        </h1>
+        <p class="lead mb-5 fs-4">
+          {% if 'username' in session %}
+          <i class="bi bi-stars text-warning me-2"></i> Continue your learning
+          journey with our comprehensive resources {% else %}
+          <i class="bi bi-stars text-warning me-2"></i> Your one-stop platform
+          for web development and exam preparation {% endif %}
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          {% if 'username' not in session %}
+          <a
+            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            href="{{ url_for('login') }}"
+            role="button"
+          >
+            <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+          </a>
+          <a
+            class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"
+            href="#features"
+            role="button"
+          >
+            <i class="bi bi-info-circle me-2"></i>Learn More
+          </a>
+          {% else %}
+          <a
+            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            href="{{ url_for('tutorials_home') }}"
+            role="button"
+          >
+            <i class="bi bi-collection-play me-2"></i>Browse Tutorials
+          </a>
+          <a
+            class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+            href="{{url_for('studyguides_home')}}"
+            role="button"
+          >
+            <i class="bi bi-journal-bookmark me-2"></i>Practice Questions
+          </a>
+          {% endif %}
+        </div>
+
+        <div class="mt-5 pt-5">
+          <a href="#features" class="text-white text-decoration-none">
+            <div class="d-flex flex-column align-items-center">
+              <span class="mb-2">Explore More</span>
+              <i class="bi bi-chevron-down fs-4 animate-bounce"></i>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- Live Tutoring Section -->
 <section id="live-tutoring" class="py-5 mb-0">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Live Tutoring Sessions</h2>
-            <p class="lead text-muted">Get real-time help from our expert tutors</p>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <div class="card border-danger shadow-sm h-100">
-                    <div class="card-body p-5">
-                        <i class="bi bi-camera-video display-1 text-danger mb-4"></i>
-                        <h3 class="h4 fw-bold mb-3">One-on-One Tutoring</h3>
-                        <p class="mb-4">Connect instantly with a tutor for personalized help with any subject.</p>
-                        <a href="{{ url_for('video_conference') }}" target="_blank"
-                            class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-                            <i class="bi bi-camera-video me-2"></i>Start Live Session
-                        </a>
-                        <p class="small text-muted mt-3">Opens in a new window</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Live Tutoring Sessions</h2>
+      <p class="lead text-muted">Get real-time help from our expert tutors</p>
     </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="card border-danger shadow-sm h-100">
+          <div class="card-body p-5">
+            <i class="bi bi-camera-video display-1 text-danger mb-4"></i>
+            <h3 class="h4 fw-bold mb-3">One-on-One Tutoring</h3>
+            <p class="mb-4">
+              Connect instantly with a tutor for personalized help with any
+              subject.
+            </p>
+            <a
+              href="{{ url_for('video_conference') }}"
+              target="_blank"
+              class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            >
+              <i class="bi bi-camera-video me-2"></i>Start Live Session
+            </a>
+            <p class="small text-muted mt-3">Opens in a new window</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Grade Level Courses -->
 <section id="courses" class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" id="features">Grade-Level Learning Paths</h2>
-            <p class="lead text-muted">Structured curriculum aligned with school standards</p>
-        </div>
-
-        <!-- Grade 7-9 -->
-        <div class="grade-section mb-5">
-            <div class="d-flex align-items-center mb-4">
-                <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
-                <h3 class="fw-bold mb-0">Middle School (Grades 7-9)</h3>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-danger shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-calculator display-4 text-danger mb-3"></i>
-                            <h4 class="fw-bold">Mathematics</h4>
-                            <ul class="text-start ps-3">
-                                <li>Pre-Algebra</li>
-                                <li>Algebra I</li>
-                                <li>Geometry Basics</li>
-                            </ul>
-                            <a href="{{ url_for('math_curriculum') }}" class="btn btn-sm btn-outline-danger mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-warning shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-flower1 display-4 text-warning mb-3"></i>
-                            <h4 class="fw-bold">Science</h4>
-                            <ul class="text-start ps-3">
-                                <li>Life Science</li>
-                                <li>Physical Science</li>
-                                <li>Earth Science</li>
-                            </ul>
-                            <a href="{{ url_for('science_curriculum') }}" class="btn btn-sm btn-outline-warning mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-secondary shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-translate display-4 text-secondary mb-3"></i>
-                            <h4 class="fw-bold">English</h4>
-                            <ul class="text-start ps-3">
-                                <li>Reading Comprehension</li>
-                                <li>Writing Fundamentals</li>
-                                <li>Grammar Skills</li>
-                            </ul>
-                            <a href="{{ url_for('english_curriculum') }}" class="btn btn-sm btn-outline-secondary mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-danger shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-globe2 display-4 text-danger mb-3"></i>
-                            <h4 class="fw-bold">Social Studies</h4>
-                            <ul class="text-start ps-3">
-                                <li>World Geography</li>
-                                <li>American History</li>
-                                <li>Civics</li>
-                            </ul>
-                            <a href="#" class="btn btn-sm btn-outline-danger mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Grade 10-12 -->
-        <div class="grade-section">
-            <div class="d-flex align-items-center mb-4">
-                <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
-                <h3 class="fw-bold mb-0">High School (Grades 10-12)</h3>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-danger shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-graph-up-arrow display-4 text-danger mb-3"></i>
-                            <h4 class="fw-bold">Mathematics</h4>
-                            <ul class="text-start ps-3">
-                                <li>Algebra II</li>
-                                <li>Pre-Calculus</li>
-                                <li>AP Calculus</li>
-                            </ul>
-                            <a href="#" class="btn btn-sm btn-outline-danger mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-warning shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-egg-fried display-4 text-warning mb-3"></i>
-                            <h4 class="fw-bold">Science</h4>
-                            <ul class="text-start ps-3">
-                                <li>Biology</li>
-                                <li>Chemistry</li>
-                                <li>Physics</li>
-                            </ul>
-                            <a href="#" class="btn btn-sm btn-outline-warning mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-secondary shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-book-half display-4 text-secondary mb-3"></i>
-                            <h4 class="fw-bold">English</h4>
-                            <ul class="text-start ps-3">
-                                <li>American Literature</li>
-                                <li>AP English</li>
-                                <li>College Writing</li>
-                            </ul>
-                            <a href="#" class="btn btn-sm btn-outline-secondary mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-danger shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-globe-americas display-4 text-danger mb-3"></i>
-                            <h4 class="fw-bold">Social Studies</h4>
-                            <ul class="text-start ps-3">
-                                <li>World History</li>
-                                <li>AP Government</li>
-                                <li>Economics</li>
-                            </ul>
-                            <a href="#" class="btn btn-sm btn-outline-danger mt-2">
-                                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Technology Section -->
-        <div class="col-12 mt-5">
-            <h3 class="h4 fw-bold mb-4 text-center">
-                <i class="bi bi-laptop text-warning me-2"></i>Technology & Programming
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-4 mt-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-filetype-html display-4 text-danger mb-3"></i>
-                        <h3 class="h4 fw-bold">Web Development</h3>
-                        <p class="card-text">HTML, CSS, and JavaScript for beginners to advanced.</p>
-                        <a href="#" class="btn btn-outline-danger mt-3">
-                            <i class="bi bi-arrow-right-circle me-1"></i>Explore
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-filetype-py display-4 text-warning mb-3"></i>
-                        <h3 class="h4 fw-bold">Python</h3>
-                        <p class="card-text">Learn Python programming from basics to web development.</p>
-                        <a href="#" class="btn btn-outline-warning mt-3">
-                            <i class="bi bi-arrow-right-circle me-1"></i>Explore
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-microsoft display-4 text-secondary mb-3"></i>
-                        <h3 class="h4 fw-bold">Microsoft Office</h3>
-                        <p class="card-text">Master Word, Excel, PowerPoint for academic success.</p>
-                        <a href="#" class="btn btn-outline-secondary mt-3">
-                            <i class="bi bi-arrow-right-circle me-1"></i>Explore
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" id="features">Grade-Level Learning Paths</h2>
+      <p class="lead text-muted">
+        Structured curriculum aligned with school standards
+      </p>
     </div>
+
+    <div class="grade-section mb-5">
+      <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
+        <h3 class="fw-bold mb-0">Middle School (Grades 7-9)</h3>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-danger shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-calculator display-4 text-danger mb-3"></i>
+              <h4 class="fw-bold">Mathematics</h4>
+              <ul class="text-start ps-3">
+                <li>Pre-Algebra</li>
+                <li>Algebra I</li>
+                <li>Geometry Basics</li>
+              </ul>
+              <a
+                href="{{ url_for('math_curriculum') }}"
+                class="btn btn-sm btn-outline-danger mt-2"
+              >
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-warning shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-flower1 display-4 text-warning mb-3"></i>
+              <h4 class="fw-bold">Science</h4>
+              <ul class="text-start ps-3">
+                <li>Life Science</li>
+                <li>Physical Science</li>
+                <li>Earth Science</li>
+              </ul>
+              <a
+                href="{{ url_for('science_curriculum') }}"
+                class="btn btn-sm btn-outline-warning mt-2"
+              >
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-secondary shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-translate display-4 text-secondary mb-3"></i>
+              <h4 class="fw-bold">English</h4>
+              <ul class="text-start ps-3">
+                <li>Reading Comprehension</li>
+                <li>Writing Fundamentals</li>
+                <li>Grammar Skills</li>
+              </ul>
+              <a
+                href="{{ url_for('english_curriculum') }}"
+                class="btn btn-sm btn-outline-secondary mt-2"
+              >
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-danger shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-globe2 display-4 text-danger mb-3"></i>
+              <h4 class="fw-bold">Social Studies</h4>
+              <ul class="text-start ps-3">
+                <li>World Geography</li>
+                <li>American History</li>
+                <li>Civics</li>
+              </ul>
+              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grade-section">
+      <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
+        <h3 class="fw-bold mb-0">High School (Grades 10-12)</h3>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-danger shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-graph-up-arrow display-4 text-danger mb-3"></i>
+              <h4 class="fw-bold">Mathematics</h4>
+              <ul class="text-start ps-3">
+                <li>Algebra II</li>
+                <li>Pre-Calculus</li>
+                <li>AP Calculus</li>
+              </ul>
+              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-warning shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-egg-fried display-4 text-warning mb-3"></i>
+              <h4 class="fw-bold">Science</h4>
+              <ul class="text-start ps-3">
+                <li>Biology</li>
+                <li>Chemistry</li>
+                <li>Physics</li>
+              </ul>
+              <a href="#" class="btn btn-sm btn-outline-warning mt-2">
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-secondary shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-book-half display-4 text-secondary mb-3"></i>
+              <h4 class="fw-bold">English</h4>
+              <ul class="text-start ps-3">
+                <li>American Literature</li>
+                <li>AP English</li>
+                <li>College Writing</li>
+              </ul>
+              <a href="#" class="btn btn-sm btn-outline-secondary mt-2">
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-danger shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi bi-globe-americas display-4 text-danger mb-3"></i>
+              <h4 class="fw-bold">Social Studies</h4>
+              <ul class="text-start ps-3">
+                <li>World History</li>
+                <li>AP Government</li>
+                <li>Economics</li>
+              </ul>
+              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+                View Curriculum <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-5">
+      <h3 class="h4 fw-bold mb-4 text-center">
+        <i class="bi bi-laptop text-warning me-2"></i>Technology & Programming
+      </h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mt-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-filetype-html display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Web Development</h3>
+            <p class="card-text">
+              HTML, CSS, and JavaScript for beginners to advanced.
+            </p>
+            <a href="#" class="btn btn-outline-danger mt-3">
+              <i class="bi bi-arrow-right-circle me-1"></i>Explore
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-filetype-py display-4 text-warning mb-3"></i>
+            <h3 class="h4 fw-bold">Python</h3>
+            <p class="card-text">
+              Learn Python programming from basics to web development.
+            </p>
+            <a href="#" class="btn btn-outline-warning mt-3">
+              <i class="bi bi-arrow-right-circle me-1"></i>Explore
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-microsoft display-4 text-secondary mb-3"></i>
+            <h3 class="h4 fw-bold">Microsoft Office</h3>
+            <p class="card-text">
+              Master Word, Excel, PowerPoint for academic success.
+            </p>
+            <a href="#" class="btn btn-outline-secondary mt-3">
+              <i class="bi bi-arrow-right-circle me-1"></i>Explore
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Exam Preparation Section -->
 <section id="exam-resources" class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Exam Preparation Resources</h2>
-            <p class="lead text-muted">Access premium study guides, video tutorials, and practice exams</p>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Exam Preparation Resources</h2>
+      <p class="lead text-muted">
+        Access premium study guides, video tutorials, and practice exams
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
+          <i class="bi bi-journal-text display-4 text-warning mb-3"></i>
+          <h3 class="h5 fw-bold">Comprehensive Guides</h3>
+          <p class="text-muted">
+            Detailed, subject-specific study materials that break down complex
+            topics
+          </p>
         </div>
+      </div>
 
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
-                    <i class="bi bi-journal-text display-4 text-warning mb-3"></i>
-                    <h3 class="h5 fw-bold">Comprehensive Guides</h3>
-                    <p class="text-muted">Detailed, subject-specific study materials that break down complex topics</p>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
-                    <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
-                    <h3 class="h5 fw-bold">Video Tutorials</h3>
-                    <p class="text-muted">Engaging video lessons from top instructors in every field</p>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
-                    <i class="bi bi-file-earmark-text display-4 text-warning mb-3"></i>
-                    <h3 class="h5 fw-bold">Practice Exams</h3>
-                    <p class="text-muted">Realistic mock tests with detailed answer explanations</p>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
-                    <i class="bi bi-graph-up display-4 text-warning mb-3"></i>
-                    <h3 class="h5 fw-bold">Progress Tracking</h3>
-                    <p class="text-muted">Monitor your improvement with personalized analytics</p>
-                </div>
-            </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
+          <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
+          <h3 class="h5 fw-bold">Video Tutorials</h3>
+          <p class="text-muted">
+            Engaging video lessons from top instructors in every field
+          </p>
         </div>
+      </div>
 
-        <div class="text-center mt-5">
-            {% if 'username' not in session %}
-            <a class="btn btn-danger btn-lg px-4 py-2" href="{{ url_for('login') }}" role="button">
-                <i class="bi bi-box-arrow-in-right me-2"></i>Login to Access Exam Resources
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
+          <i class="bi bi-file-earmark-text display-4 text-warning mb-3"></i>
+          <h3 class="h5 fw-bold">Practice Exams</h3>
+          <p class="text-muted">
+            Realistic mock tests with detailed answer explanations
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 shadow-sm rounded text-center">
+          <i class="bi bi-graph-up display-4 text-warning mb-3"></i>
+          <h3 class="h5 fw-bold">Progress Tracking</h3>
+          <p class="text-muted">
+            Monitor your improvement with personalized analytics
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      {% if 'username' not in session %}
+      <a
+        class="btn btn-danger btn-lg px-4 py-2"
+        href="{{ url_for('login') }}"
+        role="button"
+      >
+        <i class="bi bi-box-arrow-in-right me-2"></i>Login to Access Exam
+        Resources
+      </a>
+      {% else %}
+      <a href="#" class="btn btn-warning btn-lg px-4 py-2">
+        <i class="bi bi-journal-bookmark me-2"></i>Browse Exam Resources
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Popular Exam Resources</h2>
+      <p class="lead text-muted">
+        Browse our most sought-after study materials
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+            class="card-img-top"
+            alt="SAT Prep"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body text-center">
+            <h3 class="h5 fw-bold">SAT Complete Prep</h3>
+            <p class="text-muted">
+              Math, Reading, Writing - 150+ video lessons
+            </p>
+            <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
+            {% if 'username' in session %}
+            <a href="#" class="btn btn-outline-dark">
+              <i class="bi bi-eye me-1"></i>View Details
             </a>
             {% else %}
-            <a href="#" class="btn btn-warning btn-lg px-4 py-2">
-                <i class="bi bi-journal-bookmark me-2"></i>Browse Exam Resources
+            <a href="{{ url_for('login') }}" class="btn btn-outline-dark">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
             </a>
             {% endif %}
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            class="card-img-top"
+            alt="MCAT Prep"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body text-center">
+            <h3 class="h5 fw-bold">MCAT Mastery</h3>
+            <p class="text-muted">
+              1,200+ practice questions with explanations
+            </p>
+            <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
+            {% if 'username' in session %}
+            <a href="#" class="btn btn-warning">
+              <i class="bi bi-eye me-1"></i>View Details
+            </a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-warning">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            class="card-img-top"
+            alt="CPA Prep"
+            style="height: 200px; object-fit: cover"
+          />
+          <div class="card-body text-center">
+            <h3 class="h5 fw-bold">CPA Exam Crash Course</h3>
+            <p class="text-muted">All 4 sections covered in 8-week program</p>
+            <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
+            {% if 'username' in session %}
+            <a href="#" class="btn btn-danger">
+              <i class="bi bi-eye me-1"></i>View Details
+            </a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-danger">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- Popular Resources Section -->
-<section class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Popular Exam Resources</h2>
-            <p class="lead text-muted">Browse our most sought-after study materials</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-                        class="card-img-top" alt="SAT Prep" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h3 class="h5 fw-bold">SAT Complete Prep</h3>
-                        <p class="text-muted">Math, Reading, Writing - 150+ video lessons</p>
-                        <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
-                        {% if 'username' in session %}
-                        <a href="#" class="btn btn-outline-dark">
-                            <i class="bi bi-eye me-1"></i>View Details
-                        </a>
-                        {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-outline-dark">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                        class="card-img-top" alt="MCAT Prep" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h3 class="h5 fw-bold">MCAT Mastery</h3>
-                        <p class="text-muted">1,200+ practice questions with explanations</p>
-                        <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
-                        {% if 'username' in session %}
-                        <a href="#" class="btn btn-warning">
-                            <i class="bi bi-eye me-1"></i>View Details
-                        </a>
-                        {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-warning">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                        class="card-img-top" alt="CPA Prep" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h3 class="h5 fw-bold">CPA Exam Crash Course</h3>
-                        <p class="text-muted">All 4 sections covered in 8-week program</p>
-                        <div class="fs-4 fw-bold text-dark mb-3">R199.<sup>99</sup></div>
-                        {% if 'username' in session %}
-                        <a href="#" class="btn btn-danger">
-                            <i class="bi bi-eye me-1"></i>View Details
-                        </a>
-                        {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-danger">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonial Section -->
 <section class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">What Our Students Say</h2>
-            <p class="lead text-muted">Many students have achieved their goals with us</p>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="p-4 p-lg-5 shadow-sm rounded bg-white" style="border-left: 5px solid #ffc107;">
-                    <div class="text-warning fs-4 mb-3">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <p class="fs-5 fst-italic mb-4">"MiltonTutor + helped me raise my scores! The video
-                        explanations made difficult concepts so clear."</p>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                            class="rounded-circle me-3" alt="Jessica K."
-                            style="width: 50px; height: 50px; object-fit: cover;">
-                        <div>
-                            <h4 class="h6 fw-bold mb-0">Jessica K.</h4>
-                            <small class="text-muted">Harvard College</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">What Our Students Say</h2>
+      <p class="lead text-muted">
+        Many students have achieved their goals with us
+      </p>
     </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div
+          class="p-4 p-lg-5 shadow-sm rounded bg-white"
+          style="border-left: 5px solid #ffc107"
+        >
+          <div class="text-warning fs-4 mb-3">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <p class="fs-5 fst-italic mb-4">
+            "MiltonTutor + helped me raise my scores! The video explanations
+            made difficult concepts so clear."
+          </p>
+          <div class="d-flex align-items-center justify-content-center">
+            <img
+              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              class="rounded-circle me-3"
+              alt="Jessica K."
+              style="width: 50px; height: 50px; object-fit: cover"
+            />
+            <div>
+              <h4 class="h6 fw-bold mb-0">Jessica K.</h4>
+              <small class="text-muted">Harvard College</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CTA Section -->
 <section class="py-5 bg-warning">
-    <div class="container py-4 text-center">
-        <h2 class="display-5 fw-bold mb-4">Ready to Boost Your Grades?</h2>
-        <p class="lead mb-5">Join many students achieving academic success</p>
-        {% if 'username' not in session %}
-        <a href="{{ url_for('login') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-box-arrow-in-right me-2"></i>Start Learning Now
-        </a>
-        {% else %}
-        <a href="{{ url_for('tutorials_home') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-collection-play me-2"></i>Continue Learning
-        </a>
-        {% endif %}
-    </div>
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4">Ready to Boost Your Grades?</h2>
+    <p class="lead mb-5">Join many students achieving academic success</p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('login') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Start Learning Now
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('tutorials_home') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Continue Learning
+    </a>
+    {% endif %}
+  </div>
 </section>
 
 <style>
-    .hero-section {
-        position: relative;
-        width: 100vw;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
     }
 
-    .animate-bounce {
-        animation: bounce 2s infinite;
+    40% {
+      transform: translateY(-20px);
     }
 
-    @keyframes bounce {
-
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-            transform: translateY(0);
-        }
-
-        40% {
-            transform: translateY(-20px);
-        }
-
-        60% {
-            transform: translateY(-10px);
-        }
+    60% {
+      transform: translateY(-10px);
     }
+  }
 
-    .feature-card {
-        transition: transform 0.3s ease;
-    }
+  .feature-card {
+    transition: transform 0.3s ease;
+  }
 
-    .feature-card:hover {
-        transform: translateY(-10px);
-    }
+  .feature-card:hover {
+    transform: translateY(-10px);
+  }
 
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
 </style>
 
 {% endblock %}
