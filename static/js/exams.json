@@ -16,7 +16,6 @@
         "options": ["2a + 3b", "8a + 3b", "2a + b", "8a + b"],
         "correct_answer": "2a + 3b"
       }
-      
     ],
     "duration_minutes": 30,
     "difficulty": "Easy"
@@ -48,10 +47,8 @@
         ],
         "correct_answer": "Photosynthesis"
       }
-      
     ],
     "duration_minutes": 45,
     "difficulty": "Medium"
   }
-  
 ]
