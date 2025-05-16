@@ -4,7 +4,21 @@ endblock %} {% block content %}
   <h1 class="mb-4">{{ exam.title }}</h1>
   <p class="text-muted">{{ exam.description }}</p>
 
-  <form action="{{ url_for('submit_exam', exam_id=exam.id) }}" method="POST">
+  {# Timer Display Area #}
+  <div class="card bg-light mb-4 shadow-sm">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Time Remaining:</h5>
+      <div id="timer" class="h5 mb-0 text-danger fw-bold">
+        {{ exam.duration_minutes }}:00
+      </div>
+    </div>
+  </div>
+
+  <form
+    id="examForm"
+    action="{{ url_for('submit_exam', exam_id=exam.id) }}"
+    method="POST"
+  >
     {% for question in exam.questions %}
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
@@ -38,4 +52,44 @@ endblock %} {% block content %}
     <button type="submit" class="btn btn-success mt-4">Submit Exam</button>
   </form>
 </div>
+{% endblock %} {% block scripts %}
+<script>
+  // Get the total duration in minutes from Flask context
+  const examDurationMinutes = {{ exam.duration_minutes }};
+  let timeRemaining = examDurationMinutes * 60; // Convert to seconds
+
+  const timerDisplay = document.getElementById('timer');
+  const examForm = document.getElementById('examForm');
+
+  function updateTimer() {
+      const minutes = Math.floor(timeRemaining / 60);
+      let seconds = timeRemaining % 60;
+
+      // Add leading zero to seconds if less than 10
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+
+      timerDisplay.textContent = `${minutes}:${seconds}`;
+
+      if (timeRemaining <= 0) {
+          clearInterval(timerInterval); // Stop the timer
+          timerDisplay.textContent = 'Time Up!';
+          // Automatically submit the form
+          alert("Time is up! Your exam will be submitted."); // Optional alert
+          examForm.submit();
+      } else {
+          timeRemaining--;
+      }
+  }
+
+  // Start the timer when the page loads
+  const timerInterval = setInterval(updateTimer, 1000);
+
+  // Optional: Prevent user from leaving the page during the exam
+  // window.addEventListener('beforeunload', function (e) {
+  //     // Cancel the event
+  //     e.preventDefault();
+  //     // Chrome requires returnValue to be set
+  //     e.returnValue = '';
+  // });
+</script>
 {% endblock %}
