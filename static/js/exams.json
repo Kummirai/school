@@ -1,54 +1,957 @@
 [
   {
-    "id": 1,
-    "title": "Mathematics - Algebra Basics",
-    "description": "Test your knowledge of fundamental algebra.",
+    "id": 2,
+    "title": "Python Fundamentals Comprehensive Exam",
+    "description": "A thorough exam testing Python basics, including variables, lists, strings, integers, floats, and if-else statements.",
     "questions": [
       {
         "id": 101,
-        "text": "What is the value of x in the equation 2x + 3 = 7?",
-        "options": ["1", "2", "3", "4"],
-        "correct_answer": "2"
+        "text": "Which of the following is a valid variable name in Python?",
+        "options": ["2var", "var_1", "var-1", "None"],
+        "correct_answer": "var_1"
       },
       {
         "id": 102,
-        "text": "Simplify: 5a + 2b - 3a + b",
-        "options": ["2a + 3b", "8a + 3b", "2a + b", "8a + b"],
-        "correct_answer": "2a + 3b"
+        "text": "What is the correct syntax to create a list in Python?",
+        "options": [
+          "list = {1, 2, 3}",
+          "list = (1, 2, 3)",
+          "list = [1, 2, 3]",
+          "list = <1, 2, 3>"
+        ],
+        "correct_answer": "list = [1, 2, 3]"
+      },
+      {
+        "id": 103,
+        "text": "How do you access the first element of a list named `my_list`?",
+        "options": [
+          "my_list[0]",
+          "my_list(0)",
+          "my_list.first()",
+          "my_list{0}"
+        ],
+        "correct_answer": "my_list[0]"
+      },
+      {
+        "id": 104,
+        "text": "Which of the following correctly declares a string variable?",
+        "options": [
+          "text = 'Hello'",
+          "text = Hello",
+          "text = [Hello]",
+          "text = (Hello)"
+        ],
+        "correct_answer": "text = 'Hello'"
+      },
+      {
+        "id": 105,
+        "text": "What will `print(5 / 2)` output?",
+        "options": ["2", "2.5", "2.0", "Error"],
+        "correct_answer": "2.5"
+      },
+      {
+        "id": 106,
+        "text": "What data type does `type(10.5)` return?",
+        "options": ["int", "float", "str", "list"],
+        "correct_answer": "float"
+      },
+      {
+        "id": 107,
+        "text": "Which operator is used for checking equality in Python?",
+        "options": ["=", "==", "!=", "==="],
+        "correct_answer": "=="
+      },
+      {
+        "id": 108,
+        "text": "Which of the following statements correctly implements an `if` condition?",
+        "options": ["if x = 5:", "if x == 5:", "if (x = 5):", "if [x == 5]:"],
+        "correct_answer": "if x == 5:"
+      },
+      {
+        "id": 109,
+        "text": "Which of the following is NOT a mutable data type in Python?",
+        "options": ["List", "Tuple", "Dictionary", "Set"],
+        "correct_answer": "Tuple"
+      },
+      {
+        "id": 110,
+        "text": "How do you convert a string `s = '123'` into an integer?",
+        "options": ["int(s)", "str(s)", "s.toInt()", "convert(s, int)"],
+        "correct_answer": "int(s)"
+      },
+      {
+        "id": 111,
+        "text": "Which function is used to find the length of a list?",
+        "options": ["count()", "size()", "length()", "len()"],
+        "correct_answer": "len()"
+      },
+      {
+        "id": 112,
+        "text": "What will `print('hello' * 2)` output?",
+        "options": ["hellohello", "hello hello", "Error", "hello*hello"],
+        "correct_answer": "hellohello"
+      },
+      {
+        "id": 113,
+        "text": "What keyword is used to define a function in Python?",
+        "options": ["function", "def", "define", "func"],
+        "correct_answer": "def"
+      },
+      {
+        "id": 114,
+        "text": "Which method is used to add an item to the end of a list?",
+        "options": ["append()", "insert()", "extend()", "push()"],
+        "correct_answer": "append()"
+      },
+      {
+        "id": 115,
+        "text": "Which built-in function converts an integer to a string?",
+        "options": ["str()", "int()", "convert()", "toString()"],
+        "correct_answer": "str()"
+      },
+      {
+        "id": 116,
+        "text": "How do you check the data type of a variable in Python?",
+        "options": ["typeof(var)", "var.type()", "type(var)", "datatype(var)"],
+        "correct_answer": "type(var)"
+      },
+      {
+        "id": 117,
+        "text": "Which symbol is used for floor division?",
+        "options": ["/", "//", "%", "**"],
+        "correct_answer": "//"
+      },
+      {
+        "id": 118,
+        "text": "What does `range(5)` produce?",
+        "options": [
+          "[0, 1, 2, 3, 4]",
+          "[1, 2, 3, 4, 5]",
+          "[0, 2, 4]",
+          "[0, 5]"
+        ],
+        "correct_answer": "[0, 1, 2, 3, 4]"
+      },
+      {
+        "id": 119,
+        "text": "Which operator is used to concatenate strings?",
+        "options": ["+", "&", ".", ","],
+        "correct_answer": "+"
+      },
+      {
+        "id": 120,
+        "text": "Which function is used to take user input in Python?",
+        "options": ["input()", "scan()", "read()", "get()"],
+        "correct_answer": "input()"
       }
     ],
-    "duration_minutes": 30,
-    "difficulty": "Easy"
+    "duration_minutes": 60,
+    "difficulty": "Medium"
   },
   {
-    "id": 2,
-    "title": "Science - Biology Fundamentals",
-    "description": "A quick test on key biology concepts.",
+    "id": 3,
+    "title": "HTML Fundamentals Comprehensive Exam",
+    "description": "A thorough exam covering HTML basics, including headings, paragraphs, lists, formatting, and structural elements.",
     "questions": [
       {
         "id": 201,
-        "text": "What is the powerhouse of the cell?",
-        "options": [
-          "Nucleus",
-          "Mitochondria",
-          "Ribosome",
-          "Endoplasmic Reticulum"
-        ],
-        "correct_answer": "Mitochondria"
+        "text": "Which HTML tag is used for the largest heading?",
+        "options": ["<h6>", "<h3>", "<h1>", "<h4>"],
+        "correct_answer": "<h1>"
       },
       {
         "id": 202,
-        "text": "What is the process by which plants make their own food?",
+        "text": "What does the `<p>` tag represent in HTML?",
+        "options": ["Paragraph", "Page Break", "Padding", "Print"],
+        "correct_answer": "Paragraph"
+      },
+      {
+        "id": 203,
+        "text": "Which tag is used to create an unordered list?",
+        "options": ["<ul>", "<ol>", "<list>", "<li>"],
+        "correct_answer": "<ul>"
+      },
+      {
+        "id": 204,
+        "text": "Which HTML tag is used to make text bold?",
+        "options": ["<b>", "<strong>", "<bold>", "<em>"],
+        "correct_answer": "<strong>"
+      },
+      {
+        "id": 205,
+        "text": "What does the `<hr>` tag do?",
         "options": [
-          "Respiration",
-          "Transpiration",
-          "Photosynthesis",
-          "Germination"
+          "Adds a horizontal rule",
+          "Creates a hyperlink",
+          "Marks a header",
+          "Formats text"
         ],
-        "correct_answer": "Photosynthesis"
+        "correct_answer": "Adds a horizontal rule"
+      },
+      {
+        "id": 206,
+        "text": "Which tag is used to insert a line break?",
+        "options": ["<lb>", "<br>", "<break>", "<nl>"],
+        "correct_answer": "<br>"
+      },
+      {
+        "id": 207,
+        "text": "What does the `<em>` tag do?",
+        "options": [
+          "Makes text italic",
+          "Emphasizes text",
+          "Bold text",
+          "Underline text"
+        ],
+        "correct_answer": "Emphasizes text"
+      },
+      {
+        "id": 208,
+        "text": "Which of the following is a valid ordered list?",
+        "options": [
+          "<ol><li>Item</li></ol>",
+          "<ul><li>Item</li></ul>",
+          "<li><ol>Item</ol></li>",
+          "<list><ol>Item</ol></list>"
+        ],
+        "correct_answer": "<ol><li>Item</li></ol>"
+      },
+      {
+        "id": 209,
+        "text": "What does the `<li>` tag represent?",
+        "options": ["List item", "Line item", "List index", "Label input"],
+        "correct_answer": "List item"
+      },
+      {
+        "id": 210,
+        "text": "Which tag is used to apply strong emphasis to text?",
+        "options": ["<bold>", "<strong>", "<b>", "<em>"],
+        "correct_answer": "<strong>"
+      },
+      {
+        "id": 211,
+        "text": "What will the following HTML code display?\n```html\n<p><strong>Bold</strong> and <em>Italic</em> text</p>\n```",
+        "options": [
+          "Bold and Italic text",
+          "Error",
+          "Bold and Underlined text",
+          "Italic only"
+        ],
+        "correct_answer": "Bold and Italic text"
+      },
+      {
+        "id": 212,
+        "text": "What does the following code do?\n```html\n<ul>\n  <li>Apple</li>\n  <li>Orange</li>\n  <li>Banana</li>\n</ul>\n```",
+        "options": [
+          "Creates an ordered list",
+          "Creates a bullet list",
+          "Creates a numbered list",
+          "Creates a paragraph"
+        ],
+        "correct_answer": "Creates a bullet list"
+      },
+      {
+        "id": 213,
+        "text": "Which attribute is used to specify the background color of a webpage?",
+        "options": ["background", "bgcolor", "style", "color"],
+        "correct_answer": "style"
+      },
+      {
+        "id": 214,
+        "text": "What does `<ol type='A'>` do?",
+        "options": [
+          "Creates a list with numbers",
+          "Creates a list with uppercase letters",
+          "Creates a list with lowercase letters",
+          "Creates a list with Roman numerals"
+        ],
+        "correct_answer": "Creates a list with uppercase letters"
+      },
+      {
+        "id": 215,
+        "text": "Which HTML tag represents a division or section in a document?",
+        "options": ["<div>", "<section>", "<span>", "<header>"],
+        "correct_answer": "<div>"
+      },
+      {
+        "id": 216,
+        "text": "How do you create an HTML comment?",
+        "options": [
+          "<!-- This is a comment -->",
+          "// This is a comment",
+          "/* This is a comment */",
+          "' This is a comment"
+        ],
+        "correct_answer": "<!-- This is a comment -->"
+      },
+      {
+        "id": 217,
+        "text": "Which tag is used to create a hyperlink?",
+        "options": ["<link>", "<href>", "<a>", "<url>"],
+        "correct_answer": "<a>"
+      },
+      {
+        "id": 218,
+        "text": "What does `<a href='https://example.com'>Visit</a>` do?",
+        "options": [
+          "Displays 'Visit' as clickable text",
+          "Creates a paragraph",
+          "Opens a new tab",
+          "Displays a bold text"
+        ],
+        "correct_answer": "Displays 'Visit' as clickable text"
+      },
+      {
+        "id": 219,
+        "text": "What does `<span>` do?",
+        "options": [
+          "Groups inline elements",
+          "Creates a section",
+          "Creates a hyperlink",
+          "Makes text bold"
+        ],
+        "correct_answer": "Groups inline elements"
+      },
+      {
+        "id": 220,
+        "text": "Which tag is used to define a table?",
+        "options": ["<table>", "<tr>", "<td>", "<tab>"],
+        "correct_answer": "<table>"
+      }
+    ],
+    "duration_minutes": 60,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 4,
+    "title": "Grade 7 Mathematics - Fractions Exam",
+    "description": "A comprehensive examination for Grade 7 students covering fundamental concepts and operations involving fractions.",
+    "questions": [
+      {
+        "id": 301,
+        "text": "What fraction is qequivalent to 4/8?",
+        "options": ["1/4", "1/2", "3/4", "1/3"],
+        "correct_answer": "1/2"
+      },
+      {
+        "id": 302,
+        "text": "Which of the following fractions is equivalent to 1/3?",
+        "options": ["2/5", "3/9", "4/10", "5/12"],
+        "correct_answer": "3/9"
+      },
+      {
+        "id": 303,
+        "text": "Simplify the fraction 8/12 to its lowest terms.",
+        "options": ["4/6", "2/3", "1/2", "3/4"],
+        "correct_answer": "2/3"
+      },
+      {
+        "id": 304,
+        "text": "Convert the mixed number 2 1/4 into an improper fraction.",
+        "options": ["7/4", "9/4", "10/4", "11/4"],
+        "correct_answer": "9/4"
+      },
+      {
+        "id": 305,
+        "text": "Convert the improper fraction 17/5 into a mixed number.",
+        "options": ["3 1/5", "3 2/5", "3 3/5", "3 4/5"],
+        "correct_answer": "3 2/5"
+      },
+      {
+        "id": 306,
+        "text": "Which fraction is larger: 3/5 or 2/3?",
+        "options": ["3/5", "2/3", "They are equal", "Cannot be determined"],
+        "correct_answer": "2/3"
+      },
+      {
+        "id": 307,
+        "text": "Add the fractions: 1/4 + 2/4",
+        "options": ["3/8", "3/4", "1/2", "4/4"],
+        "correct_answer": "3/4"
+      },
+      {
+        "id": 308,
+        "text": "Subtract the fractions: 5/6 - 1/6",
+        "options": ["4/0", "4/6", "2/3", "1"],
+        "correct_answer": "2/3"
+      },
+      {
+        "id": 309,
+        "text": "Add the fractions: 1/2 + 1/3",
+        "options": ["2/5", "5/6", "3/5", "1/5"],
+        "correct_answer": "5/6"
+      },
+      {
+        "id": 310,
+        "text": "Subtract the fractions: 3/4 - 1/5",
+        "options": ["2/1", "11/20", "2/20", "19/20"],
+        "correct_answer": "11/20"
+      },
+      {
+        "id": 311,
+        "text": "Multiply the fractions: 2/3 * 1/4",
+        "options": ["3/7", "2/12", "1/6", "8/3"],
+        "correct_answer": "1/6"
+      },
+      {
+        "id": 312,
+        "text": "Divide the fractions: 3/5 ÷ 1/2",
+        "options": ["3/10", "6/5", "5/6", "1/10"],
+        "correct_answer": "6/5"
+      },
+      {
+        "id": 313,
+        "text": "What is 1/4 of 20?",
+        "options": ["4", "5", "10", "80"],
+        "correct_answer": "5"
+      },
+      {
+        "id": 314,
+        "text": "A pizza is cut into 8 slices. If you eat 3 slices, what fraction of the pizza did you eat?",
+        "options": ["3/8", "5/8", "1/3", "8/3"],
+        "correct_answer": "3/8"
+      },
+      {
+        "id": 315,
+        "text": "You have 12 marbles, and 1/3 of them are blue. How many blue marbles do you have?",
+        "options": ["3", "4", "6", "9"],
+        "correct_answer": "4"
+      },
+      {
+        "id": 316,
+        "text": "Which of the following is an improper fraction?",
+        "options": ["3/4", "7/6", "1/2", "5/5"],
+        "correct_answer": "7/6"
+      },
+      {
+        "id": 317,
+        "text": "Order the following fractions from smallest to largest: 1/2, 1/4, 3/4",
+        "options": [
+          "1/2, 1/4, 3/4",
+          "1/4, 1/2, 3/4",
+          "3/4, 1/2, 1/4",
+          "1/4, 3/4, 1/2"
+        ],
+        "correct_answer": "1/4, 1/2, 3/4"
+      },
+      {
+        "id": 318,
+        "text": "What is 2/5 of 50?",
+        "options": ["10", "20", "25", "100"],
+        "correct_answer": "20"
+      },
+      {
+        "id": 319,
+        "text": "If a recipe requires 3/4 cup of flour and you only want to make half of the recipe, how much flour do you need?",
+        "options": ["3/8 cup", "6/4 cup", "1/2 cup", "3/2 cup"],
+        "correct_answer": "3/8 cup"
+      },
+      {
+        "id": 320,
+        "text": "You have 2 1/2 oranges and you eat 3/4 of an orange. How many oranges do you have left?",
+        "options": ["1 3/4", "1 1/4", "2 1/4", "1 1/2"],
+        "correct_answer": "1 3/4"
+      },
+      {
+        "id": 321,
+        "text": "Which fraction is equivalent to 0.75?",
+        "options": ["1/4", "1/2", "3/4", "75/10"],
+        "correct_answer": "3/4"
+      },
+      {
+        "id": 322,
+        "text": "What is the sum of 1 1/2 and 2 1/4?",
+        "options": ["3 3/4", "3 1/2", "4", "3 1/8"],
+        "correct_answer": "3 3/4"
+      },
+      {
+        "id": 323,
+        "text": "Subtract 1/3 from 5/6.",
+        "options": ["4/3", "4/6", "1/2", "2/3"],
+        "correct_answer": "1/2"
+      },
+      {
+        "id": 324,
+        "text": "Multiply 1 1/3 by 2/5.",
+        "options": ["2/15", "8/15", "2/5", "6/15"],
+        "correct_answer": "8/15"
+      },
+      {
+        "id": 325,
+        "text": "Divide 5/8 by 1/4.",
+        "options": ["5/32", "10/8", "5/2", "2/5"],
+        "correct_answer": "5/2"
+      },
+      {
+        "id": 326,
+        "text": "A class has 30 students. If 2/5 of the students are boys, how many boys are in the class?",
+        "options": ["10", "12", "15", "20"],
+        "correct_answer": "12"
+      },
+      {
+        "id": 327,
+        "text": "You run 3/4 of a kilometer. Your friend runs 5/6 of a kilometer. Who ran further?",
+        "options": [
+          "You",
+          "Your friend",
+          "Both ran the same distance",
+          "Cannot be determined"
+        ],
+        "correct_answer": "Your friend"
+      },
+      {
+        "id": 328,
+        "text": "Simplify the expression: 1/2 + 1/4 + 1/8",
+        "options": ["3/14", "7/8", "3/8", "1/6"],
+        "correct_answer": "7/8"
+      },
+      {
+        "id": 329,
+        "text": "If a cake is divided into 10 equal slices and you eat 30% of the cake, what fraction of the cake did you eat?",
+        "options": ["3/100", "3/10", "1/3", "30/10"],
+        "correct_answer": "3/10"
+      },
+      {
+        "id": 330,
+        "text": "A carton contains 24 eggs. If 1/6 of the eggs are cracked, how many eggs are NOT cracked?",
+        "options": ["4", "18", "20", "22"],
+        "correct_answer": "20"
+      }
+    ],
+    "duration_minutes": 60,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 5,
+    "title": "General Knowledge Exam",
+    "description": "A comprehensive examination covering various topics including history, geography, science, and current events.",
+    "questions": [
+      {
+        "id": 401,
+        "text": "Who was the first President of the United States?",
+        "options": [
+          "George Washington",
+          "Thomas Jefferson",
+          "Abraham Lincoln",
+          "John Adams"
+        ],
+        "correct_answer": "George Washington"
+      },
+      {
+        "id": 402,
+        "text": "What is the capital city of France?",
+        "options": ["Berlin", "Madrid", "Paris", "Rome"],
+        "correct_answer": "Paris"
+      },
+      {
+        "id": 403,
+        "text": "Which planet is known as the Red Planet?",
+        "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+        "correct_answer": "Mars"
+      },
+      {
+        "id": 404,
+        "text": "What is the largest ocean on Earth?",
+        "options": [
+          "Atlantic Ocean",
+          "Indian Ocean",
+          "Arctic Ocean",
+          "Pacific Ocean"
+        ],
+        "correct_answer": "Pacific Ocean"
+      },
+      {
+        "id": 405,
+        "text": "Who wrote 'Romeo and Juliet'?",
+        "options": [
+          "Charles Dickens",
+          "William Shakespeare",
+          "Mark Twain",
+          "Jane Austen"
+        ],
+        "correct_answer": "William Shakespeare"
+      },
+      {
+        "id": 406,
+        "text": "What is the chemical symbol for gold?",
+        "options": ["Au", "Ag", "Pb", "Fe"],
+        "correct_answer": "Au"
+      },
+      {
+        "id": 407,
+        "text": "Which country is known as the Land of the Rising Sun?",
+        "options": ["China", "Japan", "Thailand", "South Korea"],
+        "correct_answer": "Japan"
+      },
+      {
+        "id": 408,
+        "text": "What is the largest continent on Earth?",
+        "options": ["Africa", "Asia", "North America", "Europe"],
+        "correct_answer": "Asia"
+      },
+      {
+        "id": 409,
+        "text": "Who painted the Mona Lisa?",
+        "options": [
+          "Vincent van Gogh",
+          "Pablo Picasso",
+          "Leonardo da Vinci",
+          "Claude Monet"
+        ],
+        "correct_answer": "Leonardo da Vinci"
+      },
+      {
+        "id": 410,
+        "text": "What is the freezing point of water in Celsius?",
+        "options": ["0°C", "-32°C", "-100°C", "-273°C"],
+        "correct_answer": "0°C"
+      },
+      {
+        "id": 411,
+        "text": "Which gas do plants absorb from the atmosphere?",
+        "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+        "correct_answer": "Carbon Dioxide"
+      },
+      {
+        "id": 412,
+        "text": "What is the main language spoken in Brazil?",
+        "options": ["Spanish", "Portuguese", "French", "English"],
+        "correct_answer": "Portuguese"
+      },
+      {
+        "id": 413,
+        "text": "Who discovered penicillin?",
+        "options": [
+          "Marie Curie",
+          "Alexander Fleming",
+          "Louis Pasteur",
+          "Albert Einstein"
+        ],
+        "correct_answer": "Alexander Fleming"
+      },
+      {
+        "id": 414,
+        "text": "What is the capital of Australia?",
+        "options": ["Sydney", "Canberra", "Melbourne", "Brisbane"],
+        "correct_answer": "Canberra"
+      },
+      {
+        "id": 415,
+        "text": "Which element has the atomic number 1?",
+        "options": ["Oxygen", "Hydrogen", "Helium", "Lithium"],
+        "correct_answer": "Hydrogen"
+      },
+      {
+        "id": 416,
+        "text": "'The Great Wall' is located in which country?",
+        "options": ["India", "China", "Japan", "South Korea"],
+        "correct_answer": "China"
+      },
+      {
+        "id": 417,
+        "text": "'To Kill a Mockingbird' was written by which author?",
+        "options": [
+          "Harper Lee",
+          "F. Scott Fitzgerald",
+          "Ernest Hemingway",
+          "Mark Twain"
+        ],
+        "correct_answer": "'Harper Lee'"
+      },
+      {
+        "id": 418,
+        "text": "What is the largest mammal in the world?",
+        "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],
+        "correct_answer": "Blue Whale"
+      },
+      {
+        "id": 419,
+        "text": "Which country is known for the pyramids?",
+        "options": ["Greece", "Egypt", "Mexico", "India"],
+        "correct_answer": "Egypt"
+      },
+      {
+        "id": 420,
+        "text": "What is the main ingredient in guacamole?",
+        "options": ["Tomato", "Avocado", "Onion", "Pepper"],
+        "correct_answer": "Avocado"
+      },
+      {
+        "id": 421,
+        "text": "Which organ is responsible for pumping blood in the human body?",
+        "options": ["Liver", "Lungs", "Heart", "Kidney"],
+        "correct_answer": "Heart"
+      },
+      {
+        "id": 422,
+        "text": "What is the capital of Canada?",
+        "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
+        "correct_answer": "Ottawa"
+      },
+      {
+        "id": 423,
+        "text": "Which planet is known for its rings?",
+        "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+        "correct_answer": "Saturn"
+      },
+      {
+        "id": 424,
+        "text": "What is the largest desert in the world?",
+        "options": ["Sahara", "Arabian", "Gobi", "Antarctic"],
+        "correct_answer": "Sahara"
+      },
+      {
+        "id": 425,
+        "text": "Who was the first person to walk on the moon?",
+        "options": [
+          "Buzz Aldrin",
+          "Neil Armstrong",
+          "Yuri Gagarin",
+          "John Glenn"
+        ],
+        "correct_answer": "Neil Armstrong"
+      },
+      {
+        "id": 426,
+        "text": "What is the boiling point of water in Celsius?",
+        "options": ["0°C", "100°C", "-100°C", "-32°C"],
+        "correct_answer": "100°C"
+      },
+      {
+        "id": 427,
+        "text": "Which country is known for its maple syrup?",
+        "options": ["USA", "Canada", "Mexico", "France"],
+        "correct_answer": "Canada"
+      },
+      {
+        "id": 428,
+        "text": "'The Catcher in the Rye' was written by which author?",
+        "options": [
+          "J.D. Salinger",
+          "F. Scott Fitzgerald",
+          "Ernest Hemingway",
+          "Mark Twain"
+        ],
+        "correct_answer": "'J.D. Salinger'"
+      },
+      {
+        "id": 429,
+        "text": "'The Statue of Liberty' was a gift from which country?",
+        "options": ["France", "Germany", "Italy", "Spain"],
+        "correct_answer": "'France'"
+      },
+      {
+        "id": 430,
+        "text": "'The Great Barrier Reef' is located in which country?",
+        "options": ["USA", "Australia", "Mexico", "Brazil"],
+        "correct_answer": "'Australia'"
+      }
+    ],
+    "duration_minutes": 60,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 6,
+    "title": "Grade 8 Arithmetic & Algebraic Expressions Exam",
+    "description": "A comprehensive exam covering arithmetic operations, algebraic expressions, simplification, and basic equations for 8th grade students.",
+    "questions": [
+      {
+        "id": 301,
+        "text": "What is the result of 3(4 + 5) - 2 x 3?",
+        "options": ["15", "21", "27", "33"],
+        "correct_answer": "21"
+      },
+      {
+        "id": 302,
+        "text": "Simplify the expression: 2x + 3y - x + 4y",
+        "options": ["x + 7y", "3x + 7y", "x + y", "2x + 12y"],
+        "correct_answer": "x + 7y"
+      },
+      {
+        "id": 303,
+        "text": "What is the value of 5² + 2³?",
+        "options": ["17", "25", "33", "40"],
+        "correct_answer": "33"
+      },
+      {
+        "id": 304,
+        "text": "Solve for x: 2x + 5 = 15",
+        "options": ["5", "10", "7.5", "2.5"],
+        "correct_answer": "5"
+      },
+      {
+        "id": 305,
+        "text": "What is the greatest common factor of 24 and 36?",
+        "options": ["6", "8", "12", "24"],
+        "correct_answer": "12"
+      },
+      {
+        "id": 306,
+        "text": "Evaluate: (8 - 3) x 2 + 10 / 5",
+        "options": ["12", "14", "16", "18"],
+        "correct_answer": "12"
+      },
+      {
+        "id": 307,
+        "text": "Which expression is equivalent to 3(x - 4) + 2?",
+        "options": ["3x - 10", "3x - 2", "3x + 10", "3x + 14"],
+        "correct_answer": "3x - 10"
+      },
+      {
+        "id": 308,
+        "text": "What is the least common multiple of 6 and 8?",
+        "options": ["12", "16", "24", "48"],
+        "correct_answer": "24"
+      },
+      {
+        "id": 309,
+        "text": "Simplify: (2a + 3b) - (a - b)",
+        "options": ["a + 2b", "a + 4b", "3a + 2b", "a - 2b"],
+        "correct_answer": "a + 4b"
+      },
+      {
+        "id": 310,
+        "text": "Solve: 3/4 × 2/5",
+        "options": ["3/10", "5/9", "6/20", "8/15"],
+        "correct_answer": "3/10"
+      },
+      {
+        "id": 311,
+        "text": "What is the coefficient of y in the expression 4x + 7y - 2?",
+        "options": ["4", "7", "-2", "y"],
+        "correct_answer": "7"
+      },
+      {
+        "id": 312,
+        "text": "Calculate: 15% of 80",
+        "options": ["8", "12", "15", "20"],
+        "correct_answer": "12"
+      },
+      {
+        "id": 313,
+        "text": "Expand: 2(x + 3y - 4)",
+        "options": [
+          "2x + 6y - 8",
+          "2x + 3y - 4",
+          "x + 6y - 8",
+          "2x + 5y - 6"
+        ],
+        "correct_answer": "2x + 6y - 8"
+      },
+      {
+        "id": 314,
+        "text": "What is the solution to 4x - 7 = 5?",
+        "options": ["x = 1", "x = 2", "x = 3", "x = 4"],
+        "correct_answer": "x = 3"
+      },
+      {
+        "id": 315,
+        "text": "Simplify: 5a × 3b × 2",
+        "options": ["10ab", "15ab", "30ab", "30a²b²"],
+        "correct_answer": "30ab"
+      },
+      {
+        "id": 316,
+        "text": "Convert 0.375 to a fraction in simplest form",
+        "options": ["3/8", "375/1000", "1/3", "5/16"],
+        "correct_answer": "3/8"
+      },
+      {
+        "id": 317,
+        "text": "What is the value of 3x² when x = 4?",
+        "options": ["12", "24", "36", "48"],
+        "correct_answer": "48"
+      },
+      {
+        "id": 318,
+        "text": "Solve: 2(x - 3) = 10",
+        "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+        "correct_answer": "x = 8"
+      },
+      {
+        "id": 319,
+        "text": "Which of these is a like term with 5xy?",
+        "options": ["3x", "2y", "-7xy", "5x²y"],
+        "correct_answer": "-7xy"
+      },
+      {
+        "id": 320,
+        "text": "What is the reciprocal of 2/3?",
+        "options": ["3/2", "2/3", "1.5", "0.666..."],
+        "correct_answer": "3/2"
+      },
+      {
+        "id": 321,
+        "text": "Simplify: 4(2x + 1) - 3(x - 2)",
+        "options": ["5x + 10", "5x - 2", "11x + 10", "11x - 2"],
+        "correct_answer": "5x + 10"
+      },
+      {
+        "id": 322,
+        "text": "What is the prime factorization of 60?",
+        "options": [
+          "2 × 2 × 3 × 5",
+          "2 × 3 × 5 × 5",
+          "2 × 2 × 15",
+          "3 × 4 × 5"
+        ],
+        "correct_answer": "2 × 2 × 3 × 5"
+      },
+      {
+        "id": 323,
+        "text": "Solve: x/4 = 5",
+        "options": ["x = 1.25", "x = 9", "x = 20", "x = 25"],
+        "correct_answer": "x = 20"
+      },
+      {
+        "id": 324,
+        "text": "What is the next term in the sequence: 3, 6, 12, 24, ...?",
+        "options": ["30", "36", "42", "48"],
+        "correct_answer": "48"
+      },
+      {
+        "id": 325,
+        "text": "Evaluate: 2 + 3 × (4 + 1)",
+        "options": ["25", "17", "15", "13"],
+        "correct_answer": "17"
+      },
+      {
+        "id": 326,
+        "text": "Combine like terms: 5a - 2b + 3a + 6b",
+        "options": ["8a + 4b", "15ab", "2a + 8b", "8a + 8b"],
+        "correct_answer": "8a + 4b"
+      },
+      {
+        "id": 327,
+        "text": "What is 3/4 expressed as a decimal?",
+        "options": ["0.25", "0.34", "0.75", "1.33"],
+        "correct_answer": "0.75"
+      },
+      {
+        "id": 328,
+        "text": "Solve for y: 2y - 7 = 11",
+        "options": ["y = 2", "y = 4", "y = 9", "y = 18"],
+        "correct_answer": "y = 9"
+      },
+      {
+        "id": 329,
+        "text": "What is the square root of 144?",
+        "options": ["11", "12", "13", "14"],
+        "correct_answer": "12"
+      },
+      {
+        "id": 330,
+        "text": "Factor completely: 6x + 9",
+        "options": [
+          "3(2x + 3)",
+          "6(x + 1.5)",
+          "2(3x + 4.5)",
+          "x(6 + 9)"
+        ],
+        "correct_answer": "3(2x + 3)"
       }
     ],
     "duration_minutes": 45,
     "difficulty": "Medium"
-  }
+}
 ]
