@@ -238,8 +238,9 @@ def initialize_database():
             INSERT INTO subscription_plans (name, description, price, duration_days)
             VALUES
                 ('Access', 'Access to core tutorials and study guides', 99.99, 30),
+                ('Premium', 'All features including priority support', 199.99, 30),
                 ('Standard', 'Access to core tutorials, study guides and Exams', 149.99, 30),
-                ('Premium', 'All features including priority support', 199.99, 30)
+                
         ''')
         conn.commit() # Commit is done once at the end
         print("✅ Default subscription plans inserted.")
