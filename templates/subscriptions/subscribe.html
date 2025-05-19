@@ -2,15 +2,15 @@
 content %}
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <h1 class="mb-4">Choose Your Plan</h1>
 
       <div class="row g-4">
         {% for plan in plans %}
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div
-            class="card h-100 border-{% if loop.index == 2 %}danger shadow-lg{% else %}secondary{% endif %}"
-          >
+            class="card h-100 border-{% if loop.index == 3 %}danger shadow-lg{% else %}secondary{% endif %}"
+          style="max-width: 500px">
             <div class="card-body text-center p-4">
               <h3 class="h2 fw-bold">{{ plan[1] }}</h3>
               <div class="display-4 fw-bold my-4">
@@ -19,7 +19,7 @@ content %}
               <p class="text-muted mb-4">per month</p>
 
               <ul class="list-unstyled mb-4 text-start">
-                {% if plan[1] == 'Basic' %}
+                {% if plan[1] == 'Access' %}
                 <li class="mb-2">
                   <i class="bi bi-check-circle text-success me-2"></i> Access to
                   all tutorials
@@ -32,18 +32,31 @@ content %}
                   <i class="bi bi-x-circle text-muted me-2"></i> Live tutoring
                   sessions
                 </li>
-                {% else %}
+                {% elif plan[1] == 'Standard'%}
                 <li class="mb-2">
                   <i class="bi bi-check-circle text-success me-2"></i> All Basic
                   features
                 </li>
                 <li class="mb-2">
-                  <i class="bi bi-check-circle text-success me-2"></i> Unlimited
-                  live tutoring
+                  <i class="bi bi-check-circle text-success me-2"></i> Study
+                  Guides
                 </li>
                 <li class="mb-2">
                   <i class="bi bi-check-circle text-success me-2"></i>Exam
                   Practice and Mock Tests
+                </li>
+                {% elif plan[1] == 'Premium' %}
+                <li class="mb-2">
+                  <i class="bi bi-check-circle text-success me-2"></i> All
+                  Standard features
+                </li>
+                <li class="mb-2">
+                  <i class="bi bi-check-circle text-success me-2"></i> Live
+                  Tutoring Sessions
+                </li>
+                <li class="mb-2">
+                  <i class="bi bi-check-circle text-success me-2"></i> 1-on-1
+                  Tutoring
                 </li>
                 {% endif %}
               </ul>
@@ -54,7 +67,7 @@ content %}
               >
                 <button
                   type="submit"
-                  class="btn btn-{% if loop.index == 2 %}danger{% else %}outline-secondary{% endif %} btn-lg w-100"
+                  class="btn btn-{% if loop.index == 3 %}danger{% else %}outline-secondary{% endif %} btn-lg w-100"
                 >
                   Choose Plan
                 </button>
