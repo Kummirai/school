@@ -1101,11 +1101,6 @@ def cancel_booking(booking_id, student_id):
     return affected_rows > 0
     
 
-@app.context_processor
-def inject_categories():
-    if 'username' in session:
-        return {'categories': get_all_categories()}
-    return {}
 
 @app.route('/video-conference')
 def video_conference():
@@ -2409,6 +2404,7 @@ def add_announcement():
     students = get_students()
     return render_template('admin/announcements/add.html', students=students)
 
+
 @app.route('/admin/announcements/delete/<int:announcement_id>', methods=['POST'])
 @login_required
 @admin_required
@@ -2428,13 +2424,9 @@ def delete_announcement(announcement_id):
     return redirect(url_for('manage_announcements'))
 
 @app.context_processor
-def inject_categories():
-    if 'username' in session:
-        return {
-            'categories': get_all_categories(),
-            'get_unread_announcements_count': get_unread_announcements_count
-        }
-    return {}
+def inject_functions():
+    return dict(get_unread_announcements_count=get_unread_announcements_count)
+
     
 if __name__ == '__main__':
     from waitress import serve
