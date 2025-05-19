@@ -54,6 +54,27 @@ def get_db_connection():
 def initialize_database():
     conn = get_db_connection()
     cur = conn.cursor()
+
+    # Add this after your other table creations
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS announcements (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            message TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            created_by INTEGER REFERENCES users(id) ON DELETE SET NULL
+        )
+    ''')
+    
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS user_announcements (
+            announcement_id INTEGER NOT NULL REFERENCES announcements(id) ON DELETE CASCADE,
+            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            is_read BOOLEAN DEFAULT FALSE,
+            read_at TIMESTAMP,
+            PRIMARY KEY (announcement_id, user_id)
+        )
+    ''')
     
     # Create users table
     cur.execute('''
@@ -245,6 +266,153 @@ def initialize_database():
 
 
 # Helpers
+def get_unread_announcements_count(user_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT COUNT(*) 
+            FROM user_announcements 
+            WHERE user_id = %s AND is_read = FALSE
+        ''', (user_id,))
+        return cur.fetchone()[0]
+    except Exception as e:
+        print(f"Error getting unread announcements count: {e}")
+        return 0
+    finally:
+        cur.close()
+        conn.close()
+
+# Add these helper functions to app.py
+def create_announcement(title, message, created_by, user_ids=None):
+    """Create a new announcement and optionally assign to specific users"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Create the announcement
+        cur.execute('''
+            INSERT INTO announcements (title, message, created_by)
+            VALUES (%s, %s, %s)
+            RETURNING id
+        ''', (title, message, created_by))
+        announcement_id = cur.fetchone()[0]
+        
+        # If user_ids is None, send to all users
+        if user_ids is None:
+            cur.execute('SELECT id FROM users WHERE role = %s', ('student',))
+            user_ids = [row[0] for row in cur.fetchall()]
+        
+        # Assign to selected users
+        for user_id in user_ids:
+            cur.execute('''
+                INSERT INTO user_announcements (announcement_id, user_id)
+                VALUES (%s, %s)
+            ''', (announcement_id, user_id))
+        
+        conn.commit()
+        return announcement_id
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        cur.close()
+        conn.close()
+
+def get_user_announcements(user_id, limit=None):
+    """Get announcements for a specific user"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        query = '''
+            SELECT a.id, a.title, a.message, a.created_at, 
+                   u.username as created_by, ua.is_read
+            FROM announcements a
+            JOIN user_announcements ua ON a.id = ua.announcement_id
+            JOIN users u ON a.created_by = u.id
+            WHERE ua.user_id = %s
+            ORDER BY a.created_at DESC
+        '''
+        
+        if limit:
+            query += ' LIMIT %s'
+            cur.execute(query, (user_id, limit))
+        else:
+            cur.execute(query, (user_id,))
+            
+        announcements = []
+        for row in cur.fetchall():
+            announcements.append({
+                'id': row[0],
+                'title': row[1],
+                'message': row[2],
+                'created_at': row[3],
+                'created_by': row[4],
+                'is_read': row[5]
+            })
+            
+        return announcements
+    except Exception as e:
+        print(f"Error getting announcements: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+def mark_announcement_read(announcement_id, user_id):
+    """Mark an announcement as read for a user"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            UPDATE user_announcements
+            SET is_read = TRUE, read_at = CURRENT_TIMESTAMP
+            WHERE announcement_id = %s AND user_id = %s
+        ''', (announcement_id, user_id))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error marking announcement as read: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+def get_all_announcements():
+    """Get all announcements for admin view"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT a.id, a.title, a.message, a.created_at, 
+                   u.username as created_by,
+                   COUNT(ua.user_id) as recipient_count
+            FROM announcements a
+            JOIN users u ON a.created_by = u.id
+            LEFT JOIN user_announcements ua ON a.id = ua.announcement_id
+            GROUP BY a.id, u.username
+            ORDER BY a.created_at DESC
+        ''')
+        
+        announcements = []
+        for row in cur.fetchall():
+            announcements.append({
+                'id': row[0],
+                'title': row[1],
+                'message': row[2],
+                'created_at': row[3],
+                'created_by': row[4],
+                'recipient_count': row[5]
+            })
+            
+        return announcements
+    except Exception as e:
+        print(f"Error getting all announcements: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
 def load_exams_from_json(filepath='static/js/exams.json'):
     """Loads exam data from a JSON file."""
     try:
@@ -2155,6 +2323,118 @@ def exam_results(result_id):
                            result=result,
                            exam_details=exam_details)
 
+# Announcement routes
+@app.route('/announcements')
+@login_required
+def view_announcements():
+    announcements = get_user_announcements(session['user_id'])
+    return render_template('announcements/list.html', announcements=announcements)
+
+@app.route('/announcements/<int:announcement_id>')
+@login_required
+def view_announcement(announcement_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get the announcement and mark it as read
+        cur.execute('''
+            SELECT a.id, a.title, a.message, a.created_at, u.username as created_by
+            FROM announcements a
+            JOIN users u ON a.created_by = u.id
+            JOIN user_announcements ua ON a.id = ua.announcement_id
+            WHERE ua.user_id = %s AND a.id = %s
+        ''', (session['user_id'], announcement_id))
+        
+        announcement = cur.fetchone()
+        if not announcement:
+            flash('Announcement not found', 'danger')
+            return redirect(url_for('view_announcements'))
+            
+        # Mark as read
+        mark_announcement_read(announcement_id, session['user_id'])
+        
+        return render_template('announcements/view.html', announcement={
+            'id': announcement[0],
+            'title': announcement[1],
+            'message': announcement[2],
+            'created_at': announcement[3],
+            'created_by': announcement[4]
+        })
+    except Exception as e:
+        flash('Error viewing announcement', 'danger')
+        return redirect(url_for('view_announcements'))
+    finally:
+        cur.close()
+        conn.close()
+
+# Admin announcement management
+@app.route('/admin/announcements')
+@login_required
+@admin_required
+def manage_announcements():
+    announcements = get_all_announcements()
+    return render_template('admin/announcements/list.html', announcements=announcements)
+
+@app.route('/admin/announcements/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_announcement():
+    if request.method == 'POST':
+        title = request.form.get('title', '').strip()
+        message = request.form.get('message', '').strip()
+        send_to = request.form.getlist('send_to')  # List of user IDs or 'all'
+        
+        if not title or not message:
+            flash('Title and message are required', 'danger')
+            return redirect(url_for('add_announcement'))
+            
+        try:
+            # If "all" is selected, send to all students
+            user_ids = None if 'all' in send_to else [int(user_id) for user_id in send_to]
+            
+            create_announcement(
+                title=title,
+                message=message,
+                created_by=session['user_id'],
+                user_ids=user_ids
+            )
+            
+            flash('Announcement created successfully!', 'success')
+            return redirect(url_for('manage_announcements'))
+        except Exception as e:
+            flash(f'Error creating announcement: {str(e)}', 'danger')
+            return redirect(url_for('add_announcement'))
+    
+    # GET request - show form
+    students = get_students()
+    return render_template('admin/announcements/add.html', students=students)
+
+@app.route('/admin/announcements/delete/<int:announcement_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_announcement(announcement_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('DELETE FROM announcements WHERE id = %s', (announcement_id,))
+        conn.commit()
+        flash('Announcement deleted successfully', 'success')
+    except Exception as e:
+        conn.rollback()
+        flash('Error deleting announcement', 'danger')
+    finally:
+        cur.close()
+        conn.close()
+    return redirect(url_for('manage_announcements'))
+
+@app.context_processor
+def inject_categories():
+    if 'username' in session:
+        return {
+            'categories': get_all_categories(),
+            'get_unread_announcements_count': get_unread_announcements_count
+        }
+    return {}
     
 if __name__ == '__main__':
     from waitress import serve
