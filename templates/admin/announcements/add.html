@@ -42,7 +42,7 @@
 
       <div class="mt-2">
         <label class="form-label">Or select specific students:</label>
-        {% for student in students %}
+        {% if students %} {% for student in students %}
         <div class="form-check">
           <input
             class="form-check-input student-checkbox"
@@ -52,10 +52,10 @@
             disabled
           />
           <label class="form-check-label" for="send_to_{{ student.id }}">
-            {{ student.username }}
+            {{ student[1] }}
           </label>
         </div>
-        {% endfor %}
+        {% endfor %} {%endif %}
       </div>
     </div>
 
