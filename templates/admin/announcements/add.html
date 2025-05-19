@@ -1,0 +1,83 @@
+{% extends "admin/base.html" %} {% block title %}Create Announcement{% endblock
+%} {% block content %}
+<div class="container py-4">
+  <h1 class="mb-4">Create New Announcement</h1>
+
+  <form method="POST" action="{{ url_for('add_announcement') }}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea
+        class="form-control"
+        id="message"
+        name="message"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">Send To</label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="send_to_all"
+          name="send_to"
+          value="all"
+          checked
+        />
+        <label class="form-check-label" for="send_to_all"> All Students </label>
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label">Or select specific students:</label>
+        {% for student in students %}
+        <div class="form-check">
+          <input
+            class="form-check-input student-checkbox"
+            type="checkbox"
+            name="send_to"
+            value="{{ student.id }}"
+            disabled
+          />
+          <label class="form-check-label" for="send_to_{{ student.id }}">
+            {{ student.username }}
+          </label>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send Announcement</button>
+    <a href="{{ url_for('manage_announcements') }}" class="btn btn-secondary"
+      >Cancel</a
+    >
+  </form>
+</div>
+
+<script>
+  // Enable/disable student checkboxes based on "All Students" checkbox
+  document
+    .getElementById("send_to_all")
+    .addEventListener("change", function () {
+      const checkboxes = document.querySelectorAll(".student-checkbox");
+      checkboxes.forEach((checkbox) => {
+        checkbox.disabled = this.checked;
+        if (this.checked) {
+          checkbox.checked = false;
+        }
+      });
+    });
+</script>
+{% endblock %}
