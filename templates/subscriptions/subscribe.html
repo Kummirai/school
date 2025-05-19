@@ -9,7 +9,7 @@ content %}
         {% for plan in plans %}
         <div class="col-md-4">
           <div
-            class="card h-100 border-{% if loop.index == 3 %}danger shadow-lg{% else %}secondary{% endif %}"
+            class="card h-100 border-{% if loop.index == 2 %}danger shadow-lg{% else %}secondary{% endif %}"
           style="max-width: 500px">
             <div class="card-body text-center p-4">
               <h3 class="h2 fw-bold">{{ plan[1] }}</h3>
@@ -67,7 +67,7 @@ content %}
               >
                 <button
                   type="submit"
-                  class="btn btn-{% if loop.index == 3 %}danger{% else %}outline-secondary{% endif %} btn-lg w-100"
+                  class="btn btn-{% if loop.index == 2 %}danger{% else %}outline-secondary{% endif %} btn-lg w-100"
                 >
                   Choose Plan
                 </button>
