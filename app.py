@@ -237,8 +237,10 @@ def initialize_database():
         cur.execute('''
             INSERT INTO subscription_plans (name, description, price, duration_days)
             VALUES
-                ('Basic', 'Access to core tutorials and study guides', 99.99, 30),
-                ('Premium', 'Full access including live tutoring', 199.99, 30)
+                ('Access', 'Access to core tutorials and study guides', 99.99, 30),
+                ('Standard', 'All Access features , practice tests and Exams', 149.99, 30),
+                ('Premium', 'Full access including live tutoring', 199.99, 30),
+
         ''')
         conn.commit() # Commit is done once at the end
         print("✅ Default subscription plans inserted.")
