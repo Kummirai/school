@@ -69,51 +69,61 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-              </li>
-              {% if 'username' in session and session.role == 'student' %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('view_sessions') }}"
-                  >Book A Class</a
+              <li class="nav-item" style="font-size: 0.9rem">
+                <a class="nav-link" href="{{ url_for('home') }}">
+                  <i class="bi bi-house-door-fill me-1"></i>
+                  <span>Home</span></a
                 >
               </li>
-              <li class="nav-item">
+              {% if 'username' in session and session.role == 'student' %}
+              <li class="nav-item" style="font-size: 0.9rem">
+                <a class="nav-link" href="{{ url_for('view_sessions') }}">
+                  <i class="bi bi-calendar-event me-1"></i>
+                  <span>Book A Class</span></a
+                >
+              </li>
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('view_assignments') }}">
-                  <i class="bi bi-journal-text me-1"></i> Assignments
+                  <i class="bi bi-journal-text me-1"></i>
+                  <span>Assignments</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('view_submissions') }}">
-                  <i class="bi bi-list-check me-1"></i> My Work
+                  <i class="bi bi-list-check me-1"></i>
+                  <span>My Work</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('tutorials_home') }}">
-                  <i class="bi bi-collection-play me-1"></i> Tutorials
+                  <i class="bi bi-collection-play me-1"></i>
+                  <span>Tutorials</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('studyguides_home') }}">
-                  <i class="bi bi-book me-1"></i> Practice
+                  <i class="bi bi-book me-1"></i> <span>Practice</span>
                 </a>
               </li>
               {# Add the Exam Practice link here #}
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('exam_practice') }}">
-                  <i class="bi bi-pencil-square me-1"></i> Exams
+                  <i class="bi bi-pencil-square me-1"></i>
+                  <span>Exams</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('view_leaderboard') }}">
-                  <i class="bi bi-trophy-fill"></i> Leaderboard
+                  <i class="bi bi-trophy-fill"></i>
+                  <span>Leaderboard</span>
                 </a>
               </li>
               {% if 'user_id' in session %}
               <!-- Later in your navbar items -->
-              <li class="nav-item">
+              <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('view_announcements') }}">
-                  <i class="bi bi-megaphone"></i> Announcements
+                  <i class="bi bi-megaphone"></i>
+                  <span>Announcements</span>
                   <!-- Desktop badge (always shown) -->
                   {% if 'user_id' in session %} {% set unread_count =
                   get_unread_announcements_count(session['user_id']) %} {% if

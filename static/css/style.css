@@ -66,3 +66,40 @@ footer {
 .navbar-toggler {
   padding-right: 1.5rem;
 }
+
+/* For medium-large screens (992px - 1365px) */
+@media (min-width: 992px) and (max-width: 1400px) {
+  /* Hide nav item text by default */
+  .navbar-nav .nav-item .nav-link span:not(.bi, .badge) {
+    display: none;
+  }
+
+  /* Show nav item text on hover */
+  .navbar-nav .nav-item:hover .nav-link span:not(.bi, .badge) {
+    display: inline;
+  }
+
+  /* Add some transition for smooth effect */
+  .navbar-nav .nav-item .nav-link {
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+  }
+
+  /* Adjust padding to account for hidden text */
+  .navbar-nav .nav-item .nav-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Ensure icons remain visible */
+  .navbar-nav .nav-item .nav-link .bi {
+    display: inline-block !important;
+    margin-right: 0.25rem;
+    font-size: 1.25rem;
+  }
+
+  /* Keep badges visible */
+  .navbar-nav .nav-item .nav-link .badge {
+    display: inline-block !important;
+  }
+}
