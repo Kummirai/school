@@ -238,9 +238,8 @@ def initialize_database():
             INSERT INTO subscription_plans (name, description, price, duration_days)
             VALUES
                 ('Access', 'Access to core tutorials and study guides', 99.99, 30),
-                ('Standard', 'All Access features , practice tests and Exams', 149.99, 30),
-                ('Premium', 'Full access including live tutoring', 199.99, 30),
-
+                ('Standard', 'Access to core tutorials, study guides and Exams', 149.99, 30),
+                ('Premium', 'All features including priority support', 199.99, 30)
         ''')
         conn.commit() # Commit is done once at the end
         print("✅ Default subscription plans inserted.")
@@ -2430,17 +2429,17 @@ def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
 
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
