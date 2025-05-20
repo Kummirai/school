@@ -150,7 +150,23 @@ def initialize_database():
         subject VARCHAR(100) NOT NULL,
         total_marks INTEGER NOT NULL,
         deadline TIMESTAMP,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        content TEXT -- New column for interactive assignment content
+    )
+    ''')
+
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS assignment_submissions (
+        id SERIAL PRIMARY KEY,
+        assignment_id INTEGER REFERENCES assignments(id) ON DELETE CASCADE,
+        student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        submission_text TEXT,
+        file_path VARCHAR(255),
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        marks_obtained INTEGER,
+        feedback TEXT,
+        interactive_submission_data JSONB, -- New column for interactive submission data
+        CONSTRAINT unique_submission UNIQUE (assignment_id, student_id)
     )
     ''')
 
@@ -177,19 +193,6 @@ def initialize_database():
         )
     ''')
 
-    cur.execute('''
-    CREATE TABLE IF NOT EXISTS assignment_submissions (
-        id SERIAL PRIMARY KEY,
-        assignment_id INTEGER REFERENCES assignments(id) ON DELETE CASCADE,
-        student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        submission_text TEXT,
-        file_path VARCHAR(255),
-        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        marks_obtained INTEGER,
-        feedback TEXT,
-        CONSTRAINT unique_submission UNIQUE (assignment_id, student_id)
-    )
-    ''')
     
     # Create tutorial_videos table
     cur.execute('''
@@ -680,23 +683,31 @@ def get_submission_for_grading(assignment_id, student_id):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        # Get submission details
+        # Get submission details, including interactive_submission_data
         cur.execute('''
-            SELECT s.id, s.submission_text, s.file_path, s.submitted_at, 
-                   s.marks_obtained, s.feedback, u.username
+            SELECT s.id, s.submission_text, s.file_path, s.submitted_at,
+                   s.marks_obtained, s.feedback, u.username, s.interactive_submission_data
             FROM assignment_submissions s
             JOIN users u ON s.student_id = u.id
             WHERE s.assignment_id = %s AND s.student_id = %s
         ''', (assignment_id, student_id))
         submission = cur.fetchone()
-        
+
         if not submission:
             return None
-            
-        # Get assignment details
-        cur.execute('SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
+
+        # Get assignment details, including content
+        cur.execute('SELECT id, title, total_marks, content FROM assignments WHERE id = %s', (assignment_id,))
         assignment = cur.fetchone()
-        
+
+        # Parse the content if it exists
+        content = None
+        if assignment[3]:  # content is at index 3
+            try:
+                content = json.loads(assignment[3])
+            except (TypeError, json.JSONDecodeError):
+                content = assignment[3]  # fallback to raw content if not JSON
+
         return {
             'submission': {
                 'id': submission[0],
@@ -705,12 +716,14 @@ def get_submission_for_grading(assignment_id, student_id):
                 'submitted_at': submission[3],
                 'marks_obtained': submission[4],
                 'feedback': submission[5],
-                'username': submission[6]
+                'username': submission[6],
+                'interactive_submission_data': submission[7]
             },
             'assignment': {
                 'id': assignment[0],
                 'title': assignment[1],
-                'total_marks': assignment[2]
+                'total_marks': assignment[2],
+                'content': content  # Now properly parsed
             }
         }
     finally:
@@ -779,32 +792,29 @@ def get_assignments_for_user(user_id):
         cur.close()
         conn.close()
 
-def add_assignment(title, description, subject, total_marks, deadline, assigned_users):
-    """Create a new assignment and assign it to specific users"""
+def add_assignment(title, description, subject, total_marks, deadline, assigned_students_ids, content=None):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        # Create the assignment
         cur.execute('''
-            INSERT INTO assignments 
-            (title, description, subject, total_marks, deadline)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO assignments (title, description, subject, total_marks, deadline, content)
+            VALUES (%s, %s, %s, %s, %s, %s)
             RETURNING id
-        ''', (title, description, subject, total_marks, deadline))
+        ''', (title, description, subject, total_marks, deadline, content)) # Include content here
         assignment_id = cur.fetchone()[0]
-        
-        # Assign to selected users
-        for user_id in assigned_users:
+
+        for student_id in assigned_students_ids:
             cur.execute('''
                 INSERT INTO assignment_users (assignment_id, user_id)
                 VALUES (%s, %s)
-            ''', (assignment_id, user_id))
-        
+            ''', (assignment_id, student_id))
+
         conn.commit()
-        return assignment_id
+        return True
     except Exception as e:
         conn.rollback()
-        raise e
+        print(f"Error adding assignment: {e}")
+        return False
     finally:
         cur.close()
         conn.close()
@@ -817,7 +827,7 @@ def get_assignment_details(assignment_id):
     try:
         cur.execute('''
             SELECT id, title, description, subject,
-                   total_marks, deadline, created_at
+                   total_marks, deadline, created_at, content
             FROM assignments
             WHERE id = %s
         ''', (assignment_id,))
@@ -874,19 +884,22 @@ def get_student_submissions(student_id):
     conn.close()
     return submissions
 
-def submit_assignment(assignment_id, student_id, submission_text, file_path=None):
+def submit_assignment(assignment_id, student_id, submission_text, file_path=None, interactive_submission_data=None):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
         cur.execute('''
-            INSERT INTO assignment_submissions 
-            (assignment_id, student_id, submission_text, file_path)
-            VALUES (%s, %s, %s, %s)
-            ON CONFLICT (assignment_id, student_id) 
-            DO UPDATE SET submission_text = EXCLUDED.submission_text,
-                          file_path = EXCLUDED.file_path,
-                          submitted_at = CURRENT_TIMESTAMP
-        ''', (assignment_id, student_id, submission_text, file_path))
+            INSERT INTO assignment_submissions
+            (assignment_id, student_id, submission_text, file_path, interactive_submission_data)
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (assignment_id, student_id) DO UPDATE
+            SET submission_text = EXCLUDED.submission_text,
+                file_path = EXCLUDED.file_path,
+                submitted_at = CURRENT_TIMESTAMP,
+                interactive_submission_data = EXCLUDED.interactive_submission_data -- Update interactive data
+            RETURNING id
+        ''', (assignment_id, student_id, submission_text, file_path, interactive_submission_data)) # Include interactive_submission_data here
+        submission_id = cur.fetchone()[0]
         conn.commit()
         return True
     except Exception as e:
@@ -1581,49 +1594,47 @@ def add_assignment_route():
             subject = request.form.get('subject', '').strip()
             total_marks = request.form.get('total_marks', '').strip()
             deadline_str = request.form.get('deadline', '').strip()
-            assigned_users = request.form.getlist('assigned_users')
+            assign_to = request.form.get('assign_to')  # 'all' or 'selected'
+            selected_users = request.form.getlist('selected_users[]') if assign_to == 'selected' else []
 
             # Validate required fields
             if not all([title, description, subject, total_marks, deadline_str]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
             # Convert and validate total marks
             try:
                 total_marks = int(total_marks)
                 if total_marks <= 0:
                     flash('Total marks must be positive', 'danger')
-                    return redirect(url_for('add_assignment'))
+                    return redirect(url_for('add_assignment_route'))
             except ValueError:
                 flash('Total marks must be a number', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
             # Validate deadline
             try:
                 deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
-                if deadline <= datetime.now():
+                if deadline <= datetime.utcnow():
                     flash('Deadline must be in the future', 'danger')
-                    return redirect(url_for('add_assignment'))
+                    return redirect(url_for('add_assignment_route'))
             except ValueError:
                 flash('Invalid deadline format', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
-            # Validate student selection
-            if not assigned_users:
+            # Get user IDs based on selection
+            if assign_to == 'all':
+                conn = get_db_connection()
+                cur = conn.cursor()
+                cur.execute('SELECT id FROM users WHERE role = %s', ('student',))
+                user_ids = [row[0] for row in cur.fetchall()]
+                cur.close()
+                conn.close()
+            elif assign_to == 'selected' and selected_users:
+                user_ids = [int(user_id) for user_id in selected_users]
+            else:
                 flash('Please select at least one student', 'danger')
-                return redirect(url_for('add_assignment'))
-
-            # Verify all student IDs are valid
-            valid_student_ids = {str(student[0]) for student in get_students()}  # Get current valid IDs
-            print(valid_student_ids)
-
-            for user_username in assigned_users:
-                if user_username not in valid_student_ids:
-                    flash('Invalid student selection', 'danger')
-                    return redirect(url_for('add_assignment'))
-
-            # Convert to integers
-            assigned_users = [int(user_id) for user_id in assigned_users]
+                return redirect(url_for('add_assignment_route'))
 
             # Create assignment
             assignment_id = add_assignment(
@@ -1632,7 +1643,7 @@ def add_assignment_route():
                 subject=subject,
                 total_marks=total_marks,
                 deadline=deadline,
-                assigned_users=assigned_users
+                assigned_students_ids=user_ids
             )
 
             flash('Assignment created successfully!', 'success')
@@ -1644,7 +1655,6 @@ def add_assignment_route():
     
     # GET request - show form with students
     students = get_students()
-    print(students)
     return render_template('admin/assignments/add.html', students=students)
     
 
@@ -2425,9 +2435,94 @@ def delete_announcement(announcement_id):
         conn.close()
     return redirect(url_for('manage_announcements'))
 
+@app.route('/admin/assignments/import', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def import_assignments():
+    if request.method == 'POST':
+        if 'json_file' not in request.files:
+            flash('No file selected', 'danger')
+            return redirect(request.url)
+        
+        file = request.files['json_file']
+        if file.filename == '':
+            flash('No file selected', 'danger')
+            return redirect(request.url)
+        
+        if file and file.filename.endswith('.json'):
+            try:
+                data = json.load(file)
+                
+                # Handle both single assignment and array of assignments
+                assignments_data = data if isinstance(data, list) else [data]
+                
+                for assignment_data in assignments_data:
+                    # Validate required fields
+                    required_fields = ['title', 'description', 'subject', 'total_marks', 'deadline']
+                    if not all(field in assignment_data for field in required_fields):
+                        flash('Invalid JSON structure - missing required fields', 'danger')
+                        continue
+                    
+                    try:
+                        # Convert deadline string to datetime
+                        deadline = datetime.strptime(assignment_data['deadline'], '%Y-%m-%d %H:%M')
+                    except ValueError:
+                        flash('Invalid deadline format in JSON (use YYYY-MM-DD HH:MM)', 'danger')
+                        continue
+                    
+                    # Get assigned users (default to all students if not specified)
+                    assigned_users = assignment_data.get('assigned_users', 'all')
+                    
+                    # Get the interactive content if provided
+                    content = assignment_data.get('content', '')
+                    
+                    # Create assignment with the interactive content
+                    assignment_id = add_assignment(
+                        title=assignment_data['title'],
+                        description=assignment_data['description'],
+                        subject=assignment_data['subject'],
+                        total_marks=int(assignment_data['total_marks']),
+                        deadline=deadline,
+                        assigned_students_ids=assigned_users if assigned_users != 'all' else None
+                    )
+                    
+                    # If there's interactive content, store it in the database
+                    if content:
+                        conn = get_db_connection()
+                        cur = conn.cursor()
+                        try:
+                            cur.execute('''
+                                UPDATE assignments 
+                                SET content = %s 
+                                WHERE id = %s
+                            ''', (content, assignment_id))
+                            conn.commit()
+                        except Exception as e:
+                            conn.rollback()
+                            print(f"Error saving interactive content: {e}")
+                        finally:
+                            cur.close()
+                            conn.close()
+                
+                flash(f'Successfully imported {len(assignments_data)} assignments', 'success')
+                return redirect(url_for('manage_assignments'))
+                
+            except json.JSONDecodeError:
+                flash('Invalid JSON file', 'danger')
+            except Exception as e:
+                flash(f'Error importing assignments: {str(e)}', 'danger')
+        
+        else:
+            flash('Only JSON files are allowed', 'danger')
+    
+    # GET request - show import form
+    return render_template('admin/assignments/import.html')
+
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
+    
+
 
     
 if __name__ == '__main__':

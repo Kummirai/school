@@ -1,140 +1,228 @@
-{% extends "admin/base.html" %}
-
-{% block content %}
+{% extends "admin/base.html" %} {% block content %}
 <div class="container mt-4">
-    <h2>Create New Assignment</h2>
+  <h2>Create New Assignment</h2>
 
-    <div class="card">
-        <div class="card-body">
-            <form method="POST" id="assignmentForm">
-                <div class="row mb-3">
-                    <div class="col-md-8">
-                        <label for="title" class="form-label">Assignment Title*</label>
-                        <input type="text" class="form-control" id="title" name="title" required minlength="3"
-                            maxlength="255">
-                        <div class="invalid-feedback">Please provide a title (3-255 characters)</div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="subject" class="form-label">Subject*</label>
-                        <select class="form-select" id="subject" name="subject" required>
-                            <option value="" disabled selected>Select Subject</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Science">Science</option>
-                            <option value="English">English</option>
-                            <option value="History">History</option>
-                            <option value="Peer Learning Day">Peer Learning Day</option>
-                        </select>
-                        <div class="invalid-feedback">Please select a subject</div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description*</label>
-                    <textarea class="form-control" id="description" name="description" rows="5" required
-                        minlength="10"></textarea>
-                    <div class="invalid-feedback">Please provide a description (at least 10 characters)</div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label for="total_marks" class="form-label">Total Points*</label>
-                        <input type="number" class="form-control" id="total_marks" name="total_marks" min="1" max="1000"
-                            required>
-                        <div class="invalid-feedback">Please enter a positive number (1-1000)</div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="deadline" class="form-label">Due Date*</label>
-                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" required>
-                        <div class="invalid-feedback">Please select a future date</div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Assign To Students*</label>
-                    <div class="border p-3" style="max-height: 200px; overflow-y: auto;" id="studentsContainer">
-                        {% if students %}
-                        {% for student in students %}
-                        <div class="form-check">
-                            <input class="form-check-input student-checkbox" type="checkbox"
-                                id="student_{{ student[0] }}" name="assigned_users" value="{{ student[0] }}">
-                            <label class="form-check-label" for="student_{{ student[0] }}">
-                                {{ student[1] }}
-                            </label>
-                        </div>
-                        {% endfor %}
-                        {% else %}
-                        <div class="alert alert-warning">No students available</div>
-                        {% endif %}
-                    </div>
-                    <div class="invalid-feedback" id="studentsError">Please select at least one student</div>
-                </div>
-
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                    <button type="submit" class="btn btn-primary">Create Assignment</button>
-                    <a href="{{ url_for('manage_assignments') }}" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+  <div class="card">
+    <div class="card-body">
+      <form method="POST" id="assignmentForm">
+        <div class="row mb-3">
+          <div class="col-md-8">
+            <label for="title" class="form-label">Assignment Title*</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              required
+              minlength="3"
+              maxlength="255"
+            />
+            <div class="invalid-feedback">
+              Please provide a title (3-255 characters)
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="subject" class="form-label">Subject*</label>
+            <select class="form-select" id="subject" name="subject" required>
+              <option value="" disabled selected>Select Subject</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="English">English</option>
+              <option value="History">History</option>
+            </select>
+            <div class="invalid-feedback">Please select a subject</div>
+          </div>
         </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description*</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="5"
+            required
+            minlength="10"
+          ></textarea>
+          <div class="invalid-feedback">
+            Please provide a description (at least 10 characters)
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="total_marks" class="form-label">Total Points*</label>
+            <input
+              type="number"
+              class="form-control"
+              id="total_marks"
+              name="total_marks"
+              min="1"
+              max="1000"
+              required
+            />
+            <div class="invalid-feedback">
+              Please enter a positive number (1-1000)
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="deadline" class="form-label">Due Date*</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="deadline"
+              name="deadline"
+              required
+            />
+            <div class="invalid-feedback">Please select a future date</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Assign To*</label>
+          <div class="form-check mb-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="assign_to"
+              id="assignAll"
+              value="all"
+              checked
+            />
+            <label class="form-check-label" for="assignAll">
+              All Students
+            </label>
+          </div>
+          <div class="form-check mb-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="assign_to"
+              id="assignSelected"
+              value="selected"
+            />
+            <label class="form-check-label" for="assignSelected">
+              Select Specific Students
+            </label>
+          </div>
+
+          <div
+            id="studentSelection"
+            class="border p-3"
+            style="max-height: 200px; overflow-y: auto; display: none"
+          >
+            {% if students %} {% for student in students %}
+            <div class="form-check">
+              <input
+                class="form-check-input student-checkbox"
+                type="checkbox"
+                id="student_{{ student[0] }}"
+                name="selected_users[]"
+                value="{{ student[0] }}"
+              />
+              <label class="form-check-label" for="student_{{ student[0] }}">
+                {{ student[1] }}
+              </label>
+            </div>
+            {% endfor %} {% else %}
+            <div class="alert alert-warning">No students available</div>
+            {% endif %}
+          </div>
+          <div class="invalid-feedback" id="studentsError">
+            Please select at least one student
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+          <button type="submit" class="btn btn-primary">
+            Create Assignment
+          </button>
+          <a
+            href="{{ url_for('manage_assignments') }}"
+            class="btn btn-secondary"
+            >Cancel</a
+          >
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('assignmentForm');
-        const studentCheckboxes = document.querySelectorAll('.student-checkbox');
-        const studentsError = document.getElementById('studentsError');
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("assignmentForm");
+    const assignAll = document.getElementById("assignAll");
+    const assignSelected = document.getElementById("assignSelected");
+    const studentSelection = document.getElementById("studentSelection");
+    const studentCheckboxes = document.querySelectorAll(".student-checkbox");
+    const studentsError = document.getElementById("studentsError");
 
-        // Client-side validation for student selection
-        form.addEventListener('submit', function (e) {
-            const atLeastOneChecked = Array.from(studentCheckboxes).some(checkbox => checkbox.checked);
-
-            if (!atLeastOneChecked) {
-                e.preventDefault();
-                studentsError.style.display = 'block';
-                document.getElementById('studentsContainer').classList.add('is-invalid');
-            }
-        });
-
-        // Reset validation when user checks a box
-        studentCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    studentsError.style.display = 'none';
-                    document.getElementById('studentsContainer').classList.remove('is-invalid');
-                }
-            });
-        });
-
-        // Validate deadline is in the future
-        const deadlineField = document.getElementById('deadline');
-        deadlineField.addEventListener('change', function () {
-            const selectedDate = new Date(this.value);
-            const now = new Date();
-
-            // Clear any previous validation
-            this.setCustomValidity('');
-
-            if (selectedDate <= now) {
-                this.setCustomValidity('Deadline must be in the future');
-                this.reportValidity();
-            }
-        });
-
-        // Initial validation for existing values
-        if (deadlineField.value) {
-            deadlineField.dispatchEvent(new Event('change'));
-        }
+    // Toggle student selection visibility
+    assignSelected.addEventListener("change", function () {
+      studentSelection.style.display = this.checked ? "block" : "none";
     });
+
+    assignAll.addEventListener("change", function () {
+      studentSelection.style.display = "none";
+    });
+
+    // Client-side validation
+    form.addEventListener("submit", function (e) {
+      let isValid = true;
+
+      // Validate student selection if "Select Specific Students" is chosen
+      if (assignSelected.checked) {
+        const atLeastOneChecked = Array.from(studentCheckboxes).some(
+          (checkbox) => checkbox.checked
+        );
+        if (!atLeastOneChecked) {
+          studentsError.style.display = "block";
+          studentSelection.classList.add("is-invalid");
+          isValid = false;
+        } else {
+          studentsError.style.display = "none";
+          studentSelection.classList.remove("is-invalid");
+        }
+      }
+
+      // Validate deadline is in the future
+      const deadlineField = document.getElementById("deadline");
+      const selectedDate = new Date(deadlineField.value);
+      const now = new Date();
+
+      if (selectedDate <= now) {
+        deadlineField.setCustomValidity("Deadline must be in the future");
+        deadlineField.reportValidity();
+        isValid = false;
+      } else {
+        deadlineField.setCustomValidity("");
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+
+    // Reset validation when user checks a box
+    studentCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        if (this.checked) {
+          studentsError.style.display = "none";
+          studentSelection.classList.remove("is-invalid");
+        }
+      });
+    });
+  });
 </script>
 
 <style>
-    .is-invalid {
-        border-color: #dc3545;
-        padding-right: calc(1.5em + 0.75rem);
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right calc(0.375em + 0.1875rem) center;
-        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-    }
+  .is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
 </style>
 {% endblock %}
