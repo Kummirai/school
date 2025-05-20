@@ -9,9 +9,9 @@ from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
 import json
+from flask_socketio import SocketIO, emit
 
-
-
+# Initialize Socket.IO
 # Load environment variables
 load_dotenv()
 
@@ -20,7 +20,7 @@ app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
-
+socketio = SocketIO(app)
 
 # Configure upload folder in your app
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
@@ -271,6 +271,18 @@ def initialize_database():
 
 
 # Helpers
+# Socket.IO events for real-time whiteboard
+@socketio.on('join whiteboard')
+def handle_join_whiteboard(data):
+    username = data.get('username', 'Anonymous')
+    # Add user to room
+    # You'll need to implement user tracking
+    
+@socketio.on('drawing')
+def handle_drawing(data):
+    # Broadcast drawing data to all other users
+    emit('drawing', data, broadcast=True, include_self=False)
+
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -2518,6 +2530,18 @@ def import_assignments():
     # GET request - show import form
     return render_template('admin/assignments/import.html')
 
+@app.route('/math-whiteboard')
+@login_required
+def math_whiteboard():
+    """Render the interactive math whiteboard."""
+    return render_template('math_whiteboard.html')
+
+@app.route('/code_editor')
+@login_required
+def code_editor():
+    """Render the interactive math whiteboard."""
+    return render_template('code_editor.html')
+
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
@@ -2525,17 +2549,17 @@ def inject_functions():
 
 
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)

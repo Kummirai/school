@@ -1,0 +1,258 @@
+{% extends "base.html" %} {% block content %}
+<div
+  class="container-fluid flex-grow-1 d-flex flex-column rounded-3 shadow-lg overflow-hidden mt-3"
+>
+  <div
+    class=" p-3 d-flex align-items-center justify-content-between rounded-top-3"
+  >
+    <h1 class="h4 text-dark-emphasis mb-0">Code Editor</h1>
+    <div class="d-flex align-items-center">
+      <select
+        id="language-select"
+        class="form-select bg-white text-dark-emphasis me-3 border border-dark-subtle"
+      >
+        <option value="python">Python</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      
+    </div>
+    <button id="run-button" class="btn btn-primary shadow">Run Code</button>
+  </div>
+
+  <div class="flex-grow-1 row g-3 p-3">
+    <div class="col-lg-8">
+      <div class="bg-dark rounded-3 h-100 overflow-hidden shadow-sm">
+        <textarea id="code-editor" class="w-100 h-100"></textarea>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div
+        class="bg-dark rounded-3 p-3 h-100 overflow-auto shadow-sm border border-secondary"
+      >
+        <h2 class="h5 text-white mb-2">Output:</h2>
+        <pre id="output-console" class="text-white-50 small"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .CodeMirror {
+    height: 60vh;
+    border-radius: 0.5rem; /* rounded-lg */
+    font-size: 1rem; /* text-base */
+    border: 1px solid #495057; /* Darker border for editor */
+  }
+  /* Custom scrollbar for CodeMirror */
+  .CodeMirror-vscrollbar::-webkit-scrollbar,
+  .CodeMirror-hscrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+  .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+    background-color: #6c757d; /* Bootstrap gray-600 */
+    border-radius: 4px;
+  }
+  .CodeMirror-vscrollbar::-webkit-scrollbar-track,
+  .CodeMirror-hscrollbar::-webkit-scrollbar-track {
+    background-color: #343a40; /* Bootstrap gray-800 */
+  }
+  /* Custom scrollbar for output console */
+  #output-console::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  #output-console::-webkit-scrollbar-thumb {
+    background-color: #6c757d; /* Bootstrap gray-600 */
+    border-radius: 4px;
+  }
+  #output-console::-webkit-scrollbar-track {
+    background-color: #343a40; /* Bootstrap gray-800 */
+  }
+  /* Adjust button hover effect for Bootstrap */
+  .btn-primary:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTFyMGUHv+azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+  integrity="sha384-0pUGZvbkmXLRV5vfgUjrGSOGRpPrZGUX4Vc/C7RYDYCApNQ2EqjQreGFw9kCKV2Xq"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/javascript-hint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/python-hint.min.js"></script>
+
+<script>
+  // Get references to DOM elements
+  const codeEditor = document.getElementById("code-editor");
+  const languageSelect = document.getElementById("language-select");
+  const runButton = document.getElementById("run-button");
+  const outputConsole = document.getElementById("output-console");
+
+  let editor; // CodeMirror instance
+
+  // Function to initialize CodeMirror
+  function initializeEditor(mode) {
+    // If an editor already exists, destroy it to prevent issues
+    if (editor) {
+      editor.toTextArea(); // Convert CodeMirror instance back to a textarea
+    }
+    // Initialize CodeMirror with the specified mode and theme
+    editor = CodeMirror.fromTextArea(codeEditor, {
+      mode: mode, // Set the language mode
+      theme: "dracula", // Use the dracula theme for dark mode
+      lineNumbers: true, // Show line numbers
+      indentUnit: 4, // 4 spaces for indentation
+      tabSize: 4, // Tab key inserts 4 spaces
+      indentWithTabs: false, // Use spaces instead of tabs
+      autoCloseBrackets: true, // Automatically close brackets
+      matchBrackets: true, // Highlight matching brackets
+      extraKeys: {
+        "Ctrl-Space": "autocomplete", // Trigger autocomplete on Ctrl-Space
+        "Cmd-Space": "autocomplete", // For macOS users
+      },
+    });
+
+    // Add an event listener to trigger autocomplete on typing
+    editor.on("inputRead", function (instance) {
+      // Check if the current cursor position is at the end of a word or a dot
+      // This helps in triggering hints more intelligently
+      const cur = instance.getCursor();
+      const token = instance.getTokenAt(cur);
+      const char = instance.getRange(CodeMirror.Pos(cur.line, cur.ch - 1), cur);
+
+      // Trigger autocomplete if the typed character is a letter, number, or underscore,
+      // or if it's a dot (for object/module property suggestions)
+      if (/[a-zA-Z0-9_.]/.test(char)) {
+        CodeMirror.commands.autocomplete(instance, null, {
+          completeSingle: false,
+        });
+      }
+    });
+
+    // Refresh the editor to ensure correct rendering, especially after initial setup or resizing
+    editor.refresh();
+
+    // Set initial code based on the selected language
+    if (mode === "python") {
+      editor.setValue(`def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+print(f"Factorial of 5 is: {factorial(5)}")
+`);
+    } else if (mode === "javascript") {
+      editor.setValue(`function greet(name) {
+    console.log(\`Hello, \${name}!\`);
+}
+
+greet("World");
+`);
+    }
+  }
+
+  // Event listener for language selection change
+  languageSelect.addEventListener("change", (event) => {
+    const selectedMode = event.target.value;
+    // Update CodeMirror mode
+    editor.setOption("mode", selectedMode);
+    // Set initial code for the new language
+    if (selectedMode === "python") {
+      editor.setValue(`def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+print(f"Factorial of 5 is: {factorial(5)}")
+`);
+    } else if (selectedMode === "javascript") {
+      editor.setValue(`function greet(name) {
+    console.log(\`Hello, \${name}!\`);
+}
+
+greet("World");
+`);
+    }
+    outputConsole.textContent = ""; // Clear console on language change
+  });
+
+  // Event listener for the Run button
+  runButton.addEventListener("click", async () => {
+    const code = editor.getValue(); // Get code from the editor
+    const language = languageSelect.value; // Get selected language
+    outputConsole.textContent = "Running code..."; // Show loading message
+
+    try {
+      if (language === "python") {
+        // Send Python code to the Flask backend
+        const response = await fetch("/execute-python", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ code: code }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          if (result.error) {
+            outputConsole.textContent = `Error:\n${result.error}\nOutput:\n${result.output}`;
+            outputConsole.style.color = "#dc3545"; // Bootstrap danger color
+          } else {
+            outputConsole.textContent = result.output;
+            outputConsole.style.color = "#f8f9fa"; // Default light text
+          }
+        } else {
+          outputConsole.textContent = `Server Error: ${
+            result.error || "Unknown error"
+          }`;
+          outputConsole.style.color = "#dc3545"; // Bootstrap danger color
+        }
+      } else if (language === "javascript") {
+        // For JavaScript, we can execute directly in the browser's console
+        let consoleOutput = "";
+        // Override console.log to capture output
+        const originalConsoleLog = console.log;
+        console.log = (...args) => {
+          consoleOutput += args.map(String).join(" ") + "\n";
+          originalConsoleLog(...args); // Also log to browser console
+        };
+
+        try {
+          eval(code); // Execute JavaScript code
+          outputConsole.textContent = consoleOutput;
+          outputConsole.style.color = "#f8f9fa"; // Default light text
+        } catch (error) {
+          outputConsole.textContent = `Error: ${error.message}\n${consoleOutput}`;
+          outputConsole.style.color = "#dc3545"; // Bootstrap danger color
+        } finally {
+          console.log = originalConsoleLog; // Restore original console.log
+        }
+      }
+    } catch (error) {
+      outputConsole.textContent = `Execution failed: ${error.message}`;
+      outputConsole.style.color = "#dc3545"; // Bootstrap danger color
+    }
+  });
+
+  // Initialize editor on window load with Python mode
+  window.onload = () => {
+    initializeEditor("python");
+  };
+</script>
+{% endblock %}
