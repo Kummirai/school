@@ -4,3 +4,5 @@ gunicorn==20.1.0
 python-dotenv==1.0.0
 flask
 flask_login
+flask-socketio
+html2canvas
