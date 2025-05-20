@@ -94,6 +94,12 @@
                   submission.interactive_submission_data.language }}
                 </div>
 
+                {% elif submission.interactive_submission_data.type == 'html' %}
+                <h6>HTML Submission:</h6>
+                <div class="rendered-html-content">
+                  {{ submission.interactive_submission_data.content|safe }}
+                </div>
+
                 {% else %}
                 <pre>
 {{ submission.interactive_submission_data|tojson(indent=2) }}</pre
@@ -136,8 +142,7 @@
     </div>
   </div>
 
-  {# Display the original interactive assignment content for reference #} {#
-  Display the original interactive assignment content for reference #} {% if
+  {# Display the original interactive assignment content for reference #} {% if
   assignment.content %}
   <div class="card mt-4">
     <div class="card-header">
@@ -189,12 +194,34 @@
           </ul>
         </div>
 
+        {% elif assignment.content.type == 'html' %}
+        <h6>HTML Assignment:</h6>
+        <div class="rendered-html-content">
+          {{ assignment.content.html|safe }}
+        </div>
+
         {% else %}
-        <pre>{{ assignment.content|tojson(indent=2) }}</pre>
+        <pre>{{ assignment.content}}</pre>
         {% endif %}
       </div>
     </div>
   </div>
   {% endif %}
 </div>
+
+<style>
+  .rendered-html-content {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background: white;
+    border-radius: 4px;
+  }
+  .rendered-html-content img {
+    max-width: 100%;
+    height: auto;
+  }
+  .rendered-html-content iframe {
+    max-width: 100%;
+  }
+</style>
 {% endblock %}
