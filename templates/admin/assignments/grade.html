@@ -1,61 +1,200 @@
-{% extends "admin/base.html" %}
-
-{% block content %}
+{% extends "admin/base.html" %} {% block content %}
 <div class="container mt-4">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('manage_assignments') }}">Assignments</a></li>
-            <li class="breadcrumb-item"><a
-                    href="{{ url_for('view_assignment_submissions', assignment_id=assignment_id) }}">Submissions</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Grade Submission</li>
-        </ol>
-    </nav>
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{ url_for('manage_assignments') }}">Assignments</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a
+          href="{{ url_for('view_assignment_submissions', assignment_id=assignment_id) }}"
+          >Submissions</a
+        >
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Grade Submission
+      </li>
+    </ol>
+  </nav>
 
-    <h2>Grade Submission for {{ student.username }}</h2>
-    <h4>{{ assignment.title }}</h4>
+  <h2>Grade Submission for {{ student.username }}</h2>
+  <h4>{{ assignment.title }}</h4>
 
-    <div class="card mt-4">
-        <div class="card-body">
-            <form method="POST"
-                action="{{ url_for('submit_grade', assignment_id=assignment_id, student_id=student.id) }}">
-                <div class="mb-3">
-                    <label class="form-label">Student's Work</label>
-                    <div class="border p-3 bg-light">
-                        {% if submission.submission_text %}
-                        <p>{{ submission.submission_text }}</p>
-                        {% else %}
-                        <p class="text-muted">No text submission</p>
-                        {% endif %}
-
-                        {% if submission.file_path %}
-                        <a href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
-                            target="_blank" class="btn btn-sm btn-outline-primary mt-2">
-                            Download Submitted File
-                        </a>
-                        {% endif %}
-                    </div>
+  <div class="card mt-4">
+    <div class="card-body">
+      <form
+        method="POST"
+        action="{{ url_for('submit_grade', assignment_id=assignment_id, student_id=student.id) }}"
+      >
+        <div class="mb-3">
+          <label class="form-label">Student's Work</label>
+          <div class="border p-3 bg-light">
+            {% if submission.submission_text %}
+            <p>{{ submission.submission_text }}</p>
+            {% else %}
+            <p class="text-muted">No text submission</p>
+            {% endif %} {% if submission.file_path %}
+            <a
+              href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
+              target="_blank"
+              class="btn btn-sm btn-outline-primary mt-2"
+            >
+              Download Submitted File
+            </a>
+            {% endif %} {# Interactive Content Display #} {% if
+            submission.interactive_submission_data %}
+            <div class="mt-4">
+              <h5>Interactive Submission:</h5>
+              <div class="border p-3 mt-2 bg-white">
+                {# Display interactive content based on type #} {% if
+                submission.interactive_submission_data.type == 'quiz' %}
+                <h6>Quiz Answers:</h6>
+                <ul class="list-group">
+                  {% for question in
+                  submission.interactive_submission_data.questions %}
+                  <li class="list-group-item">
+                    <strong>Question {{ loop.index }}:</strong> {{
+                    question.question }}<br />
+                    <strong>Student Answer:</strong> {{ question.answer }}<br />
+                    {% if question.correct is defined %}
+                    <span
+                      class="badge bg-{{ 'success' if question.correct else 'danger' }}"
+                    >
+                      {{ 'Correct' if question.correct else 'Incorrect' }}
+                    </span>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                <div class="mt-2">
+                  <strong>Score:</strong>
+                  {{ submission.interactive_submission_data.score|default('0')
+                  }} / {{
+                  submission.interactive_submission_data.total|default('0') }}
                 </div>
 
-                <div class="mb-3">
-                    <label for="marks_obtained" class="form-label">Score (out of {{ assignment.total_marks }})</label>
-                    <input type="number" class="form-control" id="marks_obtained" name="marks_obtained" min="0"
-                        max="{{ assignment.total_marks }}" step="0.5"
-                        value="{{ submission.marks_obtained if submission.marks_obtained is not none else '' }}"
-                        required>
+                {% elif submission.interactive_submission_data.type == 'essay'
+                %}
+                <h6>Essay Submission:</h6>
+                <div class="p-3 bg-light">
+                  {{ submission.interactive_submission_data.content|safe }}
+                </div>
+                <div class="mt-2">
+                  <strong>Word Count:</strong> {{
+                  submission.interactive_submission_data.word_count }}
                 </div>
 
-                <div class="mb-3">
-                    <label for="feedback" class="form-label">Feedback</label>
-                    <textarea class="form-control" id="feedback" name="feedback"
-                        rows="5">{{ submission.feedback or '' }}</textarea>
+                {% elif submission.interactive_submission_data.type == 'code' %}
+                <h6>Code Submission:</h6>
+                <pre
+                  class="bg-dark text-light p-3"
+                ><code>{{ submission.interactive_submission_data.code }}</code></pre>
+                <div class="mt-2">
+                  <strong>Language:</strong> {{
+                  submission.interactive_submission_data.language }}
                 </div>
 
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Save Grade</button>
-                </div>
-            </form>
+                {% else %}
+                <pre>
+{{ submission.interactive_submission_data|tojson(indent=2) }}</pre
+                >
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
         </div>
+
+        <div class="mb-3">
+          <label for="marks_obtained" class="form-label"
+            >Score (out of {{ assignment.total_marks }})</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="marks_obtained"
+            name="marks_obtained"
+            min="0"
+            max="{{ assignment.total_marks }}"
+            step="0.5"
+            value="{{ submission.marks_obtained if submission.marks_obtained is not none else '' }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="feedback" class="form-label">Feedback</label>
+          <textarea class="form-control" id="feedback" name="feedback" rows="5">
+{{ submission.feedback or '' }}</textarea
+          >
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">Save Grade</button>
+        </div>
+      </form>
     </div>
+  </div>
+
+  {# Display the original interactive assignment content for reference #} {#
+  Display the original interactive assignment content for reference #} {% if
+  assignment.content %}
+  <div class="card mt-4">
+    <div class="card-header">
+      <h5>Original Assignment Interactive Content</h5>
+    </div>
+    <div class="card-body">
+      <div class="border p-3 bg-light">
+        {% if assignment.content.type == 'quiz' %}
+        <h6>Quiz Questions:</h6>
+        <ol>
+          {% for question in assignment.content.questions %}
+          <li class="mb-3">
+            <p>{{ question.question }}</p>
+            {% if question.options %}
+            <ul>
+              {% for option in question.options %}
+              <li
+                class="{{ 'text-success fw-bold' if question.answer == loop.index0 else '' }}"
+              >
+                {{ option }} {% if question.answer == loop.index0 %}(Correct){%
+                endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+
+        {% elif assignment.content.type == 'essay' %}
+        <h6>Essay Prompt:</h6>
+        <div class="p-3 bg-white">{{ assignment.content.prompt|safe }}</div>
+        <div class="mt-2">
+          <strong>Minimum Word Count:</strong> {{ assignment.content.min_words
+          }}
+        </div>
+
+        {% elif assignment.content.type == 'code' %}
+        <h6>Coding Challenge:</h6>
+        <div class="p-3 bg-white">
+          {{ assignment.content.description|safe }}
+        </div>
+        <div class="mt-2">
+          <strong>Requirements:</strong>
+          <ul>
+            {% for req in assignment.content.requirements %}
+            <li>{{ req }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% else %}
+        <pre>{{ assignment.content|tojson(indent=2) }}</pre>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}
