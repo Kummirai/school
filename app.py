@@ -10,6 +10,8 @@ from flask import render_template
 from flask_login import current_user, login_required
 import json
 from flask_socketio import SocketIO, emit
+import docker
+from docker.errors import DockerException, ContainerError, ImageNotFound
 
 # Initialize Socket.IO
 # Load environment variables
@@ -271,6 +273,63 @@ def initialize_database():
 
 
 # Helpers
+# Add this function to your app.py (can be placed with other helper functions)
+def execute_python_in_docker(code, timeout=5):
+    """
+    Execute Python code in a disposable Docker container.
+    
+    Args:
+        code (str): Python code to execute
+        timeout (int): Maximum execution time in seconds
+        
+    Returns:
+        dict: {'output': str, 'error': str}
+    """
+    try:
+        client = docker.from_env()
+        
+        # Create a container with strict resource limits
+        container = client.containers.run(
+            'python:3.9-slim',  # Official Python image
+            command=['python', '-c', code],
+            mem_limit='100m',  # 100MB memory limit
+            cpu_period=100000,  # CPU quota parameters
+            cpu_quota=50000,    # Limits to 50% of CPU
+            network_mode='none',  # No network access
+            pids_limit=50,      # Limit number of processes
+            read_only=True,     # Filesystem is read-only
+            remove=True,        # Auto-remove container after execution
+            stdout=True,
+            stderr=True,
+            detach=True
+        )
+        
+        # Wait for container to finish with timeout
+        try:
+            result = container.wait(timeout=timeout)
+            exit_code = result['StatusCode']
+            
+            # Get the output
+            output = container.logs(stdout=True, stderr=False).decode('utf-8').strip()
+            error = container.logs(stdout=False, stderr=True).decode('utf-8').strip()
+            
+            if exit_code != 0:
+                return {'output': output, 'error': error}
+            return {'output': output, 'error': ''}
+            
+        except Exception as e:
+            container.stop()
+            return {'output': '', 'error': f'Execution timed out after {timeout} seconds'}
+            
+    except ContainerError as e:
+        return {'output': '', 'error': e.stderr.decode('utf-8').strip()}
+    except ImageNotFound:
+        return {'output': '', 'error': 'Python docker image not found'}
+    except DockerException as e:
+        return {'output': '', 'error': f'Docker error: {str(e)}'}
+    except Exception as e:
+        return {'output': '', 'error': f'Unexpected error: {str(e)}'}
+    
 # Socket.IO events for real-time whiteboard
 @socketio.on('join whiteboard')
 def handle_join_whiteboard(data):
@@ -2541,6 +2600,40 @@ def math_whiteboard():
 def code_editor():
     """Render the interactive math whiteboard."""
     return render_template('code_editor.html')
+
+@app.route('/execute-python', methods=['POST'])
+@login_required
+def execute_python():
+    """
+    Execute Python code in a Docker container.
+    Returns JSON with the output or error message.
+    """
+    if not request.is_json:
+        return jsonify({'error': 'Request must be JSON'}), 400
+    
+    data = request.get_json()
+    code = data.get('code', '')
+    
+    if not code:
+        return jsonify({'error': 'No code provided'}), 400
+    
+    # Basic code validation (optional)
+    if len(code) > 10000:  # Limit code size
+        return jsonify({'error': 'Code too large (max 10KB)'}), 400
+    
+    # Execute in Docker container
+    result = execute_python_in_docker(code)
+    
+    if result['error']:
+        return jsonify({
+            'error': result['error'],
+            'output': result['output']
+        }), 400
+    else:
+        return jsonify({
+            'output': result['output'],
+            'error': ''
+        })
 
 @app.context_processor
 def inject_functions():
