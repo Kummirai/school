@@ -1581,49 +1581,47 @@ def add_assignment_route():
             subject = request.form.get('subject', '').strip()
             total_marks = request.form.get('total_marks', '').strip()
             deadline_str = request.form.get('deadline', '').strip()
-            assigned_users = request.form.getlist('assigned_users')
+            assign_to = request.form.get('assign_to')  # 'all' or 'selected'
+            selected_users = request.form.getlist('selected_users[]') if assign_to == 'selected' else []
 
             # Validate required fields
             if not all([title, description, subject, total_marks, deadline_str]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
             # Convert and validate total marks
             try:
                 total_marks = int(total_marks)
                 if total_marks <= 0:
                     flash('Total marks must be positive', 'danger')
-                    return redirect(url_for('add_assignment'))
+                    return redirect(url_for('add_assignment_route'))
             except ValueError:
                 flash('Total marks must be a number', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
             # Validate deadline
             try:
                 deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
-                if deadline <= datetime.now():
+                if deadline <= datetime.utcnow():
                     flash('Deadline must be in the future', 'danger')
-                    return redirect(url_for('add_assignment'))
+                    return redirect(url_for('add_assignment_route'))
             except ValueError:
                 flash('Invalid deadline format', 'danger')
-                return redirect(url_for('add_assignment'))
+                return redirect(url_for('add_assignment_route'))
 
-            # Validate student selection
-            if not assigned_users:
+            # Get user IDs based on selection
+            if assign_to == 'all':
+                conn = get_db_connection()
+                cur = conn.cursor()
+                cur.execute('SELECT id FROM users WHERE role = %s', ('student',))
+                user_ids = [row[0] for row in cur.fetchall()]
+                cur.close()
+                conn.close()
+            elif assign_to == 'selected' and selected_users:
+                user_ids = [int(user_id) for user_id in selected_users]
+            else:
                 flash('Please select at least one student', 'danger')
-                return redirect(url_for('add_assignment'))
-
-            # Verify all student IDs are valid
-            valid_student_ids = {str(student[0]) for student in get_students()}  # Get current valid IDs
-            print(valid_student_ids)
-
-            for user_username in assigned_users:
-                if user_username not in valid_student_ids:
-                    flash('Invalid student selection', 'danger')
-                    return redirect(url_for('add_assignment'))
-
-            # Convert to integers
-            assigned_users = [int(user_id) for user_id in assigned_users]
+                return redirect(url_for('add_assignment_route'))
 
             # Create assignment
             assignment_id = add_assignment(
@@ -1632,7 +1630,7 @@ def add_assignment_route():
                 subject=subject,
                 total_marks=total_marks,
                 deadline=deadline,
-                assigned_users=assigned_users
+                assigned_users=user_ids
             )
 
             flash('Assignment created successfully!', 'success')
@@ -1644,7 +1642,6 @@ def add_assignment_route():
     
     # GET request - show form with students
     students = get_students()
-    print(students)
     return render_template('admin/assignments/add.html', students=students)
     
 
@@ -2425,22 +2422,78 @@ def delete_announcement(announcement_id):
         conn.close()
     return redirect(url_for('manage_announcements'))
 
+@app.route('/admin/assignments/import', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def import_assignments():
+    if request.method == 'POST':
+        if 'json_file' not in request.files:
+            flash('No file selected', 'danger')
+            return redirect(request.url)
+        
+        file = request.files['json_file']
+        if file.filename == '':
+            flash('No file selected', 'danger')
+            return redirect(request.url)
+        
+        if file and file.filename.endswith('.json'):
+            try:
+                data = json.load(file)
+                
+                # Validate JSON structure
+                required_fields = ['title', 'description', 'subject', 'total_marks', 'deadline', 'assigned_users']
+                for assignment_data in data:
+                    if not all(field in assignment_data for field in required_fields):
+                        flash('Invalid JSON structure - missing required fields', 'danger')
+                        return redirect(request.url)
+                    
+                    # Convert deadline string to datetime
+                    try:
+                        deadline = datetime.strptime(assignment_data['deadline'], '%Y-%m-%d %H:%M')
+                    except ValueError:
+                        flash('Invalid deadline format in JSON (use YYYY-MM-DD HH:MM)', 'danger')
+                        return redirect(request.url)
+                    
+                    # Create assignment
+                    assignment_id = add_assignment(
+                        title=assignment_data['title'],
+                        description=assignment_data['description'],
+                        subject=assignment_data['subject'],
+                        total_marks=int(assignment_data['total_marks']),
+                        deadline=deadline,
+                        assigned_users=[int(user_id) for user_id in assignment_data['assigned_users']]
+                    )
+                
+                flash(f'Successfully imported {len(data)} assignments', 'success')
+                return redirect(url_for('manage_assignments'))
+                
+            except json.JSONDecodeError:
+                flash('Invalid JSON file', 'danger')
+            except Exception as e:
+                flash(f'Error importing assignments: {str(e)}', 'danger')
+        
+        else:
+            flash('Only JSON files are allowed', 'danger')
+    
+    # GET request - show import form
+    return render_template('admin/assignments/import.html')
+
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
 
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Initialize database
+    initialize_database()
+    
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)

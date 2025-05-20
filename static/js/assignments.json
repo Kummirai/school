@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Math Homework 1",
+    "description": "Complete exercises 1-10 from chapter 3",
+    "subject": "Mathematics",
+    "total_marks": 100,
+    "deadline": "2025-12-15 23:59",
+    "assigned_users": [6]
+  }
+]
