@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
 import json
-from flask_socketio import SocketIO, emit
 
 # Load environment variables
 load_dotenv()
