@@ -3,11 +3,4 @@ psycopg2-binary==2.9.6
 gunicorn==20.1.0
 python-dotenv==1.0.0
 flask
-<<<<<<< HEAD
 flask_login
-flask-socketio
-docker
-flask-cors
-=======
-flask_login
->>>>>>> parent of 2ddca2d (Add real-time collaboration features with Socket.IO and implement interactive math whiteboard and code editor)
