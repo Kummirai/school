@@ -9,11 +9,7 @@ from datetime import datetime, timedelta
 from flask import render_template
 from flask_login import current_user, login_required
 import json
-from flask_socketio import SocketIO, emit
-import docker
-from docker.errors import DockerException, ContainerError, ImageNotFound
 
-# Initialize Socket.IO
 # Load environment variables
 load_dotenv()
 
@@ -22,7 +18,7 @@ app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
-socketio = SocketIO(app)
+
 
 # Configure upload folder in your app
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
@@ -271,115 +267,7 @@ def initialize_database():
     cur.close()
     conn.close()
 
-
 # Helpers
-def is_docker_available():
-    try:
-        client = docker.from_env()
-        client.ping()
-        return True
-    except DockerException:
-        return False
-
-def execute_python_in_container(code):
-    if not is_docker_available():
-        return {
-            'output': '',
-            'error': 'Docker not available in this environment'
-        }
-    
-    try:
-        client = docker.from_env()
-        container = client.containers.run(
-            'python:3.9-slim',
-            command=['python', '-c', code],
-            mem_limit='100m',
-            cpu_period=100000,
-            cpu_quota=50000,
-            network_mode='none',
-            remove=True,
-            stdout=True,
-            stderr=True
-        )
-        return {
-            'output': container.decode('utf-8'),
-            'error': ''
-        }
-    except Exception as e:
-        return {
-            'output': '',
-            'error': str(e)
-        }
-    
-# Add this function to your app.py (can be placed with other helper functions)
-def execute_python_in_docker(code, timeout=5):
-    """
-    Execute Python code in a disposable Docker container.
-    
-    Args:
-        code (str): Python code to execute
-        timeout (int): Maximum execution time in seconds
-        
-    Returns:
-        dict: {'output': str, 'error': str}
-    """
-    try:
-        client = docker.from_env()
-        
-        # Create a container with strict resource limits
-        container = client.containers.run(
-            'python:3.9-slim',  # Official Python image
-            command=['python', '-c', code],
-            mem_limit='100m',  # 100MB memory limit
-            cpu_period=100000,  # CPU quota parameters
-            cpu_quota=50000,    # Limits to 50% of CPU
-            network_mode='none',  # No network access
-            pids_limit=50,      # Limit number of processes
-            read_only=True,     # Filesystem is read-only
-            remove=True,        # Auto-remove container after execution
-            stdout=True,
-            stderr=True,
-            detach=True
-        )
-        
-        # Wait for container to finish with timeout
-        try:
-            result = container.wait(timeout=timeout)
-            exit_code = result['StatusCode']
-            
-            # Get the output
-            output = container.logs(stdout=True, stderr=False).decode('utf-8').strip()
-            error = container.logs(stdout=False, stderr=True).decode('utf-8').strip()
-            
-            if exit_code != 0:
-                return {'output': output, 'error': error}
-            return {'output': output, 'error': ''}
-            
-        except Exception as e:
-            container.stop()
-            return {'output': '', 'error': f'Execution timed out after {timeout} seconds'}
-            
-    except ContainerError as e:
-        return {'output': '', 'error': e.stderr.decode('utf-8').strip()}
-    except ImageNotFound:
-        return {'output': '', 'error': 'Python docker image not found'}
-    except DockerException as e:
-        return {'output': '', 'error': f'Docker error: {str(e)}'}
-    except Exception as e:
-        return {'output': '', 'error': f'Unexpected error: {str(e)}'}
-    
-# Socket.IO events for real-time whiteboard
-@socketio.on('join whiteboard')
-def handle_join_whiteboard(data):
-    username = data.get('username', 'Anonymous')
-    # Add user to room
-    # You'll need to implement user tracking
-    
-@socketio.on('drawing')
-def handle_drawing(data):
-    # Broadcast drawing data to all other users
-    emit('drawing', data, broadcast=True, include_self=False)
-
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -2627,63 +2515,22 @@ def import_assignments():
     # GET request - show import form
     return render_template('admin/assignments/import.html')
 
-@app.route('/math-whiteboard')
-@login_required
-def math_whiteboard():
-    """Render the interactive math whiteboard."""
-    return render_template('math_whiteboard.html')
-
-@app.route('/code_editor')
-@login_required
-def code_editor():
-    """Render the interactive math whiteboard."""
-    return render_template('code_editor.html')
-
-@app.route('/execute-python', methods=['POST'])
-def execute_python():
-    if not request.is_json:
-        return jsonify({'error': 'Request must be JSON'}), 400
-    
-    data = request.get_json()
-    code = data.get('code', '')
-    
-    if not code:
-        return jsonify({'error': 'No code provided'}), 400
-    
-    if len(code) > 10000:
-        return jsonify({'error': 'Code too large (max 10KB)'}), 400
-    
-    result = execute_python_in_container(code)
-    
-    if result['error']:
-        return jsonify({
-            'error': result['error'],
-            'output': result['output']
-        }), 400
-    return jsonify({
-        'output': result['output'],
-        'error': ''
-    })
-
-
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
     
-
-
     
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)
-
 if __name__ == '__main__':
-    # Enable Flask debug features
-    app.debug = True  # Enables auto-reloader and debugger
-    
-    # Initialize database
+    from waitress import serve
     initialize_database()
+    serve(app, host="0.0.0.0", port=5000)
+
+# if __name__ == '__main__':
+#     # Enable Flask debug features
+#     app.debug = True  # Enables auto-reloader and debugger
     
-    # Run the development server
-    app.run(host='0.0.0.0', port=5000)
+#     # Initialize database
+#     initialize_database()
+    
+#     # Run the development server
+#     app.run(host='0.0.0.0', port=5000)
