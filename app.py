@@ -273,6 +273,44 @@ def initialize_database():
 
 
 # Helpers
+def is_docker_available():
+    try:
+        client = docker.from_env()
+        client.ping()
+        return True
+    except DockerException:
+        return False
+
+def execute_python_in_container(code):
+    if not is_docker_available():
+        return {
+            'output': '',
+            'error': 'Docker not available in this environment'
+        }
+    
+    try:
+        client = docker.from_env()
+        container = client.containers.run(
+            'python:3.9-slim',
+            command=['python', '-c', code],
+            mem_limit='100m',
+            cpu_period=100000,
+            cpu_quota=50000,
+            network_mode='none',
+            remove=True,
+            stdout=True,
+            stderr=True
+        )
+        return {
+            'output': container.decode('utf-8'),
+            'error': ''
+        }
+    except Exception as e:
+        return {
+            'output': '',
+            'error': str(e)
+        }
+    
 # Add this function to your app.py (can be placed with other helper functions)
 def execute_python_in_docker(code, timeout=5):
     """
@@ -2602,12 +2640,7 @@ def code_editor():
     return render_template('code_editor.html')
 
 @app.route('/execute-python', methods=['POST'])
-@login_required
 def execute_python():
-    """
-    Execute Python code in a Docker container.
-    Returns JSON with the output or error message.
-    """
     if not request.is_json:
         return jsonify({'error': 'Request must be JSON'}), 400
     
@@ -2617,23 +2650,21 @@ def execute_python():
     if not code:
         return jsonify({'error': 'No code provided'}), 400
     
-    # Basic code validation (optional)
-    if len(code) > 10000:  # Limit code size
+    if len(code) > 10000:
         return jsonify({'error': 'Code too large (max 10KB)'}), 400
     
-    # Execute in Docker container
-    result = execute_python_in_docker(code)
+    result = execute_python_in_container(code)
     
     if result['error']:
         return jsonify({
             'error': result['error'],
             'output': result['output']
         }), 400
-    else:
-        return jsonify({
-            'output': result['output'],
-            'error': ''
-        })
+    return jsonify({
+        'output': result['output'],
+        'error': ''
+    })
+
 
 @app.context_processor
 def inject_functions():

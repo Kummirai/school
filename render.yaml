@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: flask-docker-app
+    runtime: docker
+    dockerfilePath: Dockerfile
+    env: docker
+    buildCommand: docker build -t flask-docker-app .
+    startCommand: gunicorn --bind 0.0.0.0:5000 app:app
+    envVars:
+      - key: DOCKER_ENABLED
+        value: "true"
+    port: 5000
