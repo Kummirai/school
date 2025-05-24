@@ -10,6 +10,7 @@ from flask import render_template
 from flask_login import current_user, login_required
 import json
 
+
 # Load environment variables
 load_dotenv()
 
@@ -18,6 +19,8 @@ app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
+
+
 
 
 # Configure upload folder in your app
@@ -39,7 +42,7 @@ def get_db_connection():
             port=os.getenv('5432'),
             # sslmode='require'
         )
-        print("✅ Successfully connected to Supabase!")
+        print("✅ Successfully connected to Database!")
         return conn
     except Exception as e:
         print(f"❌ Connection failed: {e}")
@@ -267,7 +270,7 @@ def initialize_database():
     cur.close()
     conn.close()
 
-# Helpers
+#Helpers
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1365,6 +1368,11 @@ def science_curriculum():
 @login_required
 def english_curriculum():
     return render_template('english_curriculum.html')
+
+@app.route('/grade_7_maths')
+@login_required
+def grade_7_maths():
+    return render_template('grade_7_maths.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -2515,22 +2523,60 @@ def import_assignments():
     # GET request - show import form
     return render_template('admin/assignments/import.html')
 
+@app.route('/whiteboards')
+@login_required
+def list_whiteboards():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get whiteboards the user has access to
+        cur.execute('''
+            SELECT w.id, w.name, u.username as created_by, w.created_at
+            FROM whiteboards w
+            JOIN users u ON w.created_by = u.id
+            JOIN whiteboard_participants p ON w.id = p.whiteboard_id
+            WHERE p.user_id = %s
+            ORDER BY w.created_at DESC
+        ''', (session['user_id'],))
+        
+        whiteboards = [{
+            'id': row[0],
+            'name': row[1],
+            'created_by': row[2],
+            'created_at': row[3]
+        } for row in cur.fetchall()]
+        
+        return render_template('whiteboards/list.html', whiteboards=whiteboards)
+    except Exception as e:
+        print(f"Error listing whiteboards: {e}")
+        return render_template('whiteboards/list.html', whiteboards=[])
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.template_filter('datetime')
+def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
+    """Format a datetime object to a string."""
+    if value is None:
+        return ""
+    return value.strftime(format)
+
+
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
     
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
+#     from waitress import serve
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Initialize database
-#     initialize_database()
+    # Initialize database
+    initialize_database()
+ 
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
