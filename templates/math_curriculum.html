@@ -1,429 +1,486 @@
-{% extends "base.html" %}
-
-{% block title %}Math Curriculum (Grades 7-12){% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Math Curriculum (Grades 7-12){%
+endblock %} {% block content %}
 
 <!-- Hero Section -->
-<section class="hero-section" style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
     background-size: cover;
     background-position: center;
     color: white;
     min-height: 60vh;
     display: flex;
     align-items: center;
-    padding: 0;">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <div class="mb-4">
-                    <i class="bi bi-calculator display-1 text-warning"></i>
-                </div>
-                <h1 class="display-3 fw-bold mb-4">
-                    Math Curriculum <span class="text-warning">Grades 7-12</span>
-                </h1>
-                <p class="lead mb-5 fs-4">
-                    <i class="bi bi-stars text-warning me-2"></i> Comprehensive mathematics program aligned with
-                    national standards
-                </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a class="btn btn-danger btn-lg px-4 py-3 fw-bold" href="#grade7" role="button">
-                        <i class="bi bi-7-circle me-2"></i>Grade 7
-                    </a>
-                    <a class="btn btn-warning btn-lg px-4 py-3 fw-bold" href="#grade10" role="button">
-                        <i class="bi bi-1-circle me-2"></i>Grade 10
-                    </a>
-                </div>
-            </div>
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-calculator display-1 text-warning"></i>
         </div>
+        <h1 class="display-3 fw-bold mb-4">
+          Math Curriculum <span class="text-warning">Grades 7-12</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-warning me-2"></i> Comprehensive
+          mathematics program aligned with national standards
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            href="#grade7"
+            role="button"
+          >
+            <i class="bi bi-7-circle me-2"></i>Grade 7
+          </a>
+          <a
+            class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+            href="#grade10"
+            role="button"
+          >
+            <i class="bi bi-1-circle me-2"></i>Grade 10
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- Middle School Math -->
 <section id="grade7" class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="d-flex align-items-center mb-4">
-            <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
-            <h2 class="fw-bold mb-0">Middle School Math (Grades 7-9)</h2>
-        </div>
-
-        <div class="row g-4">
-            <!-- Grade 7 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 7</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Ratios and Proportional Relationships</li>
-                            <li class="list-group-item">The Number System</li>
-                            <li class="list-group-item">Expressions and Equations</li>
-                            <li class="list-group-item">Geometry</li>
-                            <li class="list-group-item">Statistics and Probability</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Solving multi-step problems</li>
-                            <li class="list-group-item">Working with rational numbers</li>
-                            <li class="list-group-item">Geometric constructions</li>
-                            <li class="list-group-item">Data analysis</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 8 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 8</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">The Number System</li>
-                            <li class="list-group-item">Expressions and Equations</li>
-                            <li class="list-group-item">Functions</li>
-                            <li class="list-group-item">Geometry</li>
-                            <li class="list-group-item">Statistics and Probability</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Working with radicals and exponents</li>
-                            <li class="list-group-item">Understanding functions</li>
-                            <li class="list-group-item">Pythagorean theorem</li>
-                            <li class="list-group-item">Linear equations</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 9 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 9 (Algebra I)</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Algebraic expressions</li>
-                            <li class="list-group-item">Linear equations and inequalities</li>
-                            <li class="list-group-item">Functions</li>
-                            <li class="list-group-item">Quadratic equations</li>
-                            <li class="list-group-item">Data analysis</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Solving equations and inequalities</li>
-                            <li class="list-group-item">Graphing linear functions</li>
-                            <li class="list-group-item">Working with polynomials</li>
-                            <li class="list-group-item">Systems of equations</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Middle School Math (Grades 7-9)</h2>
     </div>
+
+    <div class="row g-4">
+      <!-- Grade 7 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 7</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">
+                Ratios and Proportional Relationships
+              </li>
+              <li class="list-group-item">The Number System</li>
+              <li class="list-group-item">Expressions and Equations</li>
+              <li class="list-group-item">Geometry</li>
+              <li class="list-group-item">Statistics and Probability</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Solving multi-step problems</li>
+              <li class="list-group-item">Working with rational numbers</li>
+              <li class="list-group-item">Geometric constructions</li>
+              <li class="list-group-item">Data analysis</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_7_maths')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 8 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 8</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">The Number System</li>
+              <li class="list-group-item">Expressions and Equations</li>
+              <li class="list-group-item">Functions</li>
+              <li class="list-group-item">Geometry</li>
+              <li class="list-group-item">Statistics and Probability</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Working with radicals and exponents
+              </li>
+              <li class="list-group-item">Understanding functions</li>
+              <li class="list-group-item">Pythagorean theorem</li>
+              <li class="list-group-item">Linear equations</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_8_maths')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 9 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 9 (Algebra I)</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Algebraic expressions</li>
+              <li class="list-group-item">Linear equations and inequalities</li>
+              <li class="list-group-item">Functions</li>
+              <li class="list-group-item">Quadratic equations</li>
+              <li class="list-group-item">Data analysis</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Solving equations and inequalities
+              </li>
+              <li class="list-group-item">Graphing linear functions</li>
+              <li class="list-group-item">Working with polynomials</li>
+              <li class="list-group-item">Systems of equations</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_9_maths')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- High School Math -->
 <section id="grade10" class="py-5">
-    <div class="container py-5">
-        <div class="d-flex align-items-center mb-4">
-            <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
-            <h2 class="fw-bold mb-0">High School Math (Grades 10-12)</h2>
-        </div>
-
-        <div class="row g-4">
-            <!-- Grade 10 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 10 (Geometry)</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Congruence and similarity</li>
-                            <li class="list-group-item">Right triangle trigonometry</li>
-                            <li class="list-group-item">Circles</li>
-                            <li class="list-group-item">Coordinate geometry</li>
-                            <li class="list-group-item">Geometric modeling</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Geometric proofs</li>
-                            <li class="list-group-item">Trigonometric ratios</li>
-                            <li class="list-group-item">Transformations</li>
-                            <li class="list-group-item">Volume calculations</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 11 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 11 (Algebra II)</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Polynomial functions</li>
-                            <li class="list-group-item">Rational exponents</li>
-                            <li class="list-group-item">Trigonometric functions</li>
-                            <li class="list-group-item">Logarithms</li>
-                            <li class="list-group-item">Probability and statistics</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Complex number operations</li>
-                            <li class="list-group-item">Function transformations</li>
-                            <li class="list-group-item">Solving exponential equations</li>
-                            <li class="list-group-item">Data modeling</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 12 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 12 (Pre-Calculus)</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Advanced functions</li>
-                            <li class="list-group-item">Trigonometric identities</li>
-                            <li class="list-group-item">Conic sections</li>
-                            <li class="list-group-item">Vectors</li>
-                            <li class="list-group-item">Limits and continuity</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Matrix operations</li>
-                            <li class="list-group-item">Polar coordinates</li>
-                            <li class="list-group-item">Parametric equations</li>
-                            <li class="list-group-item">Introduction to calculus</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">High School Math (Grades 10-12)</h2>
     </div>
+
+    <div class="row g-4">
+      <!-- Grade 10 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 10 (Geometry)</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Congruence and similarity</li>
+              <li class="list-group-item">Right triangle trigonometry</li>
+              <li class="list-group-item">Circles</li>
+              <li class="list-group-item">Coordinate geometry</li>
+              <li class="list-group-item">Geometric modeling</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Geometric proofs</li>
+              <li class="list-group-item">Trigonometric ratios</li>
+              <li class="list-group-item">Transformations</li>
+              <li class="list-group-item">Volume calculations</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_10_maths')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 11 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 11 (Algebra II)</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Polynomial functions</li>
+              <li class="list-group-item">Rational exponents</li>
+              <li class="list-group-item">Trigonometric functions</li>
+              <li class="list-group-item">Logarithms</li>
+              <li class="list-group-item">Probability and statistics</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Complex number operations</li>
+              <li class="list-group-item">Function transformations</li>
+              <li class="list-group-item">Solving exponential equations</li>
+              <li class="list-group-item">Data modeling</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_11_maths')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 12 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 12 (Pre-Calculus)</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Advanced functions</li>
+              <li class="list-group-item">Trigonometric identities</li>
+              <li class="list-group-item">Conic sections</li>
+              <li class="list-group-item">Vectors</li>
+              <li class="list-group-item">Limits and continuity</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Matrix operations</li>
+              <li class="list-group-item">Polar coordinates</li>
+              <li class="list-group-item">Parametric equations</li>
+              <li class="list-group-item">Introduction to calculus</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('grade_12_maths')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- AP Math Courses -->
 <section class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Advanced Placement Math Courses</h2>
-            <p class="lead text-muted">College-level mathematics for high school students</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">AP Calculus AB/BC</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Course Content</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Limits and continuity</li>
-                            <li class="list-group-item">Differentiation</li>
-                            <li class="list-group-item">Integration</li>
-                            <li class="list-group-item">Series (BC only)</li>
-                            <li class="list-group-item">Applications of calculus</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Exam Preparation</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Full-length practice exams</li>
-                            <li class="list-group-item">FRQ strategies</li>
-                            <li class="list-group-item">Calculator skills</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger">
-                            <i class="bi bi-journal-bookmark me-1"></i>Course Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">AP Statistics</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Course Content</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Exploring data</li>
-                            <li class="list-group-item">Sampling and experimentation</li>
-                            <li class="list-group-item">Probability</li>
-                            <li class="list-group-item">Statistical inference</li>
-                            <li class="list-group-item">Regression analysis</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Exam Preparation</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Data analysis practice</li>
-                            <li class="list-group-item">Experimental design</li>
-                            <li class="list-group-item">Inference procedures</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning">
-                            <i class="bi bi-journal-bookmark me-1"></i>Course Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Advanced Placement Math Courses</h2>
+      <p class="lead text-muted">
+        College-level mathematics for high school students
+      </p>
     </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">AP Calculus AB/BC</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Course Content</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Limits and continuity</li>
+              <li class="list-group-item">Differentiation</li>
+              <li class="list-group-item">Integration</li>
+              <li class="list-group-item">Series (BC only)</li>
+              <li class="list-group-item">Applications of calculus</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Exam Preparation</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Full-length practice exams</li>
+              <li class="list-group-item">FRQ strategies</li>
+              <li class="list-group-item">Calculator skills</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-journal-bookmark me-1"></i>Course Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">AP Statistics</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Course Content</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Exploring data</li>
+              <li class="list-group-item">Sampling and experimentation</li>
+              <li class="list-group-item">Probability</li>
+              <li class="list-group-item">Statistical inference</li>
+              <li class="list-group-item">Regression analysis</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Exam Preparation</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Data analysis practice</li>
+              <li class="list-group-item">Experimental design</li>
+              <li class="list-group-item">Inference procedures</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-warning">
+              <i class="bi bi-journal-bookmark me-1"></i>Course Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Learning Resources -->
 <section class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Math Learning Resources</h2>
-            <p class="lead text-muted">Supplemental materials to enhance your math skills</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-clipboard2-data display-4 text-danger mb-3"></i>
-                        <h3 class="h4 fw-bold">Practice Problems</h3>
-                        <p class="mb-4">Thousands of graded practice problems with step-by-step solutions</p>
-                        <a href="#" class="btn btn-outline-danger">
-                            <i class="bi bi-journal-code me-1"></i>Browse Problems
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
-                        <h3 class="h4 fw-bold">Video Tutorials</h3>
-                        <p class="mb-4">Engaging video explanations for every math concept</p>
-                        <a href="{{ url_for('tutorials_home') }}" class="btn btn-outline-warning">
-                            <i class="bi bi-collection-play me-1"></i>Watch Videos
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-file-earmark-text display-4 text-secondary mb-3"></i>
-                        <h3 class="h4 fw-bold">Worksheets</h3>
-                        <p class="mb-4">Printable worksheets with answer keys for extra practice</p>
-                        <a href="#" class="btn btn-outline-secondary">
-                            <i class="bi bi-download me-1"></i>Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Math Learning Resources</h2>
+      <p class="lead text-muted">
+        Supplemental materials to enhance your math skills
+      </p>
     </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-clipboard2-data display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Practice Problems</h3>
+            <p class="mb-4">
+              Thousands of graded practice problems with step-by-step solutions
+            </p>
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-journal-code me-1"></i>Browse Problems
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
+            <h3 class="h4 fw-bold">Video Tutorials</h3>
+            <p class="mb-4">
+              Engaging video explanations for every math concept
+            </p>
+            <a
+              href="{{ url_for('tutorials_home') }}"
+              class="btn btn-outline-warning"
+            >
+              <i class="bi bi-collection-play me-1"></i>Watch Videos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i
+              class="bi bi-file-earmark-text display-4 text-secondary mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">Worksheets</h3>
+            <p class="mb-4">
+              Printable worksheets with answer keys for extra practice
+            </p>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="bi bi-download me-1"></i>Download
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- CTA Section -->
 <section class="py-5 bg-warning">
-    <div class="container py-4 text-center">
-        <h2 class="display-5 fw-bold mb-4">Ready to Master Mathematics?</h2>
-        <p class="lead mb-5">Our structured curriculum will guide you from basic concepts to advanced topics</p>
-        {% if 'username' not in session %}
-        <a href="{{ url_for('login') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
-        </a>
-        {% else %}
-        <a href="{{ url_for('tutorials_home') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-collection-play me-2"></i>Browse Math Tutorials
-        </a>
-        {% endif %}
-    </div>
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4">Ready to Master Mathematics?</h2>
+    <p class="lead mb-5">
+      Our structured curriculum will guide you from basic concepts to advanced
+      topics
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('login') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('tutorials_home') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse Math Tutorials
+    </a>
+    {% endif %}
+  </div>
 </section>
 
 <style>
-    .hero-section {
-        position: relative;
-        width: 100vw;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-    }
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
 
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
 
-    .list-group-item {
-        border-left: none;
-        border-right: none;
-    }
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+  }
 
-    .card-header {
-        border-bottom: none;
-    }
+  .card-header {
+    border-bottom: none;
+  }
 </style>
 
 {% endblock %}

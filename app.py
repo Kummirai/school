@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for, jsonify
+from flask import Flask, flash, redirect, render_template, redirect, request, session, url_for, jsonify, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 import os
@@ -10,6 +10,7 @@ from flask import render_template
 from flask_login import current_user, login_required
 import json
 
+
 # Load environment variables
 load_dotenv()
 
@@ -18,6 +19,8 @@ app = Flask(__name__)
 #app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
+
+
 
 
 # Configure upload folder in your app
@@ -39,7 +42,7 @@ def get_db_connection():
             port=os.getenv('5432'),
             # sslmode='require'
         )
-        print("✅ Successfully connected to Supabase!")
+        print("✅ Successfully connected to Database!")
         return conn
     except Exception as e:
         print(f"❌ Connection failed: {e}")
@@ -267,7 +270,7 @@ def initialize_database():
     cur.close()
     conn.close()
 
-# Helpers
+#Helpers
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1365,6 +1368,126 @@ def science_curriculum():
 @login_required
 def english_curriculum():
     return render_template('english_curriculum.html')
+
+@app.route('/grade7/maths')
+def grade_7_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade7_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade8/maths')
+def grade_8_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade8_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade9/maths')
+def grade_9_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade9_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade10/maths')
+def grade_10_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade10_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade11/maths')
+def grade_11_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade11_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade12/maths')
+def grade_12_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade12_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")              
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -2515,22 +2638,60 @@ def import_assignments():
     # GET request - show import form
     return render_template('admin/assignments/import.html')
 
+@app.route('/whiteboards')
+@login_required
+def list_whiteboards():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get whiteboards the user has access to
+        cur.execute('''
+            SELECT w.id, w.name, u.username as created_by, w.created_at
+            FROM whiteboards w
+            JOIN users u ON w.created_by = u.id
+            JOIN whiteboard_participants p ON w.id = p.whiteboard_id
+            WHERE p.user_id = %s
+            ORDER BY w.created_at DESC
+        ''', (session['user_id'],))
+        
+        whiteboards = [{
+            'id': row[0],
+            'name': row[1],
+            'created_by': row[2],
+            'created_at': row[3]
+        } for row in cur.fetchall()]
+        
+        return render_template('whiteboards/list.html', whiteboards=whiteboards)
+    except Exception as e:
+        print(f"Error listing whiteboards: {e}")
+        return render_template('whiteboards/list.html', whiteboards=[])
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.template_filter('datetime')
+def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
+    """Format a datetime object to a string."""
+    if value is None:
+        return ""
+    return value.strftime(format)
+
+
 @app.context_processor
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
     
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
+#     from waitress import serve
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
     
-#     # Initialize database
-#     initialize_database()
+    # Initialize database
+    initialize_database()
+ 
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)

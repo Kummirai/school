@@ -1,0 +1,68 @@
+{
+  "title": "Grade 9 Mathematics Lessons",
+  "grade": "Grade 9",
+  "subject": "Mathematics",
+  "hero_image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "icon": "bi bi-graph-up",
+  "tagline": "Algebra I mastery for high school success",
+  "description": "Our comprehensive Algebra I curriculum prepares students for advanced mathematics in high school.",
+  "domains": [
+    "Algebraic Expressions",
+    "Linear Equations",
+    "Functions",
+    "Quadratic Equations",
+    "Data Analysis"
+  ],
+  "feature_note": "Includes graphing calculator tutorials and real-world modeling exercises.",
+  "stats": {
+    "total_lessons": "50",
+    "video_hours": "22",
+    "practice_problems": "800+",
+    "assessments": "16"
+  },
+  "units": [
+    {
+      "title": "Algebraic Foundations",
+      "color": "warning",
+      "lessons": [
+        {
+          "title": "1.1 Solving Linear Equations",
+          "duration": "18 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "40 questions"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Equation Solver Tool",
+      "description": "Interactive tool for solving various equation types",
+      "link": "#",
+      "icon": "bi bi-calculator",
+      "color": "warning",
+      "button_text": "Try Now",
+      "button_icon": "bi bi-arrow-right"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "Assessment Bank",
+      "description": "Ready-to-use quizzes and tests",
+      "link": "#",
+      "icon": "bi bi-collection",
+      "color": "warning",
+      "button_text": "Browse",
+      "button_icon": "bi bi-search"
+    }
+  ],
+  "cta": {
+    "title": "Algebra I Challenging You?",
+    "subtitle": "Get personalized help from our math specialists",
+    "link": "/video_conference",
+    "icon": "bi bi-people",
+    "button_text": "Find a Tutor"
+  }
+}
