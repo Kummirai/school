@@ -2076,7 +2076,6 @@ diff --git a/requirements.txt b/requirements.txt
 +python-http-client==3.3.7
 +python-json-logger==3.3.0
 +python-socketio==5.13.0
-+pywin32==310
 +pywinpty==2.0.15
 +PyYAML==6.0.2
 +pyzmq==26.4.0
