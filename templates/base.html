@@ -32,6 +32,7 @@
     <script src="../static/js/video_tutorials.js" defer></script>
     <script src="../static/js/studyGuide.js" defer></script>
     <script src="../static/js/study_guides_interactive.js" defer></script>
+    <script src="../static/data/algebra_calculator.js" defer></script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
@@ -70,13 +71,13 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+              {% if 'username' in session and session.role == 'student' %}
               <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('home') }}">
                   <i class="bi bi-house-door-fill me-1"></i>
                   <span>Home</span></a
                 >
               </li>
-              {% if 'username' in session and session.role == 'student' %}
               <li class="nav-item" style="font-size: 0.9rem">
                 <a class="nav-link" href="{{ url_for('view_sessions') }}">
                   <i class="bi bi-calendar-event me-1"></i>
@@ -99,6 +100,12 @@
                 <a class="nav-link" href="{{ url_for('tutorials_home') }}">
                   <i class="bi bi-collection-play me-1"></i>
                   <span>Tutorials</span>
+                </a>
+              </li>
+              <li class="nav-item" style="font-size: 0.9rem">
+                <a class="nav-link" href="{{ url_for('algebra_calculator') }}">
+                  <i class="bi bi-calculator me-1"></i
+                  ><span>Algebra Calculator</span>
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
@@ -200,7 +207,11 @@
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                <a
+                  class="nav-link"
+                  href="{{ url_for('login') }}"
+                  >Login</a
+                >
               </li>
               {% endif %}
             </ul>
