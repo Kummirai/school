@@ -1380,7 +1380,7 @@ def grade_7_maths():
         progress = 15  # Example value
         
         return render_template(
-            'grade_7_maths.html',
+            'maths.html',
             subject_data=subject_data,
             progress=progress
         )
@@ -1388,6 +1388,106 @@ def grade_7_maths():
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
+
+@app.route('/grade8/maths')
+def grade_8_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade8_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade9/maths')
+def grade_9_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade9_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade10/maths')
+def grade_10_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade10_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade11/maths')
+def grade_11_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade11_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+
+@app.route('/grade12/maths')
+def grade_12_maths():
+    try:
+        # Load the JSON data
+        with open('static/data/grade12_math.json', 'r') as f:
+            subject_data = json.load(f)
+        
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+        
+        return render_template(
+            'maths.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")              
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

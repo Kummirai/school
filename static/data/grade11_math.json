@@ -1,0 +1,68 @@
+{
+  "title": "Grade 11 Mathematics Lessons",
+  "grade": "Grade 11",
+  "subject": "Mathematics",
+  "hero_image": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "icon": "bi bi-graph-up-arrow",
+  "tagline": "Advanced Algebra II and Pre-Calculus Concepts",
+  "description": "Deep dive into polynomial functions, trigonometry, and the foundations of calculus.",
+  "domains": [
+    "Polynomial Functions",
+    "Rational Exponents",
+    "Trigonometric Functions",
+    "Logarithms",
+    "Probability and Statistics"
+  ],
+  "feature_note": "Includes graphing calculator integration and real-world modeling projects.",
+  "stats": {
+    "total_lessons": "55",
+    "video_hours": "30",
+    "practice_problems": "900+",
+    "assessments": "18"
+  },
+  "units": [
+    {
+      "title": "Advanced Functions",
+      "color": "danger",
+      "lessons": [
+        {
+          "title": "1.1 Polynomial Operations",
+          "duration": "22 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "45 questions"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Function Grapher",
+      "description": "Interactive tool for exploring function graphs",
+      "link": "#",
+      "icon": "bi bi-graph-up",
+      "color": "danger",
+      "button_text": "Start Graphing",
+      "button_icon": "bi bi-sliders"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "AP Prep Materials",
+      "description": "Resources for Advanced Placement preparation",
+      "link": "#",
+      "icon": "bi bi-mortarboard",
+      "color": "danger",
+      "button_text": "Access",
+      "button_icon": "bi bi-box-arrow-in-right"
+    }
+  ],
+  "cta": {
+    "title": "Algebra II Too Complex?",
+    "subtitle": "Our advanced math tutors can simplify concepts",
+    "link": "/video_conference",
+    "icon": "bi bi-people",
+    "button_text": "Schedule Help"
+  }
+}

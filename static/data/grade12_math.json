@@ -1,0 +1,68 @@
+{
+  "title": "Grade 12 Mathematics Lessons",
+  "grade": "Grade 12",
+  "subject": "Mathematics",
+  "hero_image": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "icon": "bi bi-calculator",
+  "tagline": "Pre-Calculus and Calculus Readiness",
+  "description": "Prepare for college mathematics with advanced functions, trigonometry, and introduction to calculus concepts.",
+  "domains": [
+    "Advanced Functions",
+    "Trigonometric Identities",
+    "Conic Sections",
+    "Vectors",
+    "Limits and Continuity"
+  ],
+  "feature_note": "Includes college readiness assessments and STEM career connections.",
+  "stats": {
+    "total_lessons": "60",
+    "video_hours": "35",
+    "practice_problems": "1000+",
+    "assessments": "20"
+  },
+  "units": [
+    {
+      "title": "Calculus Foundations",
+      "color": "warning",
+      "lessons": [
+        {
+          "title": "1.1 Introduction to Limits",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "50 questions"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Calculus Readiness Test",
+      "description": "Assess your preparation for college calculus",
+      "link": "#",
+      "icon": "bi bi-clipboard-check",
+      "color": "warning",
+      "button_text": "Take Test",
+      "button_icon": "bi bi-pencil"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "College Transition Guide",
+      "description": "Resources for preparing students for college math",
+      "link": "#",
+      "icon": "bi bi-journal-bookmark",
+      "color": "warning",
+      "button_text": "View Guide",
+      "button_icon": "bi bi-book"
+    }
+  ],
+  "cta": {
+    "title": "Preparing for College Math?",
+    "subtitle": "Get college-level preparation from our experts",
+    "link": "/video_conference",
+    "icon": "bi bi-mortarboard",
+    "button_text": "Start Preparing"
+  }
+}

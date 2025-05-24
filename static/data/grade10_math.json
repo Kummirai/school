@@ -1,0 +1,68 @@
+{
+  "title": "Grade 10 Mathematics Lessons",
+  "grade": "Grade 10",
+  "subject": "Mathematics",
+  "hero_image": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "icon": "bi bi-triangle",
+  "tagline": "Mastering Geometry and Mathematical Reasoning",
+  "description": "Our Geometry curriculum emphasizes proof-writing, spatial reasoning, and real-world applications of geometric concepts.",
+  "domains": [
+    "Congruence and Similarity",
+    "Right Triangle Trigonometry",
+    "Circles",
+    "Coordinate Geometry",
+    "Geometric Modeling"
+  ],
+  "feature_note": "Includes interactive geometry tools and construction tutorials.",
+  "stats": {
+    "total_lessons": "48",
+    "video_hours": "25",
+    "practice_problems": "750+",
+    "assessments": "15"
+  },
+  "units": [
+    {
+      "title": "Geometric Proofs",
+      "color": "secondary",
+      "lessons": [
+        {
+          "title": "1.1 Introduction to Proofs",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "35 questions"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Geometry Toolkit",
+      "description": "Digital tools for geometric constructions",
+      "link": "#",
+      "icon": "bi bi-pencil",
+      "color": "secondary",
+      "button_text": "Explore",
+      "button_icon": "bi bi-box-arrow-up-right"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "Proof Rubrics",
+      "description": "Grading rubrics for geometric proofs",
+      "link": "#",
+      "icon": "bi bi-file-earmark-check",
+      "color": "secondary",
+      "button_text": "Download",
+      "button_icon": "bi bi-download"
+    }
+  ],
+  "cta": {
+    "title": "Struggling with Geometry?",
+    "subtitle": "Our geometry experts can help you master proofs",
+    "link": "/video_conference",
+    "icon": "bi bi-lightbulb",
+    "button_text": "Get Help Now"
+  }
+}
