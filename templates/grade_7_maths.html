@@ -1,33 +1,32 @@
-{% extends "base.html" %} {% block title %}Grade 7 Mathematics Lessons{%
-endblock %} {% block content %}
-
+{% extends "base.html" %} {% block title %}{{ subject_data.title }}{% endblock
+%} {% block content %}
 <!-- Hero Section -->
 <section
   class="hero-section"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('{{ subject_data.hero_image }}');
     background-size: cover;
     background-position: center;
     color: white;
     min-height: 50vh;
     display: flex;
     align-items: center;
-    padding: 0;
-  "
+    padding: 0;"
 >
   <div class="container py-5">
     <div class="row align-items-center">
       <div class="col-lg-8 mx-auto text-center">
         <div class="mb-4">
-          <i class="bi bi-7-circle-fill display-1 text-warning"></i>
+          <i class="{{ subject_data.icon }} display-1 text-warning"></i>
         </div>
         <h1 class="display-3 fw-bold mb-4">
-          Grade 7 <span class="text-warning">Mathematics</span>
+          {{ subject_data.grade }}
+          <span class="text-warning">{{ subject_data.subject }}</span>
         </h1>
         <p class="lead mb-5 fs-4">
-          <i class="bi bi-stars text-warning me-2"></i> Comprehensive lessons
-          covering all Grade 7 math standards
+          <i class="bi bi-stars text-warning me-2"></i> {{ subject_data.tagline
+          }}
         </p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           <a
@@ -55,40 +54,22 @@ endblock %} {% block content %}
   <div class="container py-5">
     <div class="row align-items-center">
       <div class="col-lg-6">
-        <h2 class="fw-bold mb-4">Grade 7 Math Curriculum</h2>
-        <p class="lead">
-          Our Grade 7 Mathematics program is designed to build a strong
-          foundation in key mathematical concepts while developing critical
-          thinking and problem-solving skills.
-        </p>
-        <p>
-          The curriculum is aligned with national standards and covers five
-          major domains:
-        </p>
+        <h2 class="fw-bold mb-4">
+          {{ subject_data.grade }} {{ subject_data.subject }} Curriculum
+        </h2>
+        <p class="lead">{{ subject_data.description }}</p>
+        <p>The curriculum covers these major domains:</p>
         <ul class="list-group list-group-flush mb-4">
+          {% for domain in subject_data.domains %}
           <li class="list-group-item bg-light">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>Ratios and
-            Proportional Relationships
+            <i class="bi bi-check-circle-fill text-success me-2"></i>{{ domain
+            }}
           </li>
-          <li class="list-group-item bg-light">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>The Number
-            System
-          </li>
-          <li class="list-group-item bg-light">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>Expressions
-            and Equations
-          </li>
-          <li class="list-group-item bg-light">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>Geometry
-          </li>
-          <li class="list-group-item bg-light">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>Statistics
-            and Probability
-          </li>
+          {% endfor %}
         </ul>
         <div class="alert alert-warning">
-          <i class="bi bi-lightbulb-fill me-2"></i>Each lesson includes video
-          explanations, practice problems, and downloadable worksheets.
+          <i class="bi bi-lightbulb-fill me-2"></i>{{ subject_data.feature_note
+          }}
         </div>
       </div>
       <div class="col-lg-6">
@@ -101,14 +82,14 @@ endblock %} {% block content %}
             <div class="mb-4">
               <div class="d-flex justify-content-between mb-2">
                 <span>Your Progress:</span>
-                <span>15% Complete</span>
+                <span>{{ progress }}% Complete</span>
               </div>
               <div class="progress" style="height: 10px">
                 <div
                   class="progress-bar bg-danger"
                   role="progressbar"
-                  style="width: 15%"
-                  aria-valuenow="15"
+                  style="width: {{ progress }}%;"
+                  aria-valuenow="{{ progress }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -121,25 +102,33 @@ endblock %} {% block content %}
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Total Lessons
-                <span class="badge bg-danger rounded-pill">42</span>
+                <span class="badge bg-danger rounded-pill"
+                  >{{ subject_data.stats.total_lessons }}</span
+                >
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Video Hours
-                <span class="badge bg-danger rounded-pill">18.5</span>
+                <span class="badge bg-danger rounded-pill"
+                  >{{ subject_data.stats.video_hours }}</span
+                >
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Practice Problems
-                <span class="badge bg-danger rounded-pill">650+</span>
+                <span class="badge bg-danger rounded-pill"
+                  >{{ subject_data.stats.practice_problems }}</span
+                >
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Assessments
-                <span class="badge bg-danger rounded-pill">12</span>
+                <span class="badge bg-danger rounded-pill"
+                  >{{ subject_data.stats.assessments }}</span
+                >
               </li>
             </ul>
           </div>
@@ -153,424 +142,69 @@ endblock %} {% block content %}
 <section id="lessons" class="py-5">
   <div class="container py-5">
     <div class="text-center mb-5">
-      <h2 class="fw-bold">Grade 7 Math Lessons</h2>
+      <h2 class="fw-bold">
+        {{ subject_data.grade }} {{ subject_data.subject }} Lessons
+      </h2>
       <p class="lead text-muted">
         Structured learning path with interactive content
       </p>
     </div>
 
     <div class="accordion" id="lessonsAccordion">
-      <!-- Unit 1 -->
-      <div class="accordion-item mb-3 border-danger">
+      {% for unit in subject_data.units %}
+      <div class="accordion-item mb-3 border-{{ unit.color }}">
         <h2 class="accordion-header">
           <button
-            class="accordion-button bg-danger text-white fw-bold collapsed"
+            class="accordion-button bg-{{ unit.color }} {% if unit.color == 'warning' %}text-dark{% else %}text-white{% endif %} fw-bold collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#unit1"
+            data-bs-target="#unit{{ loop.index }}"
             aria-expanded="false"
-            aria-controls="unit1"
+            aria-controls="unit{{ loop.index }}"
           >
-            Unit 1: Ratios and Proportional Relationships
+            Unit {{ loop.index }}: {{ unit.title }}
           </button>
         </h2>
         <div
-          id="unit1"
+          id="unit{{ loop.index }}"
           class="accordion-collapse collapse"
           data-bs-parent="#lessonsAccordion"
         >
           <div class="accordion-body">
             <div class="list-group">
+              {% for lesson in unit.lessons %}
               <a
-                href="#"
+                href="{{ lesson.link }}"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
               >
                 <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>1.1 Understanding Ratios</span>
+                  <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
+                  <span>{{ lesson.title }}</span>
                 </div>
-                <span class="badge bg-light text-dark">12 min</span>
+                <span class="badge bg-light text-dark"
+                  >{{ lesson.duration }}</span
+                >
               </a>
+              {% endfor %}
               <a
-                href="#"
+                href="{{ unit.assessment_link }}"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
               >
                 <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>1.2 Equivalent Ratios</span>
+                  <i
+                    class="bi bi-card-checklist text-{{ unit.color }} me-2"
+                  ></i>
+                  <span>Unit {{ loop.index }} Assessment</span>
                 </div>
-                <span class="badge bg-light text-dark">15 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>1.3 Solving Proportion Problems</span>
-                </div>
-                <span class="badge bg-light text-dark">18 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>1.4 Constant of Proportionality</span>
-                </div>
-                <span class="badge bg-light text-dark">22 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-card-checklist text-danger me-2"></i>
-                  <span>Unit 1 Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark">30 questions</span>
+                <span class="badge bg-light text-dark"
+                  >{{ unit.assessment_questions }}</span
+                >
               </a>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Unit 2 -->
-      <div class="accordion-item mb-3 border-warning">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button bg-warning text-dark fw-bold collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#unit2"
-            aria-expanded="false"
-            aria-controls="unit2"
-          >
-            Unit 2: The Number System
-          </button>
-        </h2>
-        <div
-          id="unit2"
-          class="accordion-collapse collapse"
-          data-bs-parent="#lessonsAccordion"
-        >
-          <div class="accordion-body">
-            <div class="list-group">
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>2.1 Adding and Subtracting Rational Numbers</span>
-                </div>
-                <span class="badge bg-light text-dark">14 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>2.2 Multiplying and Dividing Rational Numbers</span>
-                </div>
-                <span class="badge bg-light text-dark">16 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>2.3 Converting Rational Numbers to Decimals</span>
-                </div>
-                <span class="badge bg-light text-dark">12 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span
-                    >2.4 Solving Real-World Problems with Rational Numbers</span
-                  >
-                </div>
-                <span class="badge bg-light text-dark">20 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-card-checklist text-warning me-2"></i>
-                  <span>Unit 2 Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark">25 questions</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unit 3 -->
-      <div class="accordion-item mb-3 border-secondary">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button bg-secondary text-white fw-bold collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#unit3"
-            aria-expanded="false"
-            aria-controls="unit3"
-          >
-            Unit 3: Expressions and Equations
-          </button>
-        </h2>
-        <div
-          id="unit3"
-          class="accordion-collapse collapse"
-          data-bs-parent="#lessonsAccordion"
-        >
-          <div class="accordion-body">
-            <div class="list-group">
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-secondary me-2"></i>
-                  <span>3.1 Writing and Evaluating Expressions</span>
-                </div>
-                <span class="badge bg-light text-dark">15 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-secondary me-2"></i>
-                  <span>3.2 Properties of Operations</span>
-                </div>
-                <span class="badge bg-light text-dark">18 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-secondary me-2"></i>
-                  <span>3.3 Solving One-Step Equations</span>
-                </div>
-                <span class="badge bg-light text-dark">20 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-secondary me-2"></i>
-                  <span>3.4 Solving Two-Step Equations</span>
-                </div>
-                <span class="badge bg-light text-dark">22 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-secondary me-2"></i>
-                  <span>3.5 Writing and Solving Inequalities</span>
-                </div>
-                <span class="badge bg-light text-dark">25 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-card-checklist text-secondary me-2"></i>
-                  <span>Unit 3 Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark">30 questions</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unit 4 -->
-      <div class="accordion-item mb-3 border-danger">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button bg-danger text-white fw-bold collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#unit4"
-            aria-expanded="false"
-            aria-controls="unit4"
-          >
-            Unit 4: Geometry
-          </button>
-        </h2>
-        <div
-          id="unit4"
-          class="accordion-collapse collapse"
-          data-bs-parent="#lessonsAccordion"
-        >
-          <div class="accordion-body">
-            <div class="list-group">
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>4.1 Scale Drawings</span>
-                </div>
-                <span class="badge bg-light text-dark">16 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>4.2 Drawing Geometric Shapes</span>
-                </div>
-                <span class="badge bg-light text-dark">18 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>4.3 Area and Circumference of Circles</span>
-                </div>
-                <span class="badge bg-light text-dark">20 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>4.4 Angle Relationships</span>
-                </div>
-                <span class="badge bg-light text-dark">22 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-danger me-2"></i>
-                  <span>4.5 Volume of Prisms and Pyramids</span>
-                </div>
-                <span class="badge bg-light text-dark">25 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-card-checklist text-danger me-2"></i>
-                  <span>Unit 4 Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark">28 questions</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Unit 5 -->
-      <div class="accordion-item mb-3 border-warning">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button bg-warning text-dark fw-bold collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#unit5"
-            aria-expanded="false"
-            aria-controls="unit5"
-          >
-            Unit 5: Statistics and Probability
-          </button>
-        </h2>
-        <div
-          id="unit5"
-          class="accordion-collapse collapse"
-          data-bs-parent="#lessonsAccordion"
-        >
-          <div class="accordion-body">
-            <div class="list-group">
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>5.1 Understanding Sampling</span>
-                </div>
-                <span class="badge bg-light text-dark">14 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>5.2 Measures of Center and Variability</span>
-                </div>
-                <span class="badge bg-light text-dark">18 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>5.3 Comparing Data Distributions</span>
-                </div>
-                <span class="badge bg-light text-dark">20 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>5.4 Probability Models</span>
-                </div>
-                <span class="badge bg-light text-dark">22 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-play-circle-fill text-warning me-2"></i>
-                  <span>5.5 Compound Probability</span>
-                </div>
-                <span class="badge bg-light text-dark">25 min</span>
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="bi bi-card-checklist text-warning me-2"></i>
-                  <span>Unit 5 Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark">25 questions</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -586,46 +220,26 @@ endblock %} {% block content %}
     </div>
 
     <div class="row g-4">
+      {% for resource in subject_data.resources %}
       <div class="col-md-4">
-        <div class="card h-100 border-danger shadow-sm">
+        <div class="card h-100 border-{{ resource.color }} shadow-sm">
           <div class="card-body text-center p-4">
-            <i class="bi bi-journal-text display-4 text-danger mb-3"></i>
-            <h3 class="h4 fw-bold">Worksheets</h3>
-            <p class="mb-4">
-              Download printable worksheets with answer keys for each unit
-            </p>
-            <a href="#" class="btn btn-outline-danger">
-              <i class="bi bi-download me-1"></i>Download All
+            <i
+              class="{{ resource.icon }} display-4 text-{{ resource.color }} mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">{{ resource.title }}</h3>
+            <p class="mb-4">{{ resource.description }}</p>
+            <a
+              href="{{ resource.link }}"
+              class="btn btn-outline-{{ resource.color }}"
+            >
+              <i class="{{ resource.button_icon }} me-1"></i>{{
+              resource.button_text }}
             </a>
           </div>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 border-warning shadow-sm">
-          <div class="card-body text-center p-4">
-            <i class="bi bi-clipboard2-pulse display-4 text-warning mb-3"></i>
-            <h3 class="h4 fw-bold">Practice Tests</h3>
-            <p class="mb-4">Timed practice tests to prepare for assessments</p>
-            <a href="#" class="btn btn-outline-warning">
-              <i class="bi bi-clock me-1"></i>Start Test
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 border-secondary shadow-sm">
-          <div class="card-body text-center p-4">
-            <i class="bi bi-puzzle display-4 text-secondary mb-3"></i>
-            <h3 class="h4 fw-bold">Interactive Games</h3>
-            <p class="mb-4">Fun games to practice math skills</p>
-            <a href="#" class="btn btn-outline-secondary">
-              <i class="bi bi-joystick me-1"></i>Play Now
-            </a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -640,31 +254,26 @@ endblock %} {% block content %}
     </div>
 
     <div class="row g-4">
+      {% for teacher_resource in subject_data.teacher_resources %}
       <div class="col-md-6">
-        <div class="card h-100 border-danger shadow-sm">
+        <div class="card h-100 border-{{ teacher_resource.color }} shadow-sm">
           <div class="card-body text-center p-4">
-            <i class="bi bi-file-earmark-slides display-4 text-danger mb-3"></i>
-            <h3 class="h4 fw-bold">Lesson Slides</h3>
-            <p class="mb-4">Editable PowerPoint slides for each lesson</p>
-            <a href="#" class="btn btn-outline-danger">
-              <i class="bi bi-download me-1"></i>Download
+            <i
+              class="{{ teacher_resource.icon }} display-4 text-{{ teacher_resource.color }} mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">{{ teacher_resource.title }}</h3>
+            <p class="mb-4">{{ teacher_resource.description }}</p>
+            <a
+              href="{{ teacher_resource.link }}"
+              class="btn btn-outline-{{ teacher_resource.color }}"
+            >
+              <i class="{{ teacher_resource.button_icon }} me-1"></i>{{
+              teacher_resource.button_text }}
             </a>
           </div>
         </div>
       </div>
-
-      <div class="col-md-6">
-        <div class="card h-100 border-warning shadow-sm">
-          <div class="card-body text-center p-4">
-            <i class="bi bi-clipboard2-data display-4 text-warning mb-3"></i>
-            <h3 class="h4 fw-bold">Assessment Tools</h3>
-            <p class="mb-4">Quizzes, tests, and answer keys</p>
-            <a href="#" class="btn btn-outline-warning">
-              <i class="bi bi-download me-1"></i>Download
-            </a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -673,52 +282,15 @@ endblock %} {% block content %}
 <!-- CTA Section -->
 <section class="py-5 bg-warning">
   <div class="container py-4 text-center">
-    <h2 class="display-5 fw-bold mb-4">Need Help with Grade 7 Math?</h2>
-    <p class="lead mb-5">
-      Our expert tutors are available for one-on-one assistance
-    </p>
+    <h2 class="display-5 fw-bold mb-4">{{ subject_data.cta.title }}</h2>
+    <p class="lead mb-5">{{ subject_data.cta.subtitle }}</p>
     <a
-      href="{{ url_for('video_conference') }}"
+      href="{{ subject_data.cta.link }}"
       class="btn btn-danger btn-lg px-4 py-3 fw-bold"
     >
-      <i class="bi bi-camera-video me-2"></i>Schedule a Tutoring Session
+      <i class="{{ subject_data.cta.icon }} me-2"></i>{{
+      subject_data.cta.button_text }}
     </a>
   </div>
 </section>
-
-<style>
-  .hero-section {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
-  .accordion-button:not(.collapsed) {
-    color: white;
-    background-color: var(--bs-danger);
-    box-shadow: none;
-  }
-
-  .accordion-button:focus {
-    box-shadow: none;
-    border-color: rgba(0, 0, 0, 0.125);
-  }
-
-  .list-group-item:hover {
-    background-color: #f8f9fa;
-  }
-
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-  }
-</style>
-
 {% endblock %}

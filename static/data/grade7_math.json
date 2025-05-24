@@ -1,0 +1,68 @@
+{
+  "title": "Grade 7 Mathematics Lessons",
+  "grade": "Grade 7",
+  "subject": "Mathematics",
+  "hero_image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "icon": "bi bi-calculator-fill",
+  "tagline": "Comprehensive lessons covering all Grade 7 math standards",
+  "description": "Our Grade 7 Mathematics program is designed to build a strong foundation in key mathematical concepts while developing critical thinking and problem-solving skills.",
+  "domains": [
+    "Ratios and Proportional Relationships",
+    "The Number System",
+    "Expressions and Equations",
+    "Geometry",
+    "Statistics and Probability"
+  ],
+  "feature_note": "Each lesson includes video explanations, practice problems, and downloadable worksheets.",
+  "stats": {
+    "total_lessons": "42",
+    "video_hours": "18.5",
+    "practice_problems": "650+",
+    "assessments": "12"
+  },
+  "units": [
+    {
+      "title": "Ratios and Proportional Relationships",
+      "color": "danger",
+      "lessons": [
+        {
+          "title": "1.1 Understanding Ratios",
+          "duration": "12 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Worksheets",
+      "description": "Download printable worksheets with answer keys for each unit",
+      "link": "#",
+      "icon": "bi bi-journal-text",
+      "color": "danger",
+      "button_text": "Download All",
+      "button_icon": "bi bi-download"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "Lesson Slides",
+      "description": "Editable PowerPoint slides for each lesson",
+      "link": "#",
+      "icon": "bi bi-file-earmark-slides",
+      "color": "danger",
+      "button_text": "Download",
+      "button_icon": "bi bi-download"
+    }
+  ],
+  "cta": {
+    "title": "Need Help with Grade 7 Math?",
+    "subtitle": "Our expert tutors are available for one-on-one assistance",
+    "link": "/video_conference",
+    "icon": "bi bi-camera-video",
+    "button_text": "Schedule a Tutoring Session"
+  }
+}
