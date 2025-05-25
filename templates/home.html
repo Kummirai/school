@@ -79,7 +79,89 @@
     </div>
   </div>
 </section>
+<!-- Subscription Plans Section -->
+<!-- Subscription Plans Section -->
+<section id="subscription-plans" class="py-5 bg-light">
+  <div class="container py-5">
+    {% if subscription %}
+    <div
+      class="alert alert-{% if subscription.is_active %}success{% else %}warning{% endif %} mb-4"
+    >
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <i
+            class="bi bi-{% if subscription.is_active %}check-circle{% else %}hourglass{% endif %} me-2"
+          ></i>
+          <strong>{{ subscription.plan_name }}</strong> Plan {% if
+          subscription.is_active %} (Active until {{
+          subscription.end_date.strftime('%Y-%m-%d') }}) {% else %} (Payment {{
+          subscription.payment_status }}) {% endif %}
+        </div>
+        <a
+          href="{{ url_for('manage_subscription') }}"
+          class="btn btn-sm btn-outline-{% if subscription.is_active %}success{% else %}warning{% endif %}"
+        >
+          Manage
+        </a>
+      </div>
+    </div>
+    {% endif %}
 
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Available Plans</h2>
+      <p class="lead text-muted">
+        {% if subscription %} Upgrade or change your plan {% else %} Choose the
+        perfect learning plan {% endif %}
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {% for plan in plans %}
+      <div class="col-md-4">
+        <div
+          class="card h-100 {% if subscription and subscription.plan_name == plan.name %}border-success{% elif loop.index == 2 %}border-primary{% else %}border-secondary{% endif %}"
+        >
+          <div class="card-body">
+            <h3 class="h4">{{ plan.name }}</h3>
+            <div class="display-5 fw-bold my-3">
+              R{{ "%.2f"|format(plan.price) }}
+              <small class="text-muted fs-6"
+                >/{{ plan.duration_days }} days</small
+              >
+            </div>
+            <p class="text-muted">{{ plan.description }}</p>
+
+            <div class="mt-4">
+              {% if subscription %} {% if subscription.plan_name == plan.name %}
+              <button class="btn btn-success w-100" disabled>
+                <i class="bi bi-check-circle"></i>
+                {% if subscription.is_active %} Current Plan {% else %}
+                Processing {% endif %}
+              </button>
+              {% else %}
+              <form method="POST" action="{{ url_for('change_subscription') }}">
+                <input type="hidden" name="plan_id" value="{{ plan.id }}" />
+                <button type="submit" class="btn btn-primary w-100">
+                  {% if plan.price > subscription.price %} Upgrade {% else %}
+                  Change {% endif %}
+                </button>
+              </form>
+              {% endif %} {% else %}
+              <a
+                href="{{ url_for('subscribe', plan_id=plan.id) }}"
+                class="btn btn-{% if loop.index == 2 %}primary{% else %}outline-secondary{% endif %} w-100"
+              >
+                Subscribe Now
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 <section id="live-tutoring" class="py-5 mb-0">
   <div class="container py-5">
     <div class="text-center mb-5">
@@ -404,7 +486,7 @@
   </div>
 </section>
 
-<section class="py-5 bg-light">
+<!-- <section class="py-5 bg-light">
   <div class="container py-5">
     <div class="text-center mb-5">
       <h2 class="fw-bold">Popular Exam Resources</h2>
@@ -494,7 +576,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="py-5">
   <div class="container py-5">
@@ -574,6 +656,17 @@
 
   .animate-bounce {
     animation: bounce 2s infinite;
+  }
+
+  .subscription-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .subscription-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  .current-plan {
+    border-left: 5px solid #28a745 !important;
   }
 
   @keyframes bounce {

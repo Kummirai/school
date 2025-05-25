@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Manage Your Subscription</h2>
+  
+  <!-- Current Subscription Card -->
+  <div class="card mb-4">
+    <div class="card-header bg-{% if subscription.is_active %}success{% else %}warning{% endif %} text-white">
+      <h3 class="h5 mb-0">
+        {{ subscription.plan_name }} Plan
+        <span class="badge bg-light text-dark float-end">
+          R{{ "%.2f"|format(subscription.price) }}/{{ subscription.duration_days }} days
+        </span>
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            <strong>Status:</strong>
+            <span class="badge bg-{% if subscription.is_active %}success{% else %}warning{% endif %}">
+              {% if subscription.is_active %}
+                Active
+              {% else %}
+                {{ subscription.payment_status|capitalize }}
+              {% endif %}
+            </span>
+          </p>
+          <p><strong>Start Date:</strong> {{ subscription.start_date.strftime('%Y-%m-%d') }}</p>
+          <p><strong>End Date:</strong> {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
+        </div>
+        <div class="col-md-6">
+          {% if subscription.payment_status == 'pending' %}
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Your plan change is pending payment
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Plan Section -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h3 class="h5 mb-0">Change Plan</h3>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="{{ url_for('change_plan') }}">
+        <div class="row g-3">
+          {% for plan in plans %}
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" 
+                     name="plan_id" id="plan-{{ plan.id }}" 
+                     value="{{ plan.id }}"
+                     {% if subscription.plan_id == plan.id %}checked disabled{% endif %}>
+              <label class="form-check-label" for="plan-{{ plan.id }}">
+                <strong>{{ plan.name }}</strong> - R{{ "%.2f"|format(plan.price) }}
+              </label>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" 
+                {% if subscription.payment_status == 'pending' %}disabled{% endif %}>
+          Change Plan
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cancel Subscription -->
+  <div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+      <h3 class="h5 mb-0">Cancel Subscription</h3>
+    </div>
+    <div class="card-body">
+      <p>Your access will continue until the end of your current billing period.</p>
+      <form method="POST" action="{{ url_for('cancel_subscription') }}" 
+            onsubmit="return confirm('Are you sure you want to cancel?')">
+        <button type="submit" class="btn btn-outline-danger"
+                {% if subscription.payment_status == 'cancelled' %}disabled{% endif %}>
+          {% if subscription.payment_status == 'cancelled' %}
+          Cancellation Pending
+          {% else %}
+          Cancel Subscription
+          {% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

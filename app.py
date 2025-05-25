@@ -1355,16 +1355,173 @@ def delete_tutorial(video_id):
 # Routes
 @app.route('/')
 def home():
-    # Initialize subscription to None
-    subscription = None
-    # Check if user is logged in and 'user_id' is in session
-    if 'user_id' in session:
-        # Call the function and pass the result to the template
-        subscription = get_user_subscription(session['user_id'])
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Get plans
+        cur.execute("""
+            SELECT id, name, description, price, duration_days 
+            FROM subscription_plans 
+            ORDER BY price
+        """)
+        plans = cur.fetchall()
+        
+        subscription = None
+        if 'user_id' in session:
+            # Get subscription with proper column names
+            cur.execute("""
+                SELECT 
+                    s.id,
+                    p.name as plan_name,
+                    p.price as plan_price,
+                    s.start_date,
+                    s.end_date,
+                    s.is_active,
+                    s.payment_status,
+                    p.duration_days
+                FROM subscriptions s
+                JOIN subscription_plans p ON s.plan_id = p.id
+                WHERE s.user_id = %s
+                AND (s.is_active = TRUE OR s.payment_status = 'pending')
+                ORDER BY s.created_at DESC
+                LIMIT 1
+            """, (session['user_id'],))
+            subscription = cur.fetchone()
+        
+        cur.close()
+        conn.close()
+        print(subscription, plans)
+        return render_template(
+            'home.html',
+            plans=plans,
+            subscription=subscription
+        )
+        
+    except Exception as e:
+        app.logger.error(f"Home error: {str(e)}")
+        return render_template('home.html', plans=[], subscription=None)
+    
+@app.route('/manage-subscription')
+def manage_subscription():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Get current subscription with plan details
+        cur.execute("""
+            SELECT s.*, p.name as plan_name, p.price, p.duration_days,
+                   (s.end_date > CURRENT_DATE) as is_active
+            FROM subscriptions s
+            JOIN subscription_plans p ON s.plan_id = p.id
+            WHERE s.user_id = %s
+            ORDER BY s.created_at DESC
+            LIMIT 1
+        """, (session['user_id'],))
+        subscription = cur.fetchone()
+        
+        # Get all available plans for changing
+        cur.execute("SELECT id, name, price FROM subscription_plans ORDER BY price")
+        available_plans = cur.fetchall()
+        
+        cur.close()
+        conn.close()
+        
+        return render_template(
+            'manage_subscription.html',
+            subscription=subscription,
+            plans=available_plans
+        )
+        
+    except Exception as e:
+        app.logger.error(f"Subscription management error: {str(e)}")
+        flash('Error loading subscription details', 'danger')
+        return redirect(url_for('home'))
+    
+@app.route('/change-plan', methods=['GET', 'POST'])
+def change_plan():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        try:
+            new_plan_id = request.form.get('plan_id')
+            conn = get_db_connection()
+            cur = conn.cursor()
+            
+            # Verify plan exists
+            cur.execute("SELECT id FROM subscription_plans WHERE id = %s", (new_plan_id,))
+            if not cur.fetchone():
+                flash('Invalid plan selected', 'danger')
+                return redirect(url_for('manage_subscription'))
+            
+            # Update subscription
+            cur.execute("""
+                UPDATE subscriptions
+                SET plan_id = %s,
+                    is_active = FALSE,
+                    payment_status = 'pending',
+                    start_date = CURRENT_DATE,
+                    end_date = CURRENT_DATE + (SELECT duration_days FROM subscription_plans WHERE id = %s)
+                WHERE user_id = %s
+                RETURNING *
+            """, (new_plan_id, new_plan_id, session['user_id']))
+            
+            conn.commit()
+            flash('Plan changed successfully! Payment pending.', 'success')
+            
+            # Here you would typically integrate with a payment gateway
+            
+            cur.close()
+            conn.close()
+            
+            return redirect(url_for('manage_subscription'))
+            
+        except Exception as e:
+            conn.rollback()
+            app.logger.error(f"Plan change error: {str(e)}")
+            flash('Error changing plan', 'danger')
+            return redirect(url_for('manage_subscription'))
+    
+    # GET request - show form
+    return redirect(url_for('manage_subscription'))
 
-    # Pass the subscription variable to the render_template function
-    return render_template('home.html', subscription=subscription)
-
+@app.route('/cancel-subscription', methods=['POST'])
+def cancel_subscription():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # Set subscription to cancel at period end
+        cur.execute("""
+            UPDATE subscriptions
+            SET is_active = FALSE,
+                payment_status = 'cancelled',
+                end_date = GREATEST(CURRENT_DATE, end_date)
+            WHERE user_id = %s
+            RETURNING *
+        """, (session['user_id'],))
+        
+        conn.commit()
+        flash('Subscription will cancel at the end of your billing period', 'warning')
+        
+        cur.close()
+        conn.close()
+        
+        return redirect(url_for('manage_subscription'))
+        
+    except Exception as e:
+        conn.rollback()
+        app.logger.error(f"Cancel subscription error: {str(e)}")
+        flash('Error cancelling subscription', 'danger')
+        return redirect(url_for('manage_subscription'))
+    
 #Curriculums
 @app.route('/math-curriculum')
 @login_required
