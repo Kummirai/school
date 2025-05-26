@@ -1817,8 +1817,6 @@ def student_assignments():
     cur = conn.cursor()
     assignments = []
     try:
-        # THE CRUCIAL SQL QUERY GOES HERE
-        # It needs to join with the assignment_students table
         cur.execute(
             """
             SELECT
@@ -1851,18 +1849,14 @@ def student_assignments():
                 'subject': row[3],
                 'total_marks': row[4],
                 'deadline': row[5],
-                'content': json.loads(row[6]) if row[6] else None, # Parse content if it's JSONB
+                'content': row[6] if row[6] else None,  # Removed json.loads() since content is already a dict
                 'created_at': row[7],
                 'submitted': row[8],
-                'grade': row[9] # Add grade
-                # Add 'status' based on deadline and submission
-                # 'status': 'active' if row[5] > datetime.now() else 'past_deadline',
+                'grade': row[9]
             })
         
-        # Add logic to determine 'status' and 'submitted' if not directly in query
         for assignment in assignments:
             assignment['status'] = 'active' if assignment['deadline'] and assignment['deadline'] > datetime.now() else 'past_deadline'
-            # 'submitted' is already handled by the query now
             
     except Exception as e:
         print(f"Error fetching student assignments: {e}")
@@ -1871,7 +1865,7 @@ def student_assignments():
         cur.close()
         conn.close()
 
-    return render_template('assignments/list.html', assignments=assignments) # This should be your student-facing list.html
+    return render_template('assignments/list.html', assignments=assignments)
 
 # Update the view_assignment route to handle interactive assignments
 @app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
