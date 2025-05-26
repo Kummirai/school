@@ -1,68 +1,442 @@
 {
-  "title": "Grade 9 Mathematics Lessons",
+  "title": "Grade 9 Mathematics Mastery",
   "grade": "Grade 9",
   "subject": "Mathematics",
-  "hero_image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "hero_image": "https://plus.unsplash.com/premium_photo-1672256330251-a0432595f9cc?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "icon": "bi bi-graph-up",
-  "tagline": "Algebra I mastery for high school success",
-  "description": "Our comprehensive Algebra I curriculum prepares students for advanced mathematics in high school.",
+  "tagline": "Advanced algebra, geometry, and data analysis for high school success",
+  "description": "Comprehensive Grade 9 mathematics curriculum covering algebraic foundations, geometric reasoning, and statistical analysis with real-world applications.",
   "domains": [
-    "Algebraic Expressions",
-    "Linear Equations",
-    "Functions",
-    "Quadratic Equations",
-    "Data Analysis"
+    "Number Systems",
+    "Algebraic Expressions & Equations",
+    "Functions & Relationships",
+    "Geometric Reasoning",
+    "Data Analysis & Probability",
+    "Mathematical Modeling"
   ],
-  "feature_note": "Includes graphing calculator tutorials and real-world modeling exercises.",
+  "feature_note": "Each lesson includes concept videos, step-by-step examples, and progressive practice problems (foundational → advanced → challenge).",
   "stats": {
-    "total_lessons": "50",
-    "video_hours": "22",
-    "practice_problems": "800+",
-    "assessments": "16"
+    "total_lessons": "85",
+    "video_hours": "48.5",
+    "practice_problems": "1500+",
+    "assessments": "24"
   },
   "units": [
+    {
+      "title": "Number Systems & Operations",
+      "color": "primary",
+      "lessons": [
+        {
+          "title": "1.1 Whole Numbers & Place Value",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-123",
+          "features": [
+            "Large number operations",
+            "Scientific contexts",
+            "Error analysis"
+          ]
+        },
+        {
+          "title": "1.2 Integer Operations & Properties",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-plus-slash-minus",
+          "features": [
+            "All four operations",
+            "Order of operations",
+            "Real-world applications"
+          ]
+        },
+        {
+          "title": "1.3 Rational Numbers: Fractions",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-percent",
+          "features": [
+            "Complex fractions",
+            "Operations mastery",
+            "Problem solving"
+          ]
+        },
+        {
+          "title": "1.4 Decimal Notation & Conversions",
+          "duration": "28 min",
+          "link": "#",
+          "icon": "bi bi-dot",
+          "features": [
+            "Fraction-decimal relationships",
+            "Rounding strategies",
+            "Precision"
+          ]
+        },
+        {
+          "title": "1.5 Exponents & Scientific Notation",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-arrow-up-right-square",
+          "features": [
+            "Laws of exponents",
+            "Scientific notation",
+            "Very large/small numbers"
+          ]
+        },
+        {
+          "title": "1.6 Number Patterns & Sequences",
+          "duration": "32 min",
+          "link": "#",
+          "icon": "bi bi-diagram-3",
+          "features": [
+            "Arithmetic sequences",
+            "Geometric patterns",
+            "Pattern rules"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "60 questions"
+    },
     {
       "title": "Algebraic Foundations",
       "color": "warning",
       "lessons": [
         {
-          "title": "1.1 Solving Linear Equations",
-          "duration": "18 min",
+          "title": "2.1 Introduction to Functions",
+          "duration": "25 min",
           "link": "#",
-          "icon": "bi bi-play-circle-fill"
+          "icon": "bi bi-arrow-left-right",
+          "features": [
+            "Function concept",
+            "Input-output relationships",
+            "Function notation"
+          ]
+        },
+        {
+          "title": "2.2 Variables & Algebraic Expressions",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-x-diamond",
+          "features": [
+            "Variable representation",
+            "Expression building",
+            "Simplification"
+          ]
+        },
+        {
+          "title": "2.3 Solving Linear Equations",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-equals",
+          "features": [
+            "One-step equations",
+            "Multi-step equations",
+            "Variables on both sides"
+          ]
+        },
+        {
+          "title": "2.4 Graphing Linear Functions",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-graph-up",
+          "features": [
+            "Coordinate plane",
+            "Slope-intercept form",
+            "Graphing techniques"
+          ]
+        },
+        {
+          "title": "2.5 Functions & Relationships",
+          "duration": "38 min",
+          "link": "#",
+          "icon": "bi bi-diagram-2",
+          "features": [
+            "Linear functions",
+            "Non-linear patterns",
+            "Domain and range"
+          ]
+        },
+        {
+          "title": "2.6 Advanced Algebraic Expressions",
+          "duration": "42 min",
+          "link": "#",
+          "icon": "bi bi-x-diamond-fill",
+          "features": ["Factoring", "Expanding", "Polynomial operations"]
+        },
+        {
+          "title": "2.7 Systems of Equations",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-intersect",
+          "features": [
+            "Graphical solutions",
+            "Substitution method",
+            "Real-world problems"
+          ]
         }
       ],
       "assessment_link": "#",
-      "assessment_questions": "40 questions"
+      "assessment_questions": "80 questions"
+    },
+    {
+      "title": "Geometric Reasoning",
+      "color": "success",
+      "lessons": [
+        {
+          "title": "3.1 Surface Area & Volume of 3D Objects",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-box-seam",
+          "features": [
+            "Prisms and cylinders",
+            "Surface area formulas",
+            "Volume calculations"
+          ]
+        },
+        {
+          "title": "3.2 Transformation Geometry",
+          "duration": "50 min",
+          "link": "#",
+          "icon": "bi bi-arrow-repeat",
+          "features": [
+            "Translations",
+            "Reflections",
+            "Rotations",
+            "Combined transformations"
+          ]
+        },
+        {
+          "title": "3.3 Properties of 3D Objects",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-cube",
+          "features": [
+            "Geometric properties",
+            "Nets and cross-sections",
+            "Spatial reasoning"
+          ]
+        },
+        {
+          "title": "3.4 Geometric Constructions",
+          "duration": "48 min",
+          "link": "#",
+          "icon": "bi bi-pencil-square",
+          "features": [
+            "Compass and straightedge",
+            "Triangle constructions",
+            "Parallel lines"
+          ]
+        },
+        {
+          "title": "3.5 Properties of 2D Shapes",
+          "duration": "42 min",
+          "link": "#",
+          "icon": "bi bi-pentagon",
+          "features": [
+            "Polygon properties",
+            "Angle relationships",
+            "Quadrilaterals"
+          ]
+        },
+        {
+          "title": "3.6 Geometry of Straight Lines",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-slash-lg",
+          "features": [
+            "Angle relationships",
+            "Parallel lines and transversals",
+            "Geometric proofs"
+          ]
+        },
+        {
+          "title": "3.7 Pythagoras' Theorem",
+          "duration": "50 min",
+          "link": "#",
+          "icon": "bi bi-triangle",
+          "features": ["Theorem understanding", "Applications", "3D problems"]
+        },
+        {
+          "title": "3.8 Area & Perimeter of 2D Shapes",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-border-width",
+          "features": ["Area formulas", "Composite shapes", "Circle areas"]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "95 questions"
+    },
+    {
+      "title": "Data Analysis & Probability",
+      "color": "info",
+      "lessons": [
+        {
+          "title": "4.1 Data Collection & Organization",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-clipboard-data",
+          "features": [
+            "Collection methods",
+            "Data organization",
+            "Measures of central tendency"
+          ]
+        },
+        {
+          "title": "4.2 Data Representation",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-bar-chart",
+          "features": [
+            "Bar graphs",
+            "Line graphs",
+            "Scatter plots",
+            "Circle graphs"
+          ]
+        },
+        {
+          "title": "4.3 Data Analysis & Interpretation",
+          "duration": "38 min",
+          "link": "#",
+          "icon": "bi bi-graph-up-arrow",
+          "features": [
+            "Reading graphs",
+            "Comparing data sets",
+            "Drawing conclusions"
+          ]
+        },
+        {
+          "title": "4.4 Introduction to Probability",
+          "duration": "42 min",
+          "link": "#",
+          "icon": "bi bi-dice-5",
+          "features": [
+            "Basic probability",
+            "Experimental vs theoretical",
+            "Compound events"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "65 questions"
     }
   ],
   "resources": [
     {
-      "title": "Equation Solver Tool",
-      "description": "Interactive tool for solving various equation types",
+      "title": "Algebra Equation Solver",
+      "description": "Step-by-step solutions for linear and quadratic equations",
       "link": "#",
       "icon": "bi bi-calculator",
       "color": "warning",
-      "button_text": "Try Now",
+      "button_text": "Solve Equations",
       "button_icon": "bi bi-arrow-right"
+    },
+    {
+      "title": "Interactive Graphing Calculator",
+      "description": "Plot functions, analyze data, and explore relationships",
+      "link": "#",
+      "icon": "bi bi-graph-up",
+      "color": "success",
+      "button_text": "Launch Grapher",
+      "button_icon": "bi bi-joystick"
+    },
+    {
+      "title": "Geometry Construction Studio",
+      "description": "Digital compass and straightedge for precise constructions",
+      "link": "#",
+      "icon": "bi bi-compass",
+      "color": "primary",
+      "button_text": "Start Building",
+      "button_icon": "bi bi-pen"
+    },
+    {
+      "title": "3D Object Visualizer",
+      "description": "Explore surface area and volume with interactive 3D models",
+      "link": "#",
+      "icon": "bi bi-cube",
+      "color": "info",
+      "button_text": "Explore 3D",
+      "button_icon": "bi bi-box-seam"
+    },
+    {
+      "title": "Data Analysis Workbench",
+      "description": "Create charts, calculate statistics, and analyze trends",
+      "link": "#",
+      "icon": "bi bi-clipboard-data",
+      "color": "danger",
+      "button_text": "Analyze Data",
+      "button_icon": "bi bi-tools"
+    },
+    {
+      "title": "Probability Experiment Lab",
+      "description": "Run simulations and explore probability concepts",
+      "link": "#",
+      "icon": "bi bi-dice-6",
+      "color": "dark",
+      "button_text": "Run Experiments",
+      "button_icon": "bi bi-play-circle"
     }
   ],
   "teacher_resources": [
     {
-      "title": "Assessment Bank",
-      "description": "Ready-to-use quizzes and tests",
+      "title": "Comprehensive Assessment Bank",
+      "description": "Unit tests, quizzes, and diagnostic assessments with rubrics",
       "link": "#",
       "icon": "bi bi-collection",
       "color": "warning",
-      "button_text": "Browse",
+      "button_text": "Browse Tests",
       "button_icon": "bi bi-search"
+    },
+    {
+      "title": "Differentiated Lesson Plans",
+      "description": "Structured lessons with activities for all learning levels",
+      "link": "#",
+      "icon": "bi bi-file-text",
+      "color": "success",
+      "button_text": "View Plans",
+      "button_icon": "bi bi-eye"
+    },
+    {
+      "title": "Student Progress Tracker",
+      "description": "Monitor individual and class progress across all topics",
+      "link": "#",
+      "icon": "bi bi-graph-up-arrow",
+      "color": "info",
+      "button_text": "Track Progress",
+      "button_icon": "bi bi-clipboard-check"
+    },
+    {
+      "title": "Interactive Whiteboard Resources",
+      "description": "Digital manipulatives and presentation tools",
+      "link": "#",
+      "icon": "bi bi-easel",
+      "color": "primary",
+      "button_text": "Access Tools",
+      "button_icon": "bi bi-collection-play"
+    },
+    {
+      "title": "Real-World Project Gallery",
+      "description": "Authentic problem-solving projects with assessment guides",
+      "link": "#",
+      "icon": "bi bi-mortarboard",
+      "color": "danger",
+      "button_text": "Browse Projects",
+      "button_icon": "bi bi-folder"
+    },
+    {
+      "title": "Parent Communication Kit",
+      "description": "Progress reports and home support materials",
+      "link": "#",
+      "icon": "bi bi-house-heart",
+      "color": "dark",
+      "button_text": "Get Materials",
+      "button_icon": "bi bi-download"
     }
   ],
   "cta": {
-    "title": "Algebra I Challenging You?",
-    "subtitle": "Get personalized help from our math specialists",
+    "title": "Grade 9 Mathematics Challenging You?",
+    "subtitle": "Get expert help from our specialized high school math tutors",
     "link": "/video_conference",
     "icon": "bi bi-people",
-    "button_text": "Find a Tutor"
+    "button_text": "Find Your Tutor"
   }
 }
