@@ -171,17 +171,18 @@ def initialize_database():
 
     cur.execute('''
         CREATE TABLE IF NOT EXISTS submissions (
-        id SERIAL PRIMARY KEY,
-        assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
-        student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        submission_text TEXT,
-        file_path VARCHAR(255), -- Path to uploaded file if any
-        submission_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        grade INTEGER, -- Nullable, will be set after grading
-        feedback TEXT, -- Teacher feedback
-        interactive_submission_data JSONB, -- For structured/interactive answers
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+            id SERIAL PRIMARY KEY,
+            assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
+            student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            submission_text TEXT,
+            file_path VARCHAR(255), -- Path to uploaded file if any
+            submission_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            grade INTEGER, -- Nullable, will be set after grading
+            feedback TEXT, -- Teacher feedback
+            interactive_submission_data JSONB, -- For structured/interactive answers
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT unique_assignment_student_submission UNIQUE (assignment_id, student_id)
+        );
     ''')
 
         # Add this to the initialize_database() function
@@ -876,9 +877,8 @@ def get_student_submission(student_id, assignment_id):
     cur = conn.cursor()
     try:
         cur.execute('''
-            SELECT id, submission_text, file_path, submitted_at, 
-                   marks_obtained, feedback
-            FROM assignment_submissions
+            SELECT id, submission_text, file_path, submission_time, grade, feedback
+            FROM submissions
             WHERE student_id = %s AND assignment_id = %s
         ''', (student_id, assignment_id))
         submission = cur.fetchone()
@@ -922,13 +922,13 @@ def submit_assignment(assignment_id, student_id, submission_text, file_path=None
     cur = conn.cursor()
     try:
         cur.execute('''
-            INSERT INTO assignment_submissions
+            INSERT INTO submissions
             (assignment_id, student_id, submission_text, file_path, interactive_submission_data)
             VALUES (%s, %s, %s, %s, %s)
             ON CONFLICT (assignment_id, student_id) DO UPDATE
             SET submission_text = EXCLUDED.submission_text,
                 file_path = EXCLUDED.file_path,
-                submitted_at = CURRENT_TIMESTAMP,
+                submission_time = CURRENT_TIMESTAMP,
                 interactive_submission_data = EXCLUDED.interactive_submission_data -- Update interactive data
             RETURNING id
         ''', (assignment_id, student_id, submission_text, file_path, interactive_submission_data)) # Include interactive_submission_data here
@@ -1765,26 +1765,26 @@ def student_assignments():
         cur.execute(
             """
             SELECT
-                a.id,
-                a.title,
-                a.description,
-                a.subject,
-                a.total_marks,
-                a.deadline,
-                a.content,
-                a.created_at,
-                -- Check if the student has submitted this assignment
-                EXISTS (SELECT 1 FROM submissions s WHERE s.assignment_id = a.id AND s.student_id = %s) AS submitted,
-                -- You might also want to fetch grade information here if available
-                COALESCE(sub.grade, NULL) as grade -- Example to get grade if needed
-            FROM
-                assignments a
-            JOIN
-                assignment_students asl ON a.id = asl.assignment_id
-            WHERE
-                asl.student_id = %s
-            ORDER BY
-                a.deadline DESC;
+            a.id,
+            a.title,
+            a.description,
+            a.subject,
+            a.total_marks,
+            a.deadline,
+            a.content,
+            a.created_at,
+            s.grade,                                -- Now fetching grade directly from the joined 'submissions' table
+            (s.id IS NOT NULL) AS submitted_status  -- Check if a submission exists (s.id will be NULL if no submission)
+        FROM
+            assignments a
+        JOIN
+            assignment_students asl ON a.id = asl.assignment_id
+        LEFT JOIN
+            submissions s ON a.id = s.assignment_id AND asl.student_id = s.student_id -- LEFT JOIN to include all assignments, even without submissions
+        WHERE
+            asl.student_id = 5
+        ORDER BY
+            a.deadline DESC;
             """,
             (user_id, user_id) # Pass user_id twice for both EXISTS and WHERE clauses
         )
@@ -1992,7 +1992,7 @@ def manage_assignments():
     try:
         cur.execute('''
             SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.created_at,
-                   COUNT(au.user_id) as assigned_count,
+                   COUNT(au.student_id) as assigned_count,
                    COUNT(s.id) as submission_count
             FROM assignments a
             LEFT JOIN assignment_students au ON a.id = au.assignment_id

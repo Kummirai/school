@@ -12,40 +12,119 @@
         "type": "multiple_choice",
         "question": "What is the solution to 2x + 3 = 7?",
         "options": ["x = 1", "x = 2", "x = 3", "x = 4"],
-        "correct_answer": "x = 2"
+        "correct_answer": "x = 2",
+        "marks": 5
       },
       {
         "id": 2,
         "type": "short_answer",
         "question": "Solve for y: 3y - 5 = 10",
-        "correct_answer": "5"
+        "correct_answer": "5",
+        "marks": 5
       },
       {
         "id": 3,
-        "type": "true_false",
-        "question": "The equation x² = 4 has only one solution.",
-        "correct_answer": "False"
+        "type": "multiple_choice",
+        "question": "Which of these is a linear equation?",
+        "options": ["x² + 2x + 1 = 0", "3x - 7 = 4", "y = √x", "xy = 12"],
+        "correct_answer": "3x - 7 = 4",
+        "marks": 5
       },
       {
         "id": 4,
-        "type": "fill_in_the_blank",
-        "question": "The value of x in the equation 5x = 20 is ____.",
-        "correct_answer": "4"
+        "type": "short_answer",
+        "question": "Simplify: 2(x + 3) - 4x",
+        "correct_answer": "-2x + 6",
+        "marks": 5
       },
       {
         "id": 5,
-        "type": "matching",
-        "question": "Match the following equations with their solutions.",
-        "pairs": [
-          {"equation": "x + 2 = 5", "solution": "x = 3"},
-          {"equation": "2x - 4 = 0", "solution": "x = 2"},
-          {"equation": "3y + 6 = 0", "solution": "y = -2"}
-        ],
-        "correct_pairs": [
-          {"equation": "x + 2 = 5", "solution": "x = 3"},
-          {"equation": "2x - 4 = 0", "solution": "x = 2"},
-          {"equation": "3y + 6 = 0", "solution": "y = -2"}
-        ]
+        "type": "multiple_choice",
+        "question": "What is the slope of the line y = -2x + 5?",
+        "options": ["2", "-2", "5", "-5"],
+        "correct_answer": "-2",
+        "marks": 5
+      },
+      {
+        "id": 6,
+        "type": "short_answer",
+        "question": "Find the x-intercept of the line y = 3x - 6",
+        "correct_answer": "2",
+        "marks": 5
+      },
+      {
+        "id": 7,
+        "type": "multiple_choice",
+        "question": "Which property is demonstrated by: a(b + c) = ab + ac?",
+        "options": ["Commutative", "Associative", "Distributive", "Identity"],
+        "correct_answer": "Distributive",
+        "marks": 5
+      },
+      {
+        "id": 8,
+        "type": "short_answer",
+        "question": "Solve the system: x + y = 5 and x - y = 1",
+        "correct_answer": "x=3, y=2",
+        "marks": 10
+      },
+      {
+        "id": 9,
+        "type": "multiple_choice",
+        "question": "What is the degree of the polynomial 3x²y + 2xy - 5?",
+        "options": ["1", "2", "3", "4"],
+        "correct_answer": "3",
+        "marks": 5
+      },
+      {
+        "id": 10,
+        "type": "short_answer",
+        "question": "Factor completely: x² - 9",
+        "correct_answer": "(x+3)(x-3)",
+        "marks": 5
+      },
+      {
+        "id": 11,
+        "type": "multiple_choice",
+        "question": "Which is the solution to the inequality 2x - 3 > 7?",
+        "options": ["x > 2", "x > 5", "x < 5", "x < 2"],
+        "correct_answer": "x > 5",
+        "marks": 5
+      },
+      {
+        "id": 12,
+        "type": "short_answer",
+        "question": "Evaluate when x=2: 3x² - 2x + 4",
+        "correct_answer": "12",
+        "marks": 5
+      },
+      {
+        "id": 13,
+        "type": "multiple_choice",
+        "question": "What is the y-intercept of y = -½x + 4?",
+        "options": ["-½", "½", "4", "-4"],
+        "correct_answer": "4",
+        "marks": 5
+      },
+      {
+        "id": 14,
+        "type": "short_answer",
+        "question": "Solve for a: 5a/3 = 10",
+        "correct_answer": "6",
+        "marks": 5
+      },
+      {
+        "id": 15,
+        "type": "problem_solving",
+        "question": "A rectangle has a length that is 3 more than twice its width. If the perimeter is 60 units, find the dimensions of the rectangle.",
+        "correct_answer": "width=9, length=21",
+        "marks": 15
+      },
+      {
+        "id": 16,
+        "type": "true_false",
+        "question": "The equation x² + 1 = 0 has real solutions.",
+        "correct_answer": "false",
+        "marks": 5
       }
     ]
   }
