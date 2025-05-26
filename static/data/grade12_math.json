@@ -2,7 +2,7 @@
   "title": "Grade 12 Mathematics Lessons",
   "grade": "Grade 12",
   "subject": "Mathematics",
-  "hero_image": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+  "hero_image": "https://images.unsplash.com/photo-1632571401005-458e9d244591?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "icon": "bi bi-calculator",
   "tagline": "Pre-Calculus and Calculus Readiness",
   "description": "Prepare for college mathematics with advanced functions, trigonometry, and introduction to calculus concepts.",
@@ -11,29 +11,433 @@
     "Trigonometric Identities",
     "Conic Sections",
     "Vectors",
-    "Limits and Continuity"
+    "Limits and Continuity",
+    "Sequences and Series",
+    "Finance Mathematics",
+    "Polynomials",
+    "Differential Calculus",
+    "Analytical Geometry",
+    "Euclidean Geometry",
+    "Statistics",
+    "Probability"
   ],
   "feature_note": "Includes college readiness assessments and STEM career connections.",
   "stats": {
-    "total_lessons": "60",
-    "video_hours": "35",
-    "practice_problems": "1000+",
-    "assessments": "20"
+    "total_lessons": "160",
+    "video_hours": "80",
+    "practice_problems": "2000+",
+    "assessments": "40"
   },
   "units": [
     {
-      "title": "Calculus Foundations",
-      "color": "warning",
+      "title": "Sequences and Series",
+      "color": "primary",
       "lessons": [
         {
-          "title": "1.1 Introduction to Limits",
+          "title": "1.1 Arithmetic Sequences",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "1.2 Geometric Sequences",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "1.3 Series",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "1.4 Finite Arithmetic Series",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "1.5 Finite Geometric Series",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "1.6 Infinite Series",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "25 questions"
+    },
+    {
+      "title": "Functions",
+      "color": "success",
+      "lessons": [
+        {
+          "title": "2.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.2 Functions and Relations",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.3 Inverse Functions",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.4 Linear Functions",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.5 Quadratic Functions",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.6 Exponential Functions",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.7 Logarithmic Functions",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "2.8 Enrichment: More on Logarithms",
           "duration": "25 min",
           "link": "#",
           "icon": "bi bi-play-circle-fill"
         }
       ],
       "assessment_link": "#",
+      "assessment_questions": "40 questions"
+    },
+    {
+      "title": "Finance",
+      "color": "info",
+      "lessons": [
+        {
+          "title": "3.1 Calculating the Period of an Investment",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "3.2 Annuities",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "3.3 Future Value Annuities",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "3.4 Present Value Annuities",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "3.5 Analysing Investment and Loan Options",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Trigonometry",
+      "color": "warning",
+      "lessons": [
+        {
+          "title": "4.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "4.2 Compound Angle Identities",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "4.3 Double Angle Identities",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "4.4 Solving Equations",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "4.5 Applications of Trigonometric Functions",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "35 questions"
+    },
+    {
+      "title": "Polynomials",
+      "color": "danger",
+      "lessons": [
+        {
+          "title": "5.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "5.2 Cubic Polynomials",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "5.3 Remainder Theorem",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "5.4 Factor Theorem",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "5.5 Solving Cubic Equations",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Differential Calculus",
+      "color": "secondary",
+      "lessons": [
+        {
+          "title": "6.1 Limits",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.2 Differentiation from First Principles",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.3 Rules for Differentiation",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.4 Equation of a Tangent to a Curve",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.5 Second Derivative",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.6 Sketching Graphs",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "6.7 Applications of Differential Calculus",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
       "assessment_questions": "50 questions"
+    },
+    {
+      "title": "Analytical Geometry",
+      "color": "dark",
+      "lessons": [
+        {
+          "title": "7.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "7.2 Equation of a Circle",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "7.3 Equation of Tangent to a Circle",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "25 questions"
+    },
+    {
+      "title": "Euclidean Geometry",
+      "color": "primary",
+      "lessons": [
+        {
+          "title": "8.1 Revision",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "8.2 Ratio and Proportion",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "8.3 Polygons",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "8.4 Triangles",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "8.5 Similarity",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "8.6 Pythagorean Theorem",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "40 questions"
+    },
+    {
+      "title": "Statistics",
+      "color": "success",
+      "lessons": [
+        {
+          "title": "9.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "9.2 Curve Fitting",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "9.3 Correlation",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Probability",
+      "color": "info",
+      "lessons": [
+        {
+          "title": "10.1 Revision",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.2 Identities",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.3 Tools and Techniques",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.4 The Fundamental Counting Principle",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.5 Factorial Notation",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.6 Application to Counting Problems",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        },
+        {
+          "title": "10.7 Application to Probability Problems",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-play-circle-fill"
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "45 questions"
     }
   ],
   "resources": [
@@ -44,6 +448,33 @@
       "icon": "bi bi-clipboard-check",
       "color": "warning",
       "button_text": "Take Test",
+      "button_icon": "bi bi-pencil"
+    },
+    {
+      "title": "Financial Mathematics Calculator",
+      "description": "Interactive tools for annuities and investment calculations",
+      "link": "#",
+      "icon": "bi bi-calculator",
+      "color": "info",
+      "button_text": "Use Calculator",
+      "button_icon": "bi bi-calculator"
+    },
+    {
+      "title": "Trigonometry Identity Reference",
+      "description": "Quick reference for all trigonometric identities",
+      "link": "#",
+      "icon": "bi bi-triangle",
+      "color": "warning",
+      "button_text": "View Reference",
+      "button_icon": "bi bi-book"
+    },
+    {
+      "title": "Graphing Practice Tool",
+      "description": "Interactive graphing for functions and calculus",
+      "link": "#",
+      "icon": "bi bi-graph-up",
+      "color": "primary",
+      "button_text": "Start Graphing",
       "button_icon": "bi bi-pencil"
     }
   ],
@@ -56,6 +487,24 @@
       "color": "warning",
       "button_text": "View Guide",
       "button_icon": "bi bi-book"
+    },
+    {
+      "title": "Assessment Bank",
+      "description": "Comprehensive question bank for all topics",
+      "link": "#",
+      "icon": "bi bi-clipboard-data",
+      "color": "success",
+      "button_text": "Access Bank",
+      "button_icon": "bi bi-collection"
+    },
+    {
+      "title": "Lesson Plan Templates",
+      "description": "Ready-to-use lesson plans for each unit",
+      "link": "#",
+      "icon": "bi bi-file-earmark-text",
+      "color": "primary",
+      "button_text": "Download Plans",
+      "button_icon": "bi bi-download"
     }
   ],
   "cta": {
