@@ -2170,7 +2170,7 @@ def manage_assignments():
     try:
         cur.execute('''
             SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.created_at,
-                   COUNT(au.student_id) as assigned_count,
+                   COUNT(s.student_id) as assigned_count,
                    COUNT(s.id) as submission_count
             FROM assignments a
             LEFT JOIN assignment_students au ON a.id = au.assignment_id
