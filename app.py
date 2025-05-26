@@ -1838,12 +1838,10 @@ def student_assignments():
             assignment_students asl ON a.id = asl.assignment_id
         LEFT JOIN
             submissions s ON a.id = s.assignment_id AND asl.student_id = s.student_id -- LEFT JOIN to include all assignments, even without submissions
-        WHERE
-            asl.student_id = 5
-        ORDER BY
-            a.deadline DESC;
+        WHERE asl.student_id = %s
+        ORDER BY a.deadline DESC;
             """,
-            (user_id, user_id) # Pass user_id twice for both EXISTS and WHERE clauses
+            (user_id,) # Pass user_id twice for both EXISTS and WHERE clauses
         )
         for row in cur.fetchall():
             assignments.append({
