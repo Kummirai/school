@@ -1954,15 +1954,136 @@ def view_assignment(assignment_id):
                          submission=submission)
 
 
-@app.route('/assignments/submissions')
-@login_required
-def view_submissions():
-    if session.get('role') != 'student':
-        flash('Only students can view submissions', 'danger')
-        return redirect(url_for('home'))
-    
-    submissions = get_student_submissions(session['user_id'])
-    return render_template('assignments/submissions.html', submissions=submissions)
+@app.route('/assignments/submissions') # Adjust this route name if yours is different
+@login_required # Assuming this page requires login
+def view_submissions(): # Adjust this function name if yours is different
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("Please log in to view your submissions.", "warning")
+        return redirect(url_for('login'))
+
+    conn = None
+    cur = None
+    submissions_data = []
+    average_score = None
+    monthly_scores = []
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # Fetch all submissions for the current user
+        cur.execute(
+            """
+            SELECT
+                s.id,
+                a.title,
+                a.subject,
+                s.submission_time,
+                s.file_path,
+                s.submission_text,
+                s.grade,
+                a.total_marks,
+                s.feedback,
+                s.interactive_submission_data
+            FROM
+                submissions s
+            JOIN
+                assignments a ON s.assignment_id = a.id
+            WHERE
+                s.student_id = %s
+            ORDER BY
+                s.submission_time DESC;
+            """,
+            (user_id,)
+        )
+        for row in cur.fetchall():
+            submissions_data.append({
+                'id': row[0],
+                'title': row[1],
+                'subject': row[2],
+                'submitted_at': row[3],
+                'file_path': row[4],
+                'submission_text': row[5],
+                'marks_obtained': row[6],
+                'total_marks': row[7],
+                'feedback': row[8],
+                'interactive_submission_data': row[9]
+            })
+
+        # Calculate Average Score
+        cur.execute(
+            """
+            SELECT
+                SUM(s.grade) AS total_grade_sum,
+                SUM(a.total_marks) AS total_possible_marks_sum
+            FROM
+                submissions s
+            JOIN
+                assignments a ON s.assignment_id = a.id
+            WHERE
+                s.student_id = %s AND s.grade IS NOT NULL;
+            """,
+            (user_id,)
+        )
+        avg_row = cur.fetchone()
+        if avg_row and avg_row[0] is not None and avg_row[1] is not None and avg_row[1] > 0:
+            average_score = (avg_row[0] / avg_row[1]) * 100 # Percentage
+            average_score = round(average_score, 2) # Round to 2 decimal places
+        else:
+            average_score = 0 # No graded submissions or total marks is zero
+
+        # Fetch Monthly Scores
+        cur.execute(
+            """
+            SELECT
+                EXTRACT(YEAR FROM s.submission_time) AS year,
+                EXTRACT(MONTH FROM s.submission_time) AS month,
+                SUM(s.grade) AS monthly_grade_sum,
+                SUM(a.total_marks) AS monthly_possible_marks_sum
+            FROM
+                submissions s
+            JOIN
+                assignments a ON s.assignment_id = a.id
+            WHERE
+                s.student_id = %s AND s.grade IS NOT NULL
+            GROUP BY
+                year, month
+            ORDER BY
+                year DESC, month DESC;
+            """,
+            (user_id,)
+        )
+        for row in cur.fetchall():
+            year = int(row[0])
+            month = int(row[1])
+            monthly_grade_sum = row[2]
+            monthly_possible_marks_sum = row[3]
+
+            if monthly_possible_marks_sum and monthly_possible_marks_sum > 0:
+                percentage = (monthly_grade_sum / monthly_possible_marks_sum) * 100
+                monthly_scores.append({
+                    'year': year,
+                    'month': month,
+                    'month_name': datetime(year, month, 1).strftime('%B'), # Get month name
+                    'score': round(percentage, 2)
+                })
+
+    except Exception as e:
+        print(f"Error fetching submission data: {e}")
+        flash("Could not load your submission data.", "danger")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+    return render_template(
+        'assignments/submissions.html',
+        submissions=submissions_data,
+        average_score=average_score,
+        monthly_scores=monthly_scores
+    )
 
 @app.route('/admin/assignments/add', methods=['GET', 'POST'])
 @login_required

@@ -1,66 +1,198 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-4">
-    <h2 class="my-4">Your Submissions</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="my-0">Your Submissions</h2>
+    {# Prominent Average Score Top-Right #}
+    <div class="card text-white bg-danger p-2">
+      <h5 class="mb-0">
+        Average Mark: {% if average_score is not none %} {{ average_score }}%
+        {% else %} N/A {% endif %}
+      </h5>
+    </div>
+  </div>
 
-    {% if submissions %}
-    <div class="row">
-        {% for submission in submissions %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ submission.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ submission.subject }}</h6>
-
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Submitted:</span>
-                        <span>{{ submission.submitted_at.strftime('%Y-%m-%d') }}</span>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">File:</span>
-                        {% if submission.file_path %}
-                        <a href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
-                            target="_blank" class="btn btn-sm btn-outline-primary">
-                            Download
-                        </a>
-                        {% else %}
-                        <span>-</span>
-                        {% endif %}
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Status:</span>
-                        {% if submission.marks_obtained is not none %}
-                        <span class="badge bg-success">Graded</span>
-                        {% else %}
-                        <span class="badge bg-warning text-dark">Pending</span>
-                        {% endif %}
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Score:</span>
-                        {% if submission.marks_obtained is not none %}
-                        <span>{{ submission.marks_obtained }}/{{ submission.total_marks }}</span>
-                        {% else %}
-                        <span>-</span>
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-2">
-                        <span class="text-muted">Feedback:</span>
-                        <p class="mt-1">{{ submission.feedback or '-' }}</p>
-                    </div>
-                </div>
-            </div>
+  {# Start of Accordion Container #}
+  <div class="accordion" id="submissionsAccordion">
+    {# Accordion Item 1: Monthly Scores #}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingMonthlyScores">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseMonthlyScores"
+          aria-expanded="false"
+          aria-controls="collapseMonthlyScores"
+        >
+          Monthly Performance
+        </button>
+      </h2>
+      <div
+        id="collapseMonthlyScores"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingMonthlyScores"
+        data-bs-parent="#submissionsAccordion"
+      >
+        <div class="accordion-body">
+          {% if monthly_scores %}
+          <ul class="list-group">
+            {% for month_data in monthly_scores %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              {{ month_data.month_name }} {{ month_data.year }}:
+              <span class="badge bg-success rounded-pill"
+                >{{ month_data.score }}%</span
+              >
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <div class="alert alert-info">
+            No graded submissions for monthly scores yet.
+          </div>
+          {% endif %}
         </div>
-        {% endfor %}
+      </div>
     </div>
-    {% else %}
-    <div class="alert alert-info">
-        No submissions found.
+
+    {# Accordion Item 2: All Individual Submissions #}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAllSubmissions">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseAllSubmissions"
+          aria-expanded="true"
+          aria-controls="collapseAllSubmissions"
+        >
+          All Individual Submissions
+        </button>
+      </h2>
+      <div
+        id="collapseAllSubmissions"
+        class="accordion-collapse collapse show"
+        aria-labelledby="headingAllSubmissions"
+        data-bs-parent="#submissionsAccordion"
+      >
+        <div class="accordion-body">
+          {% if submissions %}
+          <div class="row">
+            {% for submission in submissions %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">{{ submission.title }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    {{ submission.subject }}
+                  </h6>
+
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span class="text-muted">Submitted:</span>
+                    <span
+                      >{{ submission.submitted_at.strftime('%Y-%m-%d %H:%M')
+                      }}</span
+                    >
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span class="text-muted">File:</span>
+                    {% if submission.file_path %}
+                    <a
+                      href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
+                      target="_blank"
+                      class="btn btn-sm btn-outline-primary"
+                    >
+                      Download
+                    </a>
+                    {% else %}
+                    <span>-</span>
+                    {% endif %}
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span class="text-muted">Status:</span>
+                    {% if submission.marks_obtained is not none %}
+                    <span class="badge bg-success">Graded</span>
+                    {% else %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                    {% endif %}
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span class="text-muted">Score:</span>
+                    {% if submission.marks_obtained is not none %}
+                    <span
+                      >{{ submission.marks_obtained }}/{{ submission.total_marks
+                      }}</span
+                    >
+                    {% else %}
+                    <span>-</span>
+                    {% endif %}
+                  </div>
+
+                  <div class="mb-2">
+                    <span class="text-muted">Feedback:</span>
+                    <p class="mt-1">{{ submission.feedback or '-' }}</p>
+                  </div>
+
+                  {% if submission.interactive_submission_data %}
+                  <div class="interactive-submission mt-3">
+                    <button
+                      class="btn btn-sm btn-info w-100"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#interactiveSubmissionData_{{ submission.id }}"
+                      aria-expanded="false"
+                      aria-controls="interactiveSubmissionData_{{ submission.id }}"
+                    >
+                      View Interactive Answers
+                    </button>
+                    <div
+                      class="collapse mt-2"
+                      id="interactiveSubmissionData_{{ submission.id }}"
+                    >
+                      <div class="card card-body">
+                        {% for q in submission.interactive_submission_data %}
+                        <p class="mb-1">
+                          <strong>Q{{ loop.index }}:</strong> {{ q.question }}
+                        </p>
+                        <p class="mb-2">
+                          <strong>Your Answer:</strong> {{ q.student_answer }}
+                        </p>
+                        {% if q.correct_answer %}
+                        <p class="mb-0 text-success">
+                          <strong>Correct Answer:</strong> {{ q.correct_answer
+                          }}
+                        </p>
+                        {% endif %} {% if not loop.last %}
+                        <hr class="my-2" />
+                        {% endif %} {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="alert alert-info">No submissions found.</div>
+          {% endif %}
+        </div>
+      </div>
     </div>
-    {% endif %}
+  </div>
+  {# End of Accordion Container #}
 </div>
 {% endblock %}
