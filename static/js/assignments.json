@@ -1,10 +1,30 @@
-[
-  {
-    "title": "Math Homework 1",
-    "description": "Complete exercises 1-10 from chapter 3",
-    "subject": "Mathematics",
-    "total_marks": 100,
-    "deadline": "2025-12-15 23:59",
-    "assigned_users": [6]
+{
+  "title": "Algebra Basics Quiz",
+  "description": "Test your understanding of basic algebra concepts",
+  "subject": "Mathematics",
+  "total_marks": 100,
+  "deadline": "2023-12-31 23:59",
+  "content": {
+    "questions": [
+      {
+        "id": 1,
+        "type": "multiple_choice",
+        "question": "What is the solution to 2x + 3 = 7?",
+        "options": ["x = 1", "x = 2", "x = 3", "x = 4"],
+        "correct_answer": "x = 2"
+      },
+      {
+        "id": 2,
+        "type": "short_answer",
+        "question": "Solve for y: 3y - 5 = 10",
+        "correct_answer": "5"
+      },
+      {
+        "id": 3,
+        "type": "true_false",
+        "question": "The equation x² = 4 has only one solution.",
+        "correct_answer": "False"
+      }
+    ]
   }
-]
+}

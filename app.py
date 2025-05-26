@@ -1739,6 +1739,7 @@ def view_assignments():
                          assignments=assignments,
                          current_time=datetime.utcnow())
 
+# Update the view_assignment route to handle interactive assignments
 @app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
 @login_required
 def view_assignment(assignment_id):
@@ -1757,6 +1758,30 @@ def view_assignment(assignment_id):
         submission_text = request.form.get('submission_text', '')
         file_path = None
         
+        # Handle interactive submission data if present
+        interactive_data = None
+        if assignment[7]:  # Check if there's interactive content (index 7 is content)
+            try:
+                # Get form data for interactive questions
+                interactive_data = {}
+                assignment_content = json.loads(assignment[7])
+                
+                # Extract answers for each interactive question
+                for question in assignment_content.get('questions', []):
+                    qid = question.get('id')
+                    if qid:
+                        answer = request.form.get(f'q_{qid}')
+                        if answer is not None:
+                            interactive_data[qid] = {
+                                'question': question.get('question'),
+                                'answer': answer,
+                                'correct_answer': question.get('correct_answer')
+                            }
+                
+                interactive_data = json.dumps(interactive_data)
+            except Exception as e:
+                print(f"Error processing interactive data: {e}")
+        
         if 'assignment_file' in request.files:
             file = request.files['assignment_file']
             if file.filename != '':
@@ -1765,44 +1790,33 @@ def view_assignment(assignment_id):
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
                 file.save(file_path)
         
-        if submit_assignment(assignment_id, session['user_id'], submission_text, file_path):
+        if submit_assignment(assignment_id, session['user_id'], submission_text, file_path, interactive_data):
             flash('Assignment submitted successfully!', 'success')
             return redirect(url_for('view_assignment', assignment_id=assignment_id))
         else:
             flash('Error submitting assignment', 'danger')
     
+    # Parse assignment content if it exists
+    content = None
+    if assignment[7]:  # index 7 is the content field
+        try:
+            content = json.loads(assignment[7])
+        except (TypeError, json.JSONDecodeError):
+            content = assignment[7]  # fallback to raw content if not JSON
+    
     return render_template('assignments/view.html',
-                         assignment=assignment,
+                         assignment={
+                             'id': assignment[0],
+                             'title': assignment[1],
+                             'description': assignment[2],
+                             'subject': assignment[3],
+                             'total_marks': assignment[4],
+                             'deadline': assignment[5],
+                             'created_at': assignment[6],
+                             'content': content
+                         },
                          submission=submission)
-# @login_required
-# def view_assignment(assignment_id):
-#     if session.get('role') != 'student':
-#         flash('Only students can view assignments', 'danger')
-#         return redirect(url_for('home'))
-    
-#     assignment = get_assignment_details(assignment_id)
-#     if not assignment:
-#         flash('Assignment not found', 'danger')
-#         return redirect(url_for('view_assignments'))
-    
-#     if request.method == 'POST':
-#         submission_text = request.form.get('submission_text', '')
-#         # Handle file upload if needed
-#         file_path = None
-#         if 'assignment_file' in request.files:
-#             file = request.files['assignment_file']
-#             if file.filename != '':
-#                 filename = secure_filename(file.filename)
-#                 file_path = os.path.join('uploads', filename)
-#                 file.save(os.path.join(app.static_folder, file_path))
-        
-#         if submit_assignment(assignment_id, session['user_id'], submission_text, file_path):
-#             flash('Assignment submitted successfully!', 'success')
-#         else:
-#             flash('Error submitting assignment', 'danger')
-#         return redirect(url_for('view_assignment', assignment_id=assignment_id))
-    
-#     return render_template('assignments/view.html', assignment=assignment)
+
 
 @app.route('/assignments/submissions')
 @login_required
@@ -2706,35 +2720,23 @@ def import_assignments():
                     assigned_users = assignment_data.get('assigned_users', 'all')
                     
                     # Get the interactive content if provided
-                    content = assignment_data.get('content', '')
+                    content = assignment_data.get('content', None)
+                    if content:
+                        content = json.dumps(content)  # Convert to string for storage
                     
                     # Create assignment with the interactive content
-                    assignment_id = add_assignment(
+                    success = add_assignment(
                         title=assignment_data['title'],
                         description=assignment_data['description'],
                         subject=assignment_data['subject'],
                         total_marks=int(assignment_data['total_marks']),
                         deadline=deadline,
-                        assigned_students_ids=assigned_users if assigned_users != 'all' else None
+                        assigned_students_ids=assigned_users if assigned_users != 'all' else None,
+                        content=content
                     )
                     
-                    # If there's interactive content, store it in the database
-                    if content:
-                        conn = get_db_connection()
-                        cur = conn.cursor()
-                        try:
-                            cur.execute('''
-                                UPDATE assignments 
-                                SET content = %s 
-                                WHERE id = %s
-                            ''', (content, assignment_id))
-                            conn.commit()
-                        except Exception as e:
-                            conn.rollback()
-                            print(f"Error saving interactive content: {e}")
-                        finally:
-                            cur.close()
-                            conn.close()
+                    if not success:
+                        flash(f'Error creating assignment: {assignment_data["title"]}', 'warning')
                 
                 flash(f'Successfully imported {len(assignments_data)} assignments', 'success')
                 return redirect(url_for('manage_assignments'))

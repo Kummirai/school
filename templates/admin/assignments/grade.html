@@ -207,6 +207,19 @@
     </div>
   </div>
   {% endif %}
+  <!-- Add this to your existing grading template -->
+  {% if submission.interactive_submission_data %}
+  <div class="interactive-submission">
+    <h4>Interactive Answers</h4>
+    {% for qid, answer_data in submission.interactive_submission_data.items() %}
+    <div class="question mb-3 p-3 border rounded">
+      <p><strong>Question:</strong> {{ answer_data.question }}</p>
+      <p><strong>Student's Answer:</strong> {{ answer_data.answer }}</p>
+      <p><strong>Correct Answer:</strong> {{ answer_data.correct_answer }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
 <style>
