@@ -32,14 +32,14 @@
           "features": ["Place value", "Operations", "Word problems"]
         },
         {
-          "title": "1.2 Integers: Concepts & Applications",
+          "title": "2.1 Integers: Concepts & Applications",
           "duration": "22 min",
           "link": "#",
           "icon": "bi bi-plus-slash-minus",
           "features": ["Number line", "Absolute value", "Real-world contexts"]
         },
         {
-          "title": "1.3 Exponents & Scientific Notation",
+          "title": "3.1 Exponents & Scientific Notation",
           "duration": "25 min",
           "link": "#",
           "icon": "bi bi-arrow-up-right-square",
@@ -54,11 +54,11 @@
       "assessment_questions": "35 questions"
     },
     {
-      "title": "Algebraic Concepts",
+      "title": "Patterns and Relationships",
       "color": "warning",
       "lessons": [
         {
-          "title": "2.1 Numeric & Geometric Patterns",
+          "title": "4.1 Numeric & Geometric Patterns",
           "duration": "20 min",
           "link": "#",
           "icon": "bi bi-diagram-3",
@@ -69,7 +69,7 @@
           ]
         },
         {
-          "title": "2.2 Functions & Relationships",
+          "title": "5.1 Functions & Relationships",
           "duration": "28 min",
           "link": "#",
           "icon": "bi bi-arrow-left-right",
@@ -78,30 +78,38 @@
             "Tables & graphs",
             "Linear relationships"
           ]
-        },
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Algebraic Thinking",
+      "color": "warning",
+      "lessons": [
         {
-          "title": "2.3 Algebraic Expressions (Part 1)",
+          "title": "6.1 Algebraic Expressions (Part 1)",
           "duration": "30 min",
           "link": "#",
           "icon": "bi bi-x-diamond",
           "features": ["Terminology", "Simplifying", "Polynomials"]
         },
         {
-          "title": "2.4 Algebraic Equations (Part 1)",
+          "title": "7.1 Algebraic Equations (Part 1)",
           "duration": "32 min",
           "link": "#",
           "icon": "bi bi-equals",
           "features": ["Solving equations", "Balancing", "Verification"]
         },
         {
-          "title": "2.5 Algebraic Expressions (Part 2)",
+          "title": "8.1 Algebraic Expressions (Part 2)",
           "duration": "35 min",
           "link": "#",
           "icon": "bi bi-x-diamond-fill",
           "features": ["Factorization", "Advanced operations", "Applications"]
         },
         {
-          "title": "2.6 Algebraic Equations (Part 2)",
+          "title": "9.1 Algebraic Equations (Part 2)",
           "duration": "38 min",
           "link": "#",
           "icon": "bi bi-equals-slash",
@@ -116,7 +124,7 @@
       "color": "primary",
       "lessons": [
         {
-          "title": "3.1 Constructing Geometric Figures",
+          "title": "10.1 Constructing Geometric Figures",
           "duration": "40 min",
           "link": "#",
           "icon": "bi bi-pentagon",
@@ -127,14 +135,14 @@
           ]
         },
         {
-          "title": "3.2 2D Shapes & Their Properties",
+          "title": "11.1 Geometry of 2D Shapes",
           "duration": "45 min",
           "link": "#",
           "icon": "bi bi-square",
           "features": ["Polygons", "Angle sums", "Symmetry"]
         },
         {
-          "title": "3.3 Geometry of Straight Lines",
+          "title": "12.1 Geometry of Straight Lines",
           "duration": "50 min",
           "link": "#",
           "icon": "bi bi-slash-lg",
