@@ -4,6 +4,7 @@
   "subject": "Mathematics",
   "total_marks": 100,
   "deadline": "2023-12-31 23:59",
+  "assigned_users": [5, 6],
   "content": {
     "questions": [
       {
@@ -24,6 +25,27 @@
         "type": "true_false",
         "question": "The equation x² = 4 has only one solution.",
         "correct_answer": "False"
+      },
+      {
+        "id": 4,
+        "type": "fill_in_the_blank",
+        "question": "The value of x in the equation 5x = 20 is ____.",
+        "correct_answer": "4"
+      },
+      {
+        "id": 5,
+        "type": "matching",
+        "question": "Match the following equations with their solutions.",
+        "pairs": [
+          {"equation": "x + 2 = 5", "solution": "x = 3"},
+          {"equation": "2x - 4 = 0", "solution": "x = 2"},
+          {"equation": "3y + 6 = 0", "solution": "y = -2"}
+        ],
+        "correct_pairs": [
+          {"equation": "x + 2 = 5", "solution": "x = 3"},
+          {"equation": "2x - 4 = 0", "solution": "x = 2"},
+          {"equation": "3y + 6 = 0", "solution": "y = -2"}
+        ]
       }
     ]
   }

@@ -156,31 +156,32 @@ def initialize_database():
 
       # Add these new tables for assignment system
     cur.execute('''
-    CREATE TABLE IF NOT EXISTS assignments (
-        id SERIAL PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        description TEXT,
-        subject VARCHAR(100) NOT NULL,
-        total_marks INTEGER NOT NULL,
-        deadline TIMESTAMP,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        content TEXT -- New column for interactive assignment content
-    )
+        CREATE TABLE IF NOT EXISTS assignments (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            description TEXT,
+            subject VARCHAR(100),
+            total_marks INTEGER,
+            deadline TIMESTAMP,
+            content JSONB, -- For interactive content or complex structures
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
     ''')
 
+
     cur.execute('''
-    CREATE TABLE IF NOT EXISTS assignment_submissions (
+        CREATE TABLE IF NOT EXISTS submissions (
         id SERIAL PRIMARY KEY,
-        assignment_id INTEGER REFERENCES assignments(id) ON DELETE CASCADE,
-        student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
+        student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         submission_text TEXT,
-        file_path VARCHAR(255),
-        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        marks_obtained INTEGER,
-        feedback TEXT,
-        interactive_submission_data JSONB, -- New column for interactive submission data
-        CONSTRAINT unique_submission UNIQUE (assignment_id, student_id)
-    )
+        file_path VARCHAR(255), -- Path to uploaded file if any
+        submission_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        grade INTEGER, -- Nullable, will be set after grading
+        feedback TEXT, -- Teacher feedback
+        interactive_submission_data JSONB, -- For structured/interactive answers
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
     ''')
 
         # Add this to the initialize_database() function
@@ -199,7 +200,7 @@ def initialize_database():
 
     # Add this new table for assignment-user relationships
     cur.execute('''
-        CREATE TABLE IF NOT EXISTS assignment_users (
+        CREATE TABLE IF NOT EXISTS assignment_students (
             assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
             user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
             PRIMARY KEY (assignment_id, user_id)
@@ -779,7 +780,7 @@ def get_assignments_for_user(user_id):
         cur.execute('''
             SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.description
             FROM assignments a
-            JOIN assignment_users au ON a.id = au.assignment_id
+            JOIN assignment_students au ON a.id = au.assignment_id
             WHERE au.user_id = %s
             ORDER BY a.deadline
         ''', (user_id,))
@@ -804,22 +805,43 @@ def get_assignments_for_user(user_id):
         cur.close()
         conn.close()
 
-def add_assignment(title, description, subject, total_marks, deadline, assigned_students_ids, content=None):
+# Assuming you have a function to get all student IDs if assigned_students_ids is None
+def get_all_student_ids():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT id FROM users WHERE role = 'student'") # Adjust 'student' role as needed
+    student_ids = [row[0] for row in cur.fetchall()]
+    cur.close()
+    conn.close()
+    return student_ids
+
+def add_assignment(title, description, subject, total_marks, deadline, assigned_students_ids=None, content=None):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        cur.execute('''
+        cur.execute(
+            """
             INSERT INTO assignments (title, description, subject, total_marks, deadline, content)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            RETURNING id
-        ''', (title, description, subject, total_marks, deadline, content)) # Include content here
+            VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;
+            """,
+            (title, description, subject, total_marks, deadline, content)
+        )
         assignment_id = cur.fetchone()[0]
 
-        for student_id in assigned_students_ids:
-            cur.execute('''
-                INSERT INTO assignment_users (assignment_id, user_id)
-                VALUES (%s, %s)
-            ''', (assignment_id, student_id))
+        if assigned_students_ids is None: # This means 'all' students
+            assigned_students_ids_list = get_all_student_ids()
+        else:
+            assigned_students_ids_list = assigned_students_ids
+
+        # Insert into the assignment_students linking table
+        for student_id in assigned_students_ids_list:
+            cur.execute(
+                """
+                INSERT INTO assignment_students (assignment_id, student_id)
+                VALUES (%s, %s);
+                """,
+                (assignment_id, student_id)
+            )
 
         conn.commit()
         return True
@@ -830,7 +852,6 @@ def add_assignment(title, description, subject, total_marks, deadline, assigned_
     finally:
         cur.close()
         conn.close()
-
 
 def get_assignment_details(assignment_id):
     """Get full details for a specific assignment"""
@@ -1727,17 +1748,75 @@ def forbidden(e):
     return render_template('errors/403.html'), 403
 
 # Student assignment routes
-@app.route('/assignments')
+@app.route('/assignments', methods=['GET'])
 @login_required
-def view_assignments():
-    if session.get('role') != 'student':
-        flash('Only students can view assignments', 'danger')
-        return redirect(url_for('home'))
-    
-    assignments = get_assignments_for_user(session['user_id'])
-    return render_template('assignments/list.html', 
-                         assignments=assignments,
-                         current_time=datetime.utcnow())
+def student_assignments():
+    user_id = session.get('user_id') # Make sure this is how you get the current user's ID
+    if not user_id:
+        flash('Please log in to view your assignments.', 'warning')
+        return redirect(url_for('login')) # Redirect to login if user_id not found
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    assignments = []
+    try:
+        # THE CRUCIAL SQL QUERY GOES HERE
+        # It needs to join with the assignment_students table
+        cur.execute(
+            """
+            SELECT
+                a.id,
+                a.title,
+                a.description,
+                a.subject,
+                a.total_marks,
+                a.deadline,
+                a.content,
+                a.created_at,
+                -- Check if the student has submitted this assignment
+                EXISTS (SELECT 1 FROM submissions s WHERE s.assignment_id = a.id AND s.student_id = %s) AS submitted,
+                -- You might also want to fetch grade information here if available
+                COALESCE(sub.grade, NULL) as grade -- Example to get grade if needed
+            FROM
+                assignments a
+            JOIN
+                assignment_students asl ON a.id = asl.assignment_id
+            WHERE
+                asl.student_id = %s
+            ORDER BY
+                a.deadline DESC;
+            """,
+            (user_id, user_id) # Pass user_id twice for both EXISTS and WHERE clauses
+        )
+        for row in cur.fetchall():
+            assignments.append({
+                'id': row[0],
+                'title': row[1],
+                'description': row[2],
+                'subject': row[3],
+                'total_marks': row[4],
+                'deadline': row[5],
+                'content': json.loads(row[6]) if row[6] else None, # Parse content if it's JSONB
+                'created_at': row[7],
+                'submitted': row[8],
+                'grade': row[9] # Add grade
+                # Add 'status' based on deadline and submission
+                # 'status': 'active' if row[5] > datetime.now() else 'past_deadline',
+            })
+        
+        # Add logic to determine 'status' and 'submitted' if not directly in query
+        for assignment in assignments:
+            assignment['status'] = 'active' if assignment['deadline'] and assignment['deadline'] > datetime.now() else 'past_deadline'
+            # 'submitted' is already handled by the query now
+            
+    except Exception as e:
+        print(f"Error fetching student assignments: {e}")
+        flash('Could not load your assignments.', 'danger')
+    finally:
+        cur.close()
+        conn.close()
+
+    return render_template('assignments/list.html', assignments=assignments) # This should be your student-facing list.html
 
 # Update the view_assignment route to handle interactive assignments
 @app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
@@ -1916,8 +1995,8 @@ def manage_assignments():
                    COUNT(au.user_id) as assigned_count,
                    COUNT(s.id) as submission_count
             FROM assignments a
-            LEFT JOIN assignment_users au ON a.id = au.assignment_id
-            LEFT JOIN assignment_submissions s ON a.id = s.assignment_id
+            LEFT JOIN assignment_students au ON a.id = au.assignment_id
+            LEFT JOIN submissions s ON a.id = s.assignment_id
             GROUP BY a.id
             ORDER BY a.deadline
         ''')
@@ -2689,41 +2768,66 @@ def import_assignments():
         if 'json_file' not in request.files:
             flash('No file selected', 'danger')
             return redirect(request.url)
-        
+
         file = request.files['json_file']
         if file.filename == '':
             flash('No file selected', 'danger')
             return redirect(request.url)
-        
+
         if file and file.filename.endswith('.json'):
             try:
                 data = json.load(file)
-                
+
                 # Handle both single assignment and array of assignments
                 assignments_data = data if isinstance(data, list) else [data]
-                
+
+                # Determine assigned students from form selection
+                form_assigned_users = []
+                if 'assign_all' in request.form and request.form['assign_all'] == 'all':
+                    form_assigned_users = None # Indicates 'all students' from the form
+                else:
+                    selected_student_ids = request.form.getlist('selected_students')
+                    if selected_student_ids:
+                        form_assigned_users = [int(s_id) for s_id in selected_student_ids]
+                    else:
+                        form_assigned_users = [] # No specific students selected in form
+
+                imported_count = 0
                 for assignment_data in assignments_data:
                     # Validate required fields
                     required_fields = ['title', 'description', 'subject', 'total_marks', 'deadline']
                     if not all(field in assignment_data for field in required_fields):
-                        flash('Invalid JSON structure - missing required fields', 'danger')
-                        continue
-                    
+                        flash('Invalid JSON structure - missing required fields for an assignment', 'danger')
+                        continue # Skip to the next assignment in the JSON
+
                     try:
                         # Convert deadline string to datetime
                         deadline = datetime.strptime(assignment_data['deadline'], '%Y-%m-%d %H:%M')
                     except ValueError:
                         flash('Invalid deadline format in JSON (use YYYY-MM-DD HH:MM)', 'danger')
-                        continue
+                        continue # Skip to the next assignment in the JSON
+
+                    # Determine final assigned users for this specific assignment
+                    final_assigned_users_for_this_assignment = None # Default to 'all' if no specific assignment
                     
-                    # Get assigned users (default to all students if not specified)
-                    assigned_users = assignment_data.get('assigned_users', 'all')
+                    # Prioritize 'assigned_users' from JSON if it exists
+                    assigned_users_from_json = assignment_data.get('assigned_users')
+                    if assigned_users_from_json is not None:
+                        if assigned_users_from_json == 'all':
+                            # Map JSON 'all' string to None for add_assignment, meaning all students
+                            final_assigned_users_for_this_assignment = None
+                        else:
+                            # Use the list of user IDs from JSON
+                            final_assigned_users_for_this_assignment = assigned_users_from_json
+                    else:
+                        # If JSON doesn't specify, use what was selected in the form
+                        final_assigned_users_for_this_assignment = form_assigned_users
                     
                     # Get the interactive content if provided
                     content = assignment_data.get('content', None)
                     if content:
                         content = json.dumps(content)  # Convert to string for storage
-                    
+
                     # Create assignment with the interactive content
                     success = add_assignment(
                         title=assignment_data['title'],
@@ -2731,26 +2835,48 @@ def import_assignments():
                         subject=assignment_data['subject'],
                         total_marks=int(assignment_data['total_marks']),
                         deadline=deadline,
-                        assigned_students_ids=assigned_users if assigned_users != 'all' else None,
+                        assigned_students_ids=final_assigned_users_for_this_assignment,
                         content=content
                     )
-                    
-                    if not success:
+
+                    if success:
+                        imported_count += 1
+                    else:
                         flash(f'Error creating assignment: {assignment_data["title"]}', 'warning')
-                
-                flash(f'Successfully imported {len(assignments_data)} assignments', 'success')
+
+                flash(f'Successfully imported {imported_count} assignments', 'success')
+                if imported_count < len(assignments_data):
+                    flash(f'{len(assignments_data) - imported_count} assignments could not be imported due to errors.', 'warning')
                 return redirect(url_for('manage_assignments'))
-                
+
             except json.JSONDecodeError:
-                flash('Invalid JSON file', 'danger')
+                flash('Invalid JSON file. Please ensure it is well-formed.', 'danger')
             except Exception as e:
                 flash(f'Error importing assignments: {str(e)}', 'danger')
-        
+
         else:
             flash('Only JSON files are allowed', 'danger')
-    
+
     # GET request - show import form
-    return render_template('admin/assignments/import.html')
+    conn = None
+    cur = None
+    students = []
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        # Fetch all students to populate the checkboxes in the form
+        cur.execute("SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
+        students = [{'id': row[0], 'username': row[1]} for row in cur.fetchall()]
+    except Exception as e:
+        print(f"Error fetching students for import form: {e}")
+        flash('Could not load student list. Please check database connection.', 'danger')
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+    return render_template('admin/assignments/import.html', students=students)
 
 @app.route('/whiteboards')
 @login_required
