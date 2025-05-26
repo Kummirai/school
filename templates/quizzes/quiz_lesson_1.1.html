@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1.1 Quiz & Worksheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 2rem; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    .worksheet-section { page-break-after: always; }
+  </style>
+</head>
+<body>
+  <h2>Lesson 1.1 Quiz: Whole Numbers - Operations & Properties</h2>
+  <form id="quizForm">
+    <ol>
+      <li>
+        <label>What is 456 + 789?</label><br>
+        <input type="text" class="form-control" name="q1">
+        <div id="f1" class="feedback"></div>
+      </li>
+      <li>
+        <label>What is the product of 36 and 12?</label><br>
+        <input type="text" class="form-control" name="q2">
+        <div id="f2" class="feedback"></div>
+      </li>
+      <li>
+        <label>Which property states that a + b = b + a?</label><br>
+        <select name="q3" class="form-control">
+          <option value="">--Choose--</option>
+          <option value="commutative">Commutative Property</option>
+          <option value="associative">Associative Property</option>
+          <option value="distributive">Distributive Property</option>
+        </select>
+        <div id="f3" class="feedback"></div>
+      </li>
+      <li>
+        <label>Simplify: (25 + 75) - 50 = ?</label><br>
+        <input type="text" class="form-control" name="q4">
+        <div id="f4" class="feedback"></div>
+      </li>
+      <li>
+        <label>Is 0 an even number? (yes/no)</label><br>
+        <input type="text" class="form-control" name="q5">
+        <div id="f5" class="feedback"></div>
+      </li>
+      <li>
+        <label>Which number is a factor of 100?</label><br>
+        <input type="text" class="form-control" name="q6">
+        <div id="f6" class="feedback"></div>
+      </li>
+      <li>
+        <label>What is the smallest 3-digit whole number?</label><br>
+        <input type="text" class="form-control" name="q7">
+        <div id="f7" class="feedback"></div>
+      </li>
+      <li>
+        <label>Which operation is inverse of multiplication?</label><br>
+        <input type="text" class="form-control" name="q8">
+        <div id="f8" class="feedback"></div>
+      </li>
+      <li>
+        <label>Evaluate: 120 ÷ 10</label><br>
+        <input type="text" class="form-control" name="q9">
+        <div id="f9" class="feedback"></div>
+      </li>
+      <li>
+        <label>Find the missing number: 50 + ___ = 125</label><br>
+        <input type="text" class="form-control" name="q10">
+        <div id="f10" class="feedback"></div>
+      </li>
+    </ol>
+    <button type="button" class="btn btn-primary" onclick="checkAnswers()">Submit Answers</button>
+  </form>
+
+  <hr class="my-5">
+
+  <div class="worksheet-section">
+    <h2>Lesson 1.1 Worksheet: Practice Problems</h2>
+    <ol>
+      <li>456 + 789 = ________</li>
+      <li>1000 - 375 = ________</li>
+      <li>84 ÷ 7 = ________</li>
+      <li>Which property is shown: (5 + 6) + 7 = 5 + (6 + 7)?</li>
+      <li>Find all factors of 24.</li>
+      <li>Circle the multiples of 8: 16, 18, 24, 30</li>
+      <li>True or False: Every whole number is an integer.</li>
+      <li>Write a word problem involving subtraction.</li>
+      <li>Evaluate: (45 + 55) - 100</li>
+      <li>What is the sum of the first five even whole numbers?</li>
+    </ol>
+    <h3>Challenge:</h3>
+    <p>Write and solve a real-world word problem using multiplication.</p>
+  </div>
+
+  <div>
+    <h2>Answer Key</h2>
+    <ol>
+      <li>1245</li>
+      <li>625</li>
+      <li>12</li>
+      <li>Associative Property</li>
+      <li>1, 2, 3, 4, 6, 8, 12, 24</li>
+      <li>16, 24</li>
+      <li>True</li>
+      <li>Custom</li>
+      <li>0</li>
+      <li>2 + 4 + 6 + 8 + 10 = 30</li>
+    </ol>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = {
+        q1: "1245",
+        q2: "432",
+        q3: "commutative",
+        q4: "50",
+        q5: "yes",
+        q6: "10",
+        q7: "100",
+        q8: "division",
+        q9: "12",
+        q10: "75"
+      };
+      for (let i = 1; i <= 10; i++) {
+        const userAnswer = document.forms["quizForm"][`q${i}`].value.trim().toLowerCase();
+        const correct = answers[`q${i}`].toLowerCase();
+        const feedback = document.getElementById(`f${i}`);
+        feedback.innerHTML = userAnswer === correct ? `<span class='correct'>Correct!</span>` : `<span class='incorrect'>Incorrect</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
+

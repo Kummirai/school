@@ -10,14 +10,16 @@
     "Number Theory",
     "Algebraic Thinking",
     "Geometric Principles",
-    "Mathematical Reasoning"
+    "Mathematical Reasoning",
+    "Data Handling",
+    "Measurement"
   ],
   "feature_note": "Each lesson includes concept videos, worked examples, and tiered practice problems (basic → advanced).",
   "stats": {
-    "total_lessons": "48",
-    "video_hours": "26.5",
-    "practice_problems": "850+",
-    "assessments": "12"
+    "total_lessons": "72",
+    "video_hours": "42.5",
+    "practice_problems": "1200+",
+    "assessments": "18"
   },
   "units": [
     {
@@ -27,7 +29,7 @@
         {
           "title": "1.1 Whole Numbers: Operations & Properties",
           "duration": "18 min",
-          "link": "#",
+          "link": "/quizzes/quiz_lesson",
           "icon": "bi bi-123",
           "features": ["Place value", "Operations", "Word problems"]
         },
@@ -143,6 +145,100 @@
       ],
       "assessment_link": "#",
       "assessment_questions": "50 questions"
+    },
+    {
+      "title": "Fractions & Decimals",
+      "color": "info",
+      "lessons": [
+        {
+          "title": "4.1 Common Fractions",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-percent",
+          "features": ["Operations", "Conversions", "Word problems"]
+        },
+        {
+          "title": "4.2 Decimal Fractions",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-dot",
+          "features": ["Decimal notation", "Rounding", "Applications"]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Measurement & Data",
+      "color": "success",
+      "lessons": [
+        {
+          "title": "5.1 Perimeter & Area",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-border-width",
+          "features": ["Formulas", "Composite shapes", "Real-world problems"]
+        },
+        {
+          "title": "5.2 Surface Area & Volume",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-box-seam",
+          "features": ["3D objects", "Calculations", "Applications"]
+        },
+        {
+          "title": "5.3 Data Handling",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-bar-chart",
+          "features": ["Collection", "Organization", "Representation"]
+        },
+        {
+          "title": "5.4 Data Analysis",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-graph-up",
+          "features": ["Interpretation", "Analysis", "Reporting"]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "45 questions"
+    },
+    {
+      "title": "Advanced Topics",
+      "color": "dark",
+      "lessons": [
+        {
+          "title": "6.1 Theorem of Pythagoras",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-triangle",
+          "features": ["Proof", "Applications", "Problem-solving"]
+        },
+        {
+          "title": "6.2 Transformation Geometry",
+          "duration": "50 min",
+          "link": "#",
+          "icon": "bi bi-arrow-repeat",
+          "features": ["Translations", "Reflections", "Rotations"]
+        },
+        {
+          "title": "6.3 Probability",
+          "duration": "40 min",
+          "link": "#",
+          "icon": "bi bi-dice-5",
+          "features": ["Basic concepts", "Calculations", "Real-world examples"]
+        },
+        {
+          "title": "6.4 Advanced Graphs",
+          "duration": "45 min",
+          "link": "#",
+          "icon": "bi bi-diagram-2",
+          "features": ["Plotting", "Interpretation", "Relationships"]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "50 questions"
     }
   ],
   "resources": [
@@ -172,6 +268,24 @@
       "color": "primary",
       "button_text": "Start Drawing",
       "button_icon": "bi bi-pen"
+    },
+    {
+      "title": "Data Analysis Toolkit",
+      "description": "Resources for data collection and visualization",
+      "link": "#",
+      "icon": "bi bi-clipboard-data",
+      "color": "success",
+      "button_text": "Explore Toolkit",
+      "button_icon": "bi bi-tools"
+    },
+    {
+      "title": "Probability Simulator",
+      "description": "Interactive probability experiments",
+      "link": "#",
+      "icon": "bi bi-dice-6",
+      "color": "dark",
+      "button_text": "Run Simulations",
+      "button_icon": "bi bi-play-circle"
     }
   ],
   "teacher_resources": [
@@ -201,6 +315,24 @@
       "color": "primary",
       "button_text": "Access Videos",
       "button_icon": "bi bi-collection-play"
+    },
+    {
+      "title": "Data Project Templates",
+      "description": "Guided projects for data analysis",
+      "link": "#",
+      "icon": "bi bi-file-earmark-spreadsheet",
+      "color": "success",
+      "button_text": "Get Templates",
+      "button_icon": "bi bi-download"
+    },
+    {
+      "title": "Advanced Topics Guide",
+      "description": "Extension materials for gifted students",
+      "link": "#",
+      "icon": "bi bi-mortarboard",
+      "color": "dark",
+      "button_text": "Access Guide",
+      "button_icon": "bi bi-book"
     }
   ],
   "cta": {
