@@ -1,0 +1,102 @@
+{% extends "admin/base.html" %} {# Assuming you have an admin/base.html #} {%
+block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">All Submissions</h2>
+
+  {% if submissions %}
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Submission ID</th>
+          <th>Assignment</th>
+          <th>Student</th>
+          <th>Submission Time</th>
+          <th>Grade</th>
+          <th>Text Submission</th>
+          <th>File</th>
+          <th>Interactive Data</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sub in submissions %}
+        <tr>
+          <td>{{ sub.id }}</td>
+          <td>{{ sub.assignment_title }}</td>
+          <td>{{ sub.student_username }}</td>
+          <td>
+            {{ sub.submission_time.strftime('%Y-%m-%d %H:%M') if
+            sub.submission_time else 'N/A' }}
+          </td>
+          <td>
+            {% if sub.grade is not none %} {{ sub.grade }} {% else %}
+            <span class="text-muted">Not Graded</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if sub.submission_text %} {{ sub.submission_text[:50] }}... {#
+            Show first 50 chars #} {% else %}
+            <span class="text-muted">No text</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if sub.file_path %}
+            <a
+              href="{{ url_for('static', filename='uploads/' + sub.file_path.split('/')[-1]) }}"
+              target="_blank"
+            >
+              <i class="bi bi-file-earmark"></i> Download
+            </a>
+            {% else %}
+            <span class="text-muted">No file</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if sub.interactive_submission_data %}
+            <button
+              class="btn btn-sm btn-info"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#interactive_{{ sub.id }}"
+              aria-expanded="false"
+              aria-controls="interactive_{{ sub.id }}"
+            >
+              View Data
+            </button>
+            <div class="collapse" id="interactive_{{ sub.id }}">
+              <div class="card card-body mt-2">
+                {% for q in sub.interactive_submission_data %}
+                <p><strong>Q{{ loop.index }}:</strong> {{ q.question }}</p>
+                <p><strong>A:</strong> {{ q.student_answer }}</p>
+                {% endfor %}
+              </div>
+            </div>
+            {% else %}
+            <span class="text-muted">N/A</span>
+            {% endif %}
+          </td>
+          <td>
+            {# Link to a grading page if you have one #}
+            <a
+              href="{{ url_for('grade_submission', assignment_id=sub.assignment_id, student_id=sub.id) }}"
+              class="btn btn-sm btn-warning"
+            >
+              <i class="bi bi-pencil-fill"></i> Grade
+            </a>
+            {# You might add a delete submission action here #}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="9" class="text-center">No submissions found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alert alert-info">No submissions found.</div>
+  {% endif %}
+</div>
+{% endblock %}

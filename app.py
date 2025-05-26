@@ -699,9 +699,8 @@ def get_submission_for_grading(assignment_id, student_id):
     try:
         # Get submission details, including interactive_submission_data
         cur.execute('''
-            SELECT s.id, s.submission_text, s.file_path, s.submitted_at,
-                   s.marks_obtained, s.feedback, u.username, s.interactive_submission_data
-            FROM assignment_submissions s
+            SELECT s.id, s.submission_text, s.file_path, s.submission_time,  s.grade, s.feedback, u.username, s.interactive_submission_data
+            FROM submissions s
             JOIN users u ON s.student_id = u.id
             WHERE s.assignment_id = %s AND s.student_id = %s
         ''', (assignment_id, student_id))
@@ -749,8 +748,8 @@ def update_submission_grade(assignment_id, student_id, marks_obtained, feedback)
     cur = conn.cursor()
     try:
         cur.execute('''
-            UPDATE assignment_submissions
-            SET marks_obtained = %s, feedback = %s
+            UPDATE submissions
+            SET grade = %s, feedback = %s
             WHERE assignment_id = %s AND student_id = %s
         ''', (marks_obtained, feedback, assignment_id, student_id))
         conn.commit()
@@ -891,9 +890,9 @@ def get_student_submissions(student_id):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('''
-        SELECT a.title, a.subject, a.deadline, s.submitted_at, 
-               s.marks_obtained, a.total_marks, s.feedback, s.file_path
-        FROM assignment_submissions s
+        SELECT a.title, a.subject, a.deadline, s.submission_time, 
+               s.grade, a.total_marks, s.feedback, s.file_path
+        FROM submissions s
         JOIN assignments a ON s.assignment_id = a.id
         WHERE s.student_id = %s
         ORDER BY a.deadline DESC
@@ -1747,6 +1746,64 @@ def delete_student(student_id):
 def forbidden(e):
     return render_template('errors/403.html'), 403
 
+# app.py
+
+
+@app.route('/admin/submissions/all')
+@login_required
+# @roles_required('admin', 'teacher') # Assuming only admins/teachers can view all submissions
+def list_all_submissions():
+    conn = None
+    cur = None
+    submissions_data = []
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT
+                s.id,
+                a.title AS assignment_title,
+                u.username AS student_username,
+                s.submission_time,
+                s.grade,
+                s.file_path,
+                s.submission_text,
+                s.interactive_submission_data,
+                s.assignment_id -- Add assignment_id here
+            FROM
+                submissions s
+            JOIN
+                assignments a ON s.assignment_id = a.id
+            JOIN
+                users u ON s.student_id = u.id
+            ORDER BY
+                s.submission_time DESC;
+            """
+        )
+        for row in cur.fetchall():
+            submissions_data.append({
+                'id': row[0],
+                'assignment_title': row[1],
+                'student_username': row[2],
+                'submission_time': row[3],
+                'grade': row[4],
+                'file_path': row[5],
+                'submission_text': row[6],
+                'interactive_submission_data': row[7],
+                'assignment_id': row[8] # Add assignment_id to the dictionary
+            })
+    except Exception as e:
+        print(f"Error fetching all submissions: {e}")
+        flash("Could not load all submissions.", "danger")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+    return render_template('admin/all_submissions.html', submissions=submissions_data)
+
 # Student assignment routes
 @app.route('/assignments', methods=['GET'])
 @login_required
@@ -2035,11 +2092,11 @@ def view_assignment_submissions(assignment_id):
         
         # Get submissions with student IDs
         cur.execute('''
-            SELECT u.username, s.submitted_at, s.marks_obtained, u.id as student_id, s.feedback
-            FROM assignment_submissions s
+            SELECT u.username, s.submission_time, s.grade, u.id as student_id, s.feedback
+            FROM submissions s
             JOIN users u ON s.student_id = u.id
             WHERE s.assignment_id = %s
-            ORDER BY s.submitted_at DESC
+            ORDER BY s.submission_time DESC
         ''', (assignment_id,))
         submissions = cur.fetchall()
         
