@@ -1,68 +1,490 @@
 {
-  "title": "Grade 7 Mathematics Lessons",
+  "title": "Grade 7 Mathematics Mastery",
   "grade": "Grade 7",
   "subject": "Mathematics",
   "hero_image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
   "icon": "bi bi-calculator-fill",
-  "tagline": "Comprehensive lessons covering all Grade 7 math standards",
-  "description": "Our Grade 7 Mathematics program is designed to build a strong foundation in key mathematical concepts while developing critical thinking and problem-solving skills.",
+  "tagline": "Building strong mathematical foundations - from basic operations to advanced concepts",
+  "description": "Comprehensive curriculum covering all essential Grade 7 math concepts with progressive skill development and real-world problem solving.",
   "domains": [
-    "Ratios and Proportional Relationships",
-    "The Number System",
-    "Expressions and Equations",
-    "Geometry",
-    "Statistics and Probability"
+    "Number System Operations",
+    "Algebraic Foundations",
+    "Geometric Reasoning",
+    "Pattern Recognition",
+    "Data Analysis",
+    "Measurement Applications"
   ],
-  "feature_note": "Each lesson includes video explanations, practice problems, and downloadable worksheets.",
+  "feature_note": "Each lesson includes concept videos, step-by-step examples, and tiered practice problems (foundational → advanced).",
   "stats": {
-    "total_lessons": "42",
-    "video_hours": "18.5",
-    "practice_problems": "650+",
-    "assessments": "12"
+    "total_lessons": "84",
+    "video_hours": "48.5",
+    "practice_problems": "1400+",
+    "assessments": "20"
   },
   "units": [
     {
-      "title": "Ratios and Proportional Relationships",
-      "color": "danger",
+      "title": "Number System Foundations",
+      "color": "primary",
       "lessons": [
         {
-          "title": "1.1 Understanding Ratios",
-          "duration": "12 min",
+          "title": "1.1 Working with Whole Numbers",
+          "duration": "20 min",
+          "link": "/quizzes/quiz_lesson",
+          "icon": "bi bi-123",
+          "features": [
+            "Place value systems",
+            "Multi-digit operations",
+            "Problem solving strategies"
+          ]
+        },
+        {
+          "title": "1.2 Understanding Exponents",
+          "duration": "18 min",
           "link": "#",
-          "icon": "bi bi-play-circle-fill"
+          "icon": "bi bi-arrow-up-right-square",
+          "features": [
+            "Exponential notation",
+            "Laws of exponents",
+            "Scientific applications"
+          ]
+        },
+        {
+          "title": "1.3 Introduction to Integers",
+          "duration": "22 min",
+          "link": "#",
+          "icon": "bi bi-plus-slash-minus",
+          "features": [
+            "Positive and negative numbers",
+            "Number line concepts",
+            "Real-world contexts"
+          ]
         }
       ],
       "assessment_link": "#",
       "assessment_questions": "30 questions"
+    },
+    {
+      "title": "Fractions & Decimal Operations",
+      "color": "success",
+      "lessons": [
+        {
+          "title": "2.1 Common Fractions Mastery",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-percent",
+          "features": [
+            "Fraction operations",
+            "Equivalent fractions",
+            "Mixed numbers"
+          ]
+        },
+        {
+          "title": "2.2 Decimal Notation for Fractions",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-dot",
+          "features": [
+            "Converting fractions to decimals",
+            "Decimal operations",
+            "Rounding strategies"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "25 questions"
+    },
+    {
+      "title": "Algebraic Thinking & Patterns",
+      "color": "warning",
+      "lessons": [
+        {
+          "title": "3.1 Numeric & Geometric Patterns",
+          "duration": "18 min",
+          "link": "#",
+          "icon": "bi bi-diagram-3",
+          "features": [
+            "Pattern identification",
+            "Sequence rules",
+            "Visual patterns"
+          ]
+        },
+        {
+          "title": "3.2 Functions & Relationships 1",
+          "duration": "22 min",
+          "link": "#",
+          "icon": "bi bi-arrow-left-right",
+          "features": [
+            "Input-output tables",
+            "Function notation",
+            "Basic relationships"
+          ]
+        },
+        {
+          "title": "3.3 Functions & Relationships 2",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-graph-up-arrow",
+          "features": [
+            "Linear functions",
+            "Graphing relationships",
+            "Rate of change"
+          ]
+        },
+        {
+          "title": "3.4 Algebraic Expressions 1",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-x-diamond",
+          "features": [
+            "Variable expressions",
+            "Simplifying expressions",
+            "Like terms"
+          ]
+        },
+        {
+          "title": "3.5 Algebraic Expressions 2",
+          "duration": "28 min",
+          "link": "#",
+          "icon": "bi bi-x-diamond-fill",
+          "features": [
+            "Advanced operations",
+            "Distributive property",
+            "Factoring basics"
+          ]
+        },
+        {
+          "title": "3.6 Algebraic Equations 1",
+          "duration": "24 min",
+          "link": "#",
+          "icon": "bi bi-equals",
+          "features": [
+            "One-step equations",
+            "Balance method",
+            "Solution verification"
+          ]
+        },
+        {
+          "title": "3.7 Algebraic Equations 2",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-equals-slash",
+          "features": [
+            "Multi-step equations",
+            "Word problems",
+            "Problem-solving strategies"
+          ]
+        },
+        {
+          "title": "3.8 Relationships Between Variables",
+          "duration": "26 min",
+          "link": "#",
+          "icon": "bi bi-bezier2",
+          "features": [
+            "Variable relationships",
+            "Proportional thinking",
+            "Rate problems"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "40 questions"
+    },
+    {
+      "title": "Geometric Foundations",
+      "color": "info",
+      "lessons": [
+        {
+          "title": "4.1 Geometry of Straight Lines",
+          "duration": "22 min",
+          "link": "#",
+          "icon": "bi bi-slash-lg",
+          "features": [
+            "Line relationships",
+            "Angle properties",
+            "Parallel and perpendicular lines"
+          ]
+        },
+        {
+          "title": "4.2 Construction of Geometric Figures",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-pentagon",
+          "features": [
+            "Compass and straightedge",
+            "Accurate constructions",
+            "Geometric tools"
+          ]
+        },
+        {
+          "title": "4.3 Geometry of 2D Shapes",
+          "duration": "28 min",
+          "link": "#",
+          "icon": "bi bi-square",
+          "features": [
+            "Polygon properties",
+            "Angle sums",
+            "Classification systems"
+          ]
+        },
+        {
+          "title": "4.4 Geometry of 3D Objects",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-box",
+          "features": [
+            "3D shape properties",
+            "Nets and faces",
+            "Spatial reasoning"
+          ]
+        },
+        {
+          "title": "4.5 Transformation Geometry",
+          "duration": "32 min",
+          "link": "#",
+          "icon": "bi bi-arrow-repeat",
+          "features": ["Translations", "Reflections", "Rotations and symmetry"]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "35 questions"
+    },
+    {
+      "title": "Measurement & Applications",
+      "color": "danger",
+      "lessons": [
+        {
+          "title": "5.1 Perimeter & Area of 2D Shapes",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-border-width",
+          "features": [
+            "Area formulas",
+            "Perimeter calculations",
+            "Composite shapes"
+          ]
+        },
+        {
+          "title": "5.2 Surface Area & Volume of 3D Objects",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-box-seam",
+          "features": [
+            "Volume formulas",
+            "Surface area calculations",
+            "Real-world applications"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "28 questions"
+    },
+    {
+      "title": "Data Handling & Probability",
+      "color": "secondary",
+      "lessons": [
+        {
+          "title": "6.1 Collect, Organise & Summarise Data",
+          "duration": "20 min",
+          "link": "#",
+          "icon": "bi bi-clipboard-data",
+          "features": [
+            "Data collection methods",
+            "Organization techniques",
+            "Summary statistics"
+          ]
+        },
+        {
+          "title": "6.2 Represent Data",
+          "duration": "25 min",
+          "link": "#",
+          "icon": "bi bi-bar-chart",
+          "features": [
+            "Graphs and charts",
+            "Data visualization",
+            "Appropriate representations"
+          ]
+        },
+        {
+          "title": "6.3 Interpret, Analyse & Report Data",
+          "duration": "28 min",
+          "link": "#",
+          "icon": "bi bi-graph-up",
+          "features": [
+            "Data interpretation",
+            "Drawing conclusions",
+            "Report writing"
+          ]
+        },
+        {
+          "title": "6.4 Introduction to Probability",
+          "duration": "22 min",
+          "link": "#",
+          "icon": "bi bi-dice-5",
+          "features": [
+            "Basic probability concepts",
+            "Experimental vs theoretical",
+            "Simple calculations"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "32 questions"
+    },
+    {
+      "title": "Advanced Problem Solving",
+      "color": "dark",
+      "lessons": [
+        {
+          "title": "7.1 Graphing & Coordinate Geometry",
+          "duration": "30 min",
+          "link": "#",
+          "icon": "bi bi-diagram-2",
+          "features": ["Coordinate plane", "Plotting points", "Line graphs"]
+        },
+        {
+          "title": "7.2 Advanced Numeric Patterns",
+          "duration": "26 min",
+          "link": "#",
+          "icon": "bi bi-arrow-up-right-circle",
+          "features": [
+            "Complex sequences",
+            "Pattern rules",
+            "Mathematical reasoning"
+          ]
+        },
+        {
+          "title": "7.3 Problem Solving Strategies",
+          "duration": "35 min",
+          "link": "#",
+          "icon": "bi bi-lightbulb",
+          "features": [
+            "Multi-step problems",
+            "Strategy selection",
+            "Mathematical communication"
+          ]
+        }
+      ],
+      "assessment_link": "#",
+      "assessment_questions": "40 questions"
     }
   ],
   "resources": [
     {
-      "title": "Worksheets",
-      "description": "Download printable worksheets with answer keys for each unit",
+      "title": "Number Operations Workbook",
+      "description": "400+ practice problems with step-by-step solutions",
       "link": "#",
-      "icon": "bi bi-journal-text",
+      "icon": "bi bi-journal-bookmark",
+      "color": "primary",
+      "button_text": "Download Workbook",
+      "button_icon": "bi bi-file-earmark-arrow-down"
+    },
+    {
+      "title": "Fraction & Decimal Calculator",
+      "description": "Interactive tool for fraction and decimal operations",
+      "link": "#",
+      "icon": "bi bi-calculator",
+      "color": "success",
+      "button_text": "Launch Calculator",
+      "button_icon": "bi bi-joystick"
+    },
+    {
+      "title": "Algebra Foundations Lab",
+      "description": "Digital algebra manipulatives and problem solver",
+      "link": "#",
+      "icon": "bi bi-cpu",
+      "color": "warning",
+      "button_text": "Start Lab",
+      "button_icon": "bi bi-play-circle"
+    },
+    {
+      "title": "Geometry Construction Toolkit",
+      "description": "Virtual compass and straightedge tools",
+      "link": "#",
+      "icon": "bi bi-pencil-square",
+      "color": "info",
+      "button_text": "Open Toolkit",
+      "button_icon": "bi bi-tools"
+    },
+    {
+      "title": "Data Analysis Simulator",
+      "description": "Interactive data collection and graphing tools",
+      "link": "#",
+      "icon": "bi bi-graph-up-arrow",
       "color": "danger",
-      "button_text": "Download All",
-      "button_icon": "bi bi-download"
+      "button_text": "Launch Simulator",
+      "button_icon": "bi bi-bar-chart-line"
+    },
+    {
+      "title": "Pattern Recognition Games",
+      "description": "Engaging activities for pattern identification",
+      "link": "#",
+      "icon": "bi bi-puzzle",
+      "color": "secondary",
+      "button_text": "Play Games",
+      "button_icon": "bi bi-controller"
     }
   ],
   "teacher_resources": [
     {
-      "title": "Lesson Slides",
-      "description": "Editable PowerPoint slides for each lesson",
+      "title": "Complete Assessment Suite",
+      "description": "Chapter tests, quizzes, and rubrics for all units",
+      "link": "#",
+      "icon": "bi bi-clipboard2-check",
+      "color": "primary",
+      "button_text": "Download Suite",
+      "button_icon": "bi bi-cloud-arrow-down"
+    },
+    {
+      "title": "Differentiated Learning Plans",
+      "description": "Tiered activities for diverse learning needs",
+      "link": "#",
+      "icon": "bi bi-journal-medical",
+      "color": "success",
+      "button_text": "Access Plans",
+      "button_icon": "bi bi-eye"
+    },
+    {
+      "title": "Interactive Lesson Presentations",
+      "description": "Engaging PowerPoint slides with animations",
       "link": "#",
       "icon": "bi bi-file-earmark-slides",
-      "color": "danger",
-      "button_text": "Download",
+      "color": "warning",
+      "button_text": "View Slides",
+      "button_icon": "bi bi-collection-play"
+    },
+    {
+      "title": "Hands-On Activity Guide",
+      "description": "Manipulative-based lessons and experiments",
+      "link": "#",
+      "icon": "bi bi-tools",
+      "color": "info",
+      "button_text": "Get Guide",
       "button_icon": "bi bi-download"
+    },
+    {
+      "title": "Parent Communication Kit",
+      "description": "Home support materials and progress trackers",
+      "link": "#",
+      "icon": "bi bi-house-heart",
+      "color": "danger",
+      "button_text": "Access Kit",
+      "button_icon": "bi bi-envelope"
+    },
+    {
+      "title": "Extension Challenge Problems",
+      "description": "Advanced problems for accelerated learners",
+      "link": "#",
+      "icon": "bi bi-mortarboard",
+      "color": "dark",
+      "button_text": "View Challenges",
+      "button_icon": "bi bi-trophy"
     }
   ],
   "cta": {
-    "title": "Need Help with Grade 7 Math?",
-    "subtitle": "Our expert tutors are available for one-on-one assistance",
+    "title": "Expert Grade 7 Math Support",
+    "subtitle": "Our qualified tutors provide personalized instruction tailored to Grade 7 standards",
     "link": "/video_conference",
-    "icon": "bi bi-camera-video",
-    "button_text": "Schedule a Tutoring Session"
+    "icon": "bi bi-person-video2",
+    "button_text": "Schedule Tutoring Session"
   }
 }
