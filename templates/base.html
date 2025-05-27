@@ -136,11 +136,11 @@
                   {% if 'user_id' in session %} {% set unread_count =
                   get_unread_announcements_count(session['user_id']) %} {% if
                   unread_count > 0 %}
-                  <span
+                  <!-- <span
                     id="desktopNotificationBadge"
                     class="badge bg-danger d-none d-lg-inline-block"
                     >{{ unread_count }}</span
-                  >
+                  > -->
                   {% endif %} {% endif %}
                   <!-- Mobile badge (shown only when menu is open) -->
                   <span
