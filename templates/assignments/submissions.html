@@ -3,10 +3,13 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="my-0 fs-4">Your Grades</h2>
     {# Prominent Average Score Top-Right #}
-    <div class="card text-white bg-danger py-1 px-2">
-      <h6 class="mb-0 fs-4">
-        Av. Mark: {% if average_score is not none %} {{ average_score }}% {% else %} N/A
-        {% endif %}
+    <div
+      class="card text-white py-1 px-2 {% if average_score is not none %}{% if average_score > 80 %}bg-success{% elif average_score >= 60 %}bg-warning{% else %}bg-danger{% endif %}{% endif %}"
+    >
+      <h6 class="mb-0 fs-6">
+        {# Display average score label #} Av Score: {# Display average score
+        with percentage or N/A if not available #} {% if average_score is not
+        none %}{{ average_score }}%{% else %}N/A{% endif %}
       </h6>
     </div>
   </div>
