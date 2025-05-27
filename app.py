@@ -163,7 +163,7 @@ def initialize_database():
             subject VARCHAR(100),
             total_marks INTEGER,
             deadline TIMESTAMP,
-            content JSONB, -- For interactive content or complex structures
+            content TEXT, -- For interactive content or complex structures
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     ''')
@@ -3092,18 +3092,18 @@ def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
 def inject_functions():
     return dict(get_unread_announcements_count=get_unread_announcements_count)
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)    
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)    
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
+    
+    # Initialize database
+    initialize_database()
  
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
