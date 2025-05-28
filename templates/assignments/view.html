@@ -376,11 +376,18 @@
 </style>
 
 <div class="container mt-4">
-  <h2>{{ assignment[1] }}</h2>
+  <!-- Main Assignment Header -->
+  <h1>{{ assignment.title }}</h1>
+
+  <!-- Subject and Type Badges -->
   <div class="row mb-3">
     <div class="col-md-6">
-      <span class="badge bg-primary">{{ assignment[3] }}</span>
-      <span class="badge bg-secondary">{{ assignment[4] }}</span>
+      <span class="badge bg-primary">{{ assignment.subject }}</span>
+      {% if assignment.content and assignment.content.questions %}
+      <span class="badge bg-info">Interactive Assignment</span>
+      {% else %}
+      <span class="badge bg-secondary">Project Submission</span>
+      {% endif %}
     </div>
     <div class="col-md-6 text-end">
       <span class="text-muted"
@@ -389,23 +396,128 @@
     </div>
   </div>
 
+  <!-- Description Card -->
   <div class="card mb-4">
     <div class="card-body">
-      <h5 class="card-title">Assignment Details</h5>
-      <div class="card-text">{{ assignment[2]|safe }}</div>
+      <h5 class="card-title">Assignment Description</h5>
+      <div class="card-text">{{ assignment.description|safe }}</div>
       <hr />
-      <p><strong>Total Marks:</strong> {{ assignment[5] }}</p>
+      <p><strong>Total Marks:</strong> {{ assignment.total_marks }}</p>
     </div>
   </div>
 
-  {% if assignment[7] %}
-  <!-- Check if there's interactive content -->
+  <!-- Special Sections for Different Assignment Types -->
+  {% if assignment.content %}
+  <!-- Introduction Section (for projects/coding assignments) -->
+  {% if assignment.content.introduction %}
   <div class="card mb-4">
-    <div class="card-body">{{ assignment[7]|safe }}</div>
+    <div class="card-header">
+      <h5>Introduction</h5>
+    </div>
+    <div class="card-body">{{ assignment.content.introduction|safe }}</div>
   </div>
-  {% endif %} {% if assignment.content and assignment.content.questions %}
+  {% endif %}
 
-  <!-- Display reading passage if it exists -->
+  <!-- Learning Objectives Section -->
+  {% if assignment.content.learning_objectives %}
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Learning Objectives</h5>
+    </div>
+    <div class="card-body">
+      <ul>
+        {% for objective in assignment.content.learning_objectives %}
+        <li>{{ objective }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Coding Tips Section -->
+  {% if assignment.content.coding_tips %}
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Coding Tips</h5>
+    </div>
+    <div class="card-body">
+      {% for tip in assignment.content.coding_tips %}
+      <div class="mb-3">
+        <strong>{{ tip.topic }}:</strong>
+        {{ tip.tip|safe }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Submission Guidelines -->
+  {% if assignment.content.submission_guidelines %}
+  <div class="card mb-4">
+    <div class="card-header bg-warning text-dark">
+      <h5>Submission Guidelines</h5>
+    </div>
+    <div class="card-body">
+      {% if assignment.content.submission_guidelines.format %}
+      <div class="mb-3">
+        <strong>Format:</strong>
+        {{ assignment.content.submission_guidelines.format|safe }}
+      </div>
+      {% endif %} {% if assignment.content.submission_guidelines.naming %}
+      <div class="mb-3">
+        <strong>Naming:</strong>
+        {{ assignment.content.submission_guidelines.naming|safe }}
+      </div>
+      {% endif %} {% if assignment.content.submission_guidelines.testing %}
+      <div class="mb-3">
+        <strong>Testing:</strong>
+        {{ assignment.content.submission_guidelines.testing|safe }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Grading Criteria -->
+  {% if assignment.content.grading_criteria %}
+  <div class="card mb-4">
+    <div class="card-header bg-info text-white">
+      <h5>Grading Criteria</h5>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        {% for criterion, value in assignment.content.grading_criteria.items()
+        %}
+        <li class="list-group-item">
+          <strong>{{ criterion|title }}:</strong> {{ value }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Resources Section -->
+  {% if assignment.content.resources %}
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h5>Resources</h5>
+    </div>
+    <div class="card-body">
+      <ul>
+        {% for resource in assignment.content.resources %}
+        <li>
+          {% if resource.startswith('http') %}
+          <a href="{{ resource }}" target="_blank">{{ resource }}</a>
+          {% else %} {{ resource }} {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Reading Passage (for comprehension assignments) -->
   {% if assignment.content.passage %}
   <div class="reading-passage">
     <div class="passage-title">Reading Passage</div>
@@ -423,12 +535,14 @@
   </div>
   {% endif %}
 
+  <!-- Questions Section -->
+  {% if assignment.content.questions %}
   <div class="interactive-assignment">
-    <h3><i class="fas fa-question-circle"></i> Interactive Questions</h3>
+    <h3><i class="fas fa-question-circle"></i> Questions</h3>
     <p class="text-muted mb-4">
-      Answer each question below based on the reading passage above. {% if
-      assignment.content.passage %}Use proper grammar and complete sentences
-      where applicable.{% endif %}
+      Answer each question below based on the assignment content. {% if
+      assignment.content.passage %} Use proper grammar and complete sentences
+      where applicable. {% endif %}
     </p>
 
     <!-- Progress indicator -->
@@ -443,17 +557,7 @@
     </div>
 
     <form method="POST" enctype="multipart/form-data" id="assignmentForm">
-      {% set comprehension_questions =
-      assignment.content.questions|selectattr('id', 'lessthan', 11)|list %} {%
-      set vocabulary_questions = assignment.content.questions|selectattr('id',
-      'greaterthan', 10)|list %}
-
-      <!-- Comprehension Questions Section -->
-      {% if comprehension_questions %}
-      <div class="question-section-header">
-        <i class="fas fa-book-reader"></i> Reading Comprehension Questions
-      </div>
-      {% for question in comprehension_questions %}
+      {% for question in assignment.content.questions %}
       <div
         class="question mb-4 p-3 border rounded"
         data-question-id="{{ question.id }}"
@@ -461,9 +565,9 @@
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div>
             <span class="question-number">Question {{ loop.index }}</span>
-            <span class="question-type-badge question-type-comprehension"
-              >Comprehension</span
-            >
+            <span class="question-type-badge">
+              {{ question.type|replace('_', ' ')|title }}
+            </span>
           </div>
           <span class="marks-badge">{{ question.marks }} marks</span>
         </div>
@@ -497,110 +601,6 @@
             class="form-control short-answer-input question-input"
             name="q_{{ question.id }}"
             rows="3"
-            placeholder="Enter your answer here using complete sentences..."
-          >
-{% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
-          >
-        </div>
-
-        {% elif question.type == 'true_false' %}
-        <div class="true-false-container">
-          <h6 class="text-muted mb-3">Select True or False:</h6>
-          <div class="true-false-options">
-            <div class="true-false-option">
-              <input class="form-check-input question-input" type="radio"
-              name="q_{{ question.id }}" id="q{{ question.id }}_true"
-              value="true" {% if submission and
-              submission.interactive_submission_data and
-              submission.interactive_submission_data[question.id|string].answer
-              == 'true' %} checked {% endif %}>
-              <label class="form-check-label" for="q{{ question.id }}_true">
-                <strong>✓ True</strong>
-              </label>
-            </div>
-            <div class="true-false-option">
-              <input class="form-check-input question-input" type="radio"
-              name="q_{{ question.id }}" id="q{{ question.id }}_false"
-              value="false" {% if submission and
-              submission.interactive_submission_data and
-              submission.interactive_submission_data[question.id|string].answer
-              == 'false' %} checked {% endif %}>
-              <label class="form-check-label" for="q{{ question.id }}_false">
-                <strong>✗ False</strong>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {% elif question.type == 'problem_solving' %}
-        <div class="answer-container">
-          <h6 class="text-muted mb-3">
-            Show your work and provide the final answer:
-          </h6>
-          <textarea
-            class="form-control question-input"
-            name="q_{{ question.id }}"
-            rows="5"
-            placeholder="Show your work step by step and provide the final answer..."
-          >
-{% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
-          >
-        </div>
-        {% endif %}
-      </div>
-      {% endfor %} {% endif %}
-
-      <!-- Vocabulary Questions Section -->
-      {% if vocabulary_questions %}
-      <div class="question-section-header">
-        <i class="fas fa-spell-check"></i> Vocabulary Questions
-      </div>
-      {% for question in vocabulary_questions %}
-      <div
-        class="question mb-4 p-3 border rounded"
-        data-question-id="{{ question.id }}"
-      >
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <div>
-            <span class="question-number"
-              >Question {{ loop.index + comprehension_questions|length }}</span
-            >
-            <span class="question-type-badge question-type-vocabulary"
-              >Vocabulary</span
-            >
-          </div>
-          <span class="marks-badge">{{ question.marks }} marks</span>
-        </div>
-        <div class="question-text">{{ question.question|safe }}</div>
-
-        {% if question.type == 'multiple_choice' %}
-        <div class="options-container">
-          <h6 class="text-muted mb-3">Select the correct answer:</h6>
-          {% for option in question.options %}
-          <div class="form-check">
-            <input class="form-check-input question-input" type="radio"
-            name="q_{{ question.id }}" id="q{{ question.id }}_{{ loop.index }}"
-            value="{{ option }}" {% if submission and
-            submission.interactive_submission_data and option ==
-            submission.interactive_submission_data[question.id|string].answer %}
-            checked {% endif %}>
-            <label
-              class="form-check-label"
-              for="q{{ question.id }}_{{ loop.index }}"
-            >
-              {{ option|safe }}
-            </label>
-          </div>
-          {% endfor %}
-        </div>
-
-        {% elif question.type == 'short_answer' %}
-        <div class="answer-container">
-          <h6 class="text-muted mb-3">Enter your answer:</h6>
-          <textarea
-            class="form-control short-answer-input question-input"
-            name="q_{{ question.id }}"
-            rows="2"
             placeholder="Enter your answer here..."
           >
 {% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
@@ -652,7 +652,7 @@
         </div>
         {% endif %}
       </div>
-      {% endfor %} {% endif %}
+      {% endfor %}
 
       <div class="card mt-4">
         <div class="card-header">
@@ -713,8 +713,7 @@
       </div>
     </form>
   </div>
-
-  {% else %}
+  {% endif %} {% else %}
   <!-- Fallback for non-interactive assignments -->
   <div class="card">
     <div class="card-header">
