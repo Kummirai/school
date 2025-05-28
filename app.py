@@ -1720,10 +1720,19 @@ def admin_dashboard():
     cur = conn.cursor()
     cur.execute("SELECT COUNT(*) FROM subscriptions WHERE is_active = TRUE")
     active_subscriptions_count = cur.fetchone()[0]
+    cur.execute('''
+            SELECT username, assignment_id, title, subject, deadline, total_marks, created_at
+                FROM assignments a
+                JOIN assignment_students au ON a.id = au.assignment_id
+                JOIN users u ON u.id = au.student_id;
+        ''')
+    assignments = cur.fetchall()
     cur.close()
     conn.close()
     
-    return render_template('admin/dashboard.html', 
+    print(assignments[0][0])
+    return render_template('admin/dashboard.html',
+                        assignments=assignments, 
                          student_count=len(students), 
                          category_count=len(categories),
                          upcoming_sessions=upcoming_sessions,
@@ -2241,27 +2250,26 @@ def view_assignment_submissions(assignment_id):
         cur.close()
         conn.close()
 
-@app.route('/dashboard')
+@app.route('/admin/dashboard')
 @login_required
 def dashboard():
     try:
-        # Get the user's class from session or database
-        user_class = session.get('class')  # Make sure this is set during login
-        
+    
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('''
-            SELECT id, title, subject, deadline, total_marks
-            FROM assignments
-            WHERE class = %s
-            ORDER BY deadline
-        ''', (user_class,))
+            SELECT username, assignment_id, title, subject, deadline, total_marks
+                FROM assignments a
+                JOIN assignment_students au ON a.id = au.assignment_id
+                JOIN users u ON u.id = au.student_id;
+        ''')
         assignments = cur.fetchall()
         cur.close()
         conn.close()
         
+        print(assignments)
         return render_template(
-            'dashboard.html',
+            'admin/dashboard.html',
             assignments=assignments,
             current_time=datetime.utcnow()
         )
@@ -3107,22 +3115,6 @@ def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
         return ""
     return value.strftime(format)
 
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    # Example counts (you might have these already or need to implement)
-    student_count = 0  # Replace with actual function call if available
-    category_count = 0 # Replace with actual function call if available
-
-    # Fetch all assignments
-    all_assignments = get_all_assignments() #
-
-    return render_template(
-        'dashboard.html',
-        student_count=student_count,
-        category_count=category_count,
-        assignments=all_assignments #
-    )
 
 @app.context_processor
 def inject_functions():
@@ -3131,18 +3123,18 @@ def inject_functions():
         get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
     )
     
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)    
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-    
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)    
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
+    
+    # Initialize database
+    initialize_database()
  
     
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
