@@ -1,67 +1,72 @@
-{% extends "admin/base.html" %}
-
-{% block content %}
+{% extends "admin/base.html" %} {% block content %}
 <div class="container mt-4">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('manage_assignments') }}">Assignments</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ assignment_title }}</li>
-        </ol>
-    </nav>
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{ url_for('manage_assignments') }}">Assignments</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ assignment_title }}
+      </li>
+    </ol>
+  </nav>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Submissions for {{ assignment_title }}</h2>
-        <a href="#" class="btn btn-outline-primary">
-            <i class="bi bi-download"></i> Export All
-        </a>
-    </div>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Submissions for {{ assignment_title }}</h2>
+    <a href="#" class="btn btn-outline-primary">
+      <i class="bi bi-download"></i> Export All
+    </a>
+  </div>
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Student</th>
-                        <th>Submitted</th>
-                        <th>Status</th>
-                        <th>Score</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for submission in submissions %}
-                    <tr>
-                        <td>{{ submission[0] }}</td> <!-- username -->
-                        <td>{{ submission[1].strftime('%Y-%m-%d %H:%M') }}</td> <!-- submitted_at -->
-                        <td>
-                            {% if submission[2] is not none %}
-                            <span class="badge bg-success">Graded</span>
-                            {% else %}
-                            <span class="badge bg-warning text-dark">Pending</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if submission[2] is not none %}
-                            {{ submission[2] }} <!-- marks_obtained -->
-                            {% else %}
-                            -
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{{ url_for('grade_submission', assignment_id=assignment_id, student_id=submission[3]) }}"
-                                class="btn btn-sm btn-primary" title="View/Grade">
-                                <i class="bi bi-eye"></i> Review
-                            </a>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="5" class="text-center">No submissions yet</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-hover table-nowrap">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Score</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for submission in submissions %}
+          <tr>
+            <td>{{ submission[0] }}</td>
+            <!-- username -->
+            <td>{{ submission[1].strftime('%Y-%m-%d %H:%M') }}</td>
+            <!-- submitted_at -->
+            <td>
+              {% if submission[2] is not none %}
+              <span class="badge bg-success">Graded</span>
+              {% else %}
+              <span class="badge bg-warning text-dark">Pending</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if submission[2] is not none %} {{ submission[2] }}
+              <!-- marks_obtained -->
+              {% else %} - {% endif %}
+            </td>
+            <td>
+              <a
+                href="{{ url_for('grade_submission', assignment_id=assignment_id, student_id=submission[3]) }}"
+                class="btn btn-sm btn-primary"
+                title="View/Grade"
+              >
+                <i class="bi bi-eye"></i> Review
+              </a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center">No submissions yet</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 {% endblock %}

@@ -67,6 +67,11 @@ footer {
   padding-right: 1.5rem;
 }
 
+.table-nowrap th,
+.table-nowrap td {
+  white-space: nowrap;
+}
+
 /* For medium-large screens (992px - 1365px) */
 @media (min-width: 992px) and (max-width: 1500px) {
   /* Hide nav item text by default */
