@@ -285,6 +285,26 @@ def initialize_database():
     conn.close()
 
 #Helpers
+def get_unsubmitted_assignments_count(user_id):
+    """Get count of assignments that haven't been submitted yet"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT COUNT(a.id)
+            FROM assignments a
+            JOIN assignment_students au ON a.id = au.assignment_id
+            LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = %s
+            WHERE au.student_id = %s AND s.id IS NULL
+        ''', (user_id, user_id))
+        return cur.fetchone()[0]
+    except Exception as e:
+        print(f"Error getting unsubmitted assignments count: {e}")
+        return 0
+    finally:
+        cur.close()
+        conn.close()
+
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -3087,23 +3107,25 @@ def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
         return ""
     return value.strftime(format)
 
-
 @app.context_processor
 def inject_functions():
-    return dict(get_unread_announcements_count=get_unread_announcements_count)
+    return dict(
+        get_unread_announcements_count=get_unread_announcements_count,
+        get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
+    )
     
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)    
-
 if __name__ == '__main__':
-    # Enable Flask debug features
-    app.debug = True  # Enables auto-reloader and debugger
-    
-    # Initialize database
+    from waitress import serve
     initialize_database()
+    serve(app, host="0.0.0.0", port=5000)    
+
+# if __name__ == '__main__':
+#     # Enable Flask debug features
+#     app.debug = True  # Enables auto-reloader and debugger
+    
+#     # Initialize database
+#     initialize_database()
  
     
-    # Run the development server
-    app.run(host='0.0.0.0', port=5000)
+#     # Run the development server
+#     app.run(host='0.0.0.0', port=5000)
