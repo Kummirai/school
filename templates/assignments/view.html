@@ -194,6 +194,185 @@
     font-size: 0.8em;
     float: right;
   }
+
+  /* New styles for reading passage */
+  .reading-passage {
+    background: #ffffff;
+    border: 2px solid #007acc;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .reading-passage::before {
+    content: "📖";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: #007acc;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+
+  .passage-title {
+    color: #007acc;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+  }
+
+  .passage-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: justify;
+    font-family: "Georgia", serif;
+  }
+
+  .passage-content p {
+    margin-bottom: 15px;
+    text-indent: 30px;
+  }
+
+  .passage-instructions {
+    background: #e8f4fd;
+    border: 1px solid #007acc;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #2d3748;
+  }
+
+  .passage-instructions::before {
+    content: "📋 ";
+    font-weight: bold;
+  }
+
+  /* Question type indicators */
+  .question-type-badge {
+    background: #6c757d;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    margin-left: 10px;
+  }
+
+  .question-type-comprehension {
+    background: #17a2b8;
+  }
+
+  .question-type-vocabulary {
+    background: #fd7e14;
+  }
+
+  .question-type-true-false {
+    background: #6f42c1;
+  }
+
+  .question-type-short-answer {
+    background: #20c997;
+  }
+
+  /* Section headers for different question types */
+  .question-section-header {
+    background: linear-gradient(135deg, #007acc, #0056b3);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 30px 0 20px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .question-section-header i {
+    margin-right: 10px;
+  }
+
+  /* Enhanced form styling */
+  .short-answer-input {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .true-false-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .true-false-option {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .true-false-option:hover {
+    border-color: #007acc;
+    background: #f8f9fa;
+  }
+
+  .true-false-option input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007acc;
+  }
+
+  /* Progress indicator */
+  .progress-container {
+    background: #e9ecef;
+    border-radius: 10px;
+    height: 8px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    background: linear-gradient(90deg, #007acc, #0056b3);
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+
+  /* Responsive design improvements */
+  @media (max-width: 768px) {
+    .reading-passage {
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+    .passage-content {
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .true-false-options {
+      flex-direction: column;
+    }
+
+    .true-false-option {
+      min-width: auto;
+    }
+  }
 </style>
 
 <div class="container mt-4">
@@ -225,17 +404,67 @@
     <div class="card-body">{{ assignment[7]|safe }}</div>
   </div>
   {% endif %} {% if assignment.content and assignment.content.questions %}
+
+  <!-- Display reading passage if it exists -->
+  {% if assignment.content.passage %}
+  <div class="reading-passage">
+    <div class="passage-title">Reading Passage</div>
+    <div class="passage-instructions">
+      <strong>Instructions:</strong> Read the following passage carefully and
+      then answer the questions that follow. Pay attention to details,
+      vocabulary, and the overall meaning of the text.
+    </div>
+    <div class="passage-content">
+      {% for paragraph in assignment.content.passage.split('\n\n') %} {% if
+      paragraph.strip() %}
+      <p>{{ paragraph|safe }}</p>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
   <div class="interactive-assignment">
-    <h3><i class="fas fa-calculator"></i> Interactive Questions</h3>
+    <h3><i class="fas fa-question-circle"></i> Interactive Questions</h3>
     <p class="text-muted mb-4">
-      Answer each question below. Use proper fraction notation where applicable.
+      Answer each question below based on the reading passage above. {% if
+      assignment.content.passage %}Use proper grammar and complete sentences
+      where applicable.{% endif %}
     </p>
 
-    <form method="POST" enctype="multipart/form-data">
-      {% for question in assignment.content.questions %}
-      <div class="question mb-4 p-3 border rounded">
+    <!-- Progress indicator -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+    <div class="text-center mb-4">
+      <small class="text-muted"
+        >Progress: <span id="progressText">0</span> of {{
+        assignment.content.questions|length }} questions answered</small
+      >
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" id="assignmentForm">
+      {% set comprehension_questions =
+      assignment.content.questions|selectattr('id', 'lessthan', 11)|list %} {%
+      set vocabulary_questions = assignment.content.questions|selectattr('id',
+      'greaterthan', 10)|list %}
+
+      <!-- Comprehension Questions Section -->
+      {% if comprehension_questions %}
+      <div class="question-section-header">
+        <i class="fas fa-book-reader"></i> Reading Comprehension Questions
+      </div>
+      {% for question in comprehension_questions %}
+      <div
+        class="question mb-4 p-3 border rounded"
+        data-question-id="{{ question.id }}"
+      >
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <span class="question-number">Question {{ loop.index }}</span>
+          <div>
+            <span class="question-number">Question {{ loop.index }}</span>
+            <span class="question-type-badge question-type-comprehension"
+              >Comprehension</span
+            >
+          </div>
           <span class="marks-badge">{{ question.marks }} marks</span>
         </div>
         <div class="question-text">{{ question.question|safe }}</div>
@@ -245,11 +474,12 @@
           <h6 class="text-muted mb-3">Select the correct answer:</h6>
           {% for option in question.options %}
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="q_{{ question.id
-            }}" id="q{{ question.id }}_{{ loop.index }}" value="{{ option }}" {%
-            if submission and submission.interactive_submission_data and option
-            == submission.interactive_submission_data[question.id|string].answer
-            %} checked {% endif %}>
+            <input class="form-check-input question-input" type="radio"
+            name="q_{{ question.id }}" id="q{{ question.id }}_{{ loop.index }}"
+            value="{{ option }}" {% if submission and
+            submission.interactive_submission_data and option ==
+            submission.interactive_submission_data[question.id|string].answer %}
+            checked {% endif %}>
             <label
               class="form-check-label"
               for="q{{ question.id }}_{{ loop.index }}"
@@ -264,10 +494,10 @@
         <div class="answer-container">
           <h6 class="text-muted mb-3">Enter your answer:</h6>
           <textarea
-            class="form-control"
+            class="form-control short-answer-input question-input"
             name="q_{{ question.id }}"
             rows="3"
-            placeholder="Enter your answer here using proper fraction notation..."
+            placeholder="Enter your answer here using complete sentences..."
           >
 {% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
           >
@@ -276,25 +506,29 @@
         {% elif question.type == 'true_false' %}
         <div class="true-false-container">
           <h6 class="text-muted mb-3">Select True or False:</h6>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="q_{{ question.id
-            }}" id="q{{ question.id }}_true" value="true" {% if submission and
-            submission.interactive_submission_data and
-            submission.interactive_submission_data[question.id|string].answer ==
-            'true' %} checked {% endif %}>
-            <label class="form-check-label" for="q{{ question.id }}_true">
-              <strong>True</strong>
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="q_{{ question.id
-            }}" id="q{{ question.id }}_false" value="false" {% if submission and
-            submission.interactive_submission_data and
-            submission.interactive_submission_data[question.id|string].answer ==
-            'false' %} checked {% endif %}>
-            <label class="form-check-label" for="q{{ question.id }}_false">
-              <strong>False</strong>
-            </label>
+          <div class="true-false-options">
+            <div class="true-false-option">
+              <input class="form-check-input question-input" type="radio"
+              name="q_{{ question.id }}" id="q{{ question.id }}_true"
+              value="true" {% if submission and
+              submission.interactive_submission_data and
+              submission.interactive_submission_data[question.id|string].answer
+              == 'true' %} checked {% endif %}>
+              <label class="form-check-label" for="q{{ question.id }}_true">
+                <strong>✓ True</strong>
+              </label>
+            </div>
+            <div class="true-false-option">
+              <input class="form-check-input question-input" type="radio"
+              name="q_{{ question.id }}" id="q{{ question.id }}_false"
+              value="false" {% if submission and
+              submission.interactive_submission_data and
+              submission.interactive_submission_data[question.id|string].answer
+              == 'false' %} checked {% endif %}>
+              <label class="form-check-label" for="q{{ question.id }}_false">
+                <strong>✗ False</strong>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -304,7 +538,7 @@
             Show your work and provide the final answer:
           </h6>
           <textarea
-            class="form-control"
+            class="form-control question-input"
             name="q_{{ question.id }}"
             rows="5"
             placeholder="Show your work step by step and provide the final answer..."
@@ -314,7 +548,111 @@
         </div>
         {% endif %}
       </div>
-      {% endfor %}
+      {% endfor %} {% endif %}
+
+      <!-- Vocabulary Questions Section -->
+      {% if vocabulary_questions %}
+      <div class="question-section-header">
+        <i class="fas fa-spell-check"></i> Vocabulary Questions
+      </div>
+      {% for question in vocabulary_questions %}
+      <div
+        class="question mb-4 p-3 border rounded"
+        data-question-id="{{ question.id }}"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <span class="question-number"
+              >Question {{ loop.index + comprehension_questions|length }}</span
+            >
+            <span class="question-type-badge question-type-vocabulary"
+              >Vocabulary</span
+            >
+          </div>
+          <span class="marks-badge">{{ question.marks }} marks</span>
+        </div>
+        <div class="question-text">{{ question.question|safe }}</div>
+
+        {% if question.type == 'multiple_choice' %}
+        <div class="options-container">
+          <h6 class="text-muted mb-3">Select the correct answer:</h6>
+          {% for option in question.options %}
+          <div class="form-check">
+            <input class="form-check-input question-input" type="radio"
+            name="q_{{ question.id }}" id="q{{ question.id }}_{{ loop.index }}"
+            value="{{ option }}" {% if submission and
+            submission.interactive_submission_data and option ==
+            submission.interactive_submission_data[question.id|string].answer %}
+            checked {% endif %}>
+            <label
+              class="form-check-label"
+              for="q{{ question.id }}_{{ loop.index }}"
+            >
+              {{ option|safe }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% elif question.type == 'short_answer' %}
+        <div class="answer-container">
+          <h6 class="text-muted mb-3">Enter your answer:</h6>
+          <textarea
+            class="form-control short-answer-input question-input"
+            name="q_{{ question.id }}"
+            rows="2"
+            placeholder="Enter your answer here..."
+          >
+{% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
+          >
+        </div>
+
+        {% elif question.type == 'true_false' %}
+        <div class="true-false-container">
+          <h6 class="text-muted mb-3">Select True or False:</h6>
+          <div class="true-false-options">
+            <div class="true-false-option">
+              <input class="form-check-input question-input" type="radio"
+              name="q_{{ question.id }}" id="q{{ question.id }}_true"
+              value="true" {% if submission and
+              submission.interactive_submission_data and
+              submission.interactive_submission_data[question.id|string].answer
+              == 'true' %} checked {% endif %}>
+              <label class="form-check-label" for="q{{ question.id }}_true">
+                <strong>✓ True</strong>
+              </label>
+            </div>
+            <div class="true-false-option">
+              <input class="form-check-input question-input" type="radio"
+              name="q_{{ question.id }}" id="q{{ question.id }}_false"
+              value="false" {% if submission and
+              submission.interactive_submission_data and
+              submission.interactive_submission_data[question.id|string].answer
+              == 'false' %} checked {% endif %}>
+              <label class="form-check-label" for="q{{ question.id }}_false">
+                <strong>✗ False</strong>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        {% elif question.type == 'problem_solving' %}
+        <div class="answer-container">
+          <h6 class="text-muted mb-3">
+            Show your work and provide the final answer:
+          </h6>
+          <textarea
+            class="form-control question-input"
+            name="q_{{ question.id }}"
+            rows="5"
+            placeholder="Show your work step by step and provide the final answer..."
+          >
+{% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[question.id|string].answer }}{% endif %}</textarea
+          >
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %} {% endif %}
 
       <div class="card mt-4">
         <div class="card-header">
@@ -433,7 +771,6 @@
   {% endif %}
 </div>
 
-{% if assignment[7] %}
 <script>
   function validateListExercises() {
     // This function would validate the interactive exercises
@@ -441,8 +778,48 @@
     alert("Validation would happen here in a real implementation");
   }
 
-  // Add some interactivity for better UX
+  // Enhanced interactivity for better UX
   document.addEventListener("DOMContentLoaded", function () {
+    // Progress tracking
+    const questionInputs = document.querySelectorAll(".question-input");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const totalQuestions = document.querySelectorAll(".question").length;
+
+    function updateProgress() {
+      let answeredQuestions = 0;
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach((question) => {
+        const inputs = question.querySelectorAll(".question-input");
+        let hasAnswer = false;
+
+        inputs.forEach((input) => {
+          if (input.type === "radio" && input.checked) {
+            hasAnswer = true;
+          } else if (input.type === "textarea" && input.value.trim() !== "") {
+            hasAnswer = true;
+          }
+        });
+
+        if (hasAnswer) {
+          answeredQuestions++;
+          question.style.borderLeft = "4px solid #28a745";
+        } else {
+          question.style.borderLeft = "4px solid #dee2e6";
+        }
+      });
+
+      const percentage =
+        totalQuestions > 0 ? (answeredQuestions / totalQuestions) * 100 : 0;
+      if (progressBar) {
+        progressBar.style.width = percentage + "%";
+      }
+      if (progressText) {
+        progressText.textContent = answeredQuestions;
+      }
+    }
+
     // Highlight selected radio buttons
     const radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons.forEach((radio) => {
@@ -452,21 +829,72 @@
           `input[name="${this.name}"]`
         );
         siblings.forEach((sibling) => {
-          sibling.closest(".form-check").style.background = "#f8f9fa";
+          const parent = sibling.closest(".form-check, .true-false-option");
+          if (parent) {
+            parent.style.background = "#f8f9fa";
+            parent.style.borderColor = "#dee2e6";
+          }
         });
         // Highlight selected
-        this.closest(".form-check").style.background = "#e3f2fd";
+        const parent = this.closest(".form-check, .true-false-option");
+        if (parent) {
+          parent.style.background = "#e3f2fd";
+          parent.style.borderColor = "#007acc";
+        }
+        updateProgress();
       });
     });
 
-    // Auto-resize textareas
-    const textareas = document.querySelectorAll("textarea");
+    // Auto-resize textareas and track progress
+    const textareas = document.querySelectorAll("textarea.question-input");
     textareas.forEach((textarea) => {
       textarea.addEventListener("input", function () {
         this.style.height = "auto";
         this.style.height = this.scrollHeight + "px";
+        updateProgress();
+      });
+
+      // Trigger initial resize for pre-filled content
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
+
+    // Initial progress update
+    updateProgress();
+
+    // Form validation before submit
+    const form = document.getElementById("assignmentForm");
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        const answeredQuestions = document.querySelectorAll(
+          '.question[style*="border-left: 4px solid rgb(40, 167, 69)"]'
+        ).length;
+        if (answeredQuestions === 0) {
+          e.preventDefault();
+          alert("Please answer at least one question before submitting.");
+          return false;
+        }
+
+        // Optional: Confirm submission
+        if (
+          !confirm(
+            `You have answered ${answeredQuestions} out of ${totalQuestions} questions. Do you want to submit?`
+          )
+        ) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    }
+
+    // Smooth scrolling for question navigation
+    const questions = document.querySelectorAll(".question");
+    questions.forEach((question, index) => {
+      question.addEventListener("click", function () {
+        this.scrollIntoView({ behavior: "smooth", block: "center" });
       });
     });
   });
 </script>
-{% endif %} {% endblock %}
+
+{% endblock %}
