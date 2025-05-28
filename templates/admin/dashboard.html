@@ -101,9 +101,9 @@ block content %}
       <table class="table table-striped table-hover">
         <thead class="table-dark">
           <tr>
+            <th>Username</th>
             <th>Title</th>
             <th>Subject</th>
-            <th>Class</th>
             <th>Deadline</th>
             <th>Total Marks</th>
             <th>Created</th>
@@ -112,18 +112,18 @@ block content %}
           </tr>
         </thead>
         <tbody>
-          {% for assignment in assignments %}
+          {%if assignments%} {% for assignment in assignments %}
           <tr>
-            <td>{{ assignment.title }}</td>
-            <td>{{ assignment.subject }}</td>
-            <td>{{ assignment.class }}</td>
+            <td>{{ assignment[0] }}</td>
+            <td>{{ assignment[2] }}</td>
+            <td>{{ assignment[3] }}</td>
             <td>
-              {% if assignment.deadline %} {{
-              assignment.deadline.strftime('%Y-%m-%d %H:%M') }} {% else %} No
+              {% if assignment[4] %} {{
+              assignment[4].strftime('%Y-%m-%d %H:%M') }} {% else %} No
               deadline {% endif %}
             </td>
-            <td>{{ assignment.total_marks }}</td>
-            <td>{{ assignment.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>{{ assignment[5] }}</td>
+            <td>{{ assignment[6]}}</td>
             <td>{{ assignment.submission_count }}</td>
             <td>
               <a
@@ -141,7 +141,7 @@ block content %}
           <tr>
             <td colspan="8" class="text-center">No assignments found</td>
           </tr>
-          {% endfor %}
+          {% endfor %} {%endif%}
         </tbody>
       </table>
     </div>

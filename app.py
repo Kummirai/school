@@ -3107,6 +3107,23 @@ def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
         return ""
     return value.strftime(format)
 
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    # Example counts (you might have these already or need to implement)
+    student_count = 0  # Replace with actual function call if available
+    category_count = 0 # Replace with actual function call if available
+
+    # Fetch all assignments
+    all_assignments = get_all_assignments() #
+
+    return render_template(
+        'dashboard.html',
+        student_count=student_count,
+        category_count=category_count,
+        assignments=all_assignments #
+    )
+
 @app.context_processor
 def inject_functions():
     return dict(
