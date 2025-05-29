@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %}Edit Parent{% endblock %} {% block
+content %}
+<div class="container mt-4">
+  <h2>Edit Parent: {{ parent.username }}</h2>
+
+  <form method="POST">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        value="{{ parent.username }}"
+        {#
+        Pre-populate
+        with
+        current
+        username
+        #}
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label"
+        >New Password (leave blank to keep current)</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Linked Students</label>
+      <div class="card">
+        <div class="card-body" style="max-height: 300px; overflow-y: auto">
+          {% for student in all_students %} {# Loop through ALL students #}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="student_{{
+            student.id }}" name="student_ids" value="{{ student.id }}" {% if
+            student.id in linked_students %}checked{% endif %} {# IMPORTANT:
+            Check if student is already linked #} />
+            <label class="form-check-label" for="student_{{ student.id }}">
+              {{ student.username }} {# Assuming student object has a username
+              #}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Parent</button>
+    <a href="{{ url_for('manage_parents') }}" class="btn btn-secondary"
+      >Cancel</a
+    >
+  </form>
+</div>
+{% endblock %}

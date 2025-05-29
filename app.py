@@ -11,6 +11,7 @@ from flask_login import current_user, login_required
 import json
 import sympy
 from sympy import symbols, Eq, solve, simplify
+import psycopg2.extras
 
 
 # Load environment variables
@@ -293,7 +294,28 @@ def initialize_database():
     conn.close()
 
 # Helpers
+def get_parents():
+    """Get all parent users"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT id, username FROM users WHERE role = 'parent' ORDER BY username")
+        return [{'id': row[0], 'username': row[1]} for row in cur.fetchall()]
+    finally:
+        cur.close()
+        conn.close()
 
+def get_parent_by_id(parent_id):
+    """Get parent user by ID"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+        row = cur.fetchone()
+        return {'id': row[0], 'username': row[1]} if row else None
+    finally:
+        cur.close()
+        conn.close()
 
 def get_students_for_parent(parent_id):
     """Get all students linked to a parent"""
@@ -319,7 +341,7 @@ def get_student_performance_stats(student_id):
     try:
         # Get assignment stats
         cur.execute('''
-            SELECT 
+            SELECT
                 COUNT(*) as total_assignments,
                 COUNT(CASE WHEN s.id IS NOT NULL THEN 1 END) as submitted_count,
                 AVG(s.grade::float/a.total_marks*100) as avg_score_percentage,
@@ -328,13 +350,27 @@ def get_student_performance_stats(student_id):
             FROM assignments a
             JOIN assignment_students au ON a.id = au.assignment_id
             LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = %s
-            WHERE au.user_id = %s
-        ''', (student_id, student_id))
+            WHERE au.student_id = %s
+        ''', (student_id, student_id)) # <--- Changed this line: pass student_id twice!
         assignment_stats = cur.fetchone()
+
+        # Handle the case where no assignments are found for the student
+        if assignment_stats and assignment_stats[0] is not None and assignment_stats[0] > 0:
+            total_assignments = assignment_stats[0]
+            submitted_count = assignment_stats[1]
+            avg_assignment_score = round(assignment_stats[2], 2) if assignment_stats[2] is not None else None
+            best_assignment_score = round(assignment_stats[3], 2) if assignment_stats[3] is not None else None
+            worst_assignment_score = round(assignment_stats[4], 2) if assignment_stats[4] is not None else None
+        else:
+            total_assignments = 0
+            submitted_count = 0
+            avg_assignment_score = None
+            best_assignment_score = None
+            worst_assignment_score = None
 
         # Get practice stats
         cur.execute('''
-            SELECT 
+            SELECT
                 COUNT(*) as total_practices,
                 AVG(score::float/total_questions*100) as avg_score_percentage,
                 MAX(score::float/total_questions*100) as best_score,
@@ -344,9 +380,20 @@ def get_student_performance_stats(student_id):
         ''', (student_id,))
         practice_stats = cur.fetchone()
 
+        if practice_stats and practice_stats[0] is not None and practice_stats[0] > 0:
+            total_practices = practice_stats[0]
+            avg_practice_score = round(practice_stats[1], 2) if practice_stats[1] is not None else None
+            best_practice_score = round(practice_stats[2], 2) if practice_stats[2] is not None else None
+            worst_practice_score = round(practice_stats[3], 2) if practice_stats[3] is not None else None
+        else:
+            total_practices = 0
+            avg_practice_score = None
+            best_practice_score = None
+            worst_practice_score = None
+
         # Get exam stats
         cur.execute('''
-            SELECT 
+            SELECT
                 COUNT(*) as total_exams,
                 AVG(score) as avg_score_percentage,
                 MAX(score) as best_score,
@@ -356,31 +403,41 @@ def get_student_performance_stats(student_id):
         ''', (student_id,))
         exam_stats = cur.fetchone()
 
+        if exam_stats and exam_stats[0] is not None and exam_stats[0] > 0:
+            total_exams = exam_stats[0]
+            avg_exam_score = round(exam_stats[1], 2) if exam_stats[1] is not None else None
+            best_exam_score = round(exam_stats[2], 2) if exam_stats[2] is not None else None
+            worst_exam_score = round(exam_stats[3], 2) if exam_stats[3] is not None else None
+        else:
+            total_exams = 0
+            avg_exam_score = None
+            best_exam_score = None
+            worst_exam_score = None
+
         return {
             'assignments': {
-                'total': assignment_stats[0],
-                'submitted': assignment_stats[1],
-                'avg_score': round(assignment_stats[2], 2) if assignment_stats[2] else None,
-                'best_score': round(assignment_stats[3], 2) if assignment_stats[3] else None,
-                'worst_score': round(assignment_stats[4], 2) if assignment_stats[4] else None
+                'total': total_assignments,
+                'submitted': submitted_count,
+                'avg_score': avg_assignment_score,
+                'best_score': best_assignment_score,
+                'worst_score': worst_assignment_score
             },
             'practice': {
-                'total': practice_stats[0],
-                'avg_score': round(practice_stats[1], 2) if practice_stats[1] else None,
-                'best_score': round(practice_stats[2], 2) if practice_stats[2] else None,
-                'worst_score': round(practice_stats[3], 2) if practice_stats[3] else None
+                'total': total_practices,
+                'avg_score': avg_practice_score,
+                'best_score': best_practice_score,
+                'worst_score': worst_practice_score
             },
             'exams': {
-                'total': exam_stats[0],
-                'avg_score': round(exam_stats[1], 2) if exam_stats[1] else None,
-                'best_score': round(exam_stats[2], 2) if exam_stats[2] else None,
-                'worst_score': round(exam_stats[3], 2) if exam_stats[3] else None
+                'total': total_exams,
+                'avg_score': avg_exam_score,
+                'best_score': best_exam_score,
+                'worst_score': worst_exam_score
             }
         }
     finally:
         cur.close()
         conn.close()
-
 
 def get_unsubmitted_assignments_count(user_id):
     """Get count of assignments that haven't been submitted yet"""
@@ -1162,15 +1219,27 @@ def get_videos_by_category(category_id):
     ]
     return videos
 
-
 def get_students():
     conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT id, username FROM users WHERE role = %s', ('student',))
-    students = cur.fetchall()
-    cur.close()
-    conn.close()
-    return students
+    # Use DictCursor to fetch rows as dictionary-like objects.
+    # This allows you to access columns by name (e.g., student['id'] or student.id).
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        # Ensure your SELECT statement includes 'id' and 'username'
+        cur.execute("SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
+        students = cur.fetchall()
+        # Each item in 'students' will now be a DictRow object, which behaves like a dictionary
+        # and also supports attribute access (e.g., student.id, student.username).
+        return students
+    except Exception as e:
+        # It's good practice to log or print errors for debugging
+        print(f"Error fetching students in get_students(): {e}")
+        return [] # Return an empty list to prevent further errors in the template
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 
 def add_student_to_db(username, password):  # Changed from add_student
@@ -1843,7 +1912,11 @@ def login():
             session['class'] = user.get(
                 'class', 'default_class')  # Add this line
             flash('Logged in successfully!', 'success')
-            return redirect(request.args.get('next') or url_for('home'))
+
+            if user['role'] == 'parent':
+                return redirect(url_for('parent_dashboard'))
+            else:
+                return redirect(request.args.get('next') or url_for('home'))
         else:
             flash('Invalid username or password', 'danger')
 
@@ -3379,44 +3452,53 @@ def list_whiteboards():
     finally:
         cur.close()
         conn.close()
-
-
 @app.route('/parent/dashboard')
 @login_required
 def parent_dashboard():
     if session.get('role') != 'parent':
         abort(403)
-
+    
     students = get_students_for_parent(session['user_id'])
     if not students:
         flash('No students linked to your account', 'warning')
-        return render_template('parent/dashboard.html', students=[], selected_student=None)
-
+        return render_template('parent/dashboard.html', 
+                            students=[], 
+                            selected_student=None,
+                            stats=None,
+                            assignments=[],
+                            submissions=[],
+                            bookings=[],
+                            announcements=[])
+    
     # Default to first student
     selected_student_id = request.args.get('student_id', students[0]['id'])
-    selected_student = next(
-        (s for s in students if s['id'] == int(selected_student_id)), None)
-
+    try:
+        selected_student_id = int(selected_student_id)
+    except (ValueError, TypeError):
+        flash('Invalid student selected', 'danger')
+        return redirect(url_for('parent_dashboard'))
+    
+    selected_student = next((s for s in students if s['id'] == selected_student_id), None)
+    
     if not selected_student:
         flash('Invalid student selected', 'danger')
         return redirect(url_for('parent_dashboard'))
-
+    
     # Get all data for the selected student
     assignments = get_assignments_for_user(selected_student_id)
     submissions = get_student_submissions(selected_student_id)
     bookings = get_student_bookings(selected_student_id)
     stats = get_student_performance_stats(selected_student_id)
     announcements = get_user_announcements(selected_student_id, limit=5)
-
+    
     return render_template('parent/dashboard.html',
-                           students=students,
-                           selected_student=selected_student,
-                           assignments=assignments,
-                           submissions=submissions,
-                           bookings=bookings,
-                           stats=stats,
-                           announcements=announcements)
-
+                         students=students,
+                         selected_student=selected_student,
+                         assignments=assignments,
+                         submissions=submissions,
+                         bookings=bookings,
+                         stats=stats,
+                         announcements=announcements)
 
 @app.route('/parent/assignments/<int:student_id>')
 @login_required
@@ -3451,76 +3533,6 @@ def parent_view_submissions(student_id):
                            student_id=student_id,
                            submissions=submissions)
 
-
-@app.route('/admin/parents')
-@login_required
-@admin_required
-def manage_parents():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        # Get all parents
-        cur.execute("SELECT id, username FROM users WHERE role = 'parent'")
-        parents = [{'id': row[0], 'username': row[1]}
-                   for row in cur.fetchall()]
-
-        # Get all students
-        cur.execute("SELECT id, username FROM users WHERE role = 'student'")
-        students = [{'id': row[0], 'username': row[1]}
-                    for row in cur.fetchall()]
-
-        # Get existing relationships
-        cur.execute("SELECT parent_id, student_id FROM parent_students")
-        relationships = {(row[0], row[1]) for row in cur.fetchall()}
-
-        return render_template('admin/parents.html',
-                               parents=parents,
-                               students=students,
-                               relationships=relationships)
-    finally:
-        cur.close()
-        conn.close()
-
-
-@app.route('/admin/parents/link', methods=['POST'])
-@login_required
-@admin_required
-def link_parent_student():
-    parent_id = request.form.get('parent_id')
-    student_id = request.form.get('student_id')
-    action = request.form.get('action')  # 'link' or 'unlink'
-
-    if not all([parent_id, student_id, action]):
-        flash('Missing required parameters', 'danger')
-        return redirect(url_for('manage_parents'))
-
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        if action == 'link':
-            cur.execute('''
-                INSERT INTO parent_students (parent_id, student_id)
-                VALUES (%s, %s)
-                ON CONFLICT DO NOTHING
-            ''', (parent_id, student_id))
-        else:
-            cur.execute('''
-                DELETE FROM parent_students
-                WHERE parent_id = %s AND student_id = %s
-            ''', (parent_id, student_id))
-
-        conn.commit()
-        flash('Relationship updated successfully', 'success')
-    except Exception as e:
-        conn.rollback()
-        flash(f'Error updating relationship: {str(e)}', 'danger')
-    finally:
-        cur.close()
-        conn.close()
-
-    return redirect(url_for('manage_parents'))
-
-
 @app.route('/parent/sessions/<int:student_id>')
 @login_required
 def parent_view_sessions(student_id):
@@ -3538,6 +3550,338 @@ def parent_view_sessions(student_id):
                            student_id=student_id,
                            bookings=bookings,
                            upcoming_sessions=upcoming_sessions)
+
+# Add these routes to app.py
+@app.route('/admin/parents/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_parent():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # student_ids will be a list of strings (e.g., ['1', '2', '5'])
+        student_ids_str_list = request.form.getlist('student_ids')
+
+        existing_user = get_user_by_username(username)
+        if existing_user:
+            flash('Username already exists', 'danger')
+            # If username exists, you still need to render the form with students
+            students = get_students()
+            return render_template('admin/add_parent.html', students=students)
+        else:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            try:
+                # Create parent user
+                cur.execute('''
+                    INSERT INTO users (username, password, role) VALUES (%s, %s, %s) RETURNING id
+                ''', (username, generate_password_hash(password), 'parent'))
+                parent_id = cur.fetchone()[0]
+                
+                # Link parent to students
+                if student_ids_str_list: # Only iterate if at least one student was selected
+                    for student_id_str in student_ids_str_list:
+                        # --- IMPORTANT: Validate and convert to integer ---
+                        if not student_id_str.strip(): # Check for empty string after stripping whitespace
+                            flash('Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
+                            continue # Skip to the next student_id in the list
+                        
+                        try:
+                            student_id_int = int(student_id_str) # Convert the string to an integer
+                            cur.execute(
+                                'INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)',
+                                (parent_id, student_id_int)) # Use the integer version
+                        except ValueError:
+                            # This catches cases like 'abc' or malformed data in value attribute
+                            flash(f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
+                            continue # Skip to the next student_id in the list
+                else:
+                    # Optional: If no students were selected, you might want to flash a message
+                    # This message won't stop the parent from being created.
+                    flash('Parent created successfully, but no students were linked.', 'info')
+
+                conn.commit()
+                flash('Parent and linked students added successfully!', 'success')
+                return redirect(url_for('manage_parents'))
+            except Exception as e:
+                conn.rollback() # Rollback user creation if linking fails
+                flash(f'Error adding parent or linking students: {str(e)}', 'danger')
+                # If there's an error, you still need to render the form with students
+                students = get_students()
+                return render_template('admin/add_parent.html', students=students)
+            finally:
+                cur.close()
+                conn.close()
+
+    # GET request - show form
+    students = get_students()
+    return render_template('admin/add_parent.html', students=students)
+
+# In your app.py file, usually near your other admin routes
+
+@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_parent(parent_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    parent = None # Initialize parent variable
+
+    try:
+        # GET request: Display the current parent's data in the form
+        if request.method == 'GET':
+            cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+            parent = cur.fetchone()
+
+            if not parent:
+                flash('Parent not found.', 'danger')
+                return redirect(url_for('manage_parents'))
+
+            # Fetch students linked to this parent
+            cur.execute('''
+                SELECT s.id, s.username
+                FROM users s
+                JOIN parent_students ps ON s.id = ps.student_id
+                WHERE ps.parent_id = %s
+            ''', (parent_id,))
+            linked_students = [row[0] for row in cur.fetchall()] # Get a list of IDs of linked students
+
+            all_students = get_students() # Get all students for the checkboxes
+
+            return render_template('admin/edit_parent.html',
+                                   parent=parent,
+                                   all_students=all_students, # Pass all students for checkbox list
+                                   linked_students=linked_students) # Pass linked student IDs to pre-check checkboxes
+
+        # POST request: Process the form submission to update parent
+        elif request.method == 'POST':
+            new_username = request.form['username']
+            new_password = request.form.get('password') # Password can be optional for edit
+            student_ids_str_list = request.form.getlist('student_ids')
+
+            # Check if username already exists for another user
+            cur.execute("SELECT id FROM users WHERE username = %s AND id != %s", (new_username, parent_id))
+            if cur.fetchone():
+                flash('Username already exists for another user.', 'danger')
+                # Re-render the form with current data and students
+                cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+                parent = cur.fetchone()
+                cur.execute('''
+                    SELECT s.id, s.username FROM users s JOIN parent_students ps ON s.id = ps.student_id WHERE ps.parent_id = %s
+                ''', (parent_id,))
+                linked_students = [row[0] for row in cur.fetchall()]
+                all_students = get_students()
+                return render_template('admin/edit_parent.html',
+                                       parent=parent,
+                                       all_students=all_students,
+                                       linked_students=linked_students)
+
+            # Update parent user data
+            if new_password:
+                hashed_password = generate_password_hash(new_password)
+                cur.execute("UPDATE users SET username = %s, password = %s WHERE id = %s",
+                            (new_username, hashed_password, parent_id))
+            else:
+                cur.execute("UPDATE users SET username = %s WHERE id = %s",
+                            (new_username, parent_id))
+
+            # Update parent-student links:
+            # 1. Delete all existing links for this parent
+            cur.execute("DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
+
+            # 2. Insert new links based on selected checkboxes
+            if student_ids_str_list:
+                for student_id_str in student_ids_str_list:
+                    if not student_id_str.strip():
+                        flash('Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
+                        continue
+                    try:
+                        student_id_int = int(student_id_str)
+                        cur.execute("INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)",
+                                    (parent_id, student_id_int))
+                    except ValueError:
+                        flash(f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
+                        continue
+
+            conn.commit()
+            flash('Parent updated successfully!', 'success')
+            return redirect(url_for('manage_parents'))
+
+    except Exception as e:
+        conn.rollback()
+        flash(f'Error editing parent: {str(e)}', 'danger')
+        # On error, try to re-render the form with existing data if available
+        if parent:
+            all_students = get_students()
+            cur.execute('''
+                SELECT s.id, s.username FROM users s JOIN parent_students ps ON s.id = ps.student_id WHERE ps.parent_id = %s
+            ''', (parent_id,))
+            linked_students = [row[0] for row in cur.fetchall()]
+            return render_template('admin/edit_parent.html',
+                                   parent=parent,
+                                   all_students=all_students,
+                                   linked_students=linked_students)
+        return redirect(url_for('manage_parents')) # Fallback if parent not found on error
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+# In your app.py file, usually alongside your other admin routes
+
+@app.route('/admin/parents/<int:parent_id>/link_students', methods=['GET'])
+@login_required
+@admin_required
+def link_parent_student_ui(parent_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    parent_info = None
+    all_students = []
+    linked_student_ids = []
+
+    try:
+        # Get parent details to display on the page
+        cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+        parent_info = cur.fetchone()
+
+        if not parent_info:
+            flash('Parent not found.', 'danger')
+            return redirect(url_for('manage_parents'))
+
+        # Get all students to populate the checkboxes
+        all_students = get_students() # Assuming get_students() fetches all students for the admin
+
+        # Get the IDs of students already linked to this parent
+        cur.execute('''
+            SELECT student_id FROM parent_students WHERE parent_id = %s
+        ''', (parent_id,))
+        linked_student_ids = [row[0] for row in cur.fetchall()]
+
+        return render_template('admin/link_parent_student.html',
+                               parent=parent_info,
+                               all_students=all_students,
+                               linked_student_ids=linked_student_ids)
+
+    except Exception as e:
+        flash(f'Error loading student linking page: {str(e)}', 'danger')
+        return redirect(url_for('manage_parents'))
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+# In your app.py file
+
+@app.route('/admin/parents/<int:parent_id>/update_links', methods=['POST'])
+@login_required
+@admin_required
+def update_parent_student_links(parent_id):
+    student_ids_str_list = request.form.getlist('student_ids') # Get the selected student IDs as strings
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Step 1: Delete all existing links for this parent
+        cur.execute("DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
+
+        # Step 2: Insert new links based on the submitted data
+        if student_ids_str_list:
+            for student_id_str in student_ids_str_list:
+                if not student_id_str.strip():
+                    flash(f'Invalid (empty) student ID found in submission. Skipping.', 'warning')
+                    continue
+                try:
+                    student_id_int = int(student_id_str)
+                    cur.execute("INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)",
+                                (parent_id, student_id_int))
+                except ValueError:
+                    flash(f'Invalid student ID format "{student_id_str}" in submission. Skipping.', 'warning')
+                    continue
+        else:
+            # No students were selected, so all previous links for this parent have been removed
+            flash('No students selected. All previous links for this parent have been removed.', 'info')
+
+        conn.commit()
+        flash('Parent-student links updated successfully!', 'success')
+        return redirect(url_for('manage_parents')) # Redirect back to the parent management page
+
+    except Exception as e:
+        conn.rollback()
+        flash(f'Error updating parent-student links: {str(e)}', 'danger')
+        # On error, redirect back to the linking UI page to allow retrying
+        return redirect(url_for('link_parent_student_ui', parent_id=parent_id))
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+@app.route('/admin/parents')
+@login_required
+@admin_required
+def manage_parents():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get all parents with their linked students
+        cur.execute('''
+            SELECT u.id, u.username, 
+                   STRING_AGG(s.username, ', ') as students,
+                   COUNT(ps.student_id) as student_count
+            FROM users u
+            LEFT JOIN parent_students ps ON u.id = ps.parent_id
+            LEFT JOIN users s ON ps.student_id = s.id
+            WHERE u.role = 'parent'
+            GROUP BY u.id
+            ORDER BY u.username
+        ''')
+        parents = [{
+            'id': row[0],
+            'username': row[1],
+            'students': row[2] or 'No students linked',
+            'student_count': row[3]
+        } for row in cur.fetchall()]
+
+        return render_template('admin/parents.html', parents=parents)
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/admin/parents/link', methods=['POST'])
+@login_required
+@admin_required
+def link_parent_student():
+    parent_id = request.form['parent_id']
+    student_id = request.form['student_id']
+    action = request.form['action']  # 'link' or 'unlink'
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        if action == 'link':
+            cur.execute('''
+                INSERT INTO parent_students (parent_id, student_id)
+                VALUES (%s, %s)
+                ON CONFLICT DO NOTHING
+            ''', (parent_id, student_id))
+        else:
+            cur.execute('''
+                DELETE FROM parent_students
+                WHERE parent_id = %s AND student_id = %s
+            ''', (parent_id, student_id))
+        
+        conn.commit()
+        flash('Relationship updated successfully', 'success')
+    except Exception as e:
+        conn.rollback()
+        flash(f'Error updating relationship: {str(e)}', 'danger')
+    finally:
+        cur.close()
+        conn.close()
+    
+    return redirect(url_for('manage_parents'))
 
 
 @app.template_filter('datetime')

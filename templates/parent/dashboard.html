@@ -1,118 +1,126 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <div class="container mt-4">
-  <h2>Parent Dashboard</h2>
-
-  <!-- Student Selector -->
-  <div class="card mb-4">
-    <div class="card-header">
-      <h5>Select Student</h5>
-    </div>
-    <div class="card-body">
-      <div class="btn-group" role="group">
-        {% for student in students %}
-        <a
-          href="{{ url_for('parent_dashboard', student_id=student.id) }}"
-          class="btn {% if selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %}"
-        >
-          {{ student.username }}
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-
-  <!-- Performance Overview -->
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header bg-success text-white">
-          <h5>Assignments</h5>
+    <h2>Parent Dashboard</h2>
+    
+    <!-- Student Selector -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Select Student</h5>
         </div>
         <div class="card-body">
-          <p>Total: {{ stats.assignments.total }}</p>
-          <p>Submitted: {{ stats.assignments.submitted }}</p>
-          <p>Average: {{ stats.assignments.avg_score|default('N/A') }}%</p>
-          <p>Best: {{ stats.assignments.best_score|default('N/A') }}%</p>
+            {% if students %}
+                <div class="btn-group" role="group">
+                    {% for student in students %}
+                        <a href="{{ url_for('parent_dashboard', student_id=student.id) }}" 
+                           class="btn {% if selected_student and selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                            {{ student.username }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No students linked to your account. Please contact admin.</p>
+            {% endif %}
         </div>
-      </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header bg-info text-white">
-          <h5>Practice</h5>
+    
+    {% if selected_student %}
+        <!-- Performance Overview -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5>Assignments</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if stats and stats.assignments %}
+                            <p>Total: {{ stats.assignments.total }}</p>
+                            <p>Submitted: {{ stats.assignments.submitted }}</p>
+                            <p>Average: {{ stats.assignments.avg_score|default('N/A') }}%</p>
+                            <p>Best: {{ stats.assignments.best_score|default('N/A') }}%</p>
+                        {% else %}
+                            <p>No assignment data available</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h5>Practice</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if stats and stats.practice %}
+                            <p>Total: {{ stats.practice.total }}</p>
+                            <p>Average: {{ stats.practice.avg_score|default('N/A') }}%</p>
+                            <p>Best: {{ stats.practice.best_score|default('N/A') }}%</p>
+                        {% else %}
+                            <p>No practice data available</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h5>Exams</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if stats and stats.exams %}
+                            <p>Total: {{ stats.exams.total }}</p>
+                            <p>Average: {{ stats.exams.avg_score|default('N/A') }}%</p>
+                            <p>Best: {{ stats.exams.best_score|default('N/A') }}%</p>
+                        {% else %}
+                            <p>No exam data available</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <p>Total: {{ stats.practice.total }}</p>
-          <p>Average: {{ stats.practice.avg_score|default('N/A') }}%</p>
-          <p>Best: {{ stats.practice.best_score|default('N/A') }}%</p>
+        
+        <!-- Quick Links -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <a href="{{ url_for('parent_view_assignments', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
+                    View All Assignments
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('parent_view_submissions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
+                    View All Submissions
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
+                    View Sessions
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header bg-warning text-dark">
-          <h5>Exams</h5>
+        
+        <!-- Recent Announcements -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Recent Announcements</h5>
+            </div>
+            <div class="card-body">
+                {% if announcements %}
+                    <ul class="list-group">
+                        {% for announcement in announcements %}
+                            <li class="list-group-item">
+                                <strong>{{ announcement.title }}</strong>
+                                <p>{{ announcement.message|truncate(100) }}</p>
+                                <small class="text-muted">
+                                    Posted by {{ announcement.created_by }} on {{ announcement.created_at|datetime }}
+                                </small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No announcements</p>
+                {% endif %}
+            </div>
         </div>
-        <div class="card-body">
-          <p>Total: {{ stats.exams.total }}</p>
-          <p>Average: {{ stats.exams.avg_score|default('N/A') }}%</p>
-          <p>Best: {{ stats.exams.best_score|default('N/A') }}%</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quick Links -->
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <a
-        href="{{ url_for('parent_view_assignments', student_id=selected_student.id) }}"
-        class="btn btn-outline-primary btn-block"
-      >
-        View All Assignments
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a
-        href="{{ url_for('parent_view_submissions', student_id=selected_student.id) }}"
-        class="btn btn-outline-primary btn-block"
-      >
-        View All Submissions
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a
-        href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}"
-        class="btn btn-outline-primary btn-block"
-      >
-        View Sessions
-      </a>
-    </div>
-  </div>
-
-  <!-- Recent Announcements -->
-  <div class="card">
-    <div class="card-header">
-      <h5>Recent Announcements</h5>
-    </div>
-    <div class="card-body">
-      {% if announcements %}
-      <ul class="list-group">
-        {% for announcement in announcements %}
-        <li class="list-group-item">
-          <strong>{{ announcement.title }}</strong>
-          <p>{{ announcement.message|truncate(100) }}</p>
-          <small class="text-muted">
-            Posted by {{ announcement.created_by }} on {{
-            announcement.created_at|datetime }}
-          </small>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p>No announcements</p>
-      {% endif %}
-    </div>
-  </div>
+    {% endif %}
 </div>
 {% endblock %}

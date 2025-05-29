@@ -73,17 +73,36 @@ block content %}
       </div>
     </div>
   </div>
-  <div class="col-md-3 mb-4">
-    <div class="card text-white bg-info">
-      <div class="card-body">
-        <h5 class="card-title">Announcements</h5>
-        <a href="{{ url_for('manage_announcements') }}" class="btn btn-light">
-          <i class="bi bi-megaphone"></i> Manage
-        </a>
+  <div class="row">
+    <div class="col-md-3 mb-4">
+      <div class="card text-white bg-info">
+        <div class="card-body">
+          <h5 class="card-title">Announcements</h5>
+          <a href="{{ url_for('manage_announcements') }}" class="btn btn-light">
+            <i class="bi bi-megaphone"></i> Manage
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Assignments Section -->
+
+    <!-- Add this with the other cards in the first row -->
+    <div class="col-md-3 mb-4">
+      <div class="card text-white bg-secondary">
+        <div class="card-body">
+          <h5 class="card-title">Parents</h5>
+          <div class="d-grid gap-2">
+            <a href="{{ url_for('manage_parents') }}" class="btn btn-light">
+              <i class="bi bi-people-fill"></i> Manage Parents
+            </a>
+            <a href="{{ url_for('add_parent') }}" class="btn btn-light">
+              <i class="bi bi-person-plus"></i> Add Parent
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!-- Assignments Section -->
 
   <div class="container-fluid">
     <h2>Manage Assignments</h2>
