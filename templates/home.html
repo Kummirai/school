@@ -27,9 +27,13 @@
           {% endif %}
         </h1>
         <p class="lead mb-5 fs-5">
-          {% if 'username' in session %}
+          {% if 'username' in session and session['role'] == 'parent' %}
+          <i class="bi bi-stars text-warning me-2"></i> We are glad that you
+          chose us as the private tutors for your children! {% elif 'username'
+          in session and session['role'] != 'parent' %}
           <i class="bi bi-stars text-warning me-2"></i> Continue your learning
-          journey with our comprehensive resources {% else %}
+          journey with our comprehensive resources {% else %} {# This 'else'
+          covers cases where 'username' is NOT in session #}
           <i class="bi bi-stars text-warning me-2"></i> Your comprehensive
           platform for programming and academic enrichment. {% endif %}
         </p>
