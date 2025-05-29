@@ -1,21 +1,23 @@
-{% extends "base.html" %} {% block title %}My Sessions{% endblock %} {% block
-content %}
+{% extends "base.html" %} {% block title %}Student Sessions{% endblock %} {%
+block content %}
 <div class="container mt-4">
-  <h2 class="mb-4">Sessions for My Students</h2>
+  <h2 class="mb-4">
+    Sessions for Student: {{ student_username | default('Loading Student
+    Name...') }}
+  </h2>
 
   <div class="mb-3">
-    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-secondary"
-      ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-    >
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-secondary">
+      <i class="bi bi-arrow-left me-2"></i> Back to Dashboard
+    </a>
   </div>
 
-  {% if students_with_sessions %} {% for student in students_with_sessions %}
   <div class="card mb-4 shadow-sm">
     <div class="card-header bg-info text-white">
-      <h4 class="mb-0">Student: {{ student.username }}</h4>
+      <h4 class="mb-0">Upcoming Sessions</h4>
     </div>
     <div class="card-body">
-      {% if student.sessions %}
+      {% if bookings %}
       <div class="table-responsive">
         <table class="table table-hover table-sm">
           <thead>
@@ -30,34 +32,37 @@ content %}
             </tr>
           </thead>
           <tbody>
-            {% for session_item in student.sessions %}
+            {% for session_item in bookings %}
             <tr>
-              <td>{{ session_item.session_date.strftime('%Y-%m-%d') }}</td>
               <td>
-                {{ session_item.start_time.strftime('%H:%M') }} - {{
-                session_item.end_time.strftime('%H:%M') }}
+                {% if session_item.session_date %} {{
+                session_item.session_date.strftime('%Y-%m-%d') }} {% else %} N/A
+                {% endif %}
               </td>
-              <td>{{ session_item.topic }}</td>
-              <td>{{ session_item.tutor_name }}</td>
               <td>
-                {{ session_item.class_name if session_item.class_name else 'N/A'
-                }}
+                {% if session_item.start_time and session_item.end_time %} {{
+                session_item.start_time.strftime('%H:%M') }} - {{
+                session_item.end_time.strftime('%H:%M') }} {% else %} N/A {%
+                endif %}
               </td>
+              <td>{{ session_item.topic | default('N/A') }}</td>
+              <td>{{ session_item.tutor_name | default('N/A') }}</td>
+              <td>{{ session_item.class_name | default('N/A') }}</td>
               <td>
                 {% if session_item.notes %}
                 <button
                   type="button"
                   class="btn btn-sm btn-outline-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#notesModal{{ session_item.session_id }}"
+                  data-bs-target="#notesModal{{ session_item.session_id | default(loop.index) }}"
                 >
                   View Notes
                 </button>
                 <div
                   class="modal fade"
-                  id="notesModal{{ session_item.session_id }}"
+                  id="notesModal{{ session_item.session_id | default(loop.index) }}"
                   tabindex="-1"
-                  aria-labelledby="notesModalLabel{{ session_item.session_id }}"
+                  aria-labelledby="notesModalLabel{{ session_item.session_id | default(loop.index) }}"
                   aria-hidden="true"
                 >
                   <div class="modal-dialog modal-dialog-centered">
@@ -65,9 +70,10 @@ content %}
                       <div class="modal-header">
                         <h5
                           class="modal-title"
-                          id="notesModalLabel{{ session_item.session_id }}"
+                          id="notesModalLabel{{ session_item.session_id | default(loop.index) }}"
                         >
-                          Session Notes: {{ session_item.topic }}
+                          Session Notes: {{ session_item.topic | default('N/A')
+                          }}
                         </h5>
                         <button
                           type="button"
@@ -77,7 +83,10 @@ content %}
                         ></button>
                       </div>
                       <div class="modal-body">
-                        <p>{{ session_item.notes }}</p>
+                        <p>
+                          {{ session_item.notes | default('No notes available.')
+                          }}
+                        </p>
                       </div>
                       <div class="modal-footer">
                         <button
@@ -94,7 +103,6 @@ content %}
                 {% else %} No Notes {% endif %}
               </td>
               <td>
-                {# Add buttons for more actions here #}
                 <button class="btn btn-sm btn-outline-secondary" disabled>
                   More Actions
                 </button>
@@ -105,14 +113,9 @@ content %}
         </table>
       </div>
       {% else %}
-      <p class="text-muted">No sessions found for {{ student.username }}.</p>
+      <p class="text-muted">No sessions found for this student.</p>
       {% endif %}
     </div>
   </div>
-  {% endfor %} {% else %}
-  <div class="alert alert-info" role="alert">
-    No students linked to your account, or no sessions found.
-  </div>
-  {% endif %}
 </div>
 {% endblock %}
