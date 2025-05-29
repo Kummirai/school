@@ -1,0 +1,118 @@
+{% extends "base.html" %} {% block title %}My Sessions{% endblock %} {% block
+content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Sessions for My Students</h2>
+
+  <div class="mb-3">
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-secondary"
+      ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
+    >
+  </div>
+
+  {% if students_with_sessions %} {% for student in students_with_sessions %}
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-info text-white">
+      <h4 class="mb-0">Student: {{ student.username }}</h4>
+    </div>
+    <div class="card-body">
+      {% if student.sessions %}
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Topic</th>
+              <th>Tutor</th>
+              <th>Class</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for session_item in student.sessions %}
+            <tr>
+              <td>{{ session_item.session_date.strftime('%Y-%m-%d') }}</td>
+              <td>
+                {{ session_item.start_time.strftime('%H:%M') }} - {{
+                session_item.end_time.strftime('%H:%M') }}
+              </td>
+              <td>{{ session_item.topic }}</td>
+              <td>{{ session_item.tutor_name }}</td>
+              <td>
+                {{ session_item.class_name if session_item.class_name else 'N/A'
+                }}
+              </td>
+              <td>
+                {% if session_item.notes %}
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#notesModal{{ session_item.session_id }}"
+                >
+                  View Notes
+                </button>
+                <div
+                  class="modal fade"
+                  id="notesModal{{ session_item.session_id }}"
+                  tabindex="-1"
+                  aria-labelledby="notesModalLabel{{ session_item.session_id }}"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="notesModalLabel{{ session_item.session_id }}"
+                        >
+                          Session Notes: {{ session_item.topic }}
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>{{ session_item.notes }}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% else %} No Notes {% endif %}
+              </td>
+              <td>
+                {# Add buttons for more actions here #}
+                <button class="btn btn-sm btn-outline-secondary" disabled>
+                  More Actions
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted">No sessions found for {{ student.username }}.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="alert alert-info" role="alert">
+    No students linked to your account, or no sessions found.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

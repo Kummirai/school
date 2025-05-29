@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block title %}My Submissions{% endblock %} {% block
+content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Submissions for My Students</h2>
+  <div class="mb-3">
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-secondary"
+      ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
+    >
+  </div>
+  {% if students_with_submissions %} {% for student in students_with_submissions
+  %}
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h4 class="mb-0">Student: {{ student.username }}</h4>
+    </div>
+    <div class="card-body">
+      {% if student.submissions %}
+      <div class="table-responsive">
+        <table class="table table-hover table-sm table-nowrap">
+          <thead>
+            <tr>
+              <th>Assignment Title</th>
+              <th>Subject</th>
+              {# Added Subject #}
+              <th>Due Date</th>
+              <th>Submission Date</th>
+              {# Changed to Submission Date #}
+              <th>Grade</th>
+              <th>Feedback</th>
+              {# Added Feedback #}
+              <th>File</th>
+              {# Changed to File #}
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for submission in student.submissions %}
+            <tr>
+              <td>{{ submission['title'] }}</td>
+              <td>{{ submission.subject }}</td>
+              {# Display Subject #}
+              <td>{{ submission.deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+              {# Use deadline #}
+              <td>{{ submission.submitted_at.strftime('%Y-%m-%d %H:%M') }}</td>
+              {# Use submitted_at #}
+              <td>
+                {% if submission.marks_obtained is not none %} {{
+                submission.marks_obtained }} / {{ submission.total_marks }} {%
+                else %} Not Graded Yet {% endif %}
+              </td>
+              <td>
+                {% if submission.feedback %} {{ submission.feedback }} {% else
+                %} No Feedback {% endif %}
+              </td>
+              <td>
+                {% if submission.file_path %} {# Assuming file_path is a URL or
+                a path accessible via a static route #} {# You might need to
+                adjust the url_for('static', ...) if your files are served
+                differently #}
+                <a
+                  href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
+                  target="_blank"
+                  class="btn btn-sm btn-info"
+                  >View File</a
+                >
+                {# IMPORTANT: Changed 'submissions' to 'uploads' in static path,
+                adjust if your actual upload folder is different #} {% else %}
+                No File {% endif %}
+              </td>
+              <td>
+                {# Add buttons for more actions here #}
+                <button class="btn btn-sm btn-outline-secondary" disabled>
+                  More Actions
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted">No submissions found for {{ student.username }}.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="alert alert-info" role="alert">
+    No students linked to your account, or no submissions found.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

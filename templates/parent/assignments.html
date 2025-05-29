@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}My Assignments{% endblock %} {% block
+content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Assignments for My Child / Children</h2>
+  <div class="mb-3">
+    <a href="{{ url_for('parent_dashboard') }}" class="btn btn-secondary"
+      ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
+    >
+  </div>
+  {% if students_with_assignments %} {% for student in students_with_assignments
+  %}
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Student: {{ student.username }}</h4>
+    </div>
+    <div class="card-body">
+      {% if student.assignments %}
+      <div class="table-responsive">
+        <table class="table table-hover table-sm table-nowrap">
+          <thead>
+            <tr>
+              <th>Assignment</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Total Marks</th>
+              <th>Status</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for assignment in student.assignments %}
+            <tr>
+              <td>{{ assignment.title }}</td>
+              <td>{{ assignment.description }}</td>
+              <td>{{ assignment.deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+              {# Format date #}
+              <td>{{ assignment.total_marks }}</td>
+              <td>
+                {% if assignment.is_submitted %}
+                <span class="badge bg-success">Submitted</span>
+                {% else %}
+                <span class="badge bg-warning text-dark">Pending</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if assignment.submission_grade is not none %} {{
+                assignment.submission_grade }} / {{ assignment.total_marks }} {%
+                else %} N/A {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted">No assignments found for {{ student.username }}.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="alert alert-info" role="alert">
+    No students linked to your account, or no assignments found.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

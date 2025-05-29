@@ -439,6 +439,39 @@ def get_student_performance_stats(student_id):
         cur.close()
         conn.close()
 
+def get_student_assignments(student_id):
+    conn = get_db_connection()
+    # Using DictCursor is highly recommended here for easy access in template
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    assignments = []
+    try:
+        cur.execute('''
+            SELECT
+                a.id AS assignment_id,
+                a.title,
+                a.description,
+                a.deadline,
+                a.total_marks,
+                s.grade AS submission_grade,
+                s.submission_time AS submission_date,
+                CASE WHEN s.id IS NOT NULL THEN TRUE ELSE FALSE END AS is_submitted
+            FROM assignments a
+            JOIN assignment_students au ON a.id = au.assignment_id
+            LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = au.student_id
+            WHERE au.student_id = %s
+            ORDER BY a.deadline ASC;
+        ''', (student_id,))
+        assignments = cur.fetchall()
+    except Exception as e:
+        print(f"Error fetching assignments for student {student_id}: {e}")
+        # Log this error properly in a real application
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+    return assignments
+
 def get_unsubmitted_assignments_count(user_id):
     """Get count of assignments that haven't been submitted yet"""
     conn = get_db_connection()
@@ -977,7 +1010,7 @@ def get_assignments_for_user(user_id):
             SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.description
             FROM assignments a
             JOIN assignment_students au ON a.id = au.assignment_id
-            WHERE au.user_id = %s
+            WHERE au.student_id = %s
             ORDER BY a.deadline
         ''', (user_id,))
 
@@ -1118,7 +1151,44 @@ def get_student_submissions(student_id):
 
     cur.close()
     conn.close()
+
+    print(submissions[0]["title"])
     return submissions
+
+def get_student_sessions_data(student_id):
+    conn = get_db_connection()
+    # Use DictCursor for easy access in template
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sessions_data = []
+    try:
+        # Assuming your sessions table links directly to students or through classes
+        # This query fetches sessions associated with a student, including tutor and class info.
+        cur.execute('''
+            SELECT
+                s.id AS session_id,
+                s.session_date,
+                s.start_time,
+                s.end_time,
+                s.topic,
+                s.notes,
+                t.username AS tutor_name,
+                c.name AS class_name
+            FROM sessions s
+            JOIN users t ON s.tutor_id = t.id -- Assuming tutor_id links to users table
+            LEFT JOIN classes c ON s.class_id = c.id -- Assuming sessions can be linked to a class
+            WHERE s.student_id = %s -- Assuming sessions link directly to student_id
+            ORDER BY s.session_date DESC, s.start_time DESC;
+        ''', (student_id,))
+        sessions_data = cur.fetchall()
+    except Exception as e:
+        print(f"Error fetching sessions for student {student_id}: {e}")
+        # Log this error properly in a real application
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+    return sessions_data
 
 
 def submit_assignment(assignment_id, student_id, submission_text, file_path=None, interactive_submission_data=None):
@@ -3452,6 +3522,7 @@ def list_whiteboards():
     finally:
         cur.close()
         conn.close()
+
 @app.route('/parent/dashboard')
 @login_required
 def parent_dashboard():
@@ -3500,21 +3571,21 @@ def parent_dashboard():
                          stats=stats,
                          announcements=announcements)
 
-@app.route('/parent/assignments/<int:student_id>')
-@login_required
-def parent_view_assignments(student_id):
-    if session.get('role') != 'parent':
-        abort(403)
+# @app.route('/parent/assignments/<int:student_id>')
+# @login_required
+# def parent_view_assignments(student_id):
+#     if session.get('role') != 'parent':
+#         abort(403)
 
-    # Verify parent has access to this student
-    students = get_students_for_parent(session['user_id'])
-    if not any(s['id'] == student_id for s in students):
-        abort(403)
+#     # Verify parent has access to this student
+#     students = get_students_for_parent(session['user_id'])
+#     if not any(s['id'] == student_id for s in students):
+#         abort(403)
 
-    assignments = get_assignments_for_user(student_id)
-    return render_template('parent/assignments.html',
-                           student_id=student_id,
-                           assignments=assignments)
+#     assignments = get_assignments_for_user(student_id)
+#     return render_template('parent/assignments.html',
+#                            student_id=student_id,
+#                            assignments=assignments)
 
 
 @app.route('/parent/submissions/<int:student_id>')
@@ -3882,6 +3953,54 @@ def link_parent_student():
         conn.close()
     
     return redirect(url_for('manage_parents'))
+
+@app.route('/parent/assignments')
+@login_required
+# @parent_required # If you have a specific decorator for parent role
+def parent_view_assignments():
+    parent_id = session.get('user_id')
+    if not parent_id:
+        flash('You must be logged in as a parent to view assignments.', 'danger')
+        return redirect(url_for('login'))
+
+    conn = get_db_connection()
+    # Again, using DictCursor is good for fetching parent's students
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    students_with_assignments = []
+    try:
+        # Get all students linked to this parent
+        cur.execute('''
+            SELECT u.id AS student_id, u.username AS student_username
+            FROM users u
+            JOIN parent_students ps ON u.id = ps.student_id
+            WHERE ps.parent_id = %s AND u.role = 'student'
+            ORDER BY u.username;
+        ''', (parent_id,))
+        linked_students = cur.fetchall()
+
+        for student_info in linked_students:
+            student_id = student_info['student_id']
+            student_username = student_info['student_username']
+
+            assignments_for_student = get_student_assignments(student_id)
+
+            students_with_assignments.append({
+                'id': student_id,
+                'username': student_username,
+                'assignments': assignments_for_student
+            })
+
+    except Exception as e:
+        flash(f'Error loading assignments: {str(e)}', 'danger')
+        print(f"Error in parent_view_assignments route: {e}") # For debugging
+        return redirect(url_for('parent_dashboard')) # Redirect to a safe page on error
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+    return render_template('parent/assignments.html', students_with_assignments=students_with_assignments)
 
 
 @app.template_filter('datetime')
