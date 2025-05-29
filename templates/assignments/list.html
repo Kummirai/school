@@ -6,48 +6,67 @@
   <div class="row">
     {% for assignment in assignments %}
     <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">
-            <a
-              href="{{ url_for('view_assignment', assignment_id=assignment.id) }}"
-            >
-              {{ assignment.title }}
-            </a>
-          </h5>
-          <h6 class="card-subtitle mb-2 text-muted">
+      <div class="card h-100 shadow-sm border border-dark-subtle rounded-4">
+        <div class="card-body p-4">
+          <h5 class="card-title mb-2 fw-bold text-danger-emphasis">{{ assignment.title }}</h5>
+          <h6 class="card-subtitle mb-3 text-muted">
             {{ assignment.subject }}
           </h6>
 
-          <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="mb-2">
+            <i class="bi bi-calendar-event me-2 text-secondary"></i>
             <span class="text-muted">Deadline:</span>
-            <span>{{ assignment.deadline.strftime('%d %B %Y %H:%M') }}</span>
+            <span class="fw-medium"
+              >{{ assignment.deadline.strftime('%d %B %Y %H:%M') }}</span
+            >
           </div>
 
-          <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="mb-2">
+            <i class="bi bi-activity me-2 text-secondary"></i>
             <span class="text-muted">Status:</span>
             <span
-              class="badge {% if assignment.status == 'active' %}bg-success{% else %}bg-danger{% endif %}"
+              class="badge {% if assignment.status == 'active' %}bg-success{% else %}bg-danger{% endif %} rounded-pill"
             >
               {{ assignment.status|capitalize }}
             </span>
           </div>
 
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="mb-4">
+            <i class="bi bi-upload me-2 text-secondary"></i>
             <span class="text-muted">Submission:</span>
             {% if assignment.submitted %}
-            <span class="badge bg-success">Submitted</span>
+            <span class="badge bg-success rounded-pill">Submitted</span>
             {% else %}
-            <span class="badge bg-warning text-dark">Pending</span>
+            <span class="badge bg-warning text-dark rounded-pill">Pending</span>
             {% endif %}
           </div>
+
+          <!-- CTA Button -->
+          <a
+            href="{{ url_for('view_assignment', assignment_id=assignment.id) }}"
+            class="btn border border-warning w-100"
+          >
+            <i class="bi bi-pencil-square me-1"></i> Complete Assignment
+          </a>
         </div>
       </div>
     </div>
+
     {% endfor %}
   </div>
   {% else %}
   <div class="alert alert-info">No assignments found.</div>
   {% endif %}
 </div>
+<style>
+  .assignment-link {
+    color: #0d6efd; /* Bootstrap primary */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .assignment-link:hover {
+    color: #dc3545; /* Darker shade of primary */
+  }
+</style>
 {% endblock %}
