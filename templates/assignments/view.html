@@ -349,6 +349,107 @@
     transition: width 0.3s ease;
   }
 
+  /* New styles for reflective writing assignment */
+  .reflective-writing-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .topic-card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .topic-card:hover {
+    border-color: #007acc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .student-name {
+    font-weight: bold;
+    color: #2d3748;
+    font-size: 1.2em;
+  }
+
+  .topic-title {
+    color: #4a5568;
+    font-style: italic;
+  }
+
+  .marks-badge {
+    background: #28a745;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+  }
+
+  .prompt-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border-left: 3px solid #007acc;
+  }
+
+  .prompt-label {
+    font-weight: bold;
+    color: #007acc;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .rubric-container {
+    background: #e8f4fd;
+    border: 1px solid #007acc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 30px 0;
+  }
+
+  .rubric-title {
+    color: #007acc;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .rubric-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .rubric-category {
+    font-weight: bold;
+    color: #2d3748;
+  }
+
+  .rubric-description {
+    color: #4a5568;
+  }
+
+  .rubric-marks {
+    float: right;
+    font-weight: bold;
+  }
+
   /* Responsive design improvements */
   @media (max-width: 768px) {
     .reading-passage {
@@ -532,6 +633,123 @@
       <p>{{ paragraph|safe }}</p>
       {% endif %} {% endfor %}
     </div>
+  </div>
+  {% endif %} {% if assignment.content.topics %}
+  <div class="reflective-writing-container">
+    <h3><i class="fas fa-pen-alt"></i> Writing Topics</h3>
+    <p class="text-muted mb-4">
+      Write 1-2 paragraphs for your assigned topic below. Focus on clarity,
+      examples, and personal reflection where applicable.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% for topic in assignment.content.topics %}
+      <div class="topic-card">
+        <div class="topic-header">
+          <div>
+            <span class="student-name">{{ topic.student }}</span>
+            <span class="topic-title">{{ topic.topic }}</span>
+          </div>
+          <span class="marks-badge">{{ topic.marks }} marks</span>
+        </div>
+
+        <div class="prompt-box">
+          <span class="prompt-label">Your Prompt:</span>
+          {{ topic.prompt }}
+        </div>
+
+        <div class="form-group">
+          <label for="response_{{ topic.id }}" class="form-label"
+            >Your Response (1-2 paragraphs)</label
+          >
+          <textarea
+            class="form-control"
+            id="response_{{ topic.id }}"
+            name="response_{{ topic.id }}"
+            rows="6"
+            placeholder="Write your response here..."
+            {%
+            if
+            topic.marks
+            %}data-marks="{{ topic.marks }}"
+            {%
+            endif
+            %}
+          >
+{% if submission and submission.interactive_submission_data %}{{ submission.interactive_submission_data[topic.id|string].answer }}{% endif %}</textarea
+          >
+        </div>
+      </div>
+      {% endfor %} {% if assignment.content.rubric %}
+      <div class="rubric-container">
+        <div class="rubric-title">Grading Rubric</div>
+        {% for category, description in assignment.content.rubric.items() %}
+        <div class="rubric-item">
+          <span class="rubric-category">{{ category|title }}:</span>
+          <span class="rubric-description">{{ description }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="fas fa-comment"></i> Additional Comments
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-3">
+            <label for="submission_text" class="form-label"
+              >Additional Comments (Optional)</label
+            >
+            <textarea
+              class="form-control"
+              id="submission_text"
+              name="submission_text"
+              rows="3"
+              placeholder="Add any additional comments or explanations here..."
+            >
+{% if submission %}{{ submission.submission_text }}{% endif %}</textarea
+            >
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="assignment_file" class="form-label"
+              >Upload Supporting File (Optional)</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="assignment_file"
+              name="assignment_file"
+              accept=".pdf,.docx,.doc,.jpg,.jpeg,.png"
+            />
+            <div class="form-text">
+              Accepted formats: PDF, DOCX, DOC, JPG, PNG (max 5MB)
+            </div>
+            {% if submission and submission.file_path %}
+            <small class="form-text text-success">
+              <i class="fas fa-file"></i> Previously uploaded:
+              <a
+                href="{{ url_for('static', filename='uploads/' + submission.file_path.split('/')[-1]) }}"
+                target="_blank"
+                class="text-decoration-none"
+              >
+                {{ submission.file_path.split('/')[-1] }}
+              </a>
+            </small>
+            {% endif %}
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="fas fa-paper-plane"></i> Submit Assignment
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
   {% endif %}
 
@@ -893,6 +1111,71 @@
         this.scrollIntoView({ behavior: "smooth", block: "center" });
       });
     });
+  });
+
+  // Additional JavaScript for reflective writing assignment
+  document.addEventListener("DOMContentLoaded", function () {
+    // Auto-resize textareas for reflective writing
+    const writingTextareas = document.querySelectorAll(".topic-card textarea");
+    writingTextareas.forEach((textarea) => {
+      textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+      });
+
+      // Initial resize
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
+
+    // Word count indicator (optional)
+    const wordCountElements = document.querySelectorAll(".word-count");
+    writingTextareas.forEach((textarea, index) => {
+      textarea.addEventListener("input", function () {
+        if (wordCountElements[index]) {
+          const wordCount =
+            this.value.trim() === ""
+              ? 0
+              : this.value.trim().split(/\s+/).length;
+          wordCountElements[index].textContent = `${wordCount} words`;
+        }
+      });
+    });
+
+    // Form validation for reflective writing
+    const reflectiveForm = document.querySelector(
+      ".reflective-writing-container form"
+    );
+    if (reflectiveForm) {
+      reflectiveForm.addEventListener("submit", function (e) {
+        let hasContent = false;
+        const textareas = this.querySelectorAll("textarea[id^='response_']");
+
+        textareas.forEach((textarea) => {
+          if (textarea.value.trim().length > 0) {
+            hasContent = true;
+          }
+        });
+
+        if (!hasContent) {
+          e.preventDefault();
+          alert(
+            "Please write responses for at least one topic before submitting."
+          );
+          return false;
+        }
+
+        // Optional: Confirm submission
+        if (
+          !confirm(
+            "Are you ready to submit your reflective writing assignment?"
+          )
+        ) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    }
   });
 </script>
 
