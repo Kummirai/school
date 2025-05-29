@@ -4052,18 +4052,18 @@ def inject_functions():
         get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
     )
 
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)
-
-
 if __name__ == '__main__':
-    # Enable Flask debug features
-    app.debug = True  # Enables auto-reloader and debugger
-
-    # Initialize database
+    from waitress import serve
     initialize_database()
+    serve(app, host="0.0.0.0", port=5000)
 
-    # Run the development server
-    app.run(host='0.0.0.0', port=5000)
+
+# if __name__ == '__main__':
+#     # Enable Flask debug features
+#     app.debug = True  # Enables auto-reloader and debugger
+
+#     # Initialize database
+#     initialize_database()
+
+#     # Run the development server
+#     app.run(host='0.0.0.0', port=5000)
