@@ -18,11 +18,10 @@ load_dotenv()
 
 # Create Flask app
 app = Flask(__name__)
-#app.secret_key = os.getenv('FLASK_SECRET_KEY')
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
+# app.secret_key = os.getenv('FLASK_SECRET_KEY')
+app.secret_key = os.environ.get(
+    'FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
-
-
 
 
 # Configure upload folder in your app
@@ -34,6 +33,8 @@ if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
 
 # Database connection
+
+
 def get_db_connection():
     try:
         conn = psycopg2.connect(
@@ -54,6 +55,7 @@ def get_db_connection():
 # client = get_db_connection()
 # result = client.table('users').select("*").execute()
 
+
 def initialize_database():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -70,6 +72,14 @@ def initialize_database():
     ''')
 
     cur.execute('''
+    CREATE TABLE IF NOT EXISTS parent_students (
+        parent_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        PRIMARY KEY (parent_id, student_id)
+    )
+''')
+
+    cur.execute('''
         CREATE TABLE IF NOT EXISTS saved_equations (
             id SERIAL PRIMARY KEY ,
             user_id INTEGER NOT NULL,
@@ -78,7 +88,7 @@ def initialize_database():
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
         ''')
-    
+
     cur.execute('''
         CREATE TABLE IF NOT EXISTS user_announcements (
             announcement_id INTEGER NOT NULL REFERENCES announcements(id) ON DELETE CASCADE,
@@ -88,7 +98,7 @@ def initialize_database():
             PRIMARY KEY (announcement_id, user_id)
         )
     ''')
-    
+
     # Create users table
     cur.execute('''
     CREATE TABLE IF NOT EXISTS users (
@@ -145,7 +155,7 @@ def initialize_database():
             receipt_url VARCHAR(255)
         )
     ''')
-    
+
     # Create tutorial_categories table
     cur.execute('''
     CREATE TABLE IF NOT EXISTS tutorial_categories (
@@ -154,7 +164,7 @@ def initialize_database():
     )
     ''')
 
-      # Add these new tables for assignment system
+    # Add these new tables for assignment system
     cur.execute('''
         CREATE TABLE IF NOT EXISTS assignments (
             id SERIAL PRIMARY KEY,
@@ -167,7 +177,6 @@ def initialize_database():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     ''')
-
 
     cur.execute('''
         CREATE TABLE IF NOT EXISTS submissions (
@@ -185,7 +194,7 @@ def initialize_database():
         );
     ''')
 
-        # Add this to the initialize_database() function
+    # Add this to the initialize_database() function
     cur.execute('''
         CREATE TABLE IF NOT EXISTS practice_scores (
             id SERIAL PRIMARY KEY,
@@ -208,7 +217,6 @@ def initialize_database():
         )
     ''')
 
-    
     # Create tutorial_videos table
     cur.execute('''
     CREATE TABLE IF NOT EXISTS tutorial_videos (
@@ -246,7 +254,7 @@ def initialize_database():
 
     conn.commit()
 
-     # >>> ADDED: Check if subscription plans exist before inserting defaults
+    # >>> ADDED: Check if subscription plans exist before inserting defaults
     cur.execute('SELECT COUNT(*) FROM subscription_plans')
     plan_count = cur.fetchone()[0]
 
@@ -260,7 +268,7 @@ def initialize_database():
                 ('Standard', 'Access to core tutorials, study guides and Exams', 149.99, 30),
                 
         ''')
-        conn.commit() # Commit is done once at the end
+        conn.commit()  # Commit is done once at the end
         print("✅ Default subscription plans inserted.")
     else:
         print("Subscription plans already exist, skipping default insert.")
@@ -284,7 +292,96 @@ def initialize_database():
     cur.close()
     conn.close()
 
-#Helpers
+# Helpers
+
+
+def get_students_for_parent(parent_id):
+    """Get all students linked to a parent"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT u.id, u.username 
+            FROM users u
+            JOIN parent_students ps ON u.id = ps.student_id
+            WHERE ps.parent_id = %s
+        ''', (parent_id,))
+        return [{'id': row[0], 'username': row[1]} for row in cur.fetchall()]
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_student_performance_stats(student_id):
+    """Get comprehensive performance stats for a student"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get assignment stats
+        cur.execute('''
+            SELECT 
+                COUNT(*) as total_assignments,
+                COUNT(CASE WHEN s.id IS NOT NULL THEN 1 END) as submitted_count,
+                AVG(s.grade::float/a.total_marks*100) as avg_score_percentage,
+                MAX(s.grade::float/a.total_marks*100) as best_score,
+                MIN(s.grade::float/a.total_marks*100) as worst_score
+            FROM assignments a
+            JOIN assignment_students au ON a.id = au.assignment_id
+            LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = %s
+            WHERE au.user_id = %s
+        ''', (student_id, student_id))
+        assignment_stats = cur.fetchone()
+
+        # Get practice stats
+        cur.execute('''
+            SELECT 
+                COUNT(*) as total_practices,
+                AVG(score::float/total_questions*100) as avg_score_percentage,
+                MAX(score::float/total_questions*100) as best_score,
+                MIN(score::float/total_questions*100) as worst_score
+            FROM practice_scores
+            WHERE student_id = %s
+        ''', (student_id,))
+        practice_stats = cur.fetchone()
+
+        # Get exam stats
+        cur.execute('''
+            SELECT 
+                COUNT(*) as total_exams,
+                AVG(score) as avg_score_percentage,
+                MAX(score) as best_score,
+                MIN(score) as worst_score
+            FROM exam_results
+            WHERE user_id = %s
+        ''', (student_id,))
+        exam_stats = cur.fetchone()
+
+        return {
+            'assignments': {
+                'total': assignment_stats[0],
+                'submitted': assignment_stats[1],
+                'avg_score': round(assignment_stats[2], 2) if assignment_stats[2] else None,
+                'best_score': round(assignment_stats[3], 2) if assignment_stats[3] else None,
+                'worst_score': round(assignment_stats[4], 2) if assignment_stats[4] else None
+            },
+            'practice': {
+                'total': practice_stats[0],
+                'avg_score': round(practice_stats[1], 2) if practice_stats[1] else None,
+                'best_score': round(practice_stats[2], 2) if practice_stats[2] else None,
+                'worst_score': round(practice_stats[3], 2) if practice_stats[3] else None
+            },
+            'exams': {
+                'total': exam_stats[0],
+                'avg_score': round(exam_stats[1], 2) if exam_stats[1] else None,
+                'best_score': round(exam_stats[2], 2) if exam_stats[2] else None,
+                'worst_score': round(exam_stats[3], 2) if exam_stats[3] else None
+            }
+        }
+    finally:
+        cur.close()
+        conn.close()
+
+
 def get_unsubmitted_assignments_count(user_id):
     """Get count of assignments that haven't been submitted yet"""
     conn = get_db_connection()
@@ -305,6 +402,7 @@ def get_unsubmitted_assignments_count(user_id):
         cur.close()
         conn.close()
 
+
 def get_unread_announcements_count(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -323,6 +421,8 @@ def get_unread_announcements_count(user_id):
         conn.close()
 
 # Add these helper functions to app.py
+
+
 def create_announcement(title, message, created_by, user_ids=None):
     """Create a new announcement and optionally assign to specific users"""
     conn = get_db_connection()
@@ -335,19 +435,19 @@ def create_announcement(title, message, created_by, user_ids=None):
             RETURNING id
         ''', (title, message, created_by))
         announcement_id = cur.fetchone()[0]
-        
+
         # If user_ids is None, send to all users
         if user_ids is None:
             cur.execute('SELECT id FROM users WHERE role = %s', ('student',))
             user_ids = [row[0] for row in cur.fetchall()]
-        
+
         # Assign to selected users
         for user_id in user_ids:
             cur.execute('''
                 INSERT INTO user_announcements (announcement_id, user_id)
                 VALUES (%s, %s)
             ''', (announcement_id, user_id))
-        
+
         conn.commit()
         return announcement_id
     except Exception as e:
@@ -356,6 +456,7 @@ def create_announcement(title, message, created_by, user_ids=None):
     finally:
         cur.close()
         conn.close()
+
 
 def get_user_announcements(user_id, limit=None):
     """Get announcements for a specific user"""
@@ -371,13 +472,13 @@ def get_user_announcements(user_id, limit=None):
             WHERE ua.user_id = %s
             ORDER BY a.created_at DESC
         '''
-        
+
         if limit:
             query += ' LIMIT %s'
             cur.execute(query, (user_id, limit))
         else:
             cur.execute(query, (user_id,))
-            
+
         announcements = []
         for row in cur.fetchall():
             announcements.append({
@@ -388,7 +489,7 @@ def get_user_announcements(user_id, limit=None):
                 'created_by': row[4],
                 'is_read': row[5]
             })
-            
+
         return announcements
     except Exception as e:
         print(f"Error getting announcements: {e}")
@@ -396,6 +497,7 @@ def get_user_announcements(user_id, limit=None):
     finally:
         cur.close()
         conn.close()
+
 
 def mark_announcement_read(announcement_id, user_id):
     """Mark an announcement as read for a user"""
@@ -417,6 +519,7 @@ def mark_announcement_read(announcement_id, user_id):
         cur.close()
         conn.close()
 
+
 def get_all_announcements():
     """Get all announcements for admin view"""
     conn = get_db_connection()
@@ -432,7 +535,7 @@ def get_all_announcements():
             GROUP BY a.id, u.username
             ORDER BY a.created_at DESC
         ''')
-        
+
         announcements = []
         for row in cur.fetchall():
             announcements.append({
@@ -443,7 +546,7 @@ def get_all_announcements():
                 'created_by': row[4],
                 'recipient_count': row[5]
             })
-            
+
         return announcements
     except Exception as e:
         print(f"Error getting all announcements: {e}")
@@ -451,6 +554,7 @@ def get_all_announcements():
     finally:
         cur.close()
         conn.close()
+
 
 def load_exams_from_json(filepath='static/js/exams.json'):
     """Loads exam data from a JSON file."""
@@ -462,13 +566,16 @@ def load_exams_from_json(filepath='static/js/exams.json'):
         print(f"Error: Exam data file not found at {filepath}")
         return []
     except json.JSONDecodeError:
-        print(f"Error: Could not decode JSON from {filepath}. Check file format.")
+        print(
+            f"Error: Could not decode JSON from {filepath}. Check file format.")
         return []
     except Exception as e:
         print(f"An unexpected error occurred loading exam data: {e}")
         return []
 
 # Add this new helper function to app.py
+
+
 def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -490,6 +597,7 @@ def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=Fal
         cur.close()
         conn.close()
 
+
 def get_subscription_plans():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -498,6 +606,7 @@ def get_subscription_plans():
     cur.close()
     conn.close()
     return plans
+
 
 def get_user_subscription(user_id):
     conn = get_db_connection()
@@ -515,6 +624,7 @@ def get_user_subscription(user_id):
     conn.close()
     return subscription
 
+
 def get_all_subscriptions():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -531,6 +641,7 @@ def get_all_subscriptions():
     conn.close()
     return subscriptions
 
+
 def mark_subscription_as_paid(subscription_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -542,7 +653,7 @@ def mark_subscription_as_paid(subscription_id):
             RETURNING user_id, plan_id
         ''', (subscription_id,))
         result = cur.fetchone()
-        
+
         if result:
             user_id, plan_id = result
             # Update user's role if needed (e.g., give premium access)
@@ -554,7 +665,7 @@ def mark_subscription_as_paid(subscription_id):
                 END
                 WHERE id = %s
             ''', (plan_id, user_id))
-        
+
         conn.commit()
         return True
     except Exception as e:
@@ -564,6 +675,7 @@ def mark_subscription_as_paid(subscription_id):
     finally:
         cur.close()
         conn.close()
+
 
 def record_practice_score(student_id, subject, topic, score, total_questions):
     conn = get_db_connection()
@@ -590,6 +702,7 @@ def record_practice_score(student_id, subject, topic, score, total_questions):
         cur.close()
         conn.close()
 
+
 def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -607,43 +720,43 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
             WHERE u.role = 'student'
         '''
         params = []
-        
+
         if subject:
             query += ' AND ps.subject = %s'
             params.append(subject)
         if topic:
             query += ' AND ps.topic = %s'
             params.append(topic)
-            
+
         if time_period == 'week':
             query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'7 days\''
         elif time_period == 'month':
             query += ' AND ps.completed_at >= CURRENT_DATE - INTERVAL \'30 days\''
-            
+
         query += '''
             GROUP BY u.id, u.username
             HAVING COUNT(ps.id) > 0
             ORDER BY avg_score DESC, attempt_count DESC
         '''
-        
+
         if limit:
             query += ' LIMIT %s'
             params.append(limit)
-        
+
         cur.execute(query, params)
-        
+
         leaderboard = []
         rank = 0
         prev_avg = None
         actual_rank = 0
-        
+
         for row in cur.fetchall():
             # Handle ties in average score
             if row[2] != prev_avg:
                 actual_rank = rank + 1
             prev_avg = row[2]
             rank += 1
-            
+
             leaderboard.append({
                 'user_id': row[0],
                 'username': row[1],
@@ -652,7 +765,7 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
                 'avg_percentage': row[4],
                 'rank': actual_rank
             })
-        
+
         # Get current user's stats if logged in
         user_stats = None
         user_rank = None
@@ -667,14 +780,14 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
                 WHERE student_id = %s
             ''', (session['user_id'],))
             avg_result = cur.fetchone()
-            
+
             if avg_result and avg_result[0]:
                 user_stats = {
                     'avg_score': avg_result[0],
                     'attempt_count': avg_result[1],
                     'avg_percentage': avg_result[2]
                 }
-                
+
                 # Get user's rank based on (total score / attempts)
                 cur.execute('''
                     WITH ranked_students AS (
@@ -692,9 +805,9 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
                 rank_result = cur.fetchone()
                 if rank_result:
                     user_rank = rank_result[0]
-        
+
         return leaderboard, user_stats, user_rank
-        
+
     except Exception as e:
         print(f"Error getting leaderboard: {e}")
         return [], None, None
@@ -703,6 +816,8 @@ def get_leaderboard(subject=None, topic=None, time_period='all', limit=20):
         conn.close()
 
 # Add this helper function to get user by ID
+
+
 def get_user_by_id(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -712,6 +827,7 @@ def get_user_by_id(user_id):
     conn.close()
     if user:
         return {'id': user[0], 'username': user[1]}
+
 
 def get_submission_for_grading(assignment_id, student_id):
     conn = get_db_connection()
@@ -730,7 +846,8 @@ def get_submission_for_grading(assignment_id, student_id):
             return None
 
         # Get assignment details, including content
-        cur.execute('SELECT id, title, total_marks, content FROM assignments WHERE id = %s', (assignment_id,))
+        cur.execute(
+            'SELECT id, title, total_marks, content FROM assignments WHERE id = %s', (assignment_id,))
         assignment = cur.fetchone()
 
         # Parse the content if it exists
@@ -763,6 +880,7 @@ def get_submission_for_grading(assignment_id, student_id):
         cur.close()
         conn.close()
 
+
 def update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -781,6 +899,7 @@ def update_submission_grade(assignment_id, student_id, marks_obtained, feedback)
     finally:
         cur.close()
         conn.close()
+
 
 def get_all_assignments():
     conn = get_db_connection()
@@ -804,7 +923,7 @@ def get_assignments_for_user(user_id):
             WHERE au.user_id = %s
             ORDER BY a.deadline
         ''', (user_id,))
-        
+
         assignments = []
         for row in cur.fetchall():
             assignments.append({
@@ -816,24 +935,29 @@ def get_assignments_for_user(user_id):
                 'description': row[5],
                 'status': 'active' if row[3] > datetime.utcnow() else 'expired'
             })
-            
+
         return assignments
     except Exception as e:
-        app.logger.error(f"Error getting assignments for user {user_id}: {str(e)}")
+        app.logger.error(
+            f"Error getting assignments for user {user_id}: {str(e)}")
         return []
     finally:
         cur.close()
         conn.close()
 
 # Assuming you have a function to get all student IDs if assigned_students_ids is None
+
+
 def get_all_student_ids():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id FROM users WHERE role = 'student'") # Adjust 'student' role as needed
+    # Adjust 'student' role as needed
+    cur.execute("SELECT id FROM users WHERE role = 'student'")
     student_ids = [row[0] for row in cur.fetchall()]
     cur.close()
     conn.close()
     return student_ids
+
 
 def add_assignment(title, description, subject, total_marks, deadline, assigned_students_ids=None, content=None):
     conn = get_db_connection()
@@ -848,7 +972,7 @@ def add_assignment(title, description, subject, total_marks, deadline, assigned_
         )
         assignment_id = cur.fetchone()[0]
 
-        if assigned_students_ids is None: # This means 'all' students
+        if assigned_students_ids is None:  # This means 'all' students
             assigned_students_ids_list = get_all_student_ids()
         else:
             assigned_students_ids_list = assigned_students_ids
@@ -873,6 +997,7 @@ def add_assignment(title, description, subject, total_marks, deadline, assigned_
         cur.close()
         conn.close()
 
+
 def get_assignment_details(assignment_id):
     """Get full details for a specific assignment"""
     conn = get_db_connection()
@@ -890,6 +1015,7 @@ def get_assignment_details(assignment_id):
         cur.close()
         conn.close()
 
+
 def get_student_submission(student_id, assignment_id):
     """Get a student's submission for an assignment"""
     conn = get_db_connection()
@@ -906,6 +1032,7 @@ def get_student_submission(student_id, assignment_id):
         cur.close()
         conn.close()
 
+
 def get_student_submissions(student_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -917,7 +1044,7 @@ def get_student_submissions(student_id):
         WHERE s.student_id = %s
         ORDER BY a.deadline DESC
     ''', (student_id,))
-    
+
     # Convert tuples to dictionaries with meaningful keys
     submissions = []
     for row in cur.fetchall():
@@ -931,10 +1058,11 @@ def get_student_submissions(student_id):
             'feedback': row[6],
             'file_path': row[7]
         })
-    
+
     cur.close()
     conn.close()
     return submissions
+
 
 def submit_assignment(assignment_id, student_id, submission_text, file_path=None, interactive_submission_data=None):
     conn = get_db_connection()
@@ -950,7 +1078,7 @@ def submit_assignment(assignment_id, student_id, submission_text, file_path=None
                 submission_time = CURRENT_TIMESTAMP,
                 interactive_submission_data = EXCLUDED.interactive_submission_data -- Update interactive data
             RETURNING id
-        ''', (assignment_id, student_id, submission_text, file_path, interactive_submission_data)) # Include interactive_submission_data here
+        ''', (assignment_id, student_id, submission_text, file_path, interactive_submission_data))  # Include interactive_submission_data here
         submission_id = cur.fetchone()[0]
         conn.commit()
         return True
@@ -962,10 +1090,12 @@ def submit_assignment(assignment_id, student_id, submission_text, file_path=None
         cur.close()
         conn.close()
 
+
 def get_user_by_username(username):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT id, username, password, role FROM users WHERE username = %s', (username,))
+    cur.execute(
+        'SELECT id, username, password, role FROM users WHERE username = %s', (username,))
     user = cur.fetchone()
     cur.close()
     conn.close()
@@ -977,6 +1107,7 @@ def get_user_by_username(username):
             'role': user[3]
         }
     return None
+
 
 def get_student_bookings(student_id):
     conn = get_db_connection()
@@ -993,6 +1124,7 @@ def get_student_bookings(student_id):
     conn.close()
     return bookings
 
+
 def get_all_categories():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1002,19 +1134,23 @@ def get_all_categories():
     conn.close()
     return categories
 
+
 def get_category_name(category_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT name FROM tutorial_categories WHERE id = %s', (category_id,))
+    cur.execute(
+        'SELECT name FROM tutorial_categories WHERE id = %s', (category_id,))
     category = cur.fetchone()
     cur.close()
     conn.close()
     return category[0] if category else "Unknown Category"
 
+
 def get_videos_by_category(category_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT id, title, url FROM tutorial_videos WHERE category_id = %s', (category_id,))
+    cur.execute(
+        'SELECT id, title, url FROM tutorial_videos WHERE category_id = %s', (category_id,))
     rows = cur.fetchall()
     cur.close()
     conn.close()
@@ -1026,6 +1162,7 @@ def get_videos_by_category(category_id):
     ]
     return videos
 
+
 def get_students():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1034,6 +1171,7 @@ def get_students():
     cur.close()
     conn.close()
     return students
+
 
 def add_student_to_db(username, password):  # Changed from add_student
     conn = get_db_connection()
@@ -1044,13 +1182,16 @@ def add_student_to_db(username, password):  # Changed from add_student
     cur.close()
     conn.close()
 
+
 def delete_student_by_id(student_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('DELETE FROM users WHERE id = %s AND role = %s', (student_id, 'student'))
+    cur.execute('DELETE FROM users WHERE id = %s AND role = %s',
+                (student_id, 'student'))
     conn.commit()
     cur.close()
     conn.close()
+
 
 def get_all_sessions():
     conn = get_db_connection()
@@ -1067,6 +1208,7 @@ def get_all_sessions():
     cur.close()
     conn.close()
     return sessions
+
 
 def get_upcoming_sessions():
     conn = get_db_connection()
@@ -1086,6 +1228,7 @@ def get_upcoming_sessions():
     conn.close()
     return sessions
 
+
 def get_student_bookings(student_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1101,6 +1244,7 @@ def get_student_bookings(student_id):
     conn.close()
     return bookings
 
+
 def create_session(title, description, start_time, end_time, max_students):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1115,10 +1259,11 @@ def create_session(title, description, start_time, end_time, max_students):
     conn.close()
     return session_id
 
+
 def book_session(student_id, session_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     # Check if session exists and has available spots
     cur.execute('''
         SELECT COUNT(sb.id), ts.max_students
@@ -1128,12 +1273,12 @@ def book_session(student_id, session_id):
         GROUP BY ts.id
     ''', (session_id,))
     result = cur.fetchone()
-    
+
     if not result or result[0] >= result[1]:
         cur.close()
         conn.close()
         return False
-    
+
     # Check if student already booked this session
     cur.execute('''
         SELECT id FROM student_bookings 
@@ -1143,7 +1288,7 @@ def book_session(student_id, session_id):
         cur.close()
         conn.close()
         return False
-    
+
     # Create booking
     cur.execute('''
         INSERT INTO student_bookings (student_id, session_id)
@@ -1153,6 +1298,7 @@ def book_session(student_id, session_id):
     cur.close()
     conn.close()
     return True
+
 
 def cancel_booking(booking_id, student_id):
     conn = get_db_connection()
@@ -1166,7 +1312,6 @@ def cancel_booking(booking_id, student_id):
     cur.close()
     conn.close()
     return affected_rows > 0
-    
 
 
 @app.route('/video-conference')
@@ -1174,6 +1319,8 @@ def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 # Decorators
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -1182,6 +1329,7 @@ def login_required(f):
             return redirect(url_for('login', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
+
 
 def admin_required(f):
     @wraps(f)
@@ -1192,23 +1340,27 @@ def admin_required(f):
     return decorated_function
 
 # Student session booking routes
+
+
 @app.route('/sessions/book/<int:session_id>', methods=['POST'])
 @login_required
 def book_session_route(session_id):
     if session.get('role') != 'student':
         flash('Only students can book sessions', 'danger')
         return redirect(url_for('view_sessions'))
-    
+
     student_id = session.get('user_id')
     if not student_id:
         flash('User not properly authenticated', 'danger')
         return redirect(url_for('view_sessions'))
-    
+
     if book_session(student_id, session_id):
         flash('Session booked successfully!', 'success')
     else:
-        flash('Could not book session. It might be full or you already booked it.', 'danger')
+        flash(
+            'Could not book session. It might be full or you already booked it.', 'danger')
     return redirect(url_for('view_sessions'))
+
 
 @app.route('/sessions/cancel/<int:booking_id>', methods=['POST'])
 @login_required
@@ -1220,6 +1372,8 @@ def cancel_booking_route(booking_id):
     return redirect(url_for('view_sessions'))
 
 # Admin session management routes
+
+
 @app.route('/sessions')
 @login_required
 def view_sessions():
@@ -1227,25 +1381,28 @@ def view_sessions():
     if not student_id:
         flash('User not properly authenticated', 'danger')
         return redirect(url_for('login'))
-    
+
     sessions = get_all_sessions()
     student_bookings = get_student_bookings(student_id)
-    return render_template('sessions/list.html', 
-                         sessions=sessions, 
-                         bookings=student_bookings)
+    return render_template('sessions/list.html',
+                           sessions=sessions,
+                           bookings=student_bookings)
 
 # Add this new route to app.py
+
+
 @app.route('/admin/sessions/bookings/<int:session_id>')
 @login_required
 @admin_required
 def view_session_bookings(session_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     # Get session details
-    cur.execute('SELECT title FROM tutorial_sessions WHERE id = %s', (session_id,))
+    cur.execute(
+        'SELECT title FROM tutorial_sessions WHERE id = %s', (session_id,))
     session_title = cur.fetchone()[0]
-    
+
     # Get users who booked this session
     cur.execute('''
         SELECT u.id, u.username 
@@ -1254,13 +1411,13 @@ def view_session_bookings(session_id):
         WHERE sb.session_id = %s
     ''', (session_id,))
     booked_users = cur.fetchall()
-    
+
     cur.close()
     conn.close()
-    
-    return render_template('admin/session_bookings.html', 
-                         session_title=session_title,
-                         booked_users=booked_users)
+
+    return render_template('admin/session_bookings.html',
+                           session_title=session_title,
+                           booked_users=booked_users)
 
 
 @app.route('/admin/sessions')
@@ -1269,9 +1426,10 @@ def view_session_bookings(session_id):
 def manage_sessions():
     sessions = get_all_sessions()
     upcoming_sessions = get_upcoming_sessions()
-    return render_template('admin/sessions.html', 
-                         sessions=sessions,
-                         upcoming_sessions=upcoming_sessions)
+    return render_template('admin/sessions.html',
+                           sessions=sessions,
+                           upcoming_sessions=upcoming_sessions)
+
 
 @app.route('/admin/sessions/add', methods=['GET', 'POST'])
 @login_required
@@ -1283,15 +1441,17 @@ def add_session():
         start_time = request.form.get('start_time')
         end_time = request.form.get('end_time')
         max_students = request.form.get('max_students')
-        
+
         try:
-            create_session(title, description, start_time, end_time, int(max_students))
+            create_session(title, description, start_time,
+                           end_time, int(max_students))
             flash('Session created successfully', 'success')
             return redirect(url_for('manage_sessions'))
         except Exception as e:
             flash(f'Error creating session: {str(e)}', 'danger')
-    
+
     return render_template('admin/add_session.html')
+
 
 @app.route('/admin/sessions/delete/<int:session_id>')
 @login_required
@@ -1307,6 +1467,8 @@ def delete_session(session_id):
     return redirect(url_for('manage_sessions'))
 
 # Add these helper functions
+
+
 def get_all_videos():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1320,6 +1482,7 @@ def get_all_videos():
     conn.close()
     return videos
 
+
 def add_video(title, url, category_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1329,6 +1492,7 @@ def add_video(title, url, category_id):
     cur.close()
     conn.close()
 
+
 def delete_video(video_id):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1337,26 +1501,29 @@ def delete_video(video_id):
     cur.close()
     conn.close()
 
+
 @app.route('/admin/tutorials')
 @login_required
 @admin_required
 def manage_tutorials():
     videos = get_all_videos()  # This should return a list of videos
     categories = get_all_categories()  # This should return a list of categories
-    
+
     # Convert to the structure your template expects
     tutorials_dict = {
         category[1]: {  # category name as key
-            'videos': [v for v in videos if v[3] == category[1]],  # videos for this category
+            # videos for this category
+            'videos': [v for v in videos if v[3] == category[1]],
             'id': category[0]  # category id
         }
         for category in categories
     }
-    
-    return render_template('admin/tutorials.html', 
-                         tutorials=tutorials_dict,
-                         videos=videos,
-                         categories=categories)
+
+    return render_template('admin/tutorials.html',
+                           tutorials=tutorials_dict,
+                           videos=videos,
+                           categories=categories)
+
 
 @app.route('/admin/tutorials/add', methods=['GET', 'POST'])
 @login_required
@@ -1367,22 +1534,23 @@ def add_tutorial():
             title = request.form.get('title', '').strip()
             url = request.form.get('url', '').strip()
             category_id = request.form.get('category_id', '').strip()
-            
+
             if not all([title, url, category_id]):
                 flash('All fields are required', 'danger')
                 return redirect(url_for('add_tutorial'))
-            
+
             add_video(title, url, category_id)
             flash('Tutorial added successfully', 'success')
             return redirect(url_for('manage_tutorials'))
-            
+
         except Exception as e:
             flash(f'Error adding tutorial: {str(e)}', 'danger')
             return redirect(url_for('add_tutorial'))
-    
+
     # GET request - show the form
     categories = get_all_categories()
     return render_template('admin/add_tutorial.html', categories=categories)
+
 
 @app.route('/admin/tutorials/delete/<int:video_id>')
 @login_required
@@ -1393,6 +1561,8 @@ def delete_tutorial(video_id):
     return redirect(url_for('manage_tutorials'))
 
 # Routes
+
+
 @app.route('/')
 def home():
     # Initialize subscription to None
@@ -1405,16 +1575,20 @@ def home():
     # Pass the subscription variable to the render_template function
     return render_template('home.html', subscription=subscription)
 
-#Curriculums
+# Curriculums
+
+
 @app.route('/math-curriculum')
 @login_required
 def math_curriculum():
     return render_template('math_curriculum.html')
 
+
 @app.route('/science_curriculum')
 @login_required
 def science_curriculum():
     return render_template('science_curriculum.html')
+
 
 @app.route('/english_curriculum')
 @login_required
@@ -1422,15 +1596,17 @@ def english_curriculum():
     return render_template('english_curriculum.html')
 
 # API Endpoints
+
+
 @app.route('/api/solve-equation', methods=['POST'])
 def api_solve_equation():
     data = request.get_json()
     expr = data.get('expression', '')
-    
+
     try:
         # Use SymPy for more advanced solving
         x = symbols('x')
-        
+
         if '=' in expr:
             # Handle equations
             parts = expr.split('=')
@@ -1438,15 +1614,16 @@ def api_solve_equation():
             rhs = sympy.sympify(parts[1])
             equation = Eq(lhs, rhs)
             solutions = solve(equation, x)
-            
+
             # Format solutions
             solution_text = []
             for sol in solutions:
                 if sol.is_real:
                     solution_text.append(f"x = {sol.evalf(3)}")
                 else:
-                    solution_text.append(f"x = {sol.as_real_imag()[0].evalf(3)} + {sol.as_real_imag()[1].evalf(3)}i")
-            
+                    solution_text.append(
+                        f"x = {sol.as_real_imag()[0].evalf(3)} + {sol.as_real_imag()[1].evalf(3)}i")
+
             return jsonify({
                 'solution': ', '.join(solution_text),
                 'steps': [str(step) for step in sympy.solveset(equation, x, domain=sympy.S.Reals).args]
@@ -1458,16 +1635,17 @@ def api_solve_equation():
                 'solution': str(simplified),
                 'steps': [f"Simplified: {simplified}"]
             })
-            
+
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
 
 @app.route('/api/save-equation', methods=['POST'])
 @login_required
 def api_save_equation():
     data = request.get_json()
     equation = data.get('equation', '')
-    
+
     try:
         conn = get_db_connection()
         cur = conn.cursor()
@@ -1481,6 +1659,7 @@ def api_save_equation():
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/api/get-saved-equations', methods=['GET'])
 @login_required
@@ -1500,6 +1679,7 @@ def api_get_saved_equations():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
 @app.route('/api/delete-equation/<int:eq_id>', methods=['DELETE'])
 @login_required
 def api_delete_equation(eq_id):
@@ -1517,16 +1697,17 @@ def api_delete_equation(eq_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
 @app.route('/grade7/maths')
 def grade_7_maths():
     try:
         # Load the JSON data
         with open('static/data/grade7_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1536,6 +1717,7 @@ def grade_7_maths():
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
+
 
 @app.route('/grade8/maths')
 def grade_8_maths():
@@ -1543,10 +1725,10 @@ def grade_8_maths():
         # Load the JSON data
         with open('static/data/grade8_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1556,6 +1738,7 @@ def grade_8_maths():
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
+
 
 @app.route('/grade9/maths')
 def grade_9_maths():
@@ -1563,10 +1746,10 @@ def grade_9_maths():
         # Load the JSON data
         with open('static/data/grade9_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1576,6 +1759,7 @@ def grade_9_maths():
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
+
 
 @app.route('/grade10/maths')
 def grade_10_maths():
@@ -1583,10 +1767,10 @@ def grade_10_maths():
         # Load the JSON data
         with open('static/data/grade10_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1596,6 +1780,7 @@ def grade_10_maths():
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
+
 
 @app.route('/grade11/maths')
 def grade_11_maths():
@@ -1603,10 +1788,10 @@ def grade_11_maths():
         # Load the JSON data
         with open('static/data/grade11_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1617,16 +1802,17 @@ def grade_11_maths():
     except json.JSONDecodeError:
         abort(500, description="Error loading curriculum data")
 
+
 @app.route('/grade12/maths')
 def grade_12_maths():
     try:
         # Load the JSON data
         with open('static/data/grade12_math.json', 'r') as f:
             subject_data = json.load(f)
-        
+
         # Calculate progress (you would get this from the database in a real app)
         progress = 15  # Example value
-        
+
         return render_template(
             'maths.html',
             subject_data=subject_data,
@@ -1635,11 +1821,13 @@ def grade_12_maths():
     except FileNotFoundError:
         abort(404, description="Curriculum not found")
     except json.JSONDecodeError:
-        abort(500, description="Error loading curriculum data") 
+        abort(500, description="Error loading curriculum data")
+
 
 @app.route('/algebra-calculator')
 def algebra_calculator():
-    return render_template('algebra_calculator.html')            
+    return render_template('algebra_calculator.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -1652,13 +1840,15 @@ def login():
             session['username'] = username
             session['user_id'] = user['id']
             session['role'] = user['role']
-            session['class'] = user.get('class', 'default_class')  # Add this line
+            session['class'] = user.get(
+                'class', 'default_class')  # Add this line
             flash('Logged in successfully!', 'success')
             return redirect(request.args.get('next') or url_for('home'))
         else:
             flash('Invalid username or password', 'danger')
 
     return render_template('auth/login.html')
+
 
 @app.route('/logout')
 def logout():
@@ -1681,15 +1871,18 @@ def logout():
 #     }
 #     return render_template('tutorials/index.html', tutorials=tutorials_dict, categories=categories)
 
+
 @app.route('/tutorials')
 @login_required
 def tutorials_home():
     return render_template('tutorials/video_tutorials.html')
 
+
 @app.route('/study_guides')
 @login_required
 def studyguides_home():
     return render_template('study_guides.html')
+
 
 @app.route('/tutorials/<int:category_id>')
 @login_required
@@ -1698,15 +1891,17 @@ def tutorial_language(category_id):
     if not videos:
         flash('Tutorial category not found', 'danger')
         return redirect(url_for('tutorials_home'))
-    
+
     # Get the category name
     category_name = get_category_name(category_id)
-    
-    return render_template('tutorials/language.html', 
-                         videos=videos,
-                         category={'id': category_id, 'name': category_name})
+
+    return render_template('tutorials/language.html',
+                           videos=videos,
+                           category={'id': category_id, 'name': category_name})
 
 # Admin dashboard
+
+
 @app.route('/admin')
 @login_required
 @admin_required
@@ -1714,7 +1909,7 @@ def admin_dashboard():
     students = get_students()
     categories = get_all_categories()
     upcoming_sessions = get_upcoming_sessions()
-    
+
     # Get active subscription count
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1729,14 +1924,15 @@ def admin_dashboard():
     assignments = cur.fetchall()
     cur.close()
     conn.close()
-    
+
     print(assignments[0][0])
     return render_template('admin/dashboard.html',
-                        assignments=assignments, 
-                         student_count=len(students), 
-                         category_count=len(categories),
-                         upcoming_sessions=upcoming_sessions,
-                         active_subscriptions_count=active_subscriptions_count)
+                           assignments=assignments,
+                           student_count=len(students),
+                           category_count=len(categories),
+                           upcoming_sessions=upcoming_sessions,
+                           active_subscriptions_count=active_subscriptions_count)
+
 
 @app.route('/admin/students')
 @login_required
@@ -1744,6 +1940,7 @@ def admin_dashboard():
 def manage_students():
     students = get_students()
     return render_template('admin/students.html', students=students)
+
 
 @app.route('/admin/students/add', methods=['GET', 'POST'])
 @login_required
@@ -1763,6 +1960,7 @@ def add_student():
 
     return render_template('admin/add_student.html')
 
+
 @app.route('/admin/students/delete/<int:student_id>')
 @login_required
 @admin_required
@@ -1770,6 +1968,7 @@ def delete_student(student_id):
     delete_student_by_id(student_id)
     flash('Student deleted successfully', 'success')
     return redirect(url_for('manage_students'))
+
 
 @app.errorhandler(403)
 def forbidden(e):
@@ -1820,7 +2019,7 @@ def list_all_submissions():
                 'file_path': row[5],
                 'submission_text': row[6],
                 'interactive_submission_data': row[7],
-                'assignment_id': row[8] # Add assignment_id to the dictionary
+                'assignment_id': row[8]  # Add assignment_id to the dictionary
             })
     except Exception as e:
         print(f"Error fetching all submissions: {e}")
@@ -1834,13 +2033,17 @@ def list_all_submissions():
     return render_template('admin/all_submissions.html', submissions=submissions_data)
 
 # Student assignment routes
+
+
 @app.route('/assignments', methods=['GET'])
 @login_required
 def student_assignments():
-    user_id = session.get('user_id') # Make sure this is how you get the current user's ID
+    # Make sure this is how you get the current user's ID
+    user_id = session.get('user_id')
     if not user_id:
         flash('Please log in to view your assignments.', 'warning')
-        return redirect(url_for('login')) # Redirect to login if user_id not found
+        # Redirect to login if user_id not found
+        return redirect(url_for('login'))
 
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1868,7 +2071,7 @@ def student_assignments():
         WHERE asl.student_id = %s
         ORDER BY a.deadline DESC;
             """,
-            (user_id,) # Pass user_id twice for both EXISTS and WHERE clauses
+            (user_id,)  # Pass user_id twice for both EXISTS and WHERE clauses
         )
         for row in cur.fetchall():
             assignments.append({
@@ -1878,15 +2081,17 @@ def student_assignments():
                 'subject': row[3],
                 'total_marks': row[4],
                 'deadline': row[5],
-                'content': row[6] if row[6] else None,  # Removed json.loads() since content is already a dict
+                # Removed json.loads() since content is already a dict
+                'content': row[6] if row[6] else None,
                 'created_at': row[7],
                 'submitted': row[8],
                 'grade': row[9]
             })
-        
+
         for assignment in assignments:
-            assignment['status'] = 'active' if assignment['deadline'] and assignment['deadline'] > datetime.now() else 'past_deadline'
-            
+            assignment['status'] = 'active' if assignment['deadline'] and assignment['deadline'] > datetime.now(
+            ) else 'past_deadline'
+
     except Exception as e:
         print(f"Error fetching student assignments: {e}")
         flash('Could not load your assignments.', 'danger')
@@ -1897,32 +2102,35 @@ def student_assignments():
     return render_template('assignments/list.html', assignments=assignments)
 
 # Update the view_assignment route to handle interactive assignments
+
+
 @app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
 @login_required
 def view_assignment(assignment_id):
     if session.get('role') != 'student':
         flash('Only students can view assignments', 'danger')
         return redirect(url_for('home'))
-    
+
     assignment = get_assignment_details(assignment_id)
     if not assignment:
         flash('Assignment not found', 'danger')
         return redirect(url_for('view_assignments'))
-    
+
     submission = get_student_submission(session['user_id'], assignment_id)
-    
+
     if request.method == 'POST':
         submission_text = request.form.get('submission_text', '')
         file_path = None
-        
+
         # Handle interactive submission data if present
         interactive_data = None
-        if assignment[7]:  # Check if there's interactive content (index 7 is content)
+        # Check if there's interactive content (index 7 is content)
+        if assignment[7]:
             try:
                 # Get form data for interactive questions
                 interactive_data = {}
                 assignment_content = json.loads(assignment[7])
-                
+
                 # Extract answers for each interactive question
                 for question in assignment_content.get('questions', []):
                     qid = question.get('id')
@@ -1934,11 +2142,11 @@ def view_assignment(assignment_id):
                                 'answer': answer,
                                 'correct_answer': question.get('correct_answer')
                             }
-                
+
                 interactive_data = json.dumps(interactive_data)
             except Exception as e:
                 print(f"Error processing interactive data: {e}")
-        
+
         if 'assignment_file' in request.files:
             file = request.files['assignment_file']
             if file.filename != '':
@@ -1946,13 +2154,13 @@ def view_assignment(assignment_id):
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
                 file.save(file_path)
-        
+
         if submit_assignment(assignment_id, session['user_id'], submission_text, file_path, interactive_data):
             flash('Assignment submitted successfully!', 'success')
             return redirect(url_for('view_assignment', assignment_id=assignment_id))
         else:
             flash('Error submitting assignment', 'danger')
-    
+
     # Parse assignment content if it exists
     content = None
     if assignment[7]:  # index 7 is the content field
@@ -1960,24 +2168,25 @@ def view_assignment(assignment_id):
             content = json.loads(assignment[7])
         except (TypeError, json.JSONDecodeError):
             content = assignment[7]  # fallback to raw content if not JSON
-    
+
     return render_template('assignments/view.html',
-                         assignment={
-                             'id': assignment[0],
-                             'title': assignment[1],
-                             'description': assignment[2],
-                             'subject': assignment[3],
-                             'total_marks': assignment[4],
-                             'deadline': assignment[5],
-                             'created_at': assignment[6],
-                             'content': content
-                         },
-                         submission=submission)
+                           assignment={
+                               'id': assignment[0],
+                               'title': assignment[1],
+                               'description': assignment[2],
+                               'subject': assignment[3],
+                               'total_marks': assignment[4],
+                               'deadline': assignment[5],
+                               'created_at': assignment[6],
+                               'content': content
+                           },
+                           submission=submission)
 
 
-@app.route('/assignments/submissions') # Adjust this route name if yours is different
-@login_required # Assuming this page requires login
-def view_submissions(): # Adjust this function name if yours is different
+# Adjust this route name if yours is different
+@app.route('/assignments/submissions')
+@login_required  # Assuming this page requires login
+def view_submissions():  # Adjust this function name if yours is different
     user_id = session.get('user_id')
     if not user_id:
         flash("Please log in to view your submissions.", "warning")
@@ -2049,10 +2258,11 @@ def view_submissions(): # Adjust this function name if yours is different
         )
         avg_row = cur.fetchone()
         if avg_row and avg_row[0] is not None and avg_row[1] is not None and avg_row[1] > 0:
-            average_score = (avg_row[0] / avg_row[1]) * 100 # Percentage
-            average_score = round(average_score, 2) # Round to 2 decimal places
+            average_score = (avg_row[0] / avg_row[1]) * 100  # Percentage
+            # Round to 2 decimal places
+            average_score = round(average_score, 2)
         else:
-            average_score = 0 # No graded submissions or total marks is zero
+            average_score = 0  # No graded submissions or total marks is zero
 
         # Fetch Monthly Scores
         cur.execute(
@@ -2082,11 +2292,13 @@ def view_submissions(): # Adjust this function name if yours is different
             monthly_possible_marks_sum = row[3]
 
             if monthly_possible_marks_sum and monthly_possible_marks_sum > 0:
-                percentage = (monthly_grade_sum / monthly_possible_marks_sum) * 100
+                percentage = (monthly_grade_sum /
+                              monthly_possible_marks_sum) * 100
                 monthly_scores.append({
                     'year': year,
                     'month': month,
-                    'month_name': datetime(year, month, 1).strftime('%B'), # Get month name
+                    # Get month name
+                    'month_name': datetime(year, month, 1).strftime('%B'),
                     'score': round(percentage, 2)
                 })
 
@@ -2106,6 +2318,7 @@ def view_submissions(): # Adjust this function name if yours is different
         monthly_scores=monthly_scores
     )
 
+
 @app.route('/admin/assignments/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -2119,7 +2332,8 @@ def add_assignment_route():
             total_marks = request.form.get('total_marks', '').strip()
             deadline_str = request.form.get('deadline', '').strip()
             assign_to = request.form.get('assign_to')  # 'all' or 'selected'
-            selected_users = request.form.getlist('selected_users[]') if assign_to == 'selected' else []
+            selected_users = request.form.getlist(
+                'selected_users[]') if assign_to == 'selected' else []
 
             # Validate required fields
             if not all([title, description, subject, total_marks, deadline_str]):
@@ -2150,7 +2364,8 @@ def add_assignment_route():
             if assign_to == 'all':
                 conn = get_db_connection()
                 cur = conn.cursor()
-                cur.execute('SELECT id FROM users WHERE role = %s', ('student',))
+                cur.execute(
+                    'SELECT id FROM users WHERE role = %s', ('student',))
                 user_ids = [row[0] for row in cur.fetchall()]
                 cur.close()
                 conn.close()
@@ -2176,11 +2391,11 @@ def add_assignment_route():
         except Exception as e:
             flash(f'Error creating assignment: {str(e)}', 'danger')
             app.logger.error(f"Assignment creation error: {str(e)}")
-    
+
     # GET request - show form with students
     students = get_students()
     return render_template('admin/assignments/add.html', students=students)
-    
+
 
 @app.route('/admin/assignments')
 @login_required
@@ -2199,7 +2414,7 @@ def manage_assignments():
             GROUP BY a.id
             ORDER BY a.deadline
         ''')
-        
+
         assignments = []
         for row in cur.fetchall():
             assignments.append({
@@ -2212,11 +2427,12 @@ def manage_assignments():
                 'assigned_count': row[6],
                 'submission_count': row[7]
             })
-        
+
         return render_template('admin/assignments/list.html', assignments=assignments)
     finally:
         cur.close()
         conn.close()
+
 
 @app.route('/admin/assignments/<int:assignment_id>/submissions')
 @login_required
@@ -2226,12 +2442,13 @@ def view_assignment_submissions(assignment_id):
     cur = conn.cursor()
     try:
         # Get assignment details
-        cur.execute('SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
+        cur.execute(
+            'SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
         assignment = cur.fetchone()
         if not assignment:
             flash('Assignment not found', 'danger')
             return redirect(url_for('manage_assignments'))
-        
+
         # Get submissions with student IDs
         cur.execute('''
             SELECT u.username, s.submission_time, s.grade, u.id as student_id, s.feedback
@@ -2241,20 +2458,21 @@ def view_assignment_submissions(assignment_id):
             ORDER BY s.submission_time DESC
         ''', (assignment_id,))
         submissions = cur.fetchall()
-        
+
         return render_template('admin/assignments/submissions.html',
-                            assignment_title=assignment[1],
-                            assignment_id=assignment_id,
-                            submissions=submissions)
+                               assignment_title=assignment[1],
+                               assignment_id=assignment_id,
+                               submissions=submissions)
     finally:
         cur.close()
         conn.close()
+
 
 @app.route('/admin/dashboard')
 @login_required
 def dashboard():
     try:
-    
+
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('''
@@ -2266,7 +2484,7 @@ def dashboard():
         assignments = cur.fetchall()
         cur.close()
         conn.close()
-        
+
         print(assignments)
         return render_template(
             'admin/dashboard.html',
@@ -2275,11 +2493,13 @@ def dashboard():
         )
     except Exception as e:
         app.logger.error(f"Error fetching assignments: {str(e)}")
-        return render_template('dashboard.html', 
-                            assignments=[], 
-                            current_time=datetime.utcnow())
-    
+        return render_template('dashboard.html',
+                               assignments=[],
+                               current_time=datetime.utcnow())
+
 # Add these new routes to app.py
+
+
 @app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -2289,23 +2509,23 @@ def grade_submission(assignment_id, student_id):
     if not student:
         flash('Student not found', 'danger')
         return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-    
+
     # Get submission and assignment details
     data = get_submission_for_grading(assignment_id, student_id)
     if not data:
         flash('Submission not found', 'danger')
         return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-    
+
     if request.method == 'POST':
         marks_obtained = request.form.get('marks_obtained')
         feedback = request.form.get('feedback', '')
-        
+
         try:
             marks_obtained = float(marks_obtained)
             if marks_obtained < 0 or marks_obtained > data['assignment']['total_marks']:
                 flash('Invalid marks value', 'danger')
                 return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
-            
+
             if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
                 flash('Grade submitted successfully', 'success')
                 return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
@@ -2313,12 +2533,13 @@ def grade_submission(assignment_id, student_id):
                 flash('Error submitting grade', 'danger')
         except ValueError:
             flash('Invalid marks format', 'danger')
-    
+
     return render_template('admin/assignments/grade.html',
-                         assignment_id=assignment_id,
-                         student=student,
-                         submission=data['submission'],
-                         assignment=data['assignment'])
+                           assignment_id=assignment_id,
+                           student=student,
+                           submission=data['submission'],
+                           assignment=data['assignment'])
+
 
 @app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/submit-grade', methods=['POST'])
 @login_required
@@ -2326,49 +2547,52 @@ def grade_submission(assignment_id, student_id):
 def submit_grade(assignment_id, student_id):
     marks_obtained = request.form.get('marks_obtained')
     feedback = request.form.get('feedback', '')
-    
+
     try:
         marks_obtained = float(marks_obtained)
-        
+
         # Get assignment to validate max marks
         assignment = get_assignment_details(assignment_id)
         if not assignment:
             flash('Assignment not found', 'danger')
             return redirect(url_for('manage_assignments'))
-        
-        if marks_obtained < 0 or marks_obtained > assignment[4]:  # total_marks is at index 4
+
+        # total_marks is at index 4
+        if marks_obtained < 0 or marks_obtained > assignment[4]:
             flash('Invalid marks value', 'danger')
             return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
-        
+
         if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
             flash('Grade submitted successfully', 'success')
         else:
             flash('Error submitting grade', 'danger')
     except ValueError:
         flash('Invalid marks format', 'danger')
-    
+
     return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
 
-#Leaderboard routes
+# Leaderboard routes
+
+
 @app.route('/leaderboard')
 @login_required
 def view_leaderboard():
     subject = request.args.get('subject')
     topic = request.args.get('topic')
     time_period = request.args.get('time', 'all')
-    
+
     leaderboard, user_stats, user_rank = get_leaderboard(
-        subject=subject, 
-        topic=topic, 
+        subject=subject,
+        topic=topic,
         time_period=time_period
     )
-    
+
     # Get available subjects and topics
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT DISTINCT subject FROM practice_scores ORDER BY subject')
     available_subjects = [row[0] for row in cur.fetchall()]
-    
+
     available_topics = []
     if subject:
         cur.execute('''
@@ -2376,37 +2600,38 @@ def view_leaderboard():
             WHERE subject = %s ORDER BY topic
         ''', (subject,))
         available_topics = [row[0] for row in cur.fetchall()]
-    
+
     cur.close()
     conn.close()
-    
+
     return render_template('leaderboard.html',
-                         leaderboard=leaderboard,
-                         available_subjects=available_subjects,
-                         available_topics=available_topics,
-                         current_subject=subject,
-                         current_topic=topic,
-                         user_stats=user_stats,
-                         user_rank=user_rank)
+                           leaderboard=leaderboard,
+                           available_subjects=available_subjects,
+                           available_topics=available_topics,
+                           current_subject=subject,
+                           current_topic=topic,
+                           user_stats=user_stats,
+                           user_rank=user_rank)
+
 
 @app.route('/api/leaderboard-details')
 @login_required
 def get_leaderboard_details():
     user_id = request.args.get('user_id')
-    
+
     if not user_id:
         return jsonify({'error': 'Missing user_id parameter'}), 400
-    
+
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     try:
         # Get basic user info
         cur.execute('SELECT username FROM users WHERE id = %s', (user_id,))
         user = cur.fetchone()
         if not user:
             return jsonify({'error': 'User not found'}), 404
-        
+
         # Get overall stats (total score / attempts)
         cur.execute('''
             SELECT 
@@ -2417,7 +2642,7 @@ def get_leaderboard_details():
             WHERE student_id = %s
         ''', (user_id,))
         overall_stats = cur.fetchone()
-        
+
         # Get global rank based on (total score / attempts)
         cur.execute('''
             WITH ranked_students AS (
@@ -2433,7 +2658,7 @@ def get_leaderboard_details():
             WHERE student_id = %s
         ''', (user_id,))
         rank_result = cur.fetchone()
-        
+
         # Get performance by subject
         cur.execute('''
             SELECT 
@@ -2454,7 +2679,7 @@ def get_leaderboard_details():
                 'attempt_count': row[2],
                 'avg_percentage': row[3]
             })
-        
+
         # Get history for chart
         cur.execute('''
             SELECT 
@@ -2468,7 +2693,7 @@ def get_leaderboard_details():
             WHERE student_id = %s
             ORDER BY completed_at
         ''', (user_id,))
-        
+
         history = []
         for row in cur.fetchall():
             history.append({
@@ -2479,7 +2704,7 @@ def get_leaderboard_details():
                 'subject': row[4],
                 'topic': row[5]
             })
-        
+
         return jsonify({
             'username': user[0],
             'avg_score': overall_stats[0] if overall_stats else 0,
@@ -2489,7 +2714,7 @@ def get_leaderboard_details():
             'subjects': subjects,
             'history': history
         })
-        
+
     except Exception as e:
         print(f"Error getting leaderboard details: {e}")
         return jsonify({'error': 'Internal server error'}), 500
@@ -2497,21 +2722,22 @@ def get_leaderboard_details():
         cur.close()
         conn.close()
 
+
 @app.route('/api/record-practice', methods=['POST'])
 @login_required
 def record_practice():
     if session.get('role') != 'student':
         return jsonify({'success': False, 'error': 'Only students can record practice'})
-    
+
     data = request.get_json()
     subject = data.get('subject')
     topic = data.get('topic')
     score = data.get('score')
     total_questions = data.get('total_questions')
-    
+
     if not all([subject, topic, score is not None, total_questions]):
         return jsonify({'success': False, 'error': 'Missing required fields'})
-    
+
     try:
         success = record_practice_score(
             student_id=session['user_id'],
@@ -2523,49 +2749,53 @@ def record_practice():
         return jsonify({'success': success})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
-    
+
 # Subscription routes
+
+
 @app.route('/subscribe')
 @login_required
 def subscribe():
     plans = get_subscription_plans()
     current_sub = get_user_subscription(session['user_id'])
-    return render_template('subscriptions/subscribe.html', 
-                         plans=plans,
-                         current_sub=current_sub)
+    return render_template('subscriptions/subscribe.html',
+                           plans=plans,
+                           current_sub=current_sub)
+
 
 @app.route('/subscribe/<int:plan_id>', methods=['POST'])
 @login_required
 def create_subscription(plan_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     try:
         # Get plan details
-        cur.execute('SELECT id, price, duration_days FROM subscription_plans WHERE id = %s', (plan_id,))
+        cur.execute(
+            'SELECT id, price, duration_days FROM subscription_plans WHERE id = %s', (plan_id,))
         plan = cur.fetchone()
         if not plan:
             flash('Invalid subscription plan', 'danger')
             return redirect(url_for('subscribe'))
-        
+
         # Create subscription (payment will be marked as pending)
         start_date = datetime.utcnow()
         end_date = start_date + timedelta(days=plan[2])
-        
+
         cur.execute('''
             INSERT INTO subscriptions 
             (user_id, plan_id, start_date, end_date, is_active, payment_status)
             VALUES (%s, %s, %s, %s, %s, %s)
             RETURNING id
         ''', (session['user_id'], plan_id, start_date, end_date, False, 'pending'))
-        
+
         subscription_id = cur.fetchone()[0]
         conn.commit()
-        
+
         # In a real app, you would integrate with a payment gateway here
         # For now, we'll just redirect to a confirmation page
         return redirect(url_for('subscription_confirmation', subscription_id=subscription_id))
-        
+
     except Exception as e:
         conn.rollback()
         flash('Error creating subscription: ' + str(e), 'danger')
@@ -2574,18 +2804,22 @@ def create_subscription(plan_id):
         cur.close()
         conn.close()
 
+
 @app.route('/subscription/confirmation/<int:subscription_id>')
 @login_required
 def subscription_confirmation(subscription_id):
     return render_template('subscriptions/confirmation.html', subscription_id=subscription_id)
 
 # Admin subscription management
+
+
 @app.route('/admin/subscriptions')
 @login_required
 @admin_required
 def manage_subscriptions():
     subscriptions = get_all_subscriptions()
     return render_template('admin/subscriptions/list.html', subscriptions=subscriptions)
+
 
 @app.route('/admin/subscriptions/mark-paid/<int:subscription_id>', methods=['POST'])
 @login_required
@@ -2598,6 +2832,8 @@ def mark_subscription_paid(subscription_id):
     return redirect(url_for('manage_subscriptions'))
 
 # Add this new route to app.py
+
+
 @app.route('/admin/subscriptions/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -2608,7 +2844,8 @@ def admin_add_subscription():
             plan_id = request.form.get('plan_id')
             start_date_str = request.form.get('start_date')
             duration_days = request.form.get('duration_days')
-            mark_paid = request.form.get('mark_paid') is not None # Checkbox value
+            mark_paid = request.form.get(
+                'mark_paid') is not None  # Checkbox value
 
             if not all([student_id, plan_id, start_date_str, duration_days]):
                 flash('All fields are required', 'danger')
@@ -2623,7 +2860,7 @@ def admin_add_subscription():
 
             # Determine payment status and active status
             payment_status = 'paid' if mark_paid else 'pending'
-            is_active = mark_paid # Subscription is active immediately if marked as paid
+            is_active = mark_paid  # Subscription is active immediately if marked as paid
 
             subscription_id = add_subscription_to_db(
                 user_id=student_id,
@@ -2637,19 +2874,21 @@ def admin_add_subscription():
             if subscription_id:
                 # If marked paid, update user role if necessary (e.g., grant premium access)
                 if is_active:
-                     conn = get_db_connection()
-                     cur = conn.cursor()
-                     try:
-                         cur.execute('SELECT name FROM subscription_plans WHERE id = %s', (plan_id,))
-                         plan_name = cur.fetchone()[0]
-                         if plan_name.lower() == 'premium': # Check plan name for role update
-                             cur.execute("UPDATE users SET role = 'premium' WHERE id = %s", (student_id,))
-                             conn.commit()
-                     except Exception as e:
-                         print(f"Error updating user role: {e}")
-                     finally:
-                         cur.close()
-                         conn.close()
+                    conn = get_db_connection()
+                    cur = conn.cursor()
+                    try:
+                        cur.execute(
+                            'SELECT name FROM subscription_plans WHERE id = %s', (plan_id,))
+                        plan_name = cur.fetchone()[0]
+                        if plan_name.lower() == 'premium':  # Check plan name for role update
+                            cur.execute(
+                                "UPDATE users SET role = 'premium' WHERE id = %s", (student_id,))
+                            conn.commit()
+                    except Exception as e:
+                        print(f"Error updating user role: {e}")
+                    finally:
+                        cur.close()
+                        conn.close()
 
                 flash('Subscription added successfully', 'success')
                 return redirect(url_for('manage_subscriptions'))
@@ -2662,12 +2901,13 @@ def admin_add_subscription():
             flash(f'An unexpected error occurred: {str(e)}', 'danger')
             app.logger.error(f"Admin add subscription error: {str(e)}")
 
-
     # GET request
     students = get_students()
     plans = get_subscription_plans()
-    print("DEBUG: Rendering admin/add_subscription.html. Checking if 'float' is in globals:", 'float' in app.jinja_env.globals) # Add this line
+    print("DEBUG: Rendering admin/add_subscription.html. Checking if 'float' is in globals:",
+          'float' in app.jinja_env.globals)  # Add this line
     return render_template('admin/add_subscription.html', students=students, plans=plans)
+
 
 @app.route('/subscription/status')
 @login_required
@@ -2675,7 +2915,7 @@ def subscription_status():
     # Ensure only students can access this page if needed, although login_required already restricts it
     if session.get('role') != 'student':
         flash('This page is only for students.', 'warning')
-        return redirect(url_for('home')) # Or wherever appropriate
+        return redirect(url_for('home'))  # Or wherever appropriate
 
     user_id = session.get('user_id')
     if not user_id:
@@ -2686,21 +2926,24 @@ def subscription_status():
     subscription = get_user_subscription(user_id)
     return render_template('subscription_status.html', subscription=subscription)
 
+
 @app.route('/exam_practice')
-@login_required # Assuming exam practice requires login
+@login_required  # Assuming exam practice requires login
 # @student_required # Optional: if only students should access
 def exam_practice():
     """Renders the exam practice page with data from exams.json."""
-    exams = load_exams_from_json('static/js/exams.json') # Adjust path if needed
+    exams = load_exams_from_json(
+        'static/js/exams.json')  # Adjust path if needed
     print("DEBUG: Loaded exams:", exams)
     return render_template('exam_practice.html', exams=exams)
 
+
 @app.route('/exam/<int:exam_id>')
-@login_required # Ensure user is logged in to take exams
+@login_required  # Ensure user is logged in to take exams
 # @student_required # Optional: restrict to students
 def take_exam(exam_id):
     """Loads a specific exam and renders the exam-taking page."""
-    exams = load_exams_from_json('static/js/exams.json') # Load all exams
+    exams = load_exams_from_json('static/js/exams.json')  # Load all exams
 
     # Find the exam with the matching ID
     selected_exam = None
@@ -2713,10 +2956,12 @@ def take_exam(exam_id):
         return render_template('take_exam.html', exam=selected_exam)
     else:
         flash('Exam not found.', 'danger')
-        return redirect(url_for('exam_practice')) # Redirect back if exam ID is invalid
+        # Redirect back if exam ID is invalid
+        return redirect(url_for('exam_practice'))
+
 
 @app.route('/submit_exam/<int:exam_id>', methods=['POST'])
-@login_required # Ensure user is logged in
+@login_required  # Ensure user is logged in
 # @student_required # Optional: restrict to students
 def submit_exam(exam_id):
     """Handles the submission of an exam, grades it, and saves the result."""
@@ -2737,7 +2982,8 @@ def submit_exam(exam_id):
 
     if not selected_exam:
         flash('Exam not found.', 'danger')
-        return redirect(url_for('exam_practice')) # Redirect back if exam ID is invalid
+        # Redirect back if exam ID is invalid
+        return redirect(url_for('exam_practice'))
 
     # Get user's submitted answers
     user_answers = request.form
@@ -2760,7 +3006,7 @@ def submit_exam(exam_id):
         # Calculate score (as a percentage)
         score = (correct_answers_count / total_questions) * 100
     else:
-        score = 0 # Handle exams with no questions
+        score = 0  # Handle exams with no questions
 
     print(f"User {user_id} submitted Exam {exam_id}. Score: {score:.2f}% ({correct_answers_count}/{total_questions} correct)")
 
@@ -2795,6 +3041,8 @@ def submit_exam(exam_id):
 # You will implement the logic for this route and create the template next.
 
 # Placeholder route for displaying exam results
+
+
 @app.route('/exam_results/<int:result_id>')
 @login_required
 def exam_results(result_id):
@@ -2819,14 +3067,15 @@ def exam_results(result_id):
     except Exception as e:
         print(f"Error fetching exam result {result_id}: {e}")
         flash('Error fetching exam results.', 'danger')
-        return redirect(url_for('exam_practice')) # Redirect if fetching fails
+        return redirect(url_for('exam_practice'))  # Redirect if fetching fails
     finally:
         cur.close()
         conn.close()
 
     if not result:
         flash('Exam result not found or you do not have permission to view it.', 'danger')
-        return redirect(url_for('exam_practice')) # Redirect if result not found
+        # Redirect if result not found
+        return redirect(url_for('exam_practice'))
 
     # Unpack result data
     result_id, result_user_id, exam_json_id, score, total_questions, completion_time = result
@@ -2840,13 +3089,13 @@ def exam_results(result_id):
             break
 
     if not exam_details:
-         # This case means the exam data in the JSON was changed/removed after the user took it
-        flash(f'Exam details for result ID {result_id} not found in JSON file.', 'warning')
+        # This case means the exam data in the JSON was changed/removed after the user took it
+        flash(
+            f'Exam details for result ID {result_id} not found in JSON file.', 'warning')
         # We can still show the basic score, but not question-by-question review
         return render_template('exam_results.html',
-                               result=result, # Pass the basic result data
-                               exam_details=None) # Indicate exam details are missing
-
+                               result=result,  # Pass the basic result data
+                               exam_details=None)  # Indicate exam details are missing
 
     # Pass both the result data and exam details to the template
     return render_template('exam_results.html',
@@ -2854,11 +3103,14 @@ def exam_results(result_id):
                            exam_details=exam_details)
 
 # Announcement routes
+
+
 @app.route('/announcements')
 @login_required
 def view_announcements():
     announcements = get_user_announcements(session['user_id'])
     return render_template('announcements/list.html', announcements=announcements)
+
 
 @app.route('/announcements/<int:announcement_id>')
 @login_required
@@ -2874,15 +3126,15 @@ def view_announcement(announcement_id):
             JOIN user_announcements ua ON a.id = ua.announcement_id
             WHERE ua.user_id = %s AND a.id = %s
         ''', (session['user_id'], announcement_id))
-        
+
         announcement = cur.fetchone()
         if not announcement:
             flash('Announcement not found', 'danger')
             return redirect(url_for('view_announcements'))
-            
+
         # Mark as read
         mark_announcement_read(announcement_id, session['user_id'])
-        
+
         return render_template('announcements/view.html', announcement={
             'id': announcement[0],
             'title': announcement[1],
@@ -2898,12 +3150,15 @@ def view_announcement(announcement_id):
         conn.close()
 
 # Admin announcement management
+
+
 @app.route('/admin/announcements')
 @login_required
 @admin_required
 def manage_announcements():
     announcements = get_all_announcements()
     return render_template('admin/announcements/list.html', announcements=announcements)
+
 
 @app.route('/admin/announcements/add', methods=['GET', 'POST'])
 @login_required
@@ -2913,28 +3168,29 @@ def add_announcement():
         title = request.form.get('title', '').strip()
         message = request.form.get('message', '').strip()
         send_to = request.form.getlist('send_to')  # List of user IDs or 'all'
-        
+
         if not title or not message:
             flash('Title and message are required', 'danger')
             return redirect(url_for('add_announcement'))
-            
+
         try:
             # If "all" is selected, send to all students
-            user_ids = None if 'all' in send_to else [int(user_id) for user_id in send_to]
-            
+            user_ids = None if 'all' in send_to else [
+                int(user_id) for user_id in send_to]
+
             create_announcement(
                 title=title,
                 message=message,
                 created_by=session['user_id'],
                 user_ids=user_ids
             )
-            
+
             flash('Announcement created successfully!', 'success')
             return redirect(url_for('manage_announcements'))
         except Exception as e:
             flash(f'Error creating announcement: {str(e)}', 'danger')
             return redirect(url_for('add_announcement'))
-    
+
     # GET request - show form
     students = get_students()
     return render_template('admin/announcements/add.html', students=students)
@@ -2947,7 +3203,8 @@ def delete_announcement(announcement_id):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        cur.execute('DELETE FROM announcements WHERE id = %s', (announcement_id,))
+        cur.execute('DELETE FROM announcements WHERE id = %s',
+                    (announcement_id,))
         conn.commit()
         flash('Announcement deleted successfully', 'success')
     except Exception as e:
@@ -2957,6 +3214,7 @@ def delete_announcement(announcement_id):
         cur.close()
         conn.close()
     return redirect(url_for('manage_announcements'))
+
 
 @app.route('/admin/assignments/import', methods=['GET', 'POST'])
 @login_required
@@ -2982,34 +3240,42 @@ def import_assignments():
                 # Determine assigned students from form selection
                 form_assigned_users = []
                 if 'assign_all' in request.form and request.form['assign_all'] == 'all':
-                    form_assigned_users = None # Indicates 'all students' from the form
+                    form_assigned_users = None  # Indicates 'all students' from the form
                 else:
-                    selected_student_ids = request.form.getlist('selected_students')
+                    selected_student_ids = request.form.getlist(
+                        'selected_students')
                     if selected_student_ids:
-                        form_assigned_users = [int(s_id) for s_id in selected_student_ids]
+                        form_assigned_users = [int(s_id)
+                                               for s_id in selected_student_ids]
                     else:
-                        form_assigned_users = [] # No specific students selected in form
+                        form_assigned_users = []  # No specific students selected in form
 
                 imported_count = 0
                 for assignment_data in assignments_data:
                     # Validate required fields
-                    required_fields = ['title', 'description', 'subject', 'total_marks', 'deadline']
+                    required_fields = ['title', 'description',
+                                       'subject', 'total_marks', 'deadline']
                     if not all(field in assignment_data for field in required_fields):
-                        flash('Invalid JSON structure - missing required fields for an assignment', 'danger')
-                        continue # Skip to the next assignment in the JSON
+                        flash(
+                            'Invalid JSON structure - missing required fields for an assignment', 'danger')
+                        continue  # Skip to the next assignment in the JSON
 
                     try:
                         # Convert deadline string to datetime
-                        deadline = datetime.strptime(assignment_data['deadline'], '%Y-%m-%d %H:%M')
+                        deadline = datetime.strptime(
+                            assignment_data['deadline'], '%Y-%m-%d %H:%M')
                     except ValueError:
-                        flash('Invalid deadline format in JSON (use YYYY-MM-DD HH:MM)', 'danger')
-                        continue # Skip to the next assignment in the JSON
+                        flash(
+                            'Invalid deadline format in JSON (use YYYY-MM-DD HH:MM)', 'danger')
+                        continue  # Skip to the next assignment in the JSON
 
                     # Determine final assigned users for this specific assignment
-                    final_assigned_users_for_this_assignment = None # Default to 'all' if no specific assignment
-                    
+                    # Default to 'all' if no specific assignment
+                    final_assigned_users_for_this_assignment = None
+
                     # Prioritize 'assigned_users' from JSON if it exists
-                    assigned_users_from_json = assignment_data.get('assigned_users')
+                    assigned_users_from_json = assignment_data.get(
+                        'assigned_users')
                     if assigned_users_from_json is not None:
                         if assigned_users_from_json == 'all':
                             # Map JSON 'all' string to None for add_assignment, meaning all students
@@ -3020,11 +3286,12 @@ def import_assignments():
                     else:
                         # If JSON doesn't specify, use what was selected in the form
                         final_assigned_users_for_this_assignment = form_assigned_users
-                    
+
                     # Get the interactive content if provided
                     content = assignment_data.get('content', None)
                     if content:
-                        content = json.dumps(content)  # Convert to string for storage
+                        # Convert to string for storage
+                        content = json.dumps(content)
 
                     # Create assignment with the interactive content
                     success = add_assignment(
@@ -3040,11 +3307,14 @@ def import_assignments():
                     if success:
                         imported_count += 1
                     else:
-                        flash(f'Error creating assignment: {assignment_data["title"]}', 'warning')
+                        flash(
+                            f'Error creating assignment: {assignment_data["title"]}', 'warning')
 
-                flash(f'Successfully imported {imported_count} assignments', 'success')
+                flash(
+                    f'Successfully imported {imported_count} assignments', 'success')
                 if imported_count < len(assignments_data):
-                    flash(f'{len(assignments_data) - imported_count} assignments could not be imported due to errors.', 'warning')
+                    flash(
+                        f'{len(assignments_data) - imported_count} assignments could not be imported due to errors.', 'warning')
                 return redirect(url_for('manage_assignments'))
 
             except json.JSONDecodeError:
@@ -3063,8 +3333,10 @@ def import_assignments():
         conn = get_db_connection()
         cur = conn.cursor()
         # Fetch all students to populate the checkboxes in the form
-        cur.execute("SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
-        students = [{'id': row[0], 'username': row[1]} for row in cur.fetchall()]
+        cur.execute(
+            "SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
+        students = [{'id': row[0], 'username': row[1]}
+                    for row in cur.fetchall()]
     except Exception as e:
         print(f"Error fetching students for import form: {e}")
         flash('Could not load student list. Please check database connection.', 'danger')
@@ -3075,6 +3347,7 @@ def import_assignments():
             conn.close()
 
     return render_template('admin/assignments/import.html', students=students)
+
 
 @app.route('/whiteboards')
 @login_required
@@ -3091,14 +3364,14 @@ def list_whiteboards():
             WHERE p.user_id = %s
             ORDER BY w.created_at DESC
         ''', (session['user_id'],))
-        
+
         whiteboards = [{
             'id': row[0],
             'name': row[1],
             'created_by': row[2],
             'created_at': row[3]
         } for row in cur.fetchall()]
-        
+
         return render_template('whiteboards/list.html', whiteboards=whiteboards)
     except Exception as e:
         print(f"Error listing whiteboards: {e}")
@@ -3106,6 +3379,165 @@ def list_whiteboards():
     finally:
         cur.close()
         conn.close()
+
+
+@app.route('/parent/dashboard')
+@login_required
+def parent_dashboard():
+    if session.get('role') != 'parent':
+        abort(403)
+
+    students = get_students_for_parent(session['user_id'])
+    if not students:
+        flash('No students linked to your account', 'warning')
+        return render_template('parent/dashboard.html', students=[], selected_student=None)
+
+    # Default to first student
+    selected_student_id = request.args.get('student_id', students[0]['id'])
+    selected_student = next(
+        (s for s in students if s['id'] == int(selected_student_id)), None)
+
+    if not selected_student:
+        flash('Invalid student selected', 'danger')
+        return redirect(url_for('parent_dashboard'))
+
+    # Get all data for the selected student
+    assignments = get_assignments_for_user(selected_student_id)
+    submissions = get_student_submissions(selected_student_id)
+    bookings = get_student_bookings(selected_student_id)
+    stats = get_student_performance_stats(selected_student_id)
+    announcements = get_user_announcements(selected_student_id, limit=5)
+
+    return render_template('parent/dashboard.html',
+                           students=students,
+                           selected_student=selected_student,
+                           assignments=assignments,
+                           submissions=submissions,
+                           bookings=bookings,
+                           stats=stats,
+                           announcements=announcements)
+
+
+@app.route('/parent/assignments/<int:student_id>')
+@login_required
+def parent_view_assignments(student_id):
+    if session.get('role') != 'parent':
+        abort(403)
+
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    assignments = get_assignments_for_user(student_id)
+    return render_template('parent/assignments.html',
+                           student_id=student_id,
+                           assignments=assignments)
+
+
+@app.route('/parent/submissions/<int:student_id>')
+@login_required
+def parent_view_submissions(student_id):
+    if session.get('role') != 'parent':
+        abort(403)
+
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    submissions = get_student_submissions(student_id)
+    return render_template('parent/submissions.html',
+                           student_id=student_id,
+                           submissions=submissions)
+
+
+@app.route('/admin/parents')
+@login_required
+@admin_required
+def manage_parents():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get all parents
+        cur.execute("SELECT id, username FROM users WHERE role = 'parent'")
+        parents = [{'id': row[0], 'username': row[1]}
+                   for row in cur.fetchall()]
+
+        # Get all students
+        cur.execute("SELECT id, username FROM users WHERE role = 'student'")
+        students = [{'id': row[0], 'username': row[1]}
+                    for row in cur.fetchall()]
+
+        # Get existing relationships
+        cur.execute("SELECT parent_id, student_id FROM parent_students")
+        relationships = {(row[0], row[1]) for row in cur.fetchall()}
+
+        return render_template('admin/parents.html',
+                               parents=parents,
+                               students=students,
+                               relationships=relationships)
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route('/admin/parents/link', methods=['POST'])
+@login_required
+@admin_required
+def link_parent_student():
+    parent_id = request.form.get('parent_id')
+    student_id = request.form.get('student_id')
+    action = request.form.get('action')  # 'link' or 'unlink'
+
+    if not all([parent_id, student_id, action]):
+        flash('Missing required parameters', 'danger')
+        return redirect(url_for('manage_parents'))
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        if action == 'link':
+            cur.execute('''
+                INSERT INTO parent_students (parent_id, student_id)
+                VALUES (%s, %s)
+                ON CONFLICT DO NOTHING
+            ''', (parent_id, student_id))
+        else:
+            cur.execute('''
+                DELETE FROM parent_students
+                WHERE parent_id = %s AND student_id = %s
+            ''', (parent_id, student_id))
+
+        conn.commit()
+        flash('Relationship updated successfully', 'success')
+    except Exception as e:
+        conn.rollback()
+        flash(f'Error updating relationship: {str(e)}', 'danger')
+    finally:
+        cur.close()
+        conn.close()
+
+    return redirect(url_for('manage_parents'))
+
+
+@app.route('/parent/sessions/<int:student_id>')
+@login_required
+def parent_view_sessions(student_id):
+    if session.get('role') != 'parent':
+        abort(403)
+
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    bookings = get_student_bookings(student_id)
+    upcoming_sessions = get_upcoming_sessions()
+    return render_template('parent/sessions.html',
+                           student_id=student_id,
+                           bookings=bookings,
+                           upcoming_sessions=upcoming_sessions)
 
 
 @app.template_filter('datetime')
@@ -3122,19 +3554,19 @@ def inject_functions():
         get_unread_announcements_count=get_unread_announcements_count,
         get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
     )
-    
+
 # if __name__ == '__main__':
 #     from waitress import serve
 #     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)    
+#     serve(app, host="0.0.0.0", port=5000)
+
 
 if __name__ == '__main__':
     # Enable Flask debug features
     app.debug = True  # Enables auto-reloader and debugger
-    
+
     # Initialize database
     initialize_database()
- 
-    
+
     # Run the development server
     app.run(host='0.0.0.0', port=5000)

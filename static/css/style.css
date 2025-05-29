@@ -70,6 +70,7 @@ footer {
 .table-nowrap th,
 .table-nowrap td {
   white-space: nowrap;
+  font-size: 0.85rem;
 }
 
 /* For medium-large screens (992px - 1365px) */
