@@ -1152,8 +1152,7 @@ def get_student_submissions(student_id):
 
     cur.close()
     conn.close()
-
-    print(submissions[0]["title"])
+    
     return submissions
 
 def get_student_sessions_data(student_id):
