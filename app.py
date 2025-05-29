@@ -1127,10 +1127,11 @@ def get_student_submissions(student_id):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('''
-        SELECT a.title, a.subject, a.deadline, s.submission_time, 
+        SELECT u.username, a.title, a.subject, a.deadline, s.submission_time, 
                s.grade, a.total_marks, s.feedback, s.file_path
         FROM submissions s
         JOIN assignments a ON s.assignment_id = a.id
+        JOIN users u ON u.id = s.student_id
         WHERE s.student_id = %s
         ORDER BY a.deadline DESC
     ''', (student_id,))
@@ -3590,19 +3591,52 @@ def parent_dashboard():
 
 @app.route('/parent/submissions/<int:student_id>')
 @login_required
+# @parent_required
 def parent_view_submissions(student_id):
-    if session.get('role') != 'parent':
-        abort(403)
-
     # Verify parent has access to this student
     students = get_students_for_parent(session['user_id'])
     if not any(s['id'] == student_id for s in students):
         abort(403)
-
-    submissions = get_student_submissions(student_id)
-    return render_template('parent/submissions.html',
-                           student_id=student_id,
-                           submissions=submissions)
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT 
+                a.title, 
+                a.subject, 
+                a.deadline, 
+                s.submission_time, 
+                s.grade, 
+                a.total_marks,
+                s.feedback,
+                s.file_path
+            FROM submissions s
+            JOIN assignments a ON s.assignment_id = a.id
+            WHERE s.student_id = %s
+            ORDER BY a.deadline DESC
+        ''', (student_id,))
+        
+        # Convert to list of dictionaries with proper field names
+        submissions = []
+        for row in cur.fetchall():
+            submissions.append({
+                'title': row[0],
+                'subject': row[1],
+                'deadline': row[2],  # This should be a datetime object
+                'submitted_at': row[3],
+                'marks_obtained': row[4],
+                'total_marks': row[5],
+                'feedback': row[6],
+                'file_path': row[7]
+            })
+        
+        return render_template('parent/submissions.html',
+                            student_id=student_id,
+                            submissions=submissions)
+    finally:
+        cur.close()
+        conn.close()
 
 @app.route('/parent/sessions/<int:student_id>')
 @login_required
