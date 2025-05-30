@@ -11,10 +11,10 @@
         </div>
         <div class="card-body">
             {% if students %}
-                <div class="btn-group" role="group">
+                <div class="btn-group flex-wrap" role="group">
                     {% for student in students %}
                         <a href="{{ url_for('parent_dashboard', student_id=student.id) }}" 
-                           class="btn {% if selected_student and selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                           class="btn mb-2 {% if selected_student and selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %}">
                             {{ student.username }}
                         </a>
                     {% endfor %}
@@ -81,17 +81,17 @@
         
         <!-- Quick Links -->
         <div class="row mb-4">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <a href="{{ url_for('parent_view_assignments', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
                     View All Assignments
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <a href="{{ url_for('parent_view_submissions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
                     View All Submissions
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <a href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
                     View Sessions
                 </a>
