@@ -598,6 +598,8 @@
   </div>
   {% endif %}
 
+  <!-- {{ resource|safe }} -->
+
   <!-- Resources Section -->
   {% if assignment.content.resources %}
   <div class="card mb-4">
@@ -607,11 +609,7 @@
     <div class="card-body">
       <ul>
         {% for resource in assignment.content.resources %}
-        <li>
-          {% if resource.startswith('http') %}
-          <a href="{{ resource }}" target="_blank">{{ resource }}</a>
-          {% else %} {{ resource }} {% endif %}
-        </li>
+        <li>{{ resource|safe }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -750,6 +748,144 @@
         </div>
       </div>
     </form>
+  </div>
+  {% endif %} {% if assignment.content.tutorial_steps %}
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>HTML Tables Tutorial - Step-by-Step Guide</h5>
+    </div>
+    <div class="card-body">
+      <p class="intro-paragraph">{{ assignment.content.introduction|safe }}</p>
+
+      <h6>Learning Objectives:</h6>
+      <ul>
+        {% for objective in assignment.content.learning_objectives %}
+        <li>{{ objective }}</li>
+        {% endfor %}
+      </ul>
+
+      {% for step in assignment.content.tutorial_steps %}
+      <div class="method">
+        <h6>
+          Step {{ step.step }}: {{ step.title }} (Difficulty: {{
+          step.difficulty|title }})
+          <span class="marks-badge">{{ step.marks }} Marks</span>
+        </h6>
+        <p class="step-description">{{ step.description|safe }}</p>
+        <div class="example">
+          <h3 class="task-heading">Task: {{ step.task|safe }}</h3>
+          <h4 class="guide-heading">Guide:</h4>
+          {{ step.guide|safe }}
+          <h4 class="example-heading">Example:</h4>
+
+          <button
+            class="btn btn-secondary btn-sm mb-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#codeExample{{ loop.index }}"
+            aria-expanded="false"
+            aria-controls="codeExample{{ loop.index }}"
+          >
+            Show/Hide Code
+          </button>
+
+          <div class="collapse" id="codeExample{{ loop.index }}">
+            <div class="code">{{ step.example|safe }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <h6>Coding Tips:</h6>
+      {% for tip in assignment.content.coding_tips %}
+      <div class="mb-3">
+        <strong>{{ tip.topic }}:</strong> {{ tip.tip|safe }}
+      </div>
+      {% endfor %}
+
+      <h6>Common Functions:</h6>
+      <div class="row">
+        <div class="col-md-4">
+          <strong>Basic Elements:</strong>
+          <ul>
+            {% for element in assignment.content.common_functions.basic_elements
+            %}
+            <li>{{ element }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <strong>Semantic Elements:</strong>
+          <ul>
+            {% for element in
+            assignment.content.common_functions.semantic_elements %}
+            <li>{{ element }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <strong>Key Attributes:</strong>
+          <ul>
+            {% for attribute in
+            assignment.content.common_functions.key_attributes %}
+            <li>{{ attribute }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <h6>Submission Guidelines:</h6>
+      {% if assignment.content.submission_guidelines.format %}
+      <div class="mb-3">
+        <strong>Format:</strong> {{
+        assignment.content.submission_guidelines.format|safe }}
+      </div>
+      {% endif %} {% if assignment.content.submission_guidelines.naming %}
+      <div class="mb-3">
+        <strong>Naming:</strong> {{
+        assignment.content.submission_guidelines.naming|safe }}
+      </div>
+      {% endif %} {% if assignment.content.submission_guidelines.testing %}
+      <div class="mb-3">
+        <strong>Testing:</strong> {{
+        assignment.content.submission_guidelines.testing|safe }}
+      </div>
+      {% endif %} {% if assignment.content.submission_guidelines.documentation
+      %}
+      <div class="mb-3">
+        <strong>Documentation:</strong> {{
+        assignment.content.submission_guidelines.documentation|safe }}
+      </div>
+      {% endif %}
+
+      <h6>Grading Criteria:</h6>
+      <ul class="list-group list-group-flush">
+        {% for criterion, value in assignment.content.grading_criteria.items()
+        %}
+        <li class="list-group-item">
+          <strong>{{ criterion|title }}:</strong> {{ value }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <h6>Resources:</h6>
+      <ul>
+        {% for resource in assignment.content.resources %}
+        <li>{{ resource|safe }}</li>
+        {% endfor %}
+      </ul>
+
+      {% if assignment.content.bonus_challenges %}
+      <h6>Bonus Challenges:</h6>
+      <ul>
+        {% for challenge in assignment.content.bonus_challenges %}
+        <li>
+          <strong>{{ challenge.title }}:</strong> {{ challenge.description }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
   </div>
   {% endif %}
 
