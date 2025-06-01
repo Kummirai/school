@@ -1,38 +1,42 @@
-{% extends "admin/base.html" %}
-
-{% block content %}
+{% extends "admin/base.html" %} {% block content %}
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="h5 mb-0">Bookings for: {{ session_title }}</h3>
-        </div>
-        <div class="card-body">
-            {% if booked_users %}
-            <div class="table-responsive">
-                <table class="table table-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Student ID</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for user in booked_users %}
-                        <tr>
-                            <td>{{ user[0] }}</td>
-                            <td>{{ user[1] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% else %}
-            <div class="alert alert-info">No bookings for this session yet.</div>
-            {% endif %}
-            <a href="{{ url_for('manage_sessions') }}" class="btn btn-secondary mt-3">
-                <i class="fas fa-arrow-left"></i> Back to Classes
-            </a>
-        </div>
+  <div class="card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="h5 mb-0">Bookings for: {{ session_title }}</h3>
+      <a
+        href="{{ url_for('admin_dashboard') }}"
+        class="btn btn-outline-secondary"
+      >
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+      </a>
     </div>
+    <div class="card-body">
+      {% if booked_users %}
+      <div class="table-responsive">
+        <table class="table table-nowrap">
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in booked_users %}
+            <tr>
+              <td>{{ user[0] }}</td>
+              <td>{{ user[1] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-info">No bookings for this session yet.</div>
+      {% endif %}
+      <a href="{{ url_for('manage_sessions') }}" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Back to Classes
+      </a>
+    </div>
+  </div>
 </div>
 {% endblock %}
