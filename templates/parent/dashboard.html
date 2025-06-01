@@ -344,204 +344,293 @@
 <!-- Chart.js Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Sample data for charts - replace with actual data from your backend
   document.addEventListener("DOMContentLoaded", function () {
-    // Mini charts for cards
-    const assignmentsCtx = document
-      .getElementById("assignmentsChart")
-      .getContext("2d");
-    new Chart(assignmentsCtx, {
-      type: "line",
-      data: {
-        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-        datasets: [
-          {
-            data: [65, 72, 80, 78],
-            borderColor: "#28a745",
-            backgroundColor: "rgba(40, 167, 69, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { display: false },
-          x: { display: false },
-        },
-      },
-    });
+    // Only load if student selected
+    // Show loading states
+    showLoadingStates();
 
-    const practiceCtx = document
-      .getElementById("practiceChart")
-      .getContext("2d");
-    new Chart(practiceCtx, {
-      type: "line",
-      data: {
-        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-        datasets: [
-          {
-            data: [70, 75, 82, 85],
-            borderColor: "#17a2b8",
-            backgroundColor: "rgba(23, 162, 184, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { display: false },
-          x: { display: false },
-        },
-      },
-    });
+    // Fetch data from Flask endpoint
+    fetch(`/api/student/{{ selected_student.id }}/chart_data`)
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
 
-    const examsCtx = document.getElementById("examsChart").getContext("2d");
-    new Chart(examsCtx, {
-      type: "line",
-      data: {
-        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-        datasets: [
-          {
-            data: [68, 72, 75, 80],
-            borderColor: "#ffc107",
-            backgroundColor: "rgba(255, 193, 7, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { display: false },
-          x: { display: false },
-        },
-      },
-    });
+        if (data.error) throw new Error(data.error);
 
-    // Performance Trend Chart
-    const trendCtx = document
-      .getElementById("performanceTrendChart")
-      .getContext("2d");
-    new Chart(trendCtx, {
-      type: "line",
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-        datasets: [
-          {
-            label: "Assignments",
-            data: [65, 70, 72, 75, 78, 80],
-            borderColor: "#28a745",
-            backgroundColor: "rgba(40, 167, 69, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-          {
-            label: "Practice",
-            data: [70, 72, 75, 77, 80, 82],
-            borderColor: "#17a2b8",
-            backgroundColor: "rgba(23, 162, 184, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-          {
-            label: "Exams",
-            data: [68, 70, 72, 75, 78, 80],
-            borderColor: "#ffc107",
-            backgroundColor: "rgba(255, 193, 7, 0.1)",
-            tension: 0.3,
-            fill: true,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          tooltip: {
-            mode: "index",
-            intersect: false,
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: false,
-            min: 50,
-            max: 100,
-          },
-        },
-      },
-    });
+        // Update all dashboard components
+        updateAssignmentStats(data.assignments);
+        updatePracticeStats(data.practice);
+        updateExamStats(data.exams);
+        renderCharts(data);
+        updateActivities(data.activities);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        showErrorStates();
+      });
 
-    // Subject Breakdown Chart
-    const subjectCtx = document
-      .getElementById("subjectBreakdownChart")
-      .getContext("2d");
-    new Chart(subjectCtx, {
-      type: "doughnut",
-      data: {
-        labels: ["Math", "Science", "English", "History"],
-        datasets: [
-          {
-            data: [85, 78, 82, 75],
-            backgroundColor: ["#28a745", "#17a2b8", "#ffc107", "#dc3545"],
-            borderWidth: 1,
+    function showLoadingStates() {
+      // Add loading spinners to chart containers
+      document.querySelectorAll(".card-body canvas").forEach((canvas) => {
+        canvas.insertAdjacentHTML(
+          "beforebegin",
+          `
+                  <div class="text-center py-4 loading-spinner">
+                      <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                      </div>
+                  </div>
+              `
+        );
+        canvas.style.display = "none";
+      });
+    }
+
+    // Update these functions in your existing script
+    function updateAssignmentStats(data) {
+      safeSetText(
+        ".card-border-start-success h3.mb-0",
+        `${Math.round(data.avg_score || 0)}%`
+      );
+      safeSetText(
+        ".card-border-start-success .d-flex h6.mb-0",
+        `${data.submitted || 0}/${data.total || 0}`
+      );
+      safeSetText(
+        ".card-border-start-success .text-end h6.mb-0",
+        `${Math.round(data.best_score || 0)}%`
+      );
+    }
+
+    function updatePracticeStats(data) {
+      safeSetText(
+        ".card-border-start-info h3.mb-0",
+        `${Math.round(data.avg_score || 0)}%`
+      );
+      safeSetText(".card-border-start-info .d-flex h6.mb-0", data.total || 0);
+      safeSetText(
+        ".card-border-start-info .text-end h6.mb-0",
+        `${Math.round(data.best_score || 0)}%`
+      );
+    }
+
+    function updateExamStats(data) {
+      safeSetText(
+        ".card-border-start-warning h3.mb-0",
+        `${Math.round(data.avg_score || 0)}%`
+      );
+      safeSetText(
+        ".card-border-start-warning .d-flex h6.mb-0",
+        data.total || 0
+      );
+      safeSetText(
+        ".card-border-start-warning .text-end h6.mb-0",
+        `${Math.round(data.best_score || 0)}%`
+      );
+    }
+
+    // Helper function to safely set text content
+    function safeSetText(selector, text) {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.textContent = text;
+      } else {
+        console.error(`Element not found: ${selector}`);
+      }
+    }
+
+    // Initialize dashboard - keep your existing DOMContentLoaded code
+    // Just replace the update functions with these versions
+
+    function renderCharts(data) {
+      // Remove loading spinners and show canvases
+      document
+        .querySelectorAll(".loading-spinner")
+        .forEach((el) => el.remove());
+      document.querySelectorAll(".card-body canvas").forEach((canvas) => {
+        canvas.style.display = "block";
+      });
+
+      // Mini charts
+      renderMiniChart("assignmentsChart", data.assignments, "#28a745");
+      renderMiniChart("practiceChart", data.practice, "#17a2b8");
+      renderMiniChart("examsChart", data.exams, "#ffc107");
+
+      // Performance trend
+      renderTrendChart(data.trend);
+
+      // Subject breakdown
+      renderSubjectChart(data.subjects);
+    }
+
+    function renderMiniChart(id, data, color) {
+      const ctx = document.getElementById(id).getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: data.labels,
+          datasets: [
+            {
+              data: data.scores,
+              borderColor: color,
+              backgroundColor: `${color}20`,
+              tension: 0.3,
+              fill: true,
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { display: false }, x: { display: false } },
+        },
+      });
+    }
+
+    function renderTrendChart(data) {
+      const ctx = document
+        .getElementById("performanceTrendChart")
+        .getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: data.labels,
+          datasets: [
+            {
+              label: "Assignments",
+              data: data.assignments,
+              borderColor: "#28a745",
+              backgroundColor: "#28a74520",
+              tension: 0.3,
+              fill: true,
+              borderWidth: 2,
+            },
+            {
+              label: "Practice",
+              data: data.practice,
+              borderColor: "#17a2b8",
+              backgroundColor: "#17a2b820",
+              tension: 0.3,
+              fill: true,
+              borderWidth: 2,
+            },
+            {
+              label: "Exams",
+              data: data.exams,
+              borderColor: "#ffc107",
+              backgroundColor: "#ffc10720",
+              tension: 0.3,
+              fill: true,
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "top" },
+            tooltip: { mode: "index", intersect: false },
           },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "right",
+          scales: {
+            y: { beginAtZero: false, min: 50, max: 100 },
           },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.label}: ${context.raw}%`;
+        },
+      });
+    }
+
+    function renderSubjectChart(data) {
+      const ctx = document
+        .getElementById("subjectBreakdownChart")
+        .getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: data.labels,
+          datasets: [
+            {
+              data: data.scores,
+              backgroundColor: ["#28a745", "#17a2b8", "#ffc107", "#dc3545"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "right" },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return `${context.label}: ${context.raw}%`;
+                },
               },
             },
           },
+          cutout: "70%",
         },
-        cutout: "70%",
-      },
-    });
+      });
+    }
+
+    function updateActivities(activities) {
+      const container = document.querySelector(".list-group-flush");
+      if (!container) return;
+
+      container.innerHTML = activities.length
+        ? ""
+        : `
+              <div class="text-center py-4">
+                  <i class="fas fa-inbox fs-1 text-muted mb-3"></i>
+                  <p class="text-muted">No recent activity</p>
+              </div>
+          `;
+
+      activities.forEach((activity) => {
+        container.innerHTML += `
+                  <div class="list-group-item border-0 py-3">
+                      <div class="d-flex align-items-center">
+                          <div class="icon-shape bg-light text-primary rounded-circle me-3 p-2">
+                              <i class="fas fa-${activity.icon}"></i>
+                          </div>
+                          <div class="flex-grow-1">
+                              <h6 class="mb-1">${activity.title}</h6>
+                              <p class="small text-muted mb-0">${activity.description}</p>
+                          </div>
+                          <small class="text-muted">${activity.time}</small>
+                      </div>
+                  </div>
+              `;
+      });
+    }
+
+    function showErrorStates() {
+      // Handle errors in charts
+      document.querySelectorAll(".card-body canvas").forEach((canvas) => {
+        canvas.parentElement.innerHTML = `
+                  <div class="text-center py-4">
+                      <i class="fas fa-exclamation-triangle text-danger fs-3 mb-2"></i>
+                      <p class="text-muted">Failed to load data</p>
+                      <button class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
+                          Try Again
+                      </button>
+                  </div>
+              `;
+      });
+
+      // Show error in activities
+      const activitiesContainer = document.querySelector(".list-group-flush");
+      if (activitiesContainer) {
+        activitiesContainer.innerHTML = `
+                  <div class="text-center py-4">
+                      <i class="fas fa-exclamation-triangle text-danger fs-3 mb-2"></i>
+                      <p class="text-muted">Failed to load activities</p>
+                  </div>
+              `;
+      }
+    }
   });
 </script>
-
-<style>
-  .card-hover:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
-  }
-  .icon-shape {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
 {% endblock %}

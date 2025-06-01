@@ -12,6 +12,8 @@ import json
 import sympy
 from sympy import symbols, Eq, solve, simplify
 import psycopg2.extras
+from psycopg2.extras import DictCursor
+from flask import current_app
 
 
 # Load environment variables
@@ -228,6 +230,18 @@ def initialize_database():
     )
     ''')
 
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS student_activities (
+        id SERIAL PRIMARY KEY,
+        student_id INTEGER NOT NULL,
+        activity_type VARCHAR(100) NOT NULL,
+        description TEXT,
+        icon VARCHAR(50) DEFAULT 'check',
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+    ''')
+
     # Create tutorial_sessions table
     cur.execute('''
     CREATE TABLE IF NOT EXISTS tutorial_sessions (
@@ -294,6 +308,387 @@ def initialize_database():
     conn.close()
 
 # Helpers
+def complete_practice_session(practice_session_id):
+    """Fetches practice results from DB and logs the activity"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    try:
+        # Fetch practice session details
+        cur.execute('''
+            SELECT 
+                student_id, 
+                topic, 
+                duration_minutes, 
+                score,
+                completed_at
+            FROM practice_sessions
+            WHERE id = %s
+        ''', (practice_session_id,))
+        
+        session = cur.fetchone()
+        
+        if not session:
+            print(f"No practice session found with ID: {practice_session_id}")
+            return False
+            
+        student_id, topic, duration, score, completed_at = session
+        
+        # Log the activity
+        cur.execute('''
+            INSERT INTO student_activities 
+            (student_id, activity_type, description, icon, metadata, created_at)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        ''', (
+            student_id,
+            'practice',
+            f"Completed {duration} minute {topic} practice",
+            'book-open',
+            json.dumps({
+                'topic': topic,
+                'duration': duration,
+                'score': float(score) if score else None,
+                'completed_at': completed_at.isoformat() if completed_at else datetime.utcnow().isoformat(),
+                'practice_id': practice_session_id
+            }),
+            completed_at or datetime.utcnow()
+        ))
+        
+        conn.commit()
+        return True
+        
+    except Exception as e:
+        conn.rollback()
+        print(f"Error logging practice session: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+def log_student_activity(student_id, activity_type, description=None, icon=None, metadata=None):
+    """
+    Logs student activity to the database
+    Args:
+        student_id: ID of the student
+        activity_type: Type of activity ('assignment', 'practice', 'exam', etc.)
+        description: Human-readable description
+        icon: Font Awesome icon name
+        metadata: Additional JSON data about the activity
+    """
+    conn = current_app.db_connection  # Or your DB connection method
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO student_activities 
+                (student_id, activity_type, description, icon, metadata, created_at)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """, 
+                (
+                    student_id,
+                    activity_type,
+                    description,
+                    icon or _get_default_icon(activity_type),
+                    metadata,
+                    datetime.utcnow()
+                ))
+            conn.commit()
+    except Exception as e:
+        current_app.logger.error(f"Failed to log activity: {e}")
+        conn.rollback()
+
+def _get_default_icon(activity_type):
+    icon_map = {
+        'assignment': 'file-alt',
+        'practice': 'book-open',
+        'exam': 'file-certificate',
+        'submission': 'file-upload',
+        'grade': 'award',
+        'login': 'sign-in-alt'
+    }
+    return icon_map.get(activity_type, 'check')
+
+def get_assignments_data(student_id):
+    """Fetch actual assignment statistics with submission dates as labels"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                WITH submission_details AS (
+    SELECT 
+        s.submission_time,
+        s.grade,
+        a.subject
+    FROM submissions s
+    JOIN assignments a ON s.assignment_id = a.id
+    WHERE s.student_id = %s
+    AND s.submission_time >= NOW() - INTERVAL '30 days'
+    AND s.grade IS NOT NULL
+),
+
+assignment_stats AS (
+    SELECT 
+        AVG(grade) as avg_score,
+        COUNT(*) as total,
+        COUNT(CASE WHEN submission_time IS NOT NULL THEN 1 END) as submitted,
+        MAX(grade) as best_score,
+        ARRAY_AGG(grade ORDER BY submission_time) as scores,
+        ARRAY(
+            SELECT DISTINCT subject
+            FROM submission_details
+            ORDER BY subject
+            LIMIT 4
+        ) as subject_labels,
+        ARRAY(
+            SELECT DISTINCT ON (DATE_TRUNC('week', submission_time))
+                TO_CHAR(submission_time, 'Mon DD')
+            FROM submission_details
+            ORDER BY DATE_TRUNC('week', submission_time), submission_time
+        ) as date_labels,
+        ARRAY(
+            SELECT JSON_BUILD_OBJECT(
+                'date', TO_CHAR(submission_time, 'YYYY-MM-DD HH24:MI'),
+                'grade', grade,
+                'subject', subject
+            )
+            FROM submission_details
+            ORDER BY submission_time
+        ) as detailed_submissions
+    FROM submission_details
+)
+SELECT 
+    COALESCE(avg_score, 0) as avg_score,
+    COALESCE(total, 0) as total,
+    COALESCE(submitted, 0) as submitted,
+    COALESCE(best_score, 0) as best_score,
+    CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
+    CASE WHEN array_length(subject_labels, 1) > 0 THEN subject_labels ELSE ARRAY['Math','Science','English','History'] END as subject_labels,
+    CASE WHEN array_length(date_labels, 1) > 0 THEN date_labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as date_labels,
+    detailed_submissions
+FROM assignment_stats;
+            """, (student_id, student_id))
+            
+            assignment_data = cur.fetchone()
+            print(assignment_data)
+            
+            return {
+                'avg_score': float(assignment_data[0]),
+                'total': assignment_data[1],
+                'submitted': assignment_data[2],
+                'best_score': float(assignment_data[3]),
+                'scores': assignment_data[4],
+                'labels': assignment_data[5]
+            }
+            
+    except Exception as e:
+        print(f"Error fetching assignment data: {e}")
+        return {
+            'avg_score': 0,
+            'total': 0,
+            'submitted': 0,
+            'best_score': 0,
+            'scores': [0, 0, 0, 0],
+            'labels': ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+        }
+    finally:
+        conn.close()
+
+def get_practice_data(student_id):
+    """Fetch actual practice statistics with completion dates as labels"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                WITH practice_stats AS (
+                    SELECT 
+                        AVG(score) as avg_score,
+                        COUNT(*) as total,
+                        MAX(score) as best_score,
+                        ARRAY_AGG(score ORDER BY completed_at) as scores,
+                        ARRAY(
+                            SELECT DISTINCT ON (DATE_TRUNC('week', completed_at))
+                                TO_CHAR(completed_at, 'Mon DD')
+                            FROM practice_sessions
+                            WHERE student_id = %s
+                            AND completed_at >= NOW() - INTERVAL '30 days'
+                            ORDER BY DATE_TRUNC('week', completed_at), completed_at
+                        ) as labels
+                    FROM practice_sessions
+                    WHERE student_id = %s
+                    AND completed_at >= NOW() - INTERVAL '30 days'
+                    AND score IS NOT NULL
+                )
+                SELECT 
+                    COALESCE(avg_score, 0) as avg_score,
+                    COALESCE(total, 0) as total,
+                    COALESCE(best_score, 0) as best_score,
+                    CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
+                    CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
+                FROM practice_stats
+            """, (student_id, student_id))
+            
+            practice_data = cur.fetchone()
+            
+            return {
+                'avg_score': float(practice_data[0]),
+                'total': practice_data[1],
+                'best_score': float(practice_data[2]),
+                'scores': practice_data[3],
+                'labels': practice_data[4]
+            }
+            
+    except Exception as e:
+        print(f"Error fetching practice data: {e}")
+        return {
+            'avg_score': 0,
+            'total': 0,
+            'best_score': 0,
+            'scores': [0, 0, 0, 0],
+            'labels': ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+        }
+    finally:
+        conn.close()
+
+def get_exams_data(student_id):
+    """Fetch actual exam statistics from database"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            # Get exam statistics for the last 30 days
+            cur.execute("""
+                WITH exam_stats AS (
+                    SELECT 
+                        AVG(score) as avg_score,
+                        COUNT(*) as total,
+                        MAX(score) as best_score,
+                        ARRAY_AGG(score ORDER BY completed_at) as scores,
+                        ARRAY(
+                            SELECT DISTINCT ON (DATE_TRUNC('week', completed_at))
+                                TO_CHAR(completed_at, '"Week" IW')
+                            FROM exams
+                            WHERE student_id = %s
+                            AND completed_at >= NOW() - INTERVAL '30 days'
+                            ORDER BY DATE_TRUNC('week', completed_at)
+                        ) as labels
+                    FROM exams
+                    WHERE student_id = %s
+                    AND completed_at >= NOW() - INTERVAL '30 days'
+                    AND score IS NOT NULL
+                )
+                SELECT 
+                    COALESCE(avg_score, 0) as avg_score,
+                    COALESCE(total, 0) as total,
+                    COALESCE(best_score, 0) as best_score,
+                    CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
+                    CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
+                FROM exam_stats
+            """, (student_id, student_id))
+            
+            exam_data = cur.fetchone()
+            
+            return {
+                'avg_score': float(exam_data[0]),
+                'total': exam_data[1],
+                'best_score': float(exam_data[2]),
+                'scores': exam_data[3],
+                'labels': exam_data[4]
+            }
+            
+    except Exception as e:
+        print(f"Error fetching exam data: {e}")
+        return {
+            'avg_score': 0,
+            'total': 0,
+            'best_score': 0,
+            'scores': [0, 0, 0, 0],
+            'labels': ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+        }
+    finally:
+        conn.close()
+
+def get_recent_activities(student_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=DictCursor) as cur:
+            cur.execute("""
+                SELECT 
+                    activity_type as title,
+                    description,
+                    icon,
+                    created_at as time
+                FROM student_activities
+                WHERE student_id = %s
+                ORDER BY created_at DESC
+                LIMIT 5
+                """, (student_id,))
+            
+            return [{
+                'title': a['title'],
+                'description': a['description'],
+                'icon': a['icon'] or 'check',
+                'time': a['time'].strftime('%b %d, %H:%M')
+            } for a in cur.fetchall()]
+    except Exception as e:
+        print(f"Error fetching activities: {e}")
+        return []
+    finally:
+        conn.close()
+
+def complete_practice_session(practice_session_id):
+    """Fetches practice results from DB and logs the activity"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    try:
+        # Fetch practice session details
+        cur.execute('''
+            SELECT 
+                student_id, 
+                subject, 
+                topic, 
+                score,
+                completed_at
+            FROM practice_sessions
+            WHERE id = %s
+        ''', (practice_session_id,))
+        
+        session = cur.fetchone()
+        
+        if not session:
+            print(f"No practice session found with ID: {practice_session_id}")
+            return False
+            
+        student_id, topic, duration, score, completed_at = session
+        
+        # Log the activity
+        cur.execute('''
+            INSERT INTO student_activities 
+            (student_id, activity_type, description, icon, metadata, created_at)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        ''', (
+            student_id,
+            'practice',
+            f"Completed {duration} minute {topic} practice",
+            'book-open',
+            json.dumps({
+                'topic': topic,
+                'score': float(score) if score else None,
+                'completed_at': completed_at.isoformat() if completed_at else datetime.utcnow().isoformat(),
+                'practice_id': practice_session_id
+            }),
+            completed_at or datetime.utcnow()
+        ))
+        
+        conn.commit()
+        return True
+        
+    except Exception as e:
+        conn.rollback()
+        print(f"Error logging practice session: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
 def get_parents():
     """Get all parent users"""
     conn = get_db_connection()
@@ -3107,7 +3502,7 @@ def take_exam(exam_id):
 @login_required  # Ensure user is logged in
 # @student_required # Optional: restrict to students
 def submit_exam(exam_id):
-    """Handles the submission of an exam, grades it, and saves the result."""
+    """Handles the submission of an exam, grades it, saves the result, and logs the activity."""
     user_id = session.get('user_id')
     if not user_id:
         flash('User not logged in.', 'danger')
@@ -3117,15 +3512,10 @@ def submit_exam(exam_id):
     exams = load_exams_from_json('static/js/exams.json')
 
     # Find the specific exam the user submitted
-    selected_exam = None
-    for exam in exams:
-        if exam.get('id') == exam_id:
-            selected_exam = exam
-            break
-
+    selected_exam = next((exam for exam in exams if exam.get('id') == exam_id), None)
+    
     if not selected_exam:
         flash('Exam not found.', 'danger')
-        # Redirect back if exam ID is invalid
         return redirect(url_for('exam_practice'))
 
     # Get user's submitted answers
@@ -3136,20 +3526,13 @@ def submit_exam(exam_id):
     total_questions = len(selected_exam.get('questions', []))
 
     if total_questions > 0:
-        for question in selected_exam.get('questions', []):
-            question_id_key = f"question_{question.get('id')}"
-            submitted_answer = user_answers.get(question_id_key)
-            correct_answer = question.get('correct_answer')
-
-            # Compare submitted answer with the correct answer
-            # Ensure comparison handles potential data type differences if necessary
-            if submitted_answer is not None and str(submitted_answer) == str(correct_answer):
-                correct_answers_count += 1
-
-        # Calculate score (as a percentage)
+        correct_answers_count = sum(
+            1 for question in selected_exam.get('questions', [])
+            if str(user_answers.get(f"question_{question.get('id')}")) == str(question.get('correct_answer')))
+        
         score = (correct_answers_count / total_questions) * 100
     else:
-        score = 0  # Handle exams with no questions
+        score = 0
 
     print(f"User {user_id} submitted Exam {exam_id}. Score: {score:.2f}% ({correct_answers_count}/{total_questions} correct)")
 
@@ -3157,31 +3540,47 @@ def submit_exam(exam_id):
     conn = get_db_connection()
     cur = conn.cursor()
     result_id = None
+    
     try:
+        # Save exam result
         cur.execute('''
             INSERT INTO exam_results (user_id, exam_id, score, total_questions, completion_time)
             VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING id;
         ''', (user_id, exam_id, score, total_questions))
         result_id = cur.fetchone()[0]
+
+        # Log the exam submission activity
+        cur.execute('''
+            INSERT INTO student_activities 
+            (student_id, activity_type, description, icon, metadata)
+            VALUES (%s, %s, %s, %s, %s)
+        ''', (
+            user_id,
+            'exam',
+            f"Completed {selected_exam.get('name', 'Exam')}",
+            'file-certificate',
+            json.dumps({
+                'exam_id': exam_id,
+                'score': float(score),
+                'correct_answers': correct_answers_count,
+                'total_questions': total_questions,
+                'result_id': result_id
+            })
+        ))
+
         conn.commit()
         flash('Exam submitted and graded successfully!', 'success')
-
-        # Redirect to a results page
         return redirect(url_for('exam_results', result_id=result_id))
 
     except Exception as e:
         conn.rollback()
-        print(f"Error saving exam result: {e}")
-        flash('Error saving exam result.', 'danger')
-        # Redirect to exam practice page or an error page
+        print(f"Error processing exam submission: {e}")
+        flash('Error processing exam submission.', 'danger')
         return redirect(url_for('exam_practice'))
     finally:
         cur.close()
         conn.close()
-
-# *** Placeholder route for displaying exam results ***
-# You will implement the logic for this route and create the template next.
 
 # Placeholder route for displaying exam results
 
@@ -3571,22 +3970,6 @@ def parent_dashboard():
                          stats=stats,
                          announcements=announcements)
 
-# @app.route('/parent/assignments/<int:student_id>')
-# @login_required
-# def parent_view_assignments(student_id):
-#     if session.get('role') != 'parent':
-#         abort(403)
-
-#     # Verify parent has access to this student
-#     students = get_students_for_parent(session['user_id'])
-#     if not any(s['id'] == student_id for s in students):
-#         abort(403)
-
-#     assignments = get_assignments_for_user(student_id)
-#     return render_template('parent/assignments.html',
-#                            student_id=student_id,
-#                            assignments=assignments)
-
 
 @app.route('/parent/submissions/<int:student_id>')
 @login_required
@@ -3655,6 +4038,151 @@ def parent_view_sessions(student_id):
                            bookings=bookings,
                            upcoming_sessions=upcoming_sessions)
 
+
+def get_chart_data(student_id):
+    try:
+        # Get base data
+        assignments = get_assignments_data(student_id)
+        practice = get_practice_data(student_id)
+        exams = get_exams_data(student_id)
+        activities = get_recent_activities(student_id)
+        
+        # Get trend data from database
+        trend_data = get_actual_trend_data(student_id)
+        subject_data = get_actual_subject_data(student_id)
+        
+        return jsonify({
+            'assignments': assignments,
+            'practice': practice,
+            'exams': exams,
+            'activities': activities,
+            'trend': trend_data,
+            'subjects': subject_data
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+def get_actual_trend_data(student_id):
+    """Fetch actual trend data from database"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            # Get monthly trends for the last 6 months
+            cur.execute("""
+                WITH months AS (
+                    SELECT generate_series(
+                        date_trunc('month', CURRENT_DATE - INTERVAL '5 months'),
+                        date_trunc('month', CURRENT_DATE),
+                        INTERVAL '1 month'
+                    ) AS month
+                )
+                SELECT
+                    TO_CHAR(months.month, 'Mon') AS month_name,
+                    COALESCE(AVG(a.score), 0) AS assignment_avg,
+                    COALESCE(AVG(p.score), 0) AS practice_avg,
+                    COALESCE(AVG(e.score), 0) AS exam_avg
+                FROM months
+                LEFT JOIN assignments a ON 
+                    date_trunc('month', a.due_date) = months.month AND
+                    a.student_id = %s
+                LEFT JOIN practice_sessions p ON
+                    date_trunc('month', p.completed_at) = months.month AND
+                    p.student_id = %s
+                LEFT JOIN exams e ON
+                    date_trunc('month', e.completed_at) = months.month AND
+                    e.student_id = %s
+                GROUP BY months.month
+                ORDER BY months.month
+            """, (student_id, student_id, student_id))
+            
+            results = cur.fetchall()
+            
+            if not results:
+                return {
+                    'labels': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    'assignments': [0, 0, 0, 0, 0, 0],
+                    'practice': [0, 0, 0, 0, 0, 0],
+                    'exams': [0, 0, 0, 0, 0, 0]
+                }
+            
+            # Convert query results to trend format
+            labels = [row[0] for row in results]
+            assignments = [round(float(row[1]), 1) for row in results]
+            practice = [round(float(row[2]), 1) for row in results]
+            exams = [round(float(row[3]), 1) for row in results]
+            
+            return {
+                'labels': labels,
+                'assignments': assignments,
+                'practice': practice,
+                'exams': exams
+            }
+            
+    except Exception as e:
+        print(f"Error fetching trend data: {e}")
+        return {
+            'labels': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            'assignments': [0, 0, 0, 0, 0, 0],
+            'practice': [0, 0, 0, 0, 0, 0],
+            'exams': [0, 0, 0, 0, 0, 0]
+        }
+    finally:
+        conn.close()
+
+def get_actual_subject_data(student_id):
+    """Fetch actual subject data from database"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT 
+                    subject,
+                    AVG(score) as avg_score
+                FROM (
+                    SELECT title, score FROM assignments WHERE student_id = %s
+                    UNION ALL
+                    SELECT subject, score FROM practice_sessions WHERE student_id = %s
+                    UNION ALL
+                    SELECT subject, score FROM exams WHERE student_id = %s
+                ) combined
+                WHERE score IS NOT NULL
+                GROUP BY subject
+                ORDER BY avg_score DESC
+                LIMIT 4
+            """, (student_id, student_id, student_id))
+            
+            results = cur.fetchall()
+            
+            if not results:
+                return {
+                    'labels': ['Math', 'Science', 'English', 'History'],
+                    'scores': [0, 0, 0, 0]
+                }
+            
+            # Pad with default values if less than 4 subjects
+            labels = [row[0] for row in results]
+            scores = [round(float(row[1])) for row in results]
+            
+            while len(labels) < 4:
+                labels.append(f"Subject {len(labels)+1}")
+                scores.append(0)
+            
+            return {
+                'labels': labels[:4],  # Ensure only 4 subjects
+                'scores': scores[:4]
+            }
+            
+    except Exception as e:
+        print(f"Error fetching subject data: {e}")
+        return {
+            'labels': ['Math', 'Science', 'English', 'History'],
+            'scores': [0, 0, 0, 0]
+        }
+    finally:
+        conn.close()
+
+
+
 # Add these routes to app.py
 @app.route('/admin/parents/add', methods=['GET', 'POST'])
 @login_required
@@ -3720,6 +4248,33 @@ def add_parent():
     # GET request - show form
     students = get_students()
     return render_template('admin/add_parent.html', students=students)
+
+@app.route('/api/student/<int:student_id>/chart_data')
+def get_chart_data(student_id):
+    """Endpoint to fetch all chart data from database"""
+    try:
+        # Get all data from database
+        assignments = get_assignments_data(student_id)
+        practice = get_practice_data(student_id)
+        exams = get_exams_data(student_id)
+        activities = get_recent_activities(student_id)
+        
+        # Get actual trend data with real dates
+        trend_data = get_actual_trend_data(student_id)
+        
+        # Get actual subject performance data
+        subject_data = get_actual_subject_data(student_id)
+
+        return jsonify({
+            'assignments': assignments,
+            'practice': practice,
+            'exams': exams,
+            'activities': activities,
+            'trend': trend_data,
+            'subjects': subject_data
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # In your app.py file, usually near your other admin routes
 
@@ -4051,18 +4606,18 @@ def inject_functions():
         get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
     )
 
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
-
 # if __name__ == '__main__':
-#     # Enable Flask debug features
-#     app.debug = True  # Enables auto-reloader and debugger
-
-#     # Initialize database
+#     from waitress import serve
 #     initialize_database()
+#     serve(app, host="0.0.0.0", port=5000)
 
-#     # Run the development server
-#     app.run(host='0.0.0.0', port=5000)
+
+if __name__ == '__main__':
+    # Enable Flask debug features
+    app.debug = True  # Enables auto-reloader and debugger
+
+    # Initialize database
+    initialize_database()
+
+    # Run the development server
+    app.run(host='0.0.0.0', port=5000)
