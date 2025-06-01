@@ -7,65 +7,85 @@
       {
         "id": 101,
         "text": "Which of the following is a valid variable name in Python?",
-        "options": ["2var", "var_1", "var-1", "None"],
-        "correct_answer": "var_1"
+        "options": [
+          "<code>2var</code>",
+          "<code>var_1</code>",
+          "<code>var-1</code>",
+          "<code>None</code>"
+        ],
+        "correct_answer": "<code>var_1</code>"
       },
       {
         "id": 102,
         "text": "What is the correct syntax to create a list in Python?",
         "options": [
-          "list = {1, 2, 3}",
-          "list = (1, 2, 3)",
-          "list = [1, 2, 3]",
-          "list = <1, 2, 3>"
+          "<code>list = {1, 2, 3}</code>",
+          "<code>list = (1, 2, 3)</code>",
+          "<code>list = [1, 2, 3]</code>",
+          "<code>list = &lt;1, 2, 3&gt;</code>"
         ],
-        "correct_answer": "list = [1, 2, 3]"
+        "correct_answer": "<code>list = [1, 2, 3]</code>"
       },
       {
         "id": 103,
-        "text": "How do you access the first element of a list named `my_list`?",
+        "text": "How do you access the first element of a list named <code>my_list</code>?",
         "options": [
-          "my_list[0]",
-          "my_list(0)",
-          "my_list.first()",
-          "my_list{0}"
+          "<code>my_list[0]</code>",
+          "<code>my_list(0)</code>",
+          "<code>my_list.first()</code>",
+          "<code>my_list{0}</code>"
         ],
-        "correct_answer": "my_list[0]"
+        "correct_answer": "<code>my_list[0]</code>"
       },
       {
         "id": 104,
         "text": "Which of the following correctly declares a string variable?",
         "options": [
-          "text = 'Hello'",
-          "text = Hello",
-          "text = [Hello]",
-          "text = (Hello)"
+          "<code>text = 'Hello'</code>",
+          "<code>text = Hello</code>",
+          "<code>text = [Hello]</code>",
+          "<code>text = (Hello)</code>"
         ],
-        "correct_answer": "text = 'Hello'"
+        "correct_answer": "<code>text = 'Hello'</code>"
       },
       {
         "id": 105,
-        "text": "What will `print(5 / 2)` output?",
+        "text": "What will <code>print(5 / 2)</code> output?",
         "options": ["2", "2.5", "2.0", "Error"],
         "correct_answer": "2.5"
       },
       {
         "id": 106,
-        "text": "What data type does `type(10.5)` return?",
-        "options": ["int", "float", "str", "list"],
-        "correct_answer": "float"
+        "text": "What data type does <code>type(10.5)</code> return?",
+        "options": [
+          "<code>int</code>",
+          "<code>float</code>",
+          "<code>str</code>",
+          "<code>list</code>"
+        ],
+        "correct_answer": "<code>float</code>"
       },
       {
         "id": 107,
         "text": "Which operator is used for checking equality in Python?",
-        "options": ["=", "==", "!=", "==="],
-        "correct_answer": "=="
+        "options": [
+          "<code>=</code>",
+          "<code>==</code>",
+          "<code>!=</code>",
+          "<code>===</code>"
+        ],
+        "correct_answer": "<code>==</code>"
       },
       {
         "id": 108,
-        "text": "Which of the following statements correctly implements an `if` condition?",
-        "options": ["if x = 5:", "if x == 5:", "if (x = 5):", "if [x == 5]:"],
-        "correct_answer": "if x == 5:"
+        "text": "Which of the following statements correctly implements an <code>if</code> condition?",
+        "options": [
+          "<code>if x = 5:</code>",
+          "<code>if x == 5:</code>",
+          "<code>if (x = 5):</code>",
+          "<code>if [x == 5]:</code>"
+        ],
+        "correct_answer": "<code>if x == 5:</code>"
       },
       {
         "id": 109,
@@ -75,55 +95,90 @@
       },
       {
         "id": 110,
-        "text": "How do you convert a string `s = '123'` into an integer?",
-        "options": ["int(s)", "str(s)", "s.toInt()", "convert(s, int)"],
-        "correct_answer": "int(s)"
+        "text": "How do you convert a string <code>s = '123'</code> into an integer?",
+        "options": [
+          "<code>int(s)</code>",
+          "<code>str(s)</code>",
+          "<code>s.toInt()</code>",
+          "<code>convert(s, int)</code>"
+        ],
+        "correct_answer": "<code>int(s)</code>"
       },
       {
         "id": 111,
         "text": "Which function is used to find the length of a list?",
-        "options": ["count()", "size()", "length()", "len()"],
-        "correct_answer": "len()"
+        "options": [
+          "<code>count()</code>",
+          "<code>size()</code>",
+          "<code>length()</code>",
+          "<code>len()</code>"
+        ],
+        "correct_answer": "<code>len()</code>"
       },
       {
         "id": 112,
-        "text": "What will `print('hello' * 2)` output?",
+        "text": "What will <code>print('hello' * 2)</code> output?",
         "options": ["hellohello", "hello hello", "Error", "hello*hello"],
         "correct_answer": "hellohello"
       },
       {
         "id": 113,
         "text": "What keyword is used to define a function in Python?",
-        "options": ["function", "def", "define", "func"],
-        "correct_answer": "def"
+        "options": [
+          "<code>function</code>",
+          "<code>def</code>",
+          "<code>define</code>",
+          "<code>func</code>"
+        ],
+        "correct_answer": "<code>def</code>"
       },
       {
         "id": 114,
         "text": "Which method is used to add an item to the end of a list?",
-        "options": ["append()", "insert()", "extend()", "push()"],
-        "correct_answer": "append()"
+        "options": [
+          "<code>append()</code>",
+          "<code>insert()</code>",
+          "<code>extend()</code>",
+          "<code>push()</code>"
+        ],
+        "correct_answer": "<code>append()</code>"
       },
       {
         "id": 115,
         "text": "Which built-in function converts an integer to a string?",
-        "options": ["str()", "int()", "convert()", "toString()"],
-        "correct_answer": "str()"
+        "options": [
+          "<code>str()</code>",
+          "<code>int()</code>",
+          "<code>convert()</code>",
+          "<code>toString()</code>"
+        ],
+        "correct_answer": "<code>str()</code>"
       },
       {
         "id": 116,
         "text": "How do you check the data type of a variable in Python?",
-        "options": ["typeof(var)", "var.type()", "type(var)", "datatype(var)"],
-        "correct_answer": "type(var)"
+        "options": [
+          "<code>typeof(var)</code>",
+          "<code>var.type()</code>",
+          "<code>type(var)</code>",
+          "<code>datatype(var)</code>"
+        ],
+        "correct_answer": "<code>type(var)</code>"
       },
       {
         "id": 117,
         "text": "Which symbol is used for floor division?",
-        "options": ["/", "//", "%", "**"],
-        "correct_answer": "//"
+        "options": [
+          "<code>/</code>",
+          "<code>//</code>",
+          "<code>%</code>",
+          "<code>**</code>"
+        ],
+        "correct_answer": "<code>//</code>"
       },
       {
         "id": 118,
-        "text": "What does `range(5)` produce?",
+        "text": "What does <code>range(5)</code> produce?",
         "options": [
           "[0, 1, 2, 3, 4]",
           "[1, 2, 3, 4, 5]",
@@ -135,14 +190,24 @@
       {
         "id": 119,
         "text": "Which operator is used to concatenate strings?",
-        "options": ["+", "&", ".", ","],
-        "correct_answer": "+"
+        "options": [
+          "<code>+</code>",
+          "<code>&amp;</code>",
+          "<code>.</code>",
+          "<code>,</code>"
+        ],
+        "correct_answer": "<code>+</code>"
       },
       {
         "id": 120,
         "text": "Which function is used to take user input in Python?",
-        "options": ["input()", "scan()", "read()", "get()"],
-        "correct_answer": "input()"
+        "options": [
+          "<code>input()</code>",
+          "<code>scan()</code>",
+          "<code>read()</code>",
+          "<code>get()</code>"
+        ],
+        "correct_answer": "<code>input()</code>"
       }
     ],
     "duration_minutes": 60,
@@ -156,30 +221,45 @@
       {
         "id": 201,
         "text": "Which HTML tag is used for the largest heading?",
-        "options": ["<h6>", "<h3>", "<h1>", "<h4>"],
-        "correct_answer": "<h1>"
+        "options": [
+          "<code>&lt;h6&gt;</code>",
+          "<code>&lt;h3&gt;</code>",
+          "<code>&lt;h1&gt;</code>",
+          "<code>&lt;h4&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;h1&gt;</code>"
       },
       {
         "id": 202,
-        "text": "What does the `<p>` tag represent in HTML?",
+        "text": "What does the <code>&lt;p&gt;</code> tag represent in HTML?",
         "options": ["Paragraph", "Page Break", "Padding", "Print"],
         "correct_answer": "Paragraph"
       },
       {
         "id": 203,
         "text": "Which tag is used to create an unordered list?",
-        "options": ["<ul>", "<ol>", "<list>", "<li>"],
-        "correct_answer": "<ul>"
+        "options": [
+          "<code>&lt;ul&gt;</code>",
+          "<code>&lt;ol&gt;</code>",
+          "<code>&lt;list&gt;</code>",
+          "<code>&lt;li&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;ul&gt;</code>"
       },
       {
         "id": 204,
         "text": "Which HTML tag is used to make text bold?",
-        "options": ["<b>", "<strong>", "<bold>", "<em>"],
-        "correct_answer": "<strong>"
+        "options": [
+          "<code>&lt;b&gt;</code>",
+          "<code>&lt;strong&gt;</code>",
+          "<code>&lt;bold&gt;</code>",
+          "<code>&lt;em&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;strong&gt;</code>"
       },
       {
         "id": 205,
-        "text": "What does the `<hr>` tag do?",
+        "text": "What does the <code>&lt;hr&gt;</code> tag do?",
         "options": [
           "Adds a horizontal rule",
           "Creates a hyperlink",
@@ -191,12 +271,17 @@
       {
         "id": 206,
         "text": "Which tag is used to insert a line break?",
-        "options": ["<lb>", "<br>", "<break>", "<nl>"],
-        "correct_answer": "<br>"
+        "options": [
+          "<code>&lt;lb&gt;</code>",
+          "<code>&lt;br&gt;</code>",
+          "<code>&lt;break&gt;</code>",
+          "<code>&lt;nl&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;br&gt;</code>"
       },
       {
         "id": 207,
-        "text": "What does the `<em>` tag do?",
+        "text": "What does the <code>&lt;em&gt;</code> tag do?",
         "options": [
           "Makes text italic",
           "Emphasizes text",
@@ -209,39 +294,44 @@
         "id": 208,
         "text": "Which of the following is a valid ordered list?",
         "options": [
-          "<ol><li>Item</li></ol>",
-          "<ul><li>Item</li></ul>",
-          "<li><ol>Item</ol></li>",
-          "<list><ol>Item</ol></list>"
+          "<code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code>",
+          "<code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code>",
+          "<code>&lt;li&gt;&lt;ol&gt;Item&lt;/ol&gt;&lt;/li&gt;</code>",
+          "<code>&lt;list&gt;&lt;ol&gt;Item&lt;/ol&gt;&lt;/list&gt;</code>"
         ],
-        "correct_answer": "<ol><li>Item</li></ol>"
+        "correct_answer": "<code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code>"
       },
       {
         "id": 209,
-        "text": "What does the `<li>` tag represent?",
+        "text": "What does the <code>&lt;li&gt;</code> tag represent?",
         "options": ["List item", "Line item", "List index", "Label input"],
         "correct_answer": "List item"
       },
       {
         "id": 210,
         "text": "Which tag is used to apply strong emphasis to text?",
-        "options": ["<bold>", "<strong>", "<b>", "<em>"],
-        "correct_answer": "<strong>"
+        "options": [
+          "<code>&lt;bold&gt;</code>",
+          "<code>&lt;strong&gt;</code>",
+          "<code>&lt;b&gt;</code>",
+          "<code>&lt;em&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;strong&gt;</code>"
       },
       {
         "id": 211,
-        "text": "What will the following HTML code display?\n```html\n<p><strong>Bold</strong> and <em>Italic</em> text</p>\n```",
+        "text": "What will the following HTML code display?\n<pre><code>&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt; and &lt;em&gt;Italic&lt;/em&gt; text&lt;/p&gt;</code></pre>",
         "options": [
-          "Bold and Italic text",
+          "<strong>Bold</strong> and <em>Italic</em> text",
           "Error",
           "Bold and Underlined text",
           "Italic only"
         ],
-        "correct_answer": "Bold and Italic text"
+        "correct_answer": "<strong>Bold</strong> and <em>Italic</em> text"
       },
       {
         "id": 212,
-        "text": "What does the following code do?\n```html\n<ul>\n  <li>Apple</li>\n  <li>Orange</li>\n  <li>Banana</li>\n</ul>\n```",
+        "text": "What does the following code do?\n<pre><code>&lt;ul&gt;\n  &lt;li&gt;Apple&lt;/li&gt;\n  &lt;li&gt;Orange&lt;/li&gt;\n  &lt;li&gt;Banana&lt;/li&gt;\n&lt;/ul&gt;</code></pre>",
         "options": [
           "Creates an ordered list",
           "Creates a bullet list",
@@ -253,12 +343,17 @@
       {
         "id": 213,
         "text": "Which attribute is used to specify the background color of a webpage?",
-        "options": ["background", "bgcolor", "style", "color"],
-        "correct_answer": "style"
+        "options": [
+          "<code>background</code>",
+          "<code>bgcolor</code>",
+          "<code>style</code>",
+          "<code>color</code>"
+        ],
+        "correct_answer": "<code>style</code>"
       },
       {
         "id": 214,
-        "text": "What does `<ol type='A'>` do?",
+        "text": "What does <code>&lt;ol type='A'&gt;</code> do?",
         "options": [
           "Creates a list with numbers",
           "Creates a list with uppercase letters",
@@ -270,29 +365,39 @@
       {
         "id": 215,
         "text": "Which HTML tag represents a division or section in a document?",
-        "options": ["<div>", "<section>", "<span>", "<header>"],
-        "correct_answer": "<div>"
+        "options": [
+          "<code>&lt;div&gt;</code>",
+          "<code>&lt;section&gt;</code>",
+          "<code>&lt;span&gt;</code>",
+          "<code>&lt;header&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;div&gt;</code>"
       },
       {
         "id": 216,
         "text": "How do you create an HTML comment?",
         "options": [
-          "<!-- This is a comment -->",
-          "// This is a comment",
-          "/* This is a comment */",
-          "' This is a comment"
+          "<code>&lt;!-- This is a comment --&gt;</code>",
+          "<code>// This is a comment</code>",
+          "<code>/* This is a comment */</code>",
+          "<code>' This is a comment</code>"
         ],
-        "correct_answer": "<!-- This is a comment -->"
+        "correct_answer": "<code>&lt;!-- This is a comment --&gt;</code>"
       },
       {
         "id": 217,
         "text": "Which tag is used to create a hyperlink?",
-        "options": ["<link>", "<href>", "<a>", "<url>"],
-        "correct_answer": "<a>"
+        "options": [
+          "<code>&lt;link&gt;</code>",
+          "<code>&lt;href&gt;</code>",
+          "<code>&lt;a&gt;</code>",
+          "<code>&lt;url&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;a&gt;</code>"
       },
       {
         "id": 218,
-        "text": "What does `<a href='https://example.com'>Visit</a>` do?",
+        "text": "What does <code>&lt;a href='https://example.com'&gt;Visit&lt;/a&gt;</code> do?",
         "options": [
           "Displays 'Visit' as clickable text",
           "Creates a paragraph",
@@ -303,7 +408,7 @@
       },
       {
         "id": 219,
-        "text": "What does `<span>` do?",
+        "text": "What does <code>&lt;span&gt;</code> do?",
         "options": [
           "Groups inline elements",
           "Creates a section",
@@ -315,8 +420,13 @@
       {
         "id": 220,
         "text": "Which tag is used to define a table?",
-        "options": ["<table>", "<tr>", "<td>", "<tab>"],
-        "correct_answer": "<table>"
+        "options": [
+          "<code>&lt;table&gt;</code>",
+          "<code>&lt;tr&gt;</code>",
+          "<code>&lt;td&gt;</code>",
+          "<code>&lt;tab&gt;</code>"
+        ],
+        "correct_answer": "<code>&lt;table&gt;</code>"
       }
     ],
     "duration_minutes": 60,
@@ -329,196 +439,255 @@
     "questions": [
       {
         "id": 301,
-        "text": "What fraction is qequivalent to 4/8?",
-        "options": ["1/4", "1/2", "3/4", "1/3"],
-        "correct_answer": "1/2"
+        "text": "What fraction is equivalent to <sup>4</sup>&frasl;<sub>8</sub>?",
+        "options": [
+          "<sup>1</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>3</sub>"
+        ],
+        "correct_answer": "<sup>1</sup>&frasl;<sub>2</sub>"
       },
       {
         "id": 302,
-        "text": "Which of the following fractions is equivalent to 1/3?",
-        "options": ["2/5", "3/9", "4/10", "5/12"],
-        "correct_answer": "3/9"
+        "text": "Which of the following fractions is equivalent to <sup>1</sup>&frasl;<sub>3</sub>?",
+        "options": [
+          "<sup>2</sup>&frasl;<sub>5</sub>",
+          "<sup>3</sup>&frasl;<sub>9</sub>",
+          "<sup>4</sup>&frasl;<sub>10</sub>",
+          "<sup>5</sup>&frasl;<sub>12</sub>"
+        ],
+        "correct_answer": "<sup>3</sup>&frasl;<sub>9</sub>"
       },
       {
         "id": 303,
-        "text": "Simplify the fraction 8/12 to its lowest terms.",
-        "options": ["4/6", "2/3", "1/2", "3/4"],
-        "correct_answer": "2/3"
+        "text": "Simplify the fraction <sup>8</sup>&frasl;<sub>12</sub> to its lowest terms.",
+        "options": [
+          "<sup>4</sup>&frasl;<sub>6</sub>",
+          "<sup>2</sup>&frasl;<sub>3</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>3</sup>&frasl;<sub>4</sub>"
+        ],
+        "correct_answer": "<sup>2</sup>&frasl;<sub>3</sub>"
       },
       {
         "id": 304,
-        "text": "Convert the mixed number 2 1/4 into an improper fraction.",
-        "options": ["7/4", "9/4", "10/4", "11/4"],
-        "correct_answer": "9/4"
+        "text": "Convert the mixed number 2<sup>1</sup>&frasl;<sub>4</sub> into an improper fraction.",
+        "options": [
+          "<sup>7</sup>&frasl;<sub>4</sub>",
+          "<sup>9</sup>&frasl;<sub>4</sub>",
+          "<sup>10</sup>&frasl;<sub>4</sub>",
+          "<sup>11</sup>&frasl;<sub>4</sub>"
+        ],
+        "correct_answer": "<sup>9</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 305,
-        "text": "Convert the improper fraction 17/5 into a mixed number.",
-        "options": ["3 1/5", "3 2/5", "3 3/5", "3 4/5"],
-        "correct_answer": "3 2/5"
+        "text": "Convert the improper fraction <sup>17</sup>&frasl;<sub>5</sub> into a mixed number.",
+        "options": [
+          "3<sup>1</sup>&frasl;<sub>5</sub>",
+          "3<sup>2</sup>&frasl;<sub>5</sub>",
+          "3<sup>3</sup>&frasl;<sub>5</sub>",
+          "3<sup>4</sup>&frasl;<sub>5</sub>"
+        ],
+        "correct_answer": "3<sup>2</sup>&frasl;<sub>5</sub>"
       },
       {
         "id": 306,
-        "text": "Which fraction is larger: 3/5 or 2/3?",
-        "options": ["3/5", "2/3", "They are equal", "Cannot be determined"],
-        "correct_answer": "2/3"
+        "text": "Which fraction is larger: <sup>3</sup>&frasl;<sub>5</sub> or <sup>2</sup>&frasl;<sub>3</sub>?",
+        "options": [
+          "<sup>3</sup>&frasl;<sub>5</sub>",
+          "<sup>2</sup>&frasl;<sub>3</sub>",
+          "They are equal",
+          "Cannot be determined"
+        ],
+        "correct_answer": "<sup>2</sup>&frasl;<sub>3</sub>"
       },
       {
         "id": 307,
-        "text": "Add the fractions: 1/4 + 2/4",
-        "options": ["3/8", "3/4", "1/2", "4/4"],
-        "correct_answer": "3/4"
+        "text": "Add the fractions: <sup>1</sup>&frasl;<sub>4</sub> + <sup>2</sup>&frasl;<sub>4</sub>",
+        "options": [
+          "<sup>3</sup>&frasl;<sub>8</sub>",
+          "<sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>4</sup>&frasl;<sub>4</sub>"
+        ],
+        "correct_answer": "<sup>3</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 308,
-        "text": "Subtract the fractions: 5/6 - 1/6",
-        "options": ["4/0", "4/6", "2/3", "1"],
-        "correct_answer": "2/3"
+        "text": "Subtract the fractions: <sup>5</sup>&frasl;<sub>6</sub> - <sup>1</sup>&frasl;<sub>6</sub>",
+        "options": [
+          "<sup>4</sup>&frasl;<sub>0</sub>",
+          "<sup>4</sup>&frasl;<sub>6</sub>",
+          "<sup>2</sup>&frasl;<sub>3</sub>",
+          "1"
+        ],
+        "correct_answer": "<sup>2</sup>&frasl;<sub>3</sub>"
       },
       {
         "id": 309,
-        "text": "Add the fractions: 1/2 + 1/3",
-        "options": ["2/5", "5/6", "3/5", "1/5"],
-        "correct_answer": "5/6"
+        "text": "Add the fractions: <sup>1</sup>&frasl;<sub>2</sub> + <sup>1</sup>&frasl;<sub>3</sub>",
+        "options": [
+          "<sup>2</sup>&frasl;<sub>5</sub>",
+          "<sup>5</sup>&frasl;<sub>6</sub>",
+          "<sup>3</sup>&frasl;<sub>5</sub>",
+          "<sup>1</sup>&frasl;<sub>5</sub>"
+        ],
+        "correct_answer": "<sup>5</sup>&frasl;<sub>6</sub>"
       },
       {
         "id": 310,
-        "text": "Subtract the fractions: 3/4 - 1/5",
-        "options": ["2/1", "11/20", "2/20", "19/20"],
-        "correct_answer": "11/20"
+        "text": "Subtract the fractions: <sup>3</sup>&frasl;<sub>4</sub> - <sup>1</sup>&frasl;<sub>5</sub>",
+        "options": [
+          "<sup>2</sup>&frasl;<sub>1</sub>",
+          "<sup>11</sup>&frasl;<sub>20</sub>",
+          "<sup>2</sup>&frasl;<sub>20</sub>",
+          "<sup>19</sup>&frasl;<sub>20</sub>"
+        ],
+        "correct_answer": "<sup>11</sup>&frasl;<sub>20</sub>"
       },
       {
         "id": 311,
-        "text": "Multiply the fractions: 2/3 * 1/4",
-        "options": ["3/7", "2/12", "1/6", "8/3"],
-        "correct_answer": "1/6"
+        "text": "Multiply the fractions: <sup>2</sup>&frasl;<sub>3</sub> × <sup>1</sup>&frasl;<sub>4</sub>",
+        "options": [
+          "<sup>3</sup>&frasl;<sub>7</sub>",
+          "<sup>2</sup>&frasl;<sub>12</sub>",
+          "<sup>1</sup>&frasl;<sub>6</sub>",
+          "<sup>8</sup>&frasl;<sub>3</sub>"
+        ],
+        "correct_answer": "<sup>1</sup>&frasl;<sub>6</sub>"
       },
       {
         "id": 312,
-        "text": "Divide the fractions: 3/5 ÷ 1/2",
-        "options": ["3/10", "6/5", "5/6", "1/10"],
-        "correct_answer": "6/5"
+        "text": "Divide the fractions: <sup>3</sup>&frasl;<sub>5</sub> ÷ <sup>1</sup>&frasl;<sub>2</sub>",
+        "options": [
+          "<sup>3</sup>&frasl;<sub>10</sub>",
+          "<sup>6</sup>&frasl;<sub>5</sub>",
+          "<sup>5</sup>&frasl;<sub>6</sub>",
+          "<sup>1</sup>&frasl;<sub>10</sub>"
+        ],
+        "correct_answer": "<sup>6</sup>&frasl;<sub>5</sub>"
       },
       {
         "id": 313,
-        "text": "What is 1/4 of 20?",
+        "text": "What is <sup>1</sup>&frasl;<sub>4</sub> of 20?",
         "options": ["4", "5", "10", "80"],
         "correct_answer": "5"
       },
       {
         "id": 314,
         "text": "A pizza is cut into 8 slices. If you eat 3 slices, what fraction of the pizza did you eat?",
-        "options": ["3/8", "5/8", "1/3", "8/3"],
-        "correct_answer": "3/8"
+        "options": [
+          "<sup>3</sup>&frasl;<sub>8</sub>",
+          "<sup>5</sup>&frasl;<sub>8</sub>",
+          "<sup>1</sup>&frasl;<sub>3</sub>",
+          "<sup>8</sup>&frasl;<sub>3</sub>"
+        ],
+        "correct_answer": "<sup>3</sup>&frasl;<sub>8</sub>"
       },
       {
         "id": 315,
-        "text": "You have 12 marbles, and 1/3 of them are blue. How many blue marbles do you have?",
+        "text": "You have 12 marbles, and <sup>1</sup>&frasl;<sub>3</sub> of them are blue. How many blue marbles do you have?",
         "options": ["3", "4", "6", "9"],
         "correct_answer": "4"
       },
       {
         "id": 316,
         "text": "Which of the following is an improper fraction?",
-        "options": ["3/4", "7/6", "1/2", "5/5"],
-        "correct_answer": "7/6"
+        "options": [
+          "<sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>7</sup>&frasl;<sub>6</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>5</sup>&frasl;<sub>5</sub>"
+        ],
+        "correct_answer": "<sup>7</sup>&frasl;<sub>6</sub>"
       },
       {
         "id": 317,
-        "text": "Order the following fractions from smallest to largest: 1/2, 1/4, 3/4",
+        "text": "Order the following fractions from smallest to largest: <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>3</sup>&frasl;<sub>4</sub>",
         "options": [
-          "1/2, 1/4, 3/4",
-          "1/4, 1/2, 3/4",
-          "3/4, 1/2, 1/4",
-          "1/4, 3/4, 1/2"
+          "<sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>, <sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>2</sub>, <sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>3</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>2</sub>, <sup>1</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>4</sub>, <sup>3</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>2</sub>"
         ],
-        "correct_answer": "1/4, 1/2, 3/4"
+        "correct_answer": "<sup>1</sup>&frasl;<sub>4</sub>, <sup>1</sup>&frasl;<sub>2</sub>, <sup>3</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 318,
-        "text": "What is 2/5 of 50?",
+        "text": "What is <sup>2</sup>&frasl;<sub>5</sub> of 50?",
         "options": ["10", "20", "25", "100"],
         "correct_answer": "20"
       },
       {
         "id": 319,
-        "text": "If a recipe requires 3/4 cup of flour and you only want to make half of the recipe, how much flour do you need?",
-        "options": ["3/8 cup", "6/4 cup", "1/2 cup", "3/2 cup"],
-        "correct_answer": "3/8 cup"
+        "text": "If a recipe requires <sup>3</sup>&frasl;<sub>4</sub> cup of flour and you only want to make half of the recipe, how much flour do you need?",
+        "options": [
+          "<sup>3</sup>&frasl;<sub>8</sub> cup",
+          "<sup>6</sup>&frasl;<sub>4</sub> cup",
+          "<sup>1</sup>&frasl;<sub>2</sub> cup",
+          "<sup>3</sup>&frasl;<sub>2</sub> cup"
+        ],
+        "correct_answer": "<sup>3</sup>&frasl;<sub>8</sub> cup"
       },
       {
         "id": 320,
-        "text": "You have 2 1/2 oranges and you eat 3/4 of an orange. How many oranges do you have left?",
-        "options": ["1 3/4", "1 1/4", "2 1/4", "1 1/2"],
-        "correct_answer": "1 3/4"
+        "text": "You have 2<sup>1</sup>&frasl;<sub>2</sub> oranges and you eat <sup>3</sup>&frasl;<sub>4</sub> of an orange. How many oranges do you have left?",
+        "options": [
+          "1<sup>3</sup>&frasl;<sub>4</sub>",
+          "1<sup>1</sup>&frasl;<sub>4</sub>",
+          "2<sup>1</sup>&frasl;<sub>4</sub>",
+          "1<sup>1</sup>&frasl;<sub>2</sub>"
+        ],
+        "correct_answer": "1<sup>3</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 321,
         "text": "Which fraction is equivalent to 0.75?",
-        "options": ["1/4", "1/2", "3/4", "75/10"],
-        "correct_answer": "3/4"
+        "options": [
+          "<sup>1</sup>&frasl;<sub>4</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>3</sup>&frasl;<sub>4</sub>",
+          "<sup>75</sup>&frasl;<sub>10</sub>"
+        ],
+        "correct_answer": "<sup>3</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 322,
-        "text": "What is the sum of 1 1/2 and 2 1/4?",
-        "options": ["3 3/4", "3 1/2", "4", "3 1/8"],
-        "correct_answer": "3 3/4"
+        "text": "What is the sum of 1<sup>1</sup>&frasl;<sub>2</sub> and 2<sup>1</sup>&frasl;<sub>4</sub>?",
+        "options": [
+          "3<sup>3</sup>&frasl;<sub>4</sub>",
+          "3<sup>1</sup>&frasl;<sub>2</sub>",
+          "4",
+          "3<sup>1</sup>&frasl;<sub>8</sub>"
+        ],
+        "correct_answer": "3<sup>3</sup>&frasl;<sub>4</sub>"
       },
       {
         "id": 323,
-        "text": "Subtract 1/3 from 5/6.",
-        "options": ["4/3", "4/6", "1/2", "2/3"],
-        "correct_answer": "1/2"
+        "text": "Subtract <sup>1</sup>&frasl;<sub>3</sub> from <sup>5</sup>&frasl;<sub>6</sub>.",
+        "options": [
+          "<sup>4</sup>&frasl;<sub>3</sub>",
+          "<sup>4</sup>&frasl;<sub>6</sub>",
+          "<sup>1</sup>&frasl;<sub>2</sub>",
+          "<sup>2</sup>&frasl;<sub>3</sub>"
+        ],
+        "correct_answer": "<sup>1</sup>&frasl;<sub>2</sub>"
       },
       {
         "id": 324,
-        "text": "Multiply 1 1/3 by 2/5.",
-        "options": ["2/15", "8/15", "2/5", "6/15"],
-        "correct_answer": "8/15"
-      },
-      {
-        "id": 325,
-        "text": "Divide 5/8 by 1/4.",
-        "options": ["5/32", "10/8", "5/2", "2/5"],
-        "correct_answer": "5/2"
-      },
-      {
-        "id": 326,
-        "text": "A class has 30 students. If 2/5 of the students are boys, how many boys are in the class?",
-        "options": ["10", "12", "15", "20"],
-        "correct_answer": "12"
-      },
-      {
-        "id": 327,
-        "text": "You run 3/4 of a kilometer. Your friend runs 5/6 of a kilometer. Who ran further?",
+        "text": "Multiply 1<sup>1</sup>&frasl;<sub>3</sub> by <sup>2</sup>&frasl;<sub>5</sub>.",
         "options": [
-          "You",
-          "Your friend",
-          "Both ran the same distance",
-          "Cannot be determined"
+          "<sup>2</sup>&frasl;<sub>15</sub>",
+          "<sup>8</sup>&frasl;<sub>15</sub>",
+          "<sup>2</sup>&frasl;<sub>5</sub>",
+          "<sup>6</sup>&frasl;<sub>15</sub>"
         ],
-        "correct_answer": "Your friend"
-      },
-      {
-        "id": 328,
-        "text": "Simplify the expression: 1/2 + 1/4 + 1/8",
-        "options": ["3/14", "7/8", "3/8", "1/6"],
-        "correct_answer": "7/8"
-      },
-      {
-        "id": 329,
-        "text": "If a cake is divided into 10 equal slices and you eat 30% of the cake, what fraction of the cake did you eat?",
-        "options": ["3/100", "3/10", "1/3", "30/10"],
-        "correct_answer": "3/10"
-      },
-      {
-        "id": 330,
-        "text": "A carton contains 24 eggs. If 1/6 of the eggs are cracked, how many eggs are NOT cracked?",
-        "options": ["4", "18", "20", "22"],
-        "correct_answer": "20"
+        "correct_answer": "<sup>8</sup>&frasl;<sub>15</sub>"
       }
     ],
-    "duration_minutes": 60,
+    "duration_minutes": 45,
     "difficulty": "Medium"
   },
   {
@@ -830,12 +999,7 @@
       {
         "id": 313,
         "text": "Expand: 2(x + 3y - 4)",
-        "options": [
-          "2x + 6y - 8",
-          "2x + 3y - 4",
-          "x + 6y - 8",
-          "2x + 5y - 6"
-        ],
+        "options": ["2x + 6y - 8", "2x + 3y - 4", "x + 6y - 8", "2x + 5y - 6"],
         "correct_answer": "2x + 6y - 8"
       },
       {
@@ -942,16 +1106,70 @@
       {
         "id": 330,
         "text": "Factor completely: 6x + 9",
-        "options": [
-          "3(2x + 3)",
-          "6(x + 1.5)",
-          "2(3x + 4.5)",
-          "x(6 + 9)"
-        ],
+        "options": ["3(2x + 3)", "6(x + 1.5)", "2(3x + 4.5)", "x(6 + 9)"],
         "correct_answer": "3(2x + 3)"
       }
     ],
     "duration_minutes": 45,
     "difficulty": "Medium"
-}
+  },
+  {
+    "id": 7,
+    "title": "Grade 10 Mathematics Paper 1 - June 2024",
+    "description": "An official provincial exam assessing algebra, functions, inequalities, simplification, and graphs for Grade 10 Mathematics students.",
+    "questions": [
+      {
+        "id": 1001,
+        "type": "problem_solving ",
+        "question": " &frac14; If K = \u221a<span class='fraction-css'><span class='numerator'>9</span><span class='denominator'>4 \u2212 x</span></span>, for which value of x is K undefined?",
+        "options": ["0", "3", "4", "4"],
+        "correct_answer": "x = 4",
+        "marks": 1
+      },
+      {
+        "id": 1002,
+        "type": "problem_solving",
+        "question": "Simplify: 2b(b \u2013 5c)<span class='exponent-css'>2</span>",
+        "options": [
+          "2b<sup>3</sup> - 10bc",
+          "2b<sup>3</sup> - 20bc + 50b",
+          "2b<sup>3</sup> - 50bc",
+          "2b(b<sup>2</sup> - 10bc + 25c<sup>2</sup>)"
+        ],
+        "correct_answer": "2b(b<sup>2</sup> - 10bc + 25c<sup>2</sup>)",
+        "marks": 2
+      },
+      {
+        "id": 1003,
+        "type": "problem_solving",
+        "question": "Solve: 16<sup>2x \u2212 0.5</sup> = 41",
+        "options": [
+          "x \u2248 1.01",
+          "x \u2248 0.75",
+          "x \u2248 0.9",
+          "x \u2248 1.25"
+        ],
+        "correct_answer": "x \u2248 1.01",
+        "marks": 4
+      },
+      {
+        "id": 1004,
+        "type": "problem_solving",
+        "question": "Solve the inequality: <span class='fraction-css'><span class='numerator'>3x \u2212 4</span><span class='denominator'>2</span></span> &lt; 14",
+        "options": ["x &lt; 10", "x &lt; 12", "x &lt; 9", "x &lt; 11"],
+        "correct_answer": "x &lt; 10",
+        "marks": 2
+      },
+      {
+        "id": 1005,
+        "type": "problem_solving",
+        "question": "Write the equation of the asymptote of f(x) = 2<sup>x + k</sup> + 2",
+        "options": ["y = 0", "y = 1", "y = 2", "y = -1"],
+        "correct_answer": "y = 2",
+        "marks": 1
+      }
+    ],
+    "duration_minutes": 45,
+    "difficulty": "Medium"
+  }
 ]

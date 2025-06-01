@@ -1,126 +1,547 @@
-{% extends "base.html" %}
-
-{% block content %}
-<div class="container mt-4">
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Parent Dashboard</h2>
-    
-    <!-- Student Selector -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5>Select Student</h5>
+    <div class="dropdown">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle"
+        type="button"
+        id="timeRangeDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Last 30 Days
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+        <li><a class="dropdown-item" href="#">Last 7 Days</a></li>
+        <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
+        <li><a class="dropdown-item" href="#">Last 90 Days</a></li>
+        <li><a class="dropdown-item" href="#">All Time</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Student Selector -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-light">
+      <h5 class="mb-0">Select Student</h5>
+    </div>
+    <div class="card-body">
+      {% if students %}
+      <div class="d-flex flex-wrap gap-2">
+        {% for student in students %}
+        <a
+          href="{{ url_for('parent_dashboard', student_id=student.id) }}"
+          class="btn {% if selected_student and selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %} rounded-pill"
+        >
+          <i class="fas fa-user-graduate me-2"></i>{{ student.username }}
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="alert alert-warning mb-0">
+        No students linked to your account. Please contact admin.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if selected_student %}
+  <!-- Performance Overview Cards -->
+  <div class="row mb-4">
+    <!-- Assignments Card -->
+    <div class="col-xl-4 col-md-6 mb-4">
+      <div class="card border-start-success border-4 h-100 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-uppercase text-success fw-bold mb-1">
+                Assignments
+              </h6>
+              <h3 class="mb-0">
+                {% if stats and stats.assignments %} {{
+                stats.assignments.avg_score|default('0') }}% {% else %} N/A {%
+                endif %}
+              </h3>
+            </div>
+            <div class="icon-shape bg-success bg-opacity-10 rounded-circle p-3">
+              <i class="fas fa-tasks text-success fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <canvas id="assignmentsChart" height="120"></canvas>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <div>
+              <span class="text-muted small">Submitted</span>
+              <h6 class="mb-0">
+                {% if stats and stats.assignments %} {{
+                stats.assignments.submitted }}/{{ stats.assignments.total }} {%
+                else %} 0/0 {% endif %}
+              </h6>
+            </div>
+            <div class="text-end">
+              <span class="text-muted small">Best Score</span>
+              <h6 class="mb-0">
+                {% if stats and stats.assignments %} {{
+                stats.assignments.best_score|default('N/A') }}% {% else %} N/A
+                {% endif %}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice Card -->
+    <div class="col-xl-4 col-md-6 mb-4">
+      <div class="card border-start-info border-4 h-100 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-uppercase text-info fw-bold mb-1">Practice</h6>
+              <h3 class="mb-0">
+                {% if stats and stats.practice %} {{
+                stats.practice.avg_score|default('0') }}% {% else %} N/A {%
+                endif %}
+              </h3>
+            </div>
+            <div class="icon-shape bg-info bg-opacity-10 rounded-circle p-3">
+              <i class="fas fa-book-open text-info fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <canvas id="practiceChart" height="120"></canvas>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <div>
+              <span class="text-muted small">Total Attempts</span>
+              <h6 class="mb-0">
+                {% if stats and stats.practice %} {{ stats.practice.total }} {%
+                else %} 0 {% endif %}
+              </h6>
+            </div>
+            <div class="text-end">
+              <span class="text-muted small">Best Score</span>
+              <h6 class="mb-0">
+                {% if stats and stats.practice %} {{
+                stats.practice.best_score|default('N/A') }}% {% else %} N/A {%
+                endif %}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exams Card -->
+    <div class="col-xl-4 col-md-6 mb-4">
+      <div class="card border-start-warning border-4 h-100 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-uppercase text-warning fw-bold mb-1">Exams</h6>
+              <h3 class="mb-0">
+                {% if stats and stats.exams %} {{
+                stats.exams.avg_score|default('0') }}% {% else %} N/A {% endif
+                %}
+              </h3>
+            </div>
+            <div class="icon-shape bg-warning bg-opacity-10 rounded-circle p-3">
+              <i class="fas fa-file-alt text-warning fs-3"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <canvas id="examsChart" height="120"></canvas>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <div>
+              <span class="text-muted small">Total Taken</span>
+              <h6 class="mb-0">
+                {% if stats and stats.exams %} {{ stats.exams.total }} {% else
+                %} 0 {% endif %}
+              </h6>
+            </div>
+            <div class="text-end">
+              <span class="text-muted small">Best Score</span>
+              <h6 class="mb-0">
+                {% if stats and stats.exams %} {{
+                stats.exams.best_score|default('N/A') }}% {% else %} N/A {%
+                endif %}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Trends -->
+  <div class="row mb-4">
+    <div class="col-lg-8 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Performance Trends</h5>
         </div>
         <div class="card-body">
-            {% if students %}
-                <div class="btn-group flex-wrap" role="group">
-                    {% for student in students %}
-                        <a href="{{ url_for('parent_dashboard', student_id=student.id) }}" 
-                           class="btn mb-2 {% if selected_student and selected_student.id == student.id %}btn-primary{% else %}btn-outline-primary{% endif %}">
-                            {{ student.username }}
-                        </a>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p>No students linked to your account. Please contact admin.</p>
-            {% endif %}
+          <canvas id="performanceTrendChart" height="300"></canvas>
         </div>
+      </div>
     </div>
-    
-    {% if selected_student %}
-        <!-- Performance Overview -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h5>Assignments</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if stats and stats.assignments %}
-                            <p>Total: {{ stats.assignments.total }}</p>
-                            <p>Submitted: {{ stats.assignments.submitted }}</p>
-                            <p>Average: {{ stats.assignments.avg_score|default('N/A') }}%</p>
-                            <p>Best: {{ stats.assignments.best_score|default('N/A') }}%</p>
-                        {% else %}
-                            <p>No assignment data available</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header bg-info text-white">
-                        <h5>Practice</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if stats and stats.practice %}
-                            <p>Total: {{ stats.practice.total }}</p>
-                            <p>Average: {{ stats.practice.avg_score|default('N/A') }}%</p>
-                            <p>Best: {{ stats.practice.best_score|default('N/A') }}%</p>
-                        {% else %}
-                            <p>No practice data available</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header bg-warning text-dark">
-                        <h5>Exams</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if stats and stats.exams %}
-                            <p>Total: {{ stats.exams.total }}</p>
-                            <p>Average: {{ stats.exams.avg_score|default('N/A') }}%</p>
-                            <p>Best: {{ stats.exams.best_score|default('N/A') }}%</p>
-                        {% else %}
-                            <p>No exam data available</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Subject Breakdown</h5>
         </div>
-        
-        <!-- Quick Links -->
-        <div class="row mb-4">
-            <div class="col-md-4 mb-2">
-                <a href="{{ url_for('parent_view_assignments', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
-                    View All Assignments
-                </a>
-            </div>
-            <div class="col-md-4 mb-2">
-                <a href="{{ url_for('parent_view_submissions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
-                    View All Submissions
-                </a>
-            </div>
-            <div class="col-md-4 mb-2">
-                <a href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}" class="btn btn-outline-primary btn-block">
-                    View Sessions
-                </a>
-            </div>
+        <div class="card-body">
+          <canvas id="subjectBreakdownChart" height="300"></canvas>
         </div>
-        
-        <!-- Recent Announcements -->
-        <div class="card">
-            <div class="card-header">
-                <h5>Recent Announcements</h5>
-            </div>
-            <div class="card-body">
-                {% if announcements %}
-                    <ul class="list-group">
-                        {% for announcement in announcements %}
-                            <li class="list-group-item">
-                                <strong>{{ announcement.title }}</strong>
-                                <p>{{ announcement.message|truncate(100) }}</p>
-                                <small class="text-muted">
-                                    Posted by {{ announcement.created_by }} on {{ announcement.created_at|datetime }}
-                                </small>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No announcements</p>
-                {% endif %}
-            </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="row mb-4">
+    <div class="col-md-3 col-6 mb-2">
+      <a
+        href="{{ url_for('parent_view_assignments', student_id=selected_student.id) }}"
+        class="card card-hover h-100 text-decoration-none"
+      >
+        <div class="card-body text-center">
+          <div
+            class="icon-shape bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-3 p-3"
+          >
+            <i class="fas fa-tasks fs-4"></i>
+          </div>
+          <h6 class="mb-0">Assignments</h6>
         </div>
-    {% endif %}
+      </a>
+    </div>
+    <div class="col-md-3 col-6 mb-2">
+      <a
+        href="{{ url_for('parent_view_submissions', student_id=selected_student.id) }}"
+        class="card card-hover h-100 text-decoration-none"
+      >
+        <div class="card-body text-center">
+          <div
+            class="icon-shape bg-success bg-opacity-10 text-success rounded-circle mx-auto mb-3 p-3"
+          >
+            <i class="fas fa-file-upload fs-4"></i>
+          </div>
+          <h6 class="mb-0">Submissions</h6>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3 col-6 mb-2">
+      <a
+        href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}"
+        class="card card-hover h-100 text-decoration-none"
+      >
+        <div class="card-body text-center">
+          <div
+            class="icon-shape bg-info bg-opacity-10 text-info rounded-circle mx-auto mb-3 p-3"
+          >
+            <i class="fas fa-clock fs-4"></i>
+          </div>
+          <h6 class="mb-0">Study Sessions</h6>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3 col-6 mb-2">
+      <a
+        href="{{ url_for('parent_view_sessions', student_id=selected_student.id) }}"
+        class="card card-hover h-100 text-decoration-none"
+      >
+        <div class="card-body text-center">
+          <div
+            class="icon-shape bg-warning bg-opacity-10 text-warning rounded-circle mx-auto mb-3 p-3"
+          >
+            <i class="fas fa-chart-line fs-4"></i>
+          </div>
+          <h6 class="mb-0">Progress Report</h6>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Recent Activity</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            {% for activity in recent_activities %}
+            <div class="list-group-item border-0 py-3">
+              <div class="d-flex align-items-center">
+                <div
+                  class="icon-shape bg-light text-primary rounded-circle me-3 p-2"
+                >
+                  <i class="fas fa-{{ activity.icon|default('check') }}"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="mb-1">{{ activity.title }}</h6>
+                  <p class="small text-muted mb-0">
+                    {{ activity.description }}
+                  </p>
+                </div>
+                <small class="text-muted">{{ activity.time }}</small>
+              </div>
+            </div>
+            {% else %}
+            <div class="text-center py-4">
+              <i class="fas fa-inbox fs-1 text-muted mb-3"></i>
+              <p class="text-muted">No recent activity</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Announcements</h5>
+        </div>
+        <div class="card-body p-0">
+          {% if announcements %}
+          <div class="list-group list-group-flush">
+            {% for announcement in announcements %}
+            <div class="list-group-item border-0 py-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h6 class="mb-1">{{ announcement.title }}</h6>
+                  <p class="mb-1">{{ announcement.message|truncate(100) }}</p>
+                </div>
+                <span class="badge bg-light text-dark rounded-pill"
+                  >{{ announcement.category }}</span
+                >
+              </div>
+              <small class="text-muted"
+                >Posted by {{ announcement.created_by }} on {{
+                announcement.created_at|datetime }}</small
+              >
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="text-center py-4">
+            <i class="fas fa-bullhorn fs-1 text-muted mb-3"></i>
+            <p class="text-muted">No announcements</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
+
+<!-- Chart.js Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Sample data for charts - replace with actual data from your backend
+  document.addEventListener("DOMContentLoaded", function () {
+    // Mini charts for cards
+    const assignmentsCtx = document
+      .getElementById("assignmentsChart")
+      .getContext("2d");
+    new Chart(assignmentsCtx, {
+      type: "line",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [
+          {
+            data: [65, 72, 80, 78],
+            borderColor: "#28a745",
+            backgroundColor: "rgba(40, 167, 69, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          y: { display: false },
+          x: { display: false },
+        },
+      },
+    });
+
+    const practiceCtx = document
+      .getElementById("practiceChart")
+      .getContext("2d");
+    new Chart(practiceCtx, {
+      type: "line",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [
+          {
+            data: [70, 75, 82, 85],
+            borderColor: "#17a2b8",
+            backgroundColor: "rgba(23, 162, 184, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          y: { display: false },
+          x: { display: false },
+        },
+      },
+    });
+
+    const examsCtx = document.getElementById("examsChart").getContext("2d");
+    new Chart(examsCtx, {
+      type: "line",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [
+          {
+            data: [68, 72, 75, 80],
+            borderColor: "#ffc107",
+            backgroundColor: "rgba(255, 193, 7, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          y: { display: false },
+          x: { display: false },
+        },
+      },
+    });
+
+    // Performance Trend Chart
+    const trendCtx = document
+      .getElementById("performanceTrendChart")
+      .getContext("2d");
+    new Chart(trendCtx, {
+      type: "line",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [
+          {
+            label: "Assignments",
+            data: [65, 70, 72, 75, 78, 80],
+            borderColor: "#28a745",
+            backgroundColor: "rgba(40, 167, 69, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+          {
+            label: "Practice",
+            data: [70, 72, 75, 77, 80, 82],
+            borderColor: "#17a2b8",
+            backgroundColor: "rgba(23, 162, 184, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+          {
+            label: "Exams",
+            data: [68, 70, 72, 75, 78, 80],
+            borderColor: "#ffc107",
+            backgroundColor: "rgba(255, 193, 7, 0.1)",
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 50,
+            max: 100,
+          },
+        },
+      },
+    });
+
+    // Subject Breakdown Chart
+    const subjectCtx = document
+      .getElementById("subjectBreakdownChart")
+      .getContext("2d");
+    new Chart(subjectCtx, {
+      type: "doughnut",
+      data: {
+        labels: ["Math", "Science", "English", "History"],
+        datasets: [
+          {
+            data: [85, 78, 82, 75],
+            backgroundColor: ["#28a745", "#17a2b8", "#ffc107", "#dc3545"],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "right",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.label}: ${context.raw}%`;
+              },
+            },
+          },
+        },
+        cutout: "70%",
+      },
+    });
+  });
+</script>
+
+<style>
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+  .icon-shape {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 {% endblock %}
