@@ -222,11 +222,73 @@
 </div>
 
 <style>
+  /* Base styling for all submission content */
+  .submission-content {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+  }
+
+  /* Text submission styling */
+  .text-submission {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+  }
+
+  /* Interactive content container */
+  .interactive-content {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Quiz specific styling */
+  .quiz-answers .list-group-item {
+    margin-bottom: 0.5rem;
+  }
+  .quiz-answers .badge {
+    font-size: 0.85em;
+    margin-left: 0.5rem;
+  }
+
+  /* Essay specific styling */
+  .essay-content {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+    line-height: 1.7;
+  }
+  .essay-meta {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  /* Code submission styling */
+  .code-submission pre {
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: #212529;
+    color: #f8f9fa;
+    overflow-x: auto;
+  }
+  .code-meta {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* HTML submission styling */
   .rendered-html-content {
     border: 1px solid #ddd;
     padding: 15px;
     background: white;
     border-radius: 4px;
+    margin-bottom: 1rem;
   }
   .rendered-html-content img {
     max-width: 100%;
@@ -234,6 +296,77 @@
   }
   .rendered-html-content iframe {
     max-width: 100%;
+    border: none;
+  }
+
+  /* File download button */
+  .file-download-btn {
+    margin-top: 0.5rem;
+  }
+
+  /* Original assignment reference */
+  .assignment-reference {
+    margin-top: 2rem;
+  }
+  .assignment-reference .card-header {
+    background-color: #e9ecef;
+    font-weight: 600;
+  }
+
+  /* Question/answer pairs */
+  .question-answer {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f8fafc;
+    border-left: 4px solid #6c757d;
+    border-radius: 0.25rem;
+  }
+  .question-answer strong {
+    color: #495057;
+  }
+
+  .fraction-css {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 0.1em;
+    font-size: 0.9em;
+  }
+
+  .fraction-css .numerator,
+  .fraction-css .denominator {
+    padding: 0 0.2em;
+  }
+
+  .fraction-css .numerator {
+    border-bottom: 1px solid;
+    line-height: 1.1;
+  }
+
+  .fraction-css .denominator {
+    line-height: 1.1;
+  }
+
+  /* For better alignment with surrounding text */
+  .fraction-css-container {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Optional: Add some spacing around operators */
+  .fraction-operator {
+    margin: 0 0.3em;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .submission-content {
+      padding: 0.75rem;
+    }
+    .interactive-content {
+      padding: 1rem;
+    }
   }
 </style>
 {% endblock %}
