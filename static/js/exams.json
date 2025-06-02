@@ -51,12 +51,7 @@
       {
         "id": 105,
         "text": "What will <code>print(5 / 2)</code> output?",
-        "options": [
-          "2",
-          "2.5",
-          "2.0",
-          "Error"
-        ],
+        "options": ["2", "2.5", "2.0", "Error"],
         "correct_answer": "2.5"
       },
       {
@@ -95,12 +90,7 @@
       {
         "id": 109,
         "text": "Which of the following is NOT a mutable data type in Python?",
-        "options": [
-          "List",
-          "Tuple",
-          "Dictionary",
-          "Set"
-        ],
+        "options": ["List", "Tuple", "Dictionary", "Set"],
         "correct_answer": "Tuple"
       },
       {
@@ -128,12 +118,7 @@
       {
         "id": 112,
         "text": "What will <code>print('hello' * 2)</code> output?",
-        "options": [
-          "hellohello",
-          "hello hello",
-          "Error",
-          "hello*hello"
-        ],
+        "options": ["hellohello", "hello hello", "Error", "hello*hello"],
         "correct_answer": "hellohello"
       },
       {
@@ -247,12 +232,7 @@
       {
         "id": 202,
         "text": "What does the <code>&lt;p&gt;</code> tag represent in HTML?",
-        "options": [
-          "Paragraph",
-          "Page Break",
-          "Padding",
-          "Print"
-        ],
+        "options": ["Paragraph", "Page Break", "Padding", "Print"],
         "correct_answer": "Paragraph"
       },
       {
@@ -324,12 +304,7 @@
       {
         "id": 209,
         "text": "What does the <code>&lt;li&gt;</code> tag represent?",
-        "options": [
-          "List item",
-          "Line item",
-          "List index",
-          "Label input"
-        ],
+        "options": ["List item", "Line item", "List index", "Label input"],
         "correct_answer": "List item"
       },
       {
@@ -597,12 +572,7 @@
       {
         "id": 313,
         "text": "What is <sup>1</sup>&frasl;<sub>4</sub> of 20?",
-        "options": [
-          "4",
-          "5",
-          "10",
-          "80"
-        ],
+        "options": ["4", "5", "10", "80"],
         "correct_answer": "5"
       },
       {
@@ -619,12 +589,7 @@
       {
         "id": 315,
         "text": "You have 12 marbles, and <sup>1</sup>&frasl;<sub>3</sub> of them are blue. How many blue marbles do you have?",
-        "options": [
-          "3",
-          "4",
-          "6",
-          "9"
-        ],
+        "options": ["3", "4", "6", "9"],
         "correct_answer": "4"
       },
       {
@@ -652,12 +617,7 @@
       {
         "id": 318,
         "text": "What is <sup>2</sup>&frasl;<sub>5</sub> of 50?",
-        "options": [
-          "10",
-          "20",
-          "25",
-          "100"
-        ],
+        "options": ["10", "20", "25", "100"],
         "correct_answer": "20"
       },
       {
@@ -749,23 +709,13 @@
       {
         "id": 402,
         "text": "What is the capital city of France?",
-        "options": [
-          "Berlin",
-          "Madrid",
-          "Paris",
-          "Rome"
-        ],
+        "options": ["Berlin", "Madrid", "Paris", "Rome"],
         "correct_answer": "Paris"
       },
       {
         "id": 403,
         "text": "Which planet is known as the Red Planet?",
-        "options": [
-          "Earth",
-          "Mars",
-          "Jupiter",
-          "Saturn"
-        ],
+        "options": ["Earth", "Mars", "Jupiter", "Saturn"],
         "correct_answer": "Mars"
       },
       {
@@ -793,34 +743,19 @@
       {
         "id": 406,
         "text": "What is the chemical symbol for gold?",
-        "options": [
-          "Au",
-          "Ag",
-          "Pb",
-          "Fe"
-        ],
+        "options": ["Au", "Ag", "Pb", "Fe"],
         "correct_answer": "Au"
       },
       {
         "id": 407,
         "text": "Which country is known as the Land of the Rising Sun?",
-        "options": [
-          "China",
-          "Japan",
-          "Thailand",
-          "South Korea"
-        ],
+        "options": ["China", "Japan", "Thailand", "South Korea"],
         "correct_answer": "Japan"
       },
       {
         "id": 408,
         "text": "What is the largest continent on Earth?",
-        "options": [
-          "Africa",
-          "Asia",
-          "North America",
-          "Europe"
-        ],
+        "options": ["Africa", "Asia", "North America", "Europe"],
         "correct_answer": "Asia"
       },
       {
@@ -837,34 +772,19 @@
       {
         "id": 410,
         "text": "What is the freezing point of water in Celsius?",
-        "options": [
-          "0°C",
-          "-32°C",
-          "-100°C",
-          "-273°C"
-        ],
+        "options": ["0°C", "-32°C", "-100°C", "-273°C"],
         "correct_answer": "0°C"
       },
       {
         "id": 411,
         "text": "Which gas do plants absorb from the atmosphere?",
-        "options": [
-          "Oxygen",
-          "Carbon Dioxide",
-          "Nitrogen",
-          "Hydrogen"
-        ],
+        "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
         "correct_answer": "Carbon Dioxide"
       },
       {
         "id": 412,
         "text": "What is the main language spoken in Brazil?",
-        "options": [
-          "Spanish",
-          "Portuguese",
-          "French",
-          "English"
-        ],
+        "options": ["Spanish", "Portuguese", "French", "English"],
         "correct_answer": "Portuguese"
       },
       {
@@ -881,34 +801,19 @@
       {
         "id": 414,
         "text": "What is the capital of Australia?",
-        "options": [
-          "Sydney",
-          "Canberra",
-          "Melbourne",
-          "Brisbane"
-        ],
+        "options": ["Sydney", "Canberra", "Melbourne", "Brisbane"],
         "correct_answer": "Canberra"
       },
       {
         "id": 415,
         "text": "Which element has the atomic number 1?",
-        "options": [
-          "Oxygen",
-          "Hydrogen",
-          "Helium",
-          "Lithium"
-        ],
+        "options": ["Oxygen", "Hydrogen", "Helium", "Lithium"],
         "correct_answer": "Hydrogen"
       },
       {
         "id": 416,
         "text": "'The Great Wall' is located in which country?",
-        "options": [
-          "India",
-          "China",
-          "Japan",
-          "South Korea"
-        ],
+        "options": ["India", "China", "Japan", "South Korea"],
         "correct_answer": "China"
       },
       {
@@ -925,78 +830,43 @@
       {
         "id": 418,
         "text": "What is the largest mammal in the world?",
-        "options": [
-          "Elephant",
-          "Blue Whale",
-          "Giraffe",
-          "Great White Shark"
-        ],
+        "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],
         "correct_answer": "Blue Whale"
       },
       {
         "id": 419,
         "text": "Which country is known for the pyramids?",
-        "options": [
-          "Greece",
-          "Egypt",
-          "Mexico",
-          "India"
-        ],
+        "options": ["Greece", "Egypt", "Mexico", "India"],
         "correct_answer": "Egypt"
       },
       {
         "id": 420,
         "text": "What is the main ingredient in guacamole?",
-        "options": [
-          "Tomato",
-          "Avocado",
-          "Onion",
-          "Pepper"
-        ],
+        "options": ["Tomato", "Avocado", "Onion", "Pepper"],
         "correct_answer": "Avocado"
       },
       {
         "id": 421,
         "text": "Which organ is responsible for pumping blood in the human body?",
-        "options": [
-          "Liver",
-          "Lungs",
-          "Heart",
-          "Kidney"
-        ],
+        "options": ["Liver", "Lungs", "Heart", "Kidney"],
         "correct_answer": "Heart"
       },
       {
         "id": 422,
         "text": "What is the capital of Canada?",
-        "options": [
-          "Toronto",
-          "Vancouver",
-          "Ottawa",
-          "Montreal"
-        ],
+        "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
         "correct_answer": "Ottawa"
       },
       {
         "id": 423,
         "text": "Which planet is known for its rings?",
-        "options": [
-          "Earth",
-          "Mars",
-          "Jupiter",
-          "Saturn"
-        ],
+        "options": ["Earth", "Mars", "Jupiter", "Saturn"],
         "correct_answer": "Saturn"
       },
       {
         "id": 424,
         "text": "What is the largest desert in the world?",
-        "options": [
-          "Sahara",
-          "Arabian",
-          "Gobi",
-          "Antarctic"
-        ],
+        "options": ["Sahara", "Arabian", "Gobi", "Antarctic"],
         "correct_answer": "Sahara"
       },
       {
@@ -1013,23 +883,13 @@
       {
         "id": 426,
         "text": "What is the boiling point of water in Celsius?",
-        "options": [
-          "0°C",
-          "100°C",
-          "-100°C",
-          "-32°C"
-        ],
+        "options": ["0°C", "100°C", "-100°C", "-32°C"],
         "correct_answer": "100°C"
       },
       {
         "id": 427,
         "text": "Which country is known for its maple syrup?",
-        "options": [
-          "USA",
-          "Canada",
-          "Mexico",
-          "France"
-        ],
+        "options": ["USA", "Canada", "Mexico", "France"],
         "correct_answer": "Canada"
       },
       {
@@ -1046,23 +906,13 @@
       {
         "id": 429,
         "text": "'The Statue of Liberty' was a gift from which country?",
-        "options": [
-          "France",
-          "Germany",
-          "Italy",
-          "Spain"
-        ],
+        "options": ["France", "Germany", "Italy", "Spain"],
         "correct_answer": "'France'"
       },
       {
         "id": 430,
         "text": "'The Great Barrier Reef' is located in which country?",
-        "options": [
-          "USA",
-          "Australia",
-          "Mexico",
-          "Brazil"
-        ],
+        "options": ["USA", "Australia", "Mexico", "Brazil"],
         "correct_answer": "'Australia'"
       }
     ],
@@ -1077,232 +927,127 @@
       {
         "id": 301,
         "text": "What is the result of 3(4 + 5) - 2 x 3?",
-        "options": [
-          "15",
-          "21",
-          "27",
-          "33"
-        ],
+        "options": ["15", "21", "27", "33"],
         "correct_answer": "21"
       },
       {
         "id": 302,
         "text": "Simplify the expression: 2x + 3y - x + 4y",
-        "options": [
-          "x + 7y",
-          "3x + 7y",
-          "x + y",
-          "2x + 12y"
-        ],
+        "options": ["x + 7y", "3x + 7y", "x + y", "2x + 12y"],
         "correct_answer": "x + 7y"
       },
       {
         "id": 303,
         "text": "What is the value of 5² + 2³?",
-        "options": [
-          "17",
-          "25",
-          "33",
-          "40"
-        ],
+        "options": ["17", "25", "33", "40"],
         "correct_answer": "33"
       },
       {
         "id": 304,
         "text": "Solve for x: 2x + 5 = 15",
-        "options": [
-          "5",
-          "10",
-          "7.5",
-          "2.5"
-        ],
+        "options": ["5", "10", "7.5", "2.5"],
         "correct_answer": "5"
       },
       {
         "id": 305,
         "text": "What is the greatest common factor of 24 and 36?",
-        "options": [
-          "6",
-          "8",
-          "12",
-          "24"
-        ],
+        "options": ["6", "8", "12", "24"],
         "correct_answer": "12"
       },
       {
         "id": 306,
         "text": "Evaluate: (8 - 3) x 2 + 10 / 5",
-        "options": [
-          "12",
-          "14",
-          "16",
-          "18"
-        ],
+        "options": ["12", "14", "16", "18"],
         "correct_answer": "12"
       },
       {
         "id": 307,
         "text": "Which expression is equivalent to 3(x - 4) + 2?",
-        "options": [
-          "3x - 10",
-          "3x - 2",
-          "3x + 10",
-          "3x + 14"
-        ],
+        "options": ["3x - 10", "3x - 2", "3x + 10", "3x + 14"],
         "correct_answer": "3x - 10"
       },
       {
         "id": 308,
         "text": "What is the least common multiple of 6 and 8?",
-        "options": [
-          "12",
-          "16",
-          "24",
-          "48"
-        ],
+        "options": ["12", "16", "24", "48"],
         "correct_answer": "24"
       },
       {
         "id": 309,
         "text": "Simplify: (2a + 3b) - (a - b)",
-        "options": [
-          "a + 2b",
-          "a + 4b",
-          "3a + 2b",
-          "a - 2b"
-        ],
+        "options": ["a + 2b", "a + 4b", "3a + 2b", "a - 2b"],
         "correct_answer": "a + 4b"
       },
       {
         "id": 310,
         "text": "Solve: 3/4 × 2/5",
-        "options": [
-          "3/10",
-          "5/9",
-          "6/20",
-          "8/15"
-        ],
+        "options": ["3/10", "5/9", "6/20", "8/15"],
         "correct_answer": "3/10"
       },
       {
         "id": 311,
         "text": "What is the coefficient of y in the expression 4x + 7y - 2?",
-        "options": [
-          "4",
-          "7",
-          "-2",
-          "y"
-        ],
+        "options": ["4", "7", "-2", "y"],
         "correct_answer": "7"
       },
       {
         "id": 312,
         "text": "Calculate: 15% of 80",
-        "options": [
-          "8",
-          "12",
-          "15",
-          "20"
-        ],
+        "options": ["8", "12", "15", "20"],
         "correct_answer": "12"
       },
       {
         "id": 313,
         "text": "Expand: 2(x + 3y - 4)",
-        "options": [
-          "2x + 6y - 8",
-          "2x + 3y - 4",
-          "x + 6y - 8",
-          "2x + 5y - 6"
-        ],
+        "options": ["2x + 6y - 8", "2x + 3y - 4", "x + 6y - 8", "2x + 5y - 6"],
         "correct_answer": "2x + 6y - 8"
       },
       {
         "id": 314,
         "text": "What is the solution to 4x - 7 = 5?",
-        "options": [
-          "x = 1",
-          "x = 2",
-          "x = 3",
-          "x = 4"
-        ],
+        "options": ["x = 1", "x = 2", "x = 3", "x = 4"],
         "correct_answer": "x = 3"
       },
       {
         "id": 315,
         "text": "Simplify: 5a × 3b × 2",
-        "options": [
-          "10ab",
-          "15ab",
-          "30ab",
-          "30a²b²"
-        ],
+        "options": ["10ab", "15ab", "30ab", "30a²b²"],
         "correct_answer": "30ab"
       },
       {
         "id": 316,
         "text": "Convert 0.375 to a fraction in simplest form",
-        "options": [
-          "3/8",
-          "375/1000",
-          "1/3",
-          "5/16"
-        ],
+        "options": ["3/8", "375/1000", "1/3", "5/16"],
         "correct_answer": "3/8"
       },
       {
         "id": 317,
         "text": "What is the value of 3x² when x = 4?",
-        "options": [
-          "12",
-          "24",
-          "36",
-          "48"
-        ],
+        "options": ["12", "24", "36", "48"],
         "correct_answer": "48"
       },
       {
         "id": 318,
         "text": "Solve: 2(x - 3) = 10",
-        "options": [
-          "x = 5",
-          "x = 6",
-          "x = 7",
-          "x = 8"
-        ],
+        "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
         "correct_answer": "x = 8"
       },
       {
         "id": 319,
         "text": "Which of these is a like term with 5xy?",
-        "options": [
-          "3x",
-          "2y",
-          "-7xy",
-          "5x²y"
-        ],
+        "options": ["3x", "2y", "-7xy", "5x²y"],
         "correct_answer": "-7xy"
       },
       {
         "id": 320,
         "text": "What is the reciprocal of 2/3?",
-        "options": [
-          "3/2",
-          "2/3",
-          "1.5",
-          "0.666..."
-        ],
+        "options": ["3/2", "2/3", "1.5", "0.666..."],
         "correct_answer": "3/2"
       },
       {
         "id": 321,
         "text": "Simplify: 4(2x + 1) - 3(x - 2)",
-        "options": [
-          "5x + 10",
-          "5x - 2",
-          "11x + 10",
-          "11x - 2"
-        ],
+        "options": ["5x + 10", "5x - 2", "11x + 10", "11x - 2"],
         "correct_answer": "5x + 10"
       },
       {
@@ -1319,89 +1064,49 @@
       {
         "id": 323,
         "text": "Solve: x/4 = 5",
-        "options": [
-          "x = 1.25",
-          "x = 9",
-          "x = 20",
-          "x = 25"
-        ],
+        "options": ["x = 1.25", "x = 9", "x = 20", "x = 25"],
         "correct_answer": "x = 20"
       },
       {
         "id": 324,
         "text": "What is the next term in the sequence: 3, 6, 12, 24, ...?",
-        "options": [
-          "30",
-          "36",
-          "42",
-          "48"
-        ],
+        "options": ["30", "36", "42", "48"],
         "correct_answer": "48"
       },
       {
         "id": 325,
         "text": "Evaluate: 2 + 3 × (4 + 1)",
-        "options": [
-          "25",
-          "17",
-          "15",
-          "13"
-        ],
+        "options": ["25", "17", "15", "13"],
         "correct_answer": "17"
       },
       {
         "id": 326,
         "text": "Combine like terms: 5a - 2b + 3a + 6b",
-        "options": [
-          "8a + 4b",
-          "15ab",
-          "2a + 8b",
-          "8a + 8b"
-        ],
+        "options": ["8a + 4b", "15ab", "2a + 8b", "8a + 8b"],
         "correct_answer": "8a + 4b"
       },
       {
         "id": 327,
         "text": "What is 3/4 expressed as a decimal?",
-        "options": [
-          "0.25",
-          "0.34",
-          "0.75",
-          "1.33"
-        ],
+        "options": ["0.25", "0.34", "0.75", "1.33"],
         "correct_answer": "0.75"
       },
       {
         "id": 328,
         "text": "Solve for y: 2y - 7 = 11",
-        "options": [
-          "y = 2",
-          "y = 4",
-          "y = 9",
-          "y = 18"
-        ],
+        "options": ["y = 2", "y = 4", "y = 9", "y = 18"],
         "correct_answer": "y = 9"
       },
       {
         "id": 329,
         "text": "What is the square root of 144?",
-        "options": [
-          "11",
-          "12",
-          "13",
-          "14"
-        ],
+        "options": ["11", "12", "13", "14"],
         "correct_answer": "12"
       },
       {
         "id": 330,
         "text": "Factor completely: 6x + 9",
-        "options": [
-          "3(2x + 3)",
-          "6(x + 1.5)",
-          "2(3x + 4.5)",
-          "x(6 + 9)"
-        ],
+        "options": ["3(2x + 3)", "6(x + 1.5)", "2(3x + 4.5)", "x(6 + 9)"],
         "correct_answer": "3(2x + 3)"
       }
     ],
@@ -1417,12 +1122,7 @@
         "id": 1001,
         "type": "problem_solving ",
         "question": " &frac14; If K = \u221a<span class='fraction-css'><span class='numerator'>9</span><span class='denominator'>4 \u2212 x</span></span>, for which value of x is K undefined?",
-        "options": [
-          "0",
-          "3",
-          "4",
-          "4"
-        ],
+        "options": ["0", "3", "4", "4"],
         "correct_answer": "x = 4",
         "marks": 1
       },
@@ -1456,12 +1156,7 @@
         "id": 1004,
         "type": "problem_solving",
         "question": "Solve the inequality: <span class='fraction-css'><span class='numerator'>3x \u2212 4</span><span class='denominator'>2</span></span> &lt; 14",
-        "options": [
-          "x &lt; 10",
-          "x &lt; 12",
-          "x &lt; 9",
-          "x &lt; 11"
-        ],
+        "options": ["x &lt; 10", "x &lt; 12", "x &lt; 9", "x &lt; 11"],
         "correct_answer": "x &lt; 10",
         "marks": 2
       },
@@ -1469,12 +1164,7 @@
         "id": 1005,
         "type": "problem_solving",
         "question": "Write the equation of the asymptote of f(x) = 2<sup>x + k</sup> + 2",
-        "options": [
-          "y = 0",
-          "y = 1",
-          "y = 2",
-          "y = -1"
-        ],
+        "options": ["y = 0", "y = 1", "y = 2", "y = -1"],
         "correct_answer": "y = 2",
         "marks": 1
       }
@@ -1491,13 +1181,13 @@
         "id": 1001,
         "text": "<math><mrow><mtext> If </mtext><mspace width=\"4px\"></mspace><mi>x</mi><mspace width=\"4px\"/><mi> &#x2208; {0;1;2;3;4}</mi><mspace width=\"4px\"></mspace><mtext>write down a value of</mtext><mspace width=\"4px\"></mspace><mi>x</mi><mspace width=\"4px\"/><mtext>such that</mtext><mspace width=\"4px\"></mspace><mi>K</mi><mo>=</mo><msqrt><mfrac><mn>9</mn><mrow><mn>4</mn><mo>-</mo><mi>x</mi></mrow></mfrac></msqrt><mspace width=\"16px\"></mspace><mtext>is :</mtext></mrow></math><br>1.1 Undefined<br>1.2 Rational<br>1.3 Irrational",
         "options": [],
-        "correct_answer": ""
+        "correct_answer": ["x = 4", "x = 3", "x = 2"]
       },
       {
         "id": 1002,
         "text": "2.1.1 Simplify the following<br><math><mrow><mn>2</mn><mi>b</mi></mrow><msup><mrow><mo>(</mo><mi>b</mi><mo>-</mo><mn>5</mn><mi>c</mi><mo>)</mo></mrow><mn>2</mn></msup></math>",
         "options": [],
-        "correct_answer": ""
+        "correct_answer": "14"
       },
       {
         "id": 1003,
@@ -1543,7 +1233,8 @@
       },
       {
         "id": 1011,
-        "text": "<div class=\"container\">Question 4 <math><mrow><mtext>Consider the functions </mtext><mspace width=\"2px\" /><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>c</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>q</mi><mspace width=\"4px\"></mspace><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mspace width=\"4px\" /><mtext>intersect at points</mtext><mspace width=\"4px\" /><mi>A</mi><mo>(</mo><mn>-1</mn><mo>;</mo><mn>-3</mn><mo>)</mo><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\"></mspace><mi>B</mi><mo>(</mo><mn>2</mn><mo>;</mo><mn>0</mn><mo>)</mo></mrow></math><br>4.1 Calculate the values of a and c.<br>4.2 Calculate the values of <mspace width=\"4px\" /><mi>b</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>q</mi> <br> 4.3 Use the ANSWER SHEET provided to sketch the graphs <mspace width=\"4px\" /><mi>f</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mspace width=\"4px\" /><mtext>on the same set of axis.</mtext> <br> 4.4 <math><mrow><mtext>Determine the value of </mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>-</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math> <br> <math><mrow><mtext> For which values of </mtext><mspace width=\"4px\" /><mi>x</mi><mspace width=\"4px\"></mspace><mtext>is</mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>&#x2265;</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div>","options": [],
+        "text": "<div class=\"container\">Question 4 <math><mrow><mtext>Consider the functions </mtext><mspace width=\"2px\" /><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>c</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>q</mi><mspace width=\"4px\"></mspace><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mspace width=\"4px\" /><mtext>intersect at points</mtext><mspace width=\"4px\" /><mi>A</mi><mo>(</mo><mn>-1</mn><mo>;</mo><mn>-3</mn><mo>)</mo><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\"></mspace><mi>B</mi><mo>(</mo><mn>2</mn><mo>;</mo><mn>0</mn><mo>)</mo></mrow></math><br>4.1 Calculate the values of a and c.<br>4.2 Calculate the values of <mspace width=\"4px\" /><mi>b</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>q</mi> <br> 4.3 Use the ANSWER SHEET provided to sketch the graphs <mspace width=\"4px\" /><mi>f</mi><mspace width=\"4px\" /><mtext>and</mtext><mspace width=\"4px\" /><mi>g</mi><mspace width=\"4px\" /><mtext>on the same set of axis.</mtext> <br> 4.4 <math><mrow><mtext>Determine the value of </mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>-</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math> <br> <math><mrow><mtext> For which values of </mtext><mspace width=\"4px\" /><mi>x</mi><mspace width=\"4px\"></mspace><mtext>is</mtext><mspace width=\"4px\" /><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>&#x2265;</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div>",
+        "options": [],
         "correct_answer": ""
       },
       {

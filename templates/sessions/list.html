@@ -1,124 +1,142 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-4">Classes</h2>
-
-    {% if bookings %}
-    <div class="card mb-4">
-        <div class="card-header">
-            <h3 class="h5">Your Booked Classes</h3>
+    <a
+      href="{{ url_for('admin_dashboard') }}"
+      class="btn btn-danger text-white"
+    >
+      <i class="bi bi-pencil"></i> Create Class
+    </a>
+  </div>
+  {% if bookings %}
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="h5">Your Booked Classes</h3>
+    </div>
+    <div class="card-body">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for booking in bookings %}
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title fs-6">{{ booking[1] }}</h5>
+              <p class="card-text">
+                <i class="bi bi-calendar-event"></i> {{ booking[2].strftime('%a,
+                %b %d') }}<br />
+                <i class="bi bi-clock"></i> {{ booking[2].strftime('%H:%M') }} -
+                {{ booking[3].strftime('%H:%M') }}
+              </p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <form
+                method="POST"
+                action="{{ url_for('cancel_booking_route', booking_id=booking[0]) }}"
+                class="d-grid"
+              >
+                <button type="submit" class="btn btn-danger">
+                  Cancel Booking
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                {% for booking in bookings %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="h5">Available Classes</h3>
+    </div>
+    <div class="card-body">
+      <div class="accordion" id="sessionsAccordion">
+        {# First, group sessions by grade/course #} {% set grouped_sessions = {}
+        %} {% for session in sessions %} {# Extract grade/course from title
+        (assuming format like "Grade 10 Math" or "CS101") #} {% set parts =
+        session[1].split() %} {% if parts|length > 1 and parts[0]|lower in
+        ['grade', 'course', 'cs', 'math', 'science', 'python', 'peer', 'css',
+        'javascript', 'html'] %} {% set group_name = parts[0] ~ ' ' ~ parts[1]
+        %} {% else %} {% set group_name = 'Other Classes' %} {% endif %} {% if
+        group_name not in grouped_sessions %} {% set _ =
+        grouped_sessions.update({group_name: []}) %} {% endif %} {% set _ =
+        grouped_sessions[group_name].append(session) %} {% endfor %} {# Now
+        create accordion items for each group #} {% for group_name,
+        group_sessions in grouped_sessions.items() %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{{ loop.index }}">
+            <button
+              class="accordion-button {% if not loop.first %}collapsed{% endif %}"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse{{ loop.index }}"
+              aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+              aria-controls="collapse{{ loop.index }}"
+            >
+              {{ group_name }} ({{ group_sessions|length }} sessions)
+            </button>
+          </h2>
+          <div
+            id="collapse{{ loop.index }}"
+            class="accordion-collapse collapse"
+            aria-labelledby="heading{{ loop.index }}"
+            data-bs-parent="#sessionsAccordion"
+          >
+            <div class="accordion-body">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for session in group_sessions %}
                 <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title fs-6">{{ booking[1] }}</h5>
-                            <p class="card-text">
-                                <i class="bi bi-calendar-event"></i> {{ booking[2].strftime('%a, %b %d') }}<br>
-                                <i class="bi bi-clock"></i> {{ booking[2].strftime('%H:%M') }} - {{
-                                booking[3].strftime('%H:%M') }}
-                            </p>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <form method="POST" action="{{ url_for('cancel_booking_route', booking_id=booking[0]) }}"
-                                class="d-grid">
-                                <button type="submit" class="btn btn-danger">Cancel Booking</button>
-                            </form>
-                        </div>
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ session[1] }}</h5>
+                      <p class="card-text text-muted">
+                        {{ session[2] or 'No description provided' }}
+                      </p>
+                      <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item">
+                          <i class="bi bi-calendar-event me-2"></i>
+                          {{ session[3].strftime('%a, %b %d') }}
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-clock me-2"></i>
+                          {{ session[3].strftime('%H:%M') }} - {{
+                          session[4].strftime('%H:%M') }}
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-people me-2"></i>
+                          {{ session[6] }}/{{ session[5] }} spots filled
+                        </li>
+                      </ul>
                     </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
-    <div class="card">
-        <div class="card-header">
-            <h3 class="h5">Available Classes</h3>
-        </div>
-        <div class="card-body">
-            <div class="accordion" id="sessionsAccordion">
-                {# First, group sessions by grade/course #}
-                {% set grouped_sessions = {} %}
-                {% for session in sessions %}
-                {# Extract grade/course from title (assuming format like "Grade 10 Math" or "CS101") #}
-                {% set parts = session[1].split() %}
-                {% if parts|length > 1 and parts[0]|lower in ['grade', 'course', 'cs', 'math', 'science', 'python', 'peer', 'css', 'javascript', 'html'] %}
-                {% set group_name = parts[0] ~ ' ' ~ parts[1] %}
-                {% else %}
-                {% set group_name = 'Other Classes' %}
-                {% endif %}
-
-                {% if group_name not in grouped_sessions %}
-                {% set _ = grouped_sessions.update({group_name: []}) %}
-                {% endif %}
-                {% set _ = grouped_sessions[group_name].append(session) %}
-                {% endfor %}
-
-                {# Now create accordion items for each group #}
-                {% for group_name, group_sessions in grouped_sessions.items() %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{ loop.index }}">
-                        <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}"
-                            aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
-                            aria-controls="collapse{{ loop.index }}">
-                            {{ group_name }} ({{ group_sessions|length }} sessions)
+                    <div class="card-footer bg-transparent">
+                      {% if session[6] < session[5] %}
+                      <form
+                        method="POST"
+                        action="{{ url_for('book_session_route', session_id=session[0]) }}"
+                        class="d-grid"
+                      >
+                        <button type="submit" class="btn btn-primary">
+                          Book Now
                         </button>
-                    </h2>
-                    <div id="collapse{{ loop.index }}"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="heading{{ loop.index }}" data-bs-parent="#sessionsAccordion">
-                        <div class="accordion-body">
-                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                                {% for session in group_sessions %}
-                                <div class="col">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ session[1] }}</h5>
-                                            <p class="card-text text-muted">{{ session[2] or 'No description provided'
-                                                }}</p>
-                                            <ul class="list-group list-group-flush mb-3">
-                                                <li class="list-group-item">
-                                                    <i class="bi bi-calendar-event me-2"></i>
-                                                    {{ session[3].strftime('%a, %b %d') }}
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="bi bi-clock me-2"></i>
-                                                    {{ session[3].strftime('%H:%M') }} - {{ session[4].strftime('%H:%M')
-                                                    }}
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="bi bi-people me-2"></i>
-                                                    {{ session[6] }}/{{ session[5] }} spots filled
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-footer bg-transparent">
-                                            {% if session[6] < session[5] %} <form method="POST"
-                                                action="{{ url_for('book_session_route', session_id=session[0]) }}"
-                                                class="d-grid">
-                                                <button type="submit" class="btn btn-primary">Book Now</button>
-                                                </form>
-                                                {% else %}
-                                                <button class="btn btn-outline-secondary w-100" disabled>Session
-                                                    Full</button>
-                                                {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
+                      </form>
+                      {% else %}
+                      <button class="btn btn-outline-secondary w-100" disabled>
+                        Session Full
+                      </button>
+                      {% endif %}
                     </div>
+                  </div>
                 </div>
                 {% endfor %}
+              </div>
             </div>
+          </div>
         </div>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
