@@ -308,11 +308,13 @@ def initialize_database():
     conn.close()
 
 # Helpers
+
+
 def complete_practice_session(practice_session_id):
     """Fetches practice results from DB and logs the activity"""
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     try:
         # Fetch practice session details
         cur.execute('''
@@ -325,15 +327,15 @@ def complete_practice_session(practice_session_id):
             FROM practice_sessions
             WHERE id = %s
         ''', (practice_session_id,))
-        
+
         session = cur.fetchone()
-        
+
         if not session:
             print(f"No practice session found with ID: {practice_session_id}")
             return False
-            
+
         student_id, topic, duration, score, completed_at = session
-        
+
         # Log the activity
         cur.execute('''
             INSERT INTO student_activities 
@@ -353,10 +355,10 @@ def complete_practice_session(practice_session_id):
             }),
             completed_at or datetime.utcnow()
         ))
-        
+
         conn.commit()
         return True
-        
+
     except Exception as e:
         conn.rollback()
         print(f"Error logging practice session: {e}")
@@ -364,6 +366,7 @@ def complete_practice_session(practice_session_id):
     finally:
         cur.close()
         conn.close()
+
 
 def log_student_activity(student_id, activity_type, description=None, icon=None, metadata=None):
     """
@@ -382,19 +385,20 @@ def log_student_activity(student_id, activity_type, description=None, icon=None,
                 INSERT INTO student_activities 
                 (student_id, activity_type, description, icon, metadata, created_at)
                 VALUES (%s, %s, %s, %s, %s, %s)
-                """, 
-                (
-                    student_id,
-                    activity_type,
-                    description,
-                    icon or _get_default_icon(activity_type),
-                    metadata,
-                    datetime.utcnow()
-                ))
+                """,
+                        (
+                            student_id,
+                            activity_type,
+                            description,
+                            icon or _get_default_icon(activity_type),
+                            metadata,
+                            datetime.utcnow()
+                        ))
             conn.commit()
     except Exception as e:
         current_app.logger.error(f"Failed to log activity: {e}")
         conn.rollback()
+
 
 def _get_default_icon(activity_type):
     icon_map = {
@@ -406,6 +410,7 @@ def _get_default_icon(activity_type):
         'login': 'sign-in-alt'
     }
     return icon_map.get(activity_type, 'check')
+
 
 def get_assignments_data(student_id):
     """Fetch actual assignment statistics with submission dates as labels"""
@@ -433,7 +438,7 @@ assignment_stats AS (
         MAX(grade) as best_score,
         ARRAY_AGG(grade ORDER BY submission_time) as scores,
         ARRAY(
-            SELECT DISTINCT subject
+            SELECT subject
             FROM submission_details
             ORDER BY subject
             LIMIT 4
@@ -465,11 +470,10 @@ SELECT
     CASE WHEN array_length(date_labels, 1) > 0 THEN date_labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as date_labels,
     detailed_submissions
 FROM assignment_stats;
-            """, (student_id, student_id))
-            
+            """, (student_id,))
+
             assignment_data = cur.fetchone()
-            print(assignment_data)
-            
+
             return {
                 'avg_score': float(assignment_data[0]),
                 'total': assignment_data[1],
@@ -478,7 +482,7 @@ FROM assignment_stats;
                 'scores': assignment_data[4],
                 'labels': assignment_data[5]
             }
-            
+
     except Exception as e:
         print(f"Error fetching assignment data: {e}")
         return {
@@ -486,11 +490,12 @@ FROM assignment_stats;
             'total': 0,
             'submitted': 0,
             'best_score': 0,
-            'scores': [0, 0, 0, 0],
+            'scores': [24, 45, 54, 87],
             'labels': ['Week 1', 'Week 2', 'Week 3', 'Week 4']
         }
     finally:
         conn.close()
+
 
 def get_practice_data(student_id):
     """Fetch actual practice statistics with completion dates as labels"""
@@ -525,9 +530,9 @@ def get_practice_data(student_id):
                     CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
                 FROM practice_stats
             """, (student_id, student_id))
-            
+
             practice_data = cur.fetchone()
-            
+
             return {
                 'avg_score': float(practice_data[0]),
                 'total': practice_data[1],
@@ -535,7 +540,7 @@ def get_practice_data(student_id):
                 'scores': practice_data[3],
                 'labels': practice_data[4]
             }
-            
+
     except Exception as e:
         print(f"Error fetching practice data: {e}")
         return {
@@ -547,6 +552,7 @@ def get_practice_data(student_id):
         }
     finally:
         conn.close()
+
 
 def get_exams_data(student_id):
     """Fetch actual exam statistics from database"""
@@ -582,9 +588,9 @@ def get_exams_data(student_id):
                     CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
                 FROM exam_stats
             """, (student_id, student_id))
-            
+
             exam_data = cur.fetchone()
-            
+
             return {
                 'avg_score': float(exam_data[0]),
                 'total': exam_data[1],
@@ -592,7 +598,7 @@ def get_exams_data(student_id):
                 'scores': exam_data[3],
                 'labels': exam_data[4]
             }
-            
+
     except Exception as e:
         print(f"Error fetching exam data: {e}")
         return {
@@ -604,6 +610,7 @@ def get_exams_data(student_id):
         }
     finally:
         conn.close()
+
 
 def get_recent_activities(student_id):
     conn = get_db_connection()
@@ -620,7 +627,7 @@ def get_recent_activities(student_id):
                 ORDER BY created_at DESC
                 LIMIT 5
                 """, (student_id,))
-            
+
             return [{
                 'title': a['title'],
                 'description': a['description'],
@@ -633,11 +640,12 @@ def get_recent_activities(student_id):
     finally:
         conn.close()
 
+
 def complete_practice_session(practice_session_id):
     """Fetches practice results from DB and logs the activity"""
     conn = get_db_connection()
     cur = conn.cursor()
-    
+
     try:
         # Fetch practice session details
         cur.execute('''
@@ -650,15 +658,15 @@ def complete_practice_session(practice_session_id):
             FROM practice_sessions
             WHERE id = %s
         ''', (practice_session_id,))
-        
+
         session = cur.fetchone()
-        
+
         if not session:
             print(f"No practice session found with ID: {practice_session_id}")
             return False
-            
+
         student_id, topic, duration, score, completed_at = session
-        
+
         # Log the activity
         cur.execute('''
             INSERT INTO student_activities 
@@ -677,10 +685,10 @@ def complete_practice_session(practice_session_id):
             }),
             completed_at or datetime.utcnow()
         ))
-        
+
         conn.commit()
         return True
-        
+
     except Exception as e:
         conn.rollback()
         print(f"Error logging practice session: {e}")
@@ -689,28 +697,33 @@ def complete_practice_session(practice_session_id):
         cur.close()
         conn.close()
 
+
 def get_parents():
     """Get all parent users"""
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        cur.execute("SELECT id, username FROM users WHERE role = 'parent' ORDER BY username")
+        cur.execute(
+            "SELECT id, username FROM users WHERE role = 'parent' ORDER BY username")
         return [{'id': row[0], 'username': row[1]} for row in cur.fetchall()]
     finally:
         cur.close()
         conn.close()
+
 
 def get_parent_by_id(parent_id):
     """Get parent user by ID"""
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+        cur.execute(
+            "SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
         row = cur.fetchone()
         return {'id': row[0], 'username': row[1]} if row else None
     finally:
         cur.close()
         conn.close()
+
 
 def get_students_for_parent(parent_id):
     """Get all students linked to a parent"""
@@ -746,16 +759,19 @@ def get_student_performance_stats(student_id):
             JOIN assignment_students au ON a.id = au.assignment_id
             LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = %s
             WHERE au.student_id = %s
-        ''', (student_id, student_id)) # <--- Changed this line: pass student_id twice!
+        ''', (student_id, student_id))  # <--- Changed this line: pass student_id twice!
         assignment_stats = cur.fetchone()
 
         # Handle the case where no assignments are found for the student
         if assignment_stats and assignment_stats[0] is not None and assignment_stats[0] > 0:
             total_assignments = assignment_stats[0]
             submitted_count = assignment_stats[1]
-            avg_assignment_score = round(assignment_stats[2], 2) if assignment_stats[2] is not None else None
-            best_assignment_score = round(assignment_stats[3], 2) if assignment_stats[3] is not None else None
-            worst_assignment_score = round(assignment_stats[4], 2) if assignment_stats[4] is not None else None
+            avg_assignment_score = round(
+                assignment_stats[2], 2) if assignment_stats[2] is not None else None
+            best_assignment_score = round(
+                assignment_stats[3], 2) if assignment_stats[3] is not None else None
+            worst_assignment_score = round(
+                assignment_stats[4], 2) if assignment_stats[4] is not None else None
         else:
             total_assignments = 0
             submitted_count = 0
@@ -777,9 +793,12 @@ def get_student_performance_stats(student_id):
 
         if practice_stats and practice_stats[0] is not None and practice_stats[0] > 0:
             total_practices = practice_stats[0]
-            avg_practice_score = round(practice_stats[1], 2) if practice_stats[1] is not None else None
-            best_practice_score = round(practice_stats[2], 2) if practice_stats[2] is not None else None
-            worst_practice_score = round(practice_stats[3], 2) if practice_stats[3] is not None else None
+            avg_practice_score = round(
+                practice_stats[1], 2) if practice_stats[1] is not None else None
+            best_practice_score = round(
+                practice_stats[2], 2) if practice_stats[2] is not None else None
+            worst_practice_score = round(
+                practice_stats[3], 2) if practice_stats[3] is not None else None
         else:
             total_practices = 0
             avg_practice_score = None
@@ -800,9 +819,12 @@ def get_student_performance_stats(student_id):
 
         if exam_stats and exam_stats[0] is not None and exam_stats[0] > 0:
             total_exams = exam_stats[0]
-            avg_exam_score = round(exam_stats[1], 2) if exam_stats[1] is not None else None
-            best_exam_score = round(exam_stats[2], 2) if exam_stats[2] is not None else None
-            worst_exam_score = round(exam_stats[3], 2) if exam_stats[3] is not None else None
+            avg_exam_score = round(
+                exam_stats[1], 2) if exam_stats[1] is not None else None
+            best_exam_score = round(
+                exam_stats[2], 2) if exam_stats[2] is not None else None
+            worst_exam_score = round(
+                exam_stats[3], 2) if exam_stats[3] is not None else None
         else:
             total_exams = 0
             avg_exam_score = None
@@ -833,6 +855,7 @@ def get_student_performance_stats(student_id):
     finally:
         cur.close()
         conn.close()
+
 
 def get_student_assignments(student_id):
     conn = get_db_connection()
@@ -866,6 +889,7 @@ def get_student_assignments(student_id):
         if conn:
             conn.close()
     return assignments
+
 
 def get_unsubmitted_assignments_count(user_id):
     """Get count of assignments that haven't been submitted yet"""
@@ -1547,8 +1571,9 @@ def get_student_submissions(student_id):
 
     cur.close()
     conn.close()
-    
+
     return submissions
+
 
 def get_student_sessions_data(student_id):
     conn = get_db_connection()
@@ -1684,6 +1709,7 @@ def get_videos_by_category(category_id):
     ]
     return videos
 
+
 def get_students():
     conn = get_db_connection()
     # Use DictCursor to fetch rows as dictionary-like objects.
@@ -1691,7 +1717,8 @@ def get_students():
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     try:
         # Ensure your SELECT statement includes 'id' and 'username'
-        cur.execute("SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
+        cur.execute(
+            "SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
         students = cur.fetchall()
         # Each item in 'students' will now be a DictRow object, which behaves like a dictionary
         # and also supports attribute access (e.g., student.id, student.username).
@@ -1699,7 +1726,7 @@ def get_students():
     except Exception as e:
         # It's good practice to log or print errors for debugging
         print(f"Error fetching students in get_students(): {e}")
-        return [] # Return an empty list to prevent further errors in the template
+        return []  # Return an empty list to prevent further errors in the template
     finally:
         if cur:
             cur.close()
@@ -3512,8 +3539,9 @@ def submit_exam(exam_id):
     exams = load_exams_from_json('static/js/exams.json')
 
     # Find the specific exam the user submitted
-    selected_exam = next((exam for exam in exams if exam.get('id') == exam_id), None)
-    
+    selected_exam = next(
+        (exam for exam in exams if exam.get('id') == exam_id), None)
+
     if not selected_exam:
         flash('Exam not found.', 'danger')
         return redirect(url_for('exam_practice'))
@@ -3529,7 +3557,7 @@ def submit_exam(exam_id):
         correct_answers_count = sum(
             1 for question in selected_exam.get('questions', [])
             if str(user_answers.get(f"question_{question.get('id')}")) == str(question.get('correct_answer')))
-        
+
         score = (correct_answers_count / total_questions) * 100
     else:
         score = 0
@@ -3540,7 +3568,7 @@ def submit_exam(exam_id):
     conn = get_db_connection()
     cur = conn.cursor()
     result_id = None
-    
+
     try:
         # Save exam result
         cur.execute('''
@@ -3922,24 +3950,25 @@ def list_whiteboards():
         cur.close()
         conn.close()
 
+
 @app.route('/parent/dashboard')
 @login_required
 def parent_dashboard():
     if session.get('role') != 'parent':
         abort(403)
-    
+
     students = get_students_for_parent(session['user_id'])
     if not students:
         flash('No students linked to your account', 'warning')
-        return render_template('parent/dashboard.html', 
-                            students=[], 
-                            selected_student=None,
-                            stats=None,
-                            assignments=[],
-                            submissions=[],
-                            bookings=[],
-                            announcements=[])
-    
+        return render_template('parent/dashboard.html',
+                               students=[],
+                               selected_student=None,
+                               stats=None,
+                               assignments=[],
+                               submissions=[],
+                               bookings=[],
+                               announcements=[])
+
     # Default to first student
     selected_student_id = request.args.get('student_id', students[0]['id'])
     try:
@@ -3947,28 +3976,29 @@ def parent_dashboard():
     except (ValueError, TypeError):
         flash('Invalid student selected', 'danger')
         return redirect(url_for('parent_dashboard'))
-    
-    selected_student = next((s for s in students if s['id'] == selected_student_id), None)
-    
+
+    selected_student = next(
+        (s for s in students if s['id'] == selected_student_id), None)
+
     if not selected_student:
         flash('Invalid student selected', 'danger')
         return redirect(url_for('parent_dashboard'))
-    
+
     # Get all data for the selected student
     assignments = get_assignments_for_user(selected_student_id)
     submissions = get_student_submissions(selected_student_id)
     bookings = get_student_bookings(selected_student_id)
     stats = get_student_performance_stats(selected_student_id)
     announcements = get_user_announcements(selected_student_id, limit=5)
-    
+
     return render_template('parent/dashboard.html',
-                         students=students,
-                         selected_student=selected_student,
-                         assignments=assignments,
-                         submissions=submissions,
-                         bookings=bookings,
-                         stats=stats,
-                         announcements=announcements)
+                           students=students,
+                           selected_student=selected_student,
+                           assignments=assignments,
+                           submissions=submissions,
+                           bookings=bookings,
+                           stats=stats,
+                           announcements=announcements)
 
 
 @app.route('/parent/submissions/<int:student_id>')
@@ -3979,7 +4009,7 @@ def parent_view_submissions(student_id):
     students = get_students_for_parent(session['user_id'])
     if not any(s['id'] == student_id for s in students):
         abort(403)
-    
+
     conn = get_db_connection()
     cur = conn.cursor()
     try:
@@ -3998,7 +4028,7 @@ def parent_view_submissions(student_id):
             WHERE s.student_id = %s
             ORDER BY a.deadline DESC
         ''', (student_id,))
-        
+
         # Convert to list of dictionaries with proper field names
         submissions = []
         for row in cur.fetchall():
@@ -4012,13 +4042,14 @@ def parent_view_submissions(student_id):
                 'feedback': row[6],
                 'file_path': row[7]
             })
-        
+
         return render_template('parent/submissions.html',
-                            student_id=student_id,
-                            submissions=submissions)
+                               student_id=student_id,
+                               submissions=submissions)
     finally:
         cur.close()
         conn.close()
+
 
 @app.route('/parent/sessions/<int:student_id>')
 @login_required
@@ -4046,11 +4077,11 @@ def get_chart_data(student_id):
         practice = get_practice_data(student_id)
         exams = get_exams_data(student_id)
         activities = get_recent_activities(student_id)
-        
+
         # Get trend data from database
         trend_data = get_actual_trend_data(student_id)
         subject_data = get_actual_subject_data(student_id)
-        
+
         return jsonify({
             'assignments': assignments,
             'practice': practice,
@@ -4061,6 +4092,7 @@ def get_chart_data(student_id):
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 def get_actual_trend_data(student_id):
     """Fetch actual trend data from database"""
@@ -4094,9 +4126,9 @@ def get_actual_trend_data(student_id):
                 GROUP BY months.month
                 ORDER BY months.month
             """, (student_id, student_id, student_id))
-            
+
             results = cur.fetchall()
-            
+
             if not results:
                 return {
                     'labels': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -4104,20 +4136,20 @@ def get_actual_trend_data(student_id):
                     'practice': [0, 0, 0, 0, 0, 0],
                     'exams': [0, 0, 0, 0, 0, 0]
                 }
-            
+
             # Convert query results to trend format
             labels = [row[0] for row in results]
             assignments = [round(float(row[1]), 1) for row in results]
             practice = [round(float(row[2]), 1) for row in results]
             exams = [round(float(row[3]), 1) for row in results]
-            
+
             return {
                 'labels': labels,
                 'assignments': assignments,
                 'practice': practice,
                 'exams': exams
             }
-            
+
     except Exception as e:
         print(f"Error fetching trend data: {e}")
         return {
@@ -4128,6 +4160,7 @@ def get_actual_trend_data(student_id):
         }
     finally:
         conn.close()
+
 
 def get_actual_subject_data(student_id):
     """Fetch actual subject data from database"""
@@ -4150,28 +4183,28 @@ def get_actual_subject_data(student_id):
                 ORDER BY avg_score DESC
                 LIMIT 4
             """, (student_id, student_id, student_id))
-            
+
             results = cur.fetchall()
-            
+
             if not results:
                 return {
                     'labels': ['Math', 'Science', 'English', 'History'],
                     'scores': [0, 0, 0, 0]
                 }
-            
+
             # Pad with default values if less than 4 subjects
             labels = [row[0] for row in results]
             scores = [round(float(row[1])) for row in results]
-            
+
             while len(labels) < 4:
                 labels.append(f"Subject {len(labels)+1}")
                 scores.append(0)
-            
+
             return {
                 'labels': labels[:4],  # Ensure only 4 subjects
                 'scores': scores[:4]
             }
-            
+
     except Exception as e:
         print(f"Error fetching subject data: {e}")
         return {
@@ -4180,7 +4213,6 @@ def get_actual_subject_data(student_id):
         }
     finally:
         conn.close()
-
 
 
 # Add these routes to app.py
@@ -4209,35 +4241,41 @@ def add_parent():
                     INSERT INTO users (username, password, role) VALUES (%s, %s, %s) RETURNING id
                 ''', (username, generate_password_hash(password), 'parent'))
                 parent_id = cur.fetchone()[0]
-                
+
                 # Link parent to students
-                if student_ids_str_list: # Only iterate if at least one student was selected
+                if student_ids_str_list:  # Only iterate if at least one student was selected
                     for student_id_str in student_ids_str_list:
                         # --- IMPORTANT: Validate and convert to integer ---
-                        if not student_id_str.strip(): # Check for empty string after stripping whitespace
-                            flash('Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
-                            continue # Skip to the next student_id in the list
-                        
+                        if not student_id_str.strip():  # Check for empty string after stripping whitespace
+                            flash(
+                                'Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
+                            continue  # Skip to the next student_id in the list
+
                         try:
-                            student_id_int = int(student_id_str) # Convert the string to an integer
+                            # Convert the string to an integer
+                            student_id_int = int(student_id_str)
                             cur.execute(
                                 'INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)',
-                                (parent_id, student_id_int)) # Use the integer version
+                                # Use the integer version
+                                (parent_id, student_id_int))
                         except ValueError:
                             # This catches cases like 'abc' or malformed data in value attribute
-                            flash(f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
-                            continue # Skip to the next student_id in the list
+                            flash(
+                                f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
+                            continue  # Skip to the next student_id in the list
                 else:
                     # Optional: If no students were selected, you might want to flash a message
                     # This message won't stop the parent from being created.
-                    flash('Parent created successfully, but no students were linked.', 'info')
+                    flash(
+                        'Parent created successfully, but no students were linked.', 'info')
 
                 conn.commit()
                 flash('Parent and linked students added successfully!', 'success')
                 return redirect(url_for('manage_parents'))
             except Exception as e:
-                conn.rollback() # Rollback user creation if linking fails
-                flash(f'Error adding parent or linking students: {str(e)}', 'danger')
+                conn.rollback()  # Rollback user creation if linking fails
+                flash(
+                    f'Error adding parent or linking students: {str(e)}', 'danger')
                 # If there's an error, you still need to render the form with students
                 students = get_students()
                 return render_template('admin/add_parent.html', students=students)
@@ -4249,19 +4287,21 @@ def add_parent():
     students = get_students()
     return render_template('admin/add_parent.html', students=students)
 
+
 @app.route('/api/student/<int:student_id>/chart_data')
 def get_chart_data(student_id):
     """Endpoint to fetch all chart data from database"""
     try:
         # Get all data from database
         assignments = get_assignments_data(student_id)
+        print(assignments)
         practice = get_practice_data(student_id)
         exams = get_exams_data(student_id)
         activities = get_recent_activities(student_id)
-        
+
         # Get actual trend data with real dates
         trend_data = get_actual_trend_data(student_id)
-        
+
         # Get actual subject performance data
         subject_data = get_actual_subject_data(student_id)
 
@@ -4278,18 +4318,20 @@ def get_chart_data(student_id):
 
 # In your app.py file, usually near your other admin routes
 
+
 @app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def edit_parent(parent_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    parent = None # Initialize parent variable
+    parent = None  # Initialize parent variable
 
     try:
         # GET request: Display the current parent's data in the form
         if request.method == 'GET':
-            cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+            cur.execute(
+                "SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
             parent = cur.fetchone()
 
             if not parent:
@@ -4303,27 +4345,31 @@ def edit_parent(parent_id):
                 JOIN parent_students ps ON s.id = ps.student_id
                 WHERE ps.parent_id = %s
             ''', (parent_id,))
-            linked_students = [row[0] for row in cur.fetchall()] # Get a list of IDs of linked students
+            linked_students = [row[0] for row in cur.fetchall(
+            )]  # Get a list of IDs of linked students
 
-            all_students = get_students() # Get all students for the checkboxes
+            all_students = get_students()  # Get all students for the checkboxes
 
             return render_template('admin/edit_parent.html',
                                    parent=parent,
-                                   all_students=all_students, # Pass all students for checkbox list
-                                   linked_students=linked_students) # Pass linked student IDs to pre-check checkboxes
+                                   all_students=all_students,  # Pass all students for checkbox list
+                                   linked_students=linked_students)  # Pass linked student IDs to pre-check checkboxes
 
         # POST request: Process the form submission to update parent
         elif request.method == 'POST':
             new_username = request.form['username']
-            new_password = request.form.get('password') # Password can be optional for edit
+            # Password can be optional for edit
+            new_password = request.form.get('password')
             student_ids_str_list = request.form.getlist('student_ids')
 
             # Check if username already exists for another user
-            cur.execute("SELECT id FROM users WHERE username = %s AND id != %s", (new_username, parent_id))
+            cur.execute(
+                "SELECT id FROM users WHERE username = %s AND id != %s", (new_username, parent_id))
             if cur.fetchone():
                 flash('Username already exists for another user.', 'danger')
                 # Re-render the form with current data and students
-                cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+                cur.execute(
+                    "SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
                 parent = cur.fetchone()
                 cur.execute('''
                     SELECT s.id, s.username FROM users s JOIN parent_students ps ON s.id = ps.student_id WHERE ps.parent_id = %s
@@ -4346,20 +4392,23 @@ def edit_parent(parent_id):
 
             # Update parent-student links:
             # 1. Delete all existing links for this parent
-            cur.execute("DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
+            cur.execute(
+                "DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
 
             # 2. Insert new links based on selected checkboxes
             if student_ids_str_list:
                 for student_id_str in student_ids_str_list:
                     if not student_id_str.strip():
-                        flash('Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
+                        flash(
+                            'Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
                         continue
                     try:
                         student_id_int = int(student_id_str)
                         cur.execute("INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)",
                                     (parent_id, student_id_int))
                     except ValueError:
-                        flash(f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
+                        flash(
+                            f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
                         continue
 
             conn.commit()
@@ -4380,7 +4429,8 @@ def edit_parent(parent_id):
                                    parent=parent,
                                    all_students=all_students,
                                    linked_students=linked_students)
-        return redirect(url_for('manage_parents')) # Fallback if parent not found on error
+        # Fallback if parent not found on error
+        return redirect(url_for('manage_parents'))
     finally:
         if cur:
             cur.close()
@@ -4388,6 +4438,7 @@ def edit_parent(parent_id):
             conn.close()
 
 # In your app.py file, usually alongside your other admin routes
+
 
 @app.route('/admin/parents/<int:parent_id>/link_students', methods=['GET'])
 @login_required
@@ -4401,7 +4452,8 @@ def link_parent_student_ui(parent_id):
 
     try:
         # Get parent details to display on the page
-        cur.execute("SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
+        cur.execute(
+            "SELECT id, username FROM users WHERE id = %s AND role = 'parent'", (parent_id,))
         parent_info = cur.fetchone()
 
         if not parent_info:
@@ -4409,7 +4461,8 @@ def link_parent_student_ui(parent_id):
             return redirect(url_for('manage_parents'))
 
         # Get all students to populate the checkboxes
-        all_students = get_students() # Assuming get_students() fetches all students for the admin
+        # Assuming get_students() fetches all students for the admin
+        all_students = get_students()
 
         # Get the IDs of students already linked to this parent
         cur.execute('''
@@ -4433,38 +4486,45 @@ def link_parent_student_ui(parent_id):
 
 # In your app.py file
 
+
 @app.route('/admin/parents/<int:parent_id>/update_links', methods=['POST'])
 @login_required
 @admin_required
 def update_parent_student_links(parent_id):
-    student_ids_str_list = request.form.getlist('student_ids') # Get the selected student IDs as strings
+    # Get the selected student IDs as strings
+    student_ids_str_list = request.form.getlist('student_ids')
 
     conn = get_db_connection()
     cur = conn.cursor()
     try:
         # Step 1: Delete all existing links for this parent
-        cur.execute("DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
+        cur.execute(
+            "DELETE FROM parent_students WHERE parent_id = %s", (parent_id,))
 
         # Step 2: Insert new links based on the submitted data
         if student_ids_str_list:
             for student_id_str in student_ids_str_list:
                 if not student_id_str.strip():
-                    flash(f'Invalid (empty) student ID found in submission. Skipping.', 'warning')
+                    flash(
+                        f'Invalid (empty) student ID found in submission. Skipping.', 'warning')
                     continue
                 try:
                     student_id_int = int(student_id_str)
                     cur.execute("INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)",
                                 (parent_id, student_id_int))
                 except ValueError:
-                    flash(f'Invalid student ID format "{student_id_str}" in submission. Skipping.', 'warning')
+                    flash(
+                        f'Invalid student ID format "{student_id_str}" in submission. Skipping.', 'warning')
                     continue
         else:
             # No students were selected, so all previous links for this parent have been removed
-            flash('No students selected. All previous links for this parent have been removed.', 'info')
+            flash(
+                'No students selected. All previous links for this parent have been removed.', 'info')
 
         conn.commit()
         flash('Parent-student links updated successfully!', 'success')
-        return redirect(url_for('manage_parents')) # Redirect back to the parent management page
+        # Redirect back to the parent management page
+        return redirect(url_for('manage_parents'))
 
     except Exception as e:
         conn.rollback()
@@ -4476,6 +4536,7 @@ def update_parent_student_links(parent_id):
             cur.close()
         if conn:
             conn.close()
+
 
 @app.route('/admin/parents')
 @login_required
@@ -4508,6 +4569,7 @@ def manage_parents():
         cur.close()
         conn.close()
 
+
 @app.route('/admin/parents/link', methods=['POST'])
 @login_required
 @admin_required
@@ -4515,7 +4577,7 @@ def link_parent_student():
     parent_id = request.form['parent_id']
     student_id = request.form['student_id']
     action = request.form['action']  # 'link' or 'unlink'
-    
+
     conn = get_db_connection()
     cur = conn.cursor()
     try:
@@ -4530,7 +4592,7 @@ def link_parent_student():
                 DELETE FROM parent_students
                 WHERE parent_id = %s AND student_id = %s
             ''', (parent_id, student_id))
-        
+
         conn.commit()
         flash('Relationship updated successfully', 'success')
     except Exception as e:
@@ -4539,8 +4601,9 @@ def link_parent_student():
     finally:
         cur.close()
         conn.close()
-    
+
     return redirect(url_for('manage_parents'))
+
 
 @app.route('/parent/assignments')
 @login_required
@@ -4580,8 +4643,9 @@ def parent_view_assignments():
 
     except Exception as e:
         flash(f'Error loading assignments: {str(e)}', 'danger')
-        print(f"Error in parent_view_assignments route: {e}") # For debugging
-        return redirect(url_for('parent_dashboard')) # Redirect to a safe page on error
+        print(f"Error in parent_view_assignments route: {e}")  # For debugging
+        # Redirect to a safe page on error
+        return redirect(url_for('parent_dashboard'))
     finally:
         if cur:
             cur.close()
