@@ -566,18 +566,18 @@ def get_exams_data(student_id):
                         AVG(score) as avg_score,
                         COUNT(*) as total,
                         MAX(score) as best_score,
-                        ARRAY_AGG(score ORDER BY completed_at) as scores,
+                        ARRAY_AGG(score ORDER BY completion_time) as scores,
                         ARRAY(
-                            SELECT DISTINCT ON (DATE_TRUNC('week', completed_at))
-                                TO_CHAR(completed_at, '"Week" IW')
-                            FROM exams
-                            WHERE student_id = %s
-                            AND completed_at >= NOW() - INTERVAL '30 days'
-                            ORDER BY DATE_TRUNC('week', completed_at)
+                            SELECT DISTINCT ON (DATE_TRUNC('week', completion_time))
+                                TO_CHAR(completion_time, '"Week" IW')
+                            FROM exam_results
+                            WHERE user_id =%s
+                            AND completion_time >= NOW() - INTERVAL '30 days'
+                            ORDER BY DATE_TRUNC('week', completion_time)
                         ) as labels
-                    FROM exams
-                    WHERE student_id = %s
-                    AND completed_at >= NOW() - INTERVAL '30 days'
+                    FROM exam_results
+                    WHERE user_id = %s
+                    AND completion_time >= NOW() - INTERVAL '30 days'
                     AND score IS NOT NULL
                 )
                 SELECT 
@@ -587,7 +587,7 @@ def get_exams_data(student_id):
                     CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
                     CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
                 FROM exam_stats
-            """, (student_id, student_id))
+            """, (student_id,))
 
             exam_data = cur.fetchone()
 
@@ -4176,7 +4176,7 @@ def get_actual_subject_data(student_id):
                     UNION ALL
                     SELECT subject, score FROM practice_sessions WHERE student_id = %s
                     UNION ALL
-                    SELECT subject, score FROM exams WHERE student_id = %s
+                    SELECT subject, score FROM exam_results WHERE student_id = %s
                 ) combined
                 WHERE score IS NOT NULL
                 GROUP BY subject
@@ -4298,7 +4298,7 @@ def get_chart_data(student_id):
         practice = get_practice_data(student_id)
         exams = get_exams_data(student_id)
         activities = get_recent_activities(student_id)
-
+        print(exams)
         # Get actual trend data with real dates
         trend_data = get_actual_trend_data(student_id)
 
