@@ -710,7 +710,6 @@ def get_practice_data(student_id):
     finally:
         conn.close()
 
-
 def get_exams_data(student_id):
     """Fetch actual exam statistics from database"""
     conn = get_db_connection()
@@ -719,34 +718,45 @@ def get_exams_data(student_id):
             # Get exam statistics for the last 30 days
             cur.execute("""
                 WITH exam_stats AS (
-                    SELECT 
-                        AVG(score) as avg_score,
-                        COUNT(*) as total,
-                        MAX(score) as best_score,
-                        ARRAY_AGG(score ORDER BY completion_time) as scores,
-                        ARRAY(
-                            SELECT DISTINCT ON (DATE_TRUNC('week', completion_time))
-                                TO_CHAR(completion_time, '"Week" IW')
-                            FROM exam_results
-                            WHERE user_id =%s
-                            AND completion_time >= NOW() - INTERVAL '30 days'
-                            ORDER BY DATE_TRUNC('week', completion_time)
-                        ) as labels
-                    FROM exam_results
-                    WHERE user_id = %s
-                    AND completion_time >= NOW() - INTERVAL '30 days'
-                    AND score IS NOT NULL
-                )
-                SELECT 
-                    COALESCE(avg_score, 0) as avg_score,
-                    COALESCE(total, 0) as total,
-                    COALESCE(best_score, 0) as best_score,
-                    CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
-                    CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
-                FROM exam_stats
-            """, (student_id,))
+    SELECT 
+        AVG(score) as avg_score,
+        COUNT(*) as total,
+        MAX(score) as best_score,
+        ARRAY_AGG(score ORDER BY completion_time) as scores,
+        ARRAY(
+            SELECT TO_CHAR(completion_time, 'MM/DD HH24:MI')
+            FROM exam_results
+            WHERE user_id = %s
+            AND completion_time >= NOW() - INTERVAL '30 days'
+            AND score IS NOT NULL
+            ORDER BY completion_time
+            LIMIT 4
+        ) as labels
+    FROM exam_results
+    WHERE user_id = %s
+    AND completion_time >= NOW() - INTERVAL '30 days'
+    AND score IS NOT NULL
+)
+SELECT 
+    COALESCE(avg_score, 0) as avg_score,
+    COALESCE(total, 0) as total,
+    COALESCE(best_score, 0) as best_score,
+    CASE WHEN scores IS NOT NULL AND array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
+    CASE WHEN labels IS NOT NULL AND array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
+FROM exam_stats
+            """, (student_id, student_id))
 
             exam_data = cur.fetchone()
+            
+            # If no data was found, return default values
+            if not exam_data:
+                return {
+                    'avg_score': 0,
+                    'total': 0,
+                    'best_score': 0,
+                    'scores': [0, 0, 0, 0],
+                    'labels': ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+                }
 
             return {
                 'avg_score': float(exam_data[0]),
@@ -767,7 +777,6 @@ def get_exams_data(student_id):
         }
     finally:
         conn.close()
-
 
 def get_recent_activities(student_id):
     conn = get_db_connection()
@@ -4454,8 +4463,9 @@ def get_chart_data(student_id):
         print(assignments)
         practice = get_practice_data(student_id)
         exams = get_exams_data(student_id)
-        activities = get_recent_activities(student_id)
         print(exams)
+        activities = get_recent_activities(student_id)
+
         # Get actual trend data with real dates
         trend_data = get_actual_trend_data(student_id)
 
