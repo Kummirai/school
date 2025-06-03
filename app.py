@@ -4364,10 +4364,10 @@ def get_actual_subject_data(student_id):
                 GROUP BY subject
                 ORDER BY avg_score DESC
                 LIMIT 4
-            """, (student_id, student_id, student_id))
+            """, (student_id, student_id))
 
             results = cur.fetchall()
-
+            print(results)
             if not results:
                 return {
                     'labels': ['Math', 'Science', 'English', 'History'],
