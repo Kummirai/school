@@ -4271,29 +4271,32 @@ def get_actual_trend_data(student_id):
             # Get monthly trends for the last 6 months
             cur.execute("""
                 WITH months AS (
-                    SELECT generate_series(
-                        date_trunc('month', CURRENT_DATE - INTERVAL '5 months'),
-                        date_trunc('month', CURRENT_DATE),
-                        INTERVAL '1 month'
-                    ) AS month
-                )
-                SELECT
-                    TO_CHAR(months.month, 'Mon') AS month_name,
-                    COALESCE(AVG(a.score), 0) AS assignment_avg,
-                    COALESCE(AVG(p.score), 0) AS practice_avg,
-                    COALESCE(AVG(e.score), 0) AS exam_avg
-                FROM months
-                LEFT JOIN assignments a ON 
-                    date_trunc('month', a.due_date) = months.month AND
-                    a.student_id = %s
-                LEFT JOIN practice_sessions p ON
-                    date_trunc('month', p.completed_at) = months.month AND
-                    p.student_id = %s
-                LEFT JOIN exams e ON
-                    date_trunc('month', e.completed_at) = months.month AND
-                    e.student_id = %s
-                GROUP BY months.month
-                ORDER BY months.month
+    SELECT generate_series(
+        date_trunc('month', CURRENT_DATE - INTERVAL '5 months'),
+        date_trunc('month', CURRENT_DATE),
+        INTERVAL '1 month'
+    ) AS month
+)
+SELECT
+    TO_CHAR(months.month, 'Mon') AS month_name,
+    COALESCE(AVG(a.grade), 0) AS assignment_avg,
+    COALESCE(AVG(p.score), 0) AS practice_avg,
+    COALESCE(AVG(e.score), 0) AS exam_avg
+FROM months
+LEFT JOIN (
+    SELECT a.*, s.grade 
+    FROM assignments a
+    JOIN submissions s ON a.id = s.assignment_id
+    WHERE s.student_id = %s
+) a ON date_trunc('month', a.deadline) = months.month
+LEFT JOIN practice_scores p ON
+    date_trunc('month', p.completed_at) = months.month AND
+    p.student_id = %s
+LEFT JOIN exam_results e ON
+    date_trunc('month', e.completion_time) = months.month AND
+    e.user_id = %s
+GROUP BY months.month
+ORDER BY months.month
             """, (student_id, student_id, student_id))
 
             results = cur.fetchall()
@@ -4465,6 +4468,7 @@ def get_chart_data(student_id):
         assignments = get_assignments_data(student_id)
         print(assignments)
         practice = get_practice_data(student_id)
+        print(practice)
         exams = get_exams_data(student_id)
         print(exams)
         activities = get_recent_activities(student_id)
