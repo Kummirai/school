@@ -5,7 +5,10 @@
       <h3 class="h5 mb-0">Create New Session Request</h3>
     </div>
     <div class="card-body">
-      <form method="POST" action="{{ url_for('create_session_request') }}">
+      <form
+        method="POST"
+        action="{{ url_for('create_session_request_route') }}"
+      >
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input

@@ -1114,65 +1114,6 @@
     "difficulty": "Medium"
   },
   {
-    "id": 7,
-    "title": "Grade 10 Mathematics Paper 1 - June 2024",
-    "description": "An official provincial exam assessing algebra, functions, inequalities, simplification, and graphs for Grade 10 Mathematics students.",
-    "questions": [
-      {
-        "id": 1001,
-        "type": "problem_solving ",
-        "question": " &frac14; If K = \u221a<span class='fraction-css'><span class='numerator'>9</span><span class='denominator'>4 \u2212 x</span></span>, for which value of x is K undefined?",
-        "options": ["0", "3", "4", "4"],
-        "correct_answer": "x = 4",
-        "marks": 1
-      },
-      {
-        "id": 1002,
-        "type": "problem_solving",
-        "question": "Simplify: 2b(b \u2013 5c)<span class='exponent-css'>2</span>",
-        "options": [
-          "2b<sup>3</sup> - 10bc",
-          "2b<sup>3</sup> - 20bc + 50b",
-          "2b<sup>3</sup> - 50bc",
-          "2b(b<sup>2</sup> - 10bc + 25c<sup>2</sup>)"
-        ],
-        "correct_answer": "2b(b<sup>2</sup> - 10bc + 25c<sup>2</sup>)",
-        "marks": 2
-      },
-      {
-        "id": 1003,
-        "type": "problem_solving",
-        "question": "Solve: 16<sup>2x \u2212 0.5</sup> = 41",
-        "options": [
-          "x \u2248 1.01",
-          "x \u2248 0.75",
-          "x \u2248 0.9",
-          "x \u2248 1.25"
-        ],
-        "correct_answer": "x \u2248 1.01",
-        "marks": 4
-      },
-      {
-        "id": 1004,
-        "type": "problem_solving",
-        "question": "Solve the inequality: <span class='fraction-css'><span class='numerator'>3x \u2212 4</span><span class='denominator'>2</span></span> &lt; 14",
-        "options": ["x &lt; 10", "x &lt; 12", "x &lt; 9", "x &lt; 11"],
-        "correct_answer": "x &lt; 10",
-        "marks": 2
-      },
-      {
-        "id": 1005,
-        "type": "problem_solving",
-        "question": "Write the equation of the asymptote of f(x) = 2<sup>x + k</sup> + 2",
-        "options": ["y = 0", "y = 1", "y = 2", "y = -1"],
-        "correct_answer": "y = 2",
-        "marks": 1
-      }
-    ],
-    "duration_minutes": 45,
-    "difficulty": "Medium"
-  },
-  {
     "id": 10,
     "title": "Grade 10 Mathematics - June 2024 Exam",
     "description": "A comprehensive examination for Grade 7 students covering fundamental concepts and operations involving fractions.",
@@ -1181,19 +1122,19 @@
         "id": 1001,
         "text": "<math><mrow><mtext> If </mtext><mspace width=\"4px\"></mspace><mi>x</mi><mspace width=\"4px\"/><mi> &#x2208; {0;1;2;3;4}</mi><mspace width=\"4px\"></mspace><mtext>write down a value of</mtext><mspace width=\"4px\"></mspace><mi>x</mi><mspace width=\"4px\"/><mtext>such that</mtext><mspace width=\"4px\"></mspace><mi>K</mi><mo>=</mo><msqrt><mfrac><mn>9</mn><mrow><mn>4</mn><mo>-</mo><mi>x</mi></mrow></mfrac></msqrt><mspace width=\"16px\"></mspace><mtext>is :</mtext></mrow></math><br>1.1 Undefined<br>1.2 Rational<br>1.3 Irrational",
         "options": [],
-        "correct_answer": ["x = 4", "x = 3", "x = 2"]
+        "correct_answer": "x = 4 x = 3 x = 2"
       },
       {
         "id": 1002,
         "text": "2.1.1 Simplify the following<br><math><mrow><mn>2</mn><mi>b</mi></mrow><msup><mrow><mo>(</mo><mi>b</mi><mo>-</mo><mn>5</mn><mi>c</mi><mo>)</mo></mrow><mn>2</mn></msup></math>",
         "options": [],
-        "correct_answer": "14"
+        "correct_answer": "2b<sup>3</sup> - 20b<sup>2</sup>+50bc<sup>2</sup>"
       },
       {
         "id": 1003,
         "text": "2.1.2 Simplify the following<br><math><mfrac style=\"font-size: 1.8rem\"><mrow><mn>3</mn><mi>x</mi><mo>-</mo><msup><mn>2.3</mn><mi>x-1</mi></msup></mrow><mrow><msup><mn>3</mn><mi>x + 2</mi></msup><mo>+</mo><msup><mn>2.3</mn><mi>x + 1</mi></msup></mrow></mfrac></math>",
         "options": [],
-        "correct_answer": ""
+        "correct_answer": "<math><mfrac><mn>1</mn><mn>45</mn></mfrac></math>"
       },
       {
         "id": 1004,

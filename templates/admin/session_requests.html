@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Session Requests</h2>
+    <a
+      href="{{ url_for('admin_dashboard') }}"
+      class="btn btn-outline-secondary"
+    >
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Student</th>
+              <th>Category</th>
+              <th>Preferred Time</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>{{ req.title }}</td>
+              <td>{{ req.student_name }}</td>
+              <td>{{ req.category }}</td>
+              <td>
+                {{ req.preferred_time|datetime if req.preferred_time else 'Not
+                specified' }}
+              </td>
+              <td>
+                <span
+                  class="badge {% if req.status == 'approved' %}bg-success {% elif req.status == 'rejected' %}bg-danger {% else %}bg-warning text-dark{% endif %}"
+                >
+                  {{ req.status }}
+                </span>
+              </td>
+              <td>{{ req.created_at|datetime }}</td>
+              <td>
+                {% if req.status == 'pending' %}
+                <div class="btn-group">
+                  <form
+                    method="POST"
+                    action="{{ url_for('approve_session_request', request_id=req.id) }}"
+                    class="d-inline"
+                  >
+                    <button type="submit" class="btn btn-sm btn-success">
+                      Approve
+                    </button>
+                  </form>
+                  <form
+                    method="POST"
+                    action="{{ url_for('reject_session_request', request_id=req.id) }}"
+                    class="d-inline"
+                  >
+                    <button type="submit" class="btn btn-sm btn-danger">
+                      Reject
+                    </button>
+                  </form>
+                </div>
+                {% endif %}
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7" class="text-center">No session requests found</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

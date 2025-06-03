@@ -92,6 +92,32 @@ def initialize_database():
         )
         ''')
 
+    # Add these tables after your other table creations
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS session_requests (
+            id SERIAL PRIMARY KEY,
+            student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            title VARCHAR(255) NOT NULL,
+            description TEXT,
+            category VARCHAR(100),
+            preferred_time TIMESTAMP,
+            status VARCHAR(50) DEFAULT 'pending',  -- pending, approved, rejected
+            admin_notes TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS session_request_notes (
+            id SERIAL PRIMARY KEY,
+            request_id INTEGER NOT NULL REFERENCES session_requests(id) ON DELETE CASCADE,
+            admin_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            note TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
     cur.execute('''
         CREATE TABLE IF NOT EXISTS user_announcements (
             announcement_id INTEGER NOT NULL REFERENCES announcements(id) ON DELETE CASCADE,
@@ -308,6 +334,137 @@ def initialize_database():
     conn.close()
 
 # Helpers
+
+
+def create_session_request(student_id, title, description, category, preferred_time):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            INSERT INTO session_requests 
+            (student_id, title, description, category, preferred_time)
+            VALUES (%s, %s, %s, %s, %s)
+            RETURNING id
+        ''', (student_id, title, description, category, preferred_time))
+        request_id = cur.fetchone()[0]
+        conn.commit()
+        return request_id
+    except Exception as e:
+        conn.rollback()
+        print(f"Error creating session request: {e}")
+        return None
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_session_requests_for_student(student_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT id, title, description, category, preferred_time, status, created_at
+            FROM session_requests
+            WHERE student_id = %s
+            ORDER BY created_at DESC
+        ''', (student_id,))
+        return [{
+            'id': row[0],
+            'title': row[1],
+            'description': row[2],
+            'category': row[3],
+            'preferred_time': row[4],
+            'status': row[5],
+            'created_at': row[6]
+        } for row in cur.fetchall()]
+    except Exception as e:
+        print(f"Error getting session requests: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_all_session_requests():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT sr.id, sr.title, sr.description, sr.category, sr.preferred_time, 
+                   sr.status, sr.created_at, u.username as student_name
+            FROM session_requests sr
+            JOIN users u ON sr.student_id = u.id
+            ORDER BY sr.created_at DESC
+        ''')
+        return [{
+            'id': row[0],
+            'title': row[1],
+            'description': row[2],
+            'category': row[3],
+            'preferred_time': row[4],
+            'status': row[5],
+            'created_at': row[6],
+            'student_name': row[7]
+        } for row in cur.fetchall()]
+    except Exception as e:
+        print(f"Error getting all session requests: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def update_session_request_status(request_id, status, admin_id, notes=None):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Update the request status
+        cur.execute('''
+            UPDATE session_requests
+            SET status = %s,
+                admin_notes = %s,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        ''', (status, notes, request_id))
+
+        # If approved, create a tutorial session
+        if status == 'approved':
+            cur.execute('''
+                SELECT title, description, preferred_time
+                FROM session_requests
+                WHERE id = %s
+            ''', (request_id,))
+            request = cur.fetchone()
+
+            if request:
+                title, description, preferred_time = request
+                # Create a session with default duration (1 hour)
+                end_time = preferred_time + timedelta(hours=1)
+                cur.execute('''
+                    INSERT INTO tutorial_sessions 
+                    (title, description, start_time, end_time, max_students)
+                    VALUES (%s, %s, %s, %s, %s)
+                    RETURNING id
+                ''', (title, description, preferred_time, end_time, 1))
+                session_id = cur.fetchone()[0]
+
+                # Book the student automatically
+                cur.execute('''
+                    INSERT INTO student_bookings (student_id, session_id)
+                    SELECT student_id, %s
+                    FROM session_requests
+                    WHERE id = %s
+                ''', (session_id, request_id))
+
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error updating session request: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
 
 
 def complete_practice_session(practice_session_id):
@@ -4653,6 +4810,84 @@ def parent_view_assignments():
             conn.close()
 
     return render_template('parent/assignments.html', students_with_assignments=students_with_assignments)
+
+# Student routes
+
+
+@app.route('/sessions/request', methods=['GET', 'POST'])
+@login_required
+def create_session_request_route():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        category = request.form.get('category')
+        preferred_time_str = request.form.get('preferred_time')
+
+        if not all([title, category]):
+            flash('Title and category are required', 'danger')
+            return redirect(url_for('create_session_request_route'))
+
+        try:
+            preferred_time = datetime.strptime(
+                preferred_time_str, '%Y-%m-%dT%H:%M') if preferred_time_str else None
+            request_id = create_session_request(
+                student_id=session['user_id'],
+                title=title,
+                description=description,
+                category=category,
+                preferred_time=preferred_time
+            )
+
+            if request_id:
+                flash('Session request submitted successfully!', 'success')
+                return redirect(url_for('view_my_session_requests'))
+            else:
+                flash('Error submitting request', 'danger')
+        except ValueError:
+            flash('Invalid date/time format', 'danger')
+
+    return render_template('sessions/create.html')
+
+
+@app.route('/sessions/my-requests')
+@login_required
+def view_my_session_requests():
+    requests = get_session_requests_for_student(session['user_id'])
+    return render_template('student/session_requests.html', requests=requests)
+
+# Admin routes
+
+
+@app.route('/admin/session-requests')
+@login_required
+@admin_required
+def manage_session_requests():
+    requests = get_all_session_requests()
+    return render_template('admin/session_requests.html', requests=requests)
+
+
+@app.route('/admin/session-requests/<int:request_id>/approve', methods=['POST'])
+@login_required
+@admin_required
+def approve_session_request(request_id):
+    notes = request.form.get('notes', '')
+    if update_session_request_status(request_id, 'approved', session['user_id'], notes):
+        flash('Session request approved and scheduled!', 'success')
+    else:
+        flash('Error approving request', 'danger')
+    return redirect(url_for('manage_session_requests'))
+
+
+@app.route('/admin/session-requests/<int:request_id>/reject', methods=['POST'])
+@login_required
+@admin_required
+def reject_session_request(request_id):
+    notes = request.form.get('notes', '')
+    if update_session_request_status(request_id, 'rejected', session['user_id'], notes):
+        flash('Session request rejected', 'success')
+    else:
+        flash('Error rejecting request', 'danger')
+    return redirect(url_for('manage_session_requests'))
 
 
 @app.template_filter('datetime')

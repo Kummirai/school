@@ -178,11 +178,19 @@
               {% if 'username' in session and session['role'] == 'admin' %}
               <li class="nav-item">
                 <a
-                  class="nav-link btn btn-outline-warning btn-sm mx-2"
+                  class="nav-link btn btn-outline-warning btn-sm mx-2 mb-2 mb-sm-0"
                   href="{{ url_for('admin_dashboard') }}"
                 >
                   <i class="bi bi-speedometer2 me-1"></i> Admin Panel
                 </a>
+              </li>
+              <li class="nav-link btn btn-outline-secondary btn-sm mx-2 p-1 mb-2 mb-sm-0">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('manage_session_requests') }}"
+                >
+                  <i class="bi bi-hands me-1"></i>Session Requests</a
+                >
               </li>
               {% endif %} {% if 'username' in session %}
               <li class="nav-item dropdown">

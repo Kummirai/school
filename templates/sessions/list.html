@@ -2,12 +2,18 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-4">Classes</h2>
-    <a
-      href="{{ url_for('admin_dashboard') }}"
-      class="btn btn-danger text-white"
-    >
-      <i class="bi bi-pencil"></i> Create Class
-    </a>
+    <div class="d-flex align-items-center flex-wrap">
+      <a
+        class="btn btn-success mx-0 mx-sm-2"
+        href="{{ url_for('view_my_session_requests') }}"
+        ><i class="bi bi-pencil"></i>My Class Requests</a
+      >
+      <a
+        class="btn btn-danger"
+        href="{{ url_for('create_session_request_route') }}"
+        ><i class="bi bi-pencil"></i>Request a Class</a
+      >
+    </div>
   </div>
   {% if bookings %}
   <div class="card mb-4">

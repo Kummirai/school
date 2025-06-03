@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>My Session Requests</h2>
+  <a
+    href="{{ url_for('create_session_request_route') }}"
+    class="btn btn-primary mb-3"
+    >New Request</a
+  >
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Preferred Time</th>
+              <th>Status</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>{{ req.title }}</td>
+              <td>{{ req.category }}</td>
+              <td>
+                {{ req.preferred_time|datetime if req.preferred_time else 'Not
+                specified' }}
+              </td>
+              <td>
+                <span
+                  class="badge {% if req.status == 'approved' %}bg-success {% elif req.status == 'rejected' %}bg-danger {% else %}bg-warning text-dark{% endif %}"
+                >
+                  {{ req.status }}
+                </span>
+              </td>
+              <td>{{ req.created_at|datetime }}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="5" class="text-center">No session requests found</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
