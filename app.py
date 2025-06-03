@@ -4340,17 +4340,27 @@ def get_actual_subject_data(student_id):
     try:
         with conn.cursor() as cur:
             cur.execute("""
-                SELECT 
+               SELECT 
                     subject,
-                    AVG(score) as avg_score
+                    AVG(grade) as avg_score
                 FROM (
-                    SELECT title, score FROM assignments WHERE student_id = %s
+                    SELECT 
+                        a.title as subject, 
+                        s.grade 
+                    FROM assignments a
+                    JOIN submissions s ON a.id = s.assignment_id
+                    WHERE s.student_id = %s
+                    
                     UNION ALL
-                    SELECT subject, score FROM practice_sessions WHERE student_id = %s
-                    UNION ALL
-                    SELECT subject, score FROM exam_results WHERE student_id = %s
+                    
+                    SELECT 
+                        subject, 
+                        score 
+                    FROM practice_scores 
+                    WHERE student_id = %s
+                    
                 ) combined
-                WHERE score IS NOT NULL
+                WHERE grade IS NOT NULL
                 GROUP BY subject
                 ORDER BY avg_score DESC
                 LIMIT 4
