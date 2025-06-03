@@ -660,32 +660,33 @@ def get_practice_data(student_id):
     try:
         with conn.cursor() as cur:
             cur.execute("""
-                WITH practice_stats AS (
-                    SELECT 
-                        AVG(score) as avg_score,
-                        COUNT(*) as total,
-                        MAX(score) as best_score,
-                        ARRAY_AGG(score ORDER BY completed_at) as scores,
-                        ARRAY(
-                            SELECT DISTINCT ON (DATE_TRUNC('week', completed_at))
-                                TO_CHAR(completed_at, 'Mon DD')
-                            FROM practice_sessions
-                            WHERE student_id = %s
-                            AND completed_at >= NOW() - INTERVAL '30 days'
-                            ORDER BY DATE_TRUNC('week', completed_at), completed_at
-                        ) as labels
-                    FROM practice_sessions
-                    WHERE student_id = %s
-                    AND completed_at >= NOW() - INTERVAL '30 days'
-                    AND score IS NOT NULL
-                )
-                SELECT 
-                    COALESCE(avg_score, 0) as avg_score,
-                    COALESCE(total, 0) as total,
-                    COALESCE(best_score, 0) as best_score,
-                    CASE WHEN array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
-                    CASE WHEN array_length(labels, 1) > 0 THEN labels ELSE ARRAY['Week 1','Week 2','Week 3','Week 4'] END as labels
-                FROM practice_stats
+              WITH practice_stats AS (
+    SELECT 
+        AVG(score) as avg_score,
+        COUNT(*) as total,
+        MAX(score) as best_score,
+        ARRAY_AGG(score ORDER BY completed_at) as scores,
+        ARRAY(
+            SELECT TO_CHAR(completed_at, 'MM/DD HH24:MI')
+            FROM practice_scores
+            WHERE student_id = %s
+            AND completed_at >= NOW() - INTERVAL '30 days'
+            AND score IS NOT NULL
+            ORDER BY completed_at
+            LIMIT 4
+        ) as labels
+    FROM practice_scores
+    WHERE student_id = %s
+    AND completed_at >= NOW() - INTERVAL '30 days'
+    AND score IS NOT NULL
+)
+SELECT 
+    COALESCE(avg_score, 0) as avg_score,
+    COALESCE(total, 0) as total,
+    COALESCE(best_score, 0) as best_score,
+    CASE WHEN scores IS NOT NULL AND array_length(scores, 1) > 0 THEN scores ELSE ARRAY[0,0,0,0] END as scores,
+    CASE WHEN labels IS NOT NULL AND array_length(labels, 1) > 0 THEN labels ELSE ARRAY['No sessions','','',''] END as labels
+FROM practice_stats
             """, (student_id, student_id))
 
             practice_data = cur.fetchone()
@@ -709,6 +710,7 @@ def get_practice_data(student_id):
         }
     finally:
         conn.close()
+
 
 def get_exams_data(student_id):
     """Fetch actual exam statistics from database"""
@@ -747,7 +749,7 @@ FROM exam_stats
             """, (student_id, student_id))
 
             exam_data = cur.fetchone()
-            
+
             # If no data was found, return default values
             if not exam_data:
                 return {
@@ -777,6 +779,7 @@ FROM exam_stats
         }
     finally:
         conn.close()
+
 
 def get_recent_activities(student_id):
     conn = get_db_connection()
