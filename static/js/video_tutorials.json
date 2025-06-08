@@ -17803,6 +17803,105 @@
       "subject": "Mathematics",
       "youtubeId": "fievfFMTUJw",
       "thumbnail": "https://img.youtube.com/vi/fievfFMTUJw/mqdefault.jpg"
+    },
+    {
+      "id": 1982,
+      "title": "CS50P - Introduction",
+      "description": "CS50P - Introduction",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "OvKCESUCWII",
+      "thumbnail": "https://img.youtube.com/vi/OvKCESUCWII/mqdefault.jpg"
+    },
+    {
+      "id": 1983,
+      "title": "CS50P - Lecture 0 - Functions, Variables",
+      "description": "CS50P - Lecture 0 - Functions, Variables",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "JP7ITIXGpHk",
+      "thumbnail": "https://img.youtube.com/vi/JP7ITIXGpHk/mqdefault.jpg"
+    },
+    {
+      "id": 1984,
+      "title": "CS50P - Lecture 1 - Conditionals",
+      "description": "CS50P - Lecture 1 - Conditionals",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "_b6NgY_pMdw",
+      "thumbnail": "https://img.youtube.com/vi/_b6NgY_pMdw/mqdefault.jpg"
+    },
+    {
+      "id": 1985,
+      "title": "CS50P - Lecture 2 - Loops",
+      "description": "CS50P - Lecture 2 - Loops",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "-7xg8pGcP6w",
+      "thumbnail": "https://img.youtube.com/vi/-7xg8pGcP6w/mqdefault.jpg"
+    },
+    {
+      "id": 1986,
+      "title": "CS50P - Lecture 3 - Exceptions",
+      "description": "CS50P - Lecture 3 - Exceptions",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "LW7g1169v7w",
+      "thumbnail": "https://img.youtube.com/vi/LW7g1169v7w/mqdefault.jpg"
+    },
+    {
+      "id": 1987,
+      "title": "CS50P - Lecture 4 - Libraries",
+      "description": "CS50P - Lecture 4 - Libraries",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "MztLZWibctI",
+      "thumbnail": "https://img.youtube.com/vi/MztLZWibctI/mqdefault.jpg"
+    },
+    {
+      "id": 1988,
+      "title": "CS50P - Lecture 5 - Unit Tests",
+      "description": "CS50P - Lecture 5 - Unit Tests",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "tIrcxwLqzjQ",
+      "thumbnail": "https://img.youtube.com/vi/tIrcxwLqzjQ/mqdefault.jpg"
+    },
+    {
+      "id": 1989,
+      "title": "CS50P - Lecture 6 - File I/O",
+      "description": "CS50P - Lecture 6 - File I/O",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "KD-Yoel6EVQ",
+      "thumbnail": "https://img.youtube.com/vi/KD-Yoel6EVQ/mqdefault.jpg"
+    },
+    {
+      "id": 1990,
+      "title": "CS50P - Lecture 7 - Regular Expressions",
+      "description": "CS50P - Lecture 7 - Regular Expressions",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "hy3sd9MOAcc",
+      "thumbnail": "https://img.youtube.com/vi/hy3sd9MOAcc/mqdefault.jpg"
+    },
+    {
+      "id": 1991,
+      "title": "CS50P - Lecture 8 - Object-Oriented Programming",
+      "description": "CS50P - Lecture 8 - Object-Oriented Programming",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "e4fwY9ZsxPw",
+      "thumbnail": "https://img.youtube.com/vi/e4fwY9ZsxPw/mqdefault.jpg"
+    },
+    {
+      "id": 1992,
+      "title": "CS50P - Lecture 9 - Et Cetera",
+      "description": "CS50P - Lecture 9 - Et Cetera",
+      "grade": "CS50",
+      "subject": "Python",
+      "youtubeId": "6pgodt1mezg",
+      "thumbnail": "https://img.youtube.com/vi/6pgodt1mezg/mqdefault.jpg"
     }
   ]
 }
