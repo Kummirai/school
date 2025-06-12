@@ -3,6 +3,8 @@
 <section
   class="hero-section"
   style="
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+      url('https://images.pexels.com/photos/4260323/pexels-photo-4260323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top left;
@@ -36,8 +38,7 @@
           journey with our comprehensive resources {% else %} {# This 'else'
           covers cases where 'username' is NOT in session #}
           <i class="bi bi-stars text-warning me-2"></i> For Kids & High
-          Schoolers Who Want to Level Up in School, Coding & Beyond!{% endif
-          %}
+          Schoolers Who Want to Level Up in School, Coding & Beyond!{% endif %}
         </p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           {% if 'username' not in session %}
