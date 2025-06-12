@@ -3,24 +3,24 @@
 <section
   class="hero-section"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
-      url('https://images.pexels.com/photos/8618022/pexels-photo-8618022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: top center;
+    background-position: top left;
     color: white;
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0;
+    padding: 0px;
   "
 >
   <div class="container py-5">
     <div class="row align-items-center">
       <div class="col-lg-8 mx-auto text-center">
         <div class="mb-4">
-          <i class="bi bi-mortarboard-fill display-1 text-warning text-readability"></i>
+          <i
+            class="bi bi-mortarboard-fill display-1 text-warning text-readability"
+          ></i>
         </div>
         <h1 class="display-3 fw-bold mb-4 text-readability">
           {% if 'username' in session %} Welcome back,
@@ -36,8 +36,9 @@
           <i class="bi bi-stars text-warning me-2"></i> Continue your learning
           journey with our comprehensive resources {% else %} {# This 'else'
           covers cases where 'username' is NOT in session #}
-          <i class="bi bi-stars text-warning me-2"></i> Your comprehensive
-          platform for programming and academic enrichment. {% endif %}
+          <i class="bi bi-stars text-warning me-2"></i> For Kids & High
+          Schoolers Who Want to Level Up in School, Coding & Beyond!{% endif
+          %}
         </p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           {% if 'username' not in session %}
@@ -46,7 +47,8 @@
             href="{{ url_for('login') }}"
             role="button"
           >
-            <i class="bi bi-box-arrow-in-right me-2 text-readability"></i>Login to Get Started
+            <i class="bi bi-box-arrow-in-right me-2 text-readability"></i>Login
+            to Get Started
           </a>
           <a
             class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"
@@ -61,14 +63,16 @@
             href="{{ url_for('tutorials_home') }}"
             role="button"
           >
-            <i class="bi bi-collection-play me-2 text-readability "></i>Browse Tutorials
+            <i class="bi bi-collection-play me-2 text-readability"></i>Browse
+            Tutorials
           </a>
           <a
             class="btn btn-warning btn-lg px-4 py-3 fw-bold"
             href="{{url_for('studyguides_home')}}"
             role="button"
           >
-            <i class="bi bi-journal-bookmark me-2 text-readability"></i>Practice Questions
+            <i class="bi bi-journal-bookmark me-2 text-readability"></i>Practice
+            Questions
           </a>
           {% endif %}
         </div>

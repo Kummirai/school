@@ -21,6 +21,10 @@ body {
   width: 100%;
 }
 
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+    url("https://images.pexels.com/photos/4260323/pexels-photo-4260323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
 main {
   flex: 1; /* This makes the main content grow to push footer down */
 }
@@ -113,5 +117,13 @@ footer {
   /* Keep badges visible */
   .navbar-nav .nav-item .nav-link .badge {
     display: inline-block !important;
+  }
+}
+
+/* For small screens (up to 991px) */
+@media (max-width: 991px) {
+  .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+      url("https://images.pexels.com/photos/4260318/pexels-photo-4260318.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   }
 }
