@@ -3,12 +3,14 @@
 <section
   class="hero-section"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url('https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
+      url('https://images.pexels.com/photos/8618022/pexels-photo-8618022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    background-position: top center;
     color: white;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 0;
@@ -18,15 +20,15 @@
     <div class="row align-items-center">
       <div class="col-lg-8 mx-auto text-center">
         <div class="mb-4">
-          <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
+          <i class="bi bi-mortarboard-fill display-1 text-warning text-readability"></i>
         </div>
-        <h1 class="display-3 fw-bold mb-4">
+        <h1 class="display-3 fw-bold mb-4 text-readability">
           {% if 'username' in session %} Welcome back,
           <span class="text-warning">{{ session['username'] }}</span> {% else %}
           Master Skills with <span class="text-warning">MiltonTutor+</span>
           {% endif %}
         </h1>
-        <p class="lead mb-5 fs-5">
+        <p class="lead mb-5 fs-5 text-readability">
           {% if 'username' in session and session['role'] == 'parent' %}
           <i class="bi bi-stars text-warning me-2"></i> We are glad that you
           chose us as the private tutors for your children! {% elif 'username'
@@ -44,14 +46,14 @@
             href="{{ url_for('login') }}"
             role="button"
           >
-            <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+            <i class="bi bi-box-arrow-in-right me-2 text-readability"></i>Login to Get Started
           </a>
           <a
             class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"
             href="#features"
             role="button"
           >
-            <i class="bi bi-info-circle me-2"></i>Learn More
+            <i class="bi bi-info-circle me-2 text-readability"></i>Learn More
           </a>
           {% else %}
           <a
@@ -59,14 +61,14 @@
             href="{{ url_for('tutorials_home') }}"
             role="button"
           >
-            <i class="bi bi-collection-play me-2"></i>Browse Tutorials
+            <i class="bi bi-collection-play me-2 text-readability "></i>Browse Tutorials
           </a>
           <a
             class="btn btn-warning btn-lg px-4 py-3 fw-bold"
             href="{{url_for('studyguides_home')}}"
             role="button"
           >
-            <i class="bi bi-journal-bookmark me-2"></i>Practice Questions
+            <i class="bi bi-journal-bookmark me-2 text-readability"></i>Practice Questions
           </a>
           {% endif %}
         </div>
