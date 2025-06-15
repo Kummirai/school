@@ -435,16 +435,19 @@
   const sessions = [
     {% for session in sessions %}
     {
-      id: {{ session[0] }},
+      id: "{{ session[0] }}",
       title: "{{ session[1] | safe }}",
       description: "{{ session[2] or 'No description provided' | safe }}",
       startTime: new Date("{{ session[3].isoformat() }}"),
       endTime: new Date("{{ session[4].isoformat() }}"),
-      maxCapacity: {{ session[5] }},
-      currentBookings: {{ session[6] }}
+      maxCapacity: "{{ session[5] }}",
+      currentBookings: "{{ session[6] }}"
     }{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
+
+  console.log(sessions);
+  
 
   let currentWeekStart = new Date();
   currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay());
