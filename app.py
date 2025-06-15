@@ -2591,23 +2591,9 @@ def logout():
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
 
-# @app.route('/tutorials')
-# @login_required
-# def tutorials_home():
-#     categories = get_all_categories()
-#     # Create a dictionary with category data
-#     tutorials_dict = {
-#         category[1]: {  # Using category name as key
-#             'id': category[0],  # category id
-#             'videos': get_videos_by_category(category[0])  # videos for this category
-#         }
-#         for category in categories
-#     }
-#     return render_template('tutorials/index.html', tutorials=tutorials_dict, categories=categories)
-
 
 @app.route('/tutorials')
-@login_required
+# @login_required
 def tutorials_home():
     return render_template('tutorials/video_tutorials.html')
 
@@ -2619,7 +2605,7 @@ def studyguides_home():
 
 
 @app.route('/tutorials/<int:category_id>')
-@login_required
+# @login_required
 def tutorial_language(category_id):
     videos = get_videos_by_category(category_id)
     if not videos:
