@@ -1,43 +1,68 @@
-{% extends "base.html" %}
-
-{% block title %}Login{% endblock %}
-
-{% block content %}
-<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-    <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%; background-color: #ffffff; border: none;">
-        <div class="text-center mb-4">
-            <i class="bi bi-mortarboard-fill text-dark" style="font-size: 4rem;"></i>
-            <h2 class="fw-bold text-dark mt-2">MiltonTutor+</h2>
-            <p class="text-secondary mb-0 small">Login to your account</p>
-        </div>
-        <form method="POST" action="{{ url_for('login') }}">
-            <div class="mb-3">
-                <label class="form-label text-dark">Username</label>
-                <input type="text" name="username" class="form-control border-warning" placeholder="Enter your username"
-                    required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label text-dark">Password</label>
-                <input type="password" name="password" class="form-control border-warning"
-                    placeholder="Enter your password" required>
-            </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-danger">Login</button>
-            </div>
-        </form>
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<div
+  class="d-flex align-items-center justify-content-center"
+  style="min-height: 100vh"
+>
+  <div
+    class="card p-4 shadow-lg"
+    style="
+      max-width: 400px;
+      width: 100%;
+      background-color: #ffffff;
+      border: none;
+    "
+  >
+    <div class="text-center mb-4">
+      <i class="bi bi-mortarboard-fill text-dark" style="font-size: 4rem"></i>
+      <h2 class="fw-bold text-dark mt-2">MiltonTutor+</h2>
+      <p class="text-secondary mb-0 small">Login to your account</p>
     </div>
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="mb-3">
+        <label class="form-label text-dark">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control border-warning"
+          placeholder="Enter your username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-dark">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control border-warning"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-danger">Login</button>
+      </div>
+      <p class="mt-4 text-secondary small">
+        Dont have an account?<a
+          class="mx-1 text-danger fw-bold text-decoration-none"
+          href="https://wa.me/27782677436"
+          >Contact Tutor <i class="fas fa-phone"></i
+        ></a>
+      </p>
+    </form>
+  </div>
 </div>
 
 <style>
-    /* Hide navbar and footer for login page */
-    .navbar,
-    footer {
-        display: none !important;
-    }
+  /* Hide navbar and footer for login page */
+  .navbar,
+  footer {
+    display: none !important;
+  }
 
-    /* Ensure the wrapper takes full height */
-    .wrapper {
-        min-height: 100vh;
-    }
+  /* Ensure the wrapper takes full height */
+  .wrapper {
+    min-height: 100vh;
+  }
 </style>
 {% endblock %}

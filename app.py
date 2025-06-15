@@ -2049,8 +2049,6 @@ def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 # Decorators
-
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -2070,8 +2068,6 @@ def admin_required(f):
     return decorated_function
 
 # Student session booking routes
-
-
 @app.route('/sessions/book/<int:session_id>', methods=['POST'])
 @login_required
 def book_session_route(session_id):
