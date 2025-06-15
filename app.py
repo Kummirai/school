@@ -3607,12 +3607,6 @@ def record_practice():
         return jsonify({'success': False, 'error': str(e)})
 
 
-@app.route('/admin/approve_request')
-@admin_required
-def approve_requests():
-    return render_template('/admin/approve_requests.html')
-
-
 @app.route('/admin/approve_request/<int:request_id>')
 @admin_required  # Add your admin auth decorator
 def approve_request(request_id):
@@ -3808,6 +3802,34 @@ def mark_subscription_paid(subscription_id):
     return redirect(url_for('manage_subscriptions'))
 
 # Add this new route to app.py
+
+
+@app.route('/admin/approve_requests')
+@login_required
+@admin_required
+def approve_requests():
+    conn = get_db_connection()
+    try:
+        # Use DictCursor to get results as dictionaries
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        cur.execute("""
+            SELECT id, user_name, user_email, user_phone, 
+                   plan_name, plan_price, request_date
+            FROM requests 
+            WHERE status = 'pending'
+            ORDER BY request_date DESC
+        """)
+        requests = cur.fetchall()
+        return render_template('admin/approve_requests.html',
+                               pending_requests=requests)
+    except Exception as e:
+        print(f"Error fetching requests: {e}")
+        flash('Error loading requests', 'danger')
+        return render_template('admin/approve_requests.html',
+                               pending_requests=[])
+    finally:
+        cur.close()
+        conn.close()
 
 
 @app.route('/admin/subscriptions/add', methods=['GET', 'POST'])
