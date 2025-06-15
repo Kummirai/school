@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Subscribe{% endblock %} {% block
-content %}
+{% extends "base.html" %} {%
+block title %}Subscribe{% endblock %} {% block content %}
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-lg-12">
@@ -10,7 +10,8 @@ content %}
         <div class="col-md-4">
           <div
             class="card h-100 border-{% if loop.index == 2 %}danger shadow-lg{% else %}secondary{% endif %}"
-          style="max-width: 500px">
+            style="max-width: 500px"
+          >
             <div class="card-body text-center p-4">
               <h3 class="h2 fw-bold">{{ plan[1] }}</h3>
               <div class="display-4 fw-bold my-4">
@@ -34,8 +35,8 @@ content %}
                 </li>
                 {% elif plan[1] == 'Standard'%}
                 <li class="mb-2">
-                  <i class="bi bi-check-circle text-success me-2"></i> All Access
-                  features
+                  <i class="bi bi-check-circle text-success me-2"></i> All
+                  Access features
                 </li>
                 <li class="mb-2">
                   <i class="bi bi-check-circle text-success me-2"></i> Study
@@ -65,6 +66,13 @@ content %}
                 method="POST"
                 action="{{ url_for('create_subscription', plan_id=plan[0]) }}"
               >
+                {% if not session.user %}
+                <input
+                  type="hidden"
+                  name="selected_plan"
+                  value="{{ plan[0] }}"
+                />
+                {% endif %}
                 <button
                   type="submit"
                   class="btn btn-{% if loop.index == 2 %}danger{% else %}outline-secondary{% endif %} btn-lg w-100"
@@ -87,4 +95,4 @@ content %}
     </div>
   </div>
 </div>
-{% endblock %}
+{% endblock %} [file content end]

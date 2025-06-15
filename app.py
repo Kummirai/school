@@ -2049,6 +2049,8 @@ def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 # Decorators
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -2068,6 +2070,8 @@ def admin_required(f):
     return decorated_function
 
 # Student session booking routes
+
+
 @app.route('/sessions/book/<int:session_id>', methods=['POST'])
 @login_required
 def book_session_route(session_id):
@@ -3469,6 +3473,29 @@ def record_practice():
 # Subscription routes
 
 
+@app.route('/contact_tutor/<int:plan_id>')
+def contact_tutor(plan_id):
+    return render_template('contact_tutor.html', plan_id=plan_id)
+
+
+@app.context_processor
+def utility_processor():
+    def get_plan_name(plan_id):
+        # Query your database or plans list to get the plan name
+        plans = get_subscription_plans()
+        for plan in plans:
+            if plan[0] == plan_id:
+                return plan[1]
+        return "selected"
+    return dict(get_plan_name=get_plan_name)
+
+
+@app.route('/subscriptions')
+def subscriptions():
+    plans = get_subscription_plans()
+    return render_template('subscriptions/subscribe.html', plans=plans)
+
+
 @app.route('/subscribe')
 @login_required
 def subscribe():
@@ -3480,10 +3507,14 @@ def subscribe():
 
 
 @app.route('/subscribe/<int:plan_id>', methods=['POST'])
-@login_required
+# @login_required
 def create_subscription(plan_id):
     conn = get_db_connection()
     cur = conn.cursor()
+
+    if 'user' not in session:
+        selected_plan = request.form.get('selected_plan')
+        return redirect(url_for('contact_tutor', plan_id=selected_plan))
 
     try:
         # Get plan details

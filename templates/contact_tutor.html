@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block title %}Contact Tutor{% endblock %} {% block
+content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body p-5">
+          <h2 class="mb-4">Contact Tutor to Subscribe</h2>
+
+          {% if plan_id %}
+          <div class="alert alert-info mb-4">
+            <i class="bi bi-info-circle me-2"></i>
+            You selected the <strong>{{ get_plan_name(plan_id) }}</strong> plan.
+            Contact us to complete your subscription.
+          </div>
+          {% endif %}
+
+          <form method="POST" action="/contact_tutor">
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label"
+                >Phone Number (WhatsApp)</label
+              >
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                rows="3"
+              >
+I'm interested in the {{ get_plan_name(plan_id) }} plan. Please contact me with more details.
+              </textarea>
+            </div>
+            <input type="hidden" name="plan_id" value="{{ plan_id }}" />
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="bi bi-whatsapp me-2"></i> Contact Tutor
+            </button>
+          </form>
+
+          <div class="mt-4">
+            <p>Or contact us directly via WhatsApp:</p>
+            <a
+              href="https://wa.me/27782677436?text=I'm%20interested%20in%20the%20{{ get_plan_name(plan_id)|urlencode }}%20plan"
+              class="btn btn-success"
+            >
+              <i class="bi bi-whatsapp me-2"></i> WhatsApp Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} [file content end]
