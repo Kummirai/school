@@ -872,7 +872,7 @@
 
       modalFooter.innerHTML = `
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <form method="POST" action="/cancel_booking/${booking ? booking.id : ''}" style="display: inline;">
+        <form method="POST" action="/sessions/cancel/${booking ? booking.id : ''}" style="display: inline;">
           <button type="submit" class="btn btn-warning">Cancel Booking</button>
         </form>
       `;
