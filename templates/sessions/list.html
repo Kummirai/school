@@ -164,12 +164,13 @@
   .calendar-grid {
     display: grid;
     grid-template-rows: auto 1fr;
-    min-width: 900px; /* Ensure minimum width for proper alignment */
+    min-width: fit-content;
+    width: 100%;
   }
 
   .calendar-header {
     display: grid;
-    grid-template-columns: 100px repeat(7, 1fr);
+    grid-template-columns: auto repeat(7, minmax(0, 1fr));
     border-bottom: 2px solid #dee2e6;
     background-color: #f8f9fa;
     position: sticky;
@@ -186,6 +187,8 @@
     align-items: center;
     justify-content: center;
     background-color: #f8f9fa;
+    min-width: fit-content;
+    white-space: nowrap;
   }
 
   .day-header {
@@ -198,6 +201,7 @@
     align-items: center;
     justify-content: center;
     background-color: #f8f9fa;
+    min-width: fit-content;
   }
 
   .day-header:last-child {
@@ -206,7 +210,7 @@
 
   .calendar-body {
     display: grid;
-    grid-template-columns: 100px repeat(7, 1fr);
+    grid-template-columns: auto repeat(7, minmax(0, 1fr));
     grid-auto-rows: minmax(60px, auto);
   }
 
@@ -224,6 +228,8 @@
     position: sticky;
     left: 0;
     z-index: 5;
+    min-width: fit-content;
+    white-space: nowrap;
   }
 
   .day-column {
@@ -234,6 +240,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 120px; /* Minimum width for session content */
   }
 
   .day-column:last-child {
@@ -365,19 +372,23 @@
   /* Responsive Breakpoints */
   @media (max-width: 1200px) {
     .calendar-grid {
-      min-width: 800px;
+      min-width: fit-content;
     }
 
     .calendar-header {
-      grid-template-columns: 90px repeat(7, 1fr);
+      grid-template-columns: auto repeat(7, minmax(0, 1fr));
     }
 
     .calendar-body {
-      grid-template-columns: 90px repeat(7, 1fr);
+      grid-template-columns: auto repeat(7, minmax(0, 1fr));
     }
 
     .time-slot-header {
       padding: 12px 8px;
+    }
+
+    .day-column {
+      min-width: 100px;
     }
 
     .session-event {
@@ -393,15 +404,15 @@
 
   @media (max-width: 992px) {
     .calendar-grid {
-      min-width: 750px;
+      min-width: fit-content;
     }
 
     .calendar-header {
-      grid-template-columns: 80px repeat(7, 1fr);
+      grid-template-columns: auto repeat(7, minmax(0, 1fr));
     }
 
     .calendar-body {
-      grid-template-columns: 80px repeat(7, 1fr);
+      grid-template-columns: auto repeat(7, minmax(0, 1fr));
     }
 
     .day-header {
@@ -417,6 +428,10 @@
     .time-slot-header {
       padding: 10px 6px;
       font-size: 0.875rem;
+    }
+
+    .day-column {
+      min-width: 90px;
     }
   }
 
