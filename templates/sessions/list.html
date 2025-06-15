@@ -500,7 +500,28 @@
   function renderDesktopCalendar(calendarBody, timeSlots, weekDates) {
     calendarBody.innerHTML = '';
 
-    timeSlots.forEach(timeSlot => {
+    // Filter time slots to only include those with sessions
+    const activeSessions = getActiveSessionsForWeek(weekDates);
+    const activeTimeSlots = timeSlots.filter(timeSlot => {
+      return activeSessions.some(session => {
+        const sessionHour = session.startTime.getHours();
+        const [slotHour] = timeSlot.split(':');
+        const slotStart = parseInt(slotHour);
+        return sessionHour >= slotStart && sessionHour < slotStart + 1;
+      });
+    });
+
+    // If no active sessions, show a message
+    if (activeTimeSlots.length === 0) {
+      const noSessionsDiv = document.createElement('div');
+      noSessionsDiv.className = 'no-sessions-message';
+      noSessionsDiv.style.cssText = 'grid-column: 1 / -1; padding: 3rem; text-align: center; color: #6c757d;';
+      noSessionsDiv.innerHTML = '<i class="bi bi-calendar-x fs-1 d-block mb-2"></i><p class="mb-0">No classes scheduled for this week</p>';
+      calendarBody.appendChild(noSessionsDiv);
+      return;
+    }
+
+    activeTimeSlots.forEach(timeSlot => {
       // Time slot label
       const timeDiv = document.createElement('div');
       timeDiv.className = 'time-slot';
@@ -530,6 +551,17 @@
 
         calendarBody.appendChild(dayColumn);
       });
+    });
+  }
+
+  function getActiveSessionsForWeek(weekDates) {
+    const weekStart = weekDates[0];
+    const weekEnd = new Date(weekDates[weekDates.length - 1]);
+    weekEnd.setDate(weekEnd.getDate() + 1);
+
+    return sessions.filter(session => {
+      const sessionDate = new Date(session.startTime);
+      return sessionDate >= weekStart && sessionDate < weekEnd;
     });
   }
 
