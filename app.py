@@ -3617,7 +3617,7 @@ def approve_request(request_id):
     request = get_request_details(request_id)
 
     # Create subscription for user
-    create_subscription(request.user_email, request.plan_id)
+    create_subscription(request['user_email'], request['plan_id'])
 
     # Send confirmation email to user
     send_approval_notification(request.user_email, request.plan_name)
