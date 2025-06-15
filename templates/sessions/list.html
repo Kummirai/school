@@ -17,47 +17,34 @@
     </div>
   </div>
 
-  {% if bookings %}
+  <!-- Legend for calendar -->
   <div class="card mb-4">
-    <div class="card-header">
-      <h3 class="h5">Your Booked Classes</h3>
-    </div>
     <div class="card-body">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for booking in bookings %}
-        <div class="col">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title fs-6">{{ booking[1] }}</h5>
-              <p class="card-text">
-                <i class="bi bi-calendar-event"></i> {{ booking[2].strftime('%a,
-                %b %d') }}<br />
-                <i class="bi bi-clock"></i> {{ booking[2].strftime('%H:%M') }} -
-                {{ booking[3].strftime('%H:%M') }}
-              </p>
-            </div>
-            <div class="card-footer bg-transparent">
-              <form
-                method="POST"
-                action="{{ url_for('cancel_booking_route', booking_id=booking[0]) }}"
-                class="d-grid"
-              >
-                <button type="submit" class="btn btn-danger">
-                  Cancel Booking
-                </button>
-              </form>
-            </div>
+      <div class="row align-items-center">
+        <div class="col-12 col-md-auto">
+          <span class="fw-bold me-3">Legend:</span>
+        </div>
+        <div class="col-12 col-md-auto d-flex flex-wrap gap-3">
+          <div class="d-flex align-items-center">
+            <div class="legend-box available me-2"></div>
+            <span class="small">Available Classes</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="legend-box booked me-2"></div>
+            <span class="small">Your Bookings</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="legend-box full me-2"></div>
+            <span class="small">Full Classes</span>
           </div>
         </div>
-        {% endfor %}
       </div>
     </div>
   </div>
-  {% endif %}
 
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="h5 mb-0">Available Classes Calendar</h3>
+      <h3 class="h5 mb-0">Classes Calendar</h3>
       <div class="btn-group btn-group-sm" role="group">
         <button type="button" class="btn btn-outline-primary" id="prevWeek">
           <i class="bi bi-chevron-left"></i>
@@ -150,6 +137,25 @@
 </div>
 
 <style>
+  .legend-box {
+    width: 20px;
+    height: 15px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .legend-box.available {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+  }
+
+  .legend-box.booked {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+  }
+
+  .legend-box.full {
+    background: linear-gradient(135deg, #6c757d, #495057);
+  }
+
   .calendar-container {
     width: 100%;
     overflow-x: auto;
@@ -258,6 +264,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     line-height: 1.3;
     flex-shrink: 0;
+    position: relative;
   }
 
   .session-event:hover {
@@ -274,6 +281,35 @@
   .session-event.full:hover {
     transform: none;
     background: linear-gradient(135deg, #6c757d, #495057);
+  }
+
+  .session-event.booked {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    border: 2px solid #20c997;
+  }
+
+  .session-event.booked:hover {
+    background: linear-gradient(135deg, #1e7e34, #155724);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .session-event.booked::before {
+    content: "✓";
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
   }
 
   .session-title {
@@ -294,6 +330,15 @@
   .session-spots {
     font-size: 0.65rem;
     opacity: 0.9;
+  }
+
+  .session-status {
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin-top: 2px;
+    padding: 1px 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .no-sessions-message {
@@ -335,6 +380,7 @@
     margin-bottom: 0.75rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    position: relative;
   }
 
   .mobile-session-item:hover {
@@ -354,6 +400,24 @@
     box-shadow: none;
   }
 
+  .mobile-session-item.booked {
+    background: #d4edda;
+    border-color: #28a745;
+  }
+
+  .mobile-session-item.booked::before {
+    content: "BOOKED";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: #28a745;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+
   .mobile-session-title {
     font-weight: bold;
     margin-bottom: 0.25rem;
@@ -362,6 +426,10 @@
 
   .mobile-session-item.full .mobile-session-title {
     color: #6c757d;
+  }
+
+  .mobile-session-item.booked .mobile-session-title {
+    color: #28a745;
   }
 
   .mobile-session-details {
@@ -478,6 +546,11 @@
     .mobile-session-details {
       font-size: 0.8rem;
     }
+
+    .legend-box {
+      width: 16px;
+      height: 12px;
+    }
   }
 
   /* Touch-friendly improvements */
@@ -518,12 +591,35 @@
     {% endfor %}
   ];
 
-  console.log(sessions);
+  // Convert Flask booking data to JavaScript
+  const userBookings = [
+    {% for booking in bookings %}
+    {
+      id: "{{ booking[0] }}",
+      sessionId: "{{ booking[4] if booking|length > 4 else '' }}",
+      title: "{{ booking[1] | safe }}",
+      startTime: new Date("{{ booking[2].isoformat() }}"),
+      endTime: new Date("{{ booking[3].isoformat() }}")
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ];
 
+  console.log('Sessions:', sessions);
+  console.log('User Bookings:', userBookings);
 
   let currentWeekStart = new Date();
   currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay());
   currentWeekStart.setHours(0, 0, 0, 0);
+
+  // Helper function to check if user has booked a session
+  function isSessionBooked(sessionId) {
+    return userBookings.some(booking =>
+      booking.sessionId === sessionId ||
+      // Fallback: match by title and time if sessionId is not available
+      (booking.title === sessions.find(s => s.id === sessionId)?.title &&
+       Math.abs(booking.startTime - sessions.find(s => s.id === sessionId)?.startTime) < 60000)
+    );
+  }
 
   function generateTimeSlots() {
     const slots = [];
@@ -612,14 +708,33 @@
 
         sessionsInSlot.forEach(session => {
           const sessionDiv = document.createElement('div');
-          sessionDiv.className = `session-event ${session.currentBookings >= session.maxCapacity ? 'full' : ''}`;
+          const isBooked = isSessionBooked(session.id);
+          const isFull = session.currentBookings >= session.maxCapacity;
+
+          let sessionClass = 'session-event';
+          if (isBooked) {
+            sessionClass += ' booked';
+          } else if (isFull) {
+            sessionClass += ' full';
+          }
+
+          sessionDiv.className = sessionClass;
+
+          let statusText = '';
+          if (isBooked) {
+            statusText = '<div class="session-status">BOOKED</div>';
+          } else if (isFull) {
+            statusText = '<div class="session-status">FULL</div>';
+          }
+
           sessionDiv.innerHTML = `
             <div class="session-title">${session.title}</div>
             <div class="session-time">${session.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})} - ${session.endTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</div>
             <div class="session-spots">${session.currentBookings}/${session.maxCapacity} spots</div>
+            ${statusText}
           `;
 
-          sessionDiv.addEventListener('click', () => showSessionModal(session));
+          sessionDiv.addEventListener('click', () => showSessionModal(session, isBooked));
           dayColumn.appendChild(sessionDiv);
         });
 
@@ -670,7 +785,17 @@
 
         daySessions.sort((a, b) => a.startTime - b.startTime).forEach(session => {
           const sessionItem = document.createElement('div');
-          sessionItem.className = `mobile-session-item ${session.currentBookings >= session.maxCapacity ? 'full' : ''}`;
+          const isBooked = isSessionBooked(session.id);
+          const isFull = session.currentBookings >= session.maxCapacity;
+
+          let itemClass = 'mobile-session-item';
+          if (isBooked) {
+            itemClass += ' booked';
+          } else if (isFull) {
+            itemClass += ' full';
+          }
+
+          sessionItem.className = itemClass;
 
           sessionItem.innerHTML = `
             <div class="mobile-session-title">${session.title}</div>
@@ -681,7 +806,7 @@
             </div>
           `;
 
-          sessionItem.addEventListener('click', () => showSessionModal(session));
+          sessionItem.addEventListener('click', () => showSessionModal(session, isBooked));
           sessionsContainer.appendChild(sessionItem);
         });
 
@@ -719,7 +844,7 @@
     });
   }
 
-  function showSessionModal(session) {
+  function showSessionModal(session, isBooked = false) {
     const modal = new bootstrap.Modal(document.getElementById('sessionModal'));
     const modalLabel = document.getElementById('sessionModalLabel');
     const modalBody = document.getElementById('sessionModalBody');
@@ -727,14 +852,31 @@
 
     modalLabel.textContent = session.title;
 
+    const bookingStatus = isBooked ?
+      '<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>You have booked this class</div>' : '';
+
     modalBody.innerHTML = `
+      ${bookingStatus}
       <p><strong>Description:</strong> ${session.description}</p>
       <p><strong>Date:</strong> ${session.startTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
       <p><strong>Time:</strong> ${session.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})} - ${session.endTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</p>
       <p><strong>Availability:</strong> ${session.currentBookings}/${session.maxCapacity} spots filled</p>
     `;
 
-    if (session.currentBookings < session.maxCapacity) {
+    if (isBooked) {
+      // Find the booking ID for this session
+      const booking = userBookings.find(b =>
+        b.sessionId === session.id ||
+        (b.title === session.title && Math.abs(b.startTime - session.startTime) < 60000)
+      );
+
+      modalFooter.innerHTML = `
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form method="POST" action="/cancel_booking/${booking ? booking.id : ''}" style="display: inline;">
+          <button type="submit" class="btn btn-warning">Cancel Booking</button>
+        </form>
+      `;
+    } else if (session.currentBookings < session.maxCapacity) {
       modalFooter.innerHTML = `
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <form method="POST" action="/sessions/book/${session.id}" style="display: inline;">
