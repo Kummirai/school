@@ -92,18 +92,20 @@
       <!-- Desktop Calendar View -->
       <div class="calendar-view">
         <div class="calendar-container">
-          <div class="calendar-header">
-            <div class="time-slot-header">Time</div>
-            <div class="day-header">Sunday</div>
-            <div class="day-header">Monday</div>
-            <div class="day-header">Tuesday</div>
-            <div class="day-header">Wednesday</div>
-            <div class="day-header">Thursday</div>
-            <div class="day-header">Friday</div>
-            <div class="day-header">Saturday</div>
-          </div>
-          <div class="calendar-body" id="calendarBody">
-            <!-- Calendar grid will be populated by JavaScript -->
+          <div class="calendar-grid">
+            <div class="calendar-header">
+              <div class="time-slot-header">Time</div>
+              <div class="day-header">Sunday</div>
+              <div class="day-header">Monday</div>
+              <div class="day-header">Tuesday</div>
+              <div class="day-header">Wednesday</div>
+              <div class="day-header">Thursday</div>
+              <div class="day-header">Friday</div>
+              <div class="day-header">Saturday</div>
+            </div>
+            <div class="calendar-body" id="calendarBody">
+              <!-- Calendar grid will be populated by JavaScript -->
+            </div>
           </div>
         </div>
       </div>
@@ -158,12 +160,21 @@
     margin-bottom: 1rem;
   }
 
+  /* Main calendar grid container */
+  .calendar-grid {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 900px; /* Ensure minimum width for proper alignment */
+  }
+
   .calendar-header {
     display: grid;
-    grid-template-columns: 80px repeat(7, 1fr);
+    grid-template-columns: 100px repeat(7, 1fr);
     border-bottom: 2px solid #dee2e6;
     background-color: #f8f9fa;
-    min-width: 800px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   .time-slot-header {
@@ -171,6 +182,10 @@
     font-weight: bold;
     border-right: 1px solid #dee2e6;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
   }
 
   .day-header {
@@ -179,6 +194,10 @@
     text-align: center;
     border-right: 1px solid #dee2e6;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
   }
 
   .day-header:last-child {
@@ -187,8 +206,8 @@
 
   .calendar-body {
     display: grid;
-    grid-template-columns: 80px repeat(7, 1fr);
-    min-width: 800px;
+    grid-template-columns: 100px repeat(7, 1fr);
+    grid-auto-rows: minmax(60px, auto);
   }
 
   .time-slot {
@@ -199,18 +218,22 @@
     text-align: center;
     background-color: #f8f9fa;
     font-weight: 500;
-    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    left: 0;
+    z-index: 5;
   }
 
   .day-column {
     border-right: 1px solid #dee2e6;
     border-bottom: 1px solid #dee2e6;
-    min-height: 60px;
     position: relative;
-    padding: 3px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .day-column:last-child {
@@ -220,14 +243,14 @@
   .session-event {
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
-    padding: 3px 6px;
-    margin: 1px 0;
-    border-radius: 3px;
-    font-size: 0.7rem;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    line-height: 1.2;
+    line-height: 1.3;
+    flex-shrink: 0;
   }
 
   .session-event:hover {
@@ -252,16 +275,27 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    margin-bottom: 2px;
   }
 
   .session-time {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     opacity: 0.9;
+    margin-bottom: 1px;
   }
 
   .session-spots {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     opacity: 0.9;
+  }
+
+  .no-sessions-message {
+    grid-column: 1 / -1;
+    padding: 3rem;
+    text-align: center;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
   }
 
   /* Mobile View */
@@ -330,44 +364,59 @@
 
   /* Responsive Breakpoints */
   @media (max-width: 1200px) {
+    .calendar-grid {
+      min-width: 800px;
+    }
+
     .calendar-header {
-      grid-template-columns: 70px repeat(7, minmax(90px, 1fr));
+      grid-template-columns: 90px repeat(7, 1fr);
     }
 
     .calendar-body {
-      grid-template-columns: 70px repeat(7, minmax(90px, 1fr));
+      grid-template-columns: 90px repeat(7, 1fr);
+    }
+
+    .time-slot-header {
+      padding: 12px 8px;
     }
 
     .session-event {
-      font-size: 0.65rem;
-      padding: 2px 4px;
+      font-size: 0.7rem;
+      padding: 3px 5px;
     }
 
     .session-time,
     .session-spots {
-      font-size: 0.55rem;
+      font-size: 0.6rem;
     }
   }
 
   @media (max-width: 992px) {
+    .calendar-grid {
+      min-width: 750px;
+    }
+
     .calendar-header {
-      grid-template-columns: 60px repeat(7, minmax(80px, 1fr));
-      min-width: 700px;
+      grid-template-columns: 80px repeat(7, 1fr);
     }
 
     .calendar-body {
-      grid-template-columns: 60px repeat(7, minmax(80px, 1fr));
-      min-width: 700px;
+      grid-template-columns: 80px repeat(7, 1fr);
     }
 
     .day-header {
-      padding: 10px 5px;
+      padding: 10px 6px;
       font-size: 0.875rem;
     }
 
     .time-slot {
-      padding: 8px 5px;
-      font-size: 0.75rem;
+      padding: 8px 6px;
+      font-size: 0.8rem;
+    }
+
+    .time-slot-header {
+      padding: 10px 6px;
+      font-size: 0.875rem;
     }
   }
 
@@ -428,6 +477,14 @@
       margin-bottom: 1rem;
     }
   }
+
+  /* Ensure proper scrolling on mobile devices */
+  @media (max-width: 768px) {
+    .calendar-container {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+  }
 </style>
 
 <script>
@@ -447,7 +504,7 @@
   ];
 
   console.log(sessions);
-  
+
 
   let currentWeekStart = new Date();
   currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay());
@@ -488,8 +545,8 @@
     // Update day headers
     const dayHeaders = document.querySelectorAll('.day-header');
     weekDates.forEach((date, index) => {
-      if (dayHeaders[index + 1]) { // Skip first header which is "Time"
-        dayHeaders[index + 1].textContent = formatDate(date);
+      if (dayHeaders[index]) {
+        dayHeaders[index].textContent = formatDate(date);
       }
     });
 
@@ -518,7 +575,6 @@
     if (activeTimeSlots.length === 0) {
       const noSessionsDiv = document.createElement('div');
       noSessionsDiv.className = 'no-sessions-message';
-      noSessionsDiv.style.cssText = 'grid-column: 1 / -1; padding: 3rem; text-align: center; color: #6c757d;';
       noSessionsDiv.innerHTML = '<i class="bi bi-calendar-x fs-1 d-block mb-2"></i><p class="mb-0">No classes scheduled for this week</p>';
       calendarBody.appendChild(noSessionsDiv);
       return;
