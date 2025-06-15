@@ -13,43 +13,51 @@
   {% if not pending_requests %}
   <div class="alert alert-info mt-4">No pending requests found</div>
   {% else %}
-  <table class="table mt-3">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Plan</th>
-        <th>Price</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for request in pending_requests %}
-      <tr>
-        <td>
-          {{ request.user_name }}<br />
-          <small>{{ request.user_email }}</small><br />
-          <small>{{ request.user_phone }}</small>
-        </td>
-        <td>{{ request.plan_name }}</td>
-        <td>R{{ "%.2f"|format(request.plan_price) }}</td>
-        <td>{{ request.request_date.strftime('%Y-%m-%d') }}</td>
-        <td>
-          <a
-            href="{{ url_for('approve_request', request_id=request.id) }}"
-            class="btn btn-sm btn-success"
-            >Approve</a
-          >
-          <a
-            href="{{ url_for('reject_request', request_id=request.id) }}"
-            class="btn btn-sm btn-danger"
-            >Reject</a
-          >
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table mt-3 table-nowrap table-hover">
+      <thead class="table-light">
+        <tr>
+          <th class="min-width-200">User</th>
+          <th>Plan</th>
+          <th>Price</th>
+          <th>Date</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in pending_requests %}
+        <tr>
+          <td>
+            <div class="d-flex flex-column">
+              <span class="fw-semibold">{{ request.user_name }}</span>
+              <small class="text-muted">{{ request.user_email }}</small>
+              <small class="text-muted">{{ request.user_phone }}</small>
+            </div>
+          </td>
+          <td class="align-middle">{{ request.plan_name }}</td>
+          <td class="align-middle">R{{ "%.2f"|format(request.plan_price) }}</td>
+          <td class="align-middle">
+            {{ request.request_date.strftime('%Y-%m-%d') }}
+          </td>
+          <td class="align-middle text-end">
+            <div class="btn-group btn-group-sm" role="group">
+              <a
+                href="{{ url_for('approve_request', request_id=request.id) }}"
+                class="btn btn-success"
+                >Approve</a
+              >
+              <a
+                href="{{ url_for('reject_request', request_id=request.id) }}"
+                class="btn btn-danger"
+                >Reject</a
+              >
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   {% endif %}
 </div>
 {% endblock %}
