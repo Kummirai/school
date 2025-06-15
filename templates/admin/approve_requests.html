@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %} {% block content %}
+<div class="container">
+  <h2>Pending Subscription Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Plan</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in pending_requests %}
+      <tr>
+        <td>
+          {{ request.user_name }}<br />
+          <small>{{ request.user_email }}</small><br />
+          <small>{{ request.user_phone }}</small>
+        </td>
+        <td>{{ request.plan_name }}</td>
+        <td>R{{ "%.2f"|format(request.plan_price) }}</td>
+        <td>{{ request.request_date.strftime('%Y-%m-%d') }}</td>
+        <td>
+          <a
+            href="{{ url_for('approve_request', request_id=request.id) }}"
+            class="btn btn-sm btn-success"
+            >Approve</a
+          >
+          <a
+            href="{{ url_for('reject_request', request_id=request.id) }}"
+            class="btn btn-sm btn-danger"
+            >Reject</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

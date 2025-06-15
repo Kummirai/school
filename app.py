@@ -92,6 +92,24 @@ def initialize_database():
         )
         ''')
 
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS requests (
+            id SERIAL PRIMARY KEY,
+            user_name VARCHAR(100) NOT NULL,
+            user_email VARCHAR(100) NOT NULL,
+            user_phone VARCHAR(20) NOT NULL,
+            plan_id INTEGER NOT NULL,
+            plan_name VARCHAR(50) NOT NULL,
+            plan_price NUMERIC(10,2) NOT NULL,
+            message TEXT,
+            status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+            request_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            admin_notes TEXT,
+            processed_date TIMESTAMP WITH TIME ZONE
+            CONSTRAINT valid_email CHECK (user_email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
+        );
+                ''')
+
     # Add these tables after your other table creations
     cur.execute('''
         CREATE TABLE IF NOT EXISTS session_requests (
@@ -462,6 +480,67 @@ def update_session_request_status(request_id, status, admin_id, notes=None):
         conn.rollback()
         print(f"Error updating session request: {e}")
         return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+def update_request_status(request_id, status):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            UPDATE requests
+            SET status = %s,
+                processed_date = CURRENT_TIMESTAMP
+            WHERE id = %s
+        ''', (status, request_id))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error updating request status: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+def send_approval_notification(email, plan_name):
+    # Implement with your email service (Flask-Mail, SendGrid, etc.)
+    print(f"Sending approval email to {email} for plan {plan_name}")
+    pass
+
+
+def send_rejection_notification(email, plan_name):
+    # Implement with your email service
+    print(f"Sending rejection email to {email} for plan {plan_name}")
+    pass
+
+
+def get_request_details(request_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT id, user_name, user_email, plan_id, plan_name, plan_price
+            FROM requests
+            WHERE id = %s
+        ''', (request_id,))
+        row = cur.fetchone()
+        if row:
+            return {
+                'id': row[0],
+                'user_name': row[1],
+                'user_email': row[2],
+                'plan_id': row[3],
+                'plan_name': row[4],
+                'plan_price': row[5]
+            }
+        return None
+    except Exception as e:
+        print(f"Error getting request details: {e}")
+        return None
     finally:
         cur.close()
         conn.close()
@@ -1589,6 +1668,37 @@ def get_all_assignments():
     return assignments
 
 
+def save_plan_request(request_data):
+    """Save a new plan request to the database"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            INSERT INTO requests 
+            (user_name, user_email, user_phone, plan_id, plan_name, plan_price, message, status)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING id
+        ''', (
+            request_data['user_name'],
+            request_data['user_email'],
+            request_data['user_phone'],
+            request_data['plan_id'],
+            request_data['plan_name'],
+            request_data['plan_price'],
+            request_data.get('message', ''),
+            'pending'
+        ))
+        request_id = cur.fetchone()[0]
+        conn.commit()
+        return request_id
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        cur.close()
+        conn.close()
+
+
 def get_assignments_for_user(user_id):
     """Get assignments assigned to a specific user"""
     conn = get_db_connection()
@@ -2042,6 +2152,32 @@ def cancel_booking(booking_id, student_id):
     cur.close()
     conn.close()
     return affected_rows > 0
+
+
+def get_plan_name(plan_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(
+            'SELECT name FROM subscription_plans WHERE id = %s', (plan_id,))
+        row = cur.fetchone()
+        return row[0] if row else "Unknown Plan"
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_plan_price(plan_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(
+            'SELECT price FROM subscription_plans WHERE id = %s', (plan_id,))
+        row = cur.fetchone()
+        return float(row[0]) if row else 0.00
+    finally:
+        cur.close()
+        conn.close()
 
 
 @app.route('/video-conference')
@@ -3470,11 +3606,104 @@ def record_practice():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
-# Subscription routes
+
+@app.route('/admin/approve_request')
+@admin_required
+def approve_requests():
+    return render_template('/admin/approve_requests.html')
+
+
+@app.route('/admin/approve_request/<int:request_id>')
+@admin_required  # Add your admin auth decorator
+def approve_request(request_id):
+    # Update request status in DB
+    update_request_status(request_id, 'approved')
+
+    # Get request details
+    request = get_request_details(request_id)
+
+    # Create subscription for user
+    create_subscription(request.user_email, request.plan_id)
+
+    # Send confirmation email to user
+    send_approval_notification(request.user_email, request.plan_name)
+
+    flash('Request approved successfully!', 'success')
+    return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/admin/reject_request/<int:request_id>')
+@admin_required
+def reject_request(request_id):
+    # Update request status
+    update_request_status(request_id, 'rejected')
+
+    # Get request details
+    request = get_request_details(request_id)
+
+    # Send rejection email
+    send_rejection_notification(request.user_email, request.plan_name)
+
+    flash('Request rejected.', 'info')
+    return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/submit_plan_request', methods=['POST'])
+def submit_plan_request():
+    # Get form data
+    data = {
+        'user_name': request.form.get('name'),
+        'user_email': request.form.get('email'),
+        'user_phone': request.form.get('phone'),
+        'message': request.form.get('message', ''),
+        'plan_id': request.form.get('plan_id'),
+        'plan_name': get_plan_name(request.form.get('plan_id')),
+        'plan_price': get_plan_price(request.form.get('plan_id')),
+        'status': 'pending'
+    }
+
+    try:
+        # Save the request
+        request_id = save_plan_request(data)
+        if request_id:
+            flash('Request submitted successfully!', 'success')
+            return redirect(url_for('confirmation'))
+        else:
+            flash('Error submitting request', 'danger')
+            return redirect(url_for('contact_tutor', plan_id=data['plan_id']))
+
+    except Exception as e:
+        current_app.logger.error(f"Database error: {str(e)}")
+        flash('Error submitting request. Please try again.', 'danger')
+        return redirect(url_for('contact_tutor', plan_id=data['plan_id']))
+
+
+def get_plan_details(plan_id):
+    # Example implementation - replace with your actual DB query
+    plans = {
+        1: {'name': 'Access', 'price': 99.99},
+        2: {'name': 'Standard', 'price': 199.99},
+        3: {'name': 'Premium', 'price': 299.99}
+    }
+    return plans.get(int(plan_id), {'name': 'Unknown Plan', 'price': 0})
+
+# Email notification function (implement with your email service)
+
+
+def send_admin_notification(user_email, plan_name, message):
+    # Implement using Flask-Mail, SendGrid, etc.
+    pass
+
+
+@app.route('/confirmation')
+def confirmation():
+    """Confirmation page after plan request submission"""
+    return render_template('confirmation.html')
 
 
 @app.route('/contact_tutor/<int:plan_id>')
 def contact_tutor(plan_id):
+    """Contact tutor page with plan information"""
     return render_template('contact_tutor.html', plan_id=plan_id)
 
 

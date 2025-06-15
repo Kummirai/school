@@ -15,7 +15,7 @@ content %}
           </div>
           {% endif %}
 
-          <form method="POST" action="/contact_tutor">
+          <form method="POST" action="{{ url_for('submit_plan_request') }}">
             <div class="mb-3">
               <label for="name" class="form-label">Your Name</label>
               <input

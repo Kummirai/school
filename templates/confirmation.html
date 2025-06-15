@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title %}Confirmation{% endblock %} {% block
+content %}
+<div class="container">
+  <div class="confirmation-container text-center">
+    <div class="confirmation-icon">✓</div>
+    <h2>Request Submitted Successfully!</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+
+    <p class="mt-4">
+      Thank you for your request. We've received your submission and will
+      process it shortly.
+    </p>
+
+    <div class="mt-4">
+      <p>
+        You'll receive a confirmation email with details about your request.
+      </p>
+    </div>
+
+    <div class="mt-5">
+      <a href="{{ url_for('home') }}" class="btn btn-primary">Return to Home</a>
+    </div>
+  </div>
+</div>
+<style>
+  .confirmation-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .confirmation-icon {
+    font-size: 72px;
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+</style>
+
+{% endblock %}
