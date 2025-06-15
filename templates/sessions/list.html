@@ -16,6 +16,7 @@
       >
     </div>
   </div>
+
   {% if bookings %}
   <div class="card mb-4">
     <div class="card-header">
@@ -55,95 +56,619 @@
   {% endif %}
 
   <div class="card">
-    <div class="card-header">
-      <h3 class="h5">Available Classes</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="h5 mb-0">Available Classes Calendar</h3>
+      <div class="btn-group btn-group-sm" role="group">
+        <button type="button" class="btn btn-outline-primary" id="prevWeek">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="nextWeek">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="accordion" id="sessionsAccordion">
-        {# First, group sessions by grade/course #} {% set grouped_sessions = {}
-        %} {% for session in sessions %} {# Extract grade/course from title
-        (assuming format like "Grade 10 Math" or "CS101") #} {% set parts =
-        session[1].split() %} {% if parts|length > 1 and parts[0]|lower in
-        ['grade', 'course', 'cs', 'math', 'science', 'python', 'peer', 'css',
-        'javascript', 'html'] %} {% set group_name = parts[0] ~ ' ' ~ parts[1]
-        %} {% else %} {% set group_name = 'Other Classes' %} {% endif %} {% if
-        group_name not in grouped_sessions %} {% set _ =
-        grouped_sessions.update({group_name: []}) %} {% endif %} {% set _ =
-        grouped_sessions[group_name].append(session) %} {% endfor %} {# Now
-        create accordion items for each group #} {% for group_name,
-        group_sessions in grouped_sessions.items() %}
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="heading{{ loop.index }}">
-            <button
-              class="accordion-button {% if not loop.first %}collapsed{% endif %}"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse{{ loop.index }}"
-              aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
-              aria-controls="collapse{{ loop.index }}"
-            >
-              {{ group_name }} ({{ group_sessions|length }} sessions)
-            </button>
-          </h2>
-          <div
-            id="collapse{{ loop.index }}"
-            class="accordion-collapse collapse"
-            aria-labelledby="heading{{ loop.index }}"
-            data-bs-parent="#sessionsAccordion"
-          >
-            <div class="accordion-body">
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {% for session in group_sessions %}
-                <div class="col">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ session[1] }}</h5>
-                      <p class="card-text text-muted">
-                        {{ session[2] or 'No description provided' }}
-                      </p>
-                      <ul class="list-group list-group-flush mb-3">
-                        <li class="list-group-item">
-                          <i class="bi bi-calendar-event me-2"></i>
-                          {{ session[3].strftime('%a, %b %d') }}
-                        </li>
-                        <li class="list-group-item">
-                          <i class="bi bi-clock me-2"></i>
-                          {{ session[3].strftime('%H:%M') }} - {{
-                          session[4].strftime('%H:%M') }}
-                        </li>
-                        <li class="list-group-item">
-                          <i class="bi bi-people me-2"></i>
-                          {{ session[6] }}/{{ session[5] }} spots filled
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                      {% if session[6] < session[5] %}
-                      <form
-                        method="POST"
-                        action="{{ url_for('book_session_route', session_id=session[0]) }}"
-                        class="d-grid"
-                      >
-                        <button type="submit" class="btn btn-primary">
-                          Book Now
-                        </button>
-                      </form>
-                      {% else %}
-                      <button class="btn btn-outline-secondary w-100" disabled>
-                        Session Full
-                      </button>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
+
+    <!-- Mobile View Toggle -->
+    <div class="view-toggle d-md-none">
+      <div class="btn-group w-100" role="group">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="prevWeekMobile"
+        >
+          <i class="bi bi-chevron-left"></i> Previous Week
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="nextWeekMobile"
+        >
+          Next Week <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <!-- Desktop Calendar View -->
+      <div class="calendar-view">
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div class="time-slot-header">Time</div>
+            <div class="day-header">Sunday</div>
+            <div class="day-header">Monday</div>
+            <div class="day-header">Tuesday</div>
+            <div class="day-header">Wednesday</div>
+            <div class="day-header">Thursday</div>
+            <div class="day-header">Friday</div>
+            <div class="day-header">Saturday</div>
+          </div>
+          <div class="calendar-body" id="calendarBody">
+            <!-- Calendar grid will be populated by JavaScript -->
           </div>
         </div>
-        {% endfor %}
+      </div>
+
+      <!-- Mobile List View -->
+      <div class="mobile-view">
+        <div id="mobileCalendar" class="p-3">
+          <!-- Mobile calendar will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for session details -->
+  <div
+    class="modal fade"
+    id="sessionModal"
+    tabindex="-1"
+    aria-labelledby="sessionModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sessionModalLabel">Class Details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body" id="sessionModalBody">
+          <!-- Session details will be populated by JavaScript -->
+        </div>
+        <div class="modal-footer" id="sessionModalFooter">
+          <!-- Action buttons will be populated by JavaScript -->
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .calendar-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .view-toggle {
+    margin-bottom: 1rem;
+  }
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    min-width: 800px;
+  }
+
+  .time-slot-header {
+    padding: 15px 10px;
+    font-weight: bold;
+    border-right: 1px solid #dee2e6;
+    text-align: center;
+  }
+
+  .day-header {
+    padding: 15px 10px;
+    font-weight: bold;
+    text-align: center;
+    border-right: 1px solid #dee2e6;
+    white-space: nowrap;
+  }
+
+  .day-header:last-child {
+    border-right: none;
+  }
+
+  .calendar-body {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    min-width: 800px;
+  }
+
+  .time-slot {
+    padding: 10px;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.875rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    font-weight: 500;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .day-column {
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    min-height: 60px;
+    position: relative;
+    padding: 3px;
+  }
+
+  .day-column:last-child {
+    border-right: none;
+  }
+
+  .session-event {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 3px 6px;
+    margin: 1px 0;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+  }
+
+  .session-event:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #0056b3, #003d82);
+  }
+
+  .session-event.full {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    cursor: not-allowed;
+  }
+
+  .session-event.full:hover {
+    transform: none;
+    background: linear-gradient(135deg, #6c757d, #495057);
+  }
+
+  .session-title {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .session-time {
+    font-size: 0.6rem;
+    opacity: 0.9;
+  }
+
+  .session-spots {
+    font-size: 0.6rem;
+    opacity: 0.9;
+  }
+
+  /* Mobile View */
+  .mobile-view {
+    display: none;
+  }
+
+  .mobile-day-card {
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+  }
+
+  .mobile-day-header {
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: bold;
+  }
+
+  .mobile-sessions {
+    padding: 1rem;
+  }
+
+  .mobile-session-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-session-item:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-session-item.full {
+    background: #f5f5f5;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+
+  .mobile-session-item.full:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .mobile-session-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: #007bff;
+  }
+
+  .mobile-session-item.full .mobile-session-title {
+    color: #6c757d;
+  }
+
+  .mobile-session-details {
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 1200px) {
+    .calendar-header {
+      grid-template-columns: 70px repeat(7, minmax(90px, 1fr));
+    }
+
+    .calendar-body {
+      grid-template-columns: 70px repeat(7, minmax(90px, 1fr));
+    }
+
+    .session-event {
+      font-size: 0.65rem;
+      padding: 2px 4px;
+    }
+
+    .session-time,
+    .session-spots {
+      font-size: 0.55rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .calendar-header {
+      grid-template-columns: 60px repeat(7, minmax(80px, 1fr));
+      min-width: 700px;
+    }
+
+    .calendar-body {
+      grid-template-columns: 60px repeat(7, minmax(80px, 1fr));
+      min-width: 700px;
+    }
+
+    .day-header {
+      padding: 10px 5px;
+      font-size: 0.875rem;
+    }
+
+    .time-slot {
+      padding: 8px 5px;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .calendar-view {
+      display: none;
+    }
+
+    .mobile-view {
+      display: block;
+    }
+
+    .card-header .btn-group {
+      display: none;
+    }
+
+    .view-toggle {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .d-flex.justify-content-between {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 1rem;
+    }
+
+    .mobile-session-item {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-session-title {
+      font-size: 0.9rem;
+    }
+
+    .mobile-session-details {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Touch-friendly improvements */
+  @media (hover: none) and (pointer: coarse) {
+    .session-event {
+      padding: 6px 8px;
+      margin: 3px 0;
+    }
+
+    .mobile-session-item {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Convert Flask session data to JavaScript
+  const sessions = [
+    {% for session in sessions %}
+    {
+      id: {{ session[0] }},
+      title: "{{ session[1] | safe }}",
+      description: "{{ session[2] or 'No description provided' | safe }}",
+      startTime: new Date("{{ session[3].isoformat() }}"),
+      endTime: new Date("{{ session[4].isoformat() }}"),
+      maxCapacity: {{ session[5] }},
+      currentBookings: {{ session[6] }}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  let currentWeekStart = new Date();
+  currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay());
+  currentWeekStart.setHours(0, 0, 0, 0);
+
+  function generateTimeSlots() {
+    const slots = [];
+    for (let hour = 8; hour <= 20; hour++) {
+      slots.push(`${hour.toString().padStart(2, '0')}:00`);
+    }
+    return slots;
+  }
+
+  function formatDate(date) {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+  function getWeekDates(startDate) {
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + i);
+      dates.push(date);
+    }
+    return dates;
+  }
+
+  function renderCalendar() {
+    const calendarBody = document.getElementById('calendarBody');
+    const mobileCalendar = document.getElementById('mobileCalendar');
+    const timeSlots = generateTimeSlots();
+    const weekDates = getWeekDates(currentWeekStart);
+
+    // Update day headers
+    const dayHeaders = document.querySelectorAll('.day-header');
+    weekDates.forEach((date, index) => {
+      if (dayHeaders[index + 1]) { // Skip first header which is "Time"
+        dayHeaders[index + 1].textContent = formatDate(date);
+      }
+    });
+
+    // Render desktop calendar
+    renderDesktopCalendar(calendarBody, timeSlots, weekDates);
+
+    // Render mobile calendar
+    renderMobileCalendar(mobileCalendar, weekDates);
+  }
+
+  function renderDesktopCalendar(calendarBody, timeSlots, weekDates) {
+    calendarBody.innerHTML = '';
+
+    timeSlots.forEach(timeSlot => {
+      // Time slot label
+      const timeDiv = document.createElement('div');
+      timeDiv.className = 'time-slot';
+      timeDiv.textContent = timeSlot;
+      calendarBody.appendChild(timeDiv);
+
+      // Day columns for this time slot
+      weekDates.forEach((date, dayIndex) => {
+        const dayColumn = document.createElement('div');
+        dayColumn.className = 'day-column';
+
+        // Find sessions for this day and time slot
+        const sessionsInSlot = getSessionsForDayAndTime(date, timeSlot);
+
+        sessionsInSlot.forEach(session => {
+          const sessionDiv = document.createElement('div');
+          sessionDiv.className = `session-event ${session.currentBookings >= session.maxCapacity ? 'full' : ''}`;
+          sessionDiv.innerHTML = `
+            <div class="session-title">${session.title}</div>
+            <div class="session-time">${session.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})} - ${session.endTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</div>
+            <div class="session-spots">${session.currentBookings}/${session.maxCapacity} spots</div>
+          `;
+
+          sessionDiv.addEventListener('click', () => showSessionModal(session));
+          dayColumn.appendChild(sessionDiv);
+        });
+
+        calendarBody.appendChild(dayColumn);
+      });
+    });
+  }
+
+  function renderMobileCalendar(mobileCalendar, weekDates) {
+    mobileCalendar.innerHTML = '';
+
+    weekDates.forEach(date => {
+      const dayStart = new Date(date);
+      const dayEnd = new Date(date);
+      dayEnd.setDate(dayEnd.getDate() + 1);
+
+      const daySessions = sessions.filter(session => {
+        const sessionDate = new Date(session.startTime);
+        return sessionDate >= dayStart && sessionDate < dayEnd;
+      });
+
+      if (daySessions.length > 0) {
+        const dayCard = document.createElement('div');
+        dayCard.className = 'mobile-day-card';
+
+        const dayHeader = document.createElement('div');
+        dayHeader.className = 'mobile-day-header';
+        dayHeader.textContent = date.toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric'
+        });
+        dayCard.appendChild(dayHeader);
+
+        const sessionsContainer = document.createElement('div');
+        sessionsContainer.className = 'mobile-sessions';
+
+        daySessions.sort((a, b) => a.startTime - b.startTime).forEach(session => {
+          const sessionItem = document.createElement('div');
+          sessionItem.className = `mobile-session-item ${session.currentBookings >= session.maxCapacity ? 'full' : ''}`;
+
+          sessionItem.innerHTML = `
+            <div class="mobile-session-title">${session.title}</div>
+            <div class="mobile-session-details">
+              <div><i class="bi bi-clock me-1"></i>${session.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})} - ${session.endTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</div>
+              <div><i class="bi bi-people me-1"></i>${session.currentBookings}/${session.maxCapacity} spots filled</div>
+              ${session.description && session.description !== 'No description provided' ? `<div class="mt-1">${session.description}</div>` : ''}
+            </div>
+          `;
+
+          sessionItem.addEventListener('click', () => showSessionModal(session));
+          sessionsContainer.appendChild(sessionItem);
+        });
+
+        dayCard.appendChild(sessionsContainer);
+        mobileCalendar.appendChild(dayCard);
+      }
+    });
+
+    // Show message if no sessions
+    if (mobileCalendar.children.length === 0) {
+      const noSessionsDiv = document.createElement('div');
+      noSessionsDiv.className = 'text-center text-muted py-5';
+      noSessionsDiv.innerHTML = '<i class="bi bi-calendar-x fs-1 d-block mb-2"></i><p>No classes scheduled for this week</p>';
+      mobileCalendar.appendChild(noSessionsDiv);
+    }
+  }
+
+  function getSessionsForDayAndTime(date, timeSlot) {
+    const dayStart = new Date(date);
+    const dayEnd = new Date(date);
+    dayEnd.setDate(dayEnd.getDate() + 1);
+
+    const [slotHour] = timeSlot.split(':');
+    const slotStart = parseInt(slotHour);
+    const slotEnd = slotStart + 1;
+
+    return sessions.filter(session => {
+      const sessionDate = new Date(session.startTime);
+      const sessionHour = sessionDate.getHours();
+
+      return sessionDate >= dayStart &&
+             sessionDate < dayEnd &&
+             sessionHour >= slotStart &&
+             sessionHour < slotEnd;
+    });
+  }
+
+  function showSessionModal(session) {
+    const modal = new bootstrap.Modal(document.getElementById('sessionModal'));
+    const modalLabel = document.getElementById('sessionModalLabel');
+    const modalBody = document.getElementById('sessionModalBody');
+    const modalFooter = document.getElementById('sessionModalFooter');
+
+    modalLabel.textContent = session.title;
+
+    modalBody.innerHTML = `
+      <p><strong>Description:</strong> ${session.description}</p>
+      <p><strong>Date:</strong> ${session.startTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <p><strong>Time:</strong> ${session.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})} - ${session.endTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</p>
+      <p><strong>Availability:</strong> ${session.currentBookings}/${session.maxCapacity} spots filled</p>
+    `;
+
+    if (session.currentBookings < session.maxCapacity) {
+      modalFooter.innerHTML = `
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form method="POST" action="/sessions/book/${session.id}" style="display: inline;">
+          <button type="submit" class="btn btn-primary">Book Now</button>
+        </form>
+      `;
+    } else {
+      modalFooter.innerHTML = `
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" disabled>Session Full</button>
+      `;
+    }
+
+    modal.show();
+  }
+
+  function navigateWeek(direction) {
+    currentWeekStart.setDate(currentWeekStart.getDate() + (direction * 7));
+    renderCalendar();
+  }
+
+  // Event listeners
+  document.getElementById('prevWeek').addEventListener('click', () => navigateWeek(-1));
+  document.getElementById('nextWeek').addEventListener('click', () => navigateWeek(1));
+
+  // Mobile navigation
+  document.getElementById('prevWeekMobile').addEventListener('click', () => navigateWeek(-1));
+  document.getElementById('nextWeekMobile').addEventListener('click', () => navigateWeek(1));
+
+  // Handle window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      renderCalendar();
+    }, 250);
+  });
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', renderCalendar);
+</script>
+
 {% endblock %}
