@@ -30827,6 +30827,168 @@
       "subject": "Economic Management Sciences",
       "youtubeId": "qvhnbC340Rk",
       "thumbnail": "https://img.youtube.com/vi/qvhnbC340Rk/mqdefault.jpg"
+    },
+    {
+      "id": 3421,
+      "title": "Node Auth Tutorial (JWT) #1 - Intro & Setup",
+      "description": "Node Auth Tutorial (JWT) #1 - Intro & Setup",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "SnoAwLP1a-0",
+      "thumbnail": "https://img.youtube.com/vi/SnoAwLP1a-0/mqdefault.jpg"
+    },
+    {
+      "id": 3422,
+      "title": "Node Auth Tutorial (JWT) #2 - Auth Routes & Controllers",
+      "description": "Node Auth Tutorial (JWT) #2 - Auth Routes & Controllers",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "muhJTRQ7WMk",
+      "thumbnail": "https://img.youtube.com/vi/muhJTRQ7WMk/mqdefault.jpg"
+    },
+    {
+      "id": 3423,
+      "title": "Node Auth Tutorial (JWT) #3 - Testing Routes & Handling POST Requests",
+      "description": "Node Auth Tutorial (JWT) #3 - Testing Routes & Handling POST Requests",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "uiKwHx2K1Fo",
+      "thumbnail": "https://img.youtube.com/vi/uiKwHx2K1Fo/mqdefault.jpg"
+    },
+    {
+      "id": 3424,
+      "title": "Node Auth Tutorial (JWT) #4 - User Model",
+      "description": "Node Auth Tutorial (JWT) #4 - User Model",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "mnJxyc0DGM8",
+      "thumbnail": "https://img.youtube.com/vi/mnJxyc0DGM8/mqdefault.jpg"
+    },
+    {
+      "id": 3425,
+      "title": "Node Auth Tutorial (JWT) #5 - Mongoose Validation",
+      "description": "Node Auth Tutorial (JWT) #5 - Mongoose Validation",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "nukNITdis9g",
+      "thumbnail": "https://img.youtube.com/vi/nukNITdis9g/mqdefault.jpg"
+    },
+    {
+      "id": 3426,
+      "title": "Node Auth Tutorial (JWT) #6 - Mongoose Hooks",
+      "description": "Node Auth Tutorial (JWT) #6 - Mongoose Hooks",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "teDkX-_Zkbw",
+      "thumbnail": "https://img.youtube.com/vi/teDkX-_Zkbw/mqdefault.jpg"
+    },
+    {
+      "id": 3427,
+      "title": "Node Auth Tutorial (JWT) #7 - Hashing Passwords",
+      "description": "Node Auth Tutorial (JWT) #7 - Hashing Passwords",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "DmrjFKTLOYo",
+      "thumbnail": "https://img.youtube.com/vi/DmrjFKTLOYo/mqdefault.jpg"
+    },
+    {
+      "id": 3428,
+      "title": "Node Auth Tutorial (JWT) #8 - Auth Views",
+      "description": "Node Auth Tutorial (JWT) #8 - Auth Views",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "8RiDRdHPcxA",
+      "thumbnail": "https://img.youtube.com/vi/8RiDRdHPcxA/mqdefault.jpg"
+    },
+    {
+      "id": 3429,
+      "title": "Node Auth Tutorial (JWT) #9 - Cookies Primer",
+      "description": "Node Auth Tutorial (JWT) #9 - Cookies Primer",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "mevc_dl1i1I",
+      "thumbnail": "https://img.youtube.com/vi/mevc_dl1i1I/mqdefault.jpg"
+    },
+    {
+      "id": 3430,
+      "title": "Node Auth Tutorial (JWT) #10 - JSON Web Tokens (theory)",
+      "description": "Node Auth Tutorial (JWT) #10 - JSON Web Tokens (theory)",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "LZq0G8WUaII",
+      "thumbnail": "https://img.youtube.com/vi/LZq0G8WUaII/mqdefault.jpg"
+    },
+    {
+      "id": 3431,
+      "title": "Node Auth Tutorial (JWT) #11 - New User Signup (part 1)",
+      "description": "Node Auth Tutorial (JWT) #11 - New User Signup (part 1)",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "S-ZIfNuT5H8",
+      "thumbnail": "https://img.youtube.com/vi/S-ZIfNuT5H8/mqdefault.jpg"
+    },
+    {
+      "id": 3432,
+      "title": "Node Auth Tutorial (JWT) #12 - New User Signup (part 2)",
+      "description": "Node Auth Tutorial (JWT) #12 - New User Signup (part 2)",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "eWGwQ1__73E",
+      "thumbnail": "https://img.youtube.com/vi/eWGwQ1__73E/mqdefault.jpg"
+    },
+    {
+      "id": 3433,
+      "title": "Node Auth Tutorial (JWT) #13 - Logging Users in (part 1)",
+      "description": "Node Auth Tutorial (JWT) #13 - Logging Users in (part 1)",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "VliJT26LPFA",
+      "thumbnail": "https://img.youtube.com/vi/VliJT26LPFA/mqdefault.jpg"
+    },
+    {
+      "id": 3434,
+      "title": "Node Auth Tutorial (JWT) #14 - Logging Users in (part 2)",
+      "description": "Node Auth Tutorial (JWT) #14 - Logging Users in (part 2)",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "f-2jDPgh_Ng",
+      "thumbnail": "https://img.youtube.com/vi/f-2jDPgh_Ng/mqdefault.jpg"
+    },
+    {
+      "id": 3435,
+      "title": "Node Auth Tutorial (JWT) #15 - Protecting Routes",
+      "description": "Node Auth Tutorial (JWT) #15 - Protecting Routes",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "9N7uqbuODqs",
+      "thumbnail": "https://img.youtube.com/vi/9N7uqbuODqs/mqdefault.jpg"
+    },
+    {
+      "id": 3436,
+      "title": "Node Auth Tutorial (JWT) #16 - Logging Users Out",
+      "description": "Node Auth Tutorial (JWT) #16 - Logging Users Out",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "jQn74jB5dg0",
+      "thumbnail": "https://img.youtube.com/vi/jQn74jB5dg0/mqdefault.jpg"
+    },
+    {
+      "id": 3437,
+      "title": "Node Auth Tutorial (JWT) #17 - Checking the Current User",
+      "description": "Node Auth Tutorial (JWT) #17 - Checking the Current User",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "JqF2BJBQI9Y",
+      "thumbnail": "https://img.youtube.com/vi/JqF2BJBQI9Y/mqdefault.jpg"
+    },
+    {
+      "id": 3438,
+      "title": "Node Auth Tutorial (JWT) #18 - Conditional Rendering",
+      "description": "Node Auth Tutorial (JWT) #18 - Conditional Rendering",
+      "grade": "Grade Node",
+      "subject": "Node Auth Tutorial",
+      "youtubeId": "mqubRYtnPcs",
+      "thumbnail": "https://img.youtube.com/vi/mqubRYtnPcs/mqdefault.jpg"
     }
   ]
 }
