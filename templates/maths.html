@@ -138,74 +138,99 @@
   </div>
 </section>
 
-<!-- Lessons Section -->
+<!-- Terms Navigation -->
+<section class="py-3 bg-white sticky-top shadow-sm">
+  <div class="container">
+    <div class="d-flex overflow-auto py-2">
+      {% for term in subject_data.terms %}
+      <a
+        href="#term-{{ loop.index }}"
+        class="btn btn-outline-secondary mx-1 text-nowrap"
+      >
+        {{ term.term }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Lessons Section by Term -->
 <section id="lessons" class="py-5">
   <div class="container py-5">
     <div class="text-center mb-5">
       <h2 class="fw-bold">
-        {{ subject_data.grade }} {{ subject_data.subject }} Lessons
+        {{ subject_data.grade }} {{ subject_data.subject }} Curriculum
       </h2>
-      <p class="lead text-muted">
-        Structured learning path with interactive content
-      </p>
+      <p class="lead text-muted">Structured by term with interactive content</p>
     </div>
 
-    <div class="accordion" id="lessonsAccordion">
-      {% for unit in subject_data.units %}
-      <div class="accordion-item mb-3 border-{{ unit.color }}">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button bg-{{ unit.color }} {% if unit.color == 'warning' %}text-dark{% else %}text-white{% endif %} fw-bold collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#unit{{ loop.index }}"
-            aria-expanded="false"
-            aria-controls="unit{{ loop.index }}"
+    {% for term in subject_data.terms %}
+    <div id="term-{{ loop.index }}" class="mb-5">
+      <h3
+        class="fw-bold mb-4 text-{{ ['primary', 'success', 'warning', 'info'][loop.index0 % 4] }}"
+      >
+        {{ term.term }}
+      </h3>
+
+      <div class="accordion" id="term{{ loop.index }}Accordion">
+        {% for unit in term.units %}
+        <div class="accordion-item mb-3 border-{{ unit.color }}">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button bg-{{ unit.color }} {% if unit.color == 'warning' %}text-dark{% else %}text-white{% endif %} fw-bold collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+              aria-expanded="false"
+              aria-controls="unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+            >
+              {{ unit.title }}
+            </button>
+          </h2>
+          <div
+            id="unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+            class="accordion-collapse collapse"
+            data-bs-parent="#term{{ loop.index }}Accordion"
           >
-            Unit {{ loop.index }}: {{ unit.title }}
-          </button>
-        </h2>
-        <div
-          id="unit{{ loop.index }}"
-          class="accordion-collapse collapse"
-          data-bs-parent="#lessonsAccordion"
-        >
-          <div class="accordion-body">
-            <div class="list-group">
-              {% for lesson in unit.lessons %}
-              <a
-                href="{{ lesson.link }}"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
-                  <span>{{ lesson.title }}</span>
-                </div>
-                <span class="badge bg-light text-dark"
-                  >{{ lesson.duration }}</span
+            <div class="accordion-body">
+              <div class="list-group">
+                {% for lesson in unit.lessons %}
+                <a
+                  href="{{ lesson.link }}"
+                  class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 >
-              </a>
-              {% endfor %}
-              <a
-                href="{{ unit.assessment_link }}"
-                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <i
-                    class="bi bi-card-checklist text-{{ unit.color }} me-2"
-                  ></i>
-                  <span>Unit {{ loop.index }} Assessment</span>
-                </div>
-                <span class="badge bg-light text-dark"
-                  >{{ unit.assessment_questions }}</span
+                  <div>
+                    <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
+                    <span>{{ lesson.title }}</span>
+                  </div>
+                  <span class="badge bg-light text-dark"
+                    >{{ lesson.duration }}</span
+                  >
+                </a>
+                {% endfor %} {% if unit.assessment_questions %}
+                <a
+                  href="{{ unit.assessment_link }}"
+                  class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 >
-              </a>
+                  <div>
+                    <i
+                      class="bi bi-card-checklist text-{{ unit.color }} me-2"
+                    ></i>
+                    <span>Unit Assessment</span>
+                  </div>
+                  <span class="badge bg-light text-dark"
+                    >{{ unit.assessment_questions }}</span
+                  >
+                </a>
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
 </section>
 
@@ -231,7 +256,7 @@
             <p class="mb-4">{{ resource.description }}</p>
             <a
               href="{{ resource.link }}"
-              class="btn btn-outline-{{ resource.color }}"
+              class="btn btn-outline-{{ resource.button_color }}"
             >
               <i class="{{ resource.button_icon }} me-1"></i>{{
               resource.button_text }}

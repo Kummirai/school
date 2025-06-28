@@ -5181,6 +5181,13 @@ def reject_session_request(request_id):
     return redirect(url_for('manage_session_requests'))
 
 
+# Studyguides
+@app.route('/grade7/numeric_geometric_patterns')
+@login_required
+def numeric_geometric_patterns():
+    return render_template('grade7_maths/numeric_geometric_patterns.html')
+
+
 @app.template_filter('datetime')
 def format_datetime(value, format="%Y-%m-%d %H:%M:%S"):
     """Format a datetime object to a string."""
