@@ -1,6 +1,7 @@
 import psycopg2
 import psycopg2.extras
 from psycopg2.extras import DictCursor
+from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
 def get_db_connection():
