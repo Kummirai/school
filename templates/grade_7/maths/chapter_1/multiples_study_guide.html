@@ -1,152 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 7 Mathematics: Multiples</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1 class="display-4">Grade 7 Mathematics: Chapter 1</h1>
-            <p class="lead">Understanding Multiples</p>
-        </div>
+{% extends 'base.html' %} {% block title %}Grade 7 Mathematics: Multiples{%
+endblock %} {% block content %}
+<div class="container">
+  <div class="header">
+    <h1 class="display-4">Grade 7 Mathematics: Chapter 1</h1>
+    <p class="lead">Understanding Multiples</p>
+  </div>
 
-        <section>
-            <h2 class="section-title">1.2 Multiples</h2>
-            <p>A multiple of a number is the result of multiplying that number by an integer (a whole number). Essentially, multiples are what you get when you count by a certain number. For example, multiples of 3 are 3, 6, 9, 12, and so on.</p>
+  <section>
+    <h2 class="section-title">1.2 Multiples</h2>
+    <p>
+      A multiple of a number is the result of multiplying that number by an
+      integer (a whole number). Essentially, multiples are what you get when you
+      count by a certain number. For example, multiples of 3 are 3, 6, 9, 12,
+      and so on.
+    </p>
 
-            <h3>How to find Multiples:</h3>
-            <p>To find multiples of a number, simply multiply it by 1, 2, 3, 4, and so on.</p>
-            <h4>Examples:</h4>
-            <ul>
-                <li>Multiples of 4: 4 x 1 = 4, 4 x 2 = 8, 4 x 3 = 12, ... So, 4, 8, 12, 16, 20, ... are multiples of 4.</li>
-                <li>The first 5 multiples of 7 are: 7, 14, 21, 28, 35.</li>
-            </ul>
+    <h3>How to find Multiples:</h3>
+    <p>
+      To find multiples of a number, simply multiply it by 1, 2, 3, 4, and so
+      on.
+    </p>
+    <h4>Examples:</h4>
+    <ul>
+      <li>
+        Multiples of 4: 4 x 1 = 4, 4 x 2 = 8, 4 x 3 = 12, ... So, 4, 8, 12, 16,
+        20, ... are multiples of 4.
+      </li>
+      <li>The first 5 multiples of 7 are: 7, 14, 21, 28, 35.</li>
+    </ul>
 
-            <h3>Common Multiples</h3>
-            <p>A common multiple of two or more numbers is a number that is a multiple of all of them. For instance, common multiples of 2 and 3 are numbers that appear in both the list of multiples of 2 and the list of multiples of 3.</p>
-            <h4>Example:</h4>
-            <p>Multiples of 2: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, ...<br>
-            Multiples of 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, ...<br>
-            Common multiples of 2 and 3 are: 6, 12, 18, 24, ...</p>
-        </section>
+    <h3>Common Multiples</h3>
+    <p>
+      A common multiple of two or more numbers is a number that is a multiple of
+      all of them. For instance, common multiples of 2 and 3 are numbers that
+      appear in both the list of multiples of 2 and the list of multiples of 3.
+    </p>
+    <h4>Example:</h4>
+    <p>
+      Multiples of 2: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, ...<br />
+      Multiples of 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, ...<br />
+      Common multiples of 2 and 3 are: 6, 12, 18, 24, ...
+    </p>
+  </section>
 
-        <section class="mt-5">
-            <h2 class="section-title">Practice Questions: Multiples</h2>
+  <section class="mt-5">
+    <h2 class="section-title">Practice Questions: Multiples</h2>
 
-            <div class="question-card" id="q_mult1">
-                <label for="q_mult1_answer">1. List the first five multiples of 6.</label>
-                <input type="text" class="form-control" id="q_mult1_answer" placeholder="Enter numbers separated by commas (e.g., 6,12,18,24,30)">
-                <button class="btn btn-primary mt-2" onclick="checkMultiples('q_mult1', [6, 12, 18, 24, 30])">Check Answer</button>
-                <div class="feedback" id="q_mult1_feedback"></div>
-                <div class="explanation" id="q_mult1_explanation">
-                    <p><strong>Explanation:</strong> To find the first five multiples of 6, you multiply 6 by 1, 2, 3, 4, and 5:</p>
-                    <ul>
-                        <li>6 x 1 = 6</li>
-                        <li>6 x 2 = 12</li>
-                        <li>6 x 3 = 18</li>
-                        <li>6 x 4 = 24</li>
-                        <li>6 x 5 = 30</li>
-                    </ul>
-                    <p>So the first five multiples are 6, 12, 18, 24, 30.</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q_mult2">
-                <label for="q_mult2_answer">2. Is 56 a multiple of 8? (Yes/No)</label>
-                <input type="text" class="form-control" id="q_mult2_answer" placeholder="Yes or No">
-                <button class="btn btn-primary mt-2" onclick="checkYesNo('q_mult2', 'yes')">Check Answer</button>
-                <div class="feedback" id="q_mult2_feedback"></div>
-                <div class="explanation" id="q_mult2_explanation">
-                    <p><strong>Explanation:</strong> A number is a multiple of another if it can be divided by that number with no remainder. Since 56 ÷ 8 = 7 (with no remainder), 56 is indeed a multiple of 8. It is the 7th multiple of 8.</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q_mult3">
-                <label for="q_mult3_answer">3. What is the next multiple of 11 after 66?</label>
-                <input type="number" class="form-control" id="q_mult3_answer" placeholder="Enter your answer">
-                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_mult3', 77)">Check Answer</button>
-                <div class="feedback" id="q_mult3_feedback"></div>
-                <div class="explanation" id="q_mult3_explanation">
-                    <p><strong>Explanation:</strong> Multiples of 11 are found by adding 11 repeatedly or by multiplying 11 by consecutive integers. Since 66 is 11 x 6, the next multiple will be 11 x 7, which is 77. You can also get it by adding 11 to 66: 66 + 11 = 77.</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q_mult4">
-                <label for="q_mult4_answer">4. List the first three common multiples of 4 and 5.</label>
-                <input type="text" class="form-control" id="q_mult4_answer" placeholder="Enter numbers separated by commas (e.g., 20,40,60)">
-                <button class="btn btn-primary mt-2" onclick="checkMultiples('q_mult4', [20, 40, 60])">Check Answer</button>
-                <div class="feedback" id="q_mult4_feedback"></div>
-                <div class="explanation" id="q_mult4_explanation">
-                    <p><strong>Explanation:</strong></p>
-                    <ul>
-                        <li>Multiples of 4: 4, 8, 12, 16, <strong>20</strong>, 24, 28, 32, 36, <strong>40</strong>, 44, 48, 52, 56, <strong>60</strong>, ...</li>
-                        <li>Multiples of 5: 5, 10, 15, <strong>20</strong>, 25, 30, 35, <strong>40</strong>, 45, 50, 55, <strong>60</strong>, ...</li>
-                    </ul>
-                    <p>The numbers that appear in both lists are the common multiples. The first three are 20, 40, and 60.</p>
-                </div>
-            </div>
-
-        </section>
-
+    <div class="question-card" id="q_mult1">
+      <label for="q_mult1_answer">1. List the first five multiples of 6.</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q_mult1_answer"
+        placeholder="Enter numbers separated by commas (e.g., 6,12,18,24,30)"
+      />
+      <button
+        class="btn btn-primary mt-2"
+        onclick="checkMultiples('q_mult1', [6, 12, 18, 24, 30])"
+      >
+        Check Answer
+      </button>
+      <div class="feedback" id="q_mult1_feedback"></div>
+      <div class="explanation" id="q_mult1_explanation">
+        <p>
+          <strong>Explanation:</strong> To find the first five multiples of 6,
+          you multiply 6 by 1, 2, 3, 4, and 5:
+        </p>
+        <ul>
+          <li>6 x 1 = 6</li>
+          <li>6 x 2 = 12</li>
+          <li>6 x 3 = 18</li>
+          <li>6 x 4 = 24</li>
+          <li>6 x 5 = 30</li>
+        </ul>
+        <p>So the first five multiples are 6, 12, 18, 24, 30.</p>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function checkAnswer(questionId, correctAnswer) {
-            const userAnswer = document.getElementById(`${questionId}_answer`).value;
-            const feedbackElement = document.getElementById(`${questionId}_feedback`);
-            const explanationElement = document.getElementById(`${questionId}_explanation`);
+    <div class="question-card" id="q_mult2">
+      <label for="q_mult2_answer">2. Is 56 a multiple of 8? (Yes/No)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q_mult2_answer"
+        placeholder="Yes or No"
+      />
+      <button
+        class="btn btn-primary mt-2"
+        onclick="checkYesNo('q_mult2', 'yes')"
+      >
+        Check Answer
+      </button>
+      <div class="feedback" id="q_mult2_feedback"></div>
+      <div class="explanation" id="q_mult2_explanation">
+        <p>
+          <strong>Explanation:</strong> A number is a multiple of another if it
+          can be divided by that number with no remainder. Since 56 ÷ 8 = 7
+          (with no remainder), 56 is indeed a multiple of 8. It is the 7th
+          multiple of 8.
+        </p>
+      </div>
+    </div>
 
-            if (parseInt(userAnswer) === correctAnswer) {
-                feedbackElement.textContent = "Correct! Well done.";
-                feedbackElement.className = "feedback correct";
-            } else {
-                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-                feedbackElement.className = "feedback incorrect";
-            }
-            explanationElement.classList.add('show-explanation');
-        }
+    <div class="question-card" id="q_mult3">
+      <label for="q_mult3_answer"
+        >3. What is the next multiple of 11 after 66?</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="q_mult3_answer"
+        placeholder="Enter your answer"
+      />
+      <button class="btn btn-primary mt-2" onclick="checkAnswer('q_mult3', 77)">
+        Check Answer
+      </button>
+      <div class="feedback" id="q_mult3_feedback"></div>
+      <div class="explanation" id="q_mult3_explanation">
+        <p>
+          <strong>Explanation:</strong> Multiples of 11 are found by adding 11
+          repeatedly or by multiplying 11 by consecutive integers. Since 66 is
+          11 x 6, the next multiple will be 11 x 7, which is 77. You can also
+          get it by adding 11 to 66: 66 + 11 = 77.
+        </p>
+      </div>
+    </div>
 
-        function checkMultiples(questionId, correctArray) {
-            const userAnswer = document.getElementById(`${questionId}_answer`).value;
-            const feedbackElement = document.getElementById(`${questionId}_feedback`);
-            const explanationElement = document.getElementById(`${questionId}_explanation`);
+    <div class="question-card" id="q_mult4">
+      <label for="q_mult4_answer"
+        >4. List the first three common multiples of 4 and 5.</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="q_mult4_answer"
+        placeholder="Enter numbers separated by commas (e.g., 20,40,60)"
+      />
+      <button
+        class="btn btn-primary mt-2"
+        onclick="checkMultiples('q_mult4', [20, 40, 60])"
+      >
+        Check Answer
+      </button>
+      <div class="feedback" id="q_mult4_feedback"></div>
+      <div class="explanation" id="q_mult4_explanation">
+        <p><strong>Explanation:</strong></p>
+        <ul>
+          <li>
+            Multiples of 4: 4, 8, 12, 16, <strong>20</strong>, 24, 28, 32, 36,
+            <strong>40</strong>, 44, 48, 52, 56, <strong>60</strong>, ...
+          </li>
+          <li>
+            Multiples of 5: 5, 10, 15, <strong>20</strong>, 25, 30, 35,
+            <strong>40</strong>, 45, 50, 55, <strong>60</strong>, ...
+          </li>
+        </ul>
+        <p>
+          The numbers that appear in both lists are the common multiples. The
+          first three are 20, 40, and 60.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
 
-            const userArray = userAnswer.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+<script>
+  function checkAnswer(questionId, correctAnswer) {
+    const userAnswer = document.getElementById(`${questionId}_answer`).value;
+    const feedbackElement = document.getElementById(`${questionId}_feedback`);
+    const explanationElement = document.getElementById(
+      `${questionId}_explanation`
+    );
 
-            // Sort both arrays for consistent comparison
-            userArray.sort((a, b) => a - b);
-            const sortedCorrectArray = [...correctArray].sort((a, b) => a - b);
+    if (parseInt(userAnswer) === correctAnswer) {
+      feedbackElement.textContent = "Correct! Well done.";
+      feedbackElement.className = "feedback correct";
+    } else {
+      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+      feedbackElement.className = "feedback incorrect";
+    }
+    explanationElement.classList.add("show-explanation");
+  }
 
-            if (userArray.length !== sortedCorrectArray.length || !userArray.every((val, index) => val === sortedCorrectArray[index])) {
-                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-                feedbackElement.className = "feedback incorrect";
-            } else {
-                feedbackElement.textContent = "Correct! Well done.";
-                feedbackElement.className = "feedback correct";
-            }
-            explanationElement.classList.add('show-explanation');
-        }
+  function checkMultiples(questionId, correctArray) {
+    const userAnswer = document.getElementById(`${questionId}_answer`).value;
+    const feedbackElement = document.getElementById(`${questionId}_feedback`);
+    const explanationElement = document.getElementById(
+      `${questionId}_explanation`
+    );
 
-        function checkYesNo(questionId, correctAnswer) {
-            const userAnswer = document.getElementById(`${questionId}_answer`).value.trim().toLowerCase();
-            const feedbackElement = document.getElementById(`${questionId}_feedback`);
-            const explanationElement = document.getElementById(`${questionId}_explanation`);
+    const userArray = userAnswer
+      .split(",")
+      .map((num) => parseInt(num.trim()))
+      .filter((num) => !isNaN(num));
 
-            if (userAnswer === correctAnswer) {
-                feedbackElement.textContent = "Correct! Well done.";
-                feedbackElement.className = "feedback correct";
-            } else {
-                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-                feedbackElement.className = "feedback incorrect";
-            }
-            explanationElement.classList.add('show-explanation');
-        }
-    </script>
-</body>
-</html>
+    // Sort both arrays for consistent comparison
+    userArray.sort((a, b) => a - b);
+    const sortedCorrectArray = [...correctArray].sort((a, b) => a - b);
+
+    if (
+      userArray.length !== sortedCorrectArray.length ||
+      !userArray.every((val, index) => val === sortedCorrectArray[index])
+    ) {
+      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+      feedbackElement.className = "feedback incorrect";
+    } else {
+      feedbackElement.textContent = "Correct! Well done.";
+      feedbackElement.className = "feedback correct";
+    }
+    explanationElement.classList.add("show-explanation");
+  }
+
+  function checkYesNo(questionId, correctAnswer) {
+    const userAnswer = document
+      .getElementById(`${questionId}_answer`)
+      .value.trim()
+      .toLowerCase();
+    const feedbackElement = document.getElementById(`${questionId}_feedback`);
+    const explanationElement = document.getElementById(
+      `${questionId}_explanation`
+    );
+
+    if (userAnswer === correctAnswer) {
+      feedbackElement.textContent = "Correct! Well done.";
+      feedbackElement.className = "feedback correct";
+    } else {
+      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+      feedbackElement.className = "feedback incorrect";
+    }
+    explanationElement.classList.add("show-explanation");
+  }
+</script>
+
 {% endblock %}
