@@ -1,5 +1,6 @@
-
-    <title>Grade 7 Mathematics: Chapter 1 Test</title>
+{% extends 'base.html' %}
+{% block title %}Grade 7 Mathematics: Chapter 1 Test{% endblock %}
+{% block content %}
     
     <div class="container">
         <div class="header">
@@ -34,12 +35,12 @@
                 <input type="number" class="form-control" id="q3_answer" placeholder="Enter your answer">
                 <div class="feedback" id="q3_feedback"></div>
                 <div class="explanation" id="q3_explanation">
-                    <p><strong>Explanation:</strong> To add these numbers, align them by place value and add each column:
+                    <p><strong>Explanation:</strong> To add these numbers, align them by place value and add each column:</p>
                     <pre>  237,847
 +  87,776
 ---------
   325,623</pre>
-                    The sum is 325,623.</p>
+                    <p>The sum is 325,623.</p>
                 </div>
             </div>
 
@@ -188,12 +189,12 @@
                 <input type="number" class="form-control" id="q18_answer" placeholder="Enter your answer">
                 <div class="feedback" id="q18_feedback"></div>
                 <div class="explanation" id="q18_explanation">
-                    <p><strong>Explanation:</strong> Subtract column by column, borrowing when necessary:
+                    <p><strong>Explanation:</strong> Subtract column by column, borrowing when necessary:</p>
                     <pre>  6,234
 - 2,992
 -------
   3,242</pre>
-                    The answer is 3,242.</p>
+                   <p>The answer is 3,242.</p>
                 </div>
             </div>
 
@@ -372,5 +373,4 @@
             scoreSection.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
-
 {% endblock %}
