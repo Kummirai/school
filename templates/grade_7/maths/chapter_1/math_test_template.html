@@ -1,345 +1,556 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 7 Mathematics: Chapter 1 Test</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1 class="display-4">Grade 7 Mathematics: Chapter 1 Test</h1>
-            <p class="lead">Test your knowledge on Whole Numbers, Multiples, and Basic Operations.</p>
-            <p><strong>Instructions:</strong> Answer all questions. Enter your answers in the input fields. Click "Check All Answers" at the end to see your score and explanations.</p>
-        </div>
+{% extends 'base.html' %} {% block title %}Grade 7 Mathematics: Chapter 1 Test{%
+endblock %} {% block content %}
 
-        <section>
-            <h2 class="section-title">Test Questions</h2>
+<div class="container">
+  <div class="header">
+    <h1 class="display-4">Grade 7 Mathematics: Chapter 1 Test</h1>
+    <p class="lead">
+      Test your knowledge on Whole Numbers, Multiples, and Basic Operations.
+    </p>
+    <p>
+      <strong>Instructions:</strong> Answer all questions. Enter your answers in
+      the input fields. Click "Check All Answers" at the end to see your score
+      and explanations.
+    </p>
+  </div>
 
-            <div class="question-card" id="q1">
-                <label for="q1_answer">1. [cite_start]Write 8 706 as a sum of units, tens, hundreds, and thousands. [cite: 1]</label>
-                <input type="text" class="form-control" id="q1_answer" placeholder="e.g., 8000 + 700 + 6">
-                <div class="feedback" id="q1_feedback"></div>
-                <div class="explanation" id="q1_explanation">
-                    <p><strong>Explanation:</strong> To write 8706 as a sum of units, tens, hundreds, and thousands, break down the number by its place values: 8 thousands (8000), 7 hundreds (700), 0 tens (0), and 6 units (6). Therefore, the sum is \(8000 + 700 + 6\).</p>
-                </div>
-            </div>
+  <section>
+    <h2 class="section-title">Test Questions</h2>
 
-            <div class="question-card" id="q2">
-                <label for="q2_answer">2. [cite_start]What is the product of 20 and 500? [cite: 9]</label>
-                <input type="number" class="form-control" id="q2_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q2_feedback"></div>
-                <div class="explanation" id="q2_explanation">
-                    <p><strong>Explanation:</strong> To find the product of 20 and 500, multiply the non-zero digits and then add the total number of zeros. \(2 \times 5 = 10\). There are a total of three zeros (one from 20, two from 500). So, 10 followed by three zeros is 10 000. Therefore, \(20 \times 500 = 10000\).</p>
-                </div>
-            </div>
-            
-            <div class="question-card" id="q3">
-                <label for="q3_answer">3. [cite_start]Calculate: \(237 847 + 87 776\) [cite: 64]</label>
-                <input type="number" class="form-control" id="q3_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q3_feedback"></div>
-                <div class="explanation" id="q3_explanation">
-                    <p><strong>Explanation:</strong>
-                    To add these numbers, align them by place value and add each column, carrying over when necessary:
-                    <pre>
+    <div class="question-card" id="q1">
+      <label for="q1_answer"
+        >1. [cite_start]Write 8 706 as a sum of units, tens, hundreds, and
+        thousands. [cite: 1]</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="q1_answer"
+        placeholder="e.g., 8000 + 700 + 6"
+      />
+      <div class="feedback" id="q1_feedback"></div>
+      <div class="explanation" id="q1_explanation">
+        <p>
+          <strong>Explanation:</strong> To write 8706 as a sum of units, tens,
+          hundreds, and thousands, break down the number by its place values: 8
+          thousands (8000), 7 hundreds (700), 0 tens (0), and 6 units (6).
+          Therefore, the sum is \(8000 + 700 + 6\).
+        </p>
+      </div>
+    </div>
+
+    <div class="question-card" id="q2">
+      <label for="q2_answer"
+        >2. [cite_start]What is the product of 20 and 500? [cite: 9]</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="q2_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q2_feedback"></div>
+      <div class="explanation" id="q2_explanation">
+        <p>
+          <strong>Explanation:</strong> To find the product of 20 and 500,
+          multiply the non-zero digits and then add the total number of zeros.
+          \(2 \times 5 = 10\). There are a total of three zeros (one from 20,
+          two from 500). So, 10 followed by three zeros is 10 000. Therefore,
+          \(20 \times 500 = 10000\).
+        </p>
+      </div>
+    </div>
+
+    <div class="question-card" id="q3">
+      <label for="q3_answer"
+        >3. [cite_start]Calculate: \(237 847 + 87 776\) [cite: 64]</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="q3_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q3_feedback"></div>
+      <div class="explanation" id="q3_explanation">
+        <p><strong>Explanation:</strong></p>
+        To add these numbers, align them by place value and add each column,
+        carrying over when necessary:
+        <pre>
    237847
 +   87776
 ---------
    325623
-                    </pre>
-                    The sum is 325 623.</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q4">
-                <label for="q4_answer">4. [Your Question 4 Text Here]</label>
-                <input type="text" class="form-control" id="q4_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q4_feedback"></div>
-                <div class="explanation" id="q4_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 4 goes here]</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q5">
-                <label for="q5_answer">5. [Your Question 5 Text Here]</label>
-                <input type="text" class="form-control" id="q5_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q5_feedback"></div>
-                <div class="explanation" id="q5_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 5 goes here]</p>
-                </div>
-            </div>
-
-            <div class="question-card" id="q6">
-                <label for="q6_answer">6. [Your Question 6 Text Here]</label>
-                <input type="text" class="form-control" id="q6_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q6_feedback"></div>
-                <div class="explanation" id="q6_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 6 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q7">
-                <label for="q7_answer">7. [Your Question 7 Text Here]</label>
-                <input type="text" class="form-control" id="q7_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q7_feedback"></div>
-                <div class="explanation" id="q7_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 7 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q8">
-                <label for="q8_answer">8. [Your Question 8 Text Here]</label>
-                <input type="text" class="form-control" id="q8_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q8_feedback"></div>
-                <div class="explanation" id="q8_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 8 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q9">
-                <label for="q9_answer">9. [Your Question 9 Text Here]</label>
-                <input type="text" class="form-control" id="q9_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q9_feedback"></div>
-                <div class="explanation" id="q9_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 9 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q10">
-                <label for="q10_answer">10. [Your Question 10 Text Here]</label>
-                <input type="text" class="form-control" id="q10_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q10_feedback"></div>
-                <div class="explanation" id="q10_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 10 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q11">
-                <label for="q11_answer">11. [Your Question 11 Text Here]</label>
-                <input type="text" class="form-control" id="q11_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q11_feedback"></div>
-                <div class="explanation" id="q11_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 11 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q12">
-                <label for="q12_answer">12. [Your Question 12 Text Here]</label>
-                <input type="text" class="form-control" id="q12_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q12_feedback"></div>
-                <div class="explanation" id="q12_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 12 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q13">
-                <label for="q13_answer">13. [Your Question 13 Text Here]</label>
-                <input type="text" class="form-control" id="q13_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q13_feedback"></div>
-                <div class="explanation" id="q13_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 13 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q14">
-                <label for="q14_answer">14. [Your Question 14 Text Here]</label>
-                <input type="text" class="form-control" id="q14_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q14_feedback"></div>
-                <div class="explanation" id="q14_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 14 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q15">
-                <label for="q15_answer">15. [Your Question 15 Text Here]</label>
-                <input type="text" class="form-control" id="q15_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q15_feedback"></div>
-                <div class="explanation" id="q15_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 15 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q16">
-                <label for="q16_answer">16. [Your Question 16 Text Here]</label>
-                <input type="text" class="form-control" id="q16_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q16_feedback"></div>
-                <div class="explanation" id="q16_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 16 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q17">
-                <label for="q17_answer">17. [Your Question 17 Text Here]</label>
-                <input type="text" class="form-control" id="q17_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q17_feedback"></div>
-                <div class="explanation" id="q17_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 17 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q18">
-                <label for="q18_answer">18. [Your Question 18 Text Here]</label>
-                <input type="text" class="form-control" id="q18_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q18_feedback"></div>
-                <div class="explanation" id="q18_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 18 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q19">
-                <label for="q19_answer">19. [Your Question 19 Text Here]</label>
-                <input type="text" class="form-control" id="q19_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q19_feedback"></div>
-                <div class="explanation" id="q19_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 19 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q20">
-                <label for="q20_answer">20. [Your Question 20 Text Here]</label>
-                <input type="text" class="form-control" id="q20_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q20_feedback"></div>
-                <div class="explanation" id="q20_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 20 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q21">
-                <label for="q21_answer">21. [Your Question 21 Text Here]</label>
-                <input type="text" class="form-control" id="q21_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q21_feedback"></div>
-                <div class="explanation" id="q21_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 21 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q22">
-                <label for="q22_answer">22. [Your Question 22 Text Here]</label>
-                <input type="text" class="form-control" id="q22_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q22_feedback"></div>
-                <div class="explanation" id="q22_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 22 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q23">
-                <label for="q23_answer">23. [Your Question 23 Text Here]</label>
-                <input type="text" class="form-control" id="q23_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q23_feedback"></div>
-                <div class="explanation" id="q23_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 23 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q24">
-                <label for="q24_answer">24. [Your Question 24 Text Here]</label>
-                <input type="text" class="form-control" id="q24_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q24_feedback"></div>
-                <div class="explanation" id="q24_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 24 goes here]</p>
-                </div>
-            </div>
-            <div class="question-card" id="q25">
-                <label for="q25_answer">25. [Your Question 25 Text Here]</label>
-                <input type="text" class="form-control" id="q25_answer" placeholder="Enter your answer">
-                <div class="feedback" id="q25_feedback"></div>
-                <div class="explanation" id="q25_explanation">
-                    <p><strong>Explanation:</strong> [Detailed explanation for Question 25 goes here]</p>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <button class="btn btn-success btn-lg" onclick="checkAllAnswers()">Check All Answers</button>
-            </div>
-
-            <div class="score-section mt-5" id="scoreSection" style="display:none;">
-                <h3>Your Score: <span id="scoreDisplay">0/25</span></h3>
-                <p id="percentageDisplay"></p>
-            </div>
-
-        </section>
-
+                    </pre
+        >
+        <p>The sum is 325 623.</p>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Define correct answers for each question
-        // IMPORTANT: Update these values to match your specific questions and their correct answers.
-        // For text answers, use strings. For number answers, use numbers.
-        const correctAnswers = {
-            q1: "8000 + 700 + 6", // Example: Answer for "Write 8706 as a sum of units..."
-            q2: 10000,           // Example: Answer for "What is the product of 20 and 500?"
-            q3: 325623,          // Example: Answer for "Calculate: 237 847 + 87 776"
-            // Add correct answers for q4 to q25 here
-            q4: "Correct Answer for Q4",
-            q5: "Correct Answer for Q5",
-            q6: "Correct Answer for Q6",
-            q7: "Correct Answer for Q7",
-            q8: "Correct Answer for Q8",
-            q9: "Correct Answer for Q9",
-            q10: "Correct Answer for Q10",
-            q11: "Correct Answer for Q11",
-            q12: "Correct Answer for Q12",
-            q13: "Correct Answer for Q13",
-            q14: "Correct Answer for Q14",
-            q15: "Correct Answer for Q15",
-            q16: "Correct Answer for Q16",
-            q17: "Correct Answer for Q17",
-            q18: "Correct Answer for Q18",
-            q19: "Correct Answer for Q19",
-            q20: "Correct Answer for Q20",
-            q21: "Correct Answer for Q21",
-            q22: "Correct Answer for Q22",
-            q23: "Correct Answer for Q23",
-            q24: "Correct Answer for Q24",
-            q25: "Correct Answer for Q25"
-        };
+    <div class="question-card" id="q4">
+      <label for="q4_answer">4. [Your Question 4 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q4_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q4_feedback"></div>
+      <div class="explanation" id="q4_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 4
+          goes here]
+        </p>
+      </div>
+    </div>
 
-        // Function to normalize user input (remove spaces, convert to lowercase) for flexible checking
-        function normalizeInput(input) {
-            if (typeof input === 'string') {
-                return input.trim().replace(/\s/g, '').toLowerCase();
-            }
-            return input;
-        }
+    <div class="question-card" id="q5">
+      <label for="q5_answer">5. [Your Question 5 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q5_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q5_feedback"></div>
+      <div class="explanation" id="q5_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 5
+          goes here]
+        </p>
+      </div>
+    </div>
 
-        function checkAllAnswers() {
-            let score = 0;
-            const totalQuestions = 25; // Update if you change the number of questions
+    <div class="question-card" id="q6">
+      <label for="q6_answer">6. [Your Question 6 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q6_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q6_feedback"></div>
+      <div class="explanation" id="q6_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 6
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q7">
+      <label for="q7_answer">7. [Your Question 7 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q7_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q7_feedback"></div>
+      <div class="explanation" id="q7_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 7
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q8">
+      <label for="q8_answer">8. [Your Question 8 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q8_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q8_feedback"></div>
+      <div class="explanation" id="q8_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 8
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q9">
+      <label for="q9_answer">9. [Your Question 9 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q9_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q9_feedback"></div>
+      <div class="explanation" id="q9_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 9
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q10">
+      <label for="q10_answer">10. [Your Question 10 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q10_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q10_feedback"></div>
+      <div class="explanation" id="q10_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 10
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q11">
+      <label for="q11_answer">11. [Your Question 11 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q11_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q11_feedback"></div>
+      <div class="explanation" id="q11_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 11
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q12">
+      <label for="q12_answer">12. [Your Question 12 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q12_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q12_feedback"></div>
+      <div class="explanation" id="q12_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 12
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q13">
+      <label for="q13_answer">13. [Your Question 13 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q13_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q13_feedback"></div>
+      <div class="explanation" id="q13_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 13
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q14">
+      <label for="q14_answer">14. [Your Question 14 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q14_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q14_feedback"></div>
+      <div class="explanation" id="q14_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 14
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q15">
+      <label for="q15_answer">15. [Your Question 15 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q15_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q15_feedback"></div>
+      <div class="explanation" id="q15_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 15
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q16">
+      <label for="q16_answer">16. [Your Question 16 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q16_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q16_feedback"></div>
+      <div class="explanation" id="q16_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 16
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q17">
+      <label for="q17_answer">17. [Your Question 17 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q17_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q17_feedback"></div>
+      <div class="explanation" id="q17_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 17
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q18">
+      <label for="q18_answer">18. [Your Question 18 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q18_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q18_feedback"></div>
+      <div class="explanation" id="q18_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 18
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q19">
+      <label for="q19_answer">19. [Your Question 19 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q19_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q19_feedback"></div>
+      <div class="explanation" id="q19_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 19
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q20">
+      <label for="q20_answer">20. [Your Question 20 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q20_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q20_feedback"></div>
+      <div class="explanation" id="q20_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 20
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q21">
+      <label for="q21_answer">21. [Your Question 21 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q21_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q21_feedback"></div>
+      <div class="explanation" id="q21_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 21
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q22">
+      <label for="q22_answer">22. [Your Question 22 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q22_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q22_feedback"></div>
+      <div class="explanation" id="q22_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 22
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q23">
+      <label for="q23_answer">23. [Your Question 23 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q23_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q23_feedback"></div>
+      <div class="explanation" id="q23_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 23
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q24">
+      <label for="q24_answer">24. [Your Question 24 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q24_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q24_feedback"></div>
+      <div class="explanation" id="q24_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 24
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="question-card" id="q25">
+      <label for="q25_answer">25. [Your Question 25 Text Here]</label>
+      <input
+        type="text"
+        class="form-control"
+        id="q25_answer"
+        placeholder="Enter your answer"
+      />
+      <div class="feedback" id="q25_feedback"></div>
+      <div class="explanation" id="q25_explanation">
+        <p>
+          <strong>Explanation:</strong> [Detailed explanation for Question 25
+          goes here]
+        </p>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-success btn-lg" onclick="checkAllAnswers()">
+        Check All Answers
+      </button>
+    </div>
 
-            for (let i = 1; i <= totalQuestions; i++) {
-                const questionId = `q${i}`;
-                const userAnswerElement = document.getElementById(`${questionId}_answer`);
-                const feedbackElement = document.getElementById(`${questionId}_feedback`);
-                const explanationElement = document.getElementById(`${questionId}_explanation`);
+    <div class="score-section mt-5" id="scoreSection" style="display: none">
+      <h3>Your Score: <span id="scoreDisplay">0/25</span></h3>
+      <p id="percentageDisplay"></p>
+    </div>
+  </section>
+</div>
 
-                if (!userAnswerElement) continue; // Skip if element not found (e.g., if you have fewer than 25 questions initially)
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Define correct answers for each question
+  // IMPORTANT: Update these values to match your specific questions and their correct answers.
+  // For text answers, use strings. For number answers, use numbers.
+  const correctAnswers = {
+    q1: "8000 + 700 + 6", // Example: Answer for "Write 8706 as a sum of units..."
+    q2: 10000, // Example: Answer for "What is the product of 20 and 500?"
+    q3: 325623, // Example: Answer for "Calculate: 237 847 + 87 776"
+    // Add correct answers for q4 to q25 here
+    q4: "Correct Answer for Q4",
+    q5: "Correct Answer for Q5",
+    q6: "Correct Answer for Q6",
+    q7: "Correct Answer for Q7",
+    q8: "Correct Answer for Q8",
+    q9: "Correct Answer for Q9",
+    q10: "Correct Answer for Q10",
+    q11: "Correct Answer for Q11",
+    q12: "Correct Answer for Q12",
+    q13: "Correct Answer for Q13",
+    q14: "Correct Answer for Q14",
+    q15: "Correct Answer for Q15",
+    q16: "Correct Answer for Q16",
+    q17: "Correct Answer for Q17",
+    q18: "Correct Answer for Q18",
+    q19: "Correct Answer for Q19",
+    q20: "Correct Answer for Q20",
+    q21: "Correct Answer for Q21",
+    q22: "Correct Answer for Q22",
+    q23: "Correct Answer for Q23",
+    q24: "Correct Answer for Q24",
+    q25: "Correct Answer for Q25",
+  };
 
-                const userAnswer = normalizeInput(userAnswerElement.value);
-                const correctAnswer = normalizeInput(correctAnswers[questionId]);
+  // Function to normalize user input (remove spaces, convert to lowercase) for flexible checking
+  function normalizeInput(input) {
+    if (typeof input === "string") {
+      return input.trim().replace(/\s/g, "").toLowerCase();
+    }
+    return input;
+  }
 
-                // Check if the correct answer exists for this question
-                if (correctAnswer === undefined) {
-                    feedbackElement.textContent = "Answer not defined for this question.";
-                    feedbackElement.className = "feedback"; // Neutral feedback
-                    explanationElement.classList.add('show-explanation');
-                    continue; // Skip to next question
-                }
+  function checkAllAnswers() {
+    let score = 0;
+    const totalQuestions = 25; // Update if you change the number of questions
 
-                // Check answers - handle both number and string comparisons
-                let isCorrect = false;
-                if (typeof correctAnswer === 'number') {
-                    isCorrect = (parseFloat(userAnswer) === correctAnswer);
-                } else { // Assume string comparison for other types (e.g., ratios, expanded notation)
-                    isCorrect = (userAnswer === correctAnswer);
-                }
+    for (let i = 1; i <= totalQuestions; i++) {
+      const questionId = `q${i}`;
+      const userAnswerElement = document.getElementById(`${questionId}_answer`);
+      const feedbackElement = document.getElementById(`${questionId}_feedback`);
+      const explanationElement = document.getElementById(
+        `${questionId}_explanation`
+      );
 
-                if (isCorrect) {
-                    feedbackElement.textContent = "Correct!";
-                    feedbackElement.className = "feedback correct";
-                    score++;
-                } else {
-                    feedbackElement.textContent = `Incorrect.`;
-                    feedbackElement.className = "feedback incorrect";
-                }
-                explanationElement.classList.add('show-explanation'); // Always show explanation after checking
-            }
+      if (!userAnswerElement) continue; // Skip if element not found (e.g., if you have fewer than 25 questions initially)
 
-            // Display overall score
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            const percentageDisplay = document.getElementById('percentageDisplay');
-            const scoreSection = document.getElementById('scoreSection');
+      const userAnswer = normalizeInput(userAnswerElement.value);
+      const correctAnswer = normalizeInput(correctAnswers[questionId]);
 
-            scoreDisplay.textContent = `${score}/${totalQuestions}`;
-            const percentage = (score / totalQuestions * 100).toFixed(2);
-            percentageDisplay.textContent = `Percentage: ${percentage}%`;
-            scoreSection.style.display = 'block'; // Show the score section
-        }
-    </script>
-</body>
-</html>
+      // Check if the correct answer exists for this question
+      if (correctAnswer === undefined) {
+        feedbackElement.textContent = "Answer not defined for this question.";
+        feedbackElement.className = "feedback"; // Neutral feedback
+        explanationElement.classList.add("show-explanation");
+        continue; // Skip to next question
+      }
+
+      // Check answers - handle both number and string comparisons
+      let isCorrect = false;
+      if (typeof correctAnswer === "number") {
+        isCorrect = parseFloat(userAnswer) === correctAnswer;
+      } else {
+        // Assume string comparison for other types (e.g., ratios, expanded notation)
+        isCorrect = userAnswer === correctAnswer;
+      }
+
+      if (isCorrect) {
+        feedbackElement.textContent = "Correct!";
+        feedbackElement.className = "feedback correct";
+        score++;
+      } else {
+        feedbackElement.textContent = `Incorrect.`;
+        feedbackElement.className = "feedback incorrect";
+      }
+      explanationElement.classList.add("show-explanation"); // Always show explanation after checking
+    }
+
+    // Display overall score
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const percentageDisplay = document.getElementById("percentageDisplay");
+    const scoreSection = document.getElementById("scoreSection");
+
+    scoreDisplay.textContent = `${score}/${totalQuestions}`;
+    const percentage = ((score / totalQuestions) * 100).toFixed(2);
+    percentageDisplay.textContent = `Percentage: ${percentage}%`;
+    scoreSection.style.display = "block"; // Show the score section
+  }
+</script>
+
 {% endblock %}
