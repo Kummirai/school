@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Quick Squares and Cubes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MathJax CDN -->
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 2</h1>
+            <p class="lead">Exponents: Quick Squares and Cubes</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">2.1 Quick Squares and Cubes</h2>
+            <p>In this section, we will learn about squares and cubes of numbers. Understanding these concepts is fundamental to working with exponents.</p>
+
+            <h3 class="subsection-title">Squares</h3>
+            <p>When you multiply a number by itself, the result is called the <strong>square</strong> of that number. We often say "squared" instead of "times itself". For example, "ten times ten" can be said as "ten squared".</p>
+            <p>The notation for squaring a number is to write a small '2' as a superscript after the number. For example, \(10 \times 10\) is written as \(10^2\).</p>
+            <h4>Examples:</h4>
+            <ul>
+                <li>\(2 \times 2 = 4\), so 4 is the square of 2, or \(2^2 = 4\).</li>
+                <li>\(5 \times 5 = 25\), so 25 is the square of 5, or \(5^2 = 25\).</li>
+                <li>\(8 \times 8 = 64\), so 64 is the square of 8, or \(8^2 = 64\).</li>
+            </ul>
+
+            <h3 class="subsection-title">Cubes</h3>
+            <p>When you multiply a number by itself three times, the result is called the <strong>cube</strong> of that number. We often say "cubed" instead of "times itself three times". For example, "ten times ten times ten" can be said as "ten cubed".</p>
+            <p>The notation for cubing a number is to write a small '3' as a superscript after the number. For example, \(10 \times 10 \times 10\) is written as \(10^3\).</p>
+            <h4>Examples:</h4>
+            <ul>
+                <li>\(2 \times 2 \times 2 = 8\), so 8 is the cube of 2, or \(2^3 = 8\).</li>
+                <li>\(5 \times 5 \times 5 = 125\), so 125 is the cube of 5, or \(5^3 = 125\).</li>
+                <li>\(10 \times 10 \times 10 = 1000\), so 1000 is the cube of 10, or \(10^3 = 1000\).</li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Quick Squares and Cubes</h2>
+
+            <!-- Question 1: Calculate Square -->
+            <div class="question-card" id="q_sqcb1">
+                <label for="q_sqcb1_answer">1. How much is \(7 \times 7\)?</label>
+                <input type="number" class="form-control" id="q_sqcb1_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb1', 49)">Check Answer</button>
+                <div class="feedback" id="q_sqcb1_feedback"></div>
+                <div class="explanation" id="q_sqcb1_explanation">
+                    <p><strong>Explanation:</strong> \(7 \times 7\) means 7 squared, which is 49.</p>
+                </div>
+            </div>
+
+            <!-- Question 2: What number squared is... -->
+            <div class="question-card" id="q_sqcb2">
+                <label for="q_sqcb2_answer">2. What number squared is 100?</label>
+                <input type="number" class="form-control" id="q_sqcb2_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb2', 10)">Check Answer</button>
+                <div class="feedback" id="q_sqcb2_feedback"></div>
+                <div class="explanation" id="q_sqcb2_explanation">
+                    <p><strong>Explanation:</strong> We are looking for a number that, when multiplied by itself, equals 100. That number is 10, because \(10 \times 10 = 100\).</p>
+                </div>
+            </div>
+
+            <!-- Question 3: Calculate Cube -->
+            <div class="question-card" id="q_sqcb3">
+                <label for="q_sqcb3_answer">3. How much is \(4 \times 4 \times 4\)?</label>
+                <input type="number" class="form-control" id="q_sqcb3_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb3', 64)">Check Answer</button>
+                <div class="feedback" id="q_sqcb3_feedback"></div>
+                <div class="explanation" id="q_sqcb3_explanation">
+                    <p><strong>Explanation:</strong> \(4 \times 4 \times 4\) means 4 cubed. First, \(4 \times 4 = 16\). Then, \(16 \times 4 = 64\).</p>
+                </div>
+            </div>
+
+            <!-- Question 4: What number cubed is... -->
+            <div class="question-card" id="q_sqcb4">
+                <label for="q_sqcb4_answer">4. What number cubed is 27?</label>
+                <input type="number" class="form-control" id="q_sqcb4_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb4', 3)">Check Answer</button>
+                <div class="feedback" id="q_sqcb4_feedback"></div>
+                <div class="explanation" id="q_sqcb4_explanation">
+                    <p><strong>Explanation:</strong> We are looking for a number that, when multiplied by itself three times, equals 27. That number is 3, because \(3 \times 3 \times 3 = 9 \times 3 = 27\).</p>
+                </div>
+            </div>
+
+            <!-- Question 5: Mixed calculation with squares -->
+            <div class="question-card" id="q_sqcb5">
+                <label for="q_sqcb5_answer">5. Calculate: \(10^2 + 5^2 + 2^2\)</label>
+                <input type="number" class="form-control" id="q_sqcb5_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb5', 129)">Check Answer</button>
+                <div class="feedback" id="q_sqcb5_feedback"></div>
+                <div class="explanation" id="q_sqcb5_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>\(10^2 = 10 \times 10 = 100\)</li>
+                        <li>\(5^2 = 5 \times 5 = 25\)</li>
+                        <li>\(2^2 = 2 \times 2 = 4\)</li>
+                    </ul>
+                    Now, add the results: \(100 + 25 + 4 = 129\).</p>
+                </div>
+            </div>
+
+            <!-- Question 6: Mixed calculation with powers of 10 -->
+            <div class="question-card" id="q_sqcb6">
+                <label for="q_sqcb6_answer">6. Calculate: \(7 \times 10^2 + 3 \times 10 + 6\)</label>
+                <input type="number" class="form-control" id="q_sqcb6_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_sqcb6', 736)">Check Answer</button>
+                <div class="feedback" id="q_sqcb6_feedback"></div>
+                <div class="explanation" id="q_sqcb6_explanation">
+                    <p><strong>Explanation:</strong> Remember the order of operations (multiplication before addition):
+                    <ul>
+                        <li>\(10^2 = 100\), so \(7 \times 10^2 = 7 \times 100 = 700\)</li>
+                        <li>\(3 \times 10 = 30\)</li>
+                        <li>The last term is 6</li>
+                    </ul>
+                    Now, add the results: \(700 + 30 + 6 = 736\).</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (parseInt(userAnswer) === correctAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

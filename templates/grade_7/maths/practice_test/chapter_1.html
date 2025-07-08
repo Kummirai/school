@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics Study Guides</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .interactive-example {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Grade 7 Mathematics: Working with Whole Numbers</h1>
+        <div class="card mb-4">
+  <div class="card-header bg-primary text-white">
+    <h3>1.1 Building and Breaking Down Numbers</h3>
+  </div>
+  <div class="card-body">
+    <h4>Expanded Notation</h4>
+    <p>Numbers can be written as sums of their place values. This is called expanded notation.</p>
+
+    <div class="interactive-example p-3 mb-4 border rounded">
+      <h5>Practice: Write in Expanded Form</h5>
+      <div class="form-group">
+        <label for="numberInput">Enter a number:</label>
+        <input type="number" id="numberInput" class="form-control mb-2">
+        <button onclick="showExpandedForm()" class="btn btn-primary">Show Expanded Form</button>
+      </div>
+      <div id="expandedResult" class="mt-2"></div>
+    </div>
+
+    <div class="interactive-example p-3 mb-4 border rounded">
+      <h5>Practice: Combine Expanded Form</h5>
+      <div class="form-group">
+        <label>Enter place values:</label>
+        <div class="row">
+          <div class="col-md-3">
+            <input type="number" id="hundredThousands" class="form-control mb-2" placeholder="Hundred thousands">
+          </div>
+          <div class="col-md-3">
+            <input type="number" id="tenThousands" class="form-control mb-2" placeholder="Ten thousands">
+          </div>
+          <div class="col-md-3">
+            <input type="number" id="thousands" class="form-control mb-2" placeholder="Thousands">
+          </div>
+          <div class="col-md-3">
+            <input type="number" id="hundreds" class="form-control mb-2" placeholder="Hundreds">
+          </div>
+          <div class="col-md-3">
+            <input type="number" id="tens" class="form-control mb-2" placeholder="Tens">
+          </div>
+          <div class="col-md-3">
+            <input type="number" id="units" class="form-control mb-2" placeholder="Units">
+          </div>
+        </div>
+        <button onclick="combineExpandedForm()" class="btn btn-primary mt-2">Combine</button>
+      </div>
+      <div id="combinedResult" class="mt-2"></div>
+    </div>
+  </div>
+</div>
+<div class="card mb-4">
+  <div class="card-header bg-success text-white">
+    <h3>1.2 Multiples and Factors</h3>
+  </div>
+  <div class="card-body">
+    <h4>Understanding Multiples</h4>
+    <p>Multiples are what we get when we multiply a number by integers (whole numbers).</p>
+
+    <div class="interactive-example p-3 mb-4 border rounded">
+      <h5>Find Multiples</h5>
+      <div class="form-group">
+        <label for="baseNumber">Enter a number:</label>
+        <input type="number" id="baseNumber" class="form-control mb-2" min="1">
+        <label for="numMultiples">How many multiples?</label>
+        <input type="number" id="numMultiples" class="form-control mb-2" min="1" value="10">
+        <button onclick="calculateMultiples()" class="btn btn-success">Show Multiples</button>
+      </div>
+      <div id="multiplesResult" class="mt-2"></div>
+    </div>
+
+    <h4 class="mt-4">Finding Factors</h4>
+    <p>Factors are numbers we multiply together to get another number.</p>
+
+    <div class="interactive-example p-3 mb-4 border rounded">
+      <h5>Find Factors</h5>
+      <div class="form-group">
+        <label for="factorNumber">Enter a number to factorize:</label>
+        <input type="number" id="factorNumber" class="form-control mb-2" min="1">
+        <button onclick="findFactors()" class="btn btn-success">Find Factors</button>
+      </div>
+      <div id="factorsResult" class="mt-2"></div>
+    </div>
+
+    <h4 class="mt-4">Prime Numbers</h4>
+    <p>A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.</p>
+
+    <div class="interactive-example p-3 mb-4 border rounded">
+      <h5>Prime Number Checker</h5>
+      <div class="form-group">
+        <label for="primeCheck">Enter a number to check:</label>
+        <input type="number" id="primeCheck" class="form-control mb-2" min="1">
+        <button onclick="checkPrime()" class="btn btn-success">Check</button>
+      </div>
+      <div id="primeResult" class="mt-2"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+        
+        <!-- Paste all the study guide sections here -->
+        
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+function showExpandedForm() {
+  const number = document.getElementById('numberInput').value;
+  if (!number) return;
+
+  const numStr = number.toString();
+  let expanded = [];
+  for (let i = 0; i < numStr.length; i++) {
+    const digit = numStr[i];
+    const place = numStr.length - i - 1;
+    const value = digit * Math.pow(10, place);
+    if (value > 0) {
+      expanded.push(value);
+    }
+  }
+
+  document.getElementById('expandedResult').innerHTML =
+    `<strong>Expanded form:</strong> ${number} = ${expanded.join(' + ')}`;
+}
+
+function combineExpandedForm() {
+  const values = {
+    ht: parseInt(document.getElementById('hundredThousands').value) || 0,
+    tt: parseInt(document.getElementById('tenThousands').value) || 0,
+    th: parseInt(document.getElementById('thousands').value) || 0,
+    h: parseInt(document.getElementById('hundreds').value) || 0,
+    t: parseInt(document.getElementById('tens').value) || 0,
+    u: parseInt(document.getElementById('units').value) || 0
+  };
+
+  const total = values.ht * 100000 + values.tt * 10000 + values.th * 1000 +
+                values.h * 100 + values.t * 10 + values.u;
+
+  let expression = [];
+  if (values.ht > 0) expression.push(`${values.ht} × 100,000`);
+  if (values.tt > 0) expression.push(`${values.tt} × 10,000`);
+  if (values.th > 0) expression.push(`${values.th} × 1,000`);
+  if (values.h > 0) expression.push(`${values.h} × 100`);
+  if (values.t > 0) expression.push(`${values.t} × 10`);
+  if (values.u > 0) expression.push(`${values.u} × 1`);
+
+  document.getElementById('combinedResult').innerHTML =
+    `<strong>Combined number:</strong> ${total}<br>
+     <strong>Calculation:</strong> ${expression.join(' + ')} = ${total}`;
+}
+
+function calculateMultiples() {
+  const base = parseInt(document.getElementById('baseNumber').value);
+  const count = parseInt(document.getElementById('numMultiples').value);
+
+  if (isNaN(base) || isNaN(count) || base < 1 || count < 1) {
+    alert("Please enter valid numbers");
+    return;
+  }
+
+  let multiples = [];
+  for (let i = 1; i <= count; i++) {
+    multiples.push(base * i);
+  }
+
+  document.getElementById('multiplesResult').innerHTML =
+    `<strong>First ${count} multiples of ${base}:</strong> ${multiples.join(', ')}`;
+}
+
+function findFactors() {
+  const num = parseInt(document.getElementById('factorNumber').value);
+
+  if (isNaN(num) {
+    alert("Please enter a valid number");
+    return;
+  }
+
+  let factors = [];
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) {
+      factors.push(i);
+    }
+  }
+
+  document.getElementById('factorsResult').innerHTML =
+    `<strong>Factors of ${num}:</strong> ${factors.join(', ')}<br>
+     <strong>Number of factors:</strong> ${factors.length}`;
+}
+
+function checkPrime() {
+  const num = parseInt(document.getElementById('primeCheck').value);
+
+  if (isNaN(num) {
+    alert("Please enter a valid number");
+    return;
+  }
+
+  if (num < 2) {
+    document.getElementById('primeResult').innerHTML =
+      `${num} is not a prime number.`;
+    return;
+  }
+
+  let isPrime = true;
+  for (let i = 2, sqrt = Math.sqrt(num); i <= sqrt; i++) {
+    if (num % i === 0) {
+      isPrime = false;
+      break;
+    }
+  }
+
+  document.getElementById('primeResult').innerHTML =
+    `${num} is ${isPrime ? '' : 'not '}a prime number.`;
+}
+
+</script>
+</body>
+</html>

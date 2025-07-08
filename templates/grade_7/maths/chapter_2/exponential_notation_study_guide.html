@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: The Exponential Notation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 2</h1>
+            <p class="lead">Exponents: The Exponential Notation</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">2.2 The Exponential Notation</h2>
+            <p>The exponential notation is a shorthand way of writing repeated multiplication of the same number. Instead of writing a long string of multiplications, we can use exponents.</p>
+
+            <h3>Understanding the Notation: \(b^n\)</h3>
+            <p>In the expression \(b^n\):</p>
+            <ul>
+                <li>\(b\) is called the <strong>base</strong>. It is the number that is being multiplied.</li>
+                <li>\(n\) is called the <strong>exponent</strong> (or index or power). It tells us how many times the base is multiplied by itself.</li>
+            </ul>
+            <p>For example, \(2^5\) means \(2 \times 2 \times 2 \times 2 \times 2\). Here, 2 is the base and 5 is the exponent.</p>
+
+            <h4>Special Cases:</h4>
+            <ul>
+                <li><strong>Squared:</strong> An exponent of 2 means the base is multiplied by itself twice (e.g., \(4^2 = 4 \times 4\)). We say "4 squared".</li>
+                <li><strong>Cubed:</strong> An exponent of 3 means the base is multiplied by itself three times (e.g., \(4^3 = 4 \times 4 \times 4\)). We say "4 cubed".</li>
+                <li><strong>Any number to the power of 1:</strong> Any number raised to the power of 1 is the number itself (e.g., \(7^1 = 7\)).</li>
+            </ul>
+
+            <h4>Examples:</h4>
+            <ul>
+                <li>Write \(5 \times 5 \times 5 \times 5\) in exponential notation: \(5^4\)</li>
+                <li>Write \(3^6\) as a product of factors: \(3 \times 3 \times 3 \times 3 \times 3 \times 3\)</li>
+                <li>Calculate \(2^4\): \(2 \times 2 \times 2 \times 2 = 16\)</li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: The Exponential Notation</h2>
+
+            <div class="question-card" id="q_exp1">
+                <label for="q_exp1_answer">1. Write \(6 \times 6 \times 6 \times 6 \times 6\) in exponential notation.</label>
+                <input type="text" class="form-control" id="q_exp1_answer" placeholder="e.g., 2^3">
+                <button class="btn btn-primary mt-2" onclick="checkExponentialNotation('q_exp1', '6^5')">Check Answer</button>
+                <div class="feedback" id="q_exp1_feedback"></div>
+                <div class="explanation" id="q_exp1_explanation">
+                    <p><strong>Explanation:</strong> The base is 6, and it is multiplied by itself 5 times. So, the exponential notation is \(6^5\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_exp2">
+                <label for="q_exp2_answer">2. Write \(9^3\) as a product of factors.</label>
+                <input type="text" class="form-control" id="q_exp2_answer" placeholder="e.g., 2x2x2">
+                <button class="btn btn-primary mt-2" onclick="checkProductOfFactors('q_exp2', '9x9x9')">Check Answer</button>
+                <div class="feedback" id="q_exp2_feedback"></div>
+                <div class="explanation" id="q_exp2_explanation">
+                    <p><strong>Explanation:</strong> The base is 9 and the exponent is 3, meaning 9 is multiplied by itself 3 times: \(9 \times 9 \times 9\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_exp3">
+                <label for="q_exp3_answer">3. In the expression \(7^4\), what is the base and what is the exponent? (Format: base=X, exponent=Y)</label>
+                <input type="text" class="form-control" id="q_exp3_answer" placeholder="e.g., base=2, exponent=3">
+                <button class="btn btn-primary mt-2" onclick="checkBaseExponent('q_exp3', 7, 4)">Check Answer</button>
+                <div class="feedback" id="q_exp3_feedback"></div>
+                <div class="explanation" id="q_exp3_explanation">
+                    <p><strong>Explanation:</strong> In \(7^4\), the base is the number being multiplied, which is 7. The exponent is the small number written above and to the right, which is 4, indicating how many times the base is multiplied by itself.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_exp4">
+                <label for="q_exp4_answer">4. Calculate the value of \(5^3\).</label>
+                <input type="number" class="form-control" id="q_exp4_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_exp4', 125)">Check Answer</button>
+                <div class="feedback" id="q_exp4_feedback"></div>
+                <div class="explanation" id="q_exp4_explanation">
+                    <p><strong>Explanation:</strong> \(5^3\) means \(5 \times 5 \times 5\).
+                    <ul>
+                        <li>\(5 \times 5 = 25\)</li>
+                        <li>\(25 \times 5 = 125\)</li>
+                    </ul>
+                    So, \(5^3 = 125\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_exp5">
+                <label for="q_exp5_answer">5. Calculate the value of \(12^1\).</label>
+                <input type="number" class="form-control" id="q_exp5_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_exp5', 12)">Check Answer</button>
+                <div class="feedback" id="q_exp5_feedback"></div>
+                <div class="explanation" id="q_exp5_explanation">
+                    <p><strong>Explanation:</strong> Any number raised to the power of 1 is the number itself. So, \(12^1 = 12\).</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (parseInt(userAnswer) === correctAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkExponentialNotation(questionId, correctAnswerString) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value.trim().replace(/\s/g, '').toLowerCase();
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            const normalizedCorrectAnswer = correctAnswerString.trim().replace(/\s/g, '').toLowerCase();
+
+            if (userAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct answer is ${correctAnswerString}. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkProductOfFactors(questionId, correctAnswerString) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value.trim().replace(/\s/g, '').toLowerCase();
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            const normalizedCorrectAnswer = correctAnswerString.trim().replace(/\s/g, '').toLowerCase();
+
+            if (userAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct answer is ${correctAnswerString}. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkBaseExponent(questionId, correctBase, correctExponent) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value.trim().toLowerCase();
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            const expectedBaseString = `base=${correctBase}`;
+            const expectedExponentString = `exponent=${correctExponent}`;
+
+            // Check if both parts are present and correct, regardless of order
+            const isBaseCorrect = userAnswer.includes(expectedBaseString);
+            const isExponentCorrect = userAnswer.includes(expectedExponentString);
+
+            if (isBaseCorrect && isExponentCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct answer is base=${correctBase}, exponent=${correctExponent}. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

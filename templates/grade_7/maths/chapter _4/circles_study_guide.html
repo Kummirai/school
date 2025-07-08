@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Circles - Very Special Figures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 4</h1>
+            <p class="lead">Construction of Geometric Figures: Circles are Very Special Figures</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">4.6 Circles are very special figures</h2>
+            <p>Circles are fundamental shapes in geometry, found everywhere from wheels to planets. Understanding their properties is crucial.</p>
+
+            <h3 class="subsection-title">Basic Parts of a Circle</h3>
+            <p>A circle is a set of all points in a plane that are equidistant from a central point. Let's define its key components:</p>
+            <ul>
+                <li><strong>Centre:</strong> The fixed point from which all points on the circle are equidistant.</li>
+                <li><strong>Radius:</strong> The distance from the centre to any point on the circle. All radii of the same circle are equal in length.</li>
+                <li><strong>Diameter:</strong> A straight line segment that passes through the centre of the circle and has its endpoints on the circle. The diameter is twice the length of the radius (\(Diameter = 2 \times Radius\)).</li>
+                <li><strong>Circumference:</strong> The distance around the circle. It's similar to the perimeter of a polygon.</li>
+            </ul>
+            <div class="image-container">
+                <img src="https://cdn1.byjus.com/wp-content/uploads/2020/09/Parts-of-circle.png" alt="Diagram showing the centre, radius, diameter, and circumference of a circle.">
+                <p class="mt-2">Key components of a circle.</p>
+            </div>
+
+            <h3 class="subsection-title">Using a Compass to Draw Circles</h3>
+            <p>A compass is a geometric tool used to draw circles and arcs. It has two legs, one with a sharp point and the other with a pencil or pen holder.</p>
+            <h4>Steps to draw a circle with a compass:</h4>
+            <ol>
+                <li><strong>Set the Radius:</strong> Open the compass to the desired radius. This is done by placing the sharp point on the zero mark of a ruler and the pencil point on the desired measurement (e.g., 4 cm for a 4 cm radius).</li>
+                <li><strong>Place the Centre Point:</strong> Place the sharp point of the compass firmly on the paper where you want the centre of your circle to be. This point should not move.</li>
+                <li><strong>Rotate the Compass:</strong> Gently rotate the pencil arm of the compass around the fixed sharp point, allowing the pencil to draw a smooth, continuous circle. Keep even pressure on the pencil, and ensure the compass opening does not change.</li>
+            </ol>
+            <div class="image-container">
+                <img src="https://cdn1.byjus.com/wp-content/uploads/2020/09/Drawing-a-circle.png" alt="Illustration of a compass drawing a circle.">
+                <p class="mt-2">Drawing a circle with a compass.</p>
+            </div>
+            <p>You can draw circles of different sizes by adjusting the distance between the compass legs (the radius).</p>
+
+            <h3 class="subsection-title">Circles and Geometric Figures</h3>
+            <p>Circles are often used as construction tools to help draw other geometric figures accurately. For example, you can use circles to construct perpendicular lines or divide lines into equal segments, as often seen in higher-level constructions.</p>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Circles</h2>
+
+            <div class="question-card" id="q_circle1">
+                <label for="q_circle1_answer">1. What is the name of the line segment from the centre of a circle to any point on its circumference?</label>
+                <input type="text" class="form-control" id="q_circle1_answer" placeholder="Enter term">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_circle1', 'radius', true)">Check Answer</button>
+                <div class="feedback" id="q_circle1_feedback"></div>
+                <div class="explanation" id="q_circle1_explanation">
+                    <p><strong>Explanation:</strong> This line segment is called the radius. It is half the diameter.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_circle2">
+                <label for="q_circle2_answer">2. If the radius of a circle is 5 cm, what is its diameter?</label>
+                <input type="number" class="form-control" id="q_circle2_answer" placeholder="Enter length in cm">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_circle2', '10')">Check Answer</button>
+                <div class="feedback" id="q_circle2_feedback"></div>
+                <div class="explanation" id="q_circle2_explanation">
+                    <p><strong>Explanation:</strong> The diameter is twice the radius. So, \(2 \times 5 \text{ cm} = 10 \text{ cm}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_circle3">
+                <label for="q_circle3_answer">3. Which geometric tool is primarily used for drawing circles?</label>
+                <input type="text" class="form-control" id="q_circle3_answer" placeholder="Enter tool name">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_circle3', 'compass', true)">Check Answer</button>
+                <div class="feedback" id="q_circle3_feedback"></div>
+                <div class="explanation" id="q_circle3_explanation">
+                    <p><strong>Explanation:</strong> A compass is specifically designed for drawing circles and arcs.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_circle4">
+                <label for="q_circle4_answer">4. What is the term for the distance around the outside of a circle?</label>
+                <input type="text" class="form-control" id="q_circle4_answer" placeholder="Enter term">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_circle4', 'circumference', true)">Check Answer</button>
+                <div class="feedback" id="q_circle4_feedback"></div>
+                <div class="explanation" id="q_circle4_explanation">
+                    <p><strong>Explanation:</strong> The distance around a circle is called its circumference, analogous to the perimeter of a polygon.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9]/g, '');
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

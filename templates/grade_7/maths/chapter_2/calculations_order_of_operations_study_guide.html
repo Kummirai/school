@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Calculations with Order of Operations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 2</h1>
+            <p class="lead">Exponents: Calculations with the Order of Operations</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">2.6 Calculations: The Order of Operations</h2>
+            <p>This section provides more practice with applying the order of operations (BODMAS/PEMDAS) to solve mathematical expressions. Remember, the key is to follow the sequence consistently to arrive at the correct answer.</p>
+
+            <h3>Quick Recap of BODMAS/PEMDAS:</h3>
+            <ul>
+                <li><strong>B</strong>rackets (or **P**arentheses)</li>
+                <li><strong>O</strong>rders (or **E**xponents/Indices)</li>
+                <li><strong>D</strong>ivision and **M**ultiplication (from left to right)</li>
+                <li><strong>A</strong>ddition and **S**ubtraction (from left to right)</li>
+            </ul>
+            <p>Mastering these rules is crucial for complex calculations.</p>
+            
+            <h4>Examples (Review):</h4>
+            <ul>
+                <li>Calculate \(10 + 2 \times 5\):
+                    <ul>
+                        <li>Multiplication first: \(2 \times 5 = 10\)</li>
+                        <li>Then Addition: \(10 + 10 = 20\)</li>
+                    </ul>
+                </li>
+                <li>Calculate \((15 - 5) \div 2 + 3^2\):
+                    <ul>
+                        <li>Brackets first: \(15 - 5 = 10\)</li>
+                        <li>Orders (Exponents) next: \(3^2 = 9\)</li>
+                        <li>Division next: \(10 \div 2 = 5\)</li>
+                        <li>Finally, Addition: \(5 + 9 = 14\)</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Order of Operations Calculations</h2>
+
+            <div class="question-card" id="q_calc1">
+                <label for="q_calc1_answer">1. Calculate: \( (7 + 3) \times 4 - 20 \div 5 \)</label>
+                <input type="number" class="form-control" id="q_calc1_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_calc1', 36)">Check Answer</button>
+                <div class="feedback" id="q_calc1_feedback"></div>
+                <div class="explanation" id="q_calc1_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>Brackets first: \(7 + 3 = 10\)</li>
+                        <li>Multiplication: \(10 \times 4 = 40\)</li>
+                        <li>Division: \(20 \div 5 = 4\)</li>
+                        <li>Subtraction: \(40 - 4 = 36\)</li>
+                    </ul>
+                    The answer is 36.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_calc2">
+                <label for="q_calc2_answer">2. Calculate: \( 6^2 \div (2 \times 3) + 5 \)</label>
+                <input type="number" class="form-control" id="q_calc2_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_calc2', 11)">Check Answer</button>
+                <div class="feedback" id="q_calc2_feedback"></div>
+                <div class="explanation" id="q_calc2_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>Orders (Exponents): \(6^2 = 36\)</li>
+                        <li>Brackets: \(2 \times 3 = 6\)</li>
+                        <li>Division: \(36 \div 6 = 6\)</li>
+                        <li>Addition: \(6 + 5 = 11\)</li>
+                    </ul>
+                    The answer is 11.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_calc3">
+                <label for="q_calc3_answer">3. Calculate: \( 100 - \sqrt{81} \times 2 + 4^3 \)</label>
+                <input type="number" class="form-control" id="q_calc3_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_calc3', 146)">Check Answer</button>
+                <div class="feedback" id="q_calc3_feedback"></div>
+                <div class="explanation" id="q_calc3_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>Orders (Roots and Exponents): \(\sqrt{81} = 9\), \(4^3 = 64\)</li>
+                        <li>Multiplication: \(9 \times 2 = 18\)</li>
+                        <li>Perform Addition and Subtraction from left to right:
+                            <ul>
+                                <li>\(100 - 18 = 82\)</li>
+                                <li>\(82 + 64 = 146\)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    The answer is 146.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_calc4">
+                <label for="q_calc4_answer">4. Calculate: \( (2 + 3)^2 + 15 \div 3 - \sqrt[3]{27} \)</label>
+                <input type="number" class="form-control" id="q_calc4_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_calc4', 27)">Check Answer</button>
+                <div class="feedback" id="q_calc4_feedback"></div>
+                <div class="explanation" id="q_calc4_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>Brackets first: \(2 + 3 = 5\)</li>
+                        <li>Orders (Exponents and Roots): \(5^2 = 25\), \(\sqrt[3]{27} = 3\)</li>
+                        <li>Division: \(15 \div 3 = 5\)</li>
+                        <li>Perform Addition and Subtraction from left to right:
+                            <ul>
+                                <li>\(25 + 5 = 30\)</li>
+                                <li>\(30 - 3 = 27\)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    The answer is 27.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_calc5">
+                <label for="q_calc5_answer">5. Calculate: \( 8 \times (5 - 3) - 2^2 \)</label>
+                <input type="number" class="form-control" id="q_calc5_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_calc5', 12)">Check Answer</button>
+                <div class="feedback" id="q_calc5_feedback"></div>
+                <div class="explanation" id="q_calc5_explanation">
+                    <p><strong>Explanation:</strong>
+                    <ul>
+                        <li>Brackets first: \(5 - 3 = 2\)</li>
+                        <li>Orders (Exponents): \(2^2 = 4\)</li>
+                        <li>Multiplication: \(8 \times 2 = 16\)</li>
+                        <li>Subtraction: \(16 - 4 = 12\)</li>
+                    </ul>
+                    The answer is 12.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (parseInt(userAnswer) === correctAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

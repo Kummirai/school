@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Working with Protractors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 4</h1>
+            <p class="lead">Construction of Geometric Figures: Working with Protractors</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">4.4 Working with protractors</h2>
+            <p>This section provides practical exercises to solidify your understanding and skills in working with protractors, both for measuring existing angles and drawing new ones.</p>
+
+            <h3 class="subsection-title">Measuring and Identifying Angle Types</h3>
+            <p>It's important to be able to accurately measure angles and classify them correctly based on their degree measure.</p>
+            <div class="image-container">
+                <img src="https://images.examples.com/wp-content/uploads/2024/05/Important-Notes-on-Angles.png" alt="Example angles A, B, C, D to be measured and identified.">
+                <p class="mt-2">Use your own protractor to measure these angles as part of the exercises.</p>
+            </div>
+            <h4>Recall Angle Types:</h4>
+            <ul>
+                <li><strong>Acute angle:</strong> \( < 90^\circ \)</li>
+                <li><strong>Right angle:</strong> \( = 90^\circ \)</li>
+                <li><strong>Obtuse angle:</strong> \( > 90^\circ \) and \( < 180^\circ \)</li>
+                <li><strong>Straight angle:</strong> \( = 180^\circ \)</li>
+                <li><strong>Reflex angle:</strong> \( > 180^\circ \) and \( < 360^\circ \)</li>
+            </ul>
+
+            <h3 class="subsection-title">Drawing Angles with Precision</h3>
+            <p>Practice drawing angles of various sizes is key to mastering the use of a protractor.</p>
+            <div class="image-container">
+                <img src="https://images.examples.com/wp-content/uploads/2024/05/Protractor.png" alt="Example of an angle to draw">
+                <p class="mt-2">Practice drawing angles like this one accurately.</p>
+            </div>
+            <p>Remember the steps from the previous section: draw an arm, place the protractor's center on the vertex, align the 0° mark, make a pencil mark at the desired degree, and finally draw the second arm.</p>
+
+            <h3 class="subsection-title">Angles in Real-World Contexts</h3>
+            <p>Angles are all around us, from the hands of a clock to the corners of a room. Being able to identify and estimate angles in real-world scenarios helps build a deeper understanding.</p>
+            <ul>
+                <li>The angle formed by the minute and hour hand on a clock changes constantly.</li>
+                <li>Corners of square or rectangular objects (books, tables, walls) are typically right angles.</li>
+                <li>The opening of a pair of scissors or a door can represent various acute or obtuse angles.</li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Working with Protractors</h2>
+
+            <div class="question-card" id="q_protractor1">
+                <label for="q_protractor1_measure">1. If an angle, when measured with a protractor, has its first arm at 0° and the second arm at 75° on the same scale, what is the angle's measure and type?</label>
+                <input type="number" class="form-control mb-2" id="q_protractor1_measure" placeholder="Measure in degrees">
+                <input type="text" class="form-control" id="q_protractor1_type" placeholder="Type (e.g., acute, obtuse)">
+                <button class="btn btn-primary mt-2" onclick="checkMultipleAnswers('q_protractor1', ['75', 'acute'])">Check Answer</button>
+                <div class="feedback" id="q_protractor1_feedback"></div>
+                <div class="explanation" id="q_protractor1_explanation">
+                    <p><strong>Explanation:</strong> The angle measures 75°. Since 75° is less than 90°, it is an acute angle.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_protractor2">
+                <label for="q_protractor2_answer">2. Describe the steps you would take to draw an angle of 150° using a protractor and a ruler.</label>
+                <textarea class="form-control" id="q_protractor2_answer" rows="4" placeholder="Explain the steps"></textarea>
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_protractor2', 'draw a ray and mark a vertex at one end; place the protractor center on the vertex and align the ray with 0 degrees; mark a point at 150 degrees; draw a second ray from the vertex through the 150-degree mark.', true)">Check Answer</button>
+                <div class="feedback" id="q_protractor2_feedback"></div>
+                <div class="explanation" id="q_protractor2_explanation">
+                    <p><strong>Explanation:</strong> First, draw a ray and mark its endpoint as the vertex. Place the protractor's center on the vertex and align the ray with the 0° mark (either inner or outer scale). Find 150° on the correct scale and make a small mark. Finally, draw a second ray from the vertex through this mark to complete the 150° angle.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_protractor3">
+                <label for="q_protractor3_answer">3. You measured an angle to be 80°. What is the measure of the reflex angle associated with it?</label>
+                <input type="number" class="form-control" id="q_protractor3_answer" placeholder="Enter degrees">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_protractor3', '280')">Check Answer</button>
+                <div class="feedback" id="q_protractor3_feedback"></div>
+                <div class="explanation" id="q_protractor3_explanation">
+                    <p><strong>Explanation:</strong> A full circle is 360°. If the interior angle is 80°, the reflex angle is \(360^\circ - 80^\circ = 280^\circ\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_protractor4">
+                <label for="q_protractor4_answer">4. What is a common mistake students make when using a protractor, especially with its two scales?</label>
+                <input type="text" class="form-control" id="q_protractor4_answer" placeholder="Describe the mistake">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_protractor4', 'Reading from the wrong scale (e.g., using the outer scale when the arm aligns with 0 on the inner scale).', true)">Check Answer</button>
+                <div class="feedback" id="q_protractor4_feedback"></div>
+                <div class="explanation" id="q_protractor4_explanation">
+                    <p><strong>Explanation:</strong> A very common mistake is reading from the incorrect scale. Students might align an arm with 0° on one scale but then read the angle from the opposite scale (e.g., aligning with 0 on the inner scale but reading from the outer scale), leading to an incorrect angle measurement.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9]/g, '');
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkMultipleAnswers(questionId, correctAnswers) {
+            const measureInput = document.getElementById(`${questionId}_measure`);
+            const typeInput = document.getElementById(`${questionId}_type`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let measureCorrect = normalizeText(measureInput.value) === normalizeText(correctAnswers[0]);
+            let typeCorrect = normalizeText(typeInput.value, true) === normalizeText(correctAnswers[1], true);
+
+            if (measureCorrect && typeCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                let msg = "Incorrect. ";
+                if (!measureCorrect) msg += "Check the measure. ";
+                if (!typeCorrect) msg += "Check the type. ";
+                msg += "Please review the explanation.";
+                feedbackElement.textContent = msg;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

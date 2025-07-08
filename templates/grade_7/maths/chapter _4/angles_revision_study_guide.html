@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Angles Revision</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 4</h1>
+            <p class="lead">Construction of Geometric Figures: Angles Revision</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">4.1 Angles revision</h2>
+            <p>Angles are fundamental in geometry. They describe the "opening" between two lines or rays that meet at a common point. This section revises key concepts about angles.</p>
+
+            <h3>What is an Angle?</h3>
+            <p>When two lines (or rays or line segments) point in different directions, we say they are at an angle to each other. The "size" of the angle depends on how "different" their directions are.</p>
+            <ul>
+                <li>If directions are almost the same, the angle is **small**.</li>
+                <li>If directions are very different, the angle is **big**.</li>
+            </ul>
+
+            <h4>Parts of an Angle:</h4>
+            <ul>
+                <li><strong>Arms of the angle:</strong> These are the two lines (or rays) that form the angle.</li>
+                <li><strong>Vertex:</strong> This is the point where the two arms meet. The plural of "vertex" is "vertices".</li>
+            </ul>
+            <div class="image-container">
+                <img src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/Maths_English_term1_p87_3.png" alt="Diagram of an angle showing arms, vertex, and arc">
+                <p class="mt-2">An angle consists of two arms meeting at a vertex. The arc shows the angle being considered.</p>
+            </div>
+
+            <h4>Labelling Angles:</h4>
+            <p>There are several ways to label angles to clearly indicate which angle is being referred to, especially when multiple angles share a vertex.</p>
+            <ul>
+                <li><strong>Using a number:</strong> A number (e.g., Angle 1) placed inside the arc.</li>
+                <li><strong>Using a dot or star:</strong> A small dot or star inside the arc.</li>
+                <li><strong>Using three letters:</strong> The middle letter is always the vertex. For example, for an angle with vertex B and arms extending to A and C, you can write \(\hat{B}\) or \(A\hat{B}C\) or \(C\hat{B}A\). The "hat" symbol (\(\hat{}\)) on the letter shows where the angle is.</li>
+            </ul>
+            <div class="image-container">
+                <img src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/Maths_English_term1_p87_5.png" alt="Angle ABC with B as vertex">
+                <p class="mt-2">Angle ABC, vertex at B.</p>
+            </div>
+
+            <h4>Important Note:</h4>
+            <p>Arrowheads on the lines (arms) mean that the lines keep on going indefinitely. However, **the length of an angle's arms does not change the size of the angle.** Whether the arms are long or short, the angle size stays the same.</p>
+            <p>There are always two angles at a vertex (an inner and an outer, or reflex, angle), so the arc is important to show which one is being discussed.</p>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Angles Revision</h2>
+
+            <!-- Question 1: Lines at an angle -->
+            <div class="question-card" id="q_angle1">
+                <label for="q_angle1_answer">1. Look at the drawing on the right (two non-meeting lines). Are these lines at an angle to each other? Do the lines have to meet to be at an angle?</label>
+                <div class="image-container">
+                    <img src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48892.png" alt="Two lines not meeting">
+                </div>
+                <input type="text" class="form-control" id="q_angle1_answer" placeholder="Enter Yes/No and explanation">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle1', 'yes, no', false)">Check Answer</button>
+                <div class="feedback" id="q_angle1_feedback"></div>
+                <div class="explanation" id="q_angle1_explanation">
+                    <p><strong>Explanation:</strong> Yes, the lines are at an angle to each other. Lines do not have to physically meet to be at an angle; the angle describes their relative direction. If you were to extend them, they would eventually meet and form an angle.</p>
+                </div>
+            </div>
+
+            <!-- Question 2: Arranging angles by size -->
+            <div class="question-card" id="q_angle2">
+                <label for="q_angle2_answer">2. Arrange the angles from biggest to smallest. Just write the letters (a) to (f) in the correct order.</label>
+                <div class="image-container d-flex justify-content-around flex-wrap">
+                    <img title="a" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48803.png" alt="Angle a - small acute">
+                    <img title="b" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48810.png" alt="Angle b - large acute">
+                    <img title="c" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48814.png" alt="Angle c - obtuse">
+                    <img title="d" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48781.png" alt="Angle d - right angle">
+                    <img title="e" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48791.png" alt="Angle e - straight angle">
+                    <img title="f" src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48796.png" alt="Angle f - reflex angle">
+                </div>
+                <input type="text" class="form-control" id="q_angle2_answer" placeholder="e.g., f, e, d, c, b, a">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle2', 'f, e, c, d, b, a', false)">Check Answer</button>
+                <div class="feedback" id="q_angle2_feedback"></div>
+                <div class="explanation" id="q_angle2_explanation">
+                    <p><strong>Explanation:</strong> Based on typical visual representations of angles:
+                    <ul>
+                        <li>(f) Reflex angle (largest, greater than 180°)</li>
+                        <li>(e) Straight angle (180°)</li>
+                        <li>(c) Obtuse angle (between 90° and 180°)</li>
+                        <li>(d) Right angle (exactly 90°)</li>
+                        <li>(b) Acute angle (larger acute)</li>
+                        <li>(a) Acute angle (smaller acute)</li>
+                    </ul>
+                    So the order from biggest to smallest is: f, e, c, d, b, a.</p>
+                </div>
+            </div>
+
+            <!-- Question 3: Checking a right angle -->
+            <div class="question-card" id="q_angle3">
+                <label for="q_angle3_answer">3. How can you check that an angle is a right angle without using any special mathematics equipment? (Hint: Think about where you can find right angles around you.)</label>
+                <textarea class="form-control" id="q_angle3_answer" rows="3" placeholder="Describe your method"></textarea>
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle3', 'You can use the corner of a book, a piece of paper, a ruler, or any object with a known right angle (like a table corner or door frame) to compare with the angle in question.', true)">Check Answer</button>
+                <div class="feedback" id="q_angle3_feedback"></div>
+                <div class="explanation" id="q_angle3_explanation">
+                    <p><strong>Explanation:</strong> You can use the corner of a piece of paper (like an A4 sheet), the corner of a book, a ruler, or any object with a known right angle (e.g., a table corner, a door frame) as a reference. If the angle perfectly fits into the corner, it's a right angle.</p>
+                </div>
+            </div>
+
+            <!-- Question 4: Comparing angles by size (visual/tracing) -->
+            <div class="question-card" id="q_angle4">
+                <label for="q_angle4_answer">4. Are these two angles the same size? Describe how you found your answer.</label>
+                <div class="image-container d-flex justify-content-around">
+                    <img src="https://www.siyavula.com/read/za/mathematics/grade-7/construction-of-geometric-figures/images/48772.png?text=Angle1" alt="Angle 1">
+
+                </div>
+                <input type="text" class="form-control" id="q_angle4_answer" placeholder="Enter Yes/No and explanation">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle4', 'yes, by tracing one angle onto a piece of paper and placing it over the other angle to compare', true)">Check Answer</button>
+                <div class="feedback" id="q_angle4_feedback"></div>
+                <div class="explanation" id="q_angle4_explanation">
+                    <p><strong>Explanation:</strong> Yes, they are the same size. You can verify this by tracing one angle onto a piece of scrap paper and then placing the traced angle over the other angle to see if they perfectly overlap. The length of the arms doesn't affect the angle size.</p>
+                </div>
+            </div>
+
+            <!-- Question 5: Lines drawn with a ruler -->
+            <div class="question-card" id="q_angle5">
+                <label for="q_angle5_answer">5. Two lines are drawn by holding down a ruler and drawing lines on both sides. What can you say about the two lines?</label>
+                <input type="text" class="form-control" id="q_angle5_answer" placeholder="Describe the lines">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle5', 'The two lines are parallel.', true)">Check Answer</button>
+                <div class="feedback" id="q_angle5_feedback"></div>
+                <div class="explanation" id="q_angle5_explanation">
+                    <p><strong>Explanation:</strong> If you draw lines on both sides of a straight ruler without moving the ruler, the two lines will be parallel to each other. This is because they maintain a constant distance apart (the width of the ruler).</p>
+                </div>
+            </div>
+
+            <!-- Question 6a: Clock angles -->
+            <div class="question-card" id="q_angle6a">
+                <label for="q_angle6a_answer">6. (a) Explain why the angle between the hands at 8 o'clock is the same size as the angle at 4 o'clock.</label>
+                <input type="text" class="form-control" id="q_angle6a_answer" placeholder="Explain your reasoning">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_angle6a', 'Both angles are formed by the hands being 4 hours apart on the clock face, just in opposite directions.', true)">Check Answer</button>
+                <div class="feedback" id="q_angle6a_feedback"></div>
+                <div class="explanation" id="q_angle6a_explanation">
+                    <p><strong>Explanation:</strong> At 8 o'clock, the hour hand is at 8 and the minute hand is at 12. The smaller angle spans 4 hours (from 8 to 12). At 4 o'clock, the hour hand is at 4 and the minute hand is at 12. The smaller angle also spans 4 hours (from 12 to 4). Since the number of hours separating the hands is the same, the angle size is the same.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = text.toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9]/g, '');
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

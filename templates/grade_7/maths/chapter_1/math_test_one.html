@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Chapter 1 Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none;
+        }
+        .show-explanation {
+            display: block;
+        }
+        .score-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #d1e7dd;
+            border: 1px solid #a3cfbb;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .multiple-choice {
+            margin-top: 10px;
+        }
+        .multiple-choice input[type="radio"] {
+            margin-right: 8px;
+        }
+        .multiple-choice label {
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 1 Test</h1>
+            <p class="lead">Test your knowledge on Whole Numbers, Multiples, and Basic Operations.</p>
+            <p><strong>Instructions:</strong> Answer all questions. Enter your answers in the input fields or select from multiple choice options. Click "Check All Answers" at the end to see your score and explanations.</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">Test Questions</h2>
+
+            <div class="question-card" id="q1">
+                <label for="q1_answer">1. Write 8 706 as a sum of units, tens, hundreds, and thousands.</label>
+                <input type="text" class="form-control" id="q1_answer" placeholder="e.g., 8000 + 700 + 6">
+                <div class="feedback" id="q1_feedback"></div>
+                <div class="explanation" id="q1_explanation">
+                    <p><strong>Explanation:</strong> To write 8706 as a sum of units, tens, hundreds, and thousands, break down the number by its place values: 8 thousands (8000), 7 hundreds (700), 0 tens (0), and 6 units (6). Since there are no tens, we don't include 0 in the sum. Therefore, the answer is 8000 + 700 + 6.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q2">
+                <label for="q2_answer">2. What is the product of 20 and 500?</label>
+                <input type="number" class="form-control" id="q2_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q2_feedback"></div>
+                <div class="explanation" id="q2_explanation">
+                    <p><strong>Explanation:</strong> To find the product of 20 and 500, multiply: 20 × 500 = 10,000. You can also think of it as 2 × 5 = 10, then add the total number of zeros (1 + 2 = 3 zeros), giving us 10,000.</p>
+                </div>
+            </div>
+            
+            <div class="question-card" id="q3">
+                <label for="q3_answer">3. Calculate: 237 847 + 87 776</label>
+                <input type="number" class="form-control" id="q3_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q3_feedback"></div>
+                <div class="explanation" id="q3_explanation">
+                    <p><strong>Explanation:</strong> To add these numbers, align them by place value and add each column:
+                    <pre>  237,847
++  87,776
+---------
+  325,623</pre>
+                    The sum is 325,623.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q4">
+                <label for="q4_answer">4. Write 493 020 in expanded notation.</label>
+                <input type="text" class="form-control" id="q4_answer" placeholder="e.g., 400000 + 90000 + 3000 + 20">
+                <div class="feedback" id="q4_feedback"></div>
+                <div class="explanation" id="q4_explanation">
+                    <p><strong>Explanation:</strong> To write 493,020 in expanded notation, break it down by place values: 4 hundred thousands (400,000), 9 ten thousands (90,000), 3 thousands (3,000), 0 hundreds (0), 2 tens (20), and 0 units (0). Since we don't include zeros, the expanded form is: 400000 + 90000 + 3000 + 20.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q5">
+                <label for="q5_answer">5. Calculate: 2 × 3 × 5 × 7</label>
+                <input type="number" class="form-control" id="q5_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q5_feedback"></div>
+                <div class="explanation" id="q5_explanation">
+                    <p><strong>Explanation:</strong> Calculate step by step: 2 × 3 = 6, then 6 × 5 = 30, then 30 × 7 = 210. Therefore, 2 × 3 × 5 × 7 = 210.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q6">
+                <label for="q6_answer">6. Write 1 000 as a product of 25 and another number.</label>
+                <input type="number" class="form-control" id="q6_answer" placeholder="Enter the other number">
+                <div class="feedback" id="q6_feedback"></div>
+                <div class="explanation" id="q6_explanation">
+                    <p><strong>Explanation:</strong> To find what number multiplied by 25 gives 1,000, divide 1,000 by 25: 1,000 ÷ 25 = 40. Therefore, 1,000 = 25 × 40, so the other number is 40.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q7">
+                <label for="q7_answer">7. Write 7 000 + 600 + 80 + 4 as a single number.</label>
+                <input type="number" class="form-control" id="q7_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q7_feedback"></div>
+                <div class="explanation" id="q7_explanation">
+                    <p><strong>Explanation:</strong> Add all the place values together: 7,000 + 600 + 80 + 4 = 7,684.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q8">
+                <label>8. How many multiples of 10 are smaller than 250?</label>
+                <div class="multiple-choice">
+                    <input type="radio" id="q8_a" name="q8" value="24">
+                    <label for="q8_a">24</label><br>
+                    <input type="radio" id="q8_b" name="q8" value="25">
+                    <label for="q8_b">25</label><br>
+                    <input type="radio" id="q8_c" name="q8" value="26">
+                    <label for="q8_c">26</label><br>
+                    <input type="radio" id="q8_d" name="q8" value="23">
+                    <label for="q8_d">23</label>
+                </div>
+                <div class="feedback" id="q8_feedback"></div>
+                <div class="explanation" id="q8_explanation">
+                    <p><strong>Explanation:</strong> The multiples of 10 smaller than 250 are: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240. Counting these gives us 24 multiples.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q9">
+                <label for="q9_answer">9. Write 234 500 320 in words.</label>
+                <input type="text" class="form-control" id="q9_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q9_feedback"></div>
+                <div class="explanation" id="q9_explanation">
+                    <p><strong>Explanation:</strong> 234,500,320 is written as: Two hundred and thirty-four million, five hundred thousand, three hundred and twenty.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q10">
+                <label>10. Which number is smaller? 876 243 or 876 234</label>
+                <div class="multiple-choice">
+                    <input type="radio" id="q10_a" name="q10" value="876243">
+                    <label for="q10_a">876 243</label><br>
+                    <input type="radio" id="q10_b" name="q10" value="876234">
+                    <label for="q10_b">876 234</label>
+                </div>
+                <div class="feedback" id="q10_feedback"></div>
+                <div class="explanation" id="q10_explanation">
+                    <p><strong>Explanation:</strong> Compare the numbers digit by digit from left to right. The first difference is in the units place: 3 < 4, so 876,234 < 876,243. Therefore, 876,234 is smaller.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q11">
+                <label for="q11_answer">11. Round 1 328 to the nearest 5.</label>
+                <input type="number" class="form-control" id="q11_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q11_feedback"></div>
+                <div class="explanation" id="q11_explanation">
+                    <p><strong>Explanation:</strong> To round 1,328 to the nearest 5, look at the units digit (8). Since 8 is closer to 10 than to 5, we round up to 1,330.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q12">
+                <label for="q12_answer">12. Round 454 to the nearest 10.</label>
+                <input type="number" class="form-control" id="q12_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q12_feedback"></div>
+                <div class="explanation" id="q12_explanation">
+                    <p><strong>Explanation:</strong> To round 454 to the nearest 10, look at the units digit (4). Since 4 < 5, we round down to 450.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q13">
+                <label for="q13_answer">13. Express 36 as a product of prime factors.</label>
+                <input type="text" class="form-control" id="q13_answer" placeholder="e.g., 2 × 2 × 3 × 3">
+                <div class="feedback" id="q13_feedback"></div>
+                <div class="explanation" id="q13_explanation">
+                    <p><strong>Explanation:</strong> To find the prime factorization of 36: 36 = 4 × 9 = 2² × 3² = 2 × 2 × 3 × 3. The prime factors are 2 and 3.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q14">
+                <label for="q14_answer">14. Find the HCF of 20 and 30.</label>
+                <input type="number" class="form-control" id="q14_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q14_feedback"></div>
+                <div class="explanation" id="q14_explanation">
+                    <p><strong>Explanation:</strong> The factors of 20 are: 1, 2, 4, 5, 10, 20. The factors of 30 are: 1, 2, 3, 5, 6, 10, 15, 30. The common factors are: 1, 2, 5, 10. The highest common factor (HCF) is 10.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q15">
+                <label for="q15_answer">15. Calculate: 500 + 30 × 10</label>
+                <input type="number" class="form-control" id="q15_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q15_feedback"></div>
+                <div class="explanation" id="q15_explanation">
+                    <p><strong>Explanation:</strong> Following the order of operations (BODMAS), multiplication comes before addition: 30 × 10 = 300, then 500 + 300 = 800.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q16">
+                <label for="q16_answer">16. Calculate: (500 + 30) × 10</label>
+                <input type="number" class="form-control" id="q16_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q16_feedback"></div>
+                <div class="explanation" id="q16_explanation">
+                    <p><strong>Explanation:</strong> Following the order of operations, brackets come first: (500 + 30) = 530, then 530 × 10 = 5,300.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q17">
+                <label for="q17_answer">17. Calculate: 50 × (70 + 30)</label>
+                <input type="number" class="form-control" id="q17_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q17_feedback"></div>
+                <div class="explanation" id="q17_explanation">
+                    <p><strong>Explanation:</strong> First calculate the brackets: (70 + 30) = 100, then 50 × 100 = 5,000.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q18">
+                <label for="q18_answer">18. Calculate: 6 234 - 2 992</label>
+                <input type="number" class="form-control" id="q18_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q18_feedback"></div>
+                <div class="explanation" id="q18_explanation">
+                    <p><strong>Explanation:</strong> Subtract column by column, borrowing when necessary:
+                    <pre>  6,234
+- 2,992
+-------
+  3,242</pre>
+                    The answer is 3,242.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q19">
+                <label for="q19_answer">19. Calculate: 53 × 738</label>
+                <input type="number" class="form-control" id="q19_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q19_feedback"></div>
+                <div class="explanation" id="q19_explanation">
+                    <p><strong>Explanation:</strong> Using long multiplication:
+                    <pre>    738
+  ×  53
+  -----
+   2214  (738 × 3)
+  36900  (738 × 50)
+  -----
+  39114</pre>
+                    The answer is 39,114.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q20">
+                <label for="q20_answer">20. You want to buy chickens at R37 each and you have R920 available. How many chickens can you buy?</label>
+                <input type="number" class="form-control" id="q20_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q20_feedback"></div>
+                <div class="explanation" id="q20_explanation">
+                    <p><strong>Explanation:</strong> Divide the total money by the cost per chicken: R920 ÷ R37 = 24 remainder R32. Since you can't buy a fraction of a chicken, you can buy 24 chickens.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q21">
+                <label for="q21_answer">21. R880 is to be shared equally among 34 learners. How many full rands can each learner get?</label>
+                <input type="number" class="form-control" id="q21_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q21_feedback"></div>
+                <div class="explanation" id="q21_explanation">
+                    <p><strong>Explanation:</strong> Divide R880 by 34: R880 ÷ 34 = R25 remainder R30. Each learner gets R25 (full rands only).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q22">
+                <label for="q22_answer">22. 42 equal bags of rice weigh a total of 7 560 g. How much does one bag weigh?</label>
+                <input type="number" class="form-control" id="q22_answer" placeholder="Enter your answer in grams">
+                <div class="feedback" id="q22_feedback"></div>
+                <div class="explanation" id="q22_explanation">
+                    <p><strong>Explanation:</strong> Divide the total weight by the number of bags: 7,560g ÷ 42 = 180g. Each bag weighs 180 grams.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q23">
+                <label for="q23_answer">23. The number 26 was multiplied by a secret number and the answer was 2 184. What was the secret number?</label>
+                <input type="number" class="form-control" id="q23_answer" placeholder="Enter your answer">
+                <div class="feedback" id="q23_feedback"></div>
+                <div class="explanation" id="q23_explanation">
+                    <p><strong>Explanation:</strong> To find the secret number, divide the result by 26: 2,184 ÷ 26 = 84. The secret number is 84.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q24">
+                <label for="q24_answer">24. During heavy rain, water level increases at 8 cm per hour. By how much will it increase in 24 hours?</label>
+                <input type="number" class="form-control" id="q24_answer" placeholder="Enter your answer in cm">
+                <div class="feedback" id="q24_feedback"></div>
+                <div class="explanation" id="q24_explanation">
+                    <p><strong>Explanation:</strong> Multiply the rate by the time: 8 cm/hour × 24 hours = 192 cm. The water level will increase by 192 cm.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q25">
+                <label for="q25_answer">25. A woman drives at 95 km per hour. How far does she travel in 4 hours?</label>
+                <input type="number" class="form-control" id="q25_answer" placeholder="Enter your answer in km">
+                <div class="feedback" id="q25_feedback"></div>
+                <div class="explanation" id="q25_explanation">
+                    <p><strong>Explanation:</strong> Multiply speed by time: 95 km/hour × 4 hours = 380 km. She travels 380 kilometers.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-success btn-lg" onclick="checkAllAnswers()">Check All Answers</button>
+            </div>
+
+            <div class="score-section mt-5" id="scoreSection" style="display:none;">
+                <h3>Your Score: <span id="scoreDisplay">0/25</span></h3>
+                <p id="percentageDisplay"></p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const correctAnswers = {
+            q1: "8000+700+6",
+            q2: 10000,
+            q3: 325623,
+            q4: "400000+90000+3000+20",
+            q5: 210,
+            q6: 40,
+            q7: 7684,
+            q8: "24",
+            q9: "twohundredandthirty-fourmillion,fivehundredthousand,threehundredandtwenty",
+            q10: "876234",
+            q11: 1330,
+            q12: 450,
+            q13: "2×2×3×3",
+            q14: 10,
+            q15: 800,
+            q16: 5300,
+            q17: 5000,
+            q18: 3242,
+            q19: 39114,
+            q20: 24,
+            q21: 25,
+            q22: 180,
+            q23: 84,
+            q24: 192,
+            q25: 380
+        };
+
+        function normalizeInput(input) {
+            if (typeof input === 'string') {
+                return input.trim().replace(/[\s,]/g, '').toLowerCase();
+            }
+            return input;
+        }
+
+        function checkAllAnswers() {
+            let score = 0;
+            const totalQuestions = 25;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionId = `q${i}`;
+                let userAnswer;
+                
+                // Handle multiple choice questions
+                if (i === 8 || i === 10) {
+                    const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+                    userAnswer = selectedOption ? selectedOption.value : "";
+                } else {
+                    const userAnswerElement = document.getElementById(`${questionId}_answer`);
+                    userAnswer = userAnswerElement ? userAnswerElement.value : "";
+                }
+
+                const feedbackElement = document.getElementById(`${questionId}_feedback`);
+                const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+                const normalizedUserAnswer = normalizeInput(userAnswer);
+                const normalizedCorrectAnswer = normalizeInput(correctAnswers[questionId]);
+
+                let isCorrect = false;
+                if (typeof correctAnswers[questionId] === 'number') {
+                    isCorrect = (parseFloat(normalizedUserAnswer) === correctAnswers[questionId]);
+                } else {
+                    isCorrect = (normalizedUserAnswer === normalizedCorrectAnswer);
+                }
+
+                if (isCorrect) {
+                    feedbackElement.textContent = "Correct!";
+                    feedbackElement.className = "feedback correct";
+                    score++;
+                } else {
+                    feedbackElement.textContent = "Incorrect.";
+                    feedbackElement.className = "feedback incorrect";
+                }
+                explanationElement.classList.add('show-explanation');
+            }
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const percentageDisplay = document.getElementById('percentageDisplay');
+            const scoreSection = document.getElementById('scoreSection');
+
+            scoreDisplay.textContent = `${score}/${totalQuestions}`;
+            const percentage = (score / totalQuestions * 100).toFixed(1);
+            percentageDisplay.textContent = `Percentage: ${percentage}%`;
+            scoreSection.style.display = 'block';
+
+            // Scroll to score section
+            scoreSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

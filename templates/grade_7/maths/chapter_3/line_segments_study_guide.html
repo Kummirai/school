@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Line Segments, Lines, and Rays</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 3</h1>
+            <p class="lead">Geometry of Straight Lines: Line Segments, Lines and Rays</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">3.1 Line segments, lines and rays</h2>
+            <p>In geometry, it's important to understand the precise definitions of basic building blocks like line segments, lines, and rays. While we can draw representations of them, their true definitions describe their extent.</p>
+
+            <h3 class="subsection-title">Line Segments</h3>
+            <p>A <strong>line segment</strong> is a part of a line that has a definite starting point and a definite endpoint. Because it has clear boundaries, we can draw and measure line segments.</p>
+            <div class="image-container">
+                <img src="line-segments.png" alt="Example of a line segment">
+                <p class="mt-2">A line segment has a definite start and end.</p>
+            </div>
+            <h4>Examples:</h4>
+            <ul>
+                <li>Each side of a quadrilateral (a four-sided shape) is a line segment.</li>
+                <li>Drawing a line 12 cm long means drawing a line segment.</li>
+            </ul>
+
+            <h3 class="subsection-title">Lines</h3>
+            <p>A <strong>line</strong> is different from a line segment because it has no ends; it extends indefinitely in both directions. We cannot draw a complete line, so we represent it by drawing a line segment with arrows at both ends to show that it continues forever.</p>
+            <div class="image-container">
+                <img src="line.png" alt="Example of a line with arrows">
+                <p class="mt-2">A line extends indefinitely in both directions.</p>
+            </div>
+            <h4>Key characteristics:</h4>
+            <ul>
+                <li>Goes on indefinitely in both directions.</li>
+                <li>Cannot be measured.</li>
+                <li>Represented with arrows at both ends.</li>
+            </ul>
+
+            <h3 class="subsection-title">Rays (or Half-lines)</h3>
+            <p>A <strong>ray</strong> (sometimes called a half-line) has a definite starting point but goes on indefinitely in only one direction. We draw its starting point and part of it, using an arrow at one end to indicate its infinite extension.</p>
+            <div class="image-container">
+                <img src="ray.png" alt="Example of a ray with one arrow">
+                <p class="mt-2">A ray has a starting point and extends indefinitely in one direction.</p>
+            </div>
+            <h4>Key characteristics:</h4>
+            <ul>
+                <li>Has a definite starting point.</li>
+                <li>Extends indefinitely in one direction.</li>
+                <li>Represented with an arrow at one end.</li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Line Segments, Lines and Rays</h2>
+
+            <!-- Question 1: Definition of Line Segment -->
+            <div class="question-card" id="q_geom1">
+                <label for="q_geom1_answer">1. Which of the following has a definite starting point and a definite endpoint?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_geom1_options" id="q_geom1_optA" value="a">
+                    <label class="form-check-label" for="q_geom1_optA">
+                        (a) A line
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_geom1_options" id="q_geom1_optB" value="b">
+                    <label class="form-check-label" for="q_geom1_optB">
+                        (b) A ray
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_geom1_options" id="q_geom1_optC" value="c">
+                    <label class="form-check-label" for="q_geom1_optC">
+                        (c) A line segment
+                    </label>
+                </div>
+                <button class="btn btn-primary mt-2" onclick="checkRadioAnswer('q_geom1', 'c')">Check Answer</button>
+                <div class="feedback" id="q_geom1_feedback"></div>
+                <div class="explanation" id="q_geom1_explanation">
+                    <p><strong>Explanation:</strong> A line segment is defined by having both a definite starting point and a definite endpoint. A line extends infinitely in both directions, and a ray extends infinitely in one direction.</p>
+                </div>
+            </div>
+
+            <!-- Question 2: Properties of a Line -->
+            <div class="question-card" id="q_geom2">
+                <label for="q_geom2_answer">2. True or False: A line can be measured.</label>
+                <select class="form-select" id="q_geom2_answer">
+                    <option value="">Select...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_geom2', 'false')">Check Answer</button>
+                <div class="feedback" id="q_geom2_feedback"></div>
+                <div class="explanation" id="q_geom2_explanation">
+                    <p><strong>Explanation:</strong> False. A line extends indefinitely in both directions, meaning it has no end, and therefore cannot be measured. Only line segments can be measured.</p>
+                </div>
+            </div>
+
+            <!-- Question 3: Identifying a Ray -->
+            <div class="question-card" id="q_geom3">
+                <label for="q_geom3_answer">3. Which geometric figure has one definite starting point and extends infinitely in one direction?</label>
+                <input type="text" class="form-control" id="q_geom3_answer" placeholder="Enter 'line', 'line segment', or 'ray'">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_geom3', 'ray', true)">Check Answer</button>
+                <div class="feedback" id="q_geom3_feedback"></div>
+                <div class="explanation" id="q_geom3_explanation">
+                    <p><strong>Explanation:</strong> This describes a ray. It begins at a point and continues without end in a single direction.</p>
+                </div>
+            </div>
+
+            <!-- Question 4: Meeting points for line segments -->
+            <div class="question-card" id="q_geom4">
+                <label for="q_geom4_answer">4. Do line segments XY and GH meet anywhere if they are drawn as shown below (crossing each other)?</label>
+                <div class="image-container">
+                    <img src="https://www.siyavula.com/read/za/mathematics/grade-7/geometry-of-straight-lines/images/89879.png" alt="Two crossing line segments">
+                </div>
+                <select class="form-select" id="q_geom4_answer">
+                    <option value="">Select...</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_geom4', 'yes', false)">Check Answer</button>
+                <div class="feedback" id="q_geom4_feedback"></div>
+                <div class="explanation" id="q_geom4_explanation">
+                    <p><strong>Explanation:</strong> Yes, if two line segments are drawn such that they cross each other, they meet at their point of intersection. The image shows them crossing, so they meet.</p>
+                </div>
+            </div>
+
+            <!-- Question 5: Meeting points for lines -->
+            <div class="question-card" id="q_geom5">
+                <label for="q_geom5_answer">5. Do lines KL and NP meet anywhere if they are drawn as shown below (intersecting)?</label>
+                <div class="image-container">
+                    <img src="https://www.siyavula.com/read/za/mathematics/grade-7/geometry-of-straight-lines/images/89873.png" alt="Two intersecting lines">
+                </div>
+                <select class="form-select" id="q_geom5_answer">
+                    <option value="">Select...</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_geom5', 'yes', false)">Check Answer</button>
+                <div class="feedback" id="q_geom5_feedback"></div>
+                <div class="explanation" id="q_geom5_explanation">
+                    <p><strong>Explanation:</strong> Yes, lines that are not parallel will always meet at some point if extended indefinitely. The image shows them intersecting, meaning they meet.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text) {
+            return text.toLowerCase().replace(/[^a-z]/g, ''); // Simple normalization for text answers
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value.trim();
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeInput ? normalizeText(userAnswer) : userAnswer.toLowerCase();
+            let normalizedCorrectAnswer = normalizeInput ? normalizeText(correctAnswer) : correctAnswer.toLowerCase();
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

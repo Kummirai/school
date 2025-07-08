@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Multiples of 10, 100, 1000, 10000 (Fixed Math)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 1</h1>
+            <p class="lead">Multiples of 10, 100, 1000 and 10000</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">1.3 Multiples of Powers of Ten</h2>
+            <p>Understanding multiples of 10, 100, 1000, and 10000 is fundamental for quick calculations and a deeper understanding of place value. When you multiply a number by 10, 100, 1000, or any power of ten, you essentially shift the digits to the left and add zeros to the end.</p>
+
+            <h3>The Rule of Zeros:</h3>
+            <p>When multiplying a whole number by 10, 100, 1000, etc., you simply write the original number and then add the same number of zeros as there are in the multiplier (10, 100, 1000).</p>
+
+            <h4>Examples:</h4>
+            <ul>
+                <li>To multiply by 10 (one zero): \(7 \times 10 = 70\) (add one zero)</li>
+                <li>To multiply by 100 (two zeros): \(25 \times 100 = 2500\) (add two zeros)</li>
+                <li>To multiply by 1000 (three zeros): \(12 \times 1000 = 12000\) (add three zeros)</li>
+                <li>To multiply by 10000 (four zeros): \(3 \times 10000 = 30000\) (add four zeros)</li>
+            </ul>
+            <p>This concept also extends to division: when dividing by 10, 100, 1000, you remove zeros from the end of the number (or shift the decimal point to the left).</p>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Multiples of 10, 100, 1000, 10000</h2>
+
+            <div class="question-card" id="q_pow1">
+                <label for="q_pow1_answer">1. Calculate: \(15 \times 100\)</label>
+                <input type="number" class="form-control" id="q_pow1_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_pow1', 1500)">Check Answer</button>
+                <div class="feedback" id="q_pow1_feedback"></div>
+                <div class="explanation" id="q_pow1_explanation">
+                    <p><strong>Explanation:</strong> When multiplying by 100, you take the original number (15) and add two zeros to the end. So, \(15 \times 100 = 1500\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_pow2">
+                <label for="q_pow2_answer">2. What is \(456 \times 1000\)?</label>
+                <input type="number" class="form-control" id="q_pow2_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_pow2', 456000)">Check Answer</button>
+                <div class="feedback" id="q_pow2_feedback"></div>
+                <div class="explanation" id="q_pow2_explanation">
+                    <p><strong>Explanation:</strong> To multiply by 1000, you add three zeros to the original number. \(456 \times 1000 = 456000\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_pow3">
+                <label for="q_pow3_answer">3. Find the missing number: \( \text{______} \times 10 = 780\)</label>
+                <input type="number" class="form-control" id="q_pow3_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_pow3', 78)">Check Answer</button>
+                <div class="feedback" id="q_pow3_feedback"></div>
+                <div class="explanation" id="q_pow3_explanation">
+                    <p><strong>Explanation:</strong> If multiplying by 10 adds one zero, then to reverse the process (find the original number), you remove one zero. So, \(780 \div 10 = 78\). The missing number is 78.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_pow4">
+                <label for="q_pow4_answer">4. How many tens are there in 500?</label>
+                <input type="number" class="form-control" id="q_pow4_answer" placeholder="Enter your answer">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_pow4', 50)">Check Answer</button>
+                <div class="feedback" id="q_pow4_feedback"></div>
+                <div class="explanation" id="q_pow4_explanation">
+                    <p><strong>Explanation:</strong> This question is asking you to divide 500 by 10. \(500 \div 10 = 50\). There are 50 tens in 500.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_pow5">
+                <label for="q_pow5_answer">5. Complete the sequence: \(300, 3000, 30000, \text{______}\).</label>
+                <input type="number" class="form-control" id="q_pow5_answer" placeholder="Enter the next number">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_pow5', 300000)">Check Answer</button>
+                <div class="feedback" id="q_pow5_feedback"></div>
+                <div class="explanation" id="q_pow5_explanation">
+                    <p><strong>Explanation:</strong> Each number in the sequence is obtained by multiplying the previous number by 10.
+                        <ul>
+                            <li>\(300 \times 10 = 3000\)</li>
+                            <li>\(3000 \times 10 = 30000\)</li>
+                            <li>Therefore, the next number is \(30000 \times 10 = 300000\).</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (parseInt(userAnswer) === correctAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

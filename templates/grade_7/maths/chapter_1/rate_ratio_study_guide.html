@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Problem Solving - Rate and Ratio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 1</h1>
+            <p class="lead">Problem Solving: Rate and Ratio</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">1.6 Problem Solving: Rate and Ratio</h2>
+            <p>Rate and ratio are important concepts used to compare quantities. They help us understand relationships between different measurements or parts of a whole.</p>
+
+            <h3 class="subsection-title">Understanding Ratio</h3>
+            <p>A <strong>ratio</strong> compares two or more quantities of the same kind. It shows how much of one quantity there is compared to another. Ratios can be written in several ways: using a colon (e.g., \(2:3\)), using the word "to" (e.g., 2 to 3), or as a fraction (e.g., \(\frac{2}{3}\)). Ratios should always be simplified to their simplest form.</p>
+            <h4>Examples:</h4>
+            <ul>
+                <li>If there are 3 apples and 2 bananas, the ratio of apples to bananas is \(3:2\).</li>
+                <li>The ratio of boys to girls in a class of 10 boys and 15 girls is \(10:15\), which simplifies to \(2:3\).</li>
+            </ul>
+
+            <h3 class="subsection-title">Understanding Rate</h3>
+            <p>A <strong>rate</strong> is a special type of ratio that compares two quantities with different units. Rates often describe how much of one thing there is per unit of another thing.</p>
+            <h4>Examples:</h4>
+            <ul>
+                <li>Speed is a rate: kilometers per hour (km/h) or meters per second (m/s).</li>
+                <li>Cost per item is a rate: Rands per kilogram (R/kg) or dollars per litre ($/L).</li>
+                <li>Heartbeat is a rate: beats per minute (bpm).</li>
+            </ul>
+            <p>A <strong>unit rate</strong> is a rate where the second quantity is 1 unit (e.g., 60 km/h, $5/kg).</p>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Rate and Ratio</h2>
+
+            <div class="question-card" id="q_rr1">
+                <label for="q_rr1_answer">1. Simplify the ratio \(18:24\).</label>
+                <input type="text" class="form-control" id="q_rr1_answer" placeholder="e.g., 3:4">
+                <button class="btn btn-primary mt-2" onclick="checkRatio('q_rr1', '3:4')">Check Answer</button>
+                <div class="feedback" id="q_rr1_feedback"></div>
+                <div class="explanation" id="q_rr1_explanation">
+                    <p><strong>Explanation:</strong> To simplify a ratio, find the greatest common factor (GCF) of both numbers and divide both by it. The GCF of 18 and 24 is 6.
+                    <ul>
+                        <li>\(18 \div 6 = 3\)</li>
+                        <li>\(24 \div 6 = 4\)</li>
+                    </ul>
+                    So, the simplified ratio is \(3:4\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_rr2">
+                <label for="q_rr2_answer">2. In a basket, there are 15 red apples and 10 green apples. What is the ratio of red apples to green apples in its simplest form?</label>
+                <input type="text" class="form-control" id="q_rr2_answer" placeholder="e.g., 3:2">
+                <button class="btn btn-primary mt-2" onclick="checkRatio('q_rr2', '3:2')">Check Answer</button>
+                <div class="feedback" id="q_rr2_feedback"></div>
+                <div class="explanation" id="q_rr2_explanation">
+                    <p><strong>Explanation:</strong> The ratio of red apples to green apples is \(15:10\). To simplify, find the GCF of 15 and 10, which is 5.
+                    <ul>
+                        <li>\(15 \div 5 = 3\)</li>
+                        <li>\(10 \div 5 = 2\)</li>
+                    </ul>
+                    The simplified ratio is \(3:2\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_rr3">
+                <label for="q_rr3_answer">3. A car travels 240 kilometers in 3 hours. What is its average speed in kilometers per hour (km/h)?</label>
+                <input type="number" class="form-control" id="q_rr3_answer" placeholder="Enter km/h">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_rr3', 80)">Check Answer</button>
+                <div class="feedback" id="q_rr3_feedback"></div>
+                <div class="explanation" id="q_rr3_explanation">
+                    <p><strong>Explanation:</strong> Speed is calculated as distance divided by time.
+                    $$ \text{Speed} = \frac{\text{Distance}}{\text{Time}} $$
+                    $$ \text{Speed} = \frac{240 \text{ km}}{3 \text{ hours}} = 80 \text{ km/h} $$
+                    The average speed is 80 km/h.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_rr4">
+                <label for="q_rr4_answer">4. If 5 pens cost R40, what is the cost of one pen (unit price)?</label>
+                <input type="number" class="form-control" id="q_rr4_answer" placeholder="Enter Rands">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_rr4', 8)">Check Answer</button>
+                <div class="feedback" id="q_rr4_feedback"></div>
+                <div class="explanation" id="q_rr4_explanation">
+                    <p><strong>Explanation:</strong> To find the cost of one pen, divide the total cost by the number of pens:
+                    $$ \text{Cost per pen} = \frac{\text{Total Cost}}{\text{Number of Pens}} $$
+                    $$ \text{Cost per pen} = \frac{\text{R}40}{5 \text{ pens}} = \text{R}8 \text{ per pen} $$
+                    The cost of one pen is R8.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_rr5">
+                <label for="q_rr5_answer">5. Sarah and Tom share R90 in the ratio \(4:5\). How much money does Tom get?</label>
+                <input type="number" class="form-control" id="q_rr5_answer" placeholder="Enter Rands">
+                <button class="btn btn-primary mt-2" onclick="checkAnswer('q_rr5', 50)">Check Answer</button>
+                <div class="feedback" id="q_rr5_feedback"></div>
+                <div class="explanation" id="q_rr5_explanation">
+                    <p><strong>Explanation:</strong>
+                        <ol>
+                            <li>First, find the total number of parts in the ratio: \(4 + 5 = 9\) parts.</li>
+                            <li>Next, find the value of one part by dividing the total money by the total parts: \( \text{R}90 \div 9 = \text{R}10 \text{ per part} \).</li>
+                            <li>Tom gets 5 parts: \(5 \times \text{R}10 = \text{R}50\).</li>
+                        </ol>
+                        Tom gets R50.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (parseFloat(userAnswer) === correctAnswer) { // Use parseFloat for potential decimal answers, though these are whole numbers
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRatio(questionId, correctAnswerString) {
+            const userAnswer = document.getElementById(`${questionId}_answer`).value.trim().replace(/\s/g, '').toLowerCase(); // Remove spaces and convert to lowercase
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            const normalizedCorrectAnswer = correctAnswerString.trim().replace(/\s/g, '').toLowerCase();
+
+            if (userAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>
