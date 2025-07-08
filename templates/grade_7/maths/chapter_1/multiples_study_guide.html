@@ -1,5 +1,23 @@
 {% extends 'base.html' %} {% block title %}Grade 7 Mathematics: Multiples{%
 endblock %} {% block content %}
+{% block content %}
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel">Lesson Video: {{ lesson.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ratio ratio-16x9">
+          <iframe id="lessonVideoFrame" src="" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="header">
     <h1 class="display-4">Grade 7 Mathematics: Chapter 1</h1>
@@ -8,6 +26,9 @@ endblock %} {% block content %}
 
   <section>
     <h2 class="section-title">1.2 Multiples</h2>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ lesson.video_url }}">
+      <i class="bi bi-play-circle me-2"></i> Watch Video Lesson
+    </button>
     <p>
       A multiple of a number is the result of multiplying that number by an
       integer (a whole number). Essentially, multiples are what you get when you
@@ -165,71 +186,91 @@ endblock %} {% block content %}
 </div>
 
 <script>
-  function checkAnswer(questionId, correctAnswer) {
-    const userAnswer = document.getElementById(`${questionId}_answer`).value;
-    const feedbackElement = document.getElementById(`${questionId}_feedback`);
-    const explanationElement = document.getElementById(
-      `${questionId}_explanation`
-    );
+  document.addEventListener('DOMContentLoaded', function () {
+    const videoModal = document.getElementById('videoModal');
+    const lessonVideoFrame = document.getElementById('lessonVideoFrame');
 
-    if (parseInt(userAnswer) === correctAnswer) {
-      feedbackElement.textContent = "Correct! Well done.";
-      feedbackElement.className = "feedback correct";
-    } else {
-      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-      feedbackElement.className = "feedback incorrect";
+    videoModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const videoUrl = button.getAttribute('data-video-url');
+      lessonVideoFrame.src = videoUrl;
+    });
+
+    videoModal.addEventListener('hide.bs.modal', function () {
+      lessonVideoFrame.src = ''; // Stop the video when modal is closed
+    });
+
+    function checkAnswer(questionId, correctAnswer) {
+      const userAnswer = document.getElementById(`${questionId}_answer`).value;
+      const feedbackElement = document.getElementById(`${questionId}_feedback`);
+      const explanationElement = document.getElementById(
+        `${questionId}_explanation`
+      );
+
+      if (parseInt(userAnswer) === correctAnswer) {
+        feedbackElement.textContent = "Correct! Well done.";
+        feedbackElement.className = "feedback correct";
+      } else {
+        feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+        feedbackElement.className = "feedback incorrect";
+      }
+      explanationElement.classList.add("show-explanation");
     }
-    explanationElement.classList.add("show-explanation");
-  }
 
-  function checkMultiples(questionId, correctArray) {
-    const userAnswer = document.getElementById(`${questionId}_answer`).value;
-    const feedbackElement = document.getElementById(`${questionId}_feedback`);
-    const explanationElement = document.getElementById(
-      `${questionId}_explanation`
-    );
+    function checkMultiples(questionId, correctArray) {
+      const userAnswer = document.getElementById(`${questionId}_answer`).value;
+      const feedbackElement = document.getElementById(`${questionId}_feedback`);
+      const explanationElement = document.getElementById(
+        `${questionId}_explanation`
+      );
 
-    const userArray = userAnswer
-      .split(",")
-      .map((num) => parseInt(num.trim()))
-      .filter((num) => !isNaN(num));
+      const userArray = userAnswer
+        .split(",")
+        .map((num) => parseInt(num.trim()))
+        .filter((num) => !isNaN(num));
 
-    // Sort both arrays for consistent comparison
-    userArray.sort((a, b) => a - b);
-    const sortedCorrectArray = [...correctArray].sort((a, b) => a - b);
+      // Sort both arrays for consistent comparison
+      userArray.sort((a, b) => a - b);
+      const sortedCorrectArray = [...correctArray].sort((a, b) => a - b);
 
-    if (
-      userArray.length !== sortedCorrectArray.length ||
-      !userArray.every((val, index) => val === sortedCorrectArray[index])
-    ) {
-      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-      feedbackElement.className = "feedback incorrect";
-    } else {
-      feedbackElement.textContent = "Correct! Well done.";
-      feedbackElement.className = "feedback correct";
+      if (
+        userArray.length !== sortedCorrectArray.length ||
+        !userArray.every((val, index) => val === sortedCorrectArray[index])
+      ) {
+        feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+        feedbackElement.className = "feedback incorrect";
+      } else {
+        feedbackElement.textContent = "Correct! Well done.";
+        feedbackElement.className = "feedback correct";
+      }
+      explanationElement.classList.add("show-explanation");
     }
-    explanationElement.classList.add("show-explanation");
-  }
 
-  function checkYesNo(questionId, correctAnswer) {
-    const userAnswer = document
-      .getElementById(`${questionId}_answer`)
-      .value.trim()
-      .toLowerCase();
-    const feedbackElement = document.getElementById(`${questionId}_feedback`);
-    const explanationElement = document.getElementById(
-      `${questionId}_explanation`
-    );
+    function checkYesNo(questionId, correctAnswer) {
+      const userAnswer = document
+        .getElementById(`${questionId}_answer`)
+        .value.trim()
+        .toLowerCase();
+      const feedbackElement = document.getElementById(`${questionId}_feedback`);
+      const explanationElement = document.getElementById(
+        `${questionId}_explanation`
+      );
 
-    if (userAnswer === correctAnswer) {
-      feedbackElement.textContent = "Correct! Well done.";
-      feedbackElement.className = "feedback correct";
-    } else {
-      feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-      feedbackElement.className = "feedback incorrect";
+      if (userAnswer === correctAnswer) {
+        feedbackElement.textContent = "Correct! Well done.";
+        feedbackElement.className = "feedback correct";
+      } else {
+        feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+        feedbackElement.className = "feedback incorrect";
+      }
+      explanationElement.classList.add("show-explanation");
     }
-    explanationElement.classList.add("show-explanation");
-  }
+
+    // Make functions globally accessible
+    window.checkAnswer = checkAnswer;
+    window.checkMultiples = checkMultiples;
+    window.checkYesNo = checkYesNo;
+  });
 </script>
 
 {% endblock %}

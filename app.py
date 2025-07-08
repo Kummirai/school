@@ -1868,6 +1868,40 @@ def get_plan_price(plan_id):
 def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
+
+@app.route('/grade/<int:grade_num>/maths/chapter/<int:chapter_num>/<filename>')
+def study_guide_page(grade_num, chapter_num, filename):
+    # Construct the path to the grade-specific JSON file
+    json_file_path = os.path.join(app.root_path, 'static', 'data', f'grade{grade_num}_math.json')
+
+    try:
+        with open(json_file_path, 'r') as f:
+            subject_data = json.load(f)
+    except FileNotFoundError:
+        abort(404)  # Or render a custom error page
+
+    lesson_data = None
+    # Iterate through terms, units, and lessons to find the matching study guide
+    for term in subject_data.get('terms', []):
+        for unit in term.get('units', []):
+            for lesson in unit.get('lessons', []):
+                # Check if 'study_guide_filename' exists and matches
+                if lesson.get('study_guide_filename') == filename:
+                    lesson_data = lesson
+                    break
+            if lesson_data:
+                break
+        if lesson_data:
+            break
+
+    if not lesson_data:
+        abort(404) # Study guide not found in JSON data
+
+    # Render the specific study guide template
+    # Assuming study guides are in templates/grade_X/maths/chapter_Y/
+    template_path = f'grade_{grade_num}/maths/chapter_{chapter_num}/{filename}'
+    return render_template(template_path, lesson=lesson_data)
+
 # Decorators
 
 

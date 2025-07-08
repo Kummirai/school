@@ -1,6 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Grade 7 Mathematics: Basic Operations{% endblock %}
 {% block content %}
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel">Lesson Video: {{ lesson.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ratio ratio-16x9">
+          <iframe id="lessonVideoFrame" src="" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body>
   <div class="container">
     <div class="header">
@@ -14,6 +31,9 @@
       <h2 class="section-title">
         1.5 Basic Operations: Adding, Subtracting, Multiplying and Dividing
       </h2>
+      <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ lesson.video_url }}">
+        <i class="bi bi-play-circle me-2"></i> Watch Video Lesson
+      </button>
       <p>
         Mastering basic operations with whole numbers is crucial for all areas
         of mathematics. This section revises the concepts and properties of
@@ -293,48 +313,67 @@
   </div>
 
   <script>
-    function checkAnswer(questionId, correctAnswer) {
-      const userAnswer = document.getElementById(`${questionId}_answer`).value;
-      const feedbackElement = document.getElementById(`${questionId}_feedback`);
-      const explanationElement = document.getElementById(
-        `${questionId}_explanation`
-      );
+    document.addEventListener('DOMContentLoaded', function () {
+      const videoModal = document.getElementById('videoModal');
+      const lessonVideoFrame = document.getElementById('lessonVideoFrame');
 
-      if (parseInt(userAnswer) === correctAnswer) {
-        feedbackElement.textContent = "Correct! Well done.";
-        feedbackElement.className = "feedback correct";
-      } else {
-        feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-        feedbackElement.className = "feedback incorrect";
+      videoModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const videoUrl = button.getAttribute('data-video-url');
+        lessonVideoFrame.src = videoUrl;
+      });
+
+      videoModal.addEventListener('hide.bs.modal', function () {
+        lessonVideoFrame.src = ''; // Stop the video when modal is closed
+      });
+
+      function checkAnswer(questionId, correctAnswer) {
+        const userAnswer = document.getElementById(`${questionId}_answer`).value;
+        const feedbackElement = document.getElementById(`${questionId}_feedback`);
+        const explanationElement = document.getElementById(
+          `${questionId}_explanation`
+        );
+
+        if (parseInt(userAnswer) === correctAnswer) {
+          feedbackElement.textContent = "Correct! Well done.";
+          feedbackElement.className = "feedback correct";
+        } else {
+          feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+          feedbackElement.className = "feedback incorrect";
+        }
+        explanationElement.classList.add("show-explanation");
       }
-      explanationElement.classList.add("show-explanation");
-    }
 
-    function checkDivisionRemainder(
-      questionId,
-      correctBoxes,
-      correctRemainder
-    ) {
-      const userAnswer = document
-        .getElementById(`${questionId}_answer`)
-        .value.trim()
-        .toLowerCase();
-      const feedbackElement = document.getElementById(`${questionId}_feedback`);
-      const explanationElement = document.getElementById(
-        `${questionId}_explanation`
-      );
+      function checkDivisionRemainder(
+        questionId,
+        correctBoxes,
+        correctRemainder
+      ) {
+        const userAnswer = document
+          .getElementById(`${questionId}_answer`)
+          .value.trim()
+          .toLowerCase();
+        const feedbackElement = document.getElementById(`${questionId}_feedback`);
+        const explanationElement = document.getElementById(
+          `${questionId}_explanation`
+        );
 
-      const expectedString = `${correctBoxes} boxes, ${correctRemainder} cookies left`;
+        const expectedString = `${correctBoxes} boxes, ${correctRemainder} cookies left`;
 
-      if (userAnswer === expectedString.toLowerCase()) {
-        feedbackElement.textContent = "Correct! Well done.";
-        feedbackElement.className = "feedback correct";
-      } else {
-        feedbackElement.textContent = `Incorrect. Please review the explanation.`;
-        feedbackElement.className = "feedback incorrect";
+        if (userAnswer === expectedString.toLowerCase()) {
+          feedbackElement.textContent = "Correct! Well done.";
+          feedbackElement.className = "feedback correct";
+        } else {
+          feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+          feedbackElement.className = "feedback incorrect";
+        }
+        explanationElement.classList.add("show-explanation");
       }
-      explanationElement.classList.add("show-explanation");
-    }
+
+      // Make checkAnswer and checkDivisionRemainder globally accessible
+      window.checkAnswer = checkAnswer;
+      window.checkDivisionRemainder = checkDivisionRemainder;
+    });
   </script>
 
 {% endblock %}
