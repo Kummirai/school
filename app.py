@@ -15,7 +15,7 @@ import psycopg2.extras
 from psycopg2.extras import DictCursor
 from flask import current_app
 from models import get_db_connection, initialize_database
-from helpers import get_user_by_username, get_students, get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, book_session, cancel_booking, get_student_bookings, get_all_sessions, create_session, get_upcoming_sessions, add_student_to_db, delete_student_by_id, get_assignment_details, submit_assignment, get_student_submission, add_assignment, get_user_announcements, get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_unread_announcements_count, get_request_details, update_session_request_status, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, get_all_announcements, get_all_session_requests, save_plan_request, get_subscription_plans, get_session_requests_for_student, get_all_subscriptions, get_assignments_data, get_assignments_for_user, get_exams_data, mark_announcement_read, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db, get_all_assignments, create_announcement, create_session_request, get_unsubmitted_assignments_count, get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent, get_student_assignments
+from helpers import get_students, get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, book_session, cancel_booking, get_student_bookings, get_all_sessions, create_session, get_upcoming_sessions, add_student_to_db, delete_student_by_id, get_assignment_details, submit_assignment, get_student_submission, add_assignment, get_user_announcements, get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_unread_announcements_count, get_request_details, update_session_request_status, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, get_all_announcements, get_all_session_requests, save_plan_request, get_subscription_plans, get_session_requests_for_student, get_all_subscriptions, get_assignments_data, get_assignments_for_user, get_exams_data, mark_announcement_read, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db, get_all_assignments, create_announcement, create_session_request, get_unsubmitted_assignments_count, get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent, get_student_assignments, get_user_by_username
 
 # Load environment variables
 load_dotenv()
@@ -35,7 +35,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
-
 
 
 @app.route('/video-conference')
@@ -1512,7 +1511,7 @@ def approve_request(request_id):
     request = get_request_details(request_id)
 
     # Create subscription for user
-    create_subscription(request['user_email'], # type: ignore
+    create_subscription(request['user_email'],  # type: ignore
                         request['plan_id'])  # type: ignore
 
     # Send confirmation email to user
@@ -2665,8 +2664,8 @@ def get_chart_data(student_id):
 # In your app.py file, usually near your other admin routes
 
 
-# type: ignore
-@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
+
+@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):
