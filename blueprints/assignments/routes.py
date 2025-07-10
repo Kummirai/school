@@ -7,7 +7,8 @@ from flask_login import login_required
 from models import get_db_connection
 from helpers import get_students, get_student_submission, submit_assignment
 from decorators.decorator import admin_required
-from assignments.utils import get_assignment_details, add_assignment
+from assignments.utils import get_assignment_details, add_assignment, add_assignment
+from helpers import update_submission_grade
 
 app = Flask(__name__)
 assignments_bp = Blueprint('assignments', __name__)
@@ -444,3 +445,36 @@ def view_assignment_submissions(assignment_id):
     finally:
         cur.close()
         conn.close()
+
+
+@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/submit-grade', methods=['POST'])
+@login_required
+@admin_required
+def submit_grade(assignment_id, student_id):
+    marks_obtained = request.form.get('marks_obtained')
+    feedback = request.form.get('feedback', '')
+
+    try:
+        marks_obtained = float(marks_obtained)  # type: ignore
+
+        # Get assignment to validate max marks
+        assignment = get_assignment_details(assignment_id)
+        if not assignment:
+            flash('Assignment not found', 'danger')
+            return redirect(url_for('manage_assignments'))
+
+        # total_marks is at index 4
+        if marks_obtained < 0 or marks_obtained > assignment[4]:
+            flash('Invalid marks value', 'danger')
+            return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
+
+        if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
+            flash('Grade submitted successfully', 'success')
+        else:
+            flash('Error submitting grade', 'danger')
+    except ValueError:
+        flash('Invalid marks format', 'danger')
+
+    return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+
+# Leaderboard routes

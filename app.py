@@ -15,8 +15,10 @@ import psycopg2.extras
 from psycopg2.extras import DictCursor
 from flask import current_app
 from models import get_db_connection, initialize_database
-from helpers import get_students, get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, book_session, cancel_booking, get_student_bookings, get_all_sessions, create_session, get_upcoming_sessions, add_student_to_db, delete_student_by_id, get_assignment_details, submit_assignment, get_student_submission, add_assignment, get_user_announcements, get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_unread_announcements_count, get_request_details, update_session_request_status, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, get_all_announcements, get_all_session_requests, save_plan_request, get_subscription_plans, get_session_requests_for_student, get_all_subscriptions, get_assignments_data, get_assignments_for_user, get_exams_data, mark_announcement_read, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db, get_all_assignments, create_announcement, create_session_request, get_unsubmitted_assignments_count, get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent, get_student_assignments, get_user_by_username
+from helpers import get_students, get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, book_session, cancel_booking, get_student_bookings, get_all_sessions, create_session, get_upcoming_sessions, add_student_to_db, delete_student_by_id,  submit_assignment, get_student_submission,  get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_request_details, update_session_request_status, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, get_all_session_requests, save_plan_request, get_subscription_plans, get_session_requests_for_student, get_all_subscriptions, get_exams_data, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db, create_session_request, get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent, get_user_by_username
 from decorators.decorator import login_required, admin_required
+from blueprints.announcements.utils import get_unread_announcements_count, get_all_announcements, get_user_announcements, mark_announcement_read, create_announcement
+from blueprints.assignments.utils import get_assignment_details, add_assignment, get_all_assignments, get_assignments_data, get_assignments_for_user, get_student_assignments, get_all_student_ids, get_unsubmitted_assignments_count
 
 # Load environment variables
 load_dotenv()
@@ -839,37 +841,6 @@ def grade_submission(assignment_id, student_id):
                            assignment=data['assignment'])
 
 
-@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/submit-grade', methods=['POST'])
-@login_required
-@admin_required
-def submit_grade(assignment_id, student_id):
-    marks_obtained = request.form.get('marks_obtained')
-    feedback = request.form.get('feedback', '')
-
-    try:
-        marks_obtained = float(marks_obtained)  # type: ignore
-
-        # Get assignment to validate max marks
-        assignment = get_assignment_details(assignment_id)
-        if not assignment:
-            flash('Assignment not found', 'danger')
-            return redirect(url_for('manage_assignments'))
-
-        # total_marks is at index 4
-        if marks_obtained < 0 or marks_obtained > assignment[4]:
-            flash('Invalid marks value', 'danger')
-            return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
-
-        if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
-            flash('Grade submitted successfully', 'success')
-        else:
-            flash('Error submitting grade', 'danger')
-    except ValueError:
-        flash('Invalid marks format', 'danger')
-
-    return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-
-# Leaderboard routes
 
 
 @app.route('/leaderboard')
