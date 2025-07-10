@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Equivalent Fractions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .fraction-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+        .fraction-bar-container {
+            text-align: center;
+        }
+        .fraction-bar {
+            width: 250px;
+            height: 40px;
+            border: 1px solid #333;
+            display: flex;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .fraction-part {
+            background-color: #add8e6; /* Light blue */
+            border-right: 1px solid #333;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .fraction-part.shaded {
+            background-color: #4682b4; /* Steel blue */
+        }
+        .fraction-label {
+            margin-top: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 6</h1>
+            <p class="lead">Fractions: Equivalent Fractions</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">6.3 Equivalent fractions</h2>
+            <p>Equivalent fractions are different fractions that represent the same value or the same portion of a whole. Even though their numerators and denominators are different, they cover the exact same amount.</p>
+
+            <h3 class="subsection-title">Visualizing Equivalent Fractions</h3>
+            <p>Consider a whole divided into parts. The same amount can be described using different fractions.</p>
+
+            <div class="fraction-illustration">
+                <div class="fraction-bar-container">
+                    <div class="fraction-bar">
+                        <div class="fraction-part shaded" style="width: 50%;"></div>
+                        <div class="fraction-part" style="width: 50%;"></div>
+                    </div>
+                    <div class="fraction-label">\(\frac{1}{2}\)</div>
+                </div>
+
+                <div class="fraction-bar-container">
+                    <div class="fraction-bar">
+                        <div class="fraction-part shaded" style="width: 25%;"></div>
+                        <div class="fraction-part shaded" style="width: 25%;"></div>
+                        <div class="fraction-part" style="width: 25%;"></div>
+                        <div class="fraction-part" style="width: 25%;"></div>
+                    </div>
+                    <div class="fraction-label">\(\frac{2}{4}\)</div>
+                </div>
+
+                <div class="fraction-bar-container">
+                    <div class="fraction-bar">
+                        <div class="fraction-part shaded" style="width: 16.66%;"></div>
+                        <div class="fraction-part shaded" style="width: 16.66%;"></div>
+                        <div class="fraction-part shaded" style="width: 16.66%;"></div>
+                        <div class="fraction-part" style="width: 16.66%;"></div>
+                        <div class="fraction-part" style="width: 16.66%;"></div>
+                        <div class="fraction-part" style="width: 16.66%;"></div>
+                    </div>
+                    <div class="fraction-label">\(\frac{3}{6}\)</div>
+                </div>
+            </div>
+            <p>From the illustration above, you can see that \(\frac{1}{2}\), \(\frac{2}{4}\), and \(\frac{3}{6}\) all represent the same amount. Therefore, they are equivalent fractions.</p>
+            <p>\[\frac{1}{2} = \frac{2}{4} = \frac{3}{6}\]</p>
+
+            <h3 class="subsection-title">Finding Equivalent Fractions</h3>
+            <p>To find an equivalent fraction, you can multiply or divide both the numerator and the denominator by the same non-zero number. This is like multiplying the fraction by 1, because \(\frac{n}{n} = 1\).</p>
+
+            <h4>Method 1: Multiplication</h4>
+            <p>Multiply both the numerator and the denominator by the same number.</p>
+            <p><strong>Example:</strong> Find an equivalent fraction for \(\frac{2}{3}\).</p>
+            <p>Multiply numerator and denominator by 2:</p>
+            \[ \frac{2}{3} = \frac{2 \times 2}{3 \times 2} = \frac{4}{6} \]
+            <p>So, \(\frac{2}{3}\) is equivalent to \(\frac{4}{6}\).</p>
+
+            <p>Multiply numerator and denominator by 5:</p>
+            \[ \frac{2}{3} = \frac{2 \times 5}{3 \times 5} = \frac{10}{15} \]
+            <p>So, \(\frac{2}{3}\) is also equivalent to \(\frac{10}{15}\).</p>
+
+            <h4>Method 2: Division (Simplifying Fractions)</h4>
+            <p>Divide both the numerator and the denominator by the same common factor. This process is often called simplifying or reducing fractions to their simplest form.</p>
+            <p><strong>Example:</strong> Find an equivalent fraction for \(\frac{6}{8}\).</p>
+            <p>Divide numerator and denominator by their greatest common factor, which is 2:</p>
+            \[ \frac{6}{8} = \frac{6 \div 2}{8 \div 2} = \frac{3}{4} \]
+            <p>So, \(\frac{6}{8}\) is equivalent to \(\frac{3}{4}\). The fraction \(\frac{3}{4}\) is in its simplest form because 3 and 4 have no common factors other than 1.</p>
+
+            <p><strong>Example:</strong> Simplify \(\frac{12}{18}\) to its simplest form.</p>
+            <p>Common factors of 12 and 18 are 2, 3, 6. The greatest common factor (GCF) is 6.</p>
+            \[ \frac{12}{18} = \frac{12 \div 6}{18 \div 6} = \frac{2}{3} \]
+            <p>So, \(\frac{12}{18}\) is equivalent to \(\frac{2}{3}\) in its simplest form.</p>
+
+            <h3 class="subsection-title">Why are Equivalent Fractions Important?</h3>
+            <p>Equivalent fractions are crucial for:</p>
+            <ul>
+                <li><strong>Comparing fractions:</strong> It's easier to compare fractions if they have the same denominator (which might require finding equivalent fractions).</li>
+                <li><strong>Adding and subtracting fractions:</strong> Fractions must have a common denominator before they can be added or subtracted.</li>
+                <li><strong>Simplifying answers:</strong> Often, fractional answers are expected in their simplest form.</li>
+            </ul>
+
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Equivalent Fractions</h2>
+
+            <div class="question-card" id="q_eqfrac1">
+                <label for="q_eqfrac1_answer">1. Write an equivalent fraction for \(\frac{1}{3}\) by multiplying the numerator and denominator by 4.</label>
+                <input type="text" class="form-control" id="q_eqfrac1_answer" placeholder="e.g., 2/4">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_eqfrac1', '4/12', true)">Check Answer</button>
+                <div class="feedback" id="q_eqfrac1_feedback"></div>
+                <div class="explanation" id="q_eqfrac1_explanation">
+                    <p><strong>Explanation:</strong> Multiply both 1 and 3 by 4: \(\frac{1 \times 4}{3 \times 4} = \frac{4}{12}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_eqfrac2">
+                <label for="q_eqfrac2_answer">2. Simplify the fraction \(\frac{9}{12}\) to its simplest form.</label>
+                <input type="text" class="form-control" id="q_eqfrac2_answer" placeholder="e.g., 1/2">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_eqfrac2', '3/4', true)">Check Answer</button>
+                <div class="feedback" id="q_eqfrac2_feedback"></div>
+                <div class="explanation" id="q_eqfrac2_explanation">
+                    <p><strong>Explanation:</strong> Both 9 and 12 can be divided by 3: \(\frac{9 \div 3}{12 \div 3} = \frac{3}{4}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_eqfrac3">
+                <label for="q_eqfrac3_answer">3. Are \(\frac{2}{5}\) and \(\frac{4}{10}\) equivalent fractions? (Yes/No)</label>
+                <input type="text" class="form-control" id="q_eqfrac3_answer" placeholder="Yes or No">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_eqfrac3', 'yes', true)">Check Answer</button>
+                <div class="feedback" id="q_eqfrac3_feedback"></div>
+                <div class="explanation" id="q_eqfrac3_explanation">
+                    <p><strong>Explanation:</strong> Yes. If you multiply the numerator and denominator of \(\frac{2}{5}\) by 2, you get \(\frac{4}{10}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_eqfrac4">
+                <label for="q_eqfrac4_answer">4. Complete the equivalent fraction: \(\frac{3}{7} = \frac{?}{21}\)</label>
+                <input type="number" class="form-control" id="q_eqfrac4_answer" placeholder="Enter number">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_eqfrac4', '9')">Check Answer</button>
+                <div class="feedback" id="q_eqfrac4_feedback"></div>
+                <div class="explanation" id="q_eqfrac4_explanation">
+                    <p><strong>Explanation:</strong> The denominator 7 was multiplied by 3 to get 21. So, you must also multiply the numerator 3 by 3 to get 9. Thus, \(\frac{3}{7} = \frac{9}{21}\).</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9/\s]/g, ''); // Keep spaces and slashes for fractions
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false, alternateAnswers = []) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+            let isCorrect = false;
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                isCorrect = true;
+            } else {
+                for (let alt of alternateAnswers) {
+                    if (normalizedUserAnswer === normalizeText(alt, normalizeInput)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

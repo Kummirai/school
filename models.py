@@ -276,7 +276,8 @@ def initialize_database():
 
     # >>> ADDED: Check if subscription plans exist before inserting defaults
     cur.execute('SELECT COUNT(*) FROM subscription_plans')
-    plan_count = cur.fetchone()[0]
+    plan_count_row = cur.fetchone()
+    plan_count = plan_count_row[0] if plan_count_row is not None else 0
 
     if plan_count == 0:
         # Insert default subscription plans if they don't exist
@@ -285,7 +286,7 @@ def initialize_database():
             VALUES
                 ('Access', 'Access to core tutorials and study guides', 99.99, 30),
                 ('Premium', 'All features including priority support', 199.99, 30),
-                ('Standard', 'Access to core tutorials, study guides and Exams', 149.99, 30),
+                ('Standard', 'Access to core tutorials, study guides and Exams', 149.99, 30)
 
         ''')
         conn.commit()  # Commit is done once at the end
@@ -296,7 +297,8 @@ def initialize_database():
 
     # Check if there are any users
     cur.execute('SELECT COUNT(*) FROM users')
-    user_count = cur.fetchone()[0]
+    user_count_row = cur.fetchone()
+    user_count = user_count_row[0] if user_count_row is not None else 0
 
     if user_count == 0:
         # Insert default admin user

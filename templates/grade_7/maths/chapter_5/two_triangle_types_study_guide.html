@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Different Types of Triangles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 5</h1>
+            <p class="lead">Geometry of 2D Shapes: Different Types of Triangles</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">5.2 Different types of triangles</h2>
+            <p>Triangles are classified in two main ways: based on the lengths of their sides and based on the measures of their angles. Understanding these classifications is key to working with triangles.</p>
+
+            <h3 class="subsection-title">Classification by Sides</h3>
+            <ul>
+                <li><strong>Equilateral Triangle:</strong>
+                    <ul>
+                        <li>All three sides are equal in length.</li>
+                        <li>All three angles are also equal, each measuring \(60^\circ\).</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Equilateral+Triangle" alt="Equilateral Triangle with equal sides marked.">
+                        <p class="mt-2">Equilateral Triangle</p>
+                    </div>
+                </li>
+                <li><strong>Isosceles Triangle:</strong>
+                    <ul>
+                        <li>At least two sides are equal in length.</li>
+                        <li>The angles opposite the equal sides (base angles) are also equal.</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Isosceles+Triangle" alt="Isosceles Triangle with two equal sides marked.">
+                        <p class="mt-2">Isosceles Triangle</p>
+                    </div>
+                </li>
+                <li><strong>Scalene Triangle:</strong>
+                    <ul>
+                        <li>All three sides have different lengths.</li>
+                        <li>All three angles have different measures.</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Scalene+Triangle" alt="Scalene Triangle with all sides different lengths.">
+                        <p class="mt-2">Scalene Triangle</p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3 class="subsection-title">Classification by Angles</h3>
+            <ul>
+                <li><strong>Right-angled Triangle:</strong>
+                    <ul>
+                        <li>Has one angle that measures exactly \(90^\circ\) (a right angle).</li>
+                        <li>The side opposite the right angle is called the hypotenuse, which is always the longest side.</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Right-angled+Triangle" alt="Right-angled Triangle with a 90-degree angle marked.">
+                        <p class="mt-2">Right-angled Triangle</p>
+                    </div>
+                </li>
+                <li><strong>Acute-angled Triangle:</strong>
+                    <ul>
+                        <li>All three angles are acute (each measures less than \(90^\circ\)).</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Acute-angled+Triangle" alt="Acute-angled Triangle with all angles less than 90 degrees.">
+                        <p class="mt-2">Acute-angled Triangle</p>
+                    </div>
+                </li>
+                <li><strong>Obtuse-angled Triangle:</strong>
+                    <ul>
+                        <li>Has one angle that is obtuse (measures greater than \(90^\circ\) but less than \(180^\circ\)).</li>
+                        <li>It can only have one obtuse angle.</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://placehold.co/200x200/cccccc/000000?text=Obtuse-angled+Triangle" alt="Obtuse-angled Triangle with one angle greater than 90 degrees.">
+                        <p class="mt-2">Obtuse-angled Triangle</p>
+                    </div>
+                </li>
+            </ul>
+
+            <h3 class="subsection-title">Summary of Triangle Properties</h3>
+            <ul>
+                <li>The sum of the interior angles of any triangle is always \(180^\circ\).</li>
+                <li>An equilateral triangle is also an acute-angled triangle.</li>
+                <li>An isosceles triangle can be acute-angled, right-angled, or obtuse-angled.</li>
+                <li>A scalene triangle can also be acute-angled, right-angled, or obtuse-angled.</li>
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Types of Triangles</h2>
+
+            <div class="question-card" id="q_triangle1">
+                <label for="q_triangle1_answer">1. What type of triangle has all three sides equal in length?</label>
+                <input type="text" class="form-control" id="q_triangle1_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle1', 'equilateral', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle1_feedback"></div>
+                <div class="explanation" id="q_triangle1_explanation">
+                    <p><strong>Explanation:</strong> An equilateral triangle has all three sides equal and all three angles equal to \(60^\circ\).</p>
+[O                </div>
+            </div>
+
+            <div class="question-card" id="q_triangle2">
+                <label for="q_triangle2_answer">2. A triangle has one angle that measures \(90^\circ\). What is this type of triangle called?</label>
+                <input type="text" class="form-control" id="q_triangle2_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle2', 'right-angled', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle2_feedback"></div>
+                <div class="explanation" id="q_triangle2_explanation">
+                    <p><strong>Explanation:</strong> A triangle with a \(90^\circ\) angle is a right-angled triangle. The side opposite the \(90^\circ\) angle is the hypotenuse.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_triangle3">
+                <label for="q_triangle3_answer">3. If a triangle has two sides of equal length, what type of triangle is it?</label>
+                <input type="text" class="form-control" id="q_triangle3_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle3', 'isosceles', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle3_feedback"></div>
+                <div class="explanation" id="q_triangle3_explanation">
+                    <p><strong>Explanation:</strong> An isosceles triangle has at least two equal sides and two equal base angles.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_triangle4">
+                <label for="q_triangle4_answer">4. A triangle has angles measuring \(30^\circ\), \(70^\circ\), and \(80^\circ\). What type of triangle is it (classified by angles)?</label>
+                <input type="text" class="form-control" id="q_triangle4_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle4', 'acute-angled', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle4_feedback"></div>
+                <div class="explanation" id="q_triangle4_explanation">
+                    <p><strong>Explanation:</strong> Since all three angles are less than \(90^\circ\), it is an acute-angled triangle.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_triangle5">
+                <label for="q_triangle5_answer">5. What type of triangle has all three sides of different lengths?</label>
+                <input type="text" class="form-control" id="q_triangle5_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle5', 'scalene', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle5_feedback"></div>
+                <div class="explanation" id="q_triangle5_explanation">
+                    <p><strong>Explanation:</strong> A scalene triangle has no equal sides and no equal angles.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_triangle6">
+                <label for="q_triangle6_answer">6. A triangle has one angle measuring \(110^\circ\). What type of triangle is it (classified by angles)?</label>
+                <input type="text" class="form-control" id="q_triangle6_answer" placeholder="Enter triangle type">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_triangle6', 'obtuse-angled', true)">Check Answer</button>
+                <div class="feedback" id="q_triangle6_feedback"></div>
+                <div class="explanation" id="q_triangle6_explanation">
+                    <p><strong>Explanation:</strong> An angle of \(110^\circ\) is obtuse (greater than \(90^\circ\) and less than \(180^\circ\)). Therefore, the triangle is an obtuse-angled triangle.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9]/g, '');
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

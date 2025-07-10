@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: The Meaning of Fractions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .fraction-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .fraction-bar {
+            width: 300px;
+            height: 50px;
+            border: 2px solid #333;
+            display: flex;
+            overflow: hidden;
+        }
+        .fraction-part {
+            background-color: #add8e6; /* Light blue */
+            border-right: 1px solid #333;
+            height: 100%;
+        }
+        .fraction-part.shaded {
+            background-color: #4682b4; /* Steel blue */
+        }
+        .fraction-label {
+            margin-left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 6</h1>
+            <p class="lead">Fractions: The Meaning of Fractions</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">6.2 The meaning of fractions</h2>
+            <p>Fractions are a way of representing a part of a whole. They are used when we don't have a full unit but rather a portion of it. Fractions are written in the form \(\frac{numerator}{denominator}\).</p>
+
+            <h3 class="subsection-title">Components of a Fraction</h3>
+            <ul>
+                <li><strong>Numerator:</strong> The top number. It tells you how many parts you have.</li>
+                <li><strong>Denominator:</strong> The bottom number. It tells you how many equal parts the whole has been divided into.</li>
+            </ul>
+            <p class="text-center">\[\frac{\text{Numerator}}{\text{Denominator}}\]</p>
+            <p>For example, in the fraction \(\frac{3}{4}\):</p>
+            <ul>
+                <li>The numerator (3) tells you that you have 3 parts.</li>
+                <li>The denominator (4) tells you that the whole has been divided into 4 equal parts.</li>
+            </ul>
+
+            <h3 class="subsection-title">Fractions Representing Parts of a Whole</h3>
+            <p>Imagine a whole object, like a pizza, a cake, or a line segment. When we divide it into equal parts, fractions help us describe how much of that whole we are talking about.</p>
+
+            <h4>Example 1: Using a Rectangular Bar</h4>
+            <p>Consider a rectangular bar divided into 5 equal parts. If 2 of these parts are shaded, the fraction representing the shaded portion is \(\frac{2}{5}\).</p>
+            <div class="fraction-illustration">
+                <div class="fraction-bar">
+                    <div class="fraction-part shaded" style="width: 20%;"></div>
+                    <div class="fraction-part shaded" style="width: 20%;"></div>
+                    <div class="fraction-part" style="width: 20%;"></div>
+                    <div class="fraction-part" style="width: 20%;"></div>
+                    <div class="fraction-part" style="width: 20%;"></div>
+                </div>
+                <div class="fraction-label">\(\frac{2}{5}\)</div>
+            </div>
+            <ul>
+                <li>Numerator: 2 (number of shaded parts)</li>
+                <li>Denominator: 5 (total number of equal parts)</li>
+            </ul>
+
+            <h4>Example 2: Using a Circle</h4>
+            <p>A circle divided into 8 equal slices. If 3 slices are eaten, then \(\frac{3}{8}\) of the pizza has been eaten.</p>
+            <div class="image-container">
+                <img src="https://placehold.co/200x200/add8e6/4682b4?text=3/8%20Circle" alt="Circle divided into 8 sections with 3 sections shaded.">
+                <p class="mt-2">The shaded part represents \(\frac{3}{8}\) of the circle.</p>
+            </div>
+
+            <h3 class="subsection-title">Fractions Representing Parts of a Collection</h3>
+            <p>Fractions can also represent a part of a group or collection of items.</p>
+            <h4>Example:</h4>
+            <p>There are 12 fruits in a basket: 5 apples, 4 oranges, and 3 bananas.</p>
+            <ul>
+                <li>The fraction of apples is \(\frac{5}{12}\) (5 apples out of 12 total fruits).</li>
+                <li>The fraction of oranges is \(\frac{4}{12}\) (4 oranges out of 12 total fruits).</li>
+                <li>The fraction of bananas is \(\frac{3}{12}\) (3 bananas out of 12 total fruits).</li>
+            </ul>
+
+            <h3 class="subsection-title">Whole Numbers as Fractions</h3>
+            <p>Any whole number can be written as a fraction with a denominator of 1. For example:</p>
+            <ul>
+                <li>\(1 = \frac{1}{1}\)</li>
+                <li>\(5 = \frac{5}{1}\)</li>
+                <li>\(10 = \frac{10}{1}\)</li>
+            </ul>
+            <p>Also, if the numerator and denominator are the same (and not zero), the fraction equals 1. For example, \(\frac{4}{4}\) means 4 out of 4 parts, which is the whole unit.</p>
+            <p>\[\frac{4}{4} = 1\]</p>
+
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: The Meaning of Fractions</h2>
+
+            <div class="question-card" id="q_fracmean1">
+                <label for="q_fracmean1_answer">1. In the fraction \(\frac{7}{11}\), what is the numerator and what is the denominator?</label>
+                <input type="text" class="form-control" id="q_fracmean1_answer" placeholder="Numerator: X, Denominator: Y">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fracmean1', 'numerator: 7, denominator: 11', true)">Check Answer</button>
+                <div class="feedback" id="q_fracmean1_feedback"></div>
+                <div class="explanation" id="q_fracmean1_explanation">
+                    <p><strong>Explanation:</strong> The top number (7) is the numerator, and the bottom number (11) is the denominator.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fracmean2">
+                <label for="q_fracmean2_answer">2. A rectangle is divided into 6 equal parts, and 4 of them are shaded. Write the fraction that represents the shaded part.</label>
+                <input type="text" class="form-control" id="q_fracmean2_answer" placeholder="e.g., 1/2">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fracmean2', '4/6', true)">Check Answer</button>
+                <div class="feedback" id="q_fracmean2_feedback"></div>
+                <div class="explanation" id="q_fracmean2_explanation">
+                    <p><strong>Explanation:</strong> You have 4 shaded parts out of 6 total equal parts, so the fraction is \(\frac{4}{6}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fracmean3">
+                <label for="q_fracmean3_answer">3. In a class of 25 students, 15 are boys. What fraction of the class are boys?</label>
+                <input type="text" class="form-control" id="q_fracmean3_answer" placeholder="e.g., 1/2">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fracmean3', '15/25', true)">Check Answer</button>
+                <div class="feedback" id="q_fracmean3_feedback"></div>
+                <div class="explanation" id="q_fracmean3_explanation">
+                    <p><strong>Explanation:</strong> There are 15 boys out of a total of 25 students, so the fraction is \(\frac{15}{25}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fracmean4">
+                <label for="q_fracmean4_answer">4. Write the whole number 8 as a fraction.</label>
+                <input type="text" class="form-control" id="q_fracmean4_answer" placeholder="e.g., 5/1">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fracmean4', '8/1', true)">Check Answer</button>
+                <div class="feedback" id="q_fracmean4_feedback"></div>
+                <div class="explanation" id="q_fracmean4_explanation">
+                    <p><strong>Explanation:</strong> Any whole number can be written as a fraction over 1. So, \(8 = \frac{8}{1}\).</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9/:\s]/g, ''); // Keep spaces, slashes, and colons
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false, alternateAnswers = []) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+            let isCorrect = false;
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                isCorrect = true;
+            } else {
+                for (let alt of alternateAnswers) {
+                    if (normalizedUserAnswer === normalizeText(alt, normalizeInput)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Fractions of a Whole</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .math-equation-block {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #cceeff;
+        }
+        .math-equation-block p {
+            margin-bottom: 0;
+        }
+        .visual-aid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        .boxes-container {
+            display: flex;
+            border: 1px solid #333;
+            width: 300px;
+            height: 50px;
+        }
+        .box-part {
+            flex: 1;
+            border-right: 1px solid #ccc;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: #add8e6;
+        }
+        .box-part.shaded {
+            background-color: #4682b4; /* Steel blue */
+            color: white;
+        }
+        .box-part:last-child {
+            border-right: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 6</h1>
+            <p class="lead">Fractions: Fractions of a Whole</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">6.8 Fractions of a whole</h2>
+            <p>Often in real-life situations, we need to find a fractional part of a given quantity or a whole. For example, "half of 10 apples" or "two-thirds of the class." The key to solving these problems is to understand that "of" means multiplication when dealing with fractions.</p>
+
+            <h3 class="subsection-title">Finding a Fraction of a Number</h3>
+            <p>To find a fraction of a whole number or another fraction, you simply multiply the fraction by the number.</p>
+
+            <h4>Example 1: Finding a fraction of a whole number</h4>
+            <p>What is \(\frac{1}{4}\) of 12?</p>
+            <div class="visual-aid">
+                <div class="boxes-container">
+                    <div class="box-part shaded">3</div>
+                    <div class="box-part">3</div>
+                    <div class="box-part">3</div>
+                    <div class="box-part">3</div>
+                </div>
+                <p>Total: 12</p>
+            </div>
+            <p><strong>Solution:</strong> Convert the word "of" to a multiplication sign and solve:</p>
+            <div class="math-equation-block">
+                \[ \frac{1}{4} \times 12 \]
+                <p>Write the whole number 12 as a fraction \(\frac{12}{1}\):</p>
+                \[ \frac{1}{4} \times \frac{12}{1} = \frac{1 \times 12}{4 \times 1} = \frac{12}{4} = 3 \]
+                <p>So, \(\frac{1}{4}\) of 12 is 3.</p>
+            </div>
+
+            <h4>Example 2: Finding a fraction of another fraction</h4>
+            <p>What is \(\frac{2}{3}\) of \(\frac{1}{2}\)?</p>
+            <p><strong>Solution:</strong></p>
+            <div class="math-equation-block">
+                \[ \frac{2}{3} \times \frac{1}{2} = \frac{2 \times 1}{3 \times 2} = \frac{2}{6} \]
+                <p>Simplify the result:</p>
+                \[ \frac{2}{6} = \frac{1}{3} \]
+                <p>So, \(\frac{2}{3}\) of \(\frac{1}{2}\) is \(\frac{1}{3}\).</p>
+            </div>
+
+            <h3 class="subsection-title">Real-World Applications</h3>
+            <p>Fractions of a whole are common in everyday life, from cooking and finances to measurements and time.</p>
+
+            <h4>Example 3: Word Problem</h4>
+            <p>A recipe calls for \(\frac{3}{4}\) cup of flour. If you only want to make half of the recipe, how much flour do you need?</p>
+            <p><strong>Solution:</strong> You need to find \(\frac{1}{2}\) of \(\frac{3}{4}\) cup of flour.</p>
+            <div class="math-equation-block">
+                \[ \frac{1}{2} \times \frac{3}{4} = \frac{1 \times 3}{2 \times 4} = \frac{3}{8} \]
+                <p>You will need \(\frac{3}{8}\) cup of flour.</p>
+            </div>
+
+            <h4>Example 4: Finding the whole when a fraction is given</h4>
+            <p>If \(\frac{1}{5}\) of a number is 4, what is the number?</p>
+            <p><strong>Solution:</strong> If one-fifth of the number is 4, then the whole number must be 5 times 4.</p>
+            <div class="math-equation-block">
+                <p>Let the number be \(x\).</p>
+                \[ \frac{1}{5} \times x = 4 \]
+                <p>To find \(x\), multiply both sides by the reciprocal of \(\frac{1}{5}\), which is \(\frac{5}{1}\) or 5:</p>
+                \[ x = 4 \times 5 = 20 \]
+                <p>So, the number is 20.</p>
+            </div>
+
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Fractions of a Whole</h2>
+
+            <div class="question-card" id="q_fow1">
+                <label for="q_fow1_answer">1. What is \(\frac{2}{5}\) of 20?</label>
+                <input type="number" class="form-control" id="q_fow1_answer" placeholder="Enter number">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fow1', '8')">Check Answer</button>
+                <div class="feedback" id="q_fow1_feedback"></div>
+                <div class="explanation" id="q_fow1_explanation">
+                    <p><strong>Explanation:</strong> \(\frac{2}{5} \times 20 = \frac{2}{5} \times \frac{20}{1} = \frac{40}{5} = 8\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fow2">
+                <label for="q_fow2_answer">2. What is \(\frac{1}{3}\) of \(\frac{3}{4}\)? (Simplify your answer)</label>
+                <input type="text" class="form-control" id="q_fow2_answer" placeholder="e.g., 1/2">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fow2', '1/4', true)">Check Answer</button>
+                <div class="feedback" id="q_fow2_feedback"></div>
+                <div class="explanation" id="q_fow2_explanation">
+                    <p><strong>Explanation:</strong> \(\frac{1}{3} \times \frac{3}{4} = \frac{1 \times 3}{3 \times 4} = \frac{3}{12}\). Simplify by dividing by 3: \(\frac{3 \div 3}{12 \div 3} = \frac{1}{4}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fow3">
+                <label for="q_fow3_answer">3. A class has 30 students. \(\frac{2}{3}\) of them are girls. How many girls are in the class?</label>
+                <input type="number" class="form-control" id="q_fow3_answer" placeholder="Enter number">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fow3', '20')">Check Answer</button>
+                <div class="feedback" id="q_fow3_feedback"></div>
+                <div class="explanation" id="q_fow3_explanation">
+                    <p><strong>Explanation:</strong> Calculate \(\frac{2}{3} \times 30 = \frac{2}{3} \times \frac{30}{1} = \frac{60}{3} = 20\). There are 20 girls in the class.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_fow4">
+                <label for="q_fow4_answer">4. If \(\frac{3}{4}\) of a cake weighs 600 grams, what is the total weight of the whole cake?</label>
+                <input type="number" class="form-control" id="q_fow4_answer" placeholder="Enter number in grams">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_fow4', '800')">Check Answer</button>
+                <div class="feedback" id="q_fow4_feedback"></div>
+                <div class="explanation" id="q_fow4_explanation">
+                    <p><strong>Explanation:</strong> If \(\frac{3}{4}\) of the cake is 600g, then \(\frac{1}{4}\) of the cake is \(600 \div 3 = 200\)g.
+                        The whole cake (\(\frac{4}{4}\)) is \(200 \times 4 = 800\)g.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                // Remove all non-alphanumeric except for '/' (for fractions) and ' ' (for mixed numbers)
+                text = text.replace(/[^a-z0-9/\s]/g, '');
+                // Handle mixed numbers for comparison by converting to improper fraction format if possible
+                const mixedNumberMatch = text.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+                if (mixedNumberMatch) {
+                    const whole = parseInt(mixedNumberMatch[1]);
+                    const numerator = parseInt(mixedNumberMatch[2]);
+                    const denominator = parseInt(mixedNumberMatch[3]);
+                    return `${(whole * denominator) + numerator}/${denominator}`;
+                }
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false, alternateAnswers = []) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+            let isCorrect = false;
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                isCorrect = true;
+            } else {
+                for (let alt of alternateAnswers) {
+                    if (normalizedUserAnswer === normalizeText(alt, normalizeInput)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>

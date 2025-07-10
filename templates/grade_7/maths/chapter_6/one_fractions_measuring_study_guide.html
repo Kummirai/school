@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Mathematics: Fractions - Measuring with Parts of a Unit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .subsection-title {
+            color: #007bff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-card label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6c757d;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .show-explanation {
+            display: block;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .greystick-example {
+            border: 1px solid #333;
+            height: 30px;
+            margin-bottom: 10px;
+            background-color: #eee;
+            position: relative;
+        }
+        .greystick-part {
+            position: absolute;
+            height: 100%;
+            border-right: 1px solid #999;
+            box-sizing: border-box;
+        }
+        .greystick-label {
+            position: absolute;
+            top: -20px;
+            font-size: 0.8em;
+            transform: translateX(-50%);
+        }
+        .measure-bar {
+            height: 25px;
+            background-color: #ffc107; /* Yellow */
+            border: 1px solid #d39e00;
+            margin-top: 15px;
+        }
+        .measure-bar.red {
+            background-color: #dc3545; /* Red */
+        }
+        .measure-bar.blue {
+            background-color: #007bff; /* Blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Grade 7 Mathematics: Chapter 6</h1>
+            <p class="lead">Fractions: Measuring Accurately with Parts of a Unit</p>
+        </div>
+
+        <section>
+            <h2 class="section-title">6.1 Measuring accurately with parts of a unit</h2>
+            <p>This section introduces the concept of fractions by using a special measuring unit called a "greystick". When we measure something, it doesn't always fit perfectly into whole units. This is where fractions become important.</p>
+
+            <h3 class="subsection-title">The Greystick Unit</h3>
+            <p>Imagine a standard measuring stick, which we'll call a "greystick".</p>
+            <div class="greystick-example">
+                <div class="greystick-label" style="left: 50%;">1 Greystick</div>
+            </div>
+            <p>If something is exactly two greysticks long, it looks like this:</p>
+            <div class="greystick-example red" style="width: 100%; height: 30px; position: relative;">
+                <div class="greystick-part" style="left: 50%; width: 0;"></div>
+                <div class="greystick-label" style="left: 25%;">1 Greystick</div>
+                <div class="greystick-label" style="left: 75%;">2 Greysticks</div>
+            </div>
+
+            <h3 class="subsection-title">Measuring with Parts of a Greystick (Fractions)</h3>
+            <p>What if something is longer than one greystick but shorter than two? To measure accurately, we need to divide our greystick into smaller, equal parts.</p>
+
+            <h4>Dividing into Sixths</h4>
+            <p>If we divide one greystick into six equal parts, each part is called "one sixth of a greystick".</p>
+            <div class="greystick-example" style="width: 100%; display: flex;">
+                <div class="greystick-part" style="width: 16.66%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 16.66%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 16.66%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 16.66%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 16.66%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 16.66%;"></div>
+                <span class="greystick-label" style="left: 8.33%;">1/6</span>
+                <span class="greystick-label" style="left: 25%;">2/6</span>
+                <span class="greystick-label" style="left: 41.66%;">3/6</span>
+                <span class="greystick-label" style="left: 58.33%;">4/6</span>
+                <span class="greystick-label" style="left: 75%;">5/6</span>
+                <span class="greystick-label" style="left: 91.66%;">6/6</span>
+            </div>
+            <p>If a yellow bar is one greystick and four of these sixths long, we can say its length is "one and four sixths of a greystick". This is written as \(1\frac{4}{6}\) greysticks.</p>
+            <div class="measure-bar yellow" style="width: calc(100% * (1 + 4/6));"></div>
+            <p class="mt-1">Length: \(1\frac{4}{6}\) greysticks</p>
+
+            <h4>Dividing into Sevenths</h4>
+            <p>Similarly, if a greystick is divided into seven equal parts, each part is "one seventh of a greystick".</p>
+            <div class="greystick-example" style="width: 100%; display: flex;">
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%; border-right: 1px solid #999;"></div>
+                <div class="greystick-part" style="width: 14.28%;"></div>
+                <span class="greystick-label" style="left: 7.14%;">1/7</span>
+                <span class="greystick-label" style="left: 21.42%;">2/7</span>
+                <span class="greystick-label" style="left: 35.71%;">3/7</span>
+                <span class="greystick-label" style="left: 50%;">4/7</span>
+                <span class="greystick-label" style="left: 64.28%;">5/7</span>
+                <span class="greystick-label" style="left: 78.57%;">6/7</span>
+                <span class="greystick-label" style="left: 92.85%;">7/7</span>
+            </div>
+            <p>This shows how we use fractions to describe lengths that are not whole numbers of units.</p>
+
+            <h3 class="subsection-title">Understanding the Denominator</h3>
+            <p>The number of equal parts a whole unit is divided into gives us the name of the fraction. This number is called the **denominator**.</p>
+            <ul>
+                <li>If divided into 3 equal parts, they are thirds.</li>
+                <li>If divided into 4 equal parts, they are quarters (or fourths).</li>
+                <li>If divided into 10 equal parts, they are tenths.</li>
+            </ul>
+
+        </section>
+
+        <section class="mt-5">
+            <h2 class="section-title">Practice Questions: Measuring with Parts of a Unit</h2>
+
+            <div class="question-card" id="q_greystick1">
+                <label for="q_greystick1_answer">1. If a greystick is divided into 2 equal parts, what is each part called?</label>
+                <input type="text" class="form-control" id="q_greystick1_answer" placeholder="Enter name">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_greystick1', 'halves', true)">Check Answer</button>
+                <div class="feedback" id="q_greystick1_feedback"></div>
+                <div class="explanation" id="q_greystick1_explanation">
+                    <p><strong>Explanation:</strong> When a unit is divided into 2 equal parts, each part is a half.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_greystick2">
+                <label for="q_greystick2_answer">2. What do you call each part if a greystick is divided into 4 equal parts?</label>
+                <input type="text" class="form-control" id="q_greystick2_answer" placeholder="Enter name">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_greystick2', 'quarters', true, ['fourths'])">Check Answer</button>
+                <div class="feedback" id="q_greystick2_feedback"></div>
+                <div class="explanation" id="q_greystick2_explanation">
+                    <p><strong>Explanation:</strong> Each part is a quarter or a fourth.</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_greystick3">
+                <label for="q_greystick3_answer">3. A bar is 3 full greysticks long, plus 5 out of 8 equal parts of another greystick. How would you write its length as a mixed number?</label>
+                <input type="text" class="form-control" id="q_greystick3_answer" placeholder="e.g., 2 1/2">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_greystick3', '3 5/8', true)">Check Answer</button>
+                <div class="feedback" id="q_greystick3_feedback"></div>
+                <div class="explanation" id="q_greystick3_explanation">
+                    <p><strong>Explanation:</strong> The length is 3 whole units and \(\frac{5}{8}\) of another unit, so it's \(3\frac{5}{8}\).</p>
+                </div>
+            </div>
+
+            <div class="question-card" id="q_greystick4">
+                <label for="q_greystick4_answer">4. In the fraction \(\frac{3}{10}\), what does the number 10 represent?</label>
+                <input type="text" class="form-control" id="q_greystick4_answer" placeholder="Enter what it represents">
+                <button class="btn btn-primary mt-2" onclick="checkTextAnswer('q_greystick4', 'number of equal parts the whole is divided into', true, ['total equal parts', 'denominator'])">Check Answer</button>
+                <div class="feedback" id="q_greystick4_feedback"></div>
+                <div class="explanation" id="q_greystick4_explanation">
+                    <p><strong>Explanation:</strong> The denominator (bottom number) represents the total number of equal parts the whole is divided into.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function normalizeText(text, removeSpacesAndPunctuation = false) {
+            text = String(text).toLowerCase().trim();
+            if (removeSpacesAndPunctuation) {
+                text = text.replace(/[^a-z0-9/\s]/g, ''); // Keep spaces and slashes for fractions
+            }
+            return text;
+        }
+
+        function checkTextAnswer(questionId, correctAnswer, normalizeInput = false, alternateAnswers = []) {
+            let userAnswer = document.getElementById(`${questionId}_answer`).value;
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+            let normalizedCorrectAnswer = normalizeText(correctAnswer, normalizeInput);
+            let isCorrect = false;
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                isCorrect = true;
+            } else {
+                for (let alt of alternateAnswers) {
+                    if (normalizedUserAnswer === normalizeText(alt, normalizeInput)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isCorrect) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+
+        function checkRadioAnswer(questionId, correctAnswerValue) {
+            const selectedOption = document.querySelector(`input[name="${questionId}_options"]:checked`);
+            const feedbackElement = document.getElementById(`${questionId}_feedback`);
+            const explanationElement = document.getElementById(`${questionId}_explanation`);
+
+            if (selectedOption && selectedOption.value === correctAnswerValue) {
+                feedbackElement.textContent = "Correct! Well done.";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+                feedbackElement.className = "feedback incorrect";
+            }
+            explanationElement.classList.add('show-explanation');
+        }
+    </script>
+</body>
+</html>
