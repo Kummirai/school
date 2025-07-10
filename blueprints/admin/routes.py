@@ -10,9 +10,85 @@ from flask import current_app as app
 import json
 from assignments.utils import add_assignment
 from helpers import get_submission_for_grading, update_submission_grade, get_user_by_id, get_request_details, update_request_status,  send_approval_notification, send_rejection_notification
+from subscriptions.utils import get_subscription_plans
+from students.utils import get_user_by_username, get_students
+from werkzeug.security import generate_password_hash
 
 
 admin = Blueprint('admin', __name__)
+
+
+# Add these routes to app.py
+@app.route('/admin/parents/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_parent():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # student_ids will be a list of strings (e.g., ['1', '2', '5'])
+        student_ids_str_list = request.form.getlist('student_ids')
+
+        existing_user = get_user_by_username(username)
+        if existing_user:
+            flash('Username already exists', 'danger')
+            # If username exists, you still need to render the form with students
+            students = get_students()
+            return render_template('admin/add_parent.html', students=students)
+        else:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            try:
+                # Create parent user
+                cur.execute('''
+                    INSERT INTO users (username, password, role) VALUES (%s, %s, %s) RETURNING id
+                ''', (username, generate_password_hash(password), 'parent'))
+                parent_id = cur.fetchone()[0]  # type: ignore
+
+                # Link parent to students
+                if student_ids_str_list:  # Only iterate if at least one student was selected
+                    for student_id_str in student_ids_str_list:
+                        # --- IMPORTANT: Validate and convert to integer ---
+                        if not student_id_str.strip():  # Check for empty string after stripping whitespace
+                            flash(
+                                'Invalid (empty) student ID found. Skipping link for an empty ID.', 'warning')
+                            continue  # Skip to the next student_id in the list
+
+                        try:
+                            # Convert the string to an integer
+                            student_id_int = int(student_id_str)
+                            cur.execute(
+                                'INSERT INTO parent_students (parent_id, student_id) VALUES (%s, %s)',
+                                # Use the integer version
+                                (parent_id, student_id_int))
+                        except ValueError:
+                            # This catches cases like 'abc' or malformed data in value attribute
+                            flash(
+                                f'Invalid student ID format found for "{student_id_str}". Skipping.', 'warning')
+                            continue  # Skip to the next student_id in the list
+                else:
+                    # Optional: If no students were selected, you might want to flash a message
+                    # This message won't stop the parent from being created.
+                    flash(
+                        'Parent created successfully, but no students were linked.', 'info')
+
+                conn.commit()
+                flash('Parent and linked students added successfully!', 'success')
+                return redirect(url_for('manage_parents'))
+            except Exception as e:
+                conn.rollback()  # Rollback user creation if linking fails
+                flash(
+                    f'Error adding parent or linking students: {str(e)}', 'danger')
+                # If there's an error, you still need to render the form with students
+                students = get_students()
+                return render_template('admin/add_parent.html', students=students)
+            finally:
+                cur.close()
+                conn.close()
+
+    # GET request - show form
+    students = get_students()
+    return render_template('admin/add_parent.html', students=students)
 
 
 @app.route('/admin/approve_requests')
