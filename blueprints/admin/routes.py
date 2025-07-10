@@ -18,12 +18,193 @@ from tutorials.utils import get_all_categories, get_all_videos, add_video, delet
 from sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
 from sessions.utils import get_all_session_requests, update_session_request_status
 from students.utils import add_student_to_db, delete_student_by_id
+from assignments.utils import get_assignment_details
 
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-@app.route('/students')
+@admin_bp.route('/assignments/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_assignment_route():
+    if request.method == 'POST':
+        try:
+            # Get form data
+            title = request.form.get('title', '').strip()
+            description = request.form.get('description', '').strip()
+            subject = request.form.get('subject', '').strip()
+            total_marks = request.form.get('total_marks', '').strip()
+            deadline_str = request.form.get('deadline', '').strip()
+            assign_to = request.form.get('assign_to')  # 'all' or 'selected'
+            selected_users = request.form.getlist(
+                'selected_users[]') if assign_to == 'selected' else []
+
+            # Validate required fields
+            if not all([title, description, subject, total_marks, deadline_str]):
+                flash('All fields are required', 'danger')
+                return redirect(url_for('add_assignment_route'))
+
+            # Convert and validate total marks
+            try:
+                total_marks = int(total_marks)
+                if total_marks <= 0:
+                    flash('Total marks must be positive', 'danger')
+                    return redirect(url_for('add_assignment_route'))
+            except ValueError:
+                flash('Total marks must be a number', 'danger')
+                return redirect(url_for('add_assignment_route'))
+
+            # Validate deadline
+            try:
+                deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
+                if deadline <= datetime.utcnow():
+                    flash('Deadline must be in the future', 'danger')
+                    return redirect(url_for('add_assignment_route'))
+            except ValueError:
+                flash('Invalid deadline format', 'danger')
+                return redirect(url_for('add_assignment_route'))
+
+            # Get user IDs based on selection
+            if assign_to == 'all':
+                conn = get_db_connection()
+                cur = conn.cursor()
+                cur.execute(
+                    'SELECT id FROM users WHERE role = %s', ('student',))
+                user_ids = [row[0] for row in cur.fetchall()]
+                cur.close()
+                conn.close()
+            elif assign_to == 'selected' and selected_users:
+                user_ids = [int(user_id) for user_id in selected_users]
+            else:
+                flash('Please select at least one student', 'danger')
+                return redirect(url_for('add_assignment_route'))
+
+            # Create assignment
+            assignment_id = add_assignment(
+                title=title,
+                description=description,
+                subject=subject,
+                total_marks=total_marks,
+                deadline=deadline,
+                assigned_students_ids=user_ids
+            )
+
+            flash('Assignment created successfully!', 'success')
+            return redirect(url_for('manage_assignments'))
+
+        except Exception as e:
+            flash(f'Error creating assignment: {str(e)}', 'danger')
+            app.logger.error(f"Assignment creation error: {str(e)}")
+
+    # GET request - show form with students
+    students = get_students()
+    return render_template('admin/assignments/add.html', students=students)
+
+
+@admin_bp.route('/assignments')
+@login_required
+@admin_required
+def manage_assignments():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.created_at,
+                   COUNT(s.student_id) as assigned_count,
+                   COUNT(s.id) as submission_count
+            FROM assignments a
+            LEFT JOIN assignment_students au ON a.id = au.assignment_id
+            LEFT JOIN submissions s ON a.id = s.assignment_id
+            GROUP BY a.id
+            ORDER BY a.deadline
+        ''')
+
+        assignments = []
+        for row in cur.fetchall():
+            assignments.append({
+                'id': row[0],
+                'title': row[1],
+                'subject': row[2],
+                'deadline': row[3],
+                'total_marks': row[4],
+                'created_at': row[5],
+                'assigned_count': row[6],
+                'submission_count': row[7]
+            })
+
+        return render_template('admin/assignments/list.html', assignments=assignments)
+    finally:
+        cur.close()
+        conn.close()
+
+
+@admin_bp.route('/assignments/<int:assignment_id>/submissions')
+@login_required
+@admin_required
+def view_assignment_submissions(assignment_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get assignment details
+        cur.execute(
+            'SELECT id, title, total_marks FROM assignments WHERE id = %s', (assignment_id,))
+        assignment = cur.fetchone()
+        if not assignment:
+            flash('Assignment not found', 'danger')
+            return redirect(url_for('manage_assignments'))
+
+        # Get submissions with student IDs
+        cur.execute('''
+            SELECT u.username, s.submission_time, s.grade, u.id as student_id, s.feedback
+            FROM submissions s
+            JOIN users u ON s.student_id = u.id
+            WHERE s.assignment_id = %s
+            ORDER BY s.submission_time DESC
+        ''', (assignment_id,))
+        submissions = cur.fetchall()
+
+        return render_template('admin/assignments/submissions.html',
+                               assignment_title=assignment[1],
+                               assignment_id=assignment_id,
+                               submissions=submissions)
+    finally:
+        cur.close()
+        conn.close()
+
+
+@admin_bp.route('/assignments/<int:assignment_id>/submissions/<int:student_id>/submit-grade', methods=['POST'])
+@login_required
+@admin_required
+def submit_grade(assignment_id, student_id):
+    marks_obtained = request.form.get('marks_obtained')
+    feedback = request.form.get('feedback', '')
+
+    try:
+        marks_obtained = float(marks_obtained)  # type: ignore
+
+        # Get assignment to validate max marks
+        assignment = get_assignment_details(assignment_id)
+        if not assignment:
+            flash('Assignment not found', 'danger')
+            return redirect(url_for('manage_assignments'))
+
+        # total_marks is at index 4
+        if marks_obtained < 0 or marks_obtained > assignment[4]:
+            flash('Invalid marks value', 'danger')
+            return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
+
+        if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
+            flash('Grade submitted successfully', 'success')
+        else:
+            flash('Error submitting grade', 'danger')
+    except ValueError:
+        flash('Invalid marks format', 'danger')
+
+    return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+
+
+@admin_bp.route('/students')
 @login_required
 @admin_required
 def manage_students():
@@ -31,7 +212,7 @@ def manage_students():
     return render_template('admin/students.html', students=students)
 
 
-@app.route('/students/add', methods=['GET', 'POST'])
+@admin_bp.route('/students/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_student():
@@ -50,7 +231,7 @@ def add_student():
     return render_template('admin/add_student.html')
 
 
-@app.route('/students/delete/<int:student_id>')
+@admin_bp.route('/students/delete/<int:student_id>')
 @login_required
 @admin_required
 def delete_student(student_id):
@@ -59,7 +240,7 @@ def delete_student(student_id):
     return redirect(url_for('manage_students'))
 
 
-@app.route('/session-requests')
+@admin_bp.route('/session-requests')
 @login_required
 @admin_required
 def manage_session_requests():
@@ -67,7 +248,7 @@ def manage_session_requests():
     return render_template('admin/session_requests.html', requests=requests)
 
 
-@app.route('/session-requests/<int:request_id>/approve', methods=['POST'])
+@admin_bp.route('/session-requests/<int:request_id>/approve', methods=['POST'])
 @login_required
 @admin_required
 def approve_session_request(request_id):
@@ -79,7 +260,7 @@ def approve_session_request(request_id):
     return redirect(url_for('manage_session_requests'))
 
 
-@app.route('/session-requests/<int:request_id>/reject', methods=['POST'])
+@admin_bp.route('/session-requests/<int:request_id>/reject', methods=['POST'])
 @login_required
 @admin_required
 def reject_session_request(request_id):
@@ -91,7 +272,7 @@ def reject_session_request(request_id):
     return redirect(url_for('manage_session_requests'))
 
 
-@app.route('/parents/add', methods=['GET', 'POST'])
+@admin_bp.route('/parents/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_parent():
@@ -163,7 +344,7 @@ def add_parent():
     return render_template('admin/add_parent.html', students=students)
 
 
-@app.route('/approve_requests')
+@admin_bp.route('/approve_requests')
 @login_required
 @admin_required
 def approve_requests():
@@ -191,7 +372,7 @@ def approve_requests():
         conn.close()
 
 
-@app.route('/subscriptions/add', methods=['GET', 'POST'])
+@admin_bp.route('/subscriptions/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def admin_add_subscription():
@@ -267,7 +448,7 @@ def admin_add_subscription():
     return render_template('admin/add_subscription.html', students=students, plans=plans)
 
 
-@app.route('/announcements/delete/<int:announcement_id>', methods=['POST'])
+@admin_bp.route('/announcements/delete/<int:announcement_id>', methods=['POST'])
 @login_required
 @admin_required
 def delete_announcement(announcement_id):
@@ -287,7 +468,7 @@ def delete_announcement(announcement_id):
     return redirect(url_for('manage_announcements'))
 
 
-@app.route('/assignments/import', methods=['GET', 'POST'])
+@admin_bp.route('/assignments/import', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def import_assignments():
@@ -420,7 +601,7 @@ def import_assignments():
     return render_template('admin/assignments/import.html', students=students)
 
 
-@app.route('/submissions/all')
+@admin_bp.route('/submissions/all')
 @login_required
 # @roles_required('admin', 'teacher') # Assuming only admins/teachers can view all submissions
 def list_all_submissions():
@@ -478,7 +659,7 @@ def list_all_submissions():
 # Student assignment routes
 
 
-@app.route('/dashboard')
+@admin_bp.route('/dashboard')
 @login_required
 def dashboard():
     try:
@@ -510,7 +691,7 @@ def dashboard():
 # Add these new routes to app.py
 
 
-@app.route('/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
+@admin_bp.route('/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def grade_submission(assignment_id, student_id):
@@ -551,7 +732,7 @@ def grade_submission(assignment_id, student_id):
                            assignment=data['assignment'])
 
 
-@app.route('/approve_request/<int:request_id>')
+@admin_bp.route('/approve_request/<int:request_id>')
 @admin_required  # Add your admin auth decorator
 def approve_request(request_id):
     # Update request status in DB
@@ -572,7 +753,7 @@ def approve_request(request_id):
     return redirect(url_for('admin_dashboard'))
 
 
-@app.route('/reject_request/<int:request_id>')
+@admin_bp.route('/reject_request/<int:request_id>')
 @admin_required
 def reject_request(request_id):
     # Update request status
@@ -589,7 +770,7 @@ def reject_request(request_id):
     return redirect(url_for('admin_dashboard'))
 
 
-@app.route('/announcements')
+@admin_bp.route('/announcements')
 @login_required
 @admin_required
 def manage_announcements():
@@ -597,7 +778,7 @@ def manage_announcements():
     return render_template('admin/announcements/list.html', announcements=announcements)
 
 
-@app.route('/announcements/add', methods=['GET', 'POST'])
+@admin_bp.route('/announcements/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_announcement():
@@ -635,7 +816,8 @@ def add_announcement():
 
 # type: ignore
 # type: ignore
-@app.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
+# type: ignore
+@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):
@@ -756,7 +938,7 @@ def edit_parent(parent_id):
 # In your app.py file, usually alongside your other admin routes
 
 
-@app.route('/parents/<int:parent_id>/link_students', methods=['GET'])
+@admin_bp.route('/parents/<int:parent_id>/link_students', methods=['GET'])
 @login_required
 @admin_required
 def link_parent_student_ui(parent_id):
@@ -803,7 +985,7 @@ def link_parent_student_ui(parent_id):
 # In your app.py file
 
 
-@app.route('/parents/<int:parent_id>/update_links', methods=['POST'])
+@admin_bp.route('/parents/<int:parent_id>/update_links', methods=['POST'])
 @login_required
 @admin_required
 def update_parent_student_links(parent_id):
@@ -854,7 +1036,7 @@ def update_parent_student_links(parent_id):
             conn.close()
 
 
-@app.route('/parents')
+@admin_bp.route('/parents')
 @login_required
 @admin_required
 def manage_parents():
@@ -886,7 +1068,7 @@ def manage_parents():
         conn.close()
 
 
-@app.route('/parents/link', methods=['POST'])
+@admin_bp.route('/parents/link', methods=['POST'])
 @login_required
 @admin_required
 def link_parent_student():
@@ -921,7 +1103,7 @@ def link_parent_student():
     return redirect(url_for('manage_parents'))
 
 
-@app.route('/tutorials')
+@admin_bp.route('/tutorials')
 @login_required
 @admin_required
 def manage_tutorials():
@@ -944,7 +1126,7 @@ def manage_tutorials():
                            categories=categories)
 
 
-@app.route('/tutorials/add', methods=['GET', 'POST'])
+@admin_bp.route('/tutorials/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_tutorial():
@@ -971,7 +1153,7 @@ def add_tutorial():
     return render_template('admin/add_tutorial.html', categories=categories)
 
 
-@app.route('/tutorials/delete/<int:video_id>')
+@admin_bp.route('/tutorials/delete/<int:video_id>')
 @login_required
 @admin_required
 def delete_tutorial(video_id):
@@ -980,7 +1162,7 @@ def delete_tutorial(video_id):
     return redirect(url_for('manage_tutorials'))
 
 
-@app.route('/')
+@admin_bp.route('/')
 @login_required
 @admin_required
 def admin_dashboard():
@@ -1012,7 +1194,7 @@ def admin_dashboard():
                            active_subscriptions_count=active_subscriptions_count)
 
 
-@app.route('/sessions/bookings/<int:session_id>')
+@admin_bp.route('/sessions/bookings/<int:session_id>')
 @login_required
 @admin_required
 def view_session_bookings(session_id):
@@ -1041,7 +1223,7 @@ def view_session_bookings(session_id):
                            booked_users=booked_users)
 
 
-@app.route('/sessions')
+@admin_bp.route('/sessions')
 @login_required
 @admin_required
 def manage_sessions():
@@ -1052,7 +1234,7 @@ def manage_sessions():
                            upcoming_sessions=upcoming_sessions)
 
 
-@app.route('/sessions/add', methods=['GET', 'POST'])
+@admin_bp.route('/sessions/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_session():
@@ -1074,7 +1256,7 @@ def add_session():
     return render_template('admin/add_session.html')
 
 
-@app.route('/sessions/delete/<int:session_id>')
+@admin_bp.route('/sessions/delete/<int:session_id>')
 @login_required
 @admin_required
 def delete_session(session_id):
