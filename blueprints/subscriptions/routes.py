@@ -8,7 +8,8 @@ from flask import current_app as app
 
 
 # Create a Blueprint for the subscriptions routes
-subscriptions_bp = Blueprint('subscriptions', '__name__')
+subscriptions_bp = Blueprint(
+    'subscriptions', '__name__', url_prefix='/subscriptions')
 
 
 @app.route('/subscriptions')

@@ -5,6 +5,10 @@ from models import initialize_database
 from blueprints.announcements.utils import get_unread_announcements_count
 from blueprints.assignments.utils import get_unsubmitted_assignments_count
 from blueprints.subscriptions.utils import get_subscription_plans
+from blueprints.home.routes import home_bp
+from blueprints.admin.routes import admin_bp
+from blueprints.announcements.routes import announcement_bp
+from blueprints.assignments.routes import assignments_bp
 
 load_dotenv()
 
@@ -21,6 +25,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
+
+
+# Register the home blueprint
+app.register_blueprint(home_bp, url_prefix='/')
+app.register_blueprint(admin_bp, url_prefix='/admin')
+app.register_blueprint(announcement_bp, url_prefix='/announcements')
+app.register_blueprint(assignments_bp, url_prefix='/assignments')
 
 
 @app.context_processor
