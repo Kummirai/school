@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from datetime import datetime, timedelta
 import psycopg2.extras
 from flask_login import login_required
@@ -13,6 +13,7 @@ from helpers import get_submission_for_grading, update_submission_grade, get_use
 from subscriptions.utils import get_subscription_plans
 from students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
+from announcements.utils import get_all_announcements, create_announcement
 
 
 admin = Blueprint('admin', __name__)
@@ -515,3 +516,47 @@ def reject_request(request_id):
 
     flash('Request rejected.', 'info')
     return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/admin/announcements')
+@login_required
+@admin_required
+def manage_announcements():
+    announcements = get_all_announcements()
+    return render_template('admin/announcements/list.html', announcements=announcements)
+
+
+@app.route('/admin/announcements/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_announcement():
+    if request.method == 'POST':
+        title = request.form.get('title', '').strip()
+        message = request.form.get('message', '').strip()
+        send_to = request.form.getlist('send_to')  # List of user IDs or 'all'
+
+        if not title or not message:
+            flash('Title and message are required', 'danger')
+            return redirect(url_for('add_announcement'))
+
+        try:
+            # If "all" is selected, send to all students
+            user_ids = None if 'all' in send_to else [
+                int(user_id) for user_id in send_to]
+
+            create_announcement(
+                title=title,
+                message=message,
+                created_by=session['user_id'],
+                user_ids=user_ids
+            )
+
+            flash('Announcement created successfully!', 'success')
+            return redirect(url_for('manage_announcements'))
+        except Exception as e:
+            flash(f'Error creating announcement: {str(e)}', 'danger')
+            return redirect(url_for('add_announcement'))
+
+    # GET request - show form
+    students = get_students()
+    return render_template('admin/announcements/add.html', students=students)

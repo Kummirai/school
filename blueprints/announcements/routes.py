@@ -3,11 +3,9 @@ from decorators.decorator import login_required, admin_required
 from models import get_db_connection
 from announcements.utils import (
     get_user_announcements,
-    mark_announcement_read,
-    get_all_announcements,
-    create_announcement
+    mark_announcement_read
 )
-from helpers import get_students
+from students.utils import get_students
 
 app = Blueprint('announcements', __name__)
 # Announcement routes
@@ -58,47 +56,3 @@ def view_announcement(announcement_id):
         conn.close()
 
 # Admin announcement management
-
-
-@app.route('/admin/announcements')
-@login_required
-@admin_required
-def manage_announcements():
-    announcements = get_all_announcements()
-    return render_template('admin/announcements/list.html', announcements=announcements)
-
-
-@app.route('/admin/announcements/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def add_announcement():
-    if request.method == 'POST':
-        title = request.form.get('title', '').strip()
-        message = request.form.get('message', '').strip()
-        send_to = request.form.getlist('send_to')  # List of user IDs or 'all'
-
-        if not title or not message:
-            flash('Title and message are required', 'danger')
-            return redirect(url_for('add_announcement'))
-
-        try:
-            # If "all" is selected, send to all students
-            user_ids = None if 'all' in send_to else [
-                int(user_id) for user_id in send_to]
-
-            create_announcement(
-                title=title,
-                message=message,
-                created_by=session['user_id'],
-                user_ids=user_ids
-            )
-
-            flash('Announcement created successfully!', 'success')
-            return redirect(url_for('manage_announcements'))
-        except Exception as e:
-            flash(f'Error creating announcement: {str(e)}', 'danger')
-            return redirect(url_for('add_announcement'))
-
-    # GET request - show form
-    students = get_students()
-    return render_template('admin/announcements/add.html', students=students)
