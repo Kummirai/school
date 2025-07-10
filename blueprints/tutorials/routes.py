@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
 from utils import get_videos_by_category
-from decorators.decorator import admin_required
 from flask import current_app as app
-from tutorials.utils import get_all_videos, add_video, delete_video, get_all_categories, get_videos_by_category, get_category_name
+from tutorials.utils import get_videos_by_category, get_category_name
 
+# Create a Blueprint for the tutorials routes
+tutorials_bp = Blueprint('tutorials', __name__, url_prefix='/tutorials')
 
 
 @app.route('/tutorials')
