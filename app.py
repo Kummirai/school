@@ -9,6 +9,7 @@ from blueprints.home.routes import home_bp
 from blueprints.admin.routes import admin_bp
 from blueprints.announcements.routes import announcement_bp
 from blueprints.assignments.routes import assignments_bp
+from blueprints.curriculumn.routes import curriculum_bp
 
 load_dotenv()
 
@@ -32,6 +33,7 @@ app.register_blueprint(home_bp, url_prefix='/')
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(announcement_bp, url_prefix='/announcements')
 app.register_blueprint(assignments_bp, url_prefix='/assignments')
+app.register_blueprint(curriculum_bp, url_prefix='/curriculum')
 
 
 @app.context_processor

@@ -6,20 +6,19 @@ from announcements.utils import (
     mark_announcement_read
 )
 from students.utils import get_students
-from flask import current_app as app
 
 # Create a blueprint for announcements
 announcement_bp = Blueprint('announcement_bp', __name__)
 
 
-@app.route('/announcements')
+@announcement_bp.route('/announcements')
 @login_required
 def view_announcements():
     announcements = get_user_announcements(session['user_id'])
     return render_template('announcements/list.html', announcements=announcements)
 
 
-@app.route('/announcements/<int:announcement_id>')
+@announcement_bp.route('/announcements/<int:announcement_id>')
 @login_required
 def view_announcement(announcement_id):
     conn = get_db_connection()
