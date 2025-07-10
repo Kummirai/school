@@ -4,7 +4,7 @@ import psycopg2.extras
 from flask_login import login_required
 from decorators.decorator import admin_required
 from models import get_db_connection
-from helpers import add_subscription_to_db, get_subscription_plans, get_students
+from subscriptions.utils import add_subscription_to_db, get_subscription_plans
 
 app = Blueprint('admin', __name__)
 
