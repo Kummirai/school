@@ -15,16 +15,46 @@ from students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
 from announcements.utils import get_all_announcements, create_announcement
 from tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
-from sessions.utils import get_upcoming_sessions
+from sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
+from sessions.utils import get_all_session_requests, update_session_request_status
 
 
 admin = Blueprint('admin', __name__)
 
-# Initialize the database connection
-# Add these routes to app.py
+
+@app.route('/session-requests')
+@login_required
+@admin_required
+def manage_session_requests():
+    requests = get_all_session_requests()
+    return render_template('admin/session_requests.html', requests=requests)
 
 
-@app.route('/admin/parents/add', methods=['GET', 'POST'])
+@app.route('/session-requests/<int:request_id>/approve', methods=['POST'])
+@login_required
+@admin_required
+def approve_session_request(request_id):
+    notes = request.form.get('notes', '')
+    if update_session_request_status(request_id, 'approved', session['user_id'], notes):
+        flash('Session request approved and scheduled!', 'success')
+    else:
+        flash('Error approving request', 'danger')
+    return redirect(url_for('manage_session_requests'))
+
+
+@app.route('/session-requests/<int:request_id>/reject', methods=['POST'])
+@login_required
+@admin_required
+def reject_session_request(request_id):
+    notes = request.form.get('notes', '')
+    if update_session_request_status(request_id, 'rejected', session['user_id'], notes):
+        flash('Session request rejected', 'success')
+    else:
+        flash('Error rejecting request', 'danger')
+    return redirect(url_for('manage_session_requests'))
+
+
+@app.route('/parents/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_parent():
@@ -96,7 +126,7 @@ def add_parent():
     return render_template('admin/add_parent.html', students=students)
 
 
-@app.route('/admin/approve_requests')
+@app.route('/approve_requests')
 @login_required
 @admin_required
 def approve_requests():
@@ -124,7 +154,7 @@ def approve_requests():
         conn.close()
 
 
-@app.route('/admin/subscriptions/add', methods=['GET', 'POST'])
+@app.route('/subscriptions/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def admin_add_subscription():
@@ -200,7 +230,7 @@ def admin_add_subscription():
     return render_template('admin/add_subscription.html', students=students, plans=plans)
 
 
-@app.route('/admin/announcements/delete/<int:announcement_id>', methods=['POST'])
+@app.route('/announcements/delete/<int:announcement_id>', methods=['POST'])
 @login_required
 @admin_required
 def delete_announcement(announcement_id):
@@ -220,7 +250,7 @@ def delete_announcement(announcement_id):
     return redirect(url_for('manage_announcements'))
 
 
-@app.route('/admin/assignments/import', methods=['GET', 'POST'])
+@app.route('/assignments/import', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def import_assignments():
@@ -353,7 +383,7 @@ def import_assignments():
     return render_template('admin/assignments/import.html', students=students)
 
 
-@app.route('/admin/submissions/all')
+@app.route('/submissions/all')
 @login_required
 # @roles_required('admin', 'teacher') # Assuming only admins/teachers can view all submissions
 def list_all_submissions():
@@ -411,7 +441,7 @@ def list_all_submissions():
 # Student assignment routes
 
 
-@app.route('/admin/dashboard')
+@app.route('/dashboard')
 @login_required
 def dashboard():
     try:
@@ -443,7 +473,7 @@ def dashboard():
 # Add these new routes to app.py
 
 
-@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
+@app.route('/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def grade_submission(assignment_id, student_id):
@@ -484,7 +514,7 @@ def grade_submission(assignment_id, student_id):
                            assignment=data['assignment'])
 
 
-@app.route('/admin/approve_request/<int:request_id>')
+@app.route('/approve_request/<int:request_id>')
 @admin_required  # Add your admin auth decorator
 def approve_request(request_id):
     # Update request status in DB
@@ -505,7 +535,7 @@ def approve_request(request_id):
     return redirect(url_for('admin_dashboard'))
 
 
-@app.route('/admin/reject_request/<int:request_id>')
+@app.route('/reject_request/<int:request_id>')
 @admin_required
 def reject_request(request_id):
     # Update request status
@@ -522,7 +552,7 @@ def reject_request(request_id):
     return redirect(url_for('admin_dashboard'))
 
 
-@app.route('/admin/announcements')
+@app.route('/announcements')
 @login_required
 @admin_required
 def manage_announcements():
@@ -530,7 +560,7 @@ def manage_announcements():
     return render_template('admin/announcements/list.html', announcements=announcements)
 
 
-@app.route('/admin/announcements/add', methods=['GET', 'POST'])
+@app.route('/announcements/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_announcement():
@@ -567,7 +597,7 @@ def add_announcement():
 
 
 # type: ignore
-@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
+@app.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):
@@ -677,9 +707,8 @@ def edit_parent(parent_id):
                                    parent=parent,
                                    all_students=all_students,
                                    linked_students=linked_students)
-        else:
-            # Fallback if parent not found on error
-            return redirect(url_for('manage_parents'))
+        # Fallback if parent not found on error
+        return redirect(url_for('manage_parents'))
     finally:
         if cur:
             cur.close()
@@ -689,7 +718,7 @@ def edit_parent(parent_id):
 # In your app.py file, usually alongside your other admin routes
 
 
-@app.route('/admin/parents/<int:parent_id>/link_students', methods=['GET'])
+@app.route('/parents/<int:parent_id>/link_students', methods=['GET'])
 @login_required
 @admin_required
 def link_parent_student_ui(parent_id):
@@ -736,7 +765,7 @@ def link_parent_student_ui(parent_id):
 # In your app.py file
 
 
-@app.route('/admin/parents/<int:parent_id>/update_links', methods=['POST'])
+@app.route('/parents/<int:parent_id>/update_links', methods=['POST'])
 @login_required
 @admin_required
 def update_parent_student_links(parent_id):
@@ -787,7 +816,7 @@ def update_parent_student_links(parent_id):
             conn.close()
 
 
-@app.route('/admin/parents')
+@app.route('/parents')
 @login_required
 @admin_required
 def manage_parents():
@@ -819,7 +848,7 @@ def manage_parents():
         conn.close()
 
 
-@app.route('/admin/parents/link', methods=['POST'])
+@app.route('/parents/link', methods=['POST'])
 @login_required
 @admin_required
 def link_parent_student():
@@ -854,7 +883,7 @@ def link_parent_student():
     return redirect(url_for('manage_parents'))
 
 
-@app.route('/admin/tutorials')
+@app.route('/tutorials')
 @login_required
 @admin_required
 def manage_tutorials():
@@ -877,7 +906,7 @@ def manage_tutorials():
                            categories=categories)
 
 
-@app.route('/admin/tutorials/add', methods=['GET', 'POST'])
+@app.route('/tutorials/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_tutorial():
@@ -904,7 +933,7 @@ def add_tutorial():
     return render_template('admin/add_tutorial.html', categories=categories)
 
 
-@app.route('/admin/tutorials/delete/<int:video_id>')
+@app.route('/tutorials/delete/<int:video_id>')
 @login_required
 @admin_required
 def delete_tutorial(video_id):
@@ -913,7 +942,7 @@ def delete_tutorial(video_id):
     return redirect(url_for('manage_tutorials'))
 
 
-@app.route('/admin')
+@app.route('/')
 @login_required
 @admin_required
 def admin_dashboard():
@@ -943,3 +972,80 @@ def admin_dashboard():
                            category_count=len(categories),
                            upcoming_sessions=upcoming_sessions,
                            active_subscriptions_count=active_subscriptions_count)
+
+
+@app.route('/sessions/bookings/<int:session_id>')
+@login_required
+@admin_required
+def view_session_bookings(session_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Get session details
+    cur.execute(
+        'SELECT title FROM tutorial_sessions WHERE id = %s', (session_id,))
+    session_title = cur.fetchone()[0]  # type: ignore
+
+    # Get users who booked this session
+    cur.execute('''
+        SELECT u.id, u.username 
+        FROM student_bookings sb
+        JOIN users u ON sb.student_id = u.id
+        WHERE sb.session_id = %s
+    ''', (session_id,))
+    booked_users = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return render_template('admin/session_bookings.html',
+                           session_title=session_title,
+                           booked_users=booked_users)
+
+
+@app.route('/sessions')
+@login_required
+@admin_required
+def manage_sessions():
+    sessions = get_all_sessions()
+    upcoming_sessions = get_upcoming_sessions()
+    return render_template('admin/sessions.html',
+                           sessions=sessions,
+                           upcoming_sessions=upcoming_sessions)
+
+
+@app.route('/sessions/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_session():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+        max_students = request.form.get('max_students')
+
+        try:
+            create_session(title, description, start_time,
+                           end_time, int(max_students))  # type: ignore
+            flash('Session created successfully', 'success')
+            return redirect(url_for('manage_sessions'))
+        except Exception as e:
+            flash(f'Error creating session: {str(e)}', 'danger')
+
+    return render_template('admin/add_session.html')
+
+
+@app.route('/sessions/delete/<int:session_id>')
+@login_required
+@admin_required
+def delete_session(session_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('DELETE FROM tutorial_sessions WHERE id = %s', (session_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    flash('Session deleted successfully', 'success')
+    return redirect(url_for('manage_sessions'))
+
