@@ -2,7 +2,6 @@ from flask import Flask
 import os
 from dotenv import load_dotenv
 from models import initialize_database
-
 from blueprints.announcements.utils import get_unread_announcements_count
 from blueprints.assignments.utils import get_unsubmitted_assignments_count
 from blueprints.subscriptions.utils import get_subscription_plans

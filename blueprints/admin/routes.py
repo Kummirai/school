@@ -14,13 +14,16 @@ from subscriptions.utils import get_subscription_plans
 from students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
 from announcements.utils import get_all_announcements, create_announcement
-from tutorials.utils import get_all_categories, get_category_name, get_videos_by_category, get_all_videos, add_video, delete_video
+from tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
+from sessions.utils import get_upcoming_sessions
 
 
 admin = Blueprint('admin', __name__)
 
-
+# Initialize the database connection
 # Add these routes to app.py
+
+
 @app.route('/admin/parents/add', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -562,8 +565,6 @@ def add_announcement():
     students = get_students()
     return render_template('admin/announcements/add.html', students=students)
 
-# type: ignore
-
 
 # type: ignore
 @app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
@@ -676,8 +677,9 @@ def edit_parent(parent_id):
                                    parent=parent,
                                    all_students=all_students,
                                    linked_students=linked_students)
-        # Fallback if parent not found on error
-        return redirect(url_for('manage_parents'))
+        else:
+            # Fallback if parent not found on error
+            return redirect(url_for('manage_parents'))
     finally:
         if cur:
             cur.close()
@@ -909,3 +911,35 @@ def delete_tutorial(video_id):
     delete_video(video_id)
     flash('Tutorial video deleted successfully', 'success')
     return redirect(url_for('manage_tutorials'))
+
+
+@app.route('/admin')
+@login_required
+@admin_required
+def admin_dashboard():
+    students = get_students()
+    categories = get_all_categories()
+    upcoming_sessions = get_upcoming_sessions()
+
+    # Get active subscription count
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) FROM subscriptions WHERE is_active = TRUE")
+    active_subscriptions_count = cur.fetchone()[0]  # type: ignore
+    cur.execute('''
+            SELECT username, assignment_id, title, subject, deadline, total_marks, created_at
+                FROM assignments a
+                JOIN assignment_students au ON a.id = au.assignment_id
+                JOIN users u ON u.id = au.student_id;
+        ''')
+    assignments = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    print(assignments[0][0])
+    return render_template('admin/dashboard.html',
+                           assignments=assignments,
+                           student_count=len(students),
+                           category_count=len(categories),
+                           upcoming_sessions=upcoming_sessions,
+                           active_subscriptions_count=active_subscriptions_count)
