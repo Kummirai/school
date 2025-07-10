@@ -20,7 +20,7 @@ from sessions.utils import get_all_session_requests, update_session_request_stat
 from students.utils import add_student_to_db, delete_student_by_id
 
 
-admin = Blueprint('admin', __name__, url_prefix='/admin')
+admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @app.route('/students')

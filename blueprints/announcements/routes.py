@@ -6,9 +6,10 @@ from announcements.utils import (
     mark_announcement_read
 )
 from students.utils import get_students
+from flask import current_app as app
 
-app = Blueprint('announcements', __name__)
-# Announcement routes
+# Create a blueprint for announcements
+announcement_bp = Blueprint('announcement_bp', __name__)
 
 
 @app.route('/announcements')
