@@ -6,7 +6,7 @@ from flask import current_app as app
 home_bp = Blueprint('home', __name__)
 
 
-@app.route('/')
+@home_bp.route('/')
 def home():
     # Initialize subscription to None
     subscription = None

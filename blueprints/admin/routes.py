@@ -17,9 +17,46 @@ from announcements.utils import get_all_announcements, create_announcement
 from tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
 from sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
 from sessions.utils import get_all_session_requests, update_session_request_status
+from students.utils import add_student_to_db, delete_student_by_id
 
 
-admin = Blueprint('admin', __name__)
+admin = Blueprint('admin', __name__, url_prefix='/admin')
+
+
+@app.route('/students')
+@login_required
+@admin_required
+def manage_students():
+    students = get_students()
+    return render_template('admin/students.html', students=students)
+
+
+@app.route('/students/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_student():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        existing_user = get_user_by_username(username)
+        if existing_user:
+            flash('Username already exists', 'danger')
+        else:
+            add_student_to_db(username, password)
+            flash('Student added successfully', 'success')
+            return redirect(url_for('manage_students'))
+
+    return render_template('admin/add_student.html')
+
+
+@app.route('/students/delete/<int:student_id>')
+@login_required
+@admin_required
+def delete_student(student_id):
+    delete_student_by_id(student_id)
+    flash('Student deleted successfully', 'success')
+    return redirect(url_for('manage_students'))
 
 
 @app.route('/session-requests')
@@ -597,7 +634,8 @@ def add_announcement():
 
 
 # type: ignore
-@app.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
+# type: ignore
+@app.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):
@@ -1048,4 +1086,3 @@ def delete_session(session_id):
     conn.close()
     flash('Session deleted successfully', 'success')
     return redirect(url_for('manage_sessions'))
-
