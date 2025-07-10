@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_required
 from datetime import datetime
 from flask import current_app as app
-from helpers import create_session_request, get_all_session_requests, get_session_requests_for_student, update_session_request_status
+from utils import create_session_request, get_all_session_requests, get_session_requests_for_student, update_session_request_status
 from decorators.decorator import admin_required
 
 
