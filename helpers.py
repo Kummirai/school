@@ -911,26 +911,6 @@ def submit_assignment(assignment_id, student_id, submission_text, file_path=None
 
 
 
-def get_all_categories():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT id, name FROM tutorial_categories')
-    categories = cur.fetchall()
-    cur.close()
-    conn.close()
-    return categories
-
-
-def get_category_name(category_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(
-        'SELECT name FROM tutorial_categories WHERE id = %s', (category_id,))
-    category = cur.fetchone()
-    cur.close()
-    conn.close()
-    return category[0] if category else "Unknown Category"
-
 
 
 

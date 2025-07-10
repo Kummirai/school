@@ -3,7 +3,7 @@ from flask_login import login_required
 from utils import get_videos_by_category
 from decorators.decorator import admin_required
 from flask import current_app as app
-from helpers import get_all_categories
+from tutorials.utils import get_all_videos, add_video, delete_video, get_all_categories, get_videos_by_category, get_category_name
 
 
 @app.route('/admin/tutorials')

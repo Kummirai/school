@@ -334,4 +334,121 @@ def parent_view_assignments():
 
     return render_template('parent/assignments.html', students_with_assignments=students_with_assignments)
 
-# Student routes
+
+@app.route('/parent/dashboard')
+@login_required
+def parent_dashboard():
+    if session.get('role') != 'parent':
+        abort(403)
+
+    students = get_students_for_parent(session['user_id'])
+    if not students:
+        flash('No students linked to your account', 'warning')
+        return render_template('parent/dashboard.html',
+                               students=[],
+                               selected_student=None,
+                               stats=None,
+                               assignments=[],
+                               submissions=[],
+                               bookings=[],
+                               announcements=[])
+
+    # Default to first student
+    selected_student_id = request.args.get('student_id', students[0]['id'])
+    try:
+        selected_student_id = int(selected_student_id)
+    except (ValueError, TypeError):
+        flash('Invalid student selected', 'danger')
+        return redirect(url_for('parent_dashboard'))
+
+    selected_student = next(
+        (s for s in students if s['id'] == selected_student_id), None)
+
+    if not selected_student:
+        flash('Invalid student selected', 'danger')
+        return redirect(url_for('parent_dashboard'))
+
+    # Get all data for the selected student
+    assignments = get_assignments_for_user(selected_student_id)
+    submissions = get_student_submissions(selected_student_id)
+    bookings = get_student_bookings(selected_student_id)
+    stats = get_student_performance_stats(selected_student_id)
+    announcements = get_user_announcements(selected_student_id, limit=5)
+
+    return render_template('parent/dashboard.html',
+                           students=students,
+                           selected_student=selected_student,
+                           assignments=assignments,
+                           submissions=submissions,
+                           bookings=bookings,
+                           stats=stats,
+                           announcements=announcements)
+
+
+@app.route('/parent/submissions/<int:student_id>')
+@login_required
+# @parent_required
+def parent_view_submissions(student_id):
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute('''
+            SELECT 
+                a.title, 
+                a.subject, 
+                a.deadline, 
+                s.submission_time, 
+                s.grade, 
+                a.total_marks,
+                s.feedback,
+                s.file_path
+            FROM submissions s
+            JOIN assignments a ON s.assignment_id = a.id
+            WHERE s.student_id = %s
+            ORDER BY a.deadline DESC
+        ''', (student_id,))
+
+        # Convert to list of dictionaries with proper field names
+        submissions = []
+        for row in cur.fetchall():
+            submissions.append({
+                'title': row[0],
+                'subject': row[1],
+                'deadline': row[2],  # This should be a datetime object
+                'submitted_at': row[3],
+                'marks_obtained': row[4],
+                'total_marks': row[5],
+                'feedback': row[6],
+                'file_path': row[7]
+            })
+
+        return render_template('parent/submissions.html',
+                               student_id=student_id,
+                               submissions=submissions)
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route('/parent/sessions/<int:student_id>')
+@login_required
+def parent_view_sessions(student_id):
+    if session.get('role') != 'parent':
+        abort(403)
+
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    bookings = get_student_bookings(student_id)
+    upcoming_sessions = get_upcoming_sessions()
+    return render_template('parent/sessions.html',
+                           student_id=student_id,
+                           bookings=bookings,
+                           upcoming_sessions=upcoming_sessions)

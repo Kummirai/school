@@ -4,7 +4,7 @@ from students.utils import get_user_by_username,  get_students
 from flask import current_app as app
 from decorators.decorator import login_required, admin_required
 from models import get_db_connection
-from helpers import get_all_categories
+from tutorials.utils import get_all_categories
 from sessions.utils import get_upcoming_sessions
 
 auth_bp = Blueprint('auth', __name__)
