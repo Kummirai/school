@@ -1,105 +1,97 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from datetime import datetime, timedelta
+from flask_login import login_required
+from utils import get_subscription_plans, get_user_subscription, get_all_subscriptions, mark_subscription_as_paid
+from decorators.decorator import admin_required
 from models import get_db_connection
 
-subscriptions_bp = Blueprint('subscriptions', __name__)
+app = Blueprint('subscriptions', __name__)
 
 
-def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
+@app.route('/subscriptions')
+def subscriptions():
+    plans = get_subscription_plans()
+    return render_template('subscriptions/subscribe.html', plans=plans)
+
+
+@app.route('/subscribe')
+@login_required
+def subscribe():
+    plans = get_subscription_plans()
+    current_sub = get_user_subscription(session['user_id'])
+    return render_template('subscriptions/subscribe.html',
+                           plans=plans,
+                           current_sub=current_sub)
+
+
+@app.route('/subscribe/<int:plan_id>', methods=['POST'])
+# @login_required
+def create_subscription(plan_id):
     conn = get_db_connection()
     cur = conn.cursor()
+
+    if 'user' not in session:
+        selected_plan = request.form.get('selected_plan')
+        return redirect(url_for('contact_tutor', plan_id=selected_plan))
+
     try:
+        # Get plan details
+        cur.execute(
+            'SELECT id, price, duration_days FROM subscription_plans WHERE id = %s', (plan_id,))
+        plan = cur.fetchone()
+        if not plan:
+            flash('Invalid subscription plan', 'danger')
+            return redirect(url_for('subscribe'))
+
+        # Create subscription (payment will be marked as pending)
+        start_date = datetime.utcnow()
+        end_date = start_date + timedelta(days=plan[2])
+
         cur.execute('''
-            INSERT INTO subscriptions
+            INSERT INTO subscriptions 
             (user_id, plan_id, start_date, end_date, is_active, payment_status)
             VALUES (%s, %s, %s, %s, %s, %s)
             RETURNING id
-        ''', (user_id, plan_id, start_date, end_date, is_active, payment_status))
+        ''', (session['user_id'], plan_id, start_date, end_date, False, 'pending'))
+
         subscription_id = cur.fetchone()[0]  # type: ignore
         conn.commit()
-        return subscription_id
+
+        # In a real app, you would integrate with a payment gateway here
+        # For now, we'll just redirect to a confirmation page
+        return redirect(url_for('subscription_confirmation', subscription_id=subscription_id))
+
     except Exception as e:
         conn.rollback()
-        print(f"Error adding subscription: {e}")
-        return None
+        flash('Error creating subscription: ' + str(e), 'danger')
+        return redirect(url_for('subscribe'))
     finally:
         cur.close()
         conn.close()
 
 
-def get_subscription_plans():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM subscription_plans')
-    plans = cur.fetchall()
-    cur.close()
-    conn.close()
-    return plans
+@app.route('/subscription/confirmation/<int:subscription_id>')
+@login_required
+def subscription_confirmation(subscription_id):
+    return render_template('subscriptions/confirmation.html', subscription_id=subscription_id)
+
+# Admin subscription management
 
 
-def get_user_subscription(user_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('''
-        SELECT s.id, p.name, p.price, s.start_date, s.end_date, s.is_active, s.payment_status
-        FROM subscriptions s
-        JOIN subscription_plans p ON s.plan_id = p.id
-        WHERE s.user_id = %s
-        ORDER BY s.end_date DESC
-        LIMIT 1
-    ''', (user_id,))
-    subscription = cur.fetchone()
-    cur.close()
-    conn.close()
-    return subscription
+@app.route('/admin/subscriptions')
+@login_required
+@admin_required
+def manage_subscriptions():
+    subscriptions = get_all_subscriptions()
+    return render_template('admin/subscriptions/list.html', subscriptions=subscriptions)
 
 
-def get_all_subscriptions():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('''
-        SELECT s.id, u.username, p.name, p.price, s.start_date, s.end_date, 
-               s.is_active, s.payment_status, s.created_at
-        FROM subscriptions s
-        JOIN users u ON s.user_id = u.id
-        JOIN subscription_plans p ON s.plan_id = p.id
-        ORDER BY s.end_date DESC
-    ''')
-    subscriptions = cur.fetchall()
-    cur.close()
-    conn.close()
-    return subscriptions
-
-
-def mark_subscription_as_paid(subscription_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute('''
-            UPDATE subscriptions
-            SET payment_status = 'paid', is_active = TRUE
-            WHERE id = %s
-            RETURNING user_id, plan_id
-        ''', (subscription_id,))
-        result = cur.fetchone()
-
-        if result:
-            user_id, plan_id = result
-            # Update user's role if needed (e.g., give premium access)
-            cur.execute('''
-                UPDATE users
-                SET role = CASE 
-                    WHEN %s = 2 THEN 'premium' 
-                    ELSE role 
-                END
-                WHERE id = %s
-            ''', (plan_id, user_id))
-
-        conn.commit()
-        return True
-    except Exception as e:
-        conn.rollback()
-        print(f"Error marking subscription as paid: {e}")
-        return False
-    finally:
-        cur.close()
-        conn.close()
+@app.route('/admin/subscriptions/mark-paid/<int:subscription_id>', methods=['POST'])
+@login_required
+@admin_required
+def mark_subscription_paid(subscription_id):
+    if mark_subscription_as_paid(subscription_id):
+        flash('Subscription marked as paid', 'success')
+    else:
+        flash('Failed to mark subscription as paid', 'danger')
+    return redirect(url_for('manage_subscriptions'))
