@@ -285,24 +285,7 @@ def home():
 # Curriculums
 
 
-@app.route('/math-curriculum')
-@login_required
-def math_curriculum():
-    return render_template('math_curriculum.html')
 
-
-@app.route('/science_curriculum')
-@login_required
-def science_curriculum():
-    return render_template('science_curriculum.html')
-
-
-@app.route('/english_curriculum')
-@login_required
-def english_curriculum():
-    return render_template('english_curriculum.html')
-
-# API Endpoints
 
 
 @app.route('/api/solve-equation', methods=['POST'])
