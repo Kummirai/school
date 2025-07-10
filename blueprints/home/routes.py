@@ -2,6 +2,9 @@ from flask import Blueprint, render_template, session
 from subscriptions.utils import get_user_subscription
 from flask import current_app as app
 
+# Create a Blueprint for the home routes
+home_bp = Blueprint('home', __name__)
+
 
 @app.route('/')
 def home():

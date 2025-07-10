@@ -45,161 +45,9 @@ def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 
-# Student session booking routes
-
-
-
-# Routes
-
-
-
-
-# Curriculums
-
-
-
-# Admin dashboard
-
-
-
-
-
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('errors/403.html'), 403
-
-# app.py
-
-
-@app.route('/admin/submissions/all')
-@login_required
-# @roles_required('admin', 'teacher') # Assuming only admins/teachers can view all submissions
-def list_all_submissions():
-    conn = None
-    cur = None
-    submissions_data = []
-    try:
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute(
-            """
-            SELECT
-                s.id,
-                a.title AS assignment_title,
-                u.username AS student_username,
-                s.submission_time,
-                s.grade,
-                s.file_path,
-                s.submission_text,
-                s.interactive_submission_data,
-                s.assignment_id -- Add assignment_id here
-            FROM
-                submissions s
-            JOIN
-                assignments a ON s.assignment_id = a.id
-            JOIN
-                users u ON s.student_id = u.id
-            ORDER BY
-                s.submission_time DESC;
-            """
-        )
-        for row in cur.fetchall():
-            submissions_data.append({
-                'id': row[0],
-                'assignment_title': row[1],
-                'student_username': row[2],
-                'submission_time': row[3],
-                'grade': row[4],
-                'file_path': row[5],
-                'submission_text': row[6],
-                'interactive_submission_data': row[7],
-                'assignment_id': row[8]  # Add assignment_id to the dictionary
-            })
-    except Exception as e:
-        print(f"Error fetching all submissions: {e}")
-        flash("Could not load all submissions.", "danger")
-    finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
-
-    return render_template('admin/all_submissions.html', submissions=submissions_data)
-
-# Student assignment routes
-
-
-@app.route('/admin/dashboard')
-@login_required
-def dashboard():
-    try:
-
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute('''
-            SELECT username, assignment_id, title, subject, deadline, total_marks
-                FROM assignments a
-                JOIN assignment_students au ON a.id = au.assignment_id
-                JOIN users u ON u.id = au.student_id;
-        ''')
-        assignments = cur.fetchall()
-        cur.close()
-        conn.close()
-
-        print(assignments)
-        return render_template(
-            'admin/dashboard.html',
-            assignments=assignments,
-            current_time=datetime.utcnow()
-        )
-    except Exception as e:
-        app.logger.error(f"Error fetching assignments: {str(e)}")
-        return render_template('dashboard.html',
-                               assignments=[],
-                               current_time=datetime.utcnow())
-
-# Add these new routes to app.py
-
-
-@app.route('/admin/assignments/<int:assignment_id>/submissions/<int:student_id>/grade', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def grade_submission(assignment_id, student_id):
-    # Get student details
-    student = get_user_by_id(student_id)
-    if not student:
-        flash('Student not found', 'danger')
-        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-
-    # Get submission and assignment details
-    data = get_submission_for_grading(assignment_id, student_id)
-    if not data:
-        flash('Submission not found', 'danger')
-        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-
-    if request.method == 'POST':
-        marks_obtained = request.form.get('marks_obtained')
-        feedback = request.form.get('feedback', '')
-
-        try:
-            marks_obtained = float(marks_obtained)  # type: ignore
-            if marks_obtained < 0 or marks_obtained > data['assignment']['total_marks']:
-                flash('Invalid marks value', 'danger')
-                return redirect(url_for('grade_submission', assignment_id=assignment_id, student_id=student_id))
-
-            if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
-                flash('Grade submitted successfully', 'success')
-                return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
-            else:
-                flash('Error submitting grade', 'danger')
-        except ValueError:
-            flash('Invalid marks format', 'danger')
-
-    return render_template('admin/assignments/grade.html',
-                           assignment_id=assignment_id,
-                           student=student,
-                           submission=data['submission'],
-                           assignment=data['assignment'])
 
 
 @app.route('/leaderboard')
@@ -379,42 +227,6 @@ def record_practice():
         return jsonify({'success': False, 'error': str(e)})
 
 
-@app.route('/admin/approve_request/<int:request_id>')
-@admin_required  # Add your admin auth decorator
-def approve_request(request_id):
-    # Update request status in DB
-    update_request_status(request_id, 'approved')
-
-    # Get request details
-    request = get_request_details(request_id)
-
-    # Create subscription for user
-    create_subscription(request['user_email'],  # type: ignore
-                        request['plan_id'])  # type: ignore
-
-    # Send confirmation email to user
-    send_approval_notification(
-        request.user_email, request.plan_name)  # type: ignore
-
-    flash('Request approved successfully!', 'success')
-    return redirect(url_for('admin_dashboard'))
-
-
-@app.route('/admin/reject_request/<int:request_id>')
-@admin_required
-def reject_request(request_id):
-    # Update request status
-    update_request_status(request_id, 'rejected')
-
-    # Get request details
-    request = get_request_details(request_id)
-
-    # Send rejection email
-    send_rejection_notification(
-        request.user_email, request.plan_name)  # type: ignore
-
-    flash('Request rejected.', 'info')
-    return redirect(url_for('admin_dashboard'))
 
 
 @app.route('/submit_plan_request', methods=['POST'])
@@ -492,23 +304,6 @@ def utility_processor():
 # Add this new route to app.py
 
 
-
-@app.route('/subscription/status')
-@login_required
-def subscription_status():
-    # Ensure only students can access this page if needed, although login_required already restricts it
-    if session.get('role') != 'student':
-        flash('This page is only for students.', 'warning')
-        return redirect(url_for('home'))  # Or wherever appropriate
-
-    user_id = session.get('user_id')
-    if not user_id:
-        # This case should be covered by @login_required, but as a fallback:
-        flash('User not logged in.', 'danger')
-        return redirect(url_for('login'))
-
-    subscription = get_user_subscription(user_id)
-    return render_template('subscription_status.html', subscription=subscription)
 
 
 

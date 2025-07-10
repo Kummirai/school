@@ -95,3 +95,21 @@ def mark_subscription_paid(subscription_id):
     else:
         flash('Failed to mark subscription as paid', 'danger')
     return redirect(url_for('manage_subscriptions'))
+
+
+@app.route('/subscription/status')
+@login_required
+def subscription_status():
+    # Ensure only students can access this page if needed, although login_required already restricts it
+    if session.get('role') != 'student':
+        flash('This page is only for students.', 'warning')
+        return redirect(url_for('home'))  # Or wherever appropriate
+
+    user_id = session.get('user_id')
+    if not user_id:
+        # This case should be covered by @login_required, but as a fallback:
+        flash('User not logged in.', 'danger')
+        return redirect(url_for('login'))
+
+    subscription = get_user_subscription(user_id)
+    return render_template('subscription_status.html', subscription=subscription)
