@@ -2,7 +2,7 @@ from models import get_db_connection
 from datetime import datetime, timedelta
 import json
 import psycopg2.extras
-from flask import current_app, session
+from flask import current_app, session, jsonify
 from psycopg2.extras import DictCursor
 from werkzeug.security import generate_password_hash
 from flask import Flask
