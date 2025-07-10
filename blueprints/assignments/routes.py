@@ -5,8 +5,9 @@ import json
 import os
 from flask_login import login_required
 from models import get_db_connection
-from helpers import get_students, get_assignment_details, get_student_submission, submit_assignment, add_assignment
+from helpers import get_students, get_student_submission, submit_assignment
 from decorators.decorator import admin_required
+from assignments.utils import get_assignment_details, add_assignment
 
 app = Flask(__name__)
 assignments_bp = Blueprint('assignments', __name__)

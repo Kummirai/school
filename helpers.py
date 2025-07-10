@@ -310,7 +310,6 @@ def _get_default_icon(activity_type):
     return icon_map.get(activity_type, 'check')
 
 
-
 def get_practice_data(student_id):
     """Fetch actual practice statistics with completion dates as labels"""
     conn = get_db_connection()
@@ -681,7 +680,6 @@ def get_student_performance_stats(student_id):
     finally:
         cur.close()
         conn.close()
-
 
 
 def get_unread_announcements_count(user_id):
@@ -1183,9 +1181,6 @@ def update_submission_grade(assignment_id, student_id, marks_obtained, feedback)
         conn.close()
 
 
-
-
-
 def save_plan_request(request_data):
     """Save a new plan request to the database"""
     conn = get_db_connection()
@@ -1217,8 +1212,6 @@ def save_plan_request(request_data):
         conn.close()
 
 
-
-
 def get_all_student_ids():
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1228,8 +1221,6 @@ def get_all_student_ids():
     cur.close()
     conn.close()
     return student_ids
-
-
 
 
 def get_student_submission(student_id, assignment_id):
