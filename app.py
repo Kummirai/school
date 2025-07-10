@@ -15,7 +15,7 @@ import psycopg2.extras
 from psycopg2.extras import DictCursor
 from flask import current_app
 from models import get_db_connection, initialize_database
-from helpers import get_students, get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, book_session, cancel_booking, get_student_bookings, get_all_sessions, create_session, get_upcoming_sessions, add_student_to_db, delete_student_by_id,  submit_assignment, get_student_submission,  get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_request_details, update_session_request_status, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, get_all_session_requests, save_plan_request, get_subscription_plans, get_session_requests_for_student, get_all_subscriptions, get_exams_data, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db, create_session_request, get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent, get_user_by_username
+from helpers import get_all_categories, get_videos_by_category, get_category_name, get_user_subscription, submit_assignment, get_student_submission,  get_submission_for_grading, get_user_by_id, update_request_status, get_leaderboard, get_recent_activities, get_request_details, update_submission_grade, record_practice_score, send_approval_notification, send_rejection_notification,  get_plan_name, get_plan_price, generate_password_hash, save_plan_request, get_subscription_plans, get_all_subscriptions, get_exams_data, mark_subscription_as_paid, load_exams_from_json, log_student_activity, add_subscription_to_db,  get_practice_data, get_student_submissions, get_student_performance_stats, get_students_for_parent
 from decorators.decorator import login_required, admin_required
 from blueprints.announcements.utils import get_unread_announcements_count, get_all_announcements, get_user_announcements, mark_announcement_read, create_announcement
 from blueprints.assignments.utils import get_assignment_details, add_assignment, get_all_assignments, get_assignments_data, get_assignments_for_user, get_student_assignments, get_all_student_ids, get_unsubmitted_assignments_count
@@ -45,135 +45,7 @@ def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 
-
 # Student session booking routes
-
-
-@app.route('/sessions/book/<int:session_id>', methods=['POST'])
-@login_required
-def book_session_route(session_id):
-    if session.get('role') != 'student':
-        flash('Only students can book sessions', 'danger')
-        return redirect(url_for('view_sessions'))
-
-    student_id = session.get('user_id')
-    if not student_id:
-        flash('User not properly authenticated', 'danger')
-        return redirect(url_for('view_sessions'))
-
-    if book_session(student_id, session_id):
-        flash('Session booked successfully!', 'success')
-    else:
-        flash(
-            'Could not book session. It might be full or you already booked it.', 'danger')
-    return redirect(url_for('view_sessions'))
-
-
-@app.route('/sessions/cancel/<int:booking_id>', methods=['POST'])
-@login_required
-def cancel_booking_route(booking_id):
-    if cancel_booking(booking_id, session.get('user_id')):
-        flash('Booking cancelled successfully', 'success')
-    else:
-        flash('Could not cancel booking', 'danger')
-    return redirect(url_for('view_sessions'))
-
-# Admin session management routes
-
-
-@app.route('/sessions')
-@login_required
-def view_sessions():
-    student_id = session.get('user_id')
-    if not student_id:
-        flash('User not properly authenticated', 'danger')
-        return redirect(url_for('login'))
-
-    sessions = get_all_sessions()
-    student_bookings = get_student_bookings(student_id)
-    return render_template('sessions/list.html',
-                           sessions=sessions,
-                           bookings=student_bookings)
-
-# Add this new route to app.py
-
-
-@app.route('/admin/sessions/bookings/<int:session_id>')
-@login_required
-@admin_required
-def view_session_bookings(session_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    # Get session details
-    cur.execute(
-        'SELECT title FROM tutorial_sessions WHERE id = %s', (session_id,))
-    session_title = cur.fetchone()[0]  # type: ignore
-
-    # Get users who booked this session
-    cur.execute('''
-        SELECT u.id, u.username 
-        FROM student_bookings sb
-        JOIN users u ON sb.student_id = u.id
-        WHERE sb.session_id = %s
-    ''', (session_id,))
-    booked_users = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    return render_template('admin/session_bookings.html',
-                           session_title=session_title,
-                           booked_users=booked_users)
-
-
-@app.route('/admin/sessions')
-@login_required
-@admin_required
-def manage_sessions():
-    sessions = get_all_sessions()
-    upcoming_sessions = get_upcoming_sessions()
-    return render_template('admin/sessions.html',
-                           sessions=sessions,
-                           upcoming_sessions=upcoming_sessions)
-
-
-@app.route('/admin/sessions/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def add_session():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
-        start_time = request.form.get('start_time')
-        end_time = request.form.get('end_time')
-        max_students = request.form.get('max_students')
-
-        try:
-            create_session(title, description, start_time,
-                           end_time, int(max_students))  # type: ignore
-            flash('Session created successfully', 'success')
-            return redirect(url_for('manage_sessions'))
-        except Exception as e:
-            flash(f'Error creating session: {str(e)}', 'danger')
-
-    return render_template('admin/add_session.html')
-
-
-@app.route('/admin/sessions/delete/<int:session_id>')
-@login_required
-@admin_required
-def delete_session(session_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('DELETE FROM tutorial_sessions WHERE id = %s', (session_id,))
-    conn.commit()
-    cur.close()
-    conn.close()
-    flash('Session deleted successfully', 'success')
-    return redirect(url_for('manage_sessions'))
-
-# Add these helper functions
 
 
 def get_all_videos():
@@ -209,63 +81,6 @@ def delete_video(video_id):
     conn.close()
 
 
-@app.route('/admin/tutorials')
-@login_required
-@admin_required
-def manage_tutorials():
-    videos = get_all_videos()  # This should return a list of videos
-    categories = get_all_categories()  # This should return a list of categories
-
-    # Convert to the structure your template expects
-    tutorials_dict = {
-        category[1]: {  # category name as key
-            # videos for this category
-            'videos': [v for v in videos if v[3] == category[1]],
-            'id': category[0]  # category id
-        }
-        for category in categories
-    }
-
-    return render_template('admin/tutorials.html',
-                           tutorials=tutorials_dict,
-                           videos=videos,
-                           categories=categories)
-
-
-@app.route('/admin/tutorials/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def add_tutorial():
-    if request.method == 'POST':
-        try:
-            title = request.form.get('title', '').strip()
-            url = request.form.get('url', '').strip()
-            category_id = request.form.get('category_id', '').strip()
-
-            if not all([title, url, category_id]):
-                flash('All fields are required', 'danger')
-                return redirect(url_for('add_tutorial'))
-
-            add_video(title, url, category_id)
-            flash('Tutorial added successfully', 'success')
-            return redirect(url_for('manage_tutorials'))
-
-        except Exception as e:
-            flash(f'Error adding tutorial: {str(e)}', 'danger')
-            return redirect(url_for('add_tutorial'))
-
-    # GET request - show the form
-    categories = get_all_categories()
-    return render_template('admin/add_tutorial.html', categories=categories)
-
-
-@app.route('/admin/tutorials/delete/<int:video_id>')
-@login_required
-@admin_required
-def delete_tutorial(video_id):
-    delete_video(video_id)
-    flash('Tutorial video deleted successfully', 'success')
-    return redirect(url_for('manage_tutorials'))
 
 # Routes
 
@@ -286,107 +101,10 @@ def home():
 
 
 
-
-
-
-
-
-@app.route('/tutorials')
-# @login_required
-def tutorials_home():
-    return render_template('tutorials/video_tutorials.html')
-
-
-@app.route('/study_guides')
-@login_required
-def studyguides_home():
-    return render_template('study_guides.html')
-
-
-@app.route('/tutorials/<int:category_id>')
-# @login_required
-def tutorial_language(category_id):
-    videos = get_videos_by_category(category_id)
-    if not videos:
-        flash('Tutorial category not found', 'danger')
-        return redirect(url_for('tutorials_home'))
-
-    # Get the category name
-    category_name = get_category_name(category_id)
-
-    return render_template('tutorials/language.html',
-                           videos=videos,
-                           category={'id': category_id, 'name': category_name})
-
 # Admin dashboard
 
 
-@app.route('/admin')
-@login_required
-@admin_required
-def admin_dashboard():
-    students = get_students()
-    categories = get_all_categories()
-    upcoming_sessions = get_upcoming_sessions()
 
-    # Get active subscription count
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT COUNT(*) FROM subscriptions WHERE is_active = TRUE")
-    active_subscriptions_count = cur.fetchone()[0]  # type: ignore
-    cur.execute('''
-            SELECT username, assignment_id, title, subject, deadline, total_marks, created_at
-                FROM assignments a
-                JOIN assignment_students au ON a.id = au.assignment_id
-                JOIN users u ON u.id = au.student_id;
-        ''')
-    assignments = cur.fetchall()
-    cur.close()
-    conn.close()
-
-    print(assignments[0][0])
-    return render_template('admin/dashboard.html',
-                           assignments=assignments,
-                           student_count=len(students),
-                           category_count=len(categories),
-                           upcoming_sessions=upcoming_sessions,
-                           active_subscriptions_count=active_subscriptions_count)
-
-
-@app.route('/admin/students')
-@login_required
-@admin_required
-def manage_students():
-    students = get_students()
-    return render_template('admin/students.html', students=students)
-
-
-@app.route('/admin/students/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def add_student():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        existing_user = get_user_by_username(username)
-        if existing_user:
-            flash('Username already exists', 'danger')
-        else:
-            add_student_to_db(username, password)
-            flash('Student added successfully', 'success')
-            return redirect(url_for('manage_students'))
-
-    return render_template('admin/add_student.html')
-
-
-@app.route('/admin/students/delete/<int:student_id>')
-@login_required
-@admin_required
-def delete_student(student_id):
-    delete_student_by_id(student_id)
-    flash('Student deleted successfully', 'success')
-    return redirect(url_for('manage_students'))
 
 
 @app.errorhandler(403)
@@ -525,8 +243,6 @@ def grade_submission(assignment_id, student_id):
                            student=student,
                            submission=data['submission'],
                            assignment=data['assignment'])
-
-
 
 
 @app.route('/leaderboard')
@@ -1026,7 +742,6 @@ def subscription_status():
 
     subscription = get_user_subscription(user_id)
     return render_template('subscription_status.html', subscription=subscription)
-
 
 
 @app.route('/admin/announcements/delete/<int:announcement_id>', methods=['POST'])
@@ -1595,11 +1310,6 @@ def get_chart_data(student_id):
         return jsonify({'error': str(e)}), 500
 
 # In your app.py file, usually near your other admin routes
-
-
-
-
-
 
 
 # Studyguides

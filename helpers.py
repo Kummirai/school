@@ -565,107 +565,6 @@ def load_exams_from_json(filepath='static/js/exams.json'):
 # Add this new helper function to app.py
 
 
-def add_subscription_to_db(user_id, plan_id, start_date, end_date, is_active=False, payment_status='pending'):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute('''
-            INSERT INTO subscriptions
-            (user_id, plan_id, start_date, end_date, is_active, payment_status)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            RETURNING id
-        ''', (user_id, plan_id, start_date, end_date, is_active, payment_status))
-        subscription_id = cur.fetchone()[0]  # type: ignore
-        conn.commit()
-        return subscription_id
-    except Exception as e:
-        conn.rollback()
-        print(f"Error adding subscription: {e}")
-        return None
-    finally:
-        cur.close()
-        conn.close()
-
-
-def get_subscription_plans():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM subscription_plans')
-    plans = cur.fetchall()
-    cur.close()
-    conn.close()
-    return plans
-
-
-def get_user_subscription(user_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('''
-        SELECT s.id, p.name, p.price, s.start_date, s.end_date, s.is_active, s.payment_status
-        FROM subscriptions s
-        JOIN subscription_plans p ON s.plan_id = p.id
-        WHERE s.user_id = %s
-        ORDER BY s.end_date DESC
-        LIMIT 1
-    ''', (user_id,))
-    subscription = cur.fetchone()
-    cur.close()
-    conn.close()
-    return subscription
-
-
-def get_all_subscriptions():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('''
-        SELECT s.id, u.username, p.name, p.price, s.start_date, s.end_date, 
-               s.is_active, s.payment_status, s.created_at
-        FROM subscriptions s
-        JOIN users u ON s.user_id = u.id
-        JOIN subscription_plans p ON s.plan_id = p.id
-        ORDER BY s.end_date DESC
-    ''')
-    subscriptions = cur.fetchall()
-    cur.close()
-    conn.close()
-    return subscriptions
-
-
-def mark_subscription_as_paid(subscription_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute('''
-            UPDATE subscriptions
-            SET payment_status = 'paid', is_active = TRUE
-            WHERE id = %s
-            RETURNING user_id, plan_id
-        ''', (subscription_id,))
-        result = cur.fetchone()
-
-        if result:
-            user_id, plan_id = result
-            # Update user's role if needed (e.g., give premium access)
-            cur.execute('''
-                UPDATE users
-                SET role = CASE 
-                    WHEN %s = 2 THEN 'premium' 
-                    ELSE role 
-                END
-                WHERE id = %s
-            ''', (plan_id, user_id))
-
-        conn.commit()
-        return True
-    except Exception as e:
-        conn.rollback()
-        print(f"Error marking subscription as paid: {e}")
-        return False
-    finally:
-        cur.close()
-        conn.close()
-
-
 def record_practice_score(student_id, subject, topic, score, total_questions):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -1010,23 +909,6 @@ def submit_assignment(assignment_id, student_id, submission_text, file_path=None
         conn.close()
 
 
-def get_user_by_username(username):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(
-        'SELECT id, username, password, role FROM users WHERE username = %s', (username,))
-    user = cur.fetchone()
-    cur.close()
-    conn.close()
-    if user:
-        return {
-            'id': user[0],
-            'username': user[1],
-            'password': user[2],
-            'role': user[3]
-        }
-    return None
-
 
 
 def get_all_categories():
@@ -1050,82 +932,8 @@ def get_category_name(category_id):
     return category[0] if category else "Unknown Category"
 
 
-def get_videos_by_category(category_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(
-        'SELECT id, title, url FROM tutorial_videos WHERE category_id = %s', (category_id,))
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-
-    # Convert to list of dictionaries
-    videos = [
-        {'id': row[0], 'title': row[1], 'url': row[2]}
-        for row in rows
-    ]
-    return videos
 
 
-def get_students():
-    conn = get_db_connection()
-    # Use DictCursor to fetch rows as dictionary-like objects.
-    # This allows you to access columns by name (e.g., student['id'] or student.id).
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    try:
-        # Ensure your SELECT statement includes 'id' and 'username'
-        cur.execute(
-            "SELECT id, username FROM users WHERE role = 'student' ORDER BY username")
-        students = cur.fetchall()
-        # Each item in 'students' will now be a DictRow object, which behaves like a dictionary
-        # and also supports attribute access (e.g., student.id, student.username).
-        return students
-    except Exception as e:
-        # It's good practice to log or print errors for debugging
-        print(f"Error fetching students in get_students(): {e}")
-        return []  # Return an empty list to prevent further errors in the template
-    finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
-
-
-def add_student_to_db(username, password):  # Changed from add_student
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('INSERT INTO users (username, password, role) VALUES (%s, %s, %s)',
-                (username, generate_password_hash(password), 'student'))
-    conn.commit()
-    cur.close()
-    conn.close()
-
-
-def delete_student_by_id(student_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('DELETE FROM users WHERE id = %s AND role = %s',
-                (student_id, 'student'))
-    conn.commit()
-    cur.close()
-    conn.close()
-
-
-
-def get_student_bookings(student_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('''
-        SELECT sb.id, ts.title, ts.start_time, ts.end_time
-        FROM student_bookings sb
-        JOIN tutorial_sessions ts ON sb.session_id = ts.id
-        WHERE sb.student_id = %s AND ts.start_time > NOW()
-        ORDER BY ts.start_time
-    ''', (student_id,))
-    bookings = cur.fetchall()
-    cur.close()
-    conn.close()
-    return bookings
 
 
 
