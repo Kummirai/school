@@ -5,8 +5,12 @@ from flask_login import login_required
 from decorators.decorator import admin_required
 from models import get_db_connection
 from subscriptions.utils import add_subscription_to_db, get_subscription_plans
+from students.utils import get_students
+from flask import current_app as app
+import json
+from assignments.utils import add_assignment
 
-app = Blueprint('admin', __name__)
+admin = Blueprint('admin', __name__)
 
 
 @app.route('/admin/approve_requests')
