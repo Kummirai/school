@@ -1,10 +1,13 @@
-from app import get_db_connection, app
+from models import get_db_connection
 from datetime import datetime, timedelta
 import json
 import psycopg2.extras
 from flask import current_app, session
 from psycopg2.extras import DictCursor
 from werkzeug.security import generate_password_hash
+from flask import Flask
+
+app = Flask(__name__)
 
 
 def create_session_request(student_id, title, description, category, preferred_time):
