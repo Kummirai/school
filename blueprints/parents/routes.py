@@ -13,7 +13,7 @@ from sessions.utils import get_upcoming_sessions
 parents_bp = Blueprint('parents', __name__, url_prefix='/parent')
 
 
-@app.route('/parent/assignments')
+@app.route('/assignments')
 @login_required
 # @parent_required # If you have a specific decorator for parent role
 def parent_view_assignments():
@@ -63,7 +63,7 @@ def parent_view_assignments():
     return render_template('parent/assignments.html', students_with_assignments=students_with_assignments)
 
 
-@app.route('/parent/dashboard')
+@app.route('/dashboard')
 @login_required
 def parent_dashboard():
     if session.get('role') != 'parent':
@@ -113,7 +113,7 @@ def parent_dashboard():
                            announcements=announcements)
 
 
-@app.route('/parent/submissions/<int:student_id>')
+@app.route('/submissions/<int:student_id>')
 @login_required
 # @parent_required
 def parent_view_submissions(student_id):
@@ -163,7 +163,7 @@ def parent_view_submissions(student_id):
         conn.close()
 
 
-@app.route('/parent/sessions/<int:student_id>')
+@app.route('/sessions/<int:student_id>')
 @login_required
 def parent_view_sessions(student_id):
     if session.get('role') != 'parent':
