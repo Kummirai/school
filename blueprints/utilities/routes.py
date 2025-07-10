@@ -3,6 +3,10 @@ from flask_login import login_required
 from helpers import get_db_connection, get_leaderboard, record_practice_score
 from flask import current_app as app
 from helpers import get_plan_name, get_plan_price, save_plan_request
+from assignments.utils import get_assignments_data
+from helpers import get_exams_data, get_practice_data
+from helpers import get_actual_subject_data, get_recent_activities, get_actual_trend_data
+
 
 # Create a blueprint for utilities
 utilities_bp = Blueprint('utilities', __name__)
@@ -252,3 +256,68 @@ def confirmation():
 def contact_tutor(plan_id):
     """Contact tutor page with plan information"""
     return render_template('contact_tutor.html', plan_id=plan_id)
+
+
+@app.route('/whiteboards')
+@login_required
+def list_whiteboards():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Get whiteboards the user has access to
+        cur.execute('''
+            SELECT w.id, w.name, u.username as created_by, w.created_at
+            FROM whiteboards w
+            JOIN users u ON w.created_by = u.id
+            JOIN whiteboard_participants p ON w.id = p.whiteboard_id
+            WHERE p.user_id = %s
+            ORDER BY w.created_at DESC
+        ''', (session['user_id'],))
+
+        whiteboards = [{
+            'id': row[0],
+            'name': row[1],
+            'created_by': row[2],
+            'created_at': row[3]
+        } for row in cur.fetchall()]
+
+        return render_template('whiteboards/list.html', whiteboards=whiteboards)
+    except Exception as e:
+        print(f"Error listing whiteboards: {e}")
+        return render_template('whiteboards/list.html', whiteboards=[])
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route('/api/student/<int:student_id>/chart_data')
+def get_chart_data(student_id):
+    """Endpoint to fetch all chart data from database"""
+    try:
+        # Get all data from database
+        assignments = get_assignments_data(student_id)
+        print(assignments)
+        practice = get_practice_data(student_id)
+        print(practice)
+        exams = get_exams_data(student_id)
+        print(exams)
+        activities = get_recent_activities(student_id)
+
+        # Get actual trend data with real dates
+        trend_data = get_actual_trend_data(student_id)
+
+        # Get actual subject performance data
+        subject_data = get_actual_subject_data(student_id)
+
+        return jsonify({
+            'assignments': assignments,
+            'practice': practice,
+            'exams': exams,
+            'activities': activities,
+            'trend': trend_data,
+            'subjects': subject_data
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# In your app.py file, usually near your other admin routes

@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, abort
 import json
 import os
+from flask_login import login_required
+
 # Create a Blueprint for the grades routes
 grades_bp = Blueprint('grades', __name__, url_prefix='/grades')
 app = grades_bp
@@ -172,3 +174,11 @@ def grade_12_maths():
 @app.route('/algebra-calculator')
 def algebra_calculator():
     return render_template('algebra_calculator.html')
+
+# Studyguides
+
+
+@app.route('/grade7/numeric_geometric_patterns')
+@login_required
+def numeric_geometric_patterns():
+    return render_template('grade7_maths/numeric_geometric_patterns.html')
