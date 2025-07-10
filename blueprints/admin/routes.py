@@ -14,6 +14,7 @@ from subscriptions.utils import get_subscription_plans
 from students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
 from announcements.utils import get_all_announcements, create_announcement
+from tutorials.utils import get_all_categories, get_category_name, get_videos_by_category, get_all_videos, add_video, delete_video
 
 
 admin = Blueprint('admin', __name__)
@@ -563,7 +564,9 @@ def add_announcement():
 
 # type: ignore
 
-@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
+
+# type: ignore
+@app.route('/admin/parents/edit/<int:parent_id>', methods=['GET', 'POST']) # type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):
@@ -847,3 +850,62 @@ def link_parent_student():
         conn.close()
 
     return redirect(url_for('manage_parents'))
+
+
+@app.route('/admin/tutorials')
+@login_required
+@admin_required
+def manage_tutorials():
+    videos = get_all_videos()  # This should return a list of videos
+    categories = get_all_categories()  # This should return a list of categories
+
+    # Convert to the structure your template expects
+    tutorials_dict = {
+        category[1]: {  # category name as key
+            # videos for this category
+            'videos': [v for v in videos if v[3] == category[1]],
+            'id': category[0]  # category id
+        }
+        for category in categories
+    }
+
+    return render_template('admin/tutorials.html',
+                           tutorials=tutorials_dict,
+                           videos=videos,
+                           categories=categories)
+
+
+@app.route('/admin/tutorials/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_tutorial():
+    if request.method == 'POST':
+        try:
+            title = request.form.get('title', '').strip()
+            url = request.form.get('url', '').strip()
+            category_id = request.form.get('category_id', '').strip()
+
+            if not all([title, url, category_id]):
+                flash('All fields are required', 'danger')
+                return redirect(url_for('add_tutorial'))
+
+            add_video(title, url, category_id)
+            flash('Tutorial added successfully', 'success')
+            return redirect(url_for('manage_tutorials'))
+
+        except Exception as e:
+            flash(f'Error adding tutorial: {str(e)}', 'danger')
+            return redirect(url_for('add_tutorial'))
+
+    # GET request - show the form
+    categories = get_all_categories()
+    return render_template('admin/add_tutorial.html', categories=categories)
+
+
+@app.route('/admin/tutorials/delete/<int:video_id>')
+@login_required
+@admin_required
+def delete_tutorial(video_id):
+    delete_video(video_id)
+    flash('Tutorial video deleted successfully', 'success')
+    return redirect(url_for('manage_tutorials'))
