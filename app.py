@@ -290,38 +290,6 @@ def home():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        user = get_user_by_username(username)
-        if user and check_password_hash(user['password'], password):
-            session['username'] = username
-            session['user_id'] = user['id']
-            session['role'] = user['role']
-            session['class'] = user.get(
-                'class', 'default_class')  # Add this line
-            flash('Logged in successfully!', 'success')
-
-            if user['role'] == 'parent':
-                return redirect(url_for('parent_dashboard'))
-            else:
-                return redirect(request.args.get('next') or url_for('home'))
-        else:
-            flash('Invalid username or password', 'danger')
-
-    return render_template('auth/login.html')
-
-
-@app.route('/logout')
-def logout():
-    session.pop('username', None)
-    session.pop('role', None)
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('home'))
-
 
 @app.route('/tutorials')
 # @login_required
