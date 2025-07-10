@@ -2,10 +2,10 @@ from flask import Blueprint, render_template, abort
 import json
 import os
 from flask_login import login_required
+from flask import current_app as app
 
 # Create a Blueprint for the grades routes
 grades_bp = Blueprint('grades', __name__, url_prefix='/grades')
-app = grades_bp
 
 
 @app.route('/grade/<int:grade_num>/maths/chapter/<int:chapter_num>/<filename>')
