@@ -3,6 +3,103 @@ import psycopg2.extras
 from psycopg2.extras import DictCursor
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
+# Add this to your models.py file (after your existing imports)
+
+from flask_login import UserMixin
+
+
+class User(UserMixin):
+    def __init__(self, id, username, password, role):
+        self.id = id
+        self.username = username
+        self.password = password
+        self.role = role
+
+    @staticmethod
+    def get(user_id):
+        """Get user by ID"""
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                "SELECT id, username, password, role FROM users WHERE id = %s", (user_id,))
+            user_data = cursor.fetchone()
+
+            if user_data:
+                return User(
+                    id=user_data[0],
+                    username=user_data[1],
+                    password=user_data[2],
+                    role=user_data[3]
+                )
+            return None
+        except Exception as e:
+            print(f"Error getting user by ID: {e}")
+            return None
+        finally:
+            cursor.close()
+            conn.close()
+
+    @staticmethod
+    def get_by_username(username):
+        """Get user by username"""
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                "SELECT id, username, password, role FROM users WHERE username = %s", (username,))
+            user_data = cursor.fetchone()
+
+            if user_data:
+                return User(
+                    id=user_data[0],
+                    username=user_data[1],
+                    password=user_data[2],
+                    role=user_data[3]
+                )
+            return None
+        except Exception as e:
+            print(f"Error getting user by username: {e}")
+            return None
+        finally:
+            cursor.close()
+            conn.close()
+
+    def get_id(self):
+        """Return the user ID as a string (required by Flask-Login)"""
+        return str(self.id)
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated"""
+        return True
+
+    def is_active(self):
+        """Return True if the user is active"""
+        return True
+
+    def is_anonymous(self):
+        """Return True if the user is anonymous"""
+        return False
+
+    def check_password(self, password):
+        """Check if the provided password matches the user's password"""
+        return check_password_hash(self.password, password)
+
+    def is_admin(self):
+        """Check if user is an admin"""
+        return self.role == 'admin'
+
+    def is_student(self):
+        """Check if user is a student"""
+        return self.role == 'student'
+
+    def is_parent(self):
+        """Check if user is a parent"""
+        return self.role == 'parent'
+
+    def __repr__(self):
+        return f'<User {self.username}>'
+
 
 def get_db_connection():
     try:
@@ -19,6 +116,7 @@ def get_db_connection():
     except Exception as e:
         print(f"❌ Connection failed: {e}")
         raise
+
 
 def initialize_database():
     conn = get_db_connection()

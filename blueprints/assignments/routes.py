@@ -83,7 +83,7 @@ def student_assignments():
 def view_assignment(assignment_id):
     if session.get('role') != 'student':
         flash('Only students can view assignments', 'danger')
-        return redirect(url_for('home'))
+        return redirect(url_for('home.home'))
 
     assignment = get_assignment_details(assignment_id)
     if not assignment:

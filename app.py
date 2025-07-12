@@ -1,7 +1,8 @@
 from flask import Flask
 import os
 from dotenv import load_dotenv
-from models import initialize_database
+from flask_login import LoginManager
+from models import initialize_database, User
 from blueprints.announcements.utils import get_unread_announcements_count
 from blueprints.assignments.utils import get_unsubmitted_assignments_count
 from blueprints.subscriptions.utils import get_subscription_plans
@@ -25,6 +26,20 @@ app.secret_key = os.environ.get(
     'FLASK_SECRET_KEY', 'fallback-secret-key-for-development')
 app.jinja_env.globals.update(float=float)
 
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'home.login'  # Adjust this to your login route
+login_manager.login_message = 'Please log in to access this page.'
+login_manager.login_message_category = 'info'
+
+# User loader callbac
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -32,7 +47,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if not app.secret_key:
     raise ValueError("No secret key set for Flask application")
-
 
 # Register the home blueprint
 app.register_blueprint(home_bp, url_prefix='/')
@@ -51,7 +65,6 @@ app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
 @app.context_processor
 def utility_processor():
     def get_plan_name(plan_id):
-
         plans = get_subscription_plans()
         for plan in plans:
             if plan[0] == plan_id:
@@ -82,7 +95,6 @@ def inject_functions():
 
 
 if __name__ == '__main__':
-
     app.debug = True
     initialize_database()
     app.run(host='0.0.0.0', port=5000)

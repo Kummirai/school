@@ -51,7 +51,7 @@
                     <span class="d-none d-sm-inline">MiltonTutor+ Live</span>
                 </a>
                 <div>
-                    <a href="{{ url_for('home') }}" class="btn btn-outline-light btn-sm">
+                    <a href="{{ url_for('home.home') }}" class="btn btn-outline-light btn-sm">
                         <i class="bi bi-arrow-left me-1"></i>
                         <span class="d-none d-md-inline">Exit Session</span>
                     </a>
@@ -142,7 +142,7 @@
 
             // Error handling
             api.on('readyToClose', () => {
-                window.location.href = "{{ url_for('home') }}";
+                window.location.href = "{{ url_for('home.home') }}";
             });
             
             api.on('participantRoleChanged', function(event) {

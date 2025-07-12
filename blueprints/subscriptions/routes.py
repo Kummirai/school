@@ -28,7 +28,7 @@ def subscription_status():
     # Ensure only students can access this page if needed, although login_required already restricts it
     if session.get('role') != 'student':
         flash('This page is only for students.', 'warning')
-        return redirect(url_for('home'))  # Or wherever appropriate
+        return redirect(url_for('home.home'))  # Or wherever appropriate
 
     user_id = session.get('user_id')
     if not user_id:

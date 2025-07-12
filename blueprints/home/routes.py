@@ -1,3 +1,6 @@
+from flask import Blueprint, request, render_template, redirect, url_for, flash
+from models import User
+from flask_login import login_user, logout_user, login_required, current_user
 from flask import Blueprint, render_template, session, redirect, url_for, flash, request
 from blueprints.subscriptions.utils import get_user_subscription
 from flask import current_app as app
@@ -28,31 +31,37 @@ def home():
 @home_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-        user = get_user_by_username(username)
-        if user and check_password_hash(user['password'], password):
-            session['username'] = username
-            session['user_id'] = user['id']
-            session['role'] = user['role']
-            session['class'] = user.get(
-                'class', 'default_class')  # Add this line
-            flash('Logged in successfully!', 'success')
+        if not username or not password:
+            flash('Username and password are required.', 'error')
+            return render_template('auth/login.html')
 
-            if user['role'] == 'parent':
-                return redirect(url_for('parent_dashboard'))
-            else:
-                return redirect(request.args.get('next') or url_for('home.home'))
+        user = User.get_by_username(username)
+
+        if user and user.check_password(password):
+            login_user(user)
+            flash('Login successful!', 'success')
+
+            # Redirect to next page or dashboard
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('home.dashboard'))
         else:
-            flash('Invalid username or password', 'danger')
+            flash('Invalid username or password.', 'error')
 
     return render_template('auth/login.html')
 
 
 @home_bp.route('/logout')
+@login_required
 def logout():
-    session.pop('username', None)
-    session.pop('role', None)
+    logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('home.home'))
+    return redirect(url_for('home.login'))
+
+
+@home_bp.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('admin/dashboard.html', user=current_user)
