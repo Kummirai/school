@@ -8,7 +8,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/practice.css')}}">
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/practice.css')}}"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -48,7 +51,7 @@
         <div class="container">
           <a
             class="navbar-brand d-flex align-items-center"
-            href="{{ url_for('home') }}"
+            href="{{ url_for('home.home') }}"
           >
             <i
               class="bi bi-mortarboard-fill navbar-brand-icon text-white mx-2"
@@ -80,7 +83,7 @@
             <ul class="navbar-nav me-auto">
               {% if 'username' in session and session['role'] == 'parent' %}
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('home') }}">
+                <a class="nav-link" href="{{ url_for('home.home') }}">
                   <i class="bi bi-house-door-fill me-1"></i>
                   <span>Home</span></a
                 >
@@ -94,19 +97,25 @@
               {% endif%} {% if 'username' in session and session.role ==
               'student' %}
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('home') }}">
+                <a class="nav-link" href="{{ url_for('home.home') }}">
                   <i class="bi bi-house-door-fill me-1"></i>
                   <span>Home</span></a
                 >
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('view_sessions') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('sessions.view_sessions') }}"
+                >
                   <i class="bi bi-calendar-event me-1"></i>
                   <span>Book A Class</span></a
                 >
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('student_assignments') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('assignments.student_assignments') }}"
+                >
                   <i class="bi bi-journal-text me-1"></i>
                   <span>Assignments</span>
                   {% if 'user_id' in session %} {% set unsubmitted_count =
@@ -119,37 +128,52 @@
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('view_submissions') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('assignments.view_submissions') }}"
+                >
                   <i class="bi bi-list-check me-1"></i>
                   <span>Grades</span>
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('tutorials_home') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('tutorials.tutorials_home') }}"
+                >
                   <i class="bi bi-collection-play me-1"></i>
                   <span>Tutorials</span>
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('algebra_calculator') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('utilities.algebra_calculator') }}"
+                >
                   <i class="bi bi-calculator me-1"></i
                   ><span>Algebra Calculator</span>
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('studyguides_home') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('tutorials.studyguides_home') }}"
+                >
                   <i class="bi bi-book me-1"></i> <span>Practice</span>
                 </a>
               </li>
               {# Add the Exam Practice link here #}
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('exam_practice') }}">
+                <a class="nav-link" href="{{ url_for('exam.exam_practice') }}">
                   <i class="bi bi-pencil-square me-1"></i>
                   <span>Exams</span>
                 </a>
               </li>
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('view_leaderboard') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('utilities.view_leaderboard') }}"
+                >
                   <i class="bi bi-trophy-fill"></i>
                   <span>Leaderboard</span>
                 </a>
@@ -157,7 +181,10 @@
               {% if 'user_id' in session %}
               <!-- Later in your navbar items -->
               <li class="nav-item" style="font-size: 0.9rem">
-                <a class="nav-link" href="{{ url_for('view_announcements') }}">
+                <a
+                  class="nav-link"
+                  href="{{ url_for('announcements.view_announcements') }}"
+                >
                   <i class="bi bi-megaphone"></i>
                   <span>Messages</span>
                   <!-- Desktop badge (always shown) -->
@@ -186,7 +213,7 @@
               <li class="nav-item">
                 <a
                   class="nav-link btn btn-outline-warning btn-sm mx-2 mb-2 mb-sm-0"
-                  href="{{ url_for('admin_dashboard') }}"
+                  href="{{ url_for('admin.admin_dashboard') }}"
                 >
                   <i class="bi bi-speedometer2 me-1"></i> Admin Panel
                 </a>
@@ -196,7 +223,7 @@
               >
                 <a
                   class="nav-link"
-                  href="{{ url_for('manage_session_requests') }}"
+                  href="{{ url_for('admin.manage_session_requests') }}"
                 >
                   <i class="bi bi-hands me-1"></i>Session Requests</a
                 >
@@ -227,7 +254,7 @@
                   <li>
                     <a
                       class="dropdown-item"
-                      href="{{ url_for('subscription_status') }}"
+                      href="{{ url_for('subscriptions.subscription_status') }}"
                     >
                       <i class="bi bi-credit-card me-2"></i> Subscription Status
                     </a>
@@ -237,7 +264,7 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{{ url_for('logout') }}"
+                    <a class="dropdown-item" href="{{ url_for('home.logout') }}"
                       ><i class="bi bi-box-arrow-right me-2"></i> Logout</a
                     >
                   </li>
@@ -245,7 +272,7 @@
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-link" href="{{ url_for('home.login') }}">Login</a>
               </li>
               {% endif %}
             </ul>

@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, session, redirect, url_for, flash, request
-from subscriptions.utils import get_user_subscription
+from blueprints.subscriptions.utils import get_user_subscription
 from flask import current_app as app
-from students.utils import get_user_by_username
+from blueprints.students.utils import get_user_by_username
 from werkzeug.security import check_password_hash
 from decorators.decorator import login_required
-from students.utils import get_students
+from blueprints.students.utils import get_students
 
 
 # Create a Blueprint for the home routes
-home_bp = Blueprint('home', __name__)
+home_bp = Blueprint(
+    'home', __name__, template_folder='templates', static_folder='static')
 
 
 @home_bp.route('/')
@@ -24,7 +25,7 @@ def home():
     return render_template('home.html', subscription=subscription)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@home_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -49,7 +50,7 @@ def login():
     return render_template('auth/login.html')
 
 
-@app.route('/logout')
+@home_bp.route('/logout')
 def logout():
     session.pop('username', None)
     session.pop('role', None)

@@ -79,3 +79,14 @@ def get_user_by_username(username):
             'role': user[3]
         }
     return None
+
+
+def get_all_student_ids():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # Adjust 'student' role as needed
+    cur.execute("SELECT id FROM users WHERE role = 'student'")
+    student_ids = [row[0] for row in cur.fetchall()]
+    cur.close()
+    conn.close()
+    return student_ids

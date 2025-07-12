@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_required
 import json
 from models import get_db_connection
-from flask import current_app as app  # Assuming this utility function exists
 from helpers import load_exams_from_json
 
 # Create a blueprint for exam-related routes
-exam_bp = Blueprint('exam', __name__)
+exam_bp = Blueprint('exam', __name__,
+                    template_folder='templates', static_folder='static')
 
 
-@app.route('/exam_practice')
+@exam_bp.route('/exam_practice')
 @login_required  # Assuming exam practice requires login
 # @student_required # Optional: if only students should access
 def exam_practice():
@@ -20,7 +20,7 @@ def exam_practice():
     return render_template('exam_practice.html', exams=exams)
 
 
-@app.route('/exam/<int:exam_id>')
+@exam_bp.route('/exam/<int:exam_id>')
 @login_required  # Ensure user is logged in to take exams
 # @student_required # Optional: restrict to students
 def take_exam(exam_id):
@@ -42,7 +42,7 @@ def take_exam(exam_id):
         return redirect(url_for('exam_practice'))
 
 
-@app.route('/submit_exam/<int:exam_id>', methods=['POST'])
+@exam_bp.route('/submit_exam/<int:exam_id>', methods=['POST'])
 @login_required  # Ensure user is logged in
 # @student_required # Optional: restrict to students
 def submit_exam(exam_id):
@@ -129,7 +129,7 @@ def submit_exam(exam_id):
 # Placeholder route for displaying exam results
 
 
-@app.route('/exam_results/<int:result_id>')
+@exam_bp.route('/exam_results/<int:result_id>')
 @login_required
 def exam_results(result_id):
     """Fetches and displays the results of a completed exam."""

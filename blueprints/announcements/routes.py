@@ -1,24 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from decorators.decorator import login_required, admin_required
 from models import get_db_connection
-from announcements.utils import (
+from blueprints.announcements.utils import (
     get_user_announcements,
     mark_announcement_read
 )
-from students.utils import get_students
 
 # Create a blueprint for announcements
-announcement_bp = Blueprint('announcement_bp', __name__, template_folder='templates/announcements')
+announcement_bp = Blueprint(
+    'announcement_bp', __name__, template_folder='templates/announcements')
 
 
-@announcement_bp.route('/announcements')
+@announcement_bp.route('/')
 @login_required
 def view_announcements():
     announcements = get_user_announcements(session['user_id'])
     return render_template('announcements/list.html', announcements=announcements)
 
 
-@announcement_bp.route('/announcements/<int:announcement_id>')
+@announcement_bp.route('/<int:announcement_id>')
 @login_required
 def view_announcement(announcement_id):
     conn = get_db_connection()

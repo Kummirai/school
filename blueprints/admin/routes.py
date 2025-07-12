@@ -4,21 +4,21 @@ import psycopg2.extras
 from flask_login import login_required
 from decorators.decorator import admin_required
 from models import get_db_connection
-from subscriptions.utils import add_subscription_to_db, get_subscription_plans
-from students.utils import get_students
+from blueprints.subscriptions.utils import add_subscription_to_db, get_subscription_plans
+from blueprints.students.utils import get_students
 from flask import current_app as app
 import json
-from assignments.utils import add_assignment
+from blueprints.assignments.utils import add_assignment
 from helpers import get_submission_for_grading, update_submission_grade, get_user_by_id, get_request_details, update_request_status,  send_approval_notification, send_rejection_notification
-from subscriptions.utils import get_subscription_plans
-from students.utils import get_user_by_username, get_students
+from blueprints.subscriptions.utils import get_subscription_plans
+from blueprints.students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
-from announcements.utils import get_all_announcements, create_announcement
-from tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
-from sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
-from sessions.utils import get_all_session_requests, update_session_request_status
-from students.utils import add_student_to_db, delete_student_by_id
-from assignments.utils import get_assignment_details
+from blueprints.announcements.utils import get_all_announcements, create_announcement
+from blueprints.tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
+from blueprints.sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
+from blueprints.sessions.utils import get_all_session_requests, update_session_request_status
+from blueprints.students.utils import add_student_to_db, delete_student_by_id
+from blueprints.assignments.utils import get_assignment_details
 
 
 admin_bp = Blueprint('admin', __name__, template_folder='templates/admin')

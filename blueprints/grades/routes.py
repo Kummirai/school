@@ -171,13 +171,6 @@ def grade_12_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/algebra-calculator')
-def algebra_calculator():
-    return render_template('algebra_calculator.html')
-
-# Studyguides
-
-
 @app.route('/grade7/numeric_geometric_patterns')
 @login_required
 def numeric_geometric_patterns():

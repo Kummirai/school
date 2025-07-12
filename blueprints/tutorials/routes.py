@@ -1,26 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from utils import get_videos_by_category
-from flask import current_app as app
-from tutorials.utils import get_videos_by_category, get_category_name
-
+from .utils import get_videos_by_category, get_category_name
 # Create a Blueprint for the tutorials routes
-tutorials_bp = Blueprint('tutorials', __name__, url_prefix='/tutorials')
+tutorials_bp = Blueprint('tutorials', __name__,
+                         template_folder='templates', static_folder='static')
 
 
-@app.route('/tutorials')
+@tutorials_bp.route('/')
 # @login_required
 def tutorials_home():
     return render_template('tutorials/video_tutorials.html')
 
 
-@app.route('/study_guides')
+@tutorials_bp.route('/study_guides')
 @login_required
 def studyguides_home():
     return render_template('study_guides.html')
 
 
-@app.route('/tutorials/<int:category_id>')
+@tutorials_bp.route('/tutorials/<int:category_id>')
 # @login_required
 def tutorial_language(category_id):
     videos = get_videos_by_category(category_id)

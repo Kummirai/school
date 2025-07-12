@@ -2,7 +2,7 @@ from models import get_db_connection
 from datetime import datetime
 import psycopg2.extras
 from flask import current_app as app
-from helpers import get_all_student_ids
+from blueprints.students.utils import get_all_student_ids
 
 
 def get_assignments_data(student_id):

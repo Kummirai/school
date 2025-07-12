@@ -1,28 +1,33 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, current_app
 from flask_login import login_required
 from helpers import get_db_connection, get_leaderboard, record_practice_score
-from flask import current_app as app
 from helpers import get_plan_name, get_plan_price, save_plan_request
-from assignments.utils import get_assignments_data
 from helpers import get_exams_data, get_practice_data
 from helpers import get_actual_subject_data, get_recent_activities, get_actual_trend_data
+from blueprints.assignments.utils import get_assignments_data
 
 
 # Create a blueprint for utilities
-utilities_bp = Blueprint('utilities', __name__)
+utilities_bp = Blueprint('utilities', __name__,
+                         template_folder='templates', static_folder='static')
 
 
-@app.route('/video-conference')
+@utilities_bp.route('/algebra-calculator')
+def algebra_calculator():
+    return render_template('algebra_calculator.html')
+
+
+@utilities_bp.route('/video-conference')
 def video_conference():
     return render_template('live_session.html')  # We'll create this file next
 
 
-@app.errorhandler(403)
+@utilities_bp.errorhandler(403)
 def forbidden(e):
     return render_template('errors/403.html'), 403
 
 
-@app.route('/leaderboard')
+@utilities_bp.route('/leaderboard')
 @login_required
 def view_leaderboard():
     subject = request.args.get('subject')
@@ -62,7 +67,7 @@ def view_leaderboard():
                            user_rank=user_rank)
 
 
-@app.route('/api/leaderboard-details')
+@utilities_bp.route('/api/leaderboard-details')
 @login_required
 def get_leaderboard_details():
     user_id = request.args.get('user_id')
@@ -171,7 +176,7 @@ def get_leaderboard_details():
         conn.close()
 
 
-@app.route('/api/record-practice', methods=['POST'])
+@utilities_bp.route('/api/record-practice', methods=['POST'])
 @login_required
 def record_practice():
     if session.get('role') != 'student':
@@ -199,7 +204,7 @@ def record_practice():
         return jsonify({'success': False, 'error': str(e)})
 
 
-@app.route('/submit_plan_request', methods=['POST'])
+@utilities_bp.route('/submit_plan_request', methods=['POST'])
 def submit_plan_request():
     # Get form data
     data = {
@@ -246,19 +251,19 @@ def send_admin_notification(user_email, plan_name, message):
     pass
 
 
-@app.route('/confirmation')
+@utilities_bp.route('/confirmation')
 def confirmation():
     """Confirmation page after plan request submission"""
     return render_template('confirmation.html')
 
 
-@app.route('/contact_tutor/<int:plan_id>')
+@utilities_bp.route('/contact_tutor/<int:plan_id>')
 def contact_tutor(plan_id):
     """Contact tutor page with plan information"""
     return render_template('contact_tutor.html', plan_id=plan_id)
 
 
-@app.route('/whiteboards')
+@utilities_bp.route('/whiteboards')
 @login_required
 def list_whiteboards():
     conn = get_db_connection()
@@ -290,7 +295,7 @@ def list_whiteboards():
         conn.close()
 
 
-@app.route('/api/student/<int:student_id>/chart_data')
+@utilities_bp.route('/api/student/<int:student_id>/chart_data')
 def get_chart_data(student_id):
     """Endpoint to fetch all chart data from database"""
     try:

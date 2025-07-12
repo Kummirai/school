@@ -6,7 +6,7 @@ import os
 from flask_login import login_required
 from models import get_db_connection
 from helpers import get_student_submission, submit_assignment
-from assignments.utils import get_assignment_details
+from blueprints.assignments.utils import get_assignment_details
 from flask import current_app as app
 
 

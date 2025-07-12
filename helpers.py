@@ -7,7 +7,7 @@ from psycopg2.extras import DictCursor
 from werkzeug.security import generate_password_hash
 from flask import Flask
 from blueprints.assignments.utils import get_assignments_data
-import json
+
 
 app = Flask(__name__)
 
@@ -821,17 +821,6 @@ def save_plan_request(request_data):
     finally:
         cur.close()
         conn.close()
-
-
-def get_all_student_ids():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    # Adjust 'student' role as needed
-    cur.execute("SELECT id FROM users WHERE role = 'student'")
-    student_ids = [row[0] for row in cur.fetchall()]
-    cur.close()
-    conn.close()
-    return student_ids
 
 
 def get_student_submission(student_id, assignment_id):

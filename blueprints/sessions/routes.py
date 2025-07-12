@@ -2,15 +2,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_required
 from datetime import datetime
 from flask import current_app as app
-from utils import create_session_request, get_all_session_requests, get_session_requests_for_student, update_session_request_status, cancel_booking, book_session, get_student_bookings, get_all_sessions, get_upcoming_sessions, create_session
-from decorators.decorator import admin_required
-from models import get_db_connection
+from .utils import create_session_request, get_session_requests_for_student, cancel_booking, book_session, get_student_bookings, get_all_sessions
 
 # Create a Blueprint for the session routes
-sessions_bp = Blueprint('sessions', __name__, url_prefix='/sessions')
+sessions_bp = Blueprint('sessions', __name__, template_folder='templates', static_folder='static')
 
 
-@app.route('/request', methods=['GET', 'POST'])
+@sessions_bp.route('/request', methods=['GET', 'POST'])
 @login_required
 def create_session_request_route():
     if request.method == 'POST':
@@ -45,14 +43,14 @@ def create_session_request_route():
     return render_template('sessions/create.html')
 
 
-@app.route('/my-requests')
+@sessions_bp.route('/my-requests')
 @login_required
 def view_my_session_requests():
     requests = get_session_requests_for_student(session['user_id'])
     return render_template('student/session_requests.html', requests=requests)
 
 
-@app.route('/book/<int:session_id>', methods=['POST'])
+@sessions_bp.route('/book/<int:session_id>', methods=['POST'])
 @login_required
 def book_session_route(session_id):
     if session.get('role') != 'student':
@@ -72,7 +70,7 @@ def book_session_route(session_id):
     return redirect(url_for('view_sessions'))
 
 
-@app.route('/cancel/<int:booking_id>', methods=['POST'])
+@sessions_bp.route('/cancel/<int:booking_id>', methods=['POST'])
 @login_required
 def cancel_booking_route(booking_id):
     if cancel_booking(booking_id, session.get('user_id')):
@@ -82,7 +80,7 @@ def cancel_booking_route(booking_id):
     return redirect(url_for('view_sessions'))
 
 
-@app.route('/')
+@sessions_bp.route('/')
 @login_required
 def view_sessions():
     student_id = session.get('user_id')
