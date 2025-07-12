@@ -24,7 +24,7 @@ def tutorial_language(category_id):
     videos = get_videos_by_category(category_id)
     if not videos:
         flash('Tutorial category not found', 'danger')
-        return redirect(url_for('tutorials_home'))
+        return redirect(url_for('tutorials.tutorials_home'))
 
     # Get the category name
     category_name = get_category_name(category_id)

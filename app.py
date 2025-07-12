@@ -17,6 +17,7 @@ from blueprints.utilities.routes import utilities_bp
 from blueprints.exam.routes import exam_bp
 from blueprints.subscriptions.routes import subscriptions_bp
 from blueprints.subscribe.routes import subscribe_bp
+from blueprints.grades.routes import grades_bp
 
 load_dotenv()
 
@@ -29,7 +30,7 @@ app.jinja_env.globals.update(float=float)
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'home.login'  # Adjust this to your login route
+login_manager.login_view = 'home.login'
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
 
@@ -60,6 +61,7 @@ app.register_blueprint(utilities_bp, url_prefix='/utilities')
 app.register_blueprint(exam_bp, url_prefix='/exam')
 app.register_blueprint(subscriptions_bp, url_prefix='/subscriptions')
 app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
+app.register_blueprint(grades_bp, url_prefix='/grades')
 
 
 @app.context_processor

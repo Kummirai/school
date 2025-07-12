@@ -1,428 +1,459 @@
-{% extends "base.html" %}
-
-{% block title %}English Curriculum (Grades 7-12){% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}English Curriculum (Grades 7-12){%
+endblock %} {% block content %}
 
 <!-- Hero Section -->
-<section class="hero-section" style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
     background-size: cover;
     background-position: center;
     color: white;
     min-height: 60vh;
     display: flex;
     align-items: center;
-    padding: 0;">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <div class="mb-4">
-                    <i class="bi bi-book display-1 text-warning"></i>
-                </div>
-                <h1 class="display-3 fw-bold mb-4">
-                    English Curriculum <span class="text-warning">Grades 7-12</span>
-                </h1>
-                <p class="lead mb-5 fs-4">
-                    <i class="bi bi-stars text-warning me-2"></i> Developing critical reading and writing skills
-                </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a class="btn btn-danger btn-lg px-4 py-3 fw-bold" href="#grade7" role="button">
-                        <i class="bi bi-7-circle me-2"></i>Grade 7
-                    </a>
-                    <a class="btn btn-warning btn-lg px-4 py-3 fw-bold" href="#grade10" role="button">
-                        <i class="bi bi-1-circle me-2"></i>Grade 10
-                    </a>
-                </div>
-            </div>
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-book display-1 text-warning"></i>
         </div>
+        <h1 class="display-3 fw-bold mb-4">
+          English Curriculum <span class="text-warning">Grades 7-12</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-warning me-2"></i> Developing critical
+          reading and writing skills
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            href="#grade7"
+            role="button"
+          >
+            <i class="bi bi-7-circle me-2"></i>Grade 7
+          </a>
+          <a
+            class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+            href="#grade10"
+            role="button"
+          >
+            <i class="bi bi-1-circle me-2"></i>Grade 10
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- Middle School English -->
 <section id="grade7" class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="d-flex align-items-center mb-4">
-            <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
-            <h2 class="fw-bold mb-0">Middle School English (Grades 7-9)</h2>
-        </div>
-
-        <div class="row g-4">
-            <!-- Grade 7 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 7</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Reading comprehension</li>
-                            <li class="list-group-item">Narrative writing</li>
-                            <li class="list-group-item">Grammar fundamentals</li>
-                            <li class="list-group-item">Literary elements</li>
-                            <li class="list-group-item">Vocabulary building</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Identifying main ideas</li>
-                            <li class="list-group-item">Writing structured paragraphs</li>
-                            <li class="list-group-item">Basic research skills</li>
-                            <li class="list-group-item">Public speaking</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 8 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 8</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Literary analysis</li>
-                            <li class="list-group-item">Expository writing</li>
-                            <li class="list-group-item">Advanced grammar</li>
-                            <li class="list-group-item">Poetry</li>
-                            <li class="list-group-item">Persuasive techniques</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Thesis development</li>
-                            <li class="list-group-item">Textual evidence</li>
-                            <li class="list-group-item">Peer editing</li>
-                            <li class="list-group-item">Oral presentations</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 9 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 9</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">World literature</li>
-                            <li class="list-group-item">Argumentative writing</li>
-                            <li class="list-group-item">Research papers</li>
-                            <li class="list-group-item">Shakespeare</li>
-                            <li class="list-group-item">Literary criticism</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Critical analysis</li>
-                            <li class="list-group-item">MLA formatting</li>
-                            <li class="list-group-item">Debate techniques</li>
-                            <li class="list-group-item">Creative writing</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Middle School English (Grades 7-9)</h2>
     </div>
+
+    <div class="row g-4">
+      <!-- Grade 7 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 7</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Reading comprehension</li>
+              <li class="list-group-item">Narrative writing</li>
+              <li class="list-group-item">Grammar fundamentals</li>
+              <li class="list-group-item">Literary elements</li>
+              <li class="list-group-item">Vocabulary building</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Identifying main ideas</li>
+              <li class="list-group-item">Writing structured paragraphs</li>
+              <li class="list-group-item">Basic research skills</li>
+              <li class="list-group-item">Public speaking</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 8 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 8</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Literary analysis</li>
+              <li class="list-group-item">Expository writing</li>
+              <li class="list-group-item">Advanced grammar</li>
+              <li class="list-group-item">Poetry</li>
+              <li class="list-group-item">Persuasive techniques</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Thesis development</li>
+              <li class="list-group-item">Textual evidence</li>
+              <li class="list-group-item">Peer editing</li>
+              <li class="list-group-item">Oral presentations</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-warning btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 9 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 9</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">World literature</li>
+              <li class="list-group-item">Argumentative writing</li>
+              <li class="list-group-item">Research papers</li>
+              <li class="list-group-item">Shakespeare</li>
+              <li class="list-group-item">Literary criticism</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Critical analysis</li>
+              <li class="list-group-item">MLA formatting</li>
+              <li class="list-group-item">Debate techniques</li>
+              <li class="list-group-item">Creative writing</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- High School English -->
 <section id="grade10" class="py-5">
-    <div class="container py-5">
-        <div class="d-flex align-items-center mb-4">
-            <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
-            <h2 class="fw-bold mb-0">High School English (Grades 10-12)</h2>
-        </div>
-
-        <div class="row g-4">
-            <!-- Grade 10 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 10</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">American literature</li>
-                            <li class="list-group-item">Rhetorical analysis</li>
-                            <li class="list-group-item">Research methodology</li>
-                            <li class="list-group-item">Novel studies</li>
-                            <li class="list-group-item">SAT/ACT prep</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Rhetorical devices</li>
-                            <li class="list-group-item">Source evaluation</li>
-                            <li class="list-group-item">SAT essay writing</li>
-                            <li class="list-group-item">Literary periods</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 11 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 11</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">British literature</li>
-                            <li class="list-group-item">Literary theory</li>
-                            <li class="list-group-item">College essays</li>
-                            <li class="list-group-item">Creative nonfiction</li>
-                            <li class="list-group-item">Media literacy</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Comparative analysis</li>
-                            <li class="list-group-item">Personal statement writing</li>
-                            <li class="list-group-item">Literary movements</li>
-                            <li class="list-group-item">Visual rhetoric</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grade 12 -->
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">Grade 12</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">World literature</li>
-                            <li class="list-group-item">AP English prep</li>
-                            <li class="list-group-item">Seminar-style discussion</li>
-                            <li class="list-group-item">Capstone project</li>
-                            <li class="list-group-item">Professional writing</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Socratic seminar</li>
-                            <li class="list-group-item">Advanced research</li>
-                            <li class="list-group-item">Literary synthesis</li>
-                            <li class="list-group-item">Professional communication</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-collection-play me-1"></i>View Lessons
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">High School English (Grades 10-12)</h2>
     </div>
+
+    <div class="row g-4">
+      <!-- Grade 10 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 10</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">American literature</li>
+              <li class="list-group-item">Rhetorical analysis</li>
+              <li class="list-group-item">Research methodology</li>
+              <li class="list-group-item">Novel studies</li>
+              <li class="list-group-item">SAT/ACT prep</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Rhetorical devices</li>
+              <li class="list-group-item">Source evaluation</li>
+              <li class="list-group-item">SAT essay writing</li>
+              <li class="list-group-item">Literary periods</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 11 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 11</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">British literature</li>
+              <li class="list-group-item">Literary theory</li>
+              <li class="list-group-item">College essays</li>
+              <li class="list-group-item">Creative nonfiction</li>
+              <li class="list-group-item">Media literacy</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Comparative analysis</li>
+              <li class="list-group-item">Personal statement writing</li>
+              <li class="list-group-item">Literary movements</li>
+              <li class="list-group-item">Visual rhetoric</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-warning btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade 12 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Grade 12</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">World literature</li>
+              <li class="list-group-item">AP English prep</li>
+              <li class="list-group-item">Seminar-style discussion</li>
+              <li class="list-group-item">Capstone project</li>
+              <li class="list-group-item">Professional writing</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Socratic seminar</li>
+              <li class="list-group-item">Advanced research</li>
+              <li class="list-group-item">Literary synthesis</li>
+              <li class="list-group-item">Professional communication</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- AP English Courses -->
 <section class="py-5 bg-light">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Advanced Placement English Courses</h2>
-            <p class="lead text-muted">College-level English for high school students</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 fw-bold mb-0 text-center">AP English Language</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-danger">Course Content</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Rhetorical analysis</li>
-                            <li class="list-group-item">Argumentation</li>
-                            <li class="list-group-item">Synthesis</li>
-                            <li class="list-group-item">Nonfiction texts</li>
-                            <li class="list-group-item">Style analysis</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-danger mt-4">Exam Preparation</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Essay strategies</li>
-                            <li class="list-group-item">Multiple-choice techniques</li>
-                            <li class="list-group-item">Timed writing practice</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-danger">
-                            <i class="bi bi-journal-bookmark me-1"></i>Course Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 fw-bold mb-0 text-center">AP English Literature</h3>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="h5 fw-bold text-warning">Course Content</h4>
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item">Poetry analysis</li>
-                            <li class="list-group-item">Prose fiction</li>
-                            <li class="list-group-item">Drama</li>
-                            <li class="list-group-item">Literary criticism</li>
-                            <li class="list-group-item">Thematic studies</li>
-                        </ul>
-
-                        <h4 class="h5 fw-bold text-warning mt-4">Exam Preparation</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Close reading practice</li>
-                            <li class="list-group-item">Essay organization</li>
-                            <li class="list-group-item">Literary term mastery</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer bg-light text-center">
-                        <a href="#" class="btn btn-outline-warning">
-                            <i class="bi bi-journal-bookmark me-1"></i>Course Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Advanced Placement English Courses</h2>
+      <p class="lead text-muted">
+        College-level English for high school students
+      </p>
     </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">AP English Language</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Course Content</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Rhetorical analysis</li>
+              <li class="list-group-item">Argumentation</li>
+              <li class="list-group-item">Synthesis</li>
+              <li class="list-group-item">Nonfiction texts</li>
+              <li class="list-group-item">Style analysis</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Exam Preparation</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Essay strategies</li>
+              <li class="list-group-item">Multiple-choice techniques</li>
+              <li class="list-group-item">Timed writing practice</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-journal-bookmark me-1"></i>Course Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">AP English Literature</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Course Content</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Poetry analysis</li>
+              <li class="list-group-item">Prose fiction</li>
+              <li class="list-group-item">Drama</li>
+              <li class="list-group-item">Literary criticism</li>
+              <li class="list-group-item">Thematic studies</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Exam Preparation</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Close reading practice</li>
+              <li class="list-group-item">Essay organization</li>
+              <li class="list-group-item">Literary term mastery</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a href="#" class="btn btn-outline-warning">
+              <i class="bi bi-journal-bookmark me-1"></i>Course Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Learning Resources -->
 <section class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">English Learning Resources</h2>
-            <p class="lead text-muted">Supplemental materials to enhance your language skills</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 border-danger shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-journal-text display-4 text-danger mb-3"></i>
-                        <h3 class="h4 fw-bold">Writing Guides</h3>
-                        <p class="mb-4">Step-by-step guides for all writing types and styles</p>
-                        <a href="#" class="btn btn-outline-danger">
-                            <i class="bi bi-journal-code me-1"></i>Browse Guides
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
-                        <h3 class="h4 fw-bold">Literature Analysis</h3>
-                        <p class="mb-4">In-depth video discussions of major literary works</p>
-                        <a href="{{ url_for('tutorials_home') }}" class="btn btn-outline-warning">
-                            <i class="bi bi-collection-play me-1"></i>Watch Videos
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-secondary shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <i class="bi bi-file-earmark-text display-4 text-secondary mb-3"></i>
-                        <h3 class="h4 fw-bold">Vocabulary Builders</h3>
-                        <p class="mb-4">Printable worksheets and flashcards</p>
-                        <a href="#" class="btn btn-outline-secondary">
-                            <i class="bi bi-download me-1"></i>Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">English Learning Resources</h2>
+      <p class="lead text-muted">
+        Supplemental materials to enhance your language skills
+      </p>
     </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-journal-text display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Writing Guides</h3>
+            <p class="mb-4">
+              Step-by-step guides for all writing types and styles
+            </p>
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-journal-code me-1"></i>Browse Guides
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-camera-video display-4 text-warning mb-3"></i>
+            <h3 class="h4 fw-bold">Literature Analysis</h3>
+            <p class="mb-4">
+              In-depth video discussions of major literary works
+            </p>
+            <a
+              href="{{ url_for('tutorials.tutorials_home') }}"
+              class="btn btn-outline-warning"
+            >
+              <i class="bi bi-collection-play me-1"></i>Watch Videos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i
+              class="bi bi-file-earmark-text display-4 text-secondary mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">Vocabulary Builders</h3>
+            <p class="mb-4">Printable worksheets and flashcards</p>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="bi bi-download me-1"></i>Download
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- CTA Section -->
 <section class="py-5 bg-warning">
-    <div class="container py-4 text-center">
-        <h2 class="display-5 fw-bold mb-4">Ready to Master English?</h2>
-        <p class="lead mb-5">Our comprehensive curriculum develops critical reading and writing skills</p>
-        {% if 'username' not in session %}
-        <a href="{{ url_for('login') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
-        </a>
-        {% else %}
-        <a href="{{ url_for('tutorials_home') }}" class="btn btn-danger btn-lg px-4 py-3 fw-bold">
-            <i class="bi bi-collection-play me-2"></i>Browse English Tutorials
-        </a>
-        {% endif %}
-    </div>
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4">Ready to Master English?</h2>
+    <p class="lead mb-5">
+      Our comprehensive curriculum develops critical reading and writing skills
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('login') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('tutorials.tutorials_home') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse English Tutorials
+    </a>
+    {% endif %}
+  </div>
 </section>
 
 <style>
-    .hero-section {
-        position: relative;
-        width: 100vw;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-    }
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
 
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
 
-    .list-group-item {
-        border-left: none;
-        border-right: none;
-    }
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+  }
 
-    .card-header {
-        border-bottom: none;
-    }
+  .card-header {
+    border-bottom: none;
+  }
 </style>
 
 {% endblock %}

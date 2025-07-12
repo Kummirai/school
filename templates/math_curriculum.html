@@ -87,7 +87,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_7_maths')}}"
+              href="{{url_for('grades.grade_7_maths')}}"
               class="btn btn-outline-danger btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -124,7 +124,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_8_maths')}}"
+              href="{{url_for('grades.grade_8_maths')}}"
               class="btn btn-outline-warning btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -161,7 +161,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_9_maths')}}"
+              href="{{url_for('grades.grade_9_maths')}}"
               class="btn btn-outline-secondary btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -208,7 +208,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_10_maths')}}"
+              href="{{url_for('grades.grade_10_maths')}}"
               class="btn btn-outline-danger btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -243,7 +243,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_11_maths')}}"
+              href="{{url_for('grades.grade_11_maths')}}"
               class="btn btn-outline-warning btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -278,7 +278,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grade_12_maths')}}"
+              href="{{url_for('grades.grade_12_maths')}}"
               class="btn btn-outline-secondary btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -399,7 +399,7 @@ endblock %} {% block content %}
               Engaging video explanations for every math concept
             </p>
             <a
-              href="{{ url_for('tutorials_home') }}"
+              href="{{ url_for('tutorials.tutorials_home') }}"
               class="btn btn-outline-warning"
             >
               <i class="bi bi-collection-play me-1"></i>Watch Videos
@@ -438,14 +438,14 @@ endblock %} {% block content %}
     </p>
     {% if 'username' not in session %}
     <a
-      href="{{ url_for('login') }}"
+      href="{{ url_for('home.login') }}"
       class="btn btn-danger btn-lg px-4 py-3 fw-bold"
     >
       <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
     </a>
     {% else %}
     <a
-      href="{{ url_for('tutorials_home') }}"
+      href="{{ url_for('tutorials.tutorials_home') }}"
       class="btn btn-danger btn-lg px-4 py-3 fw-bold"
     >
       <i class="bi bi-collection-play me-2"></i>Browse Math Tutorials

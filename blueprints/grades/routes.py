@@ -5,10 +5,11 @@ from flask_login import login_required
 from flask import current_app as app
 
 # Create a Blueprint for the grades routes
-grades_bp = Blueprint('grades', __name__, url_prefix='/grades')
+grades_bp = Blueprint('grades', __name__,
+                      template_folder='templates', static_folder='static')
 
 
-@app.route('/grade/<int:grade_num>/maths/chapter/<int:chapter_num>/<filename>')
+@grades_bp.route('/grade/<int:grade_num>/maths/chapter/<int:chapter_num>/<filename>')
 def study_guide_page(grade_num, chapter_num, filename):
     # Construct the path to the grade-specific JSON file
     json_file_path = os.path.join(
@@ -43,7 +44,7 @@ def study_guide_page(grade_num, chapter_num, filename):
     return render_template(template_path, lesson=lesson_data)
 
 
-@app.route('/grade7/maths')
+@grades_bp.route('/grade7/maths')
 def grade_7_maths():
     try:
         # Load the JSON data with explicit UTF-8 encoding
@@ -66,7 +67,7 @@ def grade_7_maths():
         abort(500, description="Invalid file encoding - must be UTF-8")
 
 
-@app.route('/grade8/maths')
+@grades_bp.route('/grade8/maths')
 def grade_8_maths():
     try:
         # Load the JSON data
@@ -87,7 +88,7 @@ def grade_8_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/grade9/maths')
+@grades_bp.route('/grade9/maths')
 def grade_9_maths():
     try:
         # Load the JSON data
@@ -108,7 +109,7 @@ def grade_9_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/grade10/maths')
+@grades_bp.route('/grade10/maths')
 def grade_10_maths():
     try:
         # Load the JSON data
@@ -129,7 +130,7 @@ def grade_10_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/grade11/maths')
+@grades_bp.route('/grade11/maths')
 def grade_11_maths():
     try:
         # Load the JSON data
@@ -150,7 +151,7 @@ def grade_11_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/grade12/maths')
+@grades_bp.route('/grade12/maths')
 def grade_12_maths():
     try:
         # Load the JSON data
@@ -171,7 +172,7 @@ def grade_12_maths():
         abort(500, description="Error loading curriculum data")
 
 
-@app.route('/grade7/numeric_geometric_patterns')
+@grades_bp.route('/grade7/numeric_geometric_patterns')
 @login_required
 def numeric_geometric_patterns():
     return render_template('grade7_maths/numeric_geometric_patterns.html')
