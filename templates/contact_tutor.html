@@ -15,7 +15,10 @@ content %}
           </div>
           {% endif %}
 
-          <form method="POST" action="{{ url_for('submit_plan_request') }}">
+          <form
+            method="POST"
+            action="{{ url_for('utilities.submit_plan_request') }}"
+          >
             <div class="mb-3">
               <label for="name" class="form-label">Your Name</label>
               <input

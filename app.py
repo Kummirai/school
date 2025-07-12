@@ -30,7 +30,7 @@ app.jinja_env.globals.update(float=float)
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'home.login'
+login_manager.login_view = 'home.login' # type: ignore
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
 

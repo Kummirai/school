@@ -27,7 +27,7 @@ def create_subscription(plan_id):
 
     if 'user' not in session:
         selected_plan = request.form.get('selected_plan')
-        return redirect(url_for('contact_tutor', plan_id=selected_plan))
+        return redirect(url_for('utilities.contact_tutor', plan_id=selected_plan))
 
     try:
         # Get plan details

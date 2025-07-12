@@ -226,12 +226,12 @@ def submit_plan_request():
             return redirect(url_for('confirmation'))
         else:
             flash('Error submitting request', 'danger')
-            return redirect(url_for('contact_tutor', plan_id=data['plan_id']))
+            return redirect(url_for('utilities.contact_tutor', plan_id=data['plan_id']))
 
     except Exception as e:
         current_app.logger.error(f"Database error: {str(e)}")
         flash('Error submitting request. Please try again.', 'danger')
-        return redirect(url_for('contact_tutor', plan_id=data['plan_id']))
+        return redirect(url_for('utilities.contact_tutor', plan_id=data['plan_id']))
 
 
 def get_plan_details(plan_id):

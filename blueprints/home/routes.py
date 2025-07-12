@@ -8,6 +8,7 @@ from blueprints.students.utils import get_user_by_username
 from werkzeug.security import check_password_hash
 from decorators.decorator import login_required
 from blueprints.students.utils import get_students
+from blueprints.subscriptions.utils import get_subscription_plans
 
 
 # Create a Blueprint for the home routes
@@ -25,7 +26,7 @@ def home():
         subscription = get_user_subscription(session['user_id'])
 
     # Pass the subscription variable to the render_template function
-    return render_template('home.html', subscription=subscription)
+    return render_template('home.html', subscription=subscription, plans=get_subscription_plans())
 
 
 @home_bp.route('/login', methods=['GET', 'POST'])
