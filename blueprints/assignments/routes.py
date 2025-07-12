@@ -6,24 +6,20 @@ import os
 from flask_login import login_required
 from models import get_db_connection
 from helpers import get_student_submission, submit_assignment
-from decorators.decorator import admin_required
-from assignments.utils import get_assignment_details, add_assignment, add_assignment
-from helpers import update_submission_grade
+from assignments.utils import get_assignment_details
 from flask import current_app as app
-from students.utils import get_students
 
 
-assignments_bp = Blueprint('assignments', __name__)
+assignments_bp = Blueprint('assignments', __name__,
+                           template_folder='templates')
 
 
-@app.route('/assignments', methods=['GET'])
+@assignments_bp.route('/assignments', methods=['GET'])
 @login_required
 def student_assignments():
-    # Make sure this is how you get the current user's ID
     user_id = session.get('user_id')
     if not user_id:
         flash('Please log in to view your assignments.', 'warning')
-        # Redirect to login if user_id not found
         return redirect(url_for('login'))
 
     conn = get_db_connection()
@@ -52,7 +48,7 @@ def student_assignments():
         WHERE asl.student_id = %s
         ORDER BY a.deadline DESC;
             """,
-            (user_id,)  # Pass user_id twice for both EXISTS and WHERE clauses
+            (user_id,)
         )
         for row in cur.fetchall():
             assignments.append({
@@ -62,7 +58,6 @@ def student_assignments():
                 'subject': row[3],
                 'total_marks': row[4],
                 'deadline': row[5],
-                # Removed json.loads() since content is already a dict
                 'content': row[6] if row[6] else None,
                 'created_at': row[7],
                 'submitted': row[8],
@@ -82,10 +77,8 @@ def student_assignments():
 
     return render_template('assignments/list.html', assignments=assignments)
 
-# Update the view_assignment route to handle interactive assignments
 
-
-@app.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
+@assignments_bp.route('/assignments/<int:assignment_id>', methods=['GET', 'POST'])
 @login_required
 def view_assignment(assignment_id):
     if session.get('role') != 'student':
@@ -165,7 +158,7 @@ def view_assignment(assignment_id):
 
 
 # Adjust this route name if yours is different
-@app.route('/assignments/submissions')
+@assignments_bp.route('/assignments/submissions')
 @login_required  # Assuming this page requires login
 def view_submissions():  # Adjust this function name if yours is different
     user_id = session.get('user_id')
@@ -298,7 +291,6 @@ def view_submissions():  # Adjust this function name if yours is different
         average_score=average_score,
         monthly_scores=monthly_scores
     )
-
 
 
 # Leaderboard routes

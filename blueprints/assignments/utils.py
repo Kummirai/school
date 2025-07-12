@@ -189,8 +189,6 @@ def get_assignments_for_user(user_id):
         cur.close()
         conn.close()
 
-# Assuming you have a function to get all student IDs if assigned_students_ids is None
-
 
 def add_assignment(title, description, subject, total_marks, deadline, assigned_students_ids=None, content=None):
     conn = get_db_connection()

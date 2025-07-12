@@ -21,7 +21,7 @@ from students.utils import add_student_to_db, delete_student_by_id
 from assignments.utils import get_assignment_details
 
 
-admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
+admin_bp = Blueprint('admin', __name__, template_folder='templates/admin')
 
 
 @admin_bp.route('/assignments/add', methods=['GET', 'POST'])

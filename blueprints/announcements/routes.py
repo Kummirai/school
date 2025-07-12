@@ -8,7 +8,7 @@ from announcements.utils import (
 from students.utils import get_students
 
 # Create a blueprint for announcements
-announcement_bp = Blueprint('announcement_bp', __name__)
+announcement_bp = Blueprint('announcement_bp', __name__, template_folder='templates/announcements')
 
 
 @announcement_bp.route('/announcements')
