@@ -19,9 +19,29 @@ from blueprints.sessions.utils import get_upcoming_sessions, create_session, get
 from blueprints.sessions.utils import get_all_session_requests, update_session_request_status
 from blueprints.students.utils import add_student_to_db, delete_student_by_id
 from blueprints.assignments.utils import get_assignment_details
+from blueprints.subscriptions.utils import get_all_subscriptions, mark_subscription_as_paid
 
 
 admin_bp = Blueprint('admin', __name__, template_folder='templates/admin')
+
+
+@admin_bp.route('/subscriptions')
+@login_required
+@admin_required
+def manage_subscriptions():
+    subscriptions = get_all_subscriptions()
+    return render_template('admin/subscriptions/list.html', subscriptions=subscriptions)
+
+
+@admin_bp.route('/subscriptions/mark-paid/<int:subscription_id>', methods=['POST'])
+@login_required
+@admin_required
+def mark_subscription_paid(subscription_id):
+    if mark_subscription_as_paid(subscription_id):
+        flash('Subscription marked as paid', 'success')
+    else:
+        flash('Failed to mark subscription as paid', 'danger')
+    return redirect(url_for('manage_subscriptions'))
 
 
 @admin_bp.route('/assignments/add', methods=['GET', 'POST'])
@@ -817,7 +837,8 @@ def add_announcement():
 # type: ignore
 # type: ignore
 # type: ignore
-@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
+# type: ignore
+@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def edit_parent(parent_id):

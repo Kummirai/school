@@ -1,10 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from decorators.decorator import login_required, admin_required
 from models import get_db_connection
-from blueprints.announcements.utils import (
-    get_user_announcements,
-    mark_announcement_read
-)
+from .utils import get_user_announcements, mark_announcement_read
 
 # Create a blueprint for announcements
 announcement_bp = Blueprint(
@@ -54,5 +51,3 @@ def view_announcement(announcement_id):
     finally:
         cur.close()
         conn.close()
-
-# Admin announcement management

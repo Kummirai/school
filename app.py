@@ -14,6 +14,8 @@ from blueprints.sessions.routes import sessions_bp
 from blueprints.tutorials.routes import tutorials_bp
 from blueprints.utilities.routes import utilities_bp
 from blueprints.exam.routes import exam_bp
+from blueprints.subscriptions.routes import subscriptions_bp
+from blueprints.subcribe.routes import subscribe_bp
 
 load_dotenv()
 
@@ -42,6 +44,8 @@ app.register_blueprint(sessions_bp, url_prefix='/sessions')
 app.register_blueprint(tutorials_bp, url_prefix='/tutorials')
 app.register_blueprint(utilities_bp, url_prefix='/utilities')
 app.register_blueprint(exam_bp, url_prefix='/exam')
+app.register_blueprint(subscriptions_bp, url_prefix='/subscriptions')
+app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
 
 
 @app.context_processor
