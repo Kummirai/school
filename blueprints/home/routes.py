@@ -43,7 +43,7 @@ def login():
             if user['role'] == 'parent':
                 return redirect(url_for('parent_dashboard'))
             else:
-                return redirect(request.args.get('next') or url_for('home'))
+                return redirect(request.args.get('next') or url_for('home.home'))
         else:
             flash('Invalid username or password', 'danger')
 
@@ -55,4 +55,4 @@ def logout():
     session.pop('username', None)
     session.pop('role', None)
     flash('You have been logged out.', 'info')
-    return redirect(url_for('home'))
+    return redirect(url_for('home.home'))

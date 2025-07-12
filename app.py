@@ -9,13 +9,13 @@ from blueprints.home.routes import home_bp
 from blueprints.admin.routes import admin_bp
 from blueprints.announcements.routes import announcement_bp
 from blueprints.assignments.routes import assignments_bp
-from blueprints.curriculumn.routes import curriculum_bp
+from blueprints.curriculum.routes import curriculum_bp
 from blueprints.sessions.routes import sessions_bp
 from blueprints.tutorials.routes import tutorials_bp
 from blueprints.utilities.routes import utilities_bp
 from blueprints.exam.routes import exam_bp
 from blueprints.subscriptions.routes import subscriptions_bp
-from blueprints.subcribe.routes import subscribe_bp
+from blueprints.subscribe.routes import subscribe_bp
 
 load_dotenv()
 

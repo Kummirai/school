@@ -18,7 +18,7 @@
       <h2 class="fw-bold text-dark mt-2">MiltonTutor+</h2>
       <p class="text-secondary mb-0 small">Login to your account</p>
     </div>
-    <form method="POST" action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('home.login') }}">
       <div class="mb-3">
         <label class="form-label text-dark">Username</label>
         <input
@@ -45,7 +45,7 @@
       <p class="mt-4 text-secondary small">
         Dont have an account?<a
           class="mx-1 text-danger fw-bold text-decoration-none"
-          href="{{ url_for('subscriptions') }}"
+          href="{{ url_for('subscriptions.subscriptions') }}"
           >Sign Up</a
         >
       </p>
