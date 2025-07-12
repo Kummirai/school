@@ -838,7 +838,7 @@ def add_announcement():
 # type: ignore
 # type: ignore
 # type: ignore
-@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST'])
+@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
 @login_required
 @admin_required
 def edit_parent(parent_id):

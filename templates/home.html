@@ -52,7 +52,7 @@
           </a>
           <a
             class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('tutorials_home') }}"
+            href="{{ url_for('tutorials.tutorials_home') }}"
             role="button"
           >
             <i class="bi bi-info-circle me-2 text-readability"></i>Free Video
@@ -61,7 +61,7 @@
           {% else %}
           <a
             class="btn btn-danger btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('tutorials_home') }}"
+            href="{{ url_for('tutorials.tutorials_home') }}"
             role="button"
           >
             <i class="bi bi-collection-play me-2 text-readability"></i>Browse
@@ -69,7 +69,7 @@
           </a>
           <a
             class="btn btn-warning btn-lg px-4 py-3 fw-bold"
-            href="{{url_for('tuorials.studyguides_home')}}"
+            href="{{url_for('tutorials.studyguides_home')}}"
             role="button"
           >
             <i class="bi bi-journal-bookmark me-2 text-readability"></i>Practice
@@ -109,7 +109,7 @@
               subject.
             </p>
             <a
-              href="{{ url_for('video_conference') }}"
+              href="{{ url_for('utilities.video_conference') }}"
               target="_blank"
               class="btn btn-danger btn-lg px-4 py-3 fw-bold"
             >
@@ -148,7 +148,7 @@
                 <li>Geometry Basics</li>
               </ul>
               <a
-                href="{{ url_for('math_curriculum') }}"
+                href="{{ url_for('curriculum.math_curriculum') }}"
                 class="btn btn-sm btn-outline-danger mt-2"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
@@ -168,7 +168,7 @@
                 <li>Earth Science</li>
               </ul>
               <a
-                href="{{ url_for('science_curriculum') }}"
+                href="{{ url_for('curriculum.science_curriculum') }}"
                 class="btn btn-sm btn-outline-warning mt-2"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
@@ -188,7 +188,7 @@
                 <li>Grammar Skills</li>
               </ul>
               <a
-                href="{{ url_for('english_curriculum') }}"
+                href="{{ url_for('curriculum.english_curriculum') }}"
                 class="btn btn-sm btn-outline-secondary mt-2"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
@@ -400,7 +400,7 @@
       {% if 'username' not in session %}
       <a
         class="btn btn-danger btn-lg px-4 py-2"
-        href="{{ url_for('login') }}"
+        href="{{ url_for('home.login') }}"
         role="button"
       >
         <i class="bi bi-box-arrow-in-right me-2"></i>Login to Access Exam
@@ -444,7 +444,7 @@
               <i class="bi bi-eye me-1"></i>View Details
             </a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="btn btn-outline-dark">
+            <a href="{{ url_for('home.login') }}" class="btn btn-outline-dark">
               <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
             </a>
             {% endif %}
@@ -471,7 +471,7 @@
               <i class="bi bi-eye me-1"></i>View Details
             </a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="btn btn-warning">
+            <a href="{{ url_for('home.login') }}" class="btn btn-warning">
               <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
             </a>
             {% endif %}
@@ -496,7 +496,7 @@
               <i class="bi bi-eye me-1"></i>View Details
             </a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="btn btn-danger">
+            <a href="{{ url_for('home.login') }}" class="btn btn-danger">
               <i class="bi bi-box-arrow-in-right me-1"></i>Login to View
             </a>
             {% endif %}
@@ -557,14 +557,14 @@
     <p class="lead mb-5">Join many students achieving academic success</p>
     {% if 'username' not in session %}
     <a
-      href="{{ url_for('login') }}"
+      href="{{ url_for('home.login') }}"
       class="btn btn-danger btn-lg px-4 py-3 fw-bold"
     >
       <i class="bi bi-box-arrow-in-right me-2"></i>Start Learning Now
     </a>
     {% else %}
     <a
-      href="{{ url_for('tutorials_home') }}"
+      href="{{ url_for('tutorials.tutorials_home') }}"
       class="btn btn-danger btn-lg px-4 py-3 fw-bold"
     >
       <i class="bi bi-collection-play me-2"></i>Continue Learning
