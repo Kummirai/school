@@ -18,6 +18,8 @@ from blueprints.exam.routes import exam_bp
 from blueprints.subscriptions.routes import subscriptions_bp
 from blueprints.subscribe.routes import subscribe_bp
 from blueprints.grades.routes import grades_bp
+from blueprints.courses.routes import courses_bp
+
 
 load_dotenv()
 
@@ -62,6 +64,7 @@ app.register_blueprint(exam_bp, url_prefix='/exam')
 app.register_blueprint(subscriptions_bp, url_prefix='/subscriptions')
 app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
 app.register_blueprint(grades_bp, url_prefix='/grades')
+app.register_blueprint(courses_bp, url_prefix='/courses')
 
 
 @app.context_processor

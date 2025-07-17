@@ -1,0 +1,783 @@
+{% extends "base.html" %} {% block title %}Web Development Curriculum{% endblock
+%} {% block content %}
+
+<!-- Hero Section -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-code-square display-1 text-primary"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">
+          Web Development <span class="text-primary">Curriculum</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-primary me-2"></i> Comprehensive full-stack
+          development program from beginner to advanced
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-primary btn-lg px-4 py-3 fw-bold"
+            href="#frontend"
+            role="button"
+          >
+            <i class="bi bi-layout-text-sidebar me-2"></i>Frontend
+          </a>
+          <a
+            class="btn btn-success btn-lg px-4 py-3 fw-bold"
+            href="#backend"
+            role="button"
+          >
+            <i class="bi bi-server me-2"></i>Backend
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Frontend Development -->
+<section id="frontend" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-layout-text-sidebar text-primary fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Frontend Development</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- HTML5 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">HTML5</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-primary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Semantic HTML</li>
+              <li class="list-group-item">Forms and Input Types</li>
+              <li class="list-group-item">Accessibility (ARIA)</li>
+              <li class="list-group-item">Media Elements</li>
+              <li class="list-group-item">Canvas/SVG</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-primary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Structuring web content</li>
+              <li class="list-group-item">SEO best practices</li>
+              <li class="list-group-item">Responsive design basics</li>
+              <li class="list-group-item">Web Components</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.html_course')}}"
+              class="btn btn-outline-primary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS3 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">CSS3</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-info">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Flexbox & Grid</li>
+              <li class="list-group-item">Animations & Transitions</li>
+              <li class="list-group-item">Variables & Custom Properties</li>
+              <li class="list-group-item">Responsive Design</li>
+              <li class="list-group-item">Preprocessors (SASS/SCSS)</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-info mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Modern layout techniques</li>
+              <li class="list-group-item">Cross-browser compatibility</li>
+              <li class="list-group-item">CSS architecture</li>
+              <li class="list-group-item">Performance optimization</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.css_course')}}"
+              class="btn btn-outline-info btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">JavaScript</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">ES6+ Features</li>
+              <li class="list-group-item">DOM Manipulation</li>
+              <li class="list-group-item">Async Programming</li>
+              <li class="list-group-item">OOP & Functional Programming</li>
+              <li class="list-group-item">Error Handling</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Event handling</li>
+              <li class="list-group-item">API integration</li>
+              <li class="list-group-item">Modular JavaScript</li>
+              <li class="list-group-item">Debugging techniques</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.js_course')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-3">
+      <!-- Bootstrap -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-header bg-purple text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Bootstrap 5</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-purple">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Grid System</li>
+              <li class="list-group-item">Components & Utilities</li>
+              <li class="list-group-item">Responsive Breakpoints</li>
+              <li class="list-group-item">Customization</li>
+              <li class="list-group-item">Accessibility</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-purple mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Rapid prototyping</li>
+              <li class="list-group-item">Theme customization</li>
+              <li class="list-group-item">Mobile-first development</li>
+              <li class="list-group-item">Component integration</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.bootstrap_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- jQuery -->
+      <div class="col-md-4">
+        <div class="card h-100 border-blue shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">jQuery</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-blue">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">DOM Traversal</li>
+              <li class="list-group-item">Event Handling</li>
+              <li class="list-group-item">AJAX Methods</li>
+              <li class="list-group-item">Animations</li>
+              <li class="list-group-item">Plugins</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-blue mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Simplified DOM manipulation</li>
+              <li class="list-group-item">Cross-browser compatibility</li>
+              <li class="list-group-item">AJAX implementation</li>
+              <li class="list-group-item">Legacy code maintenance</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.jquery_course')}}"
+              class="btn btn-outline-blue btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- React -->
+      <div class="col-md-4">
+        <div class="card h-100 border-cyan shadow-sm">
+          <div class="card-header bg-cyan text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">React.js</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-cyan">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Components & Props</li>
+              <li class="list-group-item">Hooks</li>
+              <li class="list-group-item">State Management</li>
+              <li class="list-group-item">Context API</li>
+              <li class="list-group-item">React Router</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-cyan mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Building reusable components</li>
+              <li class="list-group-item">Single Page Applications</li>
+              <li class="list-group-item">Performance optimization</li>
+              <li class="list-group-item">Testing React apps</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.react_course')}}"
+              class="btn btn-outline-cyan btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Backend Development -->
+<section id="backend" class="py-5">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-server text-success fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Backend Development</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Node.js -->
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Node.js</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-success">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Event Loop</li>
+              <li class="list-group-item">Modules & NPM</li>
+              <li class="list-group-item">File System</li>
+              <li class="list-group-item">Streams & Buffers</li>
+              <li class="list-group-item">Child Processes</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-success mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Building RESTful APIs</li>
+              <li class="list-group-item">Asynchronous programming</li>
+              <li class="list-group-item">Error handling</li>
+              <li class="list-group-item">Performance optimization</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.node_course')}}"
+              class="btn btn-outline-success btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Express.js -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Express.js</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Middleware</li>
+              <li class="list-group-item">Routing</li>
+              <li class="list-group-item">Template Engines</li>
+              <li class="list-group-item">Error Handling</li>
+              <li class="list-group-item">Authentication</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">API development</li>
+              <li class="list-group-item">Request validation</li>
+              <li class="list-group-item">Security best practices</li>
+              <li class="list-group-item">Session management</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.express_course')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SQL -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">SQL Databases</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Database Design</li>
+              <li class="list-group-item">CRUD Operations</li>
+              <li class="list-group-item">Joins & Relationships</li>
+              <li class="list-group-item">Indexes & Optimization</li>
+              <li class="list-group-item">Transactions</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Writing complex queries</li>
+              <li class="list-group-item">Database normalization</li>
+              <li class="list-group-item">Stored procedures</li>
+              <li class="list-group-item">Performance tuning</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.sql_course')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-3">
+      <!-- MongoDB -->
+      <div class="col-md-4">
+        <div class="card h-100 border-green shadow-sm">
+          <div class="card-header bg-green text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">MongoDB</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-green">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Document Structure</li>
+              <li class="list-group-item">CRUD Operations</li>
+              <li class="list-group-item">Aggregation Framework</li>
+              <li class="list-group-item">Indexing</li>
+              <li class="list-group-item">Replication & Sharding</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-green mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Schema design</li>
+              <li class="list-group-item">Performance optimization</li>
+              <li class="list-group-item">Mongoose ODM</li>
+              <li class="list-group-item">Atlas cloud services</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.mongodb_course')}}"
+              class="btn btn-outline-green btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Authentication -->
+      <div class="col-md-4">
+        <div class="card h-100 border-orange shadow-sm">
+          <div class="card-header bg-orange text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Authentication</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-orange">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">JWT</li>
+              <li class="list-group-item">OAuth</li>
+              <li class="list-group-item">Session Management</li>
+              <li class="list-group-item">Password Hashing</li>
+              <li class="list-group-item">Security Best Practices</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-orange mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Implementing secure auth</li>
+              <li class="list-group-item">Social login integration</li>
+              <li class="list-group-item">Role-based access control</li>
+              <li class="list-group-item">Security testing</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.auth_course')}}"
+              class="btn btn-outline-orange btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deployment -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-header bg-purple text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Deployment</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-purple">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">CI/CD Pipelines</li>
+              <li class="list-group-item">Containerization (Docker)</li>
+              <li class="list-group-item">Cloud Platforms</li>
+              <li class="list-group-item">Serverless Architecture</li>
+              <li class="list-group-item">Monitoring</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-purple mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">AWS/Heroku/Azure deployment</li>
+              <li class="list-group-item">Environment configuration</li>
+              <li class="list-group-item">Load balancing</li>
+              <li class="list-group-item">Performance monitoring</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.deployment_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Paths -->
+<section class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Learning Paths</h2>
+      <p class="lead text-muted">
+        Structured roadmaps for different career goals
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i
+              class="bi bi-layout-text-sidebar display-4 text-primary mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">Frontend Developer</h3>
+            <p class="mb-4">
+              Master HTML, CSS, JavaScript and modern frameworks
+            </p>
+            <ol class="text-start">
+              <li>HTML & CSS Fundamentals</li>
+              <li>JavaScript Deep Dive</li>
+              <li>Responsive Design</li>
+              <li>React/Vue/Angular</li>
+              <li>State Management</li>
+              <li>Testing</li>
+            </ol>
+            <a href="#" class="btn btn-outline-primary mt-3">
+              <i class="bi bi-journal-code me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-server display-4 text-success mb-3"></i>
+            <h3 class="h4 fw-bold">Backend Developer</h3>
+            <p class="mb-4">Become proficient in server-side development</p>
+            <ol class="text-start">
+              <li>Node.js Fundamentals</li>
+              <li>Express Framework</li>
+              <li>Database Design</li>
+              <li>API Development</li>
+              <li>Authentication</li>
+              <li>Performance Optimization</li>
+            </ol>
+            <a href="#" class="btn btn-outline-success mt-3">
+              <i class="bi bi-database me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-layers display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Full Stack Developer</h3>
+            <p class="mb-4">
+              Comprehensive training for end-to-end development
+            </p>
+            <ol class="text-start">
+              <li>Frontend Fundamentals</li>
+              <li>Backend Development</li>
+              <li>Database Integration</li>
+              <li>Authentication</li>
+              <li>DevOps Basics</li>
+              <li>Project Deployment</li>
+            </ol>
+            <a href="#" class="btn btn-outline-danger mt-3">
+              <i class="bi bi-stack me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Resources -->
+<section class="py-5">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Development Resources</h2>
+      <p class="lead text-muted">
+        Tools and materials to enhance your learning
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
+            <h3 class="h4 fw-bold">Code Challenges</h3>
+            <p class="mb-4">Daily coding exercises to sharpen your skills</p>
+            <a href="#" class="btn btn-outline-primary">
+              <i class="bi bi-terminal me-1"></i>Start Coding
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-journal-code display-4 text-success mb-3"></i>
+            <h3 class="h4 fw-bold">Project Ideas</h3>
+            <p class="mb-4">Practical projects to build your portfolio</p>
+            <a href="#" class="btn btn-outline-success">
+              <i class="bi bi-lightbulb me-1"></i>Browse Projects
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-people display-4 text-info mb-3"></i>
+            <h3 class="h4 fw-bold">Community</h3>
+            <p class="mb-4">Connect with other developers and mentors</p>
+            <a href="#" class="btn btn-outline-info">
+              <i class="bi bi-chat-square-text me-1"></i>Join Community
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary">
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4 text-white">
+      Ready to Become a Web Developer?
+    </h2>
+    <p class="lead mb-5 text-white">
+      Our comprehensive curriculum will guide you from beginner to job-ready
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('home.login') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('courses.catalog') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse All Courses
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+  }
+
+  .card-header {
+    border-bottom: none;
+  }
+
+  .bg-purple {
+    background-color: #6f42c1 !important;
+  }
+  .border-purple {
+    border-color: #6f42c1 !important;
+  }
+  .text-purple {
+    color: #6f42c1 !important;
+  }
+  .btn-outline-purple {
+    color: #6f42c1;
+    border-color: #6f42c1;
+  }
+  .btn-outline-purple:hover {
+    background-color: #6f42c1;
+    color: white;
+  }
+
+  .bg-blue {
+    background-color: #0d6efd !important;
+  }
+  .border-blue {
+    border-color: #0d6efd !important;
+  }
+  .text-blue {
+    color: #0d6efd !important;
+  }
+  .btn-outline-blue {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .btn-outline-blue:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .bg-cyan {
+    background-color: #0dcaf0 !important;
+  }
+  .border-cyan {
+    border-color: #0dcaf0 !important;
+  }
+  .text-cyan {
+    color: #0dcaf0 !important;
+  }
+  .btn-outline-cyan {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+  .btn-outline-cyan:hover {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .bg-green {
+    background-color: #198754 !important;
+  }
+  .border-green {
+    border-color: #198754 !important;
+  }
+  .text-green {
+    color: #198754 !important;
+  }
+  .btn-outline-green {
+    color: #198754;
+    border-color: #198754;
+  }
+  .btn-outline-green:hover {
+    background-color: #198754;
+    color: white;
+  }
+
+  .bg-orange {
+    background-color: #fd7e14 !important;
+  }
+  .border-orange {
+    border-color: #fd7e14 !important;
+  }
+  .text-orange {
+    color: #fd7e14 !important;
+  }
+  .btn-outline-orange {
+    color: #fd7e14;
+    border-color: #fd7e14;
+  }
+  .btn-outline-orange:hover {
+    background-color: #fd7e14;
+    color: white;
+  }
+</style>
+
+{% endblock %}

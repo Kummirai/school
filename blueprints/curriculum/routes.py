@@ -17,6 +17,12 @@ def science_curriculum():
     return render_template('science_curriculum.html')
 
 
+@curriculum_bp.route('/web_development')
+@login_required
+def web_development_curriculum():
+    return render_template('webdevelopment_curriculum.html')
+
+
 @curriculum_bp.route('/english')
 @login_required
 def english_curriculum():
