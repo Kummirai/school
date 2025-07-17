@@ -164,105 +164,7 @@
       <p class="lead text-muted">Structured by term with interactive content</p>
     </div>
 
-    <!-- Lesson Content Modal -->
-    <div
-      class="modal fade"
-      id="lessonModal"
-      tabindex="-1"
-      aria-labelledby="lessonModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="lessonModalLabel">Lesson Content</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-8">
-                <!-- Video Player -->
-                <div class="ratio ratio-16x9 mb-4">
-                  <iframe id="lessonVideo" src="" allowfullscreen></iframe>
-                </div>
-
-                <!-- Lesson Content -->
-                <div id="lessonContent" class="mb-4"></div>
-              </div>
-
-              <div class="col-md-4">
-                <!-- Resources Navigation -->
-                <div class="card mb-4">
-                  <div class="card-header bg-primary text-white">
-                    <h6 class="mb-0">Lesson Resources</h6>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="list-group list-group-flush">
-                      <a
-                        href="#"
-                        class="list-group-item list-group-item-action active"
-                        data-resource="video"
-                      >
-                        <i class="bi bi-play-circle me-2"></i>Video Lesson
-                      </a>
-                      <a
-                        href="#"
-                        class="list-group-item list-group-item-action"
-                        id="studyGuideLink"
-                        target="_blank"
-                        style="display: none"
-                      >
-                        <i class="bi bi-journal-text me-2"></i>View Study Guide
-                      </a>
-                      <a
-                        href="#"
-                        class="list-group-item list-group-item-action"
-                        data-resource="exercises"
-                      >
-                        <i class="bi bi-pencil-square me-2"></i>Practice
-                        Exercises
-                      </a>
-                      <a
-                        href="#"
-                        class="list-group-item list-group-item-action"
-                        data-resource="test"
-                      >
-                        <i class="bi bi-clipboard-check me-2"></i>Lesson Test
-                      </a>
-                      <a
-                        href="{{url_for('tutorials.tutorials_home')}}"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <i class="bi bi-play-circle me-2"></i>Search More Videos
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary" id="markCompleteBtn">
-              <i class="bi bi-check-circle me-2"></i>Mark as Complete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {% for term in subject_data.terms %}
+    {% for term in subject_data.terms %} {% set term_index = loop.index0 %}
     <div id="term-{{ loop.index }}" class="mb-5">
       <h3
         class="fw-bold mb-4 text-{{ ['primary', 'success', 'warning', 'info'][loop.index0 % 4] }}"
@@ -271,7 +173,7 @@
       </h3>
 
       <div class="accordion" id="term{{ loop.index }}Accordion">
-        {% for unit in term.units %}
+        {% for unit in term.units %} {% set unit_index = loop.index0 %}
         <div class="accordion-item mb-3 border-{{ unit.color }}">
           <h2 class="accordion-header">
             <button
@@ -292,24 +194,11 @@
           >
             <div class="accordion-body">
               <div class="list-group">
-                {% for lesson in unit.lessons %}
+                {% for lesson in unit.lessons %} {% set lesson_index =
+                loop.index0 %}
                 <a
-                  href="#"
-                  class="list-group-item list-group-item-action lesson-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#lessonModal"
-                  data-lesson-title="{{ lesson.title }}"
-                  data-video-url="{{ lesson.video_url }}"
-                  data-lesson-content="{{ lesson.lesson_content }}"
-                  data-features="{{ lesson.features|tojson }}"
-                  {%
-                  if
-                  lesson.study_guide_filename
-                  %}
-                  data-study-guide-url="{{ url_for('study_guide_page', grade_num=7, chapter_num=1, filename=lesson.study_guide_filename) }}"
-                  {%
-                  endif
-                  %}
+                  href="/grade_7/maths/lesson/{{ term_index }}/{{ unit_index }}/{{ lesson_index }}"
+                  class="list-group-item list-group-item-action"
                 >
                   <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
                   {{ lesson.title }}
@@ -360,105 +249,5 @@
     </div>
   </div>
 </section>
-
-<!-- JavaScript for Lesson Modal -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Handle lesson clicks
-    const lessonModal = new bootstrap.Modal(
-      document.getElementById("lessonModal")
-    );
-    const lessonVideo = document.getElementById("lessonVideo");
-    const lessonContent = document.getElementById("lessonContent");
-    const lessonFeatures = document.getElementById("lessonFeatures");
-    const studyGuideLink = document.getElementById("studyGuideLink"); // New: Get the study guide link element
-
-    // Set up modal when a lesson is clicked
-    document.querySelectorAll(".lesson-link").forEach((link) => {
-      link.addEventListener("click", function () {
-        // Set modal title
-        document.getElementById("lessonModalLabel").textContent =
-          this.dataset.lessonTitle;
-
-        // Set video URL
-        lessonVideo.src = this.dataset.videoUrl;
-
-        // Set lesson content
-        lessonContent.innerHTML = this.dataset.lessonContent;
-
-        // Set features (if any)
-        lessonFeatures.innerHTML = "";
-        const features = JSON.parse(this.dataset.features || "[]");
-        features.forEach((feature) => {
-          const li = document.createElement("li");
-          li.className = "list-group-item";
-          li.innerHTML = `<i class="bi bi-check-circle text-success me-2"></i>${feature}`;
-          lessonFeatures.appendChild(li);
-        });
-
-        // New: Set study guide link
-        const sgUrl = this.dataset.studyGuideUrl;
-        if (sgUrl) {
-          studyGuideLink.href = sgUrl;
-          studyGuideLink.style.display = "block"; // Show the link
-        } else {
-          studyGuideLink.style.display = "none"; // Hide if no study guide
-        }
-      });
-    });
-
-    // Handle resource navigation in modal (existing logic, no change needed here for study guide link)
-    document.querySelectorAll("[data-resource]").forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        // Update active state
-        document.querySelectorAll("[data-resource]").forEach((el) => {
-          el.classList.remove("active");
-        });
-        this.classList.add("active");
-
-        // Get the active lesson link
-        const activeLesson = document.querySelector(".lesson-link.active");
-        if (!activeLesson) return;
-
-        // Update content based on resource type
-        const resourceType = this.dataset.resource;
-        switch (resourceType) {
-          case "video":
-            lessonContent.innerHTML = activeLesson.dataset.lessonContent;
-            break;
-          case "guide":
-            // This case is now handled by the direct link, but keeping for consistency if needed for in-modal display
-            lessonContent.innerHTML = `<h4>Study Guide</h4><p>Click the "View Study Guide" button to open it in a new tab.</p>`;
-            break;
-          case "exercises":
-            lessonContent.innerHTML = `<h4>Practice Exercises</h4><p>Test your understanding with these problems.</p>`;
-            break;
-          case "test":
-            lessonContent.innerHTML = `<h4>Lesson Test</h4><p>Assessment for this lesson.</p>`;
-            break;
-        }
-      });
-    });
-
-    // Mark as complete button
-    document
-      .getElementById("markCompleteBtn")
-      .addEventListener("click", function () {
-        alert("Lesson marked as complete!");
-        lessonModal.hide();
-      });
-
-    // Reset video and study guide link when modal closes
-    document
-      .getElementById("lessonModal")
-      .addEventListener("hidden.bs.modal", function () {
-        lessonVideo.src = "";
-        studyGuideLink.href = "#";
-        studyGuideLink.style.display = "none"; // Hide the link again
-      });
-  });
-</script>
 
 {% endblock %}

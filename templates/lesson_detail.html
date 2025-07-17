@@ -1,0 +1,297 @@
+{% extends "base.html" %} {% block title %}{{ lesson.title }}{% endblock %} {%
+block content %}
+<!-- Hero Section for Lesson Detail -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('{{ subject_data.hero_image }}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-3">
+          <i class="{{ lesson.icon }} display-2 text-warning"></i>
+        </div>
+        <h1 class="display-5 fw-bold mb-3">{{ lesson.title }}</h1>
+        <p class="lead mb-4 fs-5">
+          Lesson {{ global_lesson_num }} | {{ subject_data.grade }} {{
+          subject_data.subject }}
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+          {% if prev_lesson %}
+          <a
+            href="{{ url_for('grades.view_grade7_lesson', term_idx=prev_lesson.term_idx, unit_idx=prev_lesson.unit_idx, lesson_idx=prev_lesson.lesson_idx) }}"
+            class="btn btn-outline-light"
+          >
+            <i class="bi bi-chevron-left me-1"></i> Previous
+          </a>
+          {% endif %}
+
+          <a
+            href="{{ url_for('grades.grade_7_maths') }}"
+            class="btn btn-outline-light"
+          >
+            <i class="bi bi-list-ul me-1"></i> All Lessons
+          </a>
+
+          {% if next_lesson %}
+          <a
+            href="{{ url_for('grades.view_grade7_lesson', term_idx=next_lesson.term_idx, unit_idx=next_lesson.unit_idx, lesson_idx=next_lesson.lesson_idx) }}"
+            class="btn btn-outline-light"
+          >
+            Next <i class="bi bi-chevron-right ms-1"></i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Progress Indicator -->
+<div class="progress-container bg-light py-2 sticky-top">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <span class="me-3">Progress: {{ lesson.progress }}%</span>
+      <div class="progress flex-grow-1" style="height: 10px">
+        <div
+          class="progress-bar bg-success"
+          role="progressbar"
+          style="width: {{ lesson.progress }}%;"
+          aria-valuenow="{{ lesson.progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      <button class="btn btn-sm btn-success ms-3" id="markCompleteBtn">
+        <i class="bi bi-check-circle me-1"></i> Mark Complete
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Lesson Content Section -->
+<section class="lesson-content-section py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Lesson Navigation/Resources -->
+      <div class="col-lg-3">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-primary text-white">
+            <i class="bi bi-list-task me-2"></i> Lesson Resources
+          </div>
+          <div class="list-group list-group-flush">
+            {% for resource in lesson.resources %}
+            <button
+              type="button"
+              class="list-group-item list-group-item-action resource-btn {% if loop.first %}active{% endif %}"
+              data-resource-type="{{ resource.type }}"
+              data-resource-path="{{ url_for('static', filename=resource.path) }}"
+            >
+              <i
+                class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+              ></i>
+              {{ resource.title }}
+            </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Lesson Metadata -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-secondary text-white">
+            <i class="bi bi-info-circle me-2"></i> Lesson Details
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Term:</strong> {{ subject_data.terms[term_idx].term }}
+            </li>
+            <li class="list-group-item">
+              <strong>Unit:</strong> {{
+              subject_data.terms[term_idx].units[unit_idx].title }}
+            </li>
+            <li class="list-group-item">
+              <strong>Duration:</strong> {{ lesson.duration }} minutes
+            </li>
+            <li class="list-group-item">
+              <strong>Difficulty:</strong>
+              <span class="badge bg-{{ lesson.difficulty_color }}">
+                {{ lesson.difficulty }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Dynamic Lesson Content Display Area -->
+      <div class="col-lg-9">
+        <div class="card shadow-sm">
+          <div
+            class="card-header bg-light d-flex justify-content-between align-items-center"
+          >
+            <h5 class="mb-0" id="lessonContentTitle">
+              {{ lesson.resources[0].title if lesson.resources else 'Lesson
+              Content' }}
+            </h5>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-outline-secondary" id="zoomInBtn">
+                <i class="bi bi-zoom-in"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="zoomOutBtn">
+                <i class="bi bi-zoom-out"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body" id="lessonContentDisplay">
+            {% if lesson.resources %}
+            <iframe
+              src="{{ url_for('static', filename=lesson.resources[0].path) }}"
+              style="width: 100%; height: 600px; border: none"
+              id="contentFrame"
+            ></iframe>
+            {% else %}
+            <p class="text-muted">No content available for this lesson.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="d-flex justify-content-between mt-4">
+          {% if prev_lesson %}
+          <a
+            href="{{ url_for('grades.view_grade7_lesson', term_idx=prev_lesson.term_idx, unit_idx=prev_lesson.unit_idx, lesson_idx=prev_lesson.lesson_idx) }}"
+            class="btn btn-primary"
+          >
+            <i class="bi bi-chevron-left me-1"></i> Previous Lesson
+          </a>
+          {% endif %} {% if next_lesson %}
+          <a
+            href="{{ url_for('grades.view_grade7_lesson', term_idx=next_lesson.term_idx, unit_idx=next_lesson.unit_idx, lesson_idx=next_lesson.lesson_idx) }}"
+            class="btn btn-primary ms-auto"
+          >
+            Next Lesson <i class="bi bi-chevron-right ms-1"></i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const resourceButtons = document.querySelectorAll(".resource-btn");
+    const contentFrame = document.getElementById("contentFrame");
+    const lessonContentTitle = document.getElementById("lessonContentTitle");
+    const markCompleteBtn = document.getElementById("markCompleteBtn");
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    let currentZoom = 100;
+
+    // Handle resource switching
+    resourceButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        resourceButtons.forEach((btn) => btn.classList.remove("active"));
+        this.classList.add("active");
+
+        const resourcePath = this.dataset.resourcePath;
+        const resourceTitle = this.textContent.trim();
+
+        contentFrame.src = resourcePath;
+        lessonContentTitle.textContent = resourceTitle;
+      });
+    });
+
+    // Zoom functionality
+    zoomInBtn.addEventListener("click", () => {
+      currentZoom += 10;
+      contentFrame.style.transform = `scale(${currentZoom / 100})`;
+      contentFrame.style.transformOrigin = '0 0';
+    });
+
+    zoomOutBtn.addEventListener("click", () => {
+      if (currentZoom > 50) {
+        currentZoom -= 10;
+        contentFrame.style.transform = `scale(${currentZoom / 100})`;
+        contentFrame.style.transformOrigin = '0 0';
+      }
+    });
+
+    // Mark as complete functionality
+    markCompleteBtn.addEventListener("click", function () {
+      fetch("{{ url_for('grades.mark_lesson_complete') }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          term_idx: {{ term_idx }},
+          unit_idx: {{ unit_idx }},
+          lesson_idx: {{ lesson_idx }}
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showToast("Lesson marked as complete!", "success");
+          // Update UI
+          markCompleteBtn.disabled = true;
+          markCompleteBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Completed';
+        } else {
+          showToast(data.message || "Error marking lesson complete", "danger");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        showToast("Failed to mark lesson complete", "danger");
+      });
+    });
+
+    function showToast(message, type) {
+      const toastContainer = document.createElement("div");
+      toastContainer.innerHTML = `
+        <div class="toast align-items-center text-white bg-${type} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(toastContainer);
+      setTimeout(() => toastContainer.remove(), 3000);
+    }
+  });
+</script>
+
+<!-- Toast Notification -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div
+    id="liveToast"
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">Notification</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body"></div>
+  </div>
+</div>
+
+{% endblock %}

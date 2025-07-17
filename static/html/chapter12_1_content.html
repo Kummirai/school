@@ -1,0 +1,410 @@
+<!-- Content from chapter12_1.html's <div class="content"> -->
+<div class="alert alert-info">
+  <p>
+    1. (a) How many red squares and how many black squares are there in each of
+    the arrangements 1, 2, 3 and 4 below?
+  </p>
+</div>
+
+<!-- Question 1 -->
+<div class="question-section">
+  <p class="section-title">Question 1: Pattern Recognition</p>
+
+  <div class="pattern-display">
+    <h5>Arrangement Patterns</h5>
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h6>Arrangement 1</h6>
+        <div id="pattern1"></div>
+      </div>
+      <div class="col-md-3 text-center">
+        <h6>Arrangement 2</h6>
+        <div id="pattern2"></div>
+      </div>
+      <div class="col-md-3 text-center">
+        <h6>Arrangement 3</h6>
+        <div id="pattern3"></div>
+      </div>
+      <div class="col-md-3 text-center">
+        <h6>Arrangement 4</h6>
+        <div id="pattern4"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="interactive-table">
+    <!-- ... rest of the table and inputs for Question 1 ... -->
+    <div class="p-3">
+      <button class="btn btn-calculate" onclick="checkPatterns()">
+        <i class="fas fa-calculator"></i> Check My Answers
+      </button>
+      <div
+        id="pattern-results"
+        class="result-highlight"
+        style="display: none"
+      ></div>
+    </div>
+  </div>
+
+  <!-- ... rest of Question 1's content ... -->
+</div>
+
+<!-- Question 2 -->
+<div class="question-section">
+  <h3 class="section-title">Question 2: Formula Investigation</h3>
+  <!-- ... rest of Question 2's content ... -->
+</div>
+
+<!-- Question 3 -->
+<div class="question-section">
+  <h3 class="section-title">Question 3: Black Square Formulas</h3>
+  <!-- ... rest of Question 3's content ... -->
+</div>
+
+<!-- Question 4 -->
+<div class="question-section">
+  <h3 class="section-title">Question 4: Hilary's Approach</h3>
+  <!-- ... rest of Question 4's content ... -->
+</div>
+
+<!-- Summary Section -->
+<div class="question-section">
+  <h3 class="section-title">📊 Summary & Key Insights</h3>
+  <!-- ... rest of Summary Section's content ... -->
+</div>
+
+<!-- IMPORTANT: Copy the relevant styles from chapter12_1.html's original <style> block here -->
+<style>
+  .main-container {
+    /* You might need to adjust or remove this if lesson_detail provides a wrapper */
+    background: white;
+    border-radius: 0px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .header {
+    /* This header might be redundant if lesson_detail provides one */
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  .content {
+    /* This wrapper will be inside lessonContentDisplay, adjust if needed */
+    padding: 30px;
+  }
+  .pattern-display {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .square {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    border: 1px solid #333;
+  }
+  .red-square {
+    background-color: #e74c3c;
+  }
+  .black-square {
+    background-color: #2c3e50;
+  }
+  .interactive-table {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .table-header {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+  }
+  .formula-box {
+    background: #e8f5e8;
+    border: 2px solid #27ae60;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    font-family: "Courier New", monospace;
+    font-size: 1.1em;
+  }
+  .question-section {
+    background: #f8f9fa;
+    border-left: 5px solid #3498db;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+  }
+  .btn-calculate {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  .btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+  }
+  .input-field {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: border-color 0.3s ease;
+  }
+  .input-field:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  .result-highlight {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .section-title {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+</style>
+
+<!-- IMPORTANT: Copy the relevant JavaScript from chapter12_1.html's original <script> block here -->
+<script>
+  // Pattern data
+  const patterns = {
+    1: { red: 6, black: 3 },
+    2: { red: 10, black: 6 },
+    3: { red: 14, black: 11 },
+    4: { red: 18, black: 18 },
+  };
+
+  // Generate visual patterns
+  function generatePattern(n) {
+    const container = document.getElementById(`pattern${n}`);
+    if (!container) return; // Add check for element existence
+    container.innerHTML = "";
+
+    // Create a visual representation of the pattern
+    const size = n + 2; // side length
+    for (let i = 0; i < size; i++) {
+      const row = document.createElement("div");
+      for (let j = 0; j < size; j++) {
+        const square = document.createElement("div");
+        square.className = "square";
+
+        // Logic for coloring squares based on pattern
+        if (i === 0 || i === size - 1 || j === 0 || j === size - 1) {
+          square.classList.add("red-square");
+        } else {
+          square.classList.add("black-square");
+        }
+
+        row.appendChild(square);
+      }
+      container.appendChild(row);
+    }
+  }
+
+  // Generate all patterns
+  for (let i = 1; i <= 4; i++) {
+    generatePattern(i);
+  }
+
+  function checkPatterns() {
+    const results = [];
+
+    // Check predictions for arrangements 5, 6, 7
+    const predictions = [
+      { n: 5, red: 22, black: 27 },
+      { n: 6, red: 26, black: 38 },
+      { n: 7, red: 30, black: 51 },
+    ];
+
+    predictions.forEach((pred) => {
+      const redInput = document.getElementById(`red${pred.n}`);
+      const blackInput = document.getElementById(`black${pred.n}`);
+
+      if (!redInput || !blackInput) return; // Add check for element existence
+
+      const redValue = parseInt(redInput.value);
+      const blackValue = parseInt(blackInput.value);
+
+      if (redValue === pred.red && blackValue === pred.black) {
+        results.push(
+          `✅ Arrangement ${pred.n}: Correct! Red: ${pred.red}, Black: ${pred.black}`
+        );
+        redInput.style.backgroundColor = "#d4edda";
+        blackInput.style.backgroundColor = "#d4edda";
+      } else {
+        results.push(
+          `❌ Arrangement ${pred.n}: Expected Red: ${pred.red}, Black: ${pred.black}`
+        );
+        redInput.style.backgroundColor = "#f8d7da";
+        blackInput.style.backgroundColor = "#f8d7da";
+      }
+    });
+
+    const resultDiv = document.getElementById("pattern-results");
+    if (resultDiv) {
+      resultDiv.innerHTML = results.join("<br>");
+      resultDiv.style.display = "block";
+    }
+  }
+
+  function testFormulas() {
+    const tableBody = document.getElementById("formula-table-body");
+    if (!tableBody) return; // Add check for element existence
+    tableBody.innerHTML = "";
+
+    for (let x = 1; x <= 9; x++) {
+      const row = document.createElement("tr");
+
+      const formula1 = 2 * (2 * x + 1);
+      const formula2 = 2 * x + 4;
+      const formula3 = 4 * x + 2;
+      const actual = patterns[x] ? patterns[x].red : 4 * x + 2;
+
+      row.innerHTML = `
+                <td>${x}</td>
+                <td class="${
+                  formula1 === actual ? "table-success" : "table-danger"
+                }">${formula1}</td>
+                <td class="${
+                  formula2 === actual ? "table-success" : "table-danger"
+                }">${formula2}</td>
+                <td class="${
+                  formula3 === actual ? "table-success" : "table-danger"
+                }">${formula3}</td>
+                <td><strong>${actual}</strong></td>
+            `;
+
+      tableBody.appendChild(row);
+    }
+
+    const resultDiv = document.getElementById("formula-results");
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+            <h6>Results:</h6>
+            <p>✅ <strong>y = 2 × (2 × x + 1)</strong> and <strong>y = 4 × x + 2</strong> both work correctly!</p>
+            <p>❌ <strong>y = 2 × x + 4</strong> doesn't match the pattern.</p>
+            <p><em>Note: y = 2 × (2 × x + 1) simplifies to y = 4 × x + 2</em></p>
+        `;
+      resultDiv.style.display = "block";
+    }
+  }
+
+  function calculateFormula(x) {
+    const result = 4 * x + 2;
+    const resultDiv = document.getElementById(`calc-${x}`);
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+            <strong>y = 4 × ${x} + 2</strong><br>
+            y = ${4 * x} + 2<br>
+            y = <strong>${result}</strong> red squares
+        `;
+      resultDiv.style.display = "block";
+    }
+  }
+
+  function testBlackFormulas() {
+    const tableBody = document.getElementById("black-formula-table-body");
+    if (!tableBody) return; // Add check for element existence
+    tableBody.innerHTML = "";
+
+    for (let x = 1; x <= 9; x++) {
+      const row = document.createElement("tr");
+
+      const formula1 = x * x + 2;
+      const formula2 = (x + 2) * (x + 2);
+      const actual = patterns[x] ? patterns[x].black : x * x + 2;
+
+      row.innerHTML = `
+                <td>${x}</td>
+                <td class="${
+                  formula1 === actual ? "table-success" : "table-danger"
+                }">${formula1}</td>
+                <td class="${
+                  formula2 === actual ? "table-success" : "table-danger"
+                }">${formula2}</td>
+                <td><strong>${actual}</strong></td>
+            `;
+
+      tableBody.appendChild(row);
+    }
+
+    const resultDiv = document.getElementById("black-formula-results");
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+            <h6>Results:</h6>
+            <p>✅ <strong>z = x² + 2</strong> works correctly for black squares!</p>
+            <p>❌ <strong>z = (x + 2)²</strong> doesn't match the pattern.</p>
+        `;
+      resultDiv.style.display = "block";
+    }
+  }
+
+  function testHilaryFormulas() {
+    const tableBody = document.getElementById("hilary-table-body");
+    if (!tableBody) return; // Add check for element existence
+    tableBody.innerHTML = "";
+
+    // Hilary uses x as side length, so x = arrangement number + 2
+    for (let x = 3; x <= 9; x++) {
+      const row = document.createElement("tr");
+
+      const blackFormula1 = x * x - 4 * x + 6;
+      const blackFormula2 = (x - 2) * (x - 2) + 2;
+      const redFormula1 = 3 * x - 3;
+      const redFormula2 = 4 * x - 6;
+      const redFormula3 = 4 * (x - 2) + 2;
+
+      row.innerHTML = `
+                <td>${x}</td>
+                <td>${blackFormula1}</td>
+                <td>${blackFormula2}</td>
+                <td>${redFormula1}</td>
+                <td>${redFormula2}</td>
+                <td>${redFormula3}</td>
+            `;
+
+      tableBody.appendChild(row);
+    }
+
+    const resultDiv = document.getElementById("hilary-results");
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+            <h6>Analysis:</h6>
+            <p>For arrangements with side length x:</p>
+            <p>✅ <strong>Black squares:</strong> Both y = x² - 4x + 6 and y = (x - 2)² + 2 work</p>
+            <p>✅ <strong>Red squares:</strong> y = 4x - 6 and y = 4(x - 2) + 2 both work</p>
+            <p><em>Note: When x represents side length, the formulas are different from when x represents arrangement number</em></p>
+        `;
+      resultDiv.style.display = "block";
+    }
+  }
+
+  // Initial calls for chapter12_1 content when loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // These functions might need to be called here or within the fetch callback
+    // depending on when the DOM elements they target are available.
+    // The lesson_detail.html script re-executes this script, so these calls
+    // will run when the content is dynamically loaded.
+    for (let i = 1; i <= 4; i++) {
+      generatePattern(i);
+    }
+  });
+</script>

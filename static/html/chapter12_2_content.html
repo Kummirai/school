@@ -1,0 +1,675 @@
+<!-- Content from chapter12_2.html's <div class="content"> -->
+<h3 class="section-title">
+  <i class="fas fa-calculator"></i> 12.2 What to calculate and how
+</h3>
+
+<div class="question-section">
+  <p class="alert alert-info">
+    <strong>1. Representing situations mathematically</strong>
+  </p>
+  <!-- ... rest of content for Question 1 ... -->
+</div>
+
+<div class="question-section">
+  <p class="alert alert-info">
+    <strong>2. Bus companies advertisements:</strong>
+  </p>
+  <!-- ... rest of content for Question 2 ... -->
+</div>
+
+<h3 class="section-title">
+  <i class="fas fa-exchange-alt"></i> 12.3 Input and output numbers
+</h3>
+
+<div class="question-section">
+  <p class="alert alert-info">
+    <strong>1. From formulae to tables:</strong>
+  </p>
+  <!-- ... rest of content for Question 1 (tables) ... -->
+</div>
+
+<!-- IMPORTANT: Copy the relevant styles from chapter12_2.html's original <style> block here -->
+<style>
+  body {
+    /* This might be redundant if lesson_detail provides it, adjust as needed */
+    font-family: "Inter", sans-serif;
+    background-color: #f0f2f5;
+  }
+  .main-container {
+    /* This might be redundant */
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .header {
+    /* This might be redundant */
+    background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .section-title {
+    color: #333;
+    border-bottom: 3px solid #4a90e2;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    font-weight: 600;
+  }
+  .question-section {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .alert-info {
+    background-color: #e6f7ff;
+    border-color: #91d5ff;
+    color: #0050b3;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  .table-responsive {
+    margin-top: 20px;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #7e7e7e;
+    vertical-align: middle;
+  }
+  .table-primary th {
+    background-color: #4a90e2;
+    color: white;
+  }
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  .input-field {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 8px 12px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  .input-field:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+    outline: none;
+  }
+  .btn-calculate {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+  }
+  .btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+  }
+  .result-highlight {
+    background-color: #d4edda;
+    border: 1px solid #28a745;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+  .formula-display {
+    background: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 1.1em;
+  }
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+  }
+  .card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .card-body ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .card-body ul li:before {
+    content: "•";
+    color: #4a90e2;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+</style>
+
+<!-- IMPORTANT: Copy the relevant JavaScript from chapter12_2.html's original <script> block here -->
+<script>
+  // Function to check minutes table
+  function checkMinutesTable() {
+    const results = [];
+    let allCorrect = true;
+
+    const minutes_3h = parseInt(document.getElementById("minutes_3h").value);
+    const minutes_15h = parseInt(document.getElementById("minutes_15h").value);
+    const minutes_24h = parseInt(document.getElementById("minutes_24h").value);
+
+    if (minutes_3h === 180) {
+      results.push("✅ 3 hours: Correct (180 minutes)");
+    } else {
+      results.push(`❌ 3 hours: Incorrect. Expected 180, got ${minutes_3h}`);
+      allCorrect = false;
+    }
+
+    if (minutes_15h === 900) {
+      results.push("✅ 15 hours: Correct (900 minutes)");
+    } else {
+      results.push(`❌ 15 hours: Incorrect. Expected 900, got ${minutes_15h}`);
+      allCorrect = false;
+    }
+
+    if (minutes_24h === 1440) {
+      results.push("✅ 24 hours: Correct (1440 minutes)");
+    } else {
+      results.push(`❌ 24 hours: Incorrect. Expected 1440, got ${minutes_24h}`);
+      allCorrect = false;
+    }
+
+    const resultDiv = document.getElementById("minutes-table-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check bus company formulas
+  function checkBusFormulas() {
+    const results = [];
+    let allCorrect = true;
+
+    const hambaKahle = document
+      .getElementById("hamba_kahle_formula")
+      .value.toUpperCase();
+    const saamgaan = document
+      .getElementById("saamgaan_formula")
+      .value.toUpperCase();
+    const comfort = document
+      .getElementById("comfort_formula")
+      .value.toUpperCase();
+
+    if (hambaKahle === "A") {
+      results.push("✅ Hamba Kahle Tours: Correct (Formula A)");
+    } else {
+      results.push(
+        `❌ Hamba Kahle Tours: Incorrect. Expected A, got ${hambaKahle}`
+      );
+      allCorrect = false;
+    }
+
+    if (saamgaan === "C") {
+      results.push("✅ Saamgaan Tours: Correct (Formula C)");
+    } else {
+      results.push(`❌ Saamgaan Tours: Incorrect. Expected C, got ${saamgaan}`);
+      allCorrect = false;
+    }
+
+    if (comfort === "F") {
+      results.push("✅ Comfort Tours: Correct (Formula F)");
+    } else {
+      results.push(`❌ Comfort Tours: Incorrect. Expected F, got ${comfort}`);
+      allCorrect = false;
+    }
+
+    const resultDiv = document.getElementById("bus-formula-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to calculate and check fares table
+  function calculateFares() {
+    const results = [];
+    let allCorrect = true;
+
+    const distances = [150, 200, 250, 300];
+
+    // Hamba Kahle Tours: Fare = 0.50 * distance + 500
+    const hk_fares = distances.map((d) => 0.5 * d + 500);
+    // Saamgaan Tours: Fare = 0.60 * distance + 450
+    const sg_fares = distances.map((d) => 0.6 * d + 450);
+    // Comfort Tours: Fare = 0.55 * distance + 480
+    const ct_fares = distances.map((d) => 0.55 * d + 480);
+
+    const checkInput = (id, expected, company, distance) => {
+      const value = parseFloat(document.getElementById(id).value);
+      if (value === expected) {
+        results.push(
+          `✅ ${company} at ${distance}km: Correct (R${expected.toFixed(2)})`
+        );
+      } else {
+        results.push(
+          `❌ ${company} at ${distance}km: Incorrect. Expected R${expected.toFixed(
+            2
+          )}, got R${value.toFixed(2)}`
+        );
+        allCorrect = false;
+      }
+    };
+
+    checkInput("hk_150", hk_fares[0], "Hamba Kahle", 150);
+    checkInput("hk_200", hk_fares[1], "Hamba Kahle", 200);
+    checkInput("hk_250", hk_fares[2], "Hamba Kahle", 250);
+    checkInput("hk_300", hk_fares[3], "Hamba Kahle", 300);
+
+    checkInput("sg_150", sg_fares[0], "Saamgaan", 150);
+    checkInput("sg_200", sg_fares[1], "Saamgaan", 200);
+    checkInput("sg_250", sg_fares[2], "Saamgaan", 250);
+    checkInput("sg_300", sg_fares[3], "Saamgaan", 300);
+
+    checkInput("ct_150", ct_fares[0], "Comfort", 150);
+    checkInput("ct_200", ct_fares[1], "Comfort", 200);
+    checkInput("ct_250", ct_fares[2], "Comfort", 250);
+    checkInput("ct_300", ct_fares[3], "Comfort", 300);
+
+    const resultDiv = document.getElementById("fare-table-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check cheapest company
+  function checkCheapest() {
+    const company = document.getElementById("cheapest_company").value.trim();
+    const explanation = document
+      .getElementById("cheapest_explanation")
+      .value.trim();
+    const resultDiv = document.getElementById("cheapest-results");
+    let allCorrect = true;
+    const results = [];
+
+    // For distances like 150-300km, Hamba Kahle is often cheapest.
+    // Let's calculate for a few points to provide a good hint.
+    const d_test = 250; // Example distance
+    const hk_fare = 0.5 * d_test + 500; // 625
+    const sg_fare = 0.6 * d_test + 450; // 600
+    const ct_fare = 0.55 * d_test + 480; // 617.5
+
+    if (company.toLowerCase().includes("saamgaan")) {
+      results.push(
+        "✅ Company: Correct! Saamgaan Tours is often the cheapest for shorter distances."
+      );
+    } else {
+      results.push(
+        "❌ Company: Incorrect. Re-evaluate the fares for shorter distances."
+      );
+      allCorrect = false;
+    }
+
+    if (explanation.length > 10) {
+      results.push("✅ Explanation: Provided a detailed explanation.");
+    } else {
+      results.push(
+        "❌ Explanation: Please provide a more detailed explanation."
+      );
+      allCorrect = false;
+    }
+
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check Wandile's symbols
+  function checkWandileSymbols() {
+    const results = [];
+    let allCorrect = true;
+
+    const wandile_x_i = document
+      .getElementById("wandile_x_i")
+      .value.toLowerCase();
+    const wandile_y_i = document
+      .getElementById("wandile_y_i")
+      .value.toLowerCase();
+    const wandile_x_ii = document
+      .getElementById("wandile_x_ii")
+      .value.toLowerCase();
+    const wandile_y_ii = document
+      .getElementById("wandile_y_ii")
+      .value.toLowerCase();
+    const wandile_x_iii = document
+      .getElementById("wandile_x_iii")
+      .value.toLowerCase();
+    const wandile_y_iii = document
+      .getElementById("wandile_y_iii")
+      .value.toLowerCase();
+
+    const checkSymbol = (input, expected, symbol, formula) => {
+      if (input.includes(expected)) {
+        results.push(
+          `✅ Formula ${formula}: ${symbol} stands for "${expected}"`
+        );
+      } else {
+        results.push(
+          `❌ Formula ${formula}: ${symbol} should stand for "${expected}"`
+        );
+        allCorrect = false;
+      }
+    };
+
+    checkSymbol(wandile_x_i, "distance", "x", "(i)");
+    checkSymbol(wandile_y_i, "fare", "y", "(i)");
+    checkSymbol(wandile_x_ii, "distance", "x", "(ii)");
+    checkSymbol(wandile_y_ii, "fare", "y", "(ii)");
+    checkSymbol(wandile_x_iii, "distance", "x", "(iii)");
+    checkSymbol(wandile_y_iii, "fare", "y", "(iii)");
+
+    const resultDiv = document.getElementById("wandile-symbols-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check cheapest for 1000km
+  function checkCheapest1000km() {
+    const distance = 1000;
+    const hk_fare = 0.5 * distance + 500; // R1000
+    const sg_fare = 0.6 * distance + 450; // R1050
+    const ct_fare = 0.55 * distance + 480; // R1030
+
+    const cheapest = "Hamba Kahle Tours";
+    const user_input = document.getElementById("cheapest_1000km").value.trim();
+    const resultDiv = document.getElementById("cheapest-1000km-results");
+    let allCorrect = true;
+    const results = [];
+
+    if (user_input.toLowerCase().includes(cheapest.toLowerCase())) {
+      results.push(
+        `✅ Correct! ${cheapest} is the cheapest for 1000km (R${hk_fare.toFixed(
+          2
+        )})`
+      );
+    } else {
+      results.push(
+        `❌ Incorrect. For 1000km: Hamba Kahle (R${hk_fare.toFixed(
+          2
+        )}), Saamgaan (R${sg_fare.toFixed(2)}), Comfort (R${ct_fare.toFixed(
+          2
+        )}).`
+      );
+      allCorrect = false;
+    }
+
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check which formula matches the tables
+  function checkTableFormulas() {
+    const formulas = {
+      A: (x) => 5 * x + 3,
+      B: (x) => 3 * x,
+      C: (x) => 3 * x + 2,
+      D: (x) => 4 * x,
+      E: (x) => 3 * x + 1,
+      F: (x) => 2 * x,
+      G: (x) => 3 * x + 10,
+      H: (x) => 2 * x - 1,
+      I: (x) => 5 * x,
+    };
+
+    const tables = {
+      a: { values: [13, 16, 19, 22, 25], expected: "G" },
+      b: { values: [8, 13, 18, 23, 28], expected: "A" },
+      c: { values: [4, 8, 12, 16, 20], expected: "D" },
+      d: { values: [5, 8, 11, 14, 17], expected: "E" },
+      e: { values: [5, 10, 15, 20, 25], expected: "I" },
+      f: { values: [1, 3, 5, 7, 9], expected: "H" },
+    };
+
+    const results = [];
+    let allCorrect = true;
+
+    for (const key in tables) {
+      const table = tables[key];
+      const userInput = document
+        .getElementById(`table_${key}_formula`)
+        .value.toUpperCase();
+      const expectedFormula = table.expected;
+
+      if (userInput === expectedFormula) {
+        results.push(`✅ Table (${key}): Correct! Formula ${expectedFormula}`);
+      } else {
+        results.push(
+          `❌ Table (${key}): Incorrect. Expected Formula ${expectedFormula}, got ${userInput}`
+        );
+        allCorrect = false;
+      }
+    }
+
+    const resultDiv = document.getElementById("table-formula-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check formula completion tables
+  function checkFormulaCompletion() {
+    const results = [];
+    let allCorrect = true;
+
+    // Table (a): y = 6 * x - 5.5
+    const formula_a_values = [0.5, 6.5, 12.5, 18.5, 24.5, 30.5, 36.5];
+    for (let i = 1; i <= 7; i++) {
+      const inputId = `formula_a_${i}`;
+      const value = parseFloat(document.getElementById(inputId).value);
+      const expected = formula_a_values[i - 1];
+      if (value === expected) {
+        results.push(`✅ Table (a) x=${i}: Correct (${expected})`);
+      } else {
+        results.push(
+          `❌ Table (a) x=${i}: Incorrect. Expected ${expected}, got ${value}`
+        );
+        allCorrect = false;
+      }
+    }
+
+    // Table (b): y = 30 * x + 1
+    const formula_b_values = [4, 7, 10, 13, 16, 19, 22]; // These are the results for x = 0.1 to 0.7
+    for (let i = 1; i <= 7; i++) {
+      const x_val = 0.1 * i;
+      const inputId = `formula_b_0${i}`;
+      const value = parseFloat(document.getElementById(inputId).value);
+      const expected = 30 * x_val + 1;
+      if (value === expected) {
+        results.push(
+          `✅ Table (b) x=${x_val.toFixed(1)}: Correct (${expected})`
+        );
+      } else {
+        results.push(
+          `❌ Table (b) x=${x_val.toFixed(
+            1
+          )}: Incorrect. Expected ${expected}, got ${value}`
+        );
+        allCorrect = false;
+      }
+    }
+
+    const resultDiv = document.getElementById("completion-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check black squares for next arrangements (from 12.1 pattern)
+  function checkNextBlackSquares() {
+    const results = [];
+    let allCorrect = true;
+
+    const black5_expected = 27; // From 12.1 pattern: 3, 6, 11, 18, 27 (diff: +3, +5, +7, +9)
+    const black6_expected = 38; // From 12.1 pattern: 27 + 11 = 38
+
+    const black5_input = parseInt(
+      document.getElementById("black_next_arr_5").value
+    );
+    const black6_input = parseInt(
+      document.getElementById("black_next_arr_6").value
+    );
+
+    if (black5_input === black5_expected) {
+      results.push(
+        `✅ Arrangement 5 Black Squares: Correct (${black5_expected})`
+      );
+    } else {
+      results.push(
+        `❌ Arrangement 5 Black Squares: Incorrect. Expected ${black5_expected}, got ${black5_input}`
+      );
+      allCorrect = false;
+    }
+
+    if (black6_input === black6_expected) {
+      results.push(
+        `✅ Arrangement 6 Black Squares: Correct (${black6_expected})`
+      );
+    } else {
+      results.push(
+        `❌ Arrangement 6 Black Squares: Incorrect. Expected ${black6_expected}, got ${black6_input}`
+      );
+      allCorrect = false;
+    }
+
+    const resultDiv = document.getElementById("next-black-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check Susan's symbols
+  function checkSusanSymbols() {
+    const results = [];
+    let allCorrect = true;
+
+    const susan_z_b = document.getElementById("susan_z_b").value.toLowerCase();
+    const susan_x_b = document.getElementById("susan_x_b").value.toLowerCase();
+    const susan_y_d = document.getElementById("susan_y_d").value.toLowerCase();
+    const susan_x_d = document.getElementById("susan_x_d").value.toLowerCase();
+
+    const check = (input, expected, symbol, formula, type) => {
+      if (input.includes(expected)) {
+        results.push(`✅ Formula ${formula}: ${symbol} (${type}) is correct.`);
+      } else {
+        results.push(
+          `❌ Formula ${formula}: ${symbol} (${type}) is incorrect. Expected "${expected}".`
+        );
+        allCorrect = false;
+      }
+    };
+
+    check(susan_z_b, "black squares", "z", "B", "black squares");
+    check(susan_x_b, "arrangement number", "x", "B", "arrangement number");
+    check(susan_y_d, "red squares", "y", "D", "red squares");
+    check(susan_x_d, "arrangement number", "x", "D", "arrangement number");
+
+    const resultDiv = document.getElementById("susan-symbols-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to check Zain's symbols
+  function checkZainSymbols() {
+    const results = [];
+    let allCorrect = true;
+
+    const zain_z_a = document.getElementById("zain_z_a").value.toLowerCase();
+    const zain_n_a = document.getElementById("zain_n_a").value.toLowerCase();
+    const zain_y_c = document.getElementById("zain_y_c").value.toLowerCase();
+    const zain_n_c = document.getElementById("zain_n_c").value.toLowerCase();
+
+    const check = (input, expected, symbol, formula, type) => {
+      if (input.includes(expected)) {
+        results.push(`✅ Formula ${formula}: ${symbol} (${type}) is correct.`);
+      } else {
+        results.push(
+          `❌ Formula ${formula}: ${symbol} (${type}) is incorrect. Expected "${expected}".`
+        );
+        allCorrect = false;
+      }
+    };
+
+    check(zain_z_a, "black squares", "z", "A", "black squares");
+    check(zain_n_a, "arrangement number", "n", "A", "arrangement number");
+    check(zain_y_c, "red squares", "y", "C", "red squares");
+    check(zain_n_c, "arrangement number", "n", "C", "arrangement number");
+
+    const resultDiv = document.getElementById("zain-symbols-results");
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
+    resultDiv.className = `result-highlight ${
+      allCorrect ? "bg-success-subtle" : "bg-danger-subtle"
+    }`;
+  }
+
+  // Function to submit custom formulas (no automated check, just acknowledgement)
+  function submitCustomFormulas() {
+    const redFormula = document
+      .getElementById("custom_red_formula")
+      .value.trim();
+    const blackFormula = document
+      .getElementById("custom_black_formula")
+      .value.trim();
+    const resultDiv = document.getElementById("custom-formula-results");
+
+    if (redFormula.length > 0 && blackFormula.length > 0) {
+      resultDiv.innerHTML = `
+        <p>Thank you for submitting your custom formulas!</p>
+        <p><strong>Your Red Squares Formula:</strong> ${redFormula}</p>
+        <p><strong>Your Black Squares Formula:</strong> ${blackFormula}</p>
+        <p>Remember to clearly define what your symbols represent.</p>
+      `;
+      resultDiv.className = "result-highlight bg-info-subtle";
+    } else {
+      resultDiv.innerHTML = `
+        <p class="text-danger">Please provide both red and black square formulas.</p>
+      `;
+      resultDiv.className = "result-highlight bg-danger-subtle";
+    }
+    resultDiv.style.display = "block";
+  }
+</script>

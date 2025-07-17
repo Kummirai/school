@@ -14,7 +14,7 @@
     "Data Analysis",
     "Measurement Applications"
   ],
-  "feature_note": "Each lesson includes concept videos, step-by-step examples, and tiered practice problems (foundational → advanced).",
+  "feature_note": "Each lesson includes concept videos, step-by-step examples, and tiered practice problems (foundational \u2192 advanced).",
   "stats": {
     "total_lessons": "84",
     "video_hours": "48.5",
@@ -32,241 +32,229 @@
             {
               "title": "1.1 Whole Numbers",
               "duration": "20 min",
-              "link": "#",
               "icon": "bi bi-123",
-              "video_url": "https://www.youtube.com/embed/wS-T-DA6g5Y",
-              "lesson_content": "This lesson covers fundamental operations with whole numbers including addition, subtraction, multiplication, and division. We'll explore place value systems and multi-digit operations with real-world applications.",
-              "study_guide": "Key concepts:\n- Place value systems (ones, tens, hundreds, thousands)\n- Multi-digit operations (addition, subtraction, multiplication, division)\n- Problem solving strategies\n- Order of operations\n\nPractice problems:\n1. What is the value of 5 in 3,572?\n2. Calculate 345 × 12\n3. Solve 2,456 + 3,789\n4. Find 8,320 ÷ 16",
-              "exercises": [
+              "description": "This lesson covers fundamental operations with whole numbers including addition, subtraction, multiplication, and division. We'll explore place value systems and multi-digit operat",
+              "resources": [
                 {
-                  "question": "What is the place value of 5 in 3,572?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_1_whole_numbers_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Calculate 345 × 12",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/wS-T-DA6g5Y",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Solve 2,456 + 3,789",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_1_whole_numbers_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_1_whole_numbers_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_1_whole_numbers_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "Which digit is in the hundreds place in 8,429?",
-                  "options": ["8", "4", "2", "9"],
-                  "answer": "4"
-                },
-                {
-                  "question": "What is 1,234 × 5?",
-                  "options": ["6,170", "6,270", "6,170", "6,070"],
-                  "answer": "6,170"
-                }
-              ],
-              "features": [
-                "Place value systems",
-                "Multi-digit operations",
-                "Problem solving strategies"
               ]
             },
             {
               "title": "1.2 Basic Operations ",
               "duration": "18 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-square",
-              "video_url": "https://www.youtube.com/embed/YYTHaQQjewQ",
-              "lesson_content": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
-              "study_guide": "Key concepts:\n- Exponential notation (base and exponent)\n- Laws of exponents (multiplication, division, power rules)\n- Scientific applications\n- Perfect squares and cubes\n\nPractice problems:\n1. Simplify 2³ × 2⁵\n2. Evaluate (3²)⁴\n3. Calculate 5⁴\n4. Simplify 6³ ÷ 6²",
-              "exercises": [
+              "description": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
+              "resources": [
                 {
-                  "question": "Simplify 2³ × 2⁵",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_2_basic_operations__content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Evaluate (3²)⁴",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/YYTHaQQjewQ",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Calculate 5⁴",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_2_basic_operations__study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_2_basic_operations__exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_2_basic_operations__test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "What is 5³ equal to?",
-                  "options": ["15", "25", "125", "625"],
-                  "answer": "125"
-                },
-                {
-                  "question": "Simplify 4² × 4³",
-                  "options": ["4⁵", "4⁶", "16⁶", "16⁵"],
-                  "answer": "4⁵"
-                }
-              ],
-              "features": [
-                "Exponential notation",
-                "Laws of exponents",
-                "Scientific applications"
               ]
             },
             {
               "title": "1.3 Multiples ",
               "duration": "18 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-square",
-              "video_url": "https://www.youtube.com/embed/YYTHaQQjewQ",
-              "lesson_content": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
-              "study_guide": "Key concepts:\n- Exponential notation (base and exponent)\n- Laws of exponents (multiplication, division, power rules)\n- Scientific applications\n- Perfect squares and cubes\n\nPractice problems:\n1. Simplify 2³ × 2⁵\n2. Evaluate (3²)⁴\n3. Calculate 5⁴\n4. Simplify 6³ ÷ 6²",
-              "exercises": [
+              "description": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
+              "resources": [
                 {
-                  "question": "Simplify 2³ × 2⁵",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_3_multiples__content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Evaluate (3²)⁴",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/YYTHaQQjewQ",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Calculate 5⁴",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_3_multiples__study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_3_multiples__exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_3_multiples__test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "What is 5³ equal to?",
-                  "options": ["15", "25", "125", "625"],
-                  "answer": "125"
-                },
-                {
-                  "question": "Simplify 4² × 4³",
-                  "options": ["4⁵", "4⁶", "16⁶", "16⁵"],
-                  "answer": "4⁵"
-                }
-              ],
-              "features": [
-                "Exponential notation",
-                "Laws of exponents",
-                "Scientific applications"
               ]
             },
             {
               "title": "1.4 Multiples of powers",
               "duration": "18 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-square",
-              "video_url": "https://www.youtube.com/embed/YYTHaQQjewQ",
-              "lesson_content": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
-              "study_guide": "Key concepts:\n- Exponential notation (base and exponent)\n- Laws of exponents (multiplication, division, power rules)\n- Scientific applications\n- Perfect squares and cubes\n\nPractice problems:\n1. Simplify 2³ × 2⁵\n2. Evaluate (3²)⁴\n3. Calculate 5⁴\n4. Simplify 6³ ÷ 6²",
-              "exercises": [
+              "description": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
+              "resources": [
                 {
-                  "question": "Simplify 2³ × 2⁵",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_4_multiples_of_powers_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Evaluate (3²)⁴",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/YYTHaQQjewQ",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Calculate 5⁴",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_4_multiples_of_powers_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_4_multiples_of_powers_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_4_multiples_of_powers_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "What is 5³ equal to?",
-                  "options": ["15", "25", "125", "625"],
-                  "answer": "125"
-                },
-                {
-                  "question": "Simplify 4² × 4³",
-                  "options": ["4⁵", "4⁶", "16⁶", "16⁵"],
-                  "answer": "4⁵"
-                }
-              ],
-              "features": [
-                "Exponential notation",
-                "Laws of exponents",
-                "Scientific applications"
               ]
             },
             {
               "title": "1.5   Doubling and Halving ",
               "duration": "18 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-square",
-              "video_url": "https://www.youtube.com/embed/YYTHaQQjewQ",
-              "lesson_content": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
-              "study_guide": "Key concepts:\n- Exponential notation (base and exponent)\n- Laws of exponents (multiplication, division, power rules)\n- Scientific applications\n- Perfect squares and cubes\n\nPractice problems:\n1. Simplify 2³ × 2⁵\n2. Evaluate (3²)⁴\n3. Calculate 5⁴\n4. Simplify 6³ ÷ 6²",
-              "exercises": [
+              "description": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
+              "resources": [
                 {
-                  "question": "Simplify 2³ × 2⁵",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_5___doubling_and_halving__content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Evaluate (3²)⁴",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/YYTHaQQjewQ",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Calculate 5⁴",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_5___doubling_and_halving__study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_5___doubling_and_halving__exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_5___doubling_and_halving__test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "What is 5³ equal to?",
-                  "options": ["15", "25", "125", "625"],
-                  "answer": "125"
-                },
-                {
-                  "question": "Simplify 4² × 4³",
-                  "options": ["4⁵", "4⁶", "16⁶", "16⁵"],
-                  "answer": "4⁵"
-                }
-              ],
-              "features": [
-                "Exponential notation",
-                "Laws of exponents",
-                "Scientific applications"
               ]
             },
             {
               "title": "1.6 Rate and Ratio ",
               "duration": "18 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-square",
-              "video_url": "https://www.youtube.com/embed/YYTHaQQjewQ",
-              "lesson_content": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
-              "study_guide": "Key concepts:\n- Exponential notation (base and exponent)\n- Laws of exponents (multiplication, division, power rules)\n- Scientific applications\n- Perfect squares and cubes\n\nPractice problems:\n1. Simplify 2³ × 2⁵\n2. Evaluate (3²)⁴\n3. Calculate 5⁴\n4. Simplify 6³ ÷ 6²",
-              "exercises": [
+              "description": "In this lesson, we'll learn about exponential notation and the laws of exponents. We'll explore how exponents are used in scientific applications and everyday mathematics.",
+              "resources": [
                 {
-                  "question": "Simplify 2³ × 2⁵",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/1_6_rate_and_ratio__content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Evaluate (3²)⁴",
-                  "type": "short_answer"
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/YYTHaQQjewQ",
+                  "icon": "play-circle"
                 },
                 {
-                  "question": "Calculate 5⁴",
-                  "type": "short_answer"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/1_6_rate_and_ratio__study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/1_6_rate_and_ratio__exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/1_6_rate_and_ratio__test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "test_questions": [
-                {
-                  "question": "What is 5³ equal to?",
-                  "options": ["15", "25", "125", "625"],
-                  "answer": "125"
-                },
-                {
-                  "question": "Simplify 4² × 4³",
-                  "options": ["4⁵", "4⁶", "16⁶", "16⁵"],
-                  "answer": "4⁵"
-                }
-              ],
-              "features": [
-                "Exponential notation",
-                "Laws of exponents",
-                "Scientific applications"
               ]
             }
           ]
@@ -278,94 +266,115 @@
             {
               "title": "3.1 Geometry of Straight Lines",
               "duration": "22 min",
-              "link": "#",
               "icon": "bi bi-slash-lg",
-              "video_url": "https://www.youtube.com/embed/DZN-8sVAdBM",
-              "lesson_content": "This lesson explores the fundamental properties of straight lines, including line relationships, angle properties, and the characteristics of parallel and perpendicular lines.",
-              "study_guide": "Key concepts:\n- Line relationships (intersecting, parallel, perpendicular)\n- Angle properties (acute, right, obtuse, straight)\n- Parallel and perpendicular lines\n- Angle pairs (vertical, adjacent, corresponding)\n\nPractice problems:\n1. Identify parallel lines in a diagram\n2. Find the measure of vertical angles\n3. Calculate complementary angles\n4. Determine if lines are perpendicular",
-              "exercises": [
+              "description": "This lesson explores the fundamental properties of straight lines, including line relationships, angle properties, and the characteristics of parallel and perpendicular lines.",
+              "resources": [
                 {
-                  "question": "If two lines are parallel, what can you say about their corresponding angles?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/3_1_geometry_of_straight_lines_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What is the sum of complementary angles?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/DZN-8sVAdBM",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "Vertical angles are always:",
-                  "options": ["Equal", "Supplementary", "Complementary", "Different"],
-                  "answer": "Equal"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/3_1_geometry_of_straight_lines_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/3_1_geometry_of_straight_lines_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/3_1_geometry_of_straight_lines_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Line relationships",
-                "Angle properties",
-                "Parallel and perpendicular lines"
               ]
             },
             {
               "title": "3.2 Construction of Geometric Figures",
               "duration": "35 min",
-              "link": "#",
               "icon": "bi bi-pentagon",
-              "video_url": "https://www.youtube.com/embed//6lF3rWPmkZc",
-              "lesson_content": "Learn the art of geometric construction using compass and straightedge tools. This lesson covers accurate constructions and the proper use of geometric tools.",
-              "study_guide": "Key concepts:\n- Compass and straightedge techniques\n- Accurate constructions\n- Geometric tools and their uses\n- Constructing perpendicular bisectors\n- Constructing angle bisectors\n\nPractice problems:\n1. Construct a perpendicular bisector\n2. Bisect an angle\n3. Construct parallel lines\n4. Create equilateral triangles",
-              "exercises": [
+              "description": "Learn the art of geometric construction using compass and straightedge tools. This lesson covers accurate constructions and the proper use of geometric tools.",
+              "resources": [
                 {
-                  "question": "What tools are needed for geometric construction?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/3_2_construction_of_geometric_figures_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "How do you construct a perpendicular bisector?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed//6lF3rWPmkZc",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "A perpendicular bisector:",
-                  "options": ["Divides a line segment into two equal parts at 90°", "Creates parallel lines", "Bisects angles", "Measures distances"],
-                  "answer": "Divides a line segment into two equal parts at 90°"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/3_2_construction_of_geometric_figures_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/3_2_construction_of_geometric_figures_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/3_2_construction_of_geometric_figures_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Compass and straightedge",
-                "Accurate constructions",
-                "Geometric tools"
               ]
             },
             {
               "title": "3.3 Geometry of 2D Shapes",
               "duration": "52 min",
-              "link": "#",
               "icon": "bi bi-square",
-              "video_url": "https://www.youtube.com/embed/Ke9bQFtxkzE",
-              "lesson_content": "Explore the properties of 2D shapes, including polygon classification, angle sums, and systematic approaches to shape analysis.",
-              "study_guide": "Key concepts:\n- Polygon properties (vertices, sides, angles)\n- Angle sums in polygons\n- Classification systems (regular vs irregular)\n- Triangle types and properties\n- Quadrilateral families\n\nPractice problems:\n1. Find the sum of interior angles in a pentagon\n2. Classify triangles by sides and angles\n3. Identify quadrilateral types\n4. Calculate missing angles in polygons",
-              "exercises": [
+              "description": "Explore the properties of 2D shapes, including polygon classification, angle sums, and systematic approaches to shape analysis.",
+              "resources": [
                 {
-                  "question": "What is the sum of interior angles in a triangle?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/3_3_geometry_of_2d_shapes_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "How many sides does a hexagon have?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/Ke9bQFtxkzE",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "The sum of interior angles in a quadrilateral is:",
-                  "options": ["180°", "270°", "360°", "540°"],
-                  "answer": "360°"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/3_3_geometry_of_2d_shapes_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/3_3_geometry_of_2d_shapes_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/3_3_geometry_of_2d_shapes_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Polygon properties",
-                "Angle sums",
-                "Classification systems"
               ]
             }
           ]
@@ -382,63 +391,77 @@
             {
               "title": "2.1 Common Fractions Mastery",
               "duration": "25 min",
-              "link": "#",
               "icon": "bi bi-percent",
-              "video_url": "https://www.youtube.com/embed/kxNLq0BNztU",
-              "lesson_content": "Master the operations with common fractions including addition, subtraction, multiplication, and division. Learn about equivalent fractions and working with mixed numbers.",
-              "study_guide": "Key concepts:\n- Fraction operations (add, subtract, multiply, divide)\n- Equivalent fractions\n- Mixed numbers and improper fractions\n- Simplifying fractions\n- Finding common denominators\n\nPractice problems:\n1. Add 2/3 + 1/4\n2. Subtract 5/6 - 1/3\n3. Multiply 3/4 × 2/5\n4. Divide 7/8 ÷ 1/2",
-              "exercises": [
+              "description": "Master the operations with common fractions including addition, subtraction, multiplication, and division. Learn about equivalent fractions and working with mixed numbers.",
+              "resources": [
                 {
-                  "question": "Add 2/3 + 1/4",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/2_1_common_fractions_mastery_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Multiply 3/4 × 2/5",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/kxNLq0BNztU",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is 1/2 + 1/3?",
-                  "options": ["2/5", "5/6", "1/6", "3/5"],
-                  "answer": "5/6"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/2_1_common_fractions_mastery_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/2_1_common_fractions_mastery_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/2_1_common_fractions_mastery_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Fraction operations",
-                "Equivalent fractions",
-                "Mixed numbers"
               ]
             },
             {
               "title": "2.2 Decimal Notation for Fractions",
               "duration": "20 min",
-              "link": "#",
               "icon": "bi bi-dot",
-              "video_url": "https://www.youtube.com/embed//hVbxWg6I1cM",
-              "lesson_content": "Learn to convert between fractions and decimals, perform decimal operations, and apply rounding strategies in real-world contexts.",
-              "study_guide": "Key concepts:\n- Converting fractions to decimals\n- Converting decimals to fractions\n- Decimal operations (add, subtract, multiply, divide)\n- Rounding strategies\n- Terminating vs repeating decimals\n\nPractice problems:\n1. Convert 3/4 to decimal\n2. Convert 0.75 to fraction\n3. Add 2.5 + 3.75\n4. Round 7.847 to nearest tenth",
-              "exercises": [
+              "description": "Learn to convert between fractions and decimals, perform decimal operations, and apply rounding strategies in real-world contexts.",
+              "resources": [
                 {
-                  "question": "Convert 3/4 to decimal",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/2_2_decimal_notation_for_fractions_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Convert 0.6 to fraction",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed//hVbxWg6I1cM",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is 1/4 as a decimal?",
-                  "options": ["0.25", "0.4", "0.5", "0.75"],
-                  "answer": "0.25"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/2_2_decimal_notation_for_fractions_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/2_2_decimal_notation_for_fractions_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/2_2_decimal_notation_for_fractions_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Converting fractions to decimals",
-                "Decimal operations",
-                "Rounding strategies"
               ]
             }
           ]
@@ -450,32 +473,39 @@
             {
               "title": "8.1 Relationships Between Variables",
               "duration": "26 min",
-              "link": "#",
               "icon": "bi bi-bezier2",
-              "video_url": "https://www.youtube.com/embed/wxvSHL5DpXw",
-              "lesson_content": "Explore how variables relate to each other through proportional thinking and rate problems. Understanding these relationships is fundamental to algebra.",
-              "study_guide": "Key concepts:\n- Variable relationships\n- Proportional thinking\n- Rate problems\n- Direct and inverse relationships\n- Graphing relationships\n\nPractice problems:\n1. If y = 2x, find y when x = 5\n2. Speed = distance/time problems\n3. Ratio and proportion problems\n4. Identify proportional relationships",
-              "exercises": [
+              "description": "Explore how variables relate to each other through proportional thinking and rate problems. Understanding these relationships is fundamental to algebra.",
+              "resources": [
                 {
-                  "question": "If y = 3x, what is y when x = 4?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/8_1_relationships_between_variables_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "A car travels 60 km in 2 hours. What is its speed?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/wxvSHL5DpXw",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "In a direct relationship, as one variable increases, the other:",
-                  "options": ["Decreases", "Increases", "Stays the same", "Becomes zero"],
-                  "answer": "Increases"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/8_1_relationships_between_variables_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/8_1_relationships_between_variables_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/8_1_relationships_between_variables_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Variable relationships",
-                "Proportional thinking",
-                "Rate problems"
               ]
             }
           ]
@@ -487,63 +517,77 @@
             {
               "title": "9.1 Perimeter & Area of 2D Shapes",
               "duration": "25 min",
-              "link": "#",
               "icon": "bi bi-border-width",
-              "video_url": "https://www.youtube.com/embed/18y5fJqxYW8",
-              "lesson_content": "Learn to calculate perimeter and area of various 2D shapes, including composite shapes and real-world applications.",
-              "study_guide": "Key concepts:\n- Area formulas for rectangles, triangles, circles\n- Perimeter calculations\n- Composite shapes\n- Units of measurement\n- Real-world applications\n\nPractice problems:\n1. Find area of rectangle 5×8\n2. Calculate perimeter of triangle with sides 3, 4, 5\n3. Area of circle with radius 7\n4. Composite shape problems",
-              "exercises": [
+              "description": "Learn to calculate perimeter and area of various 2D shapes, including composite shapes and real-world applications.",
+              "resources": [
                 {
-                  "question": "Find the area of a rectangle with length 6 and width 4",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What is the perimeter of a square with side 5?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/18y5fJqxYW8",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "The area of a triangle is:",
-                  "options": ["base × height", "½ × base × height", "2 × base × height", "base + height"],
-                  "answer": "½ × base × height"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Area formulas",
-                "Perimeter calculations",
-                "Composite shapes"
               ]
             },
             {
               "title": "10.1 Surface Area & Volume of 3D Objects",
               "duration": "30 min",
-              "link": "#",
               "icon": "bi bi-box-seam",
-              "video_url": "https://www.youtube.com/embed/DuyCqw129HY",
-              "lesson_content": "Explore the calculation of surface area and volume for 3D objects including prisms, pyramids, and cylinders with real-world applications.",
-              "study_guide": "Key concepts:\n- Volume formulas for prisms, pyramids, cylinders\n- Surface area calculations\n- Net diagrams\n- Real-world applications\n- Units of volume\n\nPractice problems:\n1. Volume of rectangular prism 3×4×5\n2. Surface area of cube with side 6\n3. Volume of cylinder with radius 3, height 8\n4. Surface area of triangular prism",
-              "exercises": [
+              "description": "Explore the calculation of surface area and volume for 3D objects including prisms, pyramids, and cylinders with real-world applications.",
+              "resources": [
                 {
-                  "question": "Find the volume of a cube with side length 4",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What is the surface area of a cube with side 3?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/DuyCqw129HY",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "The volume of a rectangular prism is:",
-                  "options": ["length × width", "length × width × height", "2(length + width)", "length + width + height"],
-                  "answer": "length × width × height"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Volume formulas",
-                "Surface area calculations",
-                "Real-world applications"
               ]
             }
           ]
@@ -560,125 +604,129 @@
             {
               "title": "11.1 Numeric & Geometric Patterns",
               "duration": "120 min",
-              "link": "/grade7/numeric_geometric_patterns",
               "icon": "bi bi-diagram-3",
-              "video_url": "https://www.youtube.com/embed/-eX1EmsU8Ns",
-              "lesson_content": "Discover and analyze numeric and geometric patterns. Learn to identify pattern rules, extend sequences, and recognize visual patterns in mathematics.",
-              "study_guide": "Key concepts:\n- Pattern identification techniques\n- Sequence rules (arithmetic, geometric)\n- Visual patterns and their properties\n- Extending patterns\n- Finding nth terms\n\nPractice problems:\n1. Find the next term in 2, 5, 8, 11, ...\n2. Identify the pattern rule in 3, 6, 12, 24, ...\n3. Extend the visual pattern\n4. Find the 10th term in arithmetic sequence",
-              "exercises": [
+              "description": "Discover and analyze numeric and geometric patterns. Learn to identify pattern rules, extend sequences, and recognize visual patterns in mathematics.",
+              "resources": [
                 {
-                  "question": "What is the next term in the sequence 2, 5, 8, 11, ...?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/11_1_numeric_&_geometric_patterns_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Find the pattern rule in 1, 4, 7, 10, ...",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/-eX1EmsU8Ns",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "In the sequence 3, 7, 11, 15, ..., what is the common difference?",
-                  "options": ["3", "4", "7", "11"],
-                  "answer": "4"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/11_1_numeric_&_geometric_patterns_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/11_1_numeric_&_geometric_patterns_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/11_1_numeric_&_geometric_patterns_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Pattern identification",
-                "Sequence rules",
-                "Visual patterns"
               ]
             },
             {
               "title": "12.1 Functions & Relationships 1",
               "duration": "22 min",
-              "link": "#",
               "icon": "bi bi-arrow-left-right",
-              "video_url": "https://www.youtube.com/embed/8A_NmQWCsq8",
-              "lesson_content": "Introduction to functions through input-output tables and function notation. Understand basic relationships between variables.",
-              "study_guide": "Key concepts:\n- Input-output tables\n- Function notation\n- Basic relationships\n- Domain and range\n- Function rules\n\nPractice problems:\n1. Complete input-output table for y = 2x + 1\n2. Find function rule from table\n3. Identify domain and range\n4. Use function notation",
-              "exercises": [
-                {
-                  "question": "If f(x) = 3x + 2, find f(4)",
-                  "type": "short_answer"
-                },
-                {
-                  "question": "Complete the table for y = x + 5 when x = 1, 2, 3",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
-                {
-                  "question": "If f(x) = 2x - 1, what is f(3)?",
-                  "options": ["5", "6", "7", "8"],
-                  "answer": "5"
-                }
-              ],
-              "features": [
-                "Input-output tables",
-                "Function notation",
-                "Basic relationships"
-              ]
+              "description": "Introduction to functions through input-output tables and function notation. Understand basic relationships between variables.",
+              "resources": []
+            },
+            {
+              "title": "12.2 What to calculate and how",
+              "duration": "25 min",
+              "icon": "bi bi-calculator",
+              "description": "Learn to represent situations mathematically and use formulae for calculations.",
+              "resources": []
             },
             {
               "title": "13.1 Algebraic Expressions 1",
               "duration": "20 min",
-              "link": "#",
               "icon": "bi bi-x-diamond",
-              "video_url": "https://www.youtube.com/embed/hij789",
-              "lesson_content": "Learn to work with algebraic expressions including variables, simplifying expressions, and combining like terms.",
-              "study_guide": "Key concepts:\n- Variable expressions\n- Simplifying expressions\n- Like terms and combining\n- Distributive property\n- Evaluating expressions\n\nPractice problems:\n1. Simplify 3x + 2x\n2. Combine like terms in 4a + 3b - 2a + b\n3. Evaluate 2x + 5 when x = 3\n4. Expand 3(x + 4)",
-              "exercises": [
+              "description": "Learn to work with algebraic expressions including variables, simplifying expressions, and combining like terms.",
+              "resources": [
                 {
-                  "question": "Simplify 5x + 3x",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/13_1_algebraic_expressions_1_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Combine like terms: 2a + 3b + 4a - b",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/hij789",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "Simplify 4x + 2x - x:",
-                  "options": ["5x", "6x", "7x", "3x"],
-                  "answer": "5x"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/13_1_algebraic_expressions_1_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/13_1_algebraic_expressions_1_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Variable expressions",
-                "Simplifying expressions",
-                "Like terms"
               ]
             },
             {
               "title": "14.1 Algebraic Equations 1",
               "duration": "24 min",
-              "link": "#",
               "icon": "bi bi-equals",
-              "video_url": "https://www.youtube.com/embed/klm012",
-              "lesson_content": "Introduction to solving algebraic equations using the balance method and verification techniques for one-step equations.",
-              "study_guide": "Key concepts:\n- One-step equations\n- Balance method\n- Solution verification\n- Inverse operations\n- Checking solutions\n\nPractice problems:\n1. Solve x + 5 = 12\n2. Solve 3x = 21\n3. Solve x - 7 = 15\n4. Solve x/4 = 8",
-              "exercises": [
+              "description": "Introduction to solving algebraic equations using the balance method and verification techniques for one-step equations.",
+              "resources": [
                 {
-                  "question": "Solve x + 3 = 10",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/14_1_algebraic_equations_1_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Solve 2x = 14",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/klm012",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is the solution to x + 4 = 11?",
-                  "options": ["7", "8", "15", "44"],
-                  "answer": "7"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/14_1_algebraic_equations_1_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/14_1_algebraic_equations_1_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/14_1_algebraic_equations_1_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "One-step equations",
-                "Balance method",
-                "Solution verification"
               ]
             }
           ]
@@ -690,94 +738,115 @@
             {
               "title": "15.1 Graphing & Coordinate Geometry",
               "duration": "30 min",
-              "link": "#",
               "icon": "bi bi-diagram-2",
-              "video_url": "https://www.youtube.com/embed/nop345",
-              "lesson_content": "Learn to work with the coordinate plane, plot points accurately, and create line graphs to represent mathematical relationships.",
-              "study_guide": "Key concepts:\n- Coordinate plane (x-axis, y-axis, origin)\n- Plotting points (ordered pairs)\n- Line graphs and their interpretation\n- Quadrants\n- Distance and midpoint\n\nPractice problems:\n1. Plot point (3, -2)\n2. Find distance between (0,0) and (3,4)\n3. Determine quadrant of point (-2, 5)\n4. Graph linear equation y = 2x + 1",
-              "exercises": [
+              "description": "Learn to work with the coordinate plane, plot points accurately, and create line graphs to represent mathematical relationships.",
+              "resources": [
                 {
-                  "question": "What quadrant is point (-3, 4) in?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/15_1_graphing_&_coordinate_geometry_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Plot the point (2, -3) and describe its location",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/nop345",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "Point (4, -2) is located in which quadrant?",
-                  "options": ["I", "II", "III", "IV"],
-                  "answer": "IV"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/15_1_graphing_&_coordinate_geometry_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/15_1_graphing_&_coordinate_geometry_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/15_1_graphing_&_coordinate_geometry_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Coordinate plane",
-                "Plotting points",
-                "Line graphs"
               ]
             },
             {
               "title": "16.1 Transformation Geometry",
               "duration": "32 min",
-              "link": "#",
               "icon": "bi bi-arrow-repeat",
-              "video_url": "https://www.youtube.com/embed/qrs678",
-              "lesson_content": "Explore geometric transformations including translations, reflections, rotations, and symmetry concepts.",
-              "study_guide": "Key concepts:\n- Translations (slides)\n- Reflections (flips)\n- Rotations (turns)\n- Symmetry (line and rotational)\n- Transformation rules\n\nPractice problems:\n1. Translate triangle 3 units right, 2 units up\n2. Reflect shape across x-axis\n3. Rotate figure 90° clockwise\n4. Identify lines of symmetry",
-              "exercises": [
+              "description": "Explore geometric transformations including translations, reflections, rotations, and symmetry concepts.",
+              "resources": [
                 {
-                  "question": "Describe the transformation that moves (2,3) to (5,3)",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/16_1_transformation_geometry_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What happens to point (3,2) when reflected across the x-axis?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/qrs678",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "When point (2,3) is reflected across the y-axis, it becomes:",
-                  "options": ["(-2,3)", "(2,-3)", "(-2,-3)", "(3,2)"],
-                  "answer": "(-2,3)"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/16_1_transformation_geometry_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/16_1_transformation_geometry_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/16_1_transformation_geometry_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Translations",
-                "Reflections",
-                "Rotations and symmetry"
               ]
             },
             {
               "title": "17.1 Geometry of 3D Objects",
               "duration": "30 min",
-              "link": "#",
               "icon": "bi bi-box",
-              "video_url": "https://www.youtube.com/embed/tuv901",
-              "lesson_content": "Study the properties of 3D shapes, understand nets and faces, and develop spatial reasoning skills.",
-              "study_guide": "Key concepts:\n- 3D shape properties (vertices, edges, faces)\n- Nets and unfolding\n- Spatial reasoning\n- Cross-sections\n- Euler's formula\n\nPractice problems:\n1. Count vertices, edges, faces of cube\n2. Draw net of triangular prism\n3. Identify 3D shape from net\n4. Apply Euler's formula V - E + F = 2",
-              "exercises": [
+              "description": "Study the properties of 3D shapes, understand nets and faces, and develop spatial reasoning skills.",
+              "resources": [
                 {
-                  "question": "How many faces does a triangular prism have?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/17_1_geometry_of_3d_objects_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Draw a net for a rectangular prism",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/tuv901",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "A cube has how many vertices?",
-                  "options": ["6", "8", "12", "16"],
-                  "answer": "8"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/17_1_geometry_of_3d_objects_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/17_1_geometry_of_3d_objects_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/17_1_geometry_of_3d_objects_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "3D shape properties",
-                "Nets and faces",
-                "Spatial reasoning"
               ]
             }
           ]
@@ -794,63 +863,77 @@
             {
               "title": "18.1 Integers",
               "duration": "22 min",
-              "link": "#",
               "icon": "bi bi-plus-slash-minus",
-              "video_url": "https://www.youtube.com/embed/ZrUyOfquNu4",
-              "lesson_content": "Learn about positive and negative numbers, understand number line concepts, and apply integer operations in real-world contexts.",
-              "study_guide": "Key concepts:\n- Positive and negative numbers\n- Number line representation\n- Integer operations (add, subtract, multiply, divide)\n- Real-world contexts (temperature, elevation, money)\n- Absolute value\n\nPractice problems:\n1. Add (-5) + 3\n2. Subtract 7 - (-4)\n3. Multiply (-3) × (-6)\n4. Find |−8|",
-              "exercises": [
+              "description": "Learn about positive and negative numbers, understand number line concepts, and apply integer operations in real-world contexts.",
+              "resources": [
                 {
-                  "question": "Calculate (-4) + 7",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/18_1_integers_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What is the absolute value of -12?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/ZrUyOfquNu4",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is (-3) × 4?",
-                  "options": ["-12", "12", "-7", "7"],
-                  "answer": "-12"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/18_1_integers_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/18_1_integers_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/18_1_integers_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Positive and negative numbers",
-                "Number line concepts",
-                "Real-world contexts"
               ]
             },
             {
               "title": "19.1 Number Patterns",
               "duration": "20 min",
-              "link": "#",
               "icon": "bi bi-arrow-up-right-circle",
-              "video_url": "https://www.youtube.com/embed/zab567",
-              "lesson_content": "Explore complex number sequences, develop pattern recognition skills, and apply mathematical reasoning to identify and extend patterns.",
-              "study_guide": "Key concepts:\n- Complex sequences (fibonacci, prime numbers)\n- Pattern rules and formulas\n- Mathematical reasoning\n- Recursive patterns\n- Pattern applications\n\nPractice problems:\n1. Find next terms in 1, 1, 2, 3, 5, 8, ...\n2. Identify pattern in 2, 6, 18, 54, ...\n3. Find the 15th term in arithmetic sequence\n4. Create your own pattern",
-              "exercises": [
+              "description": "Explore complex number sequences, develop pattern recognition skills, and apply mathematical reasoning to identify and extend patterns.",
+              "resources": [
                 {
-                  "question": "What comes next in the sequence 1, 4, 9, 16, ...?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/19_1_number_patterns_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Find the pattern rule for 5, 10, 20, 40, ...",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/zab567",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "In the sequence 2, 4, 8, 16, ..., what is the next term?",
-                  "options": ["24", "32", "18", "20"],
-                  "answer": "32"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/19_1_number_patterns_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/19_1_number_patterns_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/19_1_number_patterns_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Complex sequences",
-                "Pattern rules",
-                "Mathematical reasoning"
               ]
             }
           ]
@@ -862,94 +945,115 @@
             {
               "title": "20.1 Functions & Relationships 2",
               "duration": "25 min",
-              "link": "#",
               "icon": "bi bi-graph-up-arrow",
-              "video_url": "https://www.youtube.com/embed/cde890",
-              "lesson_content": "Advance your understanding of functions with linear relationships, graphing techniques, and analysis of rate of change.",
-              "study_guide": "Key concepts:\n- Linear functions\n- Graphing relationships\n- Rate of change (slope)\n- Y-intercept\n- Function analysis\n\nPractice problems:\n1. Graph y = 2x + 3\n2. Find slope of line through (1,2) and (3,8)\n3. Write equation of line with slope 4, y-intercept -2\n4. Analyze function behavior",
-              "exercises": [
+              "description": "Advance your understanding of functions with linear relationships, graphing techniques, and analysis of rate of change.",
+              "resources": [
                 {
-                  "question": "What is the slope of the line y = 3x - 1?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/20_1_functions_&_relationships_2_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Find the y-intercept of y = -2x + 5",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/cde890",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "In the equation y = 4x + 2, what is the slope?",
-                  "options": ["4", "2", "6", "1"],
-                  "answer": "4"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/20_1_functions_&_relationships_2_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/20_1_functions_&_relationships_2_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/20_1_functions_&_relationships_2_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Linear functions",
-                "Graphing relationships",
-                "Rate of change"
               ]
             },
             {
               "title": "21.1 Algebraic Expressions 2",
               "duration": "28 min",
-              "link": "#",
               "icon": "bi bi-x-diamond-fill",
-              "video_url": "https://www.youtube.com/embed/fgh123",
-              "lesson_content": "Build on basic algebraic skills with advanced operations, distributive property applications, and introduction to factoring.",
-              "study_guide": "Key concepts:\n- Advanced operations with expressions\n- Distributive property applications\n- Factoring basics\n- Expanding expressions\n- Combining multiple terms\n\nPractice problems:\n1. Expand 3(2x + 5)\n2. Factor 6x + 9\n3. Simplify 2(x + 3) + 4(x - 1)\n4. Combine like terms in complex expressions",
-              "exercises": [
+              "description": "Build on basic algebraic skills with advanced operations, distributive property applications, and introduction to factoring.",
+              "resources": [
                 {
-                  "question": "Expand 4(x + 2)",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/21_1_algebraic_expressions_2_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "Factor 8x + 12",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/fgh123",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is 2(3x + 4) when expanded?",
-                  "options": ["6x + 8", "5x + 6", "6x + 4", "3x + 8"],
-                  "answer": "6x + 8"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/21_1_algebraic_expressions_2_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/21_1_algebraic_expressions_2_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/21_1_algebraic_expressions_2_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Advanced operations",
-                "Distributive property",
-                "Factoring basics"
               ]
             },
             {
               "title": "22.1 Algebraic Equations 2",
               "duration": "30 min",
-              "link": "#",
               "icon": "bi bi-equals-slash",
-              "video_url": "https://www.youtube.com/embed/ijk456",
-              "lesson_content": "Solve multi-step equations, tackle word problems, and develop systematic problem-solving strategies.",
-              "study_guide": "Key concepts:\n- Multi-step equations\n- Word problems and translation\n- Problem-solving strategies\n- Equation setup\n- Solution checking\n\nPractice problems:\n1. Solve 2x + 5 = 13\n2. Solve 3(x - 2) = 15\n3. Word problem: Age problems\n4. Word problem: Distance problems",
-              "exercises": [
+              "description": "Solve multi-step equations, tackle word problems, and develop systematic problem-solving strategies.",
+              "resources": [
                 {
-                  "question": "Solve 3x - 7 = 14",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/22_1_algebraic_equations_2_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "If 2x + 3 = 11, what is x?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/ijk456",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "What is the solution to 2x + 6 = 16?",
-                  "options": ["5", "4", "6", "8"],
-                  "answer": "5"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/22_1_algebraic_equations_2_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/22_1_algebraic_equations_2_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/22_1_algebraic_equations_2_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Multi-step equations",
-                "Word problems",
-                "Problem-solving strategies"
               ]
             }
           ]
@@ -961,125 +1065,153 @@
             {
               "title": "23.1 Collect, Organize & Summarize Data",
               "duration": "20 min",
-              "link": "#",
               "icon": "bi bi-clipboard-data",
-              "video_url": "https://www.youtube.com/embed/Wk2ddqneUIM",
-              "lesson_content": "Learn systematic approaches to data collection, organization techniques, and methods for summarizing datasets.",
-              "study_guide": "Key concepts:\n- Data collection methods (surveys, experiments, observations)\n- Organization techniques (tables, lists, categories)\n- Summary statistics (mean, median, mode, range)\n- Data quality and reliability\n- Sampling methods\n\nPractice problems:\n1. Design a survey question\n2. Organize data in frequency table\n3. Calculate mean, median, mode\n4. Identify appropriate collection method",
-              "exercises": [
+              "description": "Learn systematic approaches to data collection, organization techniques, and methods for summarizing datasets.",
+              "resources": [
                 {
-                  "question": "Find the mean of 4, 7, 9, 12, 8",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/23_1_collect,_organize_&_summarize_data_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "What is the median of 3, 7, 9, 12, 15?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/Wk2ddqneUIM",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "The mean of 5, 8, 12, 15 is:",
-                  "options": ["8", "10", "12", "15"],
-                  "answer": "10"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/23_1_collect,_organize_&_summarize_data_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/23_1_collect,_organize_&_summarize_data_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/23_1_collect,_organize_&_summarize_data_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Data collection methods",
-                "Organization techniques",
-                "Summary statistics"
               ]
             },
             {
               "title": "24.1 Represent Data",
               "duration": "25 min",
-              "link": "#",
               "icon": "bi bi-bar-chart",
-              "video_url": "https://www.youtube.com/embed/UiXTInGRqng",
-              "lesson_content": "Master the art of data visualization through various graphs and charts, learning to choose appropriate representations for different data types.",
-              "study_guide": "Key concepts:\n- Graphs and charts (bar, line, pie, histogram)\n- Data visualization principles\n- Choosing appropriate representations\n- Scale and labeling\n- Interpreting visual data\n\nPractice problems:\n1. Create bar graph from data table\n2. Draw line graph for time series data\n3. Make pie chart for categorical data\n4. Choose best graph type for given data",
-              "exercises": [
+              "description": "Master the art of data visualization through various graphs and charts, learning to choose appropriate representations for different data types.",
+              "resources": [
                 {
-                  "question": "What type of graph is best for showing change over time?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/24_1_represent_data_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "When would you use a pie chart?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/UiXTInGRqng",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "A line graph is most appropriate for:",
-                  "options": ["Categorical data", "Data over time", "Comparing parts to whole", "Single values"],
-                  "answer": "Data over time"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/24_1_represent_data_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/24_1_represent_data_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/24_1_represent_data_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Graphs and charts",
-                "Data visualization",
-                "Appropriate representations"
               ]
             },
             {
               "title": "25.1 Interpret, Analyze & Report Data",
               "duration": "28 min",
-              "link": "#",
               "icon": "bi bi-graph-up",
-              "video_url": "https://www.youtube.com/embed/oN9JF4jvbzQ",
-              "lesson_content": "Develop skills in data interpretation, drawing valid conclusions, and communicating findings through clear reports.",
-              "study_guide": "Key concepts:\n- Data interpretation techniques\n- Drawing valid conclusions\n- Report writing structure\n- Identifying trends and patterns\n- Avoiding bias in interpretation\n\nPractice problems:\n1. Interpret bar graph trends\n2. Draw conclusions from data set\n3. Write data analysis report\n4. Identify misleading representations",
-              "exercises": [
+              "description": "Develop skills in data interpretation, drawing valid conclusions, and communicating findings through clear reports.",
+              "resources": [
                 {
-                  "question": "What trend do you see in this data: 10, 15, 20, 25, 30?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/25_1_interpret,_analyze_&_report_data_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "How would you report findings from a class survey?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/oN9JF4jvbzQ",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "When data shows an upward trend, values are:",
-                  "options": ["Decreasing", "Increasing", "Staying the same", "Random"],
-                  "answer": "Increasing"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/25_1_interpret,_analyze_&_report_data_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/25_1_interpret,_analyze_&_report_data_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/25_1_interpret,_analyze_&_report_data_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Data interpretation",
-                "Drawing conclusions",
-                "Report writing"
               ]
             },
             {
               "title": "26.1 Introduction to Probability",
               "duration": "22 min",
-              "link": "#",
               "icon": "bi bi-dice-5",
-              "video_url": "https://www.youtube.com/embed/uvw678",
-              "lesson_content": "Discover the fundamentals of probability including basic concepts, experimental versus theoretical probability, and simple probability calculations.",
-              "study_guide": "Key concepts:\n- Basic probability concepts (outcome, event, sample space)\n- Experimental vs theoretical probability\n- Simple probability calculations\n- Probability scale (0 to 1)\n- Fair vs unfair games\n\nPractice problems:\n1. Find probability of rolling a 3 on a die\n2. Calculate probability of drawing red card\n3. Compare experimental to theoretical results\n4. Determine if game is fair",
-              "exercises": [
+              "description": "Discover the fundamentals of probability including basic concepts, experimental versus theoretical probability, and simple probability calculations.",
+              "resources": [
                 {
-                  "question": "What is the probability of flipping heads on a fair coin?",
-                  "type": "short_answer"
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/26_1_introduction_to_probability_content.html",
+                  "icon": "file-earmark-text"
                 },
                 {
-                  "question": "If you roll a die 60 times, how many times would you expect to roll a 6?",
-                  "type": "short_answer"
-                }
-              ],
-              "test_questions": [
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/uvw678",
+                  "icon": "play-circle"
+                },
                 {
-                  "question": "The probability of rolling an even number on a standard die is:",
-                  "options": ["1/6", "1/3", "1/2", "2/3"],
-                  "answer": "1/2"
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/26_1_introduction_to_probability_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/26_1_introduction_to_probability_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/26_1_introduction_to_probability_test.html",
+                  "icon": "clipboard-check"
                 }
-              ],
-              "features": [
-                "Basic probability concepts",
-                "Experimental vs theoretical",
-                "Simple calculations"
               ]
             }
           ]
