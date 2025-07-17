@@ -47,7 +47,7 @@ def login():
 
             # Redirect to next page or dashboard
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home.dashboard'))
+            return redirect(next_page) if next_page else redirect(url_for('home.home'))
         else:
             flash('Invalid username or password.', 'error')
 
@@ -59,7 +59,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('home.login'))
+    return redirect(url_for('home.home'))
 
 
 @home_bp.route('/dashboard')
