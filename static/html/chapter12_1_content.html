@@ -1,98 +1,22 @@
-<!-- Content from chapter12_1.html's <div class="content"> -->
-<div class="alert alert-info">
-  <p>
-    1. (a) How many red squares and how many black squares are there in each of
-    the arrangements 1, 2, 3 and 4 below?
-  </p>
-</div>
-
-<!-- Question 1 -->
-<div class="question-section">
-  <p class="section-title">Question 1: Pattern Recognition</p>
-
-  <div class="pattern-display">
-    <h5>Arrangement Patterns</h5>
-    <div class="row">
-      <div class="col-md-3 text-center">
-        <h6>Arrangement 1</h6>
-        <div id="pattern1"></div>
-      </div>
-      <div class="col-md-3 text-center">
-        <h6>Arrangement 2</h6>
-        <div id="pattern2"></div>
-      </div>
-      <div class="col-md-3 text-center">
-        <h6>Arrangement 3</h6>
-        <div id="pattern3"></div>
-      </div>
-      <div class="col-md-3 text-center">
-        <h6>Arrangement 4</h6>
-        <div id="pattern4"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="interactive-table">
-    <!-- ... rest of the table and inputs for Question 1 ... -->
-    <div class="p-3">
-      <button class="btn btn-calculate" onclick="checkPatterns()">
-        <i class="fas fa-calculator"></i> Check My Answers
-      </button>
-      <div
-        id="pattern-results"
-        class="result-highlight"
-        style="display: none"
-      ></div>
-    </div>
-  </div>
-
-  <!-- ... rest of Question 1's content ... -->
-</div>
-
-<!-- Question 2 -->
-<div class="question-section">
-  <h3 class="section-title">Question 2: Formula Investigation</h3>
-  <!-- ... rest of Question 2's content ... -->
-</div>
-
-<!-- Question 3 -->
-<div class="question-section">
-  <h3 class="section-title">Question 3: Black Square Formulas</h3>
-  <!-- ... rest of Question 3's content ... -->
-</div>
-
-<!-- Question 4 -->
-<div class="question-section">
-  <h3 class="section-title">Question 4: Hilary's Approach</h3>
-  <!-- ... rest of Question 4's content ... -->
-</div>
-
-<!-- Summary Section -->
-<div class="question-section">
-  <h3 class="section-title">📊 Summary & Key Insights</h3>
-  <!-- ... rest of Summary Section's content ... -->
-</div>
-
-<!-- IMPORTANT: Copy the relevant styles from chapter12_1.html's original <style> block here -->
 <style>
   .main-container {
-    /* You might need to adjust or remove this if lesson_detail provides a wrapper */
     background: white;
     border-radius: 0px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
+
   .header {
-    /* This header might be redundant if lesson_detail provides one */
     background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
     color: white;
     padding: 30px;
     text-align: center;
   }
+
   .content {
-    /* This wrapper will be inside lessonContentDisplay, adjust if needed */
     padding: 30px;
   }
+
   .pattern-display {
     background: #f8f9fa;
     border: 2px dashed #dee2e6;
@@ -101,6 +25,7 @@
     margin: 20px 0;
     text-align: center;
   }
+
   .square {
     display: inline-block;
     width: 25px;
@@ -108,12 +33,15 @@
     margin: 2px;
     border: 1px solid #333;
   }
+
   .red-square {
     background-color: #e74c3c;
   }
+
   .black-square {
     background-color: #2c3e50;
   }
+
   .interactive-table {
     background: white;
     border-radius: 10px;
@@ -121,12 +49,14 @@
     overflow: hidden;
     margin: 20px 0;
   }
+
   .table-header {
     background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     padding: 15px;
     font-weight: bold;
   }
+
   .formula-box {
     background: #e8f5e8;
     border: 2px solid #27ae60;
@@ -136,6 +66,7 @@
     font-family: "Courier New", monospace;
     font-size: 1.1em;
   }
+
   .question-section {
     background: #f8f9fa;
     border-left: 5px solid #3498db;
@@ -143,6 +74,7 @@
     margin: 20px 0;
     border-radius: 0 10px 10px 0;
   }
+
   .btn-calculate {
     background: linear-gradient(135deg, #27ae60, #2ecc71);
     border: none;
@@ -152,21 +84,25 @@
     font-weight: bold;
     transition: all 0.3s ease;
   }
+
   .btn-calculate:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
   }
+
   .input-field {
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     padding: 8px 12px;
     transition: border-color 0.3s ease;
   }
+
   .input-field:focus {
     border-color: #3498db;
     outline: none;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
   }
+
   .result-highlight {
     background: #fff3cd;
     border: 1px solid #ffeaa7;
@@ -174,6 +110,7 @@
     padding: 10px;
     margin: 10px 0;
   }
+
   .section-title {
     color: #2c3e50;
     border-bottom: 3px solid #3498db;
@@ -182,7 +119,574 @@
   }
 </style>
 
-<!-- IMPORTANT: Copy the relevant JavaScript from chapter12_1.html's original <script> block here -->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="main-container">
+        <div class="content">
+          <div class="alert alert-info">
+            <p>
+              1. (a) How many red squares and how many black squares are there
+              in each of the arrangements 1, 2, 3 and 4 below?
+            </p>
+          </div>
+
+          <!-- Question 1 -->
+          <div class="question-section">
+            <p class="section-title">Question 1: Pattern Recognition</p>
+
+            <div class="pattern-display">
+              <h5>Arrangement Patterns</h5>
+              <div class="row">
+                <div class="col-md-3 text-center">
+                  <h6>Arrangement 1</h6>
+                  <div id="pattern1"></div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <h6>Arrangement 2</h6>
+                  <div id="pattern2"></div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <h6>Arrangement 3</h6>
+                  <div id="pattern3"></div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <h6>Arrangement 4</h6>
+                  <div id="pattern4"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="interactive-table">
+              <div class="p-3 alert alert-info">
+                <p>
+                  (b) Imagine that arrangements 5, 6 and 7 in the table below
+                  are made according to the same pattern. How many red and how
+                  many black squares do you think there will be in each of these
+                  arrangements? Fill your answers in the table below.
+                </p>
+                <p>
+                  (c) Complete arrangements 5 and 6 on grid paper, if you have
+                  not done so already.
+                </p>
+              </div>
+              <div class="table-header">
+                <i class="fas fa-table"></i> Square Count Table
+              </div>
+              <div class="table-responsive p-3">
+                <table class="table table-bordered table-hover">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>Arrangement Number</th>
+                      <th>Red Squares</th>
+                      <th>Black Squares</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td><span id="red1">6</span></td>
+                      <td><span id="black1">3</span></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td><span id="red2">10</span></td>
+                      <td><span id="black2">6</span></td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td><span id="red3">14</span></td>
+                      <td><span id="black3">11</span></td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td><span id="red4">18</span></td>
+                      <td><span id="black4">18</span></td>
+                    </tr>
+                    <tr class="table-warning">
+                      <td>5</td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="red5"
+                          placeholder="?"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="black5"
+                          placeholder="?"
+                        />
+                      </td>
+                    </tr>
+                    <tr class="table-warning">
+                      <td>6</td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="red6"
+                          placeholder="?"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="black6"
+                          placeholder="?"
+                        />
+                      </td>
+                    </tr>
+                    <tr class="table-warning">
+                      <td>7</td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="red7"
+                          placeholder="?"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control input-field"
+                          id="black7"
+                          placeholder="?"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="p-3">
+                <button class="btn btn-calculate" onclick="checkPatterns()">
+                  <i class="fas fa-calculator"></i> Check My Answers
+                </button>
+                <div
+                  id="pattern-results"
+                  class="result-highlight"
+                  style="display: none"
+                ></div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="alert alert-info">
+                <h5>Predict arrangements 20, 21, and 22:</h5>
+                <p>
+                  (d) Try to figure out how many red and how many black squares
+                  there will be in arrangements 20, 21 and 22.
+                </p>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Arrangement 20:</label>
+                  <input
+                    type="number"
+                    class="form-control input-field"
+                    id="red20"
+                    placeholder="Red squares"
+                  />
+                  <input
+                    type="number"
+                    class="form-control input-field mt-2"
+                    id="black20"
+                    placeholder="Black squares"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label>Arrangement 21:</label>
+                  <input
+                    type="number"
+                    class="form-control input-field"
+                    id="red21"
+                    placeholder="Red squares"
+                  />
+                  <input
+                    type="number"
+                    class="form-control input-field mt-2"
+                    id="black21"
+                    placeholder="Black squares"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label>Arrangement 22:</label>
+                  <input
+                    type="number"
+                    class="form-control input-field"
+                    id="red22"
+                    placeholder="Red squares"
+                  />
+                  <input
+                    type="number"
+                    class="form-control input-field mt-2"
+                    id="black22"
+                    placeholder="Black squares"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Question 2-->
+          <div class="question-section">
+            <h3 class="section-title">Question 2: Formula Investigation</h3>
+            <div class="p-3 alert alert-info">
+              <p>
+                It will be useful to have formulae to calculate the numbers of
+                red and black squares in different arrangements like the one
+                above.
+              </p>
+              <p>
+                (a) Which of the formulae below can be used to calculate the
+                numbers of red squares in the above arrangements? There is more
+                than one formula that works.
+              </p>
+            </div>
+
+            <div class="formula-box">
+              <h5>Available Formulas for Red Squares:</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>A:</strong> y = 2 × x + 4</p>
+                  <p><strong>B:</strong> y = 2 × (2 × x + 1)</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>C:</strong> y = x² + 2</p>
+                  <p><strong>D:</strong> y = 4 × x + 2</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="interactive-table">
+              <div class="table-header">
+                <i class="fas fa-calculator"></i> Formula Testing Table
+              </div>
+              <div class="table-responsive p-3">
+                <table class="table table-bordered">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>x</th>
+                      <th>2 × (2 × x + 1)</th>
+                      <th>2 × x + 4</th>
+                      <th>4 × x + 2</th>
+                      <th>Actual Red Squares</th>
+                    </tr>
+                  </thead>
+                  <tbody id="formula-table-body"></tbody>
+                </table>
+              </div>
+              <div class="p-3">
+                <button class="btn btn-calculate" onclick="testFormulas()">
+                  <i class="fas fa-flask"></i> Test All Formulas
+                </button>
+                <div
+                  id="formula-results"
+                  class="result-highlight"
+                  style="display: none"
+                ></div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <h5>Using y = 4 × x + 2 for arrangements 20, 21, 22:</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-calculate w-100"
+                    onclick="calculateFormula(20)"
+                  >
+                    Calculate for x = 20
+                  </button>
+                  <div
+                    id="calc-20"
+                    class="result-highlight mt-2"
+                    style="display: none"
+                  ></div>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-calculate w-100"
+                    onclick="calculateFormula(21)"
+                  >
+                    Calculate for x = 21
+                  </button>
+                  <div
+                    id="calc-21"
+                    class="result-highlight mt-2"
+                    style="display: none"
+                  ></div>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-calculate w-100"
+                    onclick="calculateFormula(22)"
+                  >
+                    Calculate for x = 22
+                  </button>
+                  <div
+                    id="calc-22"
+                    class="result-highlight mt-2"
+                    style="display: none"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="question-section">
+            <h3 class="section-title">Question 3: Black Square Formulas</h3>
+            <div class="alert alert-info">
+              <p>
+                <strong>3. </strong>Which of the formulae below can be used to
+                calculate the numbers of black squares in the arrangements in
+                question 1?
+              </p>
+              <p>
+                <span class="fw-bold">y = (x+ 2)<sup>2</sup></span>
+              </p>
+              <p class="fw-bold">
+                <span>z = x<sup>2</sup>+ 2 </span>
+              </p>
+              <p class="fw-bold">
+                <span>p = n<sup>2</sup> + 2</span>
+              </p>
+            </div>
+            <div
+              class="container d-flex align-items-center justify-content-center"
+            >
+              <img src="table_1.PNG" class="img-fluid" alt="" />
+            </div>
+            <div class="formula-box">
+              <h5>Available Formulas for Black Squares:</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <p><strong>A:</strong> z = (x + 2)²</p>
+                </div>
+                <div class="col-md-4">
+                  <p><strong>B:</strong> z = x² + 2</p>
+                </div>
+                <div class="col-md-4">
+                  <p><strong>C:</strong> p = n² + 2</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="interactive-table">
+              <div class="table-header">
+                <i class="fas fa-calculator"></i> Black Square Formula Testing
+              </div>
+              <div class="table-responsive p-3">
+                <table class="table table-bordered">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>x</th>
+                      <th>x² + 2</th>
+                      <th>(x + 2)²</th>
+                      <th>Actual Black Squares</th>
+                    </tr>
+                  </thead>
+                  <tbody id="black-formula-table-body">
+                    <!-- Will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="p-3">
+                <button class="btn btn-calculate" onclick="testBlackFormulas()">
+                  <i class="fas fa-flask"></i> Test Black Square Formulas
+                </button>
+                <div
+                  id="black-formula-results"
+                  class="result-highlight"
+                  style="display: none"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="question-section">
+            <h3 class="section-title">Question 4: Hilary's Approach</h3>
+
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle"></i>
+              <strong>Hilary's Method:</strong> Hilary uses
+              <strong>x</strong> to represent the number of squares in each side
+              of the arrangements. (a) Which of these formulae can Hilary use to
+              calculate the numbers of black squares in the arrangements in
+              question 1?
+              <p>
+                <strong>y= x<sup>2</sup> − 4 × x + 6</strong>
+              </p>
+              <p>
+                <strong>y = (x − 2)<sup>2</sup> + 2</strong>
+              </p>
+              (b)Which of these formulae can Hilary use to calculate the numbers
+              of red squares?
+              <p><strong>y = 3 × x − 3</strong></p>
+              <p><strong>y = 4 × x − 6</strong></p>
+              <p><strong>y = 4 × (x −2) + 2</strong></p>
+              (c) Complete this table to check your answers.
+            </div>
+            <div
+              class="container d-flex align-items-center justify-content-center"
+            >
+              <img src="table_2.PNG" class="img-fluid" alt="" />
+            </div>
+            <div class="formula-box">
+              <h5>Hilary's Formulas:</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <h6>For Black Squares:</h6>
+                  <p><strong>A:</strong> y = x² - 4 × x + 6</p>
+                  <p><strong>B:</strong> y = (x - 2)² + 2</p>
+                </div>
+                <div class="col-md-6">
+                  <h6>For Red Squares:</h6>
+                  <p><strong>C:</strong> y = 3 × x - 3</p>
+                  <p><strong>D:</strong> y = 4 × x - 6</p>
+                  <p><strong>E:</strong> y = 4 × (x - 2) + 2</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="interactive-table">
+              <div class="table-header">
+                <i class="fas fa-calculator"></i> Hilary's Formula Testing (x =
+                side length)
+              </div>
+              <div class="table-responsive p-3">
+                <table class="table table-bordered">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>x (side length)</th>
+                      <th>x² - 4x + 6</th>
+                      <th>(x - 2)² + 2</th>
+                      <th>3x - 3</th>
+                      <th>4x - 6</th>
+                      <th>4(x - 2) + 2</th>
+                    </tr>
+                  </thead>
+                  <tbody id="hilary-table-body">
+                    <!-- Will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="p-3">
+                <button
+                  class="btn btn-calculate"
+                  onclick="testHilaryFormulas()"
+                >
+                  <i class="fas fa-flask"></i> Test Hilary's Formulas
+                </button>
+                <div
+                  id="hilary-results"
+                  class="result-highlight"
+                  style="display: none"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Section -->
+          <!-- Summary Section -->
+          <div class="question-section">
+            <h3 class="section-title">📊 Summary & Key Insights</h3>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <div class="card-header bg-primary text-white">
+                    <i class="fas fa-lightbulb"></i> Key Formulas Discovered
+                  </div>
+                  <div class="card-body">
+                    <h6>Using arrangement number (x):</h6>
+                    <p><strong>Red Squares:</strong> y = 4x + 2</p>
+                    <p><strong>Black Squares:</strong> z = x² + 2</p>
+                    <hr />
+                    <h6>Using side length (x):</h6>
+                    <p><strong>Red Squares:</strong> y = 4x - 6</p>
+                    <p><strong>Black Squares:</strong> y = x² - 4x + 6</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <div class="card-header bg-success text-white">
+                    <i class="fas fa-chart-line"></i> Pattern Analysis
+                  </div>
+                  <div class="card-body">
+                    <p>
+                      <strong>Red squares:</strong> Linear relationship -
+                      increases by 4 each time
+                    </p>
+                    <p>
+                      <strong>Black squares:</strong> Quadratic relationship -
+                      increases by odd numbers (3, 5, 7, 9...)
+                    </p>
+                    <p>
+                      <strong>Key insight:</strong> Same pattern can be
+                      expressed with different variables!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <div class="card-header bg-warning text-white">
+                    <i class="fas fa-calculator"></i> Formula Verification
+                  </div>
+                  <div class="card-body">
+                    <p><strong>Multiple correct formulas:</strong></p>
+                    <p>• y = 4x + 2</p>
+                    <p>• y = 2(2x + 1)</p>
+                    <p>• y = 4(x - 2) + 2 + 8</p>
+                    <p><em>All represent the same relationship!</em></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="card">
+                <div class="card-header bg-info text-white">
+                  <i class="fas fa-brain"></i> Mathematical Thinking Skills
+                  Developed
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6>Pattern Recognition:</h6>
+                      <ul>
+                        <li>Identifying numerical sequences</li>
+                        <li>Distinguishing linear vs quadratic growth</li>
+                        <li>Predicting future values</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <h6>Algebraic Thinking:</h6>
+                      <ul>
+                        <li>Translating patterns into formulas</li>
+                        <li>Understanding variable representation</li>
+                        <li>Verifying mathematical relationships</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   // Pattern data
   const patterns = {
@@ -195,7 +699,6 @@
   // Generate visual patterns
   function generatePattern(n) {
     const container = document.getElementById(`pattern${n}`);
-    if (!container) return; // Add check for element existence
     container.innerHTML = "";
 
     // Create a visual representation of the pattern
@@ -238,8 +741,6 @@
       const redInput = document.getElementById(`red${pred.n}`);
       const blackInput = document.getElementById(`black${pred.n}`);
 
-      if (!redInput || !blackInput) return; // Add check for element existence
-
       const redValue = parseInt(redInput.value);
       const blackValue = parseInt(blackInput.value);
 
@@ -259,15 +760,12 @@
     });
 
     const resultDiv = document.getElementById("pattern-results");
-    if (resultDiv) {
-      resultDiv.innerHTML = results.join("<br>");
-      resultDiv.style.display = "block";
-    }
+    resultDiv.innerHTML = results.join("<br>");
+    resultDiv.style.display = "block";
   }
 
   function testFormulas() {
     const tableBody = document.getElementById("formula-table-body");
-    if (!tableBody) return; // Add check for element existence
     tableBody.innerHTML = "";
 
     for (let x = 1; x <= 9; x++) {
@@ -279,50 +777,45 @@
       const actual = patterns[x] ? patterns[x].red : 4 * x + 2;
 
       row.innerHTML = `
-                <td>${x}</td>
-                <td class="${
-                  formula1 === actual ? "table-success" : "table-danger"
-                }">${formula1}</td>
-                <td class="${
-                  formula2 === actual ? "table-success" : "table-danger"
-                }">${formula2}</td>
-                <td class="${
-                  formula3 === actual ? "table-success" : "table-danger"
-                }">${formula3}</td>
-                <td><strong>${actual}</strong></td>
-            `;
+                    <td>${x}</td>
+                    <td class="${
+                      formula1 === actual ? "table-success" : "table-danger"
+                    }">${formula1}</td>
+                    <td class="${
+                      formula2 === actual ? "table-success" : "table-danger"
+                    }">${formula2}</td>
+                    <td class="${
+                      formula3 === actual ? "table-success" : "table-danger"
+                    }">${formula3}</td>
+                    <td><strong>${actual}</strong></td>
+                `;
 
       tableBody.appendChild(row);
     }
 
     const resultDiv = document.getElementById("formula-results");
-    if (resultDiv) {
-      resultDiv.innerHTML = `
-            <h6>Results:</h6>
-            <p>✅ <strong>y = 2 × (2 × x + 1)</strong> and <strong>y = 4 × x + 2</strong> both work correctly!</p>
-            <p>❌ <strong>y = 2 × x + 4</strong> doesn't match the pattern.</p>
-            <p><em>Note: y = 2 × (2 × x + 1) simplifies to y = 4 × x + 2</em></p>
-        `;
-      resultDiv.style.display = "block";
-    }
+    resultDiv.innerHTML = `
+                <h6>Results:</h6>
+                <p>✅ <strong>y = 2 × (2 × x + 1)</strong> and <strong>y = 4 × x + 2</strong> both work correctly!</p>
+                <p>❌ <strong>y = 2 × x + 4</strong> doesn't match the pattern.</p>
+                <p><em>Note: y = 2 × (2 × x + 1) simplifies to y = 4 × x + 2</em></p>
+            `;
+    resultDiv.style.display = "block";
   }
 
   function calculateFormula(x) {
     const result = 4 * x + 2;
     const resultDiv = document.getElementById(`calc-${x}`);
-    if (resultDiv) {
-      resultDiv.innerHTML = `
-            <strong>y = 4 × ${x} + 2</strong><br>
-            y = ${4 * x} + 2<br>
-            y = <strong>${result}</strong> red squares
-        `;
-      resultDiv.style.display = "block";
-    }
+    resultDiv.innerHTML = `
+                <strong>y = 4 × ${x} + 2</strong><br>
+                y = ${4 * x} + 2<br>
+                y = <strong>${result}</strong> red squares
+            `;
+    resultDiv.style.display = "block";
   }
 
   function testBlackFormulas() {
     const tableBody = document.getElementById("black-formula-table-body");
-    if (!tableBody) return; // Add check for element existence
     tableBody.innerHTML = "";
 
     for (let x = 1; x <= 9; x++) {
@@ -333,33 +826,30 @@
       const actual = patterns[x] ? patterns[x].black : x * x + 2;
 
       row.innerHTML = `
-                <td>${x}</td>
-                <td class="${
-                  formula1 === actual ? "table-success" : "table-danger"
-                }">${formula1}</td>
-                <td class="${
-                  formula2 === actual ? "table-success" : "table-danger"
-                }">${formula2}</td>
-                <td><strong>${actual}</strong></td>
-            `;
+                    <td>${x}</td>
+                    <td class="${
+                      formula1 === actual ? "table-success" : "table-danger"
+                    }">${formula1}</td>
+                    <td class="${
+                      formula2 === actual ? "table-success" : "table-danger"
+                    }">${formula2}</td>
+                    <td><strong>${actual}</strong></td>
+                `;
 
       tableBody.appendChild(row);
     }
 
     const resultDiv = document.getElementById("black-formula-results");
-    if (resultDiv) {
-      resultDiv.innerHTML = `
-            <h6>Results:</h6>
-            <p>✅ <strong>z = x² + 2</strong> works correctly for black squares!</p>
-            <p>❌ <strong>z = (x + 2)²</strong> doesn't match the pattern.</p>
-        `;
-      resultDiv.style.display = "block";
-    }
+    resultDiv.innerHTML = `
+                <h6>Results:</h6>
+                <p>✅ <strong>z = x² + 2</strong> works correctly for black squares!</p>
+                <p>❌ <strong>z = (x + 2)²</strong> doesn't match the pattern.</p>
+            `;
+    resultDiv.style.display = "block";
   }
 
   function testHilaryFormulas() {
     const tableBody = document.getElementById("hilary-table-body");
-    if (!tableBody) return; // Add check for element existence
     tableBody.innerHTML = "";
 
     // Hilary uses x as side length, so x = arrangement number + 2
@@ -373,38 +863,25 @@
       const redFormula3 = 4 * (x - 2) + 2;
 
       row.innerHTML = `
-                <td>${x}</td>
-                <td>${blackFormula1}</td>
-                <td>${blackFormula2}</td>
-                <td>${redFormula1}</td>
-                <td>${redFormula2}</td>
-                <td>${redFormula3}</td>
-            `;
+                    <td>${x}</td>
+                    <td>${blackFormula1}</td>
+                    <td>${blackFormula2}</td>
+                    <td>${redFormula1}</td>
+                    <td>${redFormula2}</td>
+                    <td>${redFormula3}</td>
+                `;
 
       tableBody.appendChild(row);
     }
 
     const resultDiv = document.getElementById("hilary-results");
-    if (resultDiv) {
-      resultDiv.innerHTML = `
-            <h6>Analysis:</h6>
-            <p>For arrangements with side length x:</p>
-            <p>✅ <strong>Black squares:</strong> Both y = x² - 4x + 6 and y = (x - 2)² + 2 work</p>
-            <p>✅ <strong>Red squares:</strong> y = 4x - 6 and y = 4(x - 2) + 2 both work</p>
-            <p><em>Note: When x represents side length, the formulas are different from when x represents arrangement number</em></p>
-        `;
-      resultDiv.style.display = "block";
-    }
+    resultDiv.innerHTML = `
+                <h6>Analysis:</h6>
+                <p>For arrangements with side length x:</p>
+                <p>✅ <strong>Black squares:</strong> Both y = x² - 4x + 6 and y = (x - 2)² + 2 work</p>
+                <p>✅ <strong>Red squares:</strong> y = 4x - 6 and y = 4(x - 2) + 2 both work</p>
+                <p><em>Note: When x represents side length, the formulas are different from when x represents arrangement number</em></p>
+            `;
+    resultDiv.style.display = "block";
   }
-
-  // Initial calls for chapter12_1 content when loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    // These functions might need to be called here or within the fetch callback
-    // depending on when the DOM elements they target are available.
-    // The lesson_detail.html script re-executes this script, so these calls
-    // will run when the content is dynamically loaded.
-    for (let i = 1; i <= 4; i++) {
-      generatePattern(i);
-    }
-  });
 </script>
