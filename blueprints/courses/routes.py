@@ -74,3 +74,48 @@ def express_course():
         return render_template('express_course.html')
     except Exception as e:
         abort(500, description=str(e))
+
+
+@courses_bp.route('sql_course')
+@login_required
+def sql_course():
+    try:
+        return render_template('sql_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('mongodb_course')
+@login_required
+def mongodb_course():
+    try:
+        return render_template('mongodb_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('auth_course')
+@login_required
+def auth_course():
+    try:
+        return render_template('auth_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('deployment_course')
+@login_required
+def deployment_course():
+    try:
+        return render_template('deployment_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('catalog')
+@login_required
+def catalog():
+    try:
+        return render_template('catalog.html')
+    except Exception as e:
+        abort(500, description=str(e))
