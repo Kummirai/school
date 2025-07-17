@@ -3,386 +3,270 @@
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   rel="stylesheet"
 />
+<!-- Google Fonts - Inter -->
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
   rel="stylesheet"
 />
-
 <style>
-  body {
-    font-family: "Inter", sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
-  }
-  .navbar {
-    background-color: #007bff;
-    border-radius: 0 0 15px 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .navbar-brand {
-    color: #fff !important;
-    font-weight: 700;
-  }
-  .nav-link {
-    color: #fff !important;
-  }
-  .nav-link.active {
-    font-weight: 700;
-    text-decoration: underline;
-  }
   .container {
-    margin-top: 30px;
-    padding: 20px;
+    max-width: 960px;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
   }
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    color: #007bff;
-    margin-bottom: 20px;
+  h4 {
+    color: #343a40;
+    margin-bottom: 25px;
+    font-weight: 600;
   }
-  .section-title {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
+  .section-card {
     margin-bottom: 30px;
-  }
-  .card {
-    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: #fefefe;
+    padding: 25px;
   }
-  .card-header {
-    background-color: #007bff;
-    color: #fff;
+  .section-card-header {
+    background-color: #e9ecef;
+    padding: 15px 25px;
+    margin: -25px -25px 20px -25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     font-weight: 700;
-    border-radius: 10px 10px 0 0 !important;
-  }
-  .card-body {
-    padding: 20px;
+    color: #343a40;
   }
   .example-box {
-    background-color: #e9ecef;
-    border-left: 5px solid #28a745;
+    background-color: #e0f2fe;
+    border-left: 5px solid #0d6efd;
     padding: 15px;
     border-radius: 8px;
     margin-top: 15px;
+    margin-bottom: 15px;
   }
-  .key-term {
-    font-weight: bold;
-    color: #dc3545;
+  .definition-box {
+    background-color: #d4edda;
+    border-left: 5px solid #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #155724;
   }
-  .math-formula {
-    font-family: "Times New Roman", serif; /* Or a specific math font if available */
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #0056b3;
+  code {
+    color: #d63384;
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  .flow-diagram-text {
+    background-color: #f0f8ff;
+    border: 1px dashed #0d6efd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Grade 7 Mathematics Study Guide</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#section13-1"
-            >13.1 Describing and doing computations</a
-          >
+<div class="container">
+  <p class="lead text-center">
+    This guide summarizes key concepts from Chapter 13 of your Grade 7
+    Mathematics textbook.
+  </p>
+
+  <!-- Section: 13.1 Describing and doing computations -->
+  <div class="section-card">
+    <div class="section-card-header">
+      <h3>13.1 Describing and Doing Computations</h3>
+    </div>
+    <p>
+      Algebraic expressions are a way to describe computations using symbols and
+      numbers. They help us represent rules and relationships efficiently.
+    </p>
+
+    <h4>Variables and Constants</h4>
+    <div class="definition-box">
+      <strong>Variable:</strong> A quantity that can change or take on different
+      values. It is usually represented by a letter symbol (e.g.,
+      <code>x</code>, <code>n</code>, <code>l</code>, <code>b</code>,
+      <code>w</code>).<br />
+      <strong>Constant:</strong> A quantity that remains the same or has a fixed
+      value. It is usually a number.
+    </div>
+    <div class="example-box">
+      <h5>Example: Circles in Arrangements (from Activity 1)</h5>
+      <p>In diagrams where circles are arranged in two rows:</p>
+      <ul>
+        <li>
+          The <strong>number of rows (2)</strong> remains the same. This is a
+          <strong>constant</strong>.
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#section13-2"
-            >13.2 Relationships represented in formulae</a
-          >
+        <li>
+          The <strong>number of circles per row (n)</strong> changes for each
+          diagram. This is a <strong>variable</strong>.
+        </li>
+        <li>
+          The rule to calculate the total number of circles is
+          <code>2 × n</code>. Here, <code>2</code> is a constant, and
+          <code>n</code> is a variable.
         </li>
       </ul>
     </div>
+
+    <h4>Flow Diagrams</h4>
+    <p>
+      Flow diagrams illustrate a sequence of operations performed on an input
+      number to produce an output number.
+    </p>
+    <div class="example-box">
+      <h5>Example: Simple Flow Diagram</h5>
+      <p>Consider the flow diagram: Input → <code>× 2</code> → Output</p>
+      <div class="flow-diagram-text">
+        If Input is 11, Output is <code>11 × 2 = 22</code>.<br />
+        If Input is 21, Output is <code>21 × 2 = 42</code>.<br />
+        If Input is 41, Output is <code>41 × 2 = 82</code>.
+      </div>
+    </div>
+    <div class="example-box">
+      <h5>Example: Complex Flow Diagram (from Activity 4)</h5>
+      <p>
+        Consider the flow diagram: Input → <code>+ 4</code> → <code>× 5</code> →
+        Output
+      </p>
+      <div class="flow-diagram-text">
+        To calculate the output:
+        <ol>
+          <li>First, <strong>add 4</strong> to the input number.</li>
+          <li>Then, <strong>multiply the result by 5</strong>.</li>
+        </ol>
+        If Input is 10: <code>(10 + 4) × 5 = 14 × 5 = 70</code>.
+      </div>
+    </div>
+
+    <h4>Algebraic Expressions</h4>
+    <p>
+      An algebraic expression is a mathematical phrase that can contain numbers,
+      variables, and operation symbols (like +, -, ×, ÷). It's an abbreviation
+      for a computational instruction.
+    </p>
+    <div class="example-box">
+      <h5>Example: From Words to Expressions (from Activity 8)</h5>
+      <ul>
+        <li>"Multiply by 4 and then subtract 8": <code>4x - 8</code></li>
+        <li>
+          "Subtract 8 and then multiply by 4": <code>4(x - 8)</code> (Notice the
+          brackets for order of operations!)
+        </li>
+        <li>"Add 15 and then divide by 5": <code>(x + 15) / 5</code></li>
+        <li>"Divide by 5 and then add 15": <code>x / 5 + 15</code></li>
+      </ul>
+      <p>
+        <strong>Important: Order of Operations (BODMAS/PEMDAS)</strong> is
+        crucial when writing and interpreting expressions. Brackets ensure
+        operations are performed in the intended order.
+      </p>
+    </div>
+    <div class="example-box">
+      <h5>Example: From Expressions to Words (from Activity 9)</h5>
+      <ul>
+        <li><code>x × 4 + 7</code>: "Multiply by 4, then add 7."</li>
+        <li><code>(x + 7) × 4</code>: "Add 7, then multiply by 4."</li>
+      </ul>
+    </div>
   </div>
-</nav>
 
-<div class="container">
-  <h1 class="text-center mb-4">
-    Chapter 13: Algebraic Expressions 1 - Study Guide
-  </h1>
+  <!-- Section: 13.2 Relationships represented in formulae -->
+  <div class="section-card">
+    <div class="section-card-header">
+      <h3>13.2 Relationships Represented in Formulae</h3>
+    </div>
+    <p>
+      A formula is a special type of algebraic expression that shows a
+      relationship between different quantities, often used to calculate a
+      specific value.
+    </p>
 
-  <!-- Section 13.1 -->
-  <section id="section13-1" class="mb-5">
-    <h2 class="section-title">13.1 Describing and doing computations</h2>
-
-    <div class="card">
-      <div class="card-header">Key Concepts</div>
-      <div class="card-body">
-        <ul>
-          <li>
-            <span class="key-term">Constant:</span> A quantity that remains the
-            same or fixed in a given situation or formula.
-          </li>
-          <li>
-            <span class="key-term">Variable:</span> A quantity that can change
-            or vary. It is often represented by a letter symbol (e.g., $x$, $n$,
-            $l$, $w$).
-          </li>
-          <li>
-            <span class="key-term">Algebraic Expression:</span> A combination of
-            constants, variables, and mathematical operations (addition,
-            subtraction, multiplication, division).
-          </li>
-          <li>
-            <span class="key-term">Flow Diagram:</span> A visual representation
-            of a computational instruction, showing the input, operations, and
-            output.
-          </li>
-          <li>
-            <span class="key-term">Input Number:</span> The starting value in a
-            computation or flow diagram.
-          </li>
-          <li>
-            <span class="key-term">Output Number:</span> The result obtained
-            after applying the computational instruction to the input number.
-          </li>
-        </ul>
-      </div>
+    <h4>Variables and Constants in Formulae</h4>
+    <div class="example-box">
+      <h5>Example: Perimeter Formula (from Activity 13.2.1)</h5>
+      <p>
+        The formula for the perimeter of a rectangle is
+        <code>P = 2 × l + 2 × b</code> or <code>P = 2 × (l + b)</code>.
+      </p>
+      <ul>
+        <li>
+          <strong>Variables:</strong> <code>P</code> (Perimeter),
+          <code>l</code> (Length), <code>b</code> (Breadth) - these values can
+          change for different rectangles.
+        </li>
+        <li>
+          <strong>Constant:</strong> <code>2</code> - this number always remains
+          the same in the formula. It represents the two pairs of sides in a
+          rectangle.
+        </li>
+      </ul>
     </div>
 
-    <div class="card">
-      <div class="card-header">Understanding Patterns and Rules</div>
-      <div class="card-body">
-        <h4>Example: Circles in Rows (from Textbook Question 1)</h4>
-        <p>
-          If diagrams have 2 rows of circles, and the number of circles per row
-          changes, we can find the total number of circles. If 'n' is the number
-          of circles per row, the rule to calculate the total number of circles
-          is $2 \times n$.
-        </p>
-        <div class="example-box">
-          <p>
-            <strong>Example:</strong> If Diagram 11 has 11 circles per row and 2
-            rows, how many total circles?
-          </p>
-          <p>
-            <strong>Solution:</strong> Using the rule $2 \times n$, substitute
-            $n=11$.
-          </p>
-          <p class="math-formula">$2 \times 11 = 22$ circles.</p>
-        </div>
-
-        <h4>Example: Odd Number Sequence (from Textbook Question 2)</h4>
-        <p>
-          The sequence 1; 3; 5; 7; 9; ... can be described by the rule $2 \times
-          n - 1$, where 'n' represents the position of the odd number in the
-          sequence.
-        </p>
-        <div class="example-box">
-          <p><strong>Example:</strong> What is the 10th odd number?</p>
-          <p>
-            <strong>Solution:</strong> Using the rule $2 \times n - 1$,
-            substitute $n=10$.
-          </p>
-          <p class="math-formula">$2 \times 10 - 1 = 20 - 1 = 19$.</p>
-        </div>
-      </div>
+    <h4>Solving Equations</h4>
+    <p>
+      When an algebraic expression is set equal to a value, it becomes an
+      equation. In an equation, the letter symbol represents an
+      <strong>unknown value</strong> that we need to find.
+    </p>
+    <div class="example-box">
+      <h5>Example: Sindi's Father's Age (from Activity 13.2.2)</h5>
+      <p>
+        Formula: <code>F = x + 37</code>, where <code>x</code> is Sindi's age
+        and <code>F</code> is her father's age.
+      </p>
+      <p>
+        If her father passed away when Sindi was 43 years old, we can find his
+        age by substituting <code>x = 43</code> into the formula:
+      </p>
+      <p><code>F = 43 + 37</code></p>
+      <p><code>F = 80</code></p>
+      <p>So, her father was 80 years old.</p>
     </div>
-
-    <div class="card">
-      <div class="card-header">Writing Algebraic Expressions</div>
-      <div class="card-body">
-        <p>
-          Algebraic expressions are a shorthand for computational instructions.
-        </p>
-        <ul>
-          <li>
-            "Add 4 to the input number, then multiply by 5" can be written as
-            $(x+4)\times5$. Here, $x$ is the input number (variable), and 4 and
-            5 are constants.
-          </li>
-        </ul>
-        <div class="example-box">
-          <p>
-            <strong>Example:</strong> Write the abbreviation for "Multiply the
-            input number by 6 and subtract 2."
-          </p>
-          <p>
-            <strong>Solution:</strong> Let the input number be $x$. The
-            expression is $6 \times x - 2$ or $6x - 2$.
-          </p>
-        </div>
-        <div class="example-box">
-          <p>
-            <strong>Example:</strong> Describe the computational instruction for
-            $x \rightarrow \times4 \rightarrow +7$.
-          </p>
-          <p>
-            <strong>Solution:</strong> Multiply the input number by 4 and then
-            add 7.
-          </p>
-        </div>
-      </div>
+    <div class="example-box">
+      <h5>Example: Jacob's Cell Phone Savings (from Activity 13.2.3)</h5>
+      <p>
+        Formula: <code>y = 45 + 5 × w</code>, where <code>y</code> is total
+        savings and <code>w</code> is weeks.
+      </p>
+      <ul>
+        <li>
+          <strong>Constants:</strong> <code>45</code> (initial savings),
+          <code>5</code> (savings per week).
+        </li>
+        <li>
+          <strong>Variables:</strong> <code>y</code> (amount saved),
+          <code>w</code> (number of weeks).
+        </li>
+      </ul>
+      <p>
+        If Jacob wants a phone that costs R90, we can find out if he has enough
+        by the eighth week (<code>w = 8</code>):
+      </p>
+      <p><code>y = 45 + 5 × 8</code></p>
+      <p><code>y = 45 + 40</code></p>
+      <p><code>y = 85</code></p>
+      <p>
+        Since R85 is less than R90, he will *not* have enough money by the
+        eighth week.
+      </p>
     </div>
-  </section>
+  </div>
 
-  <!-- Section 13.2 -->
-  <section id="section13-2" class="mb-5">
-    <h2 class="section-title">13.2 Relationships represented in formulae</h2>
-
-    <div class="card">
-      <div class="card-header">
-        Understanding Variables and Constants in Formulae
-      </div>
-      <div class="card-body">
-        <p>
-          A <span class="key-term">formula</span> is a mathematical rule that
-          shows the relationship between different quantities, often expressed
-          using variables and constants.
-        </p>
-        <h4>
-          Example: Perimeter and Area of a Rectangle (from Textbook Question 1)
-        </h4>
-        <ul>
-          <li>
-            Perimeter formula: $P = 2 \times l + 2 \times b$ or $P = 2 \times
-            (l+b)$
-          </li>
-          <li>Area formula: $A = l \times b$</li>
-        </ul>
-        <p>In the formula $P = 2 \times (l+b)$:</p>
-        <ul>
-          <li>
-            The number 2 is a <span class="key-term">constant</span> because it
-            always represents the two pairs of sides in a rectangle.
-          </li>
-          <li>
-            The letter symbols $l$ (length) and $b$ (breadth) are
-            <span class="key-term">variables</span> because their values can
-            change depending on the specific rectangle.
-          </li>
-        </ul>
-        <div class="example-box">
-          <p>
-            <strong>Example:</strong> Calculate the perimeter and area of a
-            rectangle with length ($l$) = 8 and breadth ($b$) = 4.
-          </p>
-          <p><strong>Solution:</strong></p>
-          <p>Perimeter: $P = 2 \times (8+4) = 2 \times 12 = 24$ units.</p>
-          <p>Area: $A = 8 \times 4 = 32$ square units.</p>
-        </div>
-
-        <h4>Example: Sindi's Father's Age (from Textbook Question 2)</h4>
-        <p>
-          Formula: $F = x + 37$, where $F$ is the father's age and $x$ is
-          Sindi's age.
-        </p>
-        <p>In this formula:</p>
-        <ul>
-          <li>
-            $x$ (Sindi's age) is the <span class="key-term">variable</span>.
-          </li>
-          <li>
-            37 is the <span class="key-term">constant</span> (the age
-            difference).
-          </li>
-        </ul>
-        <div class="example-box">
-          <p>
-            <strong>Example:</strong> If Sindi was 43 years old, how old was her
-            father?
-          </p>
-          <p><strong>Solution:</strong> Substitute $x=43$ into the formula:</p>
-          <p class="math-formula">$F = 43 + 37 = 80$ years old.</p>
-        </div>
-
-        <h4>Example: Jacob's Cell Phone Savings (from Textbook Question 3)</h4>
-        <p>
-          Formula: $y = 45 + 5 \times w$, where $y$ is the amount saved and $w$
-          is the number of weeks.
-        </p>
-        <p>In this formula:</p>
-        <ul>
-          <li>
-            $w$ (number of weeks) and $y$ (amount saved) are
-            <span class="key-term">variables</span>.
-          </li>
-          <li>
-            45 (initial savings) and 5 (savings per week) are
-            <span class="key-term">constants</span>.
-          </li>
-        </ul>
-        <div class="example-box">
-          <p><strong>Example:</strong> Will Jacob have R90 by the 8th week?</p>
-          <p><strong>Solution:</strong> Substitute $w=8$ into the formula:</p>
-          <p class="math-formula">$y = 45 + 5 \times 8 = 45 + 40 = 85$.</p>
-          <p>
-            Jacob will have R85 by the 8th week. Since the phone costs R90, he
-            will not have saved enough money.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">Identifying Variables and Constants</div>
-      <div class="card-body">
-        <p>
-          For any given formula, identify which symbols change (variables) and
-          which remain fixed (constants).
-        </p>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Formula</th>
-                <th>Symbols for variable(s)</th>
-                <th>Constant(s)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>$y=5\times x+7$</td>
-                <td>$x, y$</td>
-                <td>$5, 7$</td>
-              </tr>
-              <tr>
-                <td>$y=100+x$</td>
-                <td>$x, y$</td>
-                <td>$100$</td>
-              </tr>
-              <tr>
-                <td>$y=x\div5$</td>
-                <td>$x, y$</td>
-                <td>$5$</td>
-              </tr>
-              <tr>
-                <td>$y=5\times x$</td>
-                <td>$x, y$</td>
-                <td>$5$</td>
-              </tr>
-              <tr>
-                <td>$y=0,7\times x+2,3$</td>
-                <td>$x, y$</td>
-                <td>$0,7, 2,3$</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="text-center mt-5">
+    <p class="text-muted">End of Study Guide. Keep practicing!</p>
+  </div>
 </div>
 
-<!-- Bootstrap JS and Popper.js -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
