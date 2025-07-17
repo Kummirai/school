@@ -1,0 +1,488 @@
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<!-- Bootstrap Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+/>
+<style>
+  body {
+    background-color: #f8f9fa;
+    line-height: 1.6;
+  }
+  .study-guide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 20px 20px;
+  }
+  .header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .section-title {
+    color: #2575fc;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .key-point {
+    background-color: #f8f9fa;
+    border-left: 4px solid #2575fc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 0 5px 5px 0;
+  }
+  .example {
+    background-color: #e9f5ff;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+  }
+  .tip-box {
+    background-color: #fff8e6;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 5px 5px 0;
+  }
+  .flow-diagram {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+  }
+  .table-example {
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto;
+  }
+</style>
+
+<div class="study-guide">
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-question-circle"></i> 1. Understanding Functions and
+      Relationships
+    </h2>
+    <div class="key-point">
+      <h5><i class="bi bi-lightbulb"></i> Definition</h5>
+      <p>
+        Functions and relationships involve understanding the connection between
+        <strong>input</strong> numbers and <strong>output</strong> numbers. The
+        input undergoes a process (a rule) to produce the output.
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-box-arrow-in-right"></i> Input
+            </h5>
+            <p class="card-text">
+              The starting number that goes into the relationship.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-gear"></i> Rule</h5>
+            <p class="card-text">
+              The set of operations (e.g., multiplying, dividing, adding,
+              subtracting) performed on the input to get the output.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-box-arrow-in-left"></i> Output
+            </h5>
+            <p class="card-text">
+              The resulting number after the rule has been applied to the input.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box mt-4">
+      <h5><i class="bi bi-clipboard-check"></i> Common Tasks</h5>
+      <ul>
+        <li>Use given inputs to calculate outputs</li>
+        <li>Use given outputs to calculate inputs (working backward)</li>
+        <li>Use given inputs and outputs to determine the rule</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-diagram-3"></i> 2. Representing Relationships
+    </h2>
+    <p>Function relationships can be shown in different ways:</p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-arrow-right-circle"></i> Flow Diagrams</h5>
+          <ul>
+            <li>
+              Visually show the input, the rule (operations), and the output
+            </li>
+            <li>
+              Indicate what calculations are done and which output is connected
+              to which input
+            </li>
+          </ul>
+          <div class="flow-diagram mt-3">
+            Input → [Operation 1] → [Operation 2] → Output
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-table"></i> Tables of Values</h5>
+          <ul>
+            <li>Display pairs of input and corresponding output numbers</li>
+            <li>
+              Sometimes numbers might be missing, requiring you to determine the
+              rule first
+            </li>
+          </ul>
+          <table class="table table-bordered table-example mt-3">
+            <thead class="table-primary">
+              <tr>
+                <th>Input (x)</th>
+                <th>Output (y)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-magic"></i> 3. Determining the Rule
+    </h2>
+    <p>
+      A common task is to find the mathematical rule that connects inputs to
+      outputs:
+    </p>
+
+    <div class="key-point">
+      <h5>
+        <i class="bi bi-graph-up"></i> Arithmetic Patterns (Constant Difference)
+      </h5>
+      <ul>
+        <li>
+          For many patterns, you can identify a
+          <strong
+            >constant difference between consecutive output numbers</strong
+          >
+        </li>
+        <li>
+          This <strong>constant difference is usually the multiplier</strong> in
+          your rule
+        </li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h5><i class="bi bi-list-ol"></i> Steps to Find the Rule</h5>
+      <ol>
+        <li>
+          Look at the outputs and find the difference between consecutive terms
+        </li>
+        <li>
+          Take this constant difference as the number you multiply the input (x)
+          by
+        </li>
+        <li>Test this partial rule with an input number</li>
+        <li>If needed, add or subtract a constant to make it match</li>
+        <li>Verify the complete rule with other input-output pairs</li>
+      </ol>
+    </div>
+
+    <div class="alert alert-warning mt-3">
+      <i class="bi bi-exclamation-triangle"></i>
+      <strong>Working with Negative Numbers</strong>: When dealing with negative
+      inputs or outputs, follow the same method. Pay close attention to signs
+      when calculating differences and applying the rule.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-arrow-counterclockwise"></i> 4. Working Backwards (Inverse
+      Operations)
+    </h2>
+    <p>
+      When you have the output and need to find the input, you must reverse the
+      operations:
+    </p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-arrow-left-right"></i> Opposite Operations</h5>
+          <ul>
+            <li>Addition (+) ↔ Subtraction (-)</li>
+            <li>Multiplication (×) ↔ Division (÷)</li>
+            <li>Squaring (x²) ↔ Square Root (√)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-back"></i> Reverse Order</h5>
+          <p>
+            You must
+            <strong>undo the operations in the reverse order</strong> they were
+            applied. Think of it like unwrapping a present.
+          </p>
+          <div class="example mt-2">
+            <p>
+              <strong>Example</strong>: If the rule is "multiply by 2 and then
+              add 3", to find the input from an output:
+            </p>
+            <ol>
+              <li>First subtract 3</li>
+              <li>Then divide by 2</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-calculator"></i> 5. Order of Operations (BODMAS/PEMDAS)
+    </h2>
+    <p>
+      Understanding the correct order of operations is essential for accurate
+      calculations:
+    </p>
+
+    <div class="key-point">
+      <h5><i class="bi bi-list-ol"></i> BODMAS stands for:</h5>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item"><strong>B</strong>rackets</li>
+        <li class="list-group-item"><strong>O</strong>rders (Exponents)</li>
+        <li class="list-group-item">
+          <strong>D</strong>ivision and <strong>M</strong>ultiplication (same
+          level)
+        </li>
+        <li class="list-group-item">
+          <strong>A</strong>ddition and <strong>S</strong>ubtraction (same
+          level)
+        </li>
+      </ul>
+    </div>
+
+    <div class="key-point">
+      <h5><i class="bi bi-key"></i> Key Rules</h5>
+      <ul>
+        <li>
+          Operations within <strong>brackets</strong> are always done first
+        </li>
+        <li><strong>Exponents</strong> are done next</li>
+        <li>
+          For operations on the same level, work from
+          <strong>left to right</strong>
+        </li>
+        <li>
+          <strong>Order matters</strong> when mixing operations from different
+          levels
+        </li>
+        <li>
+          If you are only multiplying and dividing, the order doesn't change the
+          answer
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-123"></i> 6. Measuring vs. Counting
+    </h2>
+    <p>
+      Differentiate between quantities that are measured and those that are
+      counted:
+    </p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-header bg-primary text-white">
+            <i class="bi bi-hash"></i> Counting
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Involves using <strong>whole numbers</strong></li>
+              <li>Applies to discrete items (e.g., people, cars)</li>
+              <li>Cannot have fractions ("57.5 people")</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-header bg-success text-white">
+            <i class="bi bi-rulers"></i> Measuring
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                Involves quantities that <strong>can have decimals</strong>
+              </li>
+              <li>
+                Applies to continuous quantities (e.g., distance, temperature)
+              </li>
+              <li>Context dictates whether decimals are acceptable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-square"></i> 7. Squaring vs. Square Rooting
+    </h2>
+    <p>These are two important inverse operations:</p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-square-fill"></i> Squaring</h5>
+          <ul>
+            <li>Means <strong>multiplying a number by itself</strong></li>
+            <li>Example: "4 squared" is 4 × 4 = 16</li>
+            <li>Used when calculating the <strong>area of a square</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-point">
+          <h5><i class="bi bi-square-root"></i> Square Rooting</h5>
+          <ul>
+            <li>The <strong>opposite operation of squaring</strong></li>
+            <li>
+              Finds a number that, when squared, gives the original number
+            </li>
+            <li>Example: √144 = 12 (because 12 × 12 = 144)</li>
+            <li>Used to find a square's side length from its area</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-3">
+      <i class="bi bi-chat-square-text"></i> <strong>Language Matters</strong>:
+      Use the correct terms (squaring, square rooting) to describe these
+      operations, as they are distinct mathematical concepts.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">
+      <i class="bi bi-lightbulb"></i> Tips for Solving Problems
+    </h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-repeat"></i> Practice</h5>
+            <p class="card-text">
+              The more you practice, the easier these concepts will become.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-pencil"></i> Show Your Work
+            </h5>
+            <p class="card-text">
+              Especially with decimals or multiple operations, showing steps
+              helps prevent errors.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-check-circle"></i> Test Your Rule
+            </h5>
+            <p class="card-text">
+              Always substitute values back into your determined rule to verify
+              correctness.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="bi bi-question-circle"></i> Ask for Clarification
+            </h5>
+            <p class="card-text">
+              If a query is ambiguous, it's always best to ask for
+              clarification.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5 text-center text-muted">
+    <p>Grade 7 Mathematics Study Guide | Functions and Relationships</p>
+  </footer>
+</div>
