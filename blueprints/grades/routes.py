@@ -68,7 +68,7 @@ def grade_7_maths():
 
 
 # UPDATED ROUTE: Now handles term_idx, unit_idx, and lesson_idx
-@grades_bp.route('/grade_7/maths/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
+@grades_bp.route('/grade7/maths/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
 def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
     try:
         # Load the JSON data for Grade 7 Maths
