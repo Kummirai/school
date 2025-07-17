@@ -197,7 +197,7 @@
                 {% for lesson in unit.lessons %} {% set lesson_index =
                 loop.index0 %}
                 <a
-                  href="/grade_7/maths/lesson/{{ term_index }}/{{ unit_index }}/{{ lesson_index }}"
+                  href="{{ url_for('grades.view_grade7_lesson', term_idx=term_index, unit_idx=unit_index, lesson_idx=lesson_index) }}"
                   class="list-group-item list-group-item-action"
                 >
                   <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>

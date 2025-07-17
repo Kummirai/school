@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, url_for, request, jsonify, redirect, abort
 import json
 import os
 from flask_login import login_required
@@ -67,9 +67,10 @@ def grade_7_maths():
         abort(500, description="Invalid file encoding - must be UTF-8")
 
 
-# UPDATED ROUTE: Now handles term_idx, unit_idx, and lesson_idx
 @grades_bp.route('/grade7/maths/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
 def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
+    print(
+        f"Loading lesson for Term: {term_idx}, Unit: {unit_idx}, Lesson: {lesson_idx}")
     try:
         # Load the JSON data for Grade 7 Maths
         json_file_path = os.path.join(
@@ -297,3 +298,26 @@ def grade_12_maths():
 @login_required
 def numeric_geometric_patterns():
     return render_template('grade7_maths/numeric_geometric_patterns.html')
+
+
+@grades_bp.route('/mark_lesson_complete', methods=['POST'])
+def mark_lesson_complete():
+    data = request.get_json()
+    term_idx = data.get('term_idx')
+    unit_idx = data.get('unit_idx')
+    lesson_idx = data.get('lesson_idx')
+
+    # Here, you would implement the logic to mark the lesson as complete.
+    # This might involve:
+    # 1. Loading the user's progress data (e.g., from a database or session).
+    # 2. Updating the status of the specific lesson.
+    # 3. Saving the updated progress.
+
+    # For demonstration, let's just return a success message.
+    if term_idx is not None and unit_idx is not None and lesson_idx is not None:
+        # In a real application, update your data model here
+        print(
+            f"Lesson T{term_idx}, U{unit_idx}, L{lesson_idx} marked complete for user.")
+        return jsonify({'success': True, 'message': 'Lesson marked as complete!'})
+    else:
+        return jsonify({'success': False, 'message': 'Invalid lesson data provided.'}), 400

@@ -644,14 +644,76 @@
               "duration": "22 min",
               "icon": "bi bi-arrow-left-right",
               "description": "Introduction to functions through input-output tables and function notation. Understand basic relationships between variables.",
-              "resources": []
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/13_1_algebraic_expressions_1_content.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/hij789",
+                  "icon": "play-circle"
+                },
+                {
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/13_1_algebraic_expressions_1_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/13_1_algebraic_expressions_1_test.html",
+                  "icon": "clipboard-check"
+                }
+              ]
             },
             {
               "title": "12.2 What to calculate and how",
               "duration": "25 min",
               "icon": "bi bi-calculator",
               "description": "Learn to represent situations mathematically and use formulae for calculations.",
-              "resources": []
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/13_1_algebraic_expressions_1_content.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/hij789",
+                  "icon": "play-circle"
+                },
+                {
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/13_1_algebraic_expressions_1_study_guide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/13_1_algebraic_expressions_1_test.html",
+                  "icon": "clipboard-check"
+                }
+              ]
             },
             {
               "title": "13.1 Algebraic Expressions 1",
