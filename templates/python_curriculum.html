@@ -1,0 +1,721 @@
+{% extends "base.html" %} {% block title %}Python Development Curriculum{%
+endblock %} {% block content %}
+
+<!-- Hero Section -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1550439062-609e1d856093?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-filetype-py display-1 text-info"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">
+          Python Development <span class="text-info">Curriculum</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-info me-2"></i> Comprehensive Python
+          program from beginner to advanced for various specializations
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-primary btn-lg px-4 py-3 fw-bold"
+            href="#fundamentals"
+            role="button"
+          >
+            <i class="bi bi-code-square me-2"></i>Fundamentals
+          </a>
+          <a
+            class="btn btn-success btn-lg px-4 py-3 fw-bold"
+            href="#specializations"
+            role="button"
+          >
+            <i class="bi bi-lightbulb me-2"></i>Specializations
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Python Fundamentals -->
+<section id="fundamentals" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-code-square text-primary fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Python Fundamentals</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Python Basics -->
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Python Basics</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-primary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Syntax & Variables</li>
+              <li class="list-group-item">
+                Data Types (Lists, Tuples, Dictionaries)
+              </li>
+              <li class="list-group-item">Operators & Expressions</li>
+              <li class="list-group-item">Control Flow (If/Else, Loops)</li>
+              <li class="list-group-item">Functions</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-primary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Writing clean, readable code</li>
+              <li class="list-group-item">Problem-solving with Python</li>
+              <li class="list-group-item">Basic scripting</li>
+              <li class="list-group-item">Debugging</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_basics_course')}}"
+              class="btn btn-outline-primary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Object-Oriented Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Object-Oriented Python</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-info">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Classes & Objects</li>
+              <li class="list-group-item">Inheritance & Polymorphism</li>
+              <li class="list-group-item">Encapsulation & Abstraction</li>
+              <li class="list-group-item">Magic Methods</li>
+              <li class="list-group-item">Decorators & Generators</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-info mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Designing robust applications</li>
+              <li class="list-group-item">Code reusability</li>
+              <li class="list-group-item">Understanding design patterns</li>
+              <li class="list-group-item">Advanced Python features</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.oop_python_course')}}"
+              class="btn btn-outline-info btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Advanced Python</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">File I/O</li>
+              <li class="list-group-item">Exception Handling</li>
+              <li class="list-group-item">Modules & Packages</li>
+              <li class="list-group-item">Context Managers</li>
+              <li class="list-group-item">Concurrency (Threads, Asyncio)</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-warning mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Building scalable applications</li>
+              <li class="list-group-item">Efficient resource management</li>
+              <li class="list-group-item">Handling complex data</li>
+              <li class="list-group-item">Performance tuning</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.oop_python_course')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Python Specializations -->
+<section id="specializations" class="py-5">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-lightbulb text-success fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Python Specializations</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Web Development with Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">
+              Web Development (Django/Flask)
+            </h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-success">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">MVC/MVT Architecture</li>
+              <li class="list-group-item">Routing & Views</li>
+              <li class="list-group-item">Templates & Forms</li>
+              <li class="list-group-item">ORM & Databases</li>
+              <li class="list-group-item">RESTful APIs</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-success mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Building web applications</li>
+              <li class="list-group-item">Database integration</li>
+              <li class="list-group-item">Authentication & Authorization</li>
+              <li class="list-group-item">Deployment strategies</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_web_course')}}"
+              class="btn btn-outline-success btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Science with Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">
+              Data Science with Python
+            </h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">NumPy & Pandas</li>
+              <li class="list-group-item">Data Cleaning & Preprocessing</li>
+              <li class="list-group-item">
+                Data Visualization (Matplotlib, Seaborn)
+              </li>
+              <li class="list-group-item">Statistical Analysis</li>
+              <li class="list-group-item">Jupyter Notebooks</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-danger mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Data manipulation & analysis</li>
+              <li class="list-group-item">Exploratory Data Analysis (EDA)</li>
+              <li class="list-group-item">Building data pipelines</li>
+              <li class="list-group-item">Reporting & presentation</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.data_science_course')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Machine Learning with Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">
+              Machine Learning with Python
+            </h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-secondary">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Scikit-learn</li>
+              <li class="list-group-item">
+                Supervised Learning (Regression, Classification)
+              </li>
+              <li class="list-group-item">
+                Unsupervised Learning (Clustering)
+              </li>
+              <li class="list-group-item">Model Evaluation & Tuning</li>
+              <li class="list-group-item">
+                Deep Learning Basics (TensorFlow/PyTorch)
+              </li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-secondary mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Building predictive models</li>
+              <li class="list-group-item">Feature engineering</li>
+              <li class="list-group-item">Model deployment</li>
+              <li class="list-group-item">Understanding ML algorithms</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.ml_python_course')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-3">
+      <!-- Automation & Scripting -->
+      <div class="col-md-4">
+        <div class="card h-100 border-green shadow-sm">
+          <div class="card-header bg-green text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Automation & Scripting</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-green">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">OS Module & File Operations</li>
+              <li class="list-group-item">
+                Web Scraping (BeautifulSoup, Scrapy)
+              </li>
+              <li class="list-group-item">
+                Automating GUI (Selenium, PyAutoGUI)
+              </li>
+              <li class="list-group-item">Email & PDF Automation</li>
+              <li class="list-group-item">Scheduling Tasks</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-green mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Automating repetitive tasks</li>
+              <li class="list-group-item">Data extraction from web</li>
+              <li class="list-group-item">Building command-line tools</li>
+              <li class="list-group-item">System administration scripts</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.automation_python_course')}}"
+              class="btn btn-outline-green btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testing & Deployment -->
+      <div class="col-md-4">
+        <div class="card h-100 border-orange shadow-sm">
+          <div class="card-header bg-orange text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Testing & Deployment</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-orange">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">Unit Testing (unittest, pytest)</li>
+              <li class="list-group-item">Integration Testing</li>
+              <li class="list-group-item">Docker & Containerization</li>
+              <li class="list-group-item">Cloud Deployment (AWS, Heroku)</li>
+              <li class="list-group-item">CI/CD Pipelines</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-orange mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Writing effective tests</li>
+              <li class="list-group-item">Ensuring code quality</li>
+              <li class="list-group-item">Deploying Python applications</li>
+              <li class="list-group-item">Automating build processes</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_deployment_course')}}"
+              class="btn btn-outline-orange btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithms & Data Structures -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-header bg-purple text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">
+              Algorithms & Data Structures
+            </h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-purple">Core Concepts</h4>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">
+                Arrays, Linked Lists, Stacks, Queues
+              </li>
+              <li class="list-group-item">Trees & Graphs</li>
+              <li class="list-group-item">Sorting Algorithms</li>
+              <li class="list-group-item">Searching Algorithms</li>
+              <li class="list-group-item">Time & Space Complexity</li>
+            </ul>
+
+            <h4 class="h5 fw-bold text-purple mt-4">Key Skills</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Optimizing code performance</li>
+              <li class="list-group-item">Solving complex problems</li>
+              <li class="list-group-item">Interview preparation</li>
+              <li class="list-group-item">Foundational computer science</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.algorithms_python_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Paths -->
+<section class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Learning Paths</h2>
+      <p class="lead text-muted">
+        Structured roadmaps for different career goals
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-globe display-4 text-primary mb-3"></i>
+            <h3 class="h4 fw-bold">Python Web Developer</h3>
+            <p class="mb-4">
+              Master backend web development with Python frameworks
+            </p>
+            <ol class="text-start">
+              <li>Python Fundamentals</li>
+              <li>Django/Flask</li>
+              <li>Database Integration</li>
+              <li>RESTful API Development</li>
+              <li>Authentication & Security</li>
+              <li>Deployment</li>
+            </ol>
+            <a href="#" class="btn btn-outline-primary mt-3">
+              <i class="bi bi-journal-code me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-graph-up display-4 text-success mb-3"></i>
+            <h3 class="h4 fw-bold">Python Data Scientist</h3>
+            <p class="mb-4">Become proficient in data analysis and modeling</p>
+            <ol class="text-start">
+              <li>Python Fundamentals</li>
+              <li>NumPy & Pandas</li>
+              <li>Data Visualization</li>
+              <li>Statistical Analysis</li>
+              <li>Machine Learning Basics</li>
+              <li>Deep Learning Intro</li>
+            </ol>
+            <a href="#" class="btn btn-outline-success mt-3">
+              <i class="bi bi-database me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-robot display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Python ML Engineer</h3>
+            <p class="mb-4">
+              Comprehensive training for building and deploying ML models
+            </p>
+            <ol class="text-start">
+              <li>Python Fundamentals</li>
+              <li>Advanced ML Algorithms</li>
+              <li>Deep Learning Frameworks</li>
+              <li>Model Deployment</li>
+              <li>MLOps Basics</li>
+              <li>Cloud ML Services</li>
+            </ol>
+            <a href="#" class="btn btn-outline-danger mt-3">
+              <i class="bi bi-stack me-1"></i>View Path
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Resources -->
+<section class="py-5">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Python Resources</h2>
+      <p class="lead text-muted">
+        Tools and materials to enhance your Python learning
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
+            <h3 class="h4 fw-bold">Coding Challenges</h3>
+            <p class="mb-4">
+              Daily Python coding exercises to sharpen your skills
+            </p>
+            <a href="#" class="btn btn-outline-primary">
+              <i class="bi bi-terminal me-1"></i>Start Coding
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-journal-code display-4 text-success mb-3"></i>
+            <h3 class="h4 fw-bold">Python Project Ideas</h3>
+            <p class="mb-4">
+              Practical projects to build your Python portfolio
+            </p>
+            <a href="#" class="btn btn-outline-success">
+              <i class="bi bi-lightbulb me-1"></i>Browse Projects
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-people display-4 text-info mb-3"></i>
+            <h3 class="h4 fw-bold">Python Community</h3>
+            <p class="mb-4">Connect with other Python developers and mentors</p>
+            <a href="#" class="btn btn-outline-info">
+              <i class="bi bi-chat-square-text me-1"></i>Join Community
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary">
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4 text-white">Ready to Master Python?</h2>
+    <p class="lead mb-5 text-white">
+      Our comprehensive curriculum will guide you from beginner to expert in
+      Python development
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('home.login') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('courses.catalog') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse All Courses
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+  }
+
+  .card-header {
+    border-bottom: none;
+  }
+
+  /* Custom color for Python icon and sections */
+  .text-info {
+    color: #17a2b8 !important; /* Bootstrap info color, often used for Python */
+  }
+  .border-info {
+    border-color: #17a2b8 !important;
+  }
+  .bg-info {
+    background-color: #17a2b8 !important;
+  }
+  .btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+  }
+  .btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  /* Reusing existing colors for other sections, or define new ones if needed */
+  .bg-purple {
+    background-color: #6f42c1 !important;
+  }
+  .border-purple {
+    border-color: #6f42c1 !important;
+  }
+  .text-purple {
+    color: #6f42c1 !important;
+  }
+  .btn-outline-purple {
+    color: #6f42c1;
+    border-color: #6f42c1;
+  }
+  .btn-outline-purple:hover {
+    background-color: #6f42c1;
+    color: white;
+  }
+
+  .bg-blue {
+    background-color: #0d6efd !important;
+  }
+  .border-blue {
+    border-color: #0d6efd !important;
+  }
+  .text-blue {
+    color: #0d6efd !important;
+  }
+  .btn-outline-blue {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .btn-outline-blue:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .bg-cyan {
+    background-color: #0dcaf0 !important;
+  }
+  .border-cyan {
+    border-color: #0dcaf0 !important;
+  }
+  .text-cyan {
+    color: #0dcaf0 !important;
+  }
+  .btn-outline-cyan {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+  .btn-outline-cyan:hover {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .bg-green {
+    background-color: #198754 !important;
+  }
+  .border-green {
+    border-color: #198754 !important;
+  }
+  .text-green {
+    color: #198754 !important;
+  }
+  .btn-outline-green {
+    color: #198754;
+    border-color: #198754;
+  }
+  .btn-outline-green:hover {
+    background-color: #198754;
+    color: white;
+  }
+
+  .bg-orange {
+    background-color: #fd7e14 !important;
+  }
+  .border-orange {
+    border-color: #fd7e14 !important;
+  }
+  .text-orange {
+    color: #fd7e14 !important;
+  }
+  .btn-outline-orange {
+    color: #fd7e14;
+    border-color: #fd7e14;
+  }
+  .btn-outline-orange:hover {
+    background-color: #fd7e14;
+    color: white;
+  }
+</style>
+
+{% endblock %}

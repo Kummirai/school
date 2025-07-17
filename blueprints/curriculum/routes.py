@@ -27,3 +27,12 @@ def web_development_curriculum():
 @login_required
 def english_curriculum():
     return render_template('english_curriculum.html')
+
+
+@curriculum_bp.route('/python_curriculum')
+@login_required
+def python_curriculum():
+    try:
+        return render_template('python_curriculum.html')
+    except Exception as e:
+        abort(500, description=str(e))

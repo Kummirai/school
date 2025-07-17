@@ -1,0 +1,763 @@
+{% extends "base.html" %} {% block title %}Course Catalog{% endblock %} {% block
+content %}
+
+<!-- Hero Section -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-journal-bookmark display-1 text-warning"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">
+          Our <span class="text-warning">Course Catalog</span>
+        </h1>
+        <p class="lead mb-4 fs-4">
+          Explore a wide range of courses to kickstart or advance your
+          development career.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Web Development Courses -->
+<section id="web-development" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-code-square text-primary fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Web Development Courses</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- HTML5 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-primary">HTML5 Mastery</h5>
+            <p class="card-text">
+              Learn to structure web content with semantic HTML.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.html_course')}}"
+              class="btn btn-outline-primary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS3 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-info">CSS3 Styling</h5>
+            <p class="card-text">
+              Master modern CSS for stunning and responsive designs.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.css_course')}}"
+              class="btn btn-outline-info btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-warning">
+              JavaScript Fundamentals
+            </h5>
+            <p class="card-text">
+              Add interactivity and dynamic behavior to your web pages.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.js_course')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bootstrap 5 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-purple">Bootstrap Framework</h5>
+            <p class="card-text">
+              Quickly build responsive interfaces with Bootstrap.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.bootstrap_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- jQuery -->
+      <div class="col-md-4">
+        <div class="card h-100 border-blue shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-blue">jQuery Fundamentals</h5>
+            <p class="card-text">
+              Simplify DOM manipulation and event handling.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.jquery_course')}}"
+              class="btn btn-outline-blue btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- React.js -->
+      <div class="col-md-4">
+        <div class="card h-100 border-cyan shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-cyan">React.js Fundamentals</h5>
+            <p class="card-text">
+              Build modern, interactive user interfaces with React.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.react_course')}}"
+              class="btn btn-outline-cyan btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Backend Development Courses -->
+<section id="backend-development" class="py-5">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-server text-success fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Backend Development Courses</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Node.js -->
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-success">Node.js Basics</h5>
+            <p class="card-text">Learn server-side JavaScript with Node.js.</p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.nodejs_course')}}"
+              class="btn btn-outline-success btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Express.js -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-danger">Express.js Framework</h5>
+            <p class="card-text">Build robust web APIs with Express.js.</p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.express_course')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Authentication -->
+      <div class="col-md-4">
+        <div class="card h-100 border-orange shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-orange">
+              Authentication & Authorization
+            </h5>
+            <p class="card-text">
+              Implement secure user authentication in your applications.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.auth_course')}}"
+              class="btn btn-outline-orange btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deployment -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-purple">
+              Web Application Deployment
+            </h5>
+            <p class="card-text">
+              Learn to deploy your web applications to the cloud.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.deployment_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Database Courses -->
+<section id="databases" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-database text-secondary fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Database Courses</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- SQL -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-secondary">SQL Databases</h5>
+            <p class="card-text">Master relational databases with SQL.</p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.sql_course')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MongoDB -->
+      <div class="col-md-4">
+        <div class="card h-100 border-green shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-green">
+              MongoDB NoSQL Database
+            </h5>
+            <p class="card-text">
+              Learn document-oriented database management with MongoDB.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.mongodb_course')}}"
+              class="btn btn-outline-green btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Python Courses -->
+<section id="python-courses" class="py-5">
+  <div class="container py-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-filetype-py text-info fs-1 me-3"></i>
+      <h2 class="fw-bold mb-0">Python Courses</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Python Basics -->
+      <div class="col-md-4">
+        <div class="card h-100 border-info shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-info">Python Basics</h5>
+            <p class="card-text">
+              Get started with the fundamentals of Python programming.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_basics_course')}}"
+              class="btn btn-outline-info btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Object-Oriented Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-primary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-primary">
+              Object-Oriented Python
+            </h5>
+            <p class="card-text">
+              Learn OOP principles and apply them in Python.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.oop_python_course')}}"
+              class="btn btn-outline-primary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-warning shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-warning">
+              Advanced Python Concepts
+            </h5>
+            <p class="card-text">
+              Deep dive into advanced features and best practices.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.advanced_python_course')}}"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Python Web Development -->
+      <div class="col-md-4">
+        <div class="card h-100 border-success shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-success">
+              Python Web Development (Django/Flask)
+            </h5>
+            <p class="card-text">
+              Build web applications using popular Python frameworks.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_web_course')}}"
+              class="btn btn-outline-success btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Science with Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-danger shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-danger">
+              Data Science with Python
+            </h5>
+            <p class="card-text">
+              Analyze and visualize data using Python libraries.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.data_science_course')}}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Machine Learning with Python -->
+      <div class="col-md-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-secondary">
+              Machine Learning with Python
+            </h5>
+            <p class="card-text">Develop and deploy machine learning models.</p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.ml_python_course')}}"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automation & Scripting -->
+      <div class="col-md-4">
+        <div class="card h-100 border-green shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-green">
+              Python Automation & Scripting
+            </h5>
+            <p class="card-text">
+              Automate tasks and create powerful scripts with Python.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.automation_python_course')}}"
+              class="btn btn-outline-green btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testing & Deployment -->
+      <div class="col-md-4">
+        <div class="card h-100 border-orange shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-orange">
+              Python Testing & Deployment
+            </h5>
+            <p class="card-text">
+              Ensure code quality and deploy Python applications.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.python_deployment_course')}}"
+              class="btn btn-outline-orange btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithms & Data Structures -->
+      <div class="col-md-4">
+        <div class="card h-100 border-purple shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-purple">
+              Algorithms & Data Structures (Python)
+            </h5>
+            <p class="card-text">
+              Master fundamental algorithms and data structures.
+            </p>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="{{url_for('courses.algorithms_python_course')}}"
+              class="btn btn-outline-purple btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary">
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4 text-white">
+      Find Your Next Learning Adventure!
+    </h2>
+    <p class="lead mb-5 text-white">
+      Browse our extensive catalog and start your journey today.
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('home.login') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="{{ url_for('courses.catalog') }}"
+      class="btn btn-light btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse All Courses
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    flex-grow: 1; /* Allows text to take up available space */
+  }
+
+  /* Custom colors for consistency with curriculum pages */
+  .bg-purple {
+    background-color: #6f42c1 !important;
+  }
+  .border-purple {
+    border-color: #6f42c1 !important;
+  }
+  .text-purple {
+    color: #6f42c1 !important;
+  }
+  .btn-outline-purple {
+    color: #6f42c1;
+    border-color: #6f42c1;
+  }
+  .btn-outline-purple:hover {
+    background-color: #6f42c1;
+    color: white;
+  }
+
+  .bg-blue {
+    background-color: #0d6efd !important;
+  }
+  .border-blue {
+    border-color: #0d6efd !important;
+  }
+  .text-blue {
+    color: #0d6efd !important;
+  }
+  .btn-outline-blue {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .btn-outline-blue:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .bg-cyan {
+    background-color: #0dcaf0 !important;
+  }
+  .border-cyan {
+    border-color: #0dcaf0 !important;
+  }
+  .text-cyan {
+    color: #0dcaf0 !important;
+  }
+  .btn-outline-cyan {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+  .btn-outline-cyan:hover {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .bg-green {
+    background-color: #198754 !important;
+  }
+  .border-green {
+    border-color: #198754 !important;
+  }
+  .text-green {
+    color: #198754 !important;
+  }
+  .btn-outline-green {
+    color: #198754;
+    border-color: #198754;
+  }
+  .btn-outline-green:hover {
+    background-color: #198754;
+    color: white;
+  }
+
+  .bg-orange {
+    background-color: #fd7e14 !important;
+  }
+  .border-orange {
+    border-color: #fd7e14 !important;
+  }
+  .text-orange {
+    color: #fd7e14 !important;
+  }
+  .btn-outline-orange {
+    color: #fd7e14;
+    border-color: #fd7e14;
+  }
+  .btn-outline-orange:hover {
+    background-color: #fd7e14;
+    color: white;
+  }
+
+  .text-primary {
+    color: #0d6efd !important;
+  }
+  .border-primary {
+    border-color: #0d6efd !important;
+  }
+  .bg-primary {
+    background-color: #0d6efd !important;
+  }
+  .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .text-info {
+    color: #0dcaf0 !important;
+  }
+  .border-info {
+    border-color: #0dcaf0 !important;
+  }
+  .bg-info {
+    background-color: #0dcaf0 !important;
+  }
+  .btn-outline-info {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+  .btn-outline-info:hover {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .text-warning {
+    color: #ffc107 !important;
+  }
+  .border-warning {
+    border-color: #ffc107 !important;
+  }
+  .bg-warning {
+    background-color: #ffc107 !important;
+  }
+  .btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+  }
+  .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: black; /* Changed for better contrast */
+  }
+
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  .border-danger {
+    border-color: #dc3545 !important;
+  }
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .text-secondary {
+    color: #6c757d !important;
+  }
+  .border-secondary {
+    border-color: #6c757d !important;
+  }
+  .bg-secondary {
+    background-color: #6c757d !important;
+  }
+  .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+  }
+  .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+  }
+</style>
+
+{% endblock %}

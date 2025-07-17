@@ -119,3 +119,96 @@ def catalog():
         return render_template('/courses/catalog.html')
     except Exception as e:
         abort(500, description=str(e))
+
+
+@courses_bp.route('/python_basics_course')
+@login_required
+def python_basics_course():
+    try:
+        return render_template('/courses/python_basics_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('/oop_python_course')
+@login_required
+def oop_python_course():
+    try:
+        return render_template('/courses/oop_python_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('/python_web_course')
+@login_required
+def python_web_course():
+    try:
+        return render_template('/courses/python_web_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+@courses_bp.route('/django_course')
+@login_required
+def django_course():
+    try:
+        return render_template('/courses/django_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+# advanced python course
+@courses_bp.route('/advanced_python_course')
+@login_required
+def advanced_python_course():
+    try:
+        return render_template('/courses/advanced_python_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+#data_science_course
+@courses_bp.route('/data_science_course')
+@login_required
+def data_science_course():
+    try:
+        return render_template('/courses/data_science_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+#ml_python_course
+@courses_bp.route('/ml_python_course')
+@login_required
+def ml_python_course():
+    try:
+        return render_template('/courses/ml_python_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+
+#automation_python_course
+@courses_bp.route('/automation_python_course')
+@login_required
+def automation_python_course():
+    try:
+        return render_template('/courses/automation_python_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+#python_deployment_course
+@courses_bp.route('/python_deployment_course')
+@login_required
+def python_deployment_course():
+    try:
+        return render_template('/courses/python_deployment_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
+#algorithms_python_course
+@courses_bp.route('/algorithms_python_course')
+@login_required
+def algorithms_python_course():
+    try:
+        return render_template('/courses/algorithms_python_course.html')
+    except Exception as e:
+        abort(500, description=str(e))
+
