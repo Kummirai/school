@@ -654,7 +654,11 @@
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/hij789",
+                  "path": [
+                    "https://www.youtube.com/embed/hX_nrH8dgz8",
+                    "https://www.youtube.com/embed/oUrbhXQFWHA",
+                    "https://www.youtube.com/embed/bULJ1hQSRgk"
+                  ],
                   "icon": "play-circle"
                 },
                 {

@@ -84,54 +84,49 @@ block content %}
   <div class="container">
     <div class="row">
       <!-- Lesson Navigation/Resources -->
+      <!-- Lesson Navigation/Resources -->
       <div class="col-lg-3">
         <div class="card shadow-sm mb-4">
           <div class="card-header bg-primary text-white">
             <i class="bi bi-list-task me-2"></i> Lesson Resources
           </div>
           <div class="list-group list-group-flush">
-            {% for resource in lesson.resources %}
+            {% set first_loop = true %} {% for resource in lesson.resources %}
+            {% if resource.path is string %}
+            <!-- Single path resource -->
             <button
               type="button"
-              class="list-group-item list-group-item-action resource-btn {% if loop.first %}active{% endif %}"
+              class="list-group-item list-group-item-action resource-btn {% if first_loop %}active{% endif %}"
               data-resource-type="{{ resource.type }}"
-              data-resource-path="{{ url_for('static', filename=resource.path) }}"
+              data-resource-path="{% if resource.path.startswith('http') %}{{ resource.path }}{% else %}{{ url_for('static', filename=resource.path) }}{% endif %}"
             >
               <i
                 class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
               ></i>
               {{ resource.title }}
             </button>
-            {% endfor %}
+            {% set first_loop = false %} {% else %}
+            <!-- Multiple paths resource -->
+            {% for path in resource.path %}
+            <button
+              type="button"
+              class="list-group-item list-group-item-action resource-btn {% if first_loop and loop.first %}active{% endif %}"
+              data-resource-type="{{ resource.type }}"
+              data-resource-path="{% if path.startswith('http') %}{{ path }}{% else %}{{ url_for('static', filename=path) }}{% endif %}"
+            >
+              <i
+                class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+              ></i>
+              {{ resource.title }}{% if resource.path|length > 1 %} - Part {{
+              loop.index }}{% endif %}
+            </button>
+            {% if loop.first %}{% set first_loop = false %}{% endif %} {% endfor
+            %} {% endif %} {% endfor %}
           </div>
-        </div>
-
-        <!-- Lesson Metadata -->
-        <div class="card shadow-sm mb-4">
-          <div class="card-header bg-secondary text-white">
-            <i class="bi bi-info-circle me-2"></i> Lesson Details
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <strong>Term:</strong> {{ subject_data.terms[term_idx].term }}
-            </li>
-            <li class="list-group-item">
-              <strong>Unit:</strong> {{
-              subject_data.terms[term_idx].units[unit_idx].title }}
-            </li>
-            <li class="list-group-item">
-              <strong>Duration:</strong> {{ lesson.duration }} minutes
-            </li>
-            <li class="list-group-item">
-              <strong>Difficulty:</strong>
-              <span class="badge bg-{{ lesson.difficulty_color }}">
-                {{ lesson.difficulty }}
-              </span>
-            </li>
-          </ul>
         </div>
       </div>
 
+      <!-- Dynamic Lesson Content Display Area -->
       <!-- Dynamic Lesson Content Display Area -->
       <div class="col-lg-9">
         <div class="card shadow-sm">
@@ -139,8 +134,10 @@ block content %}
             class="card-header bg-light d-flex justify-content-between align-items-center"
           >
             <h5 class="mb-0" id="lessonContentTitle">
-              {{ lesson.resources[0].title if lesson.resources else 'Lesson
-              Content' }}
+              {% if lesson.resources %} {% if lesson.resources[0].path is string
+              %} {{ lesson.resources[0].title }} {% else %} {{
+              lesson.resources[0].title }} - Part 1 {% endif %} {% else %}
+              Lesson Content {% endif %}
             </h5>
             <div class="btn-group">
               <button class="btn btn-sm btn-outline-secondary" id="zoomInBtn">
@@ -152,35 +149,32 @@ block content %}
             </div>
           </div>
           <div class="card-body" id="lessonContentDisplay">
-            {% if lesson.resources %}
+            {% if lesson.resources %} {% set first_resource =
+            lesson.resources[0] %} {% if first_resource.path is string %} {% set
+            first_path = first_resource.path %} {% else %} {% set first_path =
+            first_resource.path[0] %} {% endif %} {% if
+            first_path.startswith('http') %}
+            <!-- YouTube Video Embed -->
+            <div class="ratio ratio-16x9">
+              <iframe
+                src="{{ first_path }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            {% else %}
+            <!-- Local Content Embed -->
             <iframe
-              src="{{ url_for('static', filename=lesson.resources[0].path) }}"
+              src="{{ url_for('static', filename=first_path) }}"
               style="width: 100%; height: 600px; border: none"
               id="contentFrame"
             ></iframe>
-            {% else %}
+            {% endif %} {% else %}
             <p class="text-muted">No content available for this lesson.</p>
             {% endif %}
           </div>
-        </div>
-
-        <!-- Navigation Footer -->
-        <div class="d-flex justify-content-between mt-4">
-          {% if prev_lesson %}
-          <a
-            href="{{ url_for('grades.view_grade7_lesson', term_idx=prev_lesson.term_idx, unit_idx=prev_lesson.unit_idx, lesson_idx=prev_lesson.lesson_idx) }}"
-            class="btn btn-primary"
-          >
-            <i class="bi bi-chevron-left me-1"></i> Previous Lesson
-          </a>
-          {% endif %} {% if next_lesson %}
-          <a
-            href="{{ url_for('grades.view_grade7_lesson', term_idx=next_lesson.term_idx, unit_idx=next_lesson.unit_idx, lesson_idx=next_lesson.lesson_idx) }}"
-            class="btn btn-primary ms-auto"
-          >
-            Next Lesson <i class="bi bi-chevron-right ms-1"></i>
-          </a>
-          {% endif %}
         </div>
       </div>
     </div>
@@ -188,88 +182,119 @@ block content %}
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const resourceButtons = document.querySelectorAll(".resource-btn");
-    const contentFrame = document.getElementById("contentFrame");
-    const lessonContentTitle = document.getElementById("lessonContentTitle");
-    const markCompleteBtn = document.getElementById("markCompleteBtn");
-    const zoomInBtn = document.getElementById("zoomInBtn");
-    const zoomOutBtn = document.getElementById("zoomOutBtn");
-    let currentZoom = 100;
+    document.addEventListener("DOMContentLoaded", function () {
+      const resourceButtons = document.querySelectorAll(".resource-btn");
+      const contentDisplay = document.getElementById("lessonContentDisplay");
+      const lessonContentTitle = document.getElementById("lessonContentTitle");
+      const markCompleteBtn = document.getElementById("markCompleteBtn");
+      const zoomInBtn = document.getElementById("zoomInBtn");
+      const zoomOutBtn = document.getElementById("zoomOutBtn");
+      let currentZoom = 100;
 
-    // Handle resource switching
-    resourceButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        resourceButtons.forEach((btn) => btn.classList.remove("active"));
-        this.classList.add("active");
+      // Handle resource switching
+  resourceButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      resourceButtons.forEach((btn) => btn.classList.remove("active"));
+      this.classList.add("active");
 
-        const resourcePath = this.dataset.resourcePath;
-        const resourceTitle = this.textContent.trim();
+      const resourcePath = this.dataset.resourcePath;
+      const resourceType = this.dataset.resourceType;
+      const resourceTitle = this.textContent.trim();
 
+      // Clear previous content
+      contentDisplay.innerHTML = '';
+
+      if (resourcePath.startsWith('http')) {
+        // Handle YouTube/video content
+        const videoEmbed = document.createElement('div');
+        videoEmbed.className = 'ratio ratio-16x9';
+        videoEmbed.innerHTML = `
+          <iframe
+            src="${resourcePath}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        `;
+        contentDisplay.appendChild(videoEmbed);
+      } else {
+        // Handle local content
+        const contentFrame = document.createElement('iframe');
         contentFrame.src = resourcePath;
-        lessonContentTitle.textContent = resourceTitle;
+        contentFrame.style.width = '100%';
+        contentFrame.style.height = '600px';
+        contentFrame.style.border = 'none';
+        contentFrame.id = 'contentFrame';
+        contentDisplay.appendChild(contentFrame);
+      }
+
+      lessonContentTitle.textContent = resourceTitle;
+    });
+  });
+
+      // Zoom functionality (only for local content)
+      zoomInBtn.addEventListener("click", () => {
+        const contentFrame = document.getElementById("contentFrame");
+        if (contentFrame) {
+          currentZoom += 10;
+          contentFrame.style.transform = `scale(${currentZoom / 100})`;
+          contentFrame.style.transformOrigin = '0 0';
+        }
       });
-    });
 
-    // Zoom functionality
-    zoomInBtn.addEventListener("click", () => {
-      currentZoom += 10;
-      contentFrame.style.transform = `scale(${currentZoom / 100})`;
-      contentFrame.style.transformOrigin = '0 0';
-    });
+      zoomOutBtn.addEventListener("click", () => {
+        const contentFrame = document.getElementById("contentFrame");
+        if (contentFrame && currentZoom > 50) {
+          currentZoom -= 10;
+          contentFrame.style.transform = `scale(${currentZoom / 100})`;
+          contentFrame.style.transformOrigin = '0 0';
+        }
+      });
 
-    zoomOutBtn.addEventListener("click", () => {
-      if (currentZoom > 50) {
-        currentZoom -= 10;
-        contentFrame.style.transform = `scale(${currentZoom / 100})`;
-        contentFrame.style.transformOrigin = '0 0';
+      // Mark as complete functionality
+      markCompleteBtn.addEventListener("click", function () {
+        fetch("{{ url_for('grades.mark_lesson_complete') }}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            term_idx: {{ term_idx }},
+            unit_idx: {{ unit_idx }},
+            lesson_idx: {{ lesson_idx }}
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showToast("Lesson marked as complete!", "success");
+            // Update UI
+            markCompleteBtn.disabled = true;
+            markCompleteBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Completed';
+          } else {
+            showToast(data.message || "Error marking lesson complete", "danger");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          showToast("Failed to mark lesson complete", "danger");
+        });
+      });
+
+      function showToast(message, type) {
+        const toastContainer = document.createElement("div");
+        toastContainer.innerHTML = `
+          <div class="toast align-items-center text-white bg-${type} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">${message}</div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(toastContainer);
+        setTimeout(() => toastContainer.remove(), 3000);
       }
     });
-
-    // Mark as complete functionality
-    markCompleteBtn.addEventListener("click", function () {
-      fetch("{{ url_for('grades.mark_lesson_complete') }}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          term_idx: {{ term_idx }},
-          unit_idx: {{ unit_idx }},
-          lesson_idx: {{ lesson_idx }}
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showToast("Lesson marked as complete!", "success");
-          // Update UI
-          markCompleteBtn.disabled = true;
-          markCompleteBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Completed';
-        } else {
-          showToast(data.message || "Error marking lesson complete", "danger");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        showToast("Failed to mark lesson complete", "danger");
-      });
-    });
-
-    function showToast(message, type) {
-      const toastContainer = document.createElement("div");
-      toastContainer.innerHTML = `
-        <div class="toast align-items-center text-white bg-${type} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-            <div class="toast-body">${message}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(toastContainer);
-      setTimeout(() => toastContainer.remove(), 3000);
-    }
-  });
 </script>
 
 <!-- Toast Notification -->
