@@ -693,39 +693,52 @@
               ]
             },
             {
-              "title": "13.1 Algebraic Expressions 1",
-              "duration": "20 min",
+              "title": "13 Algebraic Expressions 1",
+              "duration": "120 min",
               "icon": "bi bi-x-diamond",
               "description": "Learn to work with algebraic expressions including variables, simplifying expressions, and combining like terms.",
               "resources": [
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_content.html",
+                  "path": "html/grade_7/maths/chapter13/chapter13_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/hij789",
+                  "path": [
+                    "https://www.youtube.com/embed/n4pt7LOlnsg",
+                    "https://www.youtube.com/embed//eF8Qmbhe3Ho",
+                    "https://www.youtube.com/embed/8LrMZy_Hisc",
+                    "https://www.youtube.com/embed/79KK6PS6EAI",
+                    "https://www.youtube.com/embed/DV7z8FnXioY"
+                  ],
                   "icon": "play-circle"
                 },
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_study_guide.html",
+                  "path": "html/grade_7/maths/chapter13/chapter13_studyguide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_exercises.html",
+                  "path": [
+                    "html/grade_7/maths/chapter13/chapter13_exercise_1.html",
+                    "html/grade_7/maths/chapter13/chapter13_exercise_2.html",
+                    "html/grade_7/maths/chapter13/chapter13_exercise_3.html"
+                  ],
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_test.html",
+                  "path": [
+                    "html/grade_7/maths/chapter13/chapter13_test_1.html",
+                    "html/grade_7/maths/chapter13/chapter13_test_2.html"
+                  ],
                   "icon": "clipboard-check"
                 }
               ]

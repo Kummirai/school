@@ -1,0 +1,2380 @@
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts - Inter -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .container {
+    max-width: 960px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+  h1,
+  h2,
+  h3 {
+    color: #343a40;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  .chapter-section,
+  .activity-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    background-color: #fefefe;
+  }
+  .question-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
+  .question-group label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #495057;
+  }
+  .form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border-color: #ced4da;
+  }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+  }
+  .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+      transform 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-2px);
+  }
+  .feedback-message {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  .feedback-correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .feedback-incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  .feedback-partial {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+  .correct-answer {
+    color: green;
+    font-weight: bold;
+  }
+  .incorrect-answer {
+    color: red;
+    font-weight: bold;
+  }
+  .table th,
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .table thead th {
+    background-color: #e9ecef;
+  }
+  .flow-diagram-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .flow-box {
+    border: 2px solid #0d6efd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 10px;
+    font-weight: bold;
+    background-color: #e0f2fe;
+    color: #0d6efd;
+  }
+  .flow-arrow {
+    font-size: 2em;
+    color: #6c757d;
+    margin: 0 5px;
+  }
+  .flow-input-output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+  }
+  .flow-label {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 5px;
+  }
+  .flow-value {
+    font-weight: bold;
+    color: #343a40;
+  }
+  .flow-line {
+    width: 50px;
+    height: 2px;
+    background-color: #6c757d;
+    margin: 0 10px;
+  }
+  .flow-operation {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+</style>
+
+<div class="container">
+  <div class="chapter-section">
+    <p class="lead">Different ways of describing a computation</p>
+
+    <div class="activity-section">
+      <h4>Activity 1: Circles in arrangements</h4>
+      <p>
+        The diagrams below represent arrangements of small circles. In every
+        arrangement there are two rows of circles.
+      </p>
+      <p>
+        <strong>Diagram description:</strong> Imagine diagrams where circles are
+        arranged in two rows. Diagram 1 has 1 circle per row, Diagram 2 has 2
+        circles per row, Diagram 3 has 3 circles per row, and so on.
+      </p>
+
+      <h5>
+        (a) The table below relates to the diagrams. Copy and complete it.
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Diagram number</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Number of circles per row</td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_circles_1"
+                  value="1"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_circles_2"
+                  value="2"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_circles_3"
+                  value="3"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_circles_4"
+                  value="4"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_circles_5"
+                  value="5"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Number of rows</td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_rows_1"
+                  value="2"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_rows_2"
+                  value="2"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_rows_3"
+                  value="2"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_rows_4"
+                  value="2"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a1q1_rows_5"
+                  value="2"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                How to calculate the total number of circles per diagram (rule)
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a1q1_rule_1"
+                  placeholder="e.g., 2x1"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a1q1_rule_2"
+                  placeholder="e.g., 2x2"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a1q1_rule_3"
+                  placeholder="e.g., 2x3"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a1q1_rule_4"
+                  placeholder="e.g., 2x4"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a1q1_rule_5"
+                  placeholder="e.g., 2x5"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity1a()"
+      >
+        Check Answers (1a)
+      </button>
+      <div id="feedback-a1q1a" class="feedback-message mt-3 d-none"></div>
+
+      <h5>(b) What remains the same in the diagrams above?</h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a1q1b"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>
+        (c) What changes in the diagrams? In other words, what are the variable
+        quantities in the situation?
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a1q1c"
+          placeholder="Your answer"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity1bc()"
+      >
+        Check Answers (1b-c)
+      </button>
+      <div id="feedback-a1q1bc" class="feedback-message mt-3 d-none"></div>
+
+      <h5>(d) Copy and complete the flow diagram on the right.</h5>
+      <p>
+        <strong>Flow Diagram Description:</strong> Input numbers go into a box
+        with the operation "x 2", and then output numbers come out. Some inputs
+        are given, and you need to find the corresponding outputs.
+      </p>
+      <div class="flow-diagram-container">
+        <div class="flow-input-output">
+          <span class="flow-label">Input</span>
+          <span class="flow-value">11</span>
+          <span class="flow-value">21</span>
+          <span class="flow-value">41</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="flow-operation">× 2</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-input-output">
+          <span class="flow-label">Output</span>
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a1q1d_out1"
+            placeholder="Output for 11"
+          />
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a1q1d_out2"
+            placeholder="Output for 21"
+          />
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a1q1d_out3"
+            placeholder="Output for 41"
+          />
+          <span class="flow-value mt-2">62 (Input: 31)</span>
+          <span class="flow-value">102 (Input: 51)</span>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity1d()"
+      >
+        Check Answers (1d)
+      </button>
+      <div id="feedback-a1q1d" class="feedback-message mt-3 d-none"></div>
+
+      <h5>
+        (e) How many circles will diagram 11 have if the pattern is extended?
+        Explain.
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a1q1e"
+          placeholder="Your answer and explanation"
+        />
+      </div>
+      <h5>(f) What does the number 2 in the rule $2\times n$ represent?</h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a1q1f"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>
+        (g) What does the letter symbol n represent in the rule $2\times n$?
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a1q1g"
+          placeholder="Your answer"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity1efg()"
+      >
+        Check Answers (1e-g)
+      </button>
+      <div id="feedback-a1q1efg" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 2 & 3: Odd Numbers Sequence</h4>
+      <p>Consider the sequence 1; 3; 5; 7; 9; ...</p>
+      <p>The first odd number can be written as $2\times1-1$.</p>
+      <p>The second odd number can be written as $2\times2-1$.</p>
+      <p>The third odd number can be written as $2\times3-1$.</p>
+
+      <h5>2. (a) What is the tenth odd number?</h5>
+      <div class="question-group">
+        <input
+          type="number"
+          class="form-control"
+          id="a2q2a"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>(b) What is the thirtieth odd number?</h5>
+      <div class="question-group">
+        <input
+          type="number"
+          class="form-control"
+          id="a2q2b"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>(c) What is the hundredth odd number?</h5>
+      <div class="question-group">
+        <input
+          type="number"
+          class="form-control"
+          id="a2q2c"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>(d) What is the nth odd number?</h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a2q2d"
+          placeholder="e.g., 2n-1"
+        />
+      </div>
+      <h5>
+        3. The rule $2\times n-1$ can be used to determine any odd number in the
+        sequence 1; 3; 5; 7; 9; ... What does the letter symbol n represent in
+        the rule $2\times n-1$?
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a2q3"
+          placeholder="Your answer"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity23()"
+      >
+        Check Answers (2 & 3)
+      </button>
+      <div id="feedback-a2q23" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 4 & 5: Complex Flow Diagram and Word Formulae</h4>
+      <p>
+        <strong>Flow Diagram Description:</strong> Input numbers go into a box
+        with operation "+ 4", then the output of that goes into another box with
+        operation "x 5", and finally, the final output comes out.
+      </p>
+      <div class="flow-diagram-container">
+        <div class="flow-input-output">
+          <span class="flow-label">Input</span>
+          <span class="flow-value">11</span>
+          <span class="flow-value">31</span>
+          <span class="flow-value">41</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="flow-operation">+ 4</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="flow-operation">× 5</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-input-output">
+          <span class="flow-label">Output</span>
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a4q4a_out1"
+            placeholder="Output for 11"
+          />
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a4q4a_out2"
+            placeholder="Output for 31"
+          />
+          <input
+            type="number"
+            class="form-control form-control-sm my-1"
+            id="a4q4a_out3"
+            placeholder="Output for 41"
+          />
+          <span class="flow-value mt-2">125 (Input: 21)</span>
+          <span class="flow-value">275 (Input: 51)</span>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity4a()"
+      >
+        Check Answers (4a)
+      </button>
+      <div id="feedback-a4q4a" class="feedback-message mt-3 d-none"></div>
+
+      <h5>
+        (b) Which of the following instructions did you follow to calculate the
+        output values of the flow diagram in question 4(a)?
+      </h5>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="a4q4b"
+          id="a4q4b_a"
+          value="A"
+        />
+        <label class="form-check-label" for="a4q4b_a"
+          >A. Multiply the input number by 5 and then add 4.</label
+        >
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="a4q4b"
+          id="a4q4b_b"
+          value="B"
+        />
+        <label class="form-check-label" for="a4q4b_b"
+          >B. Add 45 to the input number.</label
+        >
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="a4q4b"
+          id="a4q4b_c"
+          value="C"
+        />
+        <label class="form-check-label" for="a4q4b_c"
+          >C. Add 4 to the input number and then multiply by 5.</label
+        >
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity4b()"
+      >
+        Check Answer (4b)
+      </button>
+      <div id="feedback-a4q4b" class="feedback-message mt-3 d-none"></div>
+
+      <h5>
+        5. Use 10 as the input number and calculate the output number for each
+        of the word formulae in question 4(b).
+      </h5>
+      <div class="question-group">
+        <label for="a4q5a"
+          >A. Multiply the input number by 5 and then add 4.</label
+        >
+        <input
+          type="number"
+          class="form-control mb-2"
+          id="a4q5a"
+          placeholder="Output for A"
+        />
+        <label for="a4q5b">B. Add 45 to the input number.</label>
+        <input
+          type="number"
+          class="form-control mb-2"
+          id="a4q5b"
+          placeholder="Output for B"
+        />
+        <label for="a4q5c"
+          >C. Add 4 to the input number and then multiply by 5.</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="a4q5c"
+          placeholder="Output for C"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity5()"
+      >
+        Check Answers (5)
+      </button>
+      <div id="feedback-a4q5" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 6: Writing Abbreviations (Algebraic Expressions)</h4>
+      <p>
+        Write the abbreviations for the following computational instructions by
+        using <code>x</code> for "the input number":
+      </p>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a6q6a">6. (a) Halve the input number and plus 2.</label>
+            <input
+              type="text"
+              class="form-control"
+              id="a6q6a"
+              placeholder="e.g., x/2 + 2"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a6q6b"
+              >6. (b) Multiply the input number by 6 and subtract 2.</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="a6q6b"
+              placeholder="e.g., 6x - 2"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a6q6c"
+              >6. (c) Multiply the sum of the input number and 3 by 10.</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="a6q6c"
+              placeholder="e.g., 10(x + 3)"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a6q6d"
+              >6. (d) Subtract 4 from the input number and multiply the answer
+              by 7.</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="a6q6d"
+              placeholder="e.g., 7(x - 4)"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity6()"
+      >
+        Check Answers (6)
+      </button>
+      <div id="feedback-a6q6" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 7: Cardo's Teacher</h4>
+      <p>
+        Cardo's teacher writes on the board: "Add 2 and then multiply the answer
+        by 3." The class must use 5 as an input number and apply the
+        computational instruction.
+      </p>
+      <h5>
+        (a) Cardo uses 5 as the input number and writes: $(5+2)\times3$. Paul
+        says $(5+2)\times3$ is $7\times3$ which is 21. Is Paul right?
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a7q7a"
+          placeholder="Yes/No"
+        />
+      </div>
+      <h5>(b) Explain your answer in (a).</h5>
+      <div class="question-group">
+        <textarea
+          class="form-control"
+          id="a7q7b"
+          rows="3"
+          placeholder="Your explanation"
+        ></textarea>
+      </div>
+      <h5>(c) Represent this flow diagram as an algebraic expression:</h5>
+      <p>
+        <strong>Flow Diagram Description:</strong> Input 'X' goes into a box
+        with operation "+2", then the output of that goes into another box with
+        operation "x 3", and finally, the final output comes out.
+      </p>
+      <div class="flow-diagram-container">
+        <div class="flow-input-output">
+          <span class="flow-label">Input</span>
+          <span class="flow-value">X</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="flow-operation">+ 2</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="flow-operation">× 3</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-input-output">
+          <span class="flow-label">Output</span>
+          <input
+            type="text"
+            class="form-control form-control-sm my-1"
+            id="a7q7c"
+            placeholder="Algebraic Expression"
+          />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity7()"
+      >
+        Check Answers (7)
+      </button>
+      <div id="feedback-a7q7" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 8: Flow Diagrams and Algebraic Expressions</h4>
+      <p>
+        Express each computational instruction as an algebraic expression with
+        <code>x</code> as input number:
+      </p>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a8q8a">8. (a) Multiply by 4 and then subtract 8.</label>
+            <input
+              type="text"
+              class="form-control"
+              id="a8q8a"
+              placeholder="e.g., 4x - 8"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a8q8b">8. (b) Subtract 8 and then multiply by 4.</label>
+            <input
+              type="text"
+              class="form-control"
+              id="a8q8b"
+              placeholder="e.g., 4(x - 8)"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a8q8c">8. (c) Add 15 and then divide by 5.</label>
+            <input
+              type="text"
+              class="form-control"
+              id="a8q8c"
+              placeholder="e.g., (x + 15) / 5"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <label for="a8q8d">8. (d) Divide by 5 and then add 15.</label>
+            <input
+              type="text"
+              class="form-control"
+              id="a8q8d"
+              placeholder="e.g., x / 5 + 15"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity8()"
+      >
+        Check Answers (8)
+      </button>
+      <div id="feedback-a8q8" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 9: Describing Computational Instructions in Words</h4>
+      <p>Describe each computational instruction in words:</p>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <p>9. (a) Flow: Input → ×4 → +7 → Output</p>
+            <input
+              type="text"
+              class="form-control"
+              id="a9q9a"
+              placeholder="Your description"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <p>9. (b) Flow: Input → +7 → ×4 → Output</p>
+            <input
+              type="text"
+              class="form-control"
+              id="a9q9b"
+              placeholder="Your description"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <p>9. (c) Flow: Input → ×9 → -5 → Output</p>
+            <input
+              type="text"
+              class="form-control"
+              id="a9q9c"
+              placeholder="Your description"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="question-group">
+            <p>9. (d) Flow: Input → -5 → ×9 → Output</p>
+            <input
+              type="text"
+              class="form-control"
+              id="a9q9d"
+              placeholder="Your description"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity9()"
+      >
+        Check Answers (9)
+      </button>
+      <div id="feedback-a9q9" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 10: Determining Output Values</h4>
+      <p>
+        Two algebraic expressions are given in the table. Copy the table and use
+        the given input values (x values) to determine the corresponding output
+        values.
+      </p>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>X</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>5</th>
+              <th>6</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>6 × x + 8</code></td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q1_x1"
+                  value="14"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q1_x2"
+                  value="20"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q1_x3"
+                  value="26"
+                  readonly
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q1_x5"
+                  placeholder="Output for 5"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q1_x6"
+                  placeholder="Output for 6"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><code>2 × x × (3 + 4)</code></td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q2_x1"
+                  placeholder="Output for 1"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q2_x2"
+                  placeholder="Output for 2"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q2_x3"
+                  placeholder="Output for 3"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q2_x5"
+                  placeholder="Output for 5"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a10q2_x6"
+                  placeholder="Output for 6"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity10()"
+      >
+        Check Answers (10)
+      </button>
+      <div id="feedback-a10q10" class="feedback-message mt-3 d-none"></div>
+    </div>
+  </div>
+
+  <div class="chapter-section">
+    <h3 class="text-center">13.2 Relationships represented in formulae</h3>
+    <p class="lead">Making sense of variables and constants in formulae</p>
+
+    <div class="activity-section">
+      <h4>Activity 1: Perimeters and Areas of Rectangles</h4>
+      <h5>
+        1. (a) Chris uses the formula $P=2\times l+2\times b$ to calculate the
+        perimeters of rectangles of differing lengths and breadths as indicated
+        in the table. He also calculates the area of each rectangle using the
+        formula $A=l\times h$. Copy and complete the table.
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Rectangle</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Length (l)</td>
+              <td>24</td>
+              <td>8</td>
+              <td>6</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>Breadth (b)</td>
+              <td>1</td>
+              <td>4</td>
+              <td>3</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Perimeter $P=2\times l+2\times b$</td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_p1"
+                  placeholder="P for Rect 1"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_p2"
+                  placeholder="P for Rect 2"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_p3"
+                  placeholder="P for Rect 3"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_p4"
+                  placeholder="P for Rect 4"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Area $A=l\times b$</td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_a1"
+                  placeholder="A for Rect 1"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_a2"
+                  placeholder="A for Rect 2"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_a3"
+                  placeholder="A for Rect 3"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q1a_a4"
+                  placeholder="A for Rect 4"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_1a()"
+      >
+        Check Answers (1a)
+      </button>
+      <div id="feedback-a132q1a" class="feedback-message mt-3 d-none"></div>
+
+      <h5>
+        (b) Rita calculates the perimeter of a rectangle in a different way. She
+        adds the value of the length of the rectangle to the value of the
+        breadth of the rectangle and then multiplies the answer by 2. Write down
+        the formula that Rita uses to calculate the perimeter of each rectangle.
+        Test whether or not Rita's formula produces the same results as Chris's.
+      </h5>
+      <div class="question-group">
+        <label for="a132q1b_formula">Rita's Formula:</label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          id="a132q1b_formula"
+          placeholder="e.g., P = 2 * (l + b)"
+        />
+        <label for="a132q1b_test"
+          >Does it produce the same results? (Yes/No)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="a132q1b_test"
+          placeholder="Your answer"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_1b()"
+      >
+        Check Answers (1b)
+      </button>
+      <div id="feedback-a132q1b" class="feedback-message mt-3 d-none"></div>
+
+      <p>Questions 1(c) to (e) refer to the formula $P=2\times(l+b)$</p>
+      <h5>(c) What does the number 2 represent in the formula?</h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a132q1c"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>(d) What is the number 2 called?</h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a132q1d"
+          placeholder="Your answer"
+        />
+      </div>
+      <h5>
+        (e) Which letter symbols represent variables in the formula
+        $P=2\times(l+b)$? Explain.
+      </h5>
+      <div class="question-group">
+        <input
+          type="text"
+          class="form-control"
+          id="a132q1e"
+          placeholder="Your answer and explanation"
+        />
+      </div>
+      <h5>(f) What can you say about the area of all of these rectangles?</h5>
+      <div class="question-group">
+        <textarea
+          class="form-control"
+          id="a132q1f"
+          rows="3"
+          placeholder="Your answer"
+        ></textarea>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_1cdef()"
+      >
+        Check Answers (1c-f)
+      </button>
+      <div id="feedback-a132q1cdef" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 2: Sindi's Father's Age</h4>
+      <h5>
+        2. Sindi calculates her father's age by using the formula $F=x+37$,
+        where x is Sindi's age. Her father passed away when Sindi was 43 years
+        old. How old was he then?
+      </h5>
+      <div class="question-group">
+        <input
+          type="number"
+          class="form-control"
+          id="a132q2"
+          placeholder="Father's age"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_2()"
+      >
+        Check Answer (2)
+      </button>
+      <div id="feedback-a132q2" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 3: Jacob's Cell Phone Savings</h4>
+      <p>
+        Jacob wants to buy the cheapest cell phone in the market. He has already
+        saved R45 and decides to save R5 per week until he has enough money to
+        buy the phone. The formula $y=45+5\times w$ gives the amount of money
+        (in rands) that Jacob has saved to buy the cell phone after w weeks.
+      </p>
+
+      <h5>
+        (a) Copy and complete the table. The first row has been done as an
+        example.
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Number of weeks (w)</th>
+              <th>How to calculate $45+5\times w$</th>
+              <th>Amount saved (y)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>$45+5\times0=45+0$</td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3a_calc1"
+                  placeholder="Calculation"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q3a_amt1"
+                  placeholder="Amount"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3a_calc2"
+                  placeholder="Calculation"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q3a_amt2"
+                  placeholder="Amount"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3a_calc4"
+                  placeholder="Calculation"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q3a_amt4"
+                  placeholder="Amount"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3a_calc5"
+                  placeholder="Calculation"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  id="a132q3a_amt5"
+                  placeholder="Amount"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_3a()"
+      >
+        Check Answers (3a)
+      </button>
+      <div id="feedback-a132q3a" class="feedback-message mt-3 d-none"></div>
+
+      <h5>
+        (b) The cell phone that Jacob wants to buy costs R90. Will Jacob have
+        saved enough money to be able to buy the cell phone by the eighth week?
+        Explain.
+      </h5>
+      <div class="question-group">
+        <label for="a132q3b_answer">Will he have enough? (Yes/No)</label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          id="a132q3b_answer"
+          placeholder="Your answer"
+        />
+        <label for="a132q3b_explanation">Explanation:</label>
+        <textarea
+          class="form-control"
+          id="a132q3b_explanation"
+          rows="3"
+          placeholder="Your explanation"
+        ></textarea>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_3b()"
+      >
+        Check Answers (3b)
+      </button>
+      <div id="feedback-a132q3b" class="feedback-message mt-3 d-none"></div>
+
+      <h5>(c) Copy and complete the table.</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Formula: $y=45+5\times w$</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Which are constants in the formula?</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3c_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Which letter symbols represent variable quantities in the
+                formula?
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q3c_var"
+                  placeholder="Variables"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_3c()"
+      >
+        Check Answers (3c)
+      </button>
+      <div id="feedback-a132q3c" class="feedback-message mt-3 d-none"></div>
+    </div>
+
+    <div class="activity-section">
+      <h4>Activity 4: Identify Variables and Constants in Formulae</h4>
+      <p>
+        Copy the table. In each of the formulae in the table, identify the
+        symbols that represent variables and constants and fill them in.
+      </p>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Formula</th>
+              <th>Symbols for variable(s)</th>
+              <th>Constant(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>(a) $y=5\times x+7$</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4a_var"
+                  placeholder="Variables"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4a_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>(b) $y=100+x$</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4b_var"
+                  placeholder="Variables"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4b_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>(c) $y=x\div5$</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4c_var"
+                  placeholder="Variables"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4c_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>(d) $y=5\times x$</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4d_var"
+                  placeholder="Variables"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4d_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>(e) $y=0,7\times x+2,3$</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4e_var"
+                  placeholder="Variables"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="a132q4e_const"
+                  placeholder="Constants"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary mt-3"
+        onclick="checkActivity132_4()"
+      >
+        Check Answers (4)
+      </button>
+      <div id="feedback-a132q4" class="feedback-message mt-3 d-none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Helper function to normalize string input for comparison
+  function normalizeString(str) {
+    if (typeof str !== "string") return "";
+    return str
+      .toLowerCase()
+      .replace(/\s/g, "")
+      .replace(/\*\*/g, "^")
+      .replace(/ /g, ""); // Remove all spaces
+  }
+
+  // Helper function to compare numerical values, handling fractions
+  function compareNumbers(input, correct) {
+    input = String(input).trim();
+    correct = String(correct).trim();
+
+    // Handle fractions (e.g., "1/2", "3/4")
+    const parseFraction = (s) => {
+      const parts = s.split("/");
+      if (parts.length === 2) {
+        const num = parseFloat(parts[0]);
+        const den = parseFloat(parts[1]);
+        return den !== 0 ? num / den : NaN;
+      }
+      return parseFloat(s);
+    };
+
+    const parsedInput = parseFraction(input);
+    const parsedCorrect = parseFraction(correct);
+
+    // Use a small epsilon for floating point comparisons
+    return Math.abs(parsedInput - parsedCorrect) < 1e-9;
+  }
+
+  // Function to display feedback
+  function displayFeedback(feedbackId, message, type) {
+    const feedbackDiv = document.getElementById(feedbackId);
+    feedbackDiv.innerHTML = message;
+    feedbackDiv.classList.remove(
+      "d-none",
+      "feedback-correct",
+      "feedback-incorrect",
+      "feedback-partial"
+    );
+    feedbackDiv.classList.add(`feedback-${type}`);
+  }
+
+  // Function to check a single input field
+  function checkInput(elementId, correctAnswers, isNumeric = false) {
+    const inputElement = document.getElementById(elementId);
+    const userAnswer = inputElement.value;
+    let isCorrect = false;
+
+    if (isNumeric) {
+      isCorrect = correctAnswers.some((ans) => compareNumbers(userAnswer, ans));
+    } else {
+      isCorrect = correctAnswers.some(
+        (ans) => normalizeString(userAnswer) === normalizeString(ans)
+      );
+    }
+
+    if (isCorrect) {
+      inputElement.classList.remove("is-invalid");
+      inputElement.classList.add("is-valid");
+    } else {
+      inputElement.classList.remove("is-valid");
+      inputElement.classList.add("is-invalid");
+    }
+    return isCorrect;
+  }
+
+  // --- Activity 1: Circles in arrangements ---
+  function checkActivity1a() {
+    let score = 0;
+    const totalQuestions = 5;
+    const correctRules = {
+      a1q1_rule_1: ["2x1", "2*1", "1*2", "1x2"],
+      a1q1_rule_2: ["2x2", "2*2", "2*2", "2x2"],
+      a1q1_rule_3: ["2x3", "2*3", "3*2", "3x2"],
+      a1q1_rule_4: ["2x4", "2*4", "4*2", "4x2"],
+      a1q1_rule_5: ["2x5", "2*5", "5*2", "5x2"],
+    };
+
+    for (let i = 1; i <= totalQuestions; i++) {
+      const id = `a1q1_rule_${i}`;
+      if (checkInput(id, correctRules[id])) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a1q1a",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1a.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity1bc() {
+    let score = 0;
+    const totalQuestions = 2;
+    const q1bCorrect = [
+      "numberofrows",
+      "therows",
+      "theremainsconstantisthenumberofrows",
+      "thenumberofrows",
+    ];
+    const q1cCorrect = [
+      "numberofcirclesperrow",
+      "thenumberofcirclesperrow",
+      "thenumberofcirclesperrowandthetotalnumberofcircles",
+      "circlesperrow",
+      "totalnumberofcircles",
+    ];
+
+    if (checkInput("a1q1b", q1bCorrect)) score++;
+    if (checkInput("a1q1c", q1cCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a1q1bc",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1b-c.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity1d() {
+    let score = 0;
+    const totalQuestions = 3;
+    const correctOutputs = {
+      a1q1d_out1: ["22"],
+      a1q1d_out2: ["42"],
+      a1q1d_out3: ["82"],
+    };
+
+    for (const id in correctOutputs) {
+      if (checkInput(id, correctOutputs[id], true)) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a1q1d",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1d.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity1efg() {
+    let score = 0;
+    const totalQuestions = 3;
+    const q1eCorrect = ["22", "22circles", "2x11=22", "2*11=22"]; // Simplistic check for explanation
+    const q1fCorrect = ["numberofrows", "itrepresentsnumberofrows", "constant"];
+    const q1gCorrect = [
+      "numberofcirclesperrow",
+      "variable",
+      "itrepresentsnumberofcirclesperrow",
+    ];
+
+    if (checkInput("a1q1e", q1eCorrect)) score++;
+    if (checkInput("a1q1f", q1fCorrect)) score++;
+    if (checkInput("a1q1g", q1gCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a1q1efg",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1e-g.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 2 & 3: Odd Numbers Sequence ---
+  function checkActivity23() {
+    let score = 0;
+    const totalQuestions = 5;
+    const q2aCorrect = ["19"]; // 2*10-1
+    const q2bCorrect = ["59"]; // 2*30-1
+    const q2cCorrect = ["199"]; // 2*100-1
+    const q2dCorrect = ["2n-1", "2*n-1", "2xn-1"];
+    const q3Correct = ["positionoftheoddnumberinthesequence", "position"];
+
+    if (checkInput("a2q2a", q2aCorrect, true)) score++;
+    if (checkInput("a2q2b", q2bCorrect, true)) score++;
+    if (checkInput("a2q2c", q2cCorrect, true)) score++;
+    if (checkInput("a2q2d", q2dCorrect)) score++;
+    if (checkInput("a2q3", q3Correct)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a2q23",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 2 & 3.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 4 & 5: Complex Flow Diagram and Word Formulae ---
+  function checkActivity4a() {
+    let score = 0;
+    const totalQuestions = 3;
+    const correctOutputs = {
+      a4q4a_out1: ["75"], // (11+4)*5
+      a4q4a_out2: ["175"], // (31+4)*5
+      a4q4a_out3: ["225"], // (41+4)*5
+    };
+
+    for (const id in correctOutputs) {
+      if (checkInput(id, correctOutputs[id], true)) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a4q4a",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 4a.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity4b() {
+    const correctOption = "C";
+    const selectedOption = document.querySelector(
+      'input[name="a4q4b"]:checked'
+    )?.value;
+    const feedbackDiv = document.getElementById("feedback-a4q4b");
+
+    if (selectedOption === correctOption) {
+      displayFeedback(
+        "feedback-a4q4b",
+        "Correct! Option C is the right instruction.",
+        "correct"
+      );
+      document.getElementById("a4q4b_c").classList.add("is-valid");
+      document.getElementById("a4q4b_a").classList.remove("is-invalid");
+      document.getElementById("a4q4b_b").classList.remove("is-invalid");
+    } else {
+      displayFeedback(
+        "feedback-a4q4b",
+        `Incorrect. The correct option is C.`,
+        "incorrect"
+      );
+      document.getElementById("a4q4b_c").classList.remove("is-valid");
+      document.getElementById("a4q4b_c").classList.add("is-invalid");
+      if (selectedOption) {
+        document
+          .getElementById(`a4q4b_${selectedOption.toLowerCase()}`)
+          .classList.add("is-invalid");
+      }
+    }
+  }
+
+  function checkActivity5() {
+    let score = 0;
+    const totalQuestions = 3;
+    const input = 10;
+    const correctOutputs = {
+      a4q5a: [String(input * 5 + 4)], // 54
+      a4q5b: [String(input + 45)], // 55
+      a4q5c: [String((input + 4) * 5)], // 70
+    };
+
+    for (const id in correctOutputs) {
+      if (checkInput(id, correctOutputs[id], true)) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a4q5",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 5.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 6: Writing Abbreviations (Algebraic Expressions) ---
+  function checkActivity6() {
+    let score = 0;
+    const totalQuestions = 4;
+    const correctExpressions = {
+      a6q6a: ["x/2+2", "0.5x+2", "x/2+2", "1/2x+2"],
+      a6q6b: ["6x-2", "6*x-2"],
+      a6q6c: ["10(x+3)", "10*(x+3)", "(x+3)*10"],
+      a6q6d: ["7(x-4)", "7*(x-4)", "(x-4)*7"],
+    };
+
+    for (const id in correctExpressions) {
+      if (checkInput(id, correctExpressions[id])) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a6q6",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 6.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 7: Cardo's Teacher ---
+  function checkActivity7() {
+    let score = 0;
+    const totalQuestions = 3;
+    const q7aCorrect = ["yes"];
+    const q7bCorrect = [
+      "yesbecause5+2is7and7*3is21",
+      "yesbecauseorderofoperationsiscorrect",
+      "yes",
+    ]; // Simplified for validation
+    const q7cCorrect = ["(x+2)*3", "3(x+2)"];
+
+    if (checkInput("a7q7a", q7aCorrect)) score++;
+    if (checkInput("a7q7b", q7bCorrect)) score++;
+    if (checkInput("a7q7c", q7cCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a7q7",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 7.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 8: Flow Diagrams and Algebraic Expressions ---
+  function checkActivity8() {
+    let score = 0;
+    const totalQuestions = 4;
+    const correctExpressions = {
+      a8q8a: ["4x-8", "4*x-8"],
+      a8q8b: ["4(x-8)", "(x-8)*4"],
+      a8q8c: ["(x+15)/5", "x/5+3"],
+      a8q8d: ["x/5+15"],
+    };
+
+    for (const id in correctExpressions) {
+      if (checkInput(id, correctExpressions[id])) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a8q8",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 8.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 9: Describing Computational Instructions in Words ---
+  function checkActivity9() {
+    let score = 0;
+    const totalQuestions = 4;
+    const correctDescriptions = {
+      a9q9a: ["multiplyby4thenadd7"],
+      a9q9b: ["add7thenmultiplyby4"],
+      a9q9c: ["multiplyby9thensubtract5"],
+      a9q9d: ["subtract5thenmultiplyby9"],
+    };
+
+    for (const id in correctDescriptions) {
+      if (checkInput(id, correctDescriptions[id])) {
+        score++;
+      }
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a9q9",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 9.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 10: Determining Output Values ---
+  function checkActivity10() {
+    let score = 0;
+    const totalQuestions = 5;
+    const correctOutputs = {
+      a10q1_x5: ["38"], // 6*5+8
+      a10q1_x6: ["44"], // 6*6+8
+      a10q2_x1: ["14"], // 2*1*(3+4)
+      a10q2_x2: ["28"], // 2*2*(3+4)
+      a10q2_x3: ["42"], // 2*3*(3+4)
+      a10q2_x5: ["70"], // 2*5*(3+4)
+      a10q2_x6: ["84"], // 2*6*(3+4)
+    };
+
+    const idsToCheck = [
+      "a10q1_x5",
+      "a10q1_x6",
+      "a10q2_x1",
+      "a10q2_x2",
+      "a10q2_x3",
+      "a10q2_x5",
+      "a10q2_x6",
+    ];
+    let correctCount = 0;
+
+    idsToCheck.forEach((id) => {
+      if (checkInput(id, correctOutputs[id], true)) {
+        correctCount++;
+      }
+    });
+
+    // The original table had 5 blanks, so totalQuestions is 5.
+    // My implementation has 7 blanks. I will adjust the total questions to 7.
+    const adjustedTotalQuestions = 7;
+
+    const percentage = (correctCount / adjustedTotalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (correctCount === adjustedTotalQuestions) {
+      feedbackType = "correct";
+    } else if (correctCount > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a10q10",
+      `You scored ${correctCount} out of ${adjustedTotalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 10.`,
+      feedbackType
+    );
+  }
+
+  // --- Section 13.2: Relationships represented in formulae ---
+  // --- Activity 1: Perimeters and Areas of Rectangles ---
+  function checkActivity132_1a() {
+    let score = 0;
+    const totalQuestions = 8; // 4 perimeters + 4 areas
+    const correctP = {
+      a132q1a_p1: ["50"], // 2*24 + 2*1 = 48 + 2 = 50
+      a132q1a_p2: ["24"], // 2*8 + 2*4 = 16 + 8 = 24
+      a132q1a_p3: ["18"], // 2*6 + 2*3 = 12 + 6 = 18
+      a132q1a_p4: ["28"], // 2*12 + 2*2 = 24 + 4 = 28
+    };
+    const correctA = {
+      a132q1a_a1: ["24"], // 24*1 = 24
+      a132q1a_a2: ["32"], // 8*4 = 32
+      a132q1a_a3: ["18"], // 6*3 = 18
+      a132q1a_a4: ["24"], // 12*2 = 24
+    };
+
+    for (const id in correctP) {
+      if (checkInput(id, correctP[id], true)) score++;
+    }
+    for (const id in correctA) {
+      if (checkInput(id, correctA[id], true)) score++;
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q1a",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1a.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity132_1b() {
+    let score = 0;
+    const totalQuestions = 2;
+    const formulaCorrect = ["p=2*(l+b)", "p=2(l+b)", "2(l+b)", "2*(l+b)"];
+    const testCorrect = ["yes", "yesitproduceshesameresults"];
+
+    if (checkInput("a132q1b_formula", formulaCorrect)) score++;
+    if (checkInput("a132q1b_test", testCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q1b",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1b.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity132_1cdef() {
+    let score = 0;
+    const totalQuestions = 4;
+    const q1cCorrect = ["numberofsides", "numberofpairs"];
+    const q1dCorrect = ["constant"];
+    const q1eCorrect = ["landb", "lengthandbreadth", "l,b"];
+    const q1fCorrect = [
+      "theyarenotthesame",
+      "theyvary",
+      "theyarenotconstant",
+      "theyaredifferent",
+    ];
+
+    if (checkInput("a132q1c", q1cCorrect)) score++;
+    if (checkInput("a132q1d", q1dCorrect)) score++;
+    if (checkInput("a132q1e", q1eCorrect)) score++;
+    if (checkInput("a132q1f", q1fCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q1cdef",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 1c-f.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 2: Sindi's Father's Age ---
+  function checkActivity132_2() {
+    let score = 0;
+    const totalQuestions = 1;
+    const correctAge = ["80"]; // 43 + 37
+
+    if (checkInput("a132q2", correctAge, true)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q2",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 2.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 3: Jacob's Cell Phone Savings ---
+  function checkActivity132_3a() {
+    let score = 0;
+    const totalQuestions = 8; // 4 calculations + 4 amounts
+    const correctCalcs = {
+      a132q3a_calc1: ["45+5*1=45+5", "45+5x1=45+5"],
+      a132q3a_calc2: ["45+5*2=45+10", "45+5x2=45+10"],
+      a132q3a_calc4: ["45+5*4=45+20", "45+5x4=45+20"],
+      a132q3a_calc5: ["45+5*5=45+25", "45+5x5=45+25"],
+    };
+    const correctAmts = {
+      a132q3a_amt1: ["50"],
+      a132q3a_amt2: ["55"],
+      a132q3a_amt4: ["65"],
+      a132q3a_amt5: ["70"],
+    };
+
+    for (const id in correctCalcs) {
+      if (checkInput(id, correctCalcs[id])) score++;
+    }
+    for (const id in correctAmts) {
+      if (checkInput(id, correctAmts[id], true)) score++;
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q3a",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 3a.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity132_3b() {
+    let score = 0;
+    const totalQuestions = 2;
+    const answerCorrect = ["yes"];
+    const explanationCorrect = [
+      "yesbecausebytheeighthweekhewillhavesavedr45+5*8=r85whichislessthanr90",
+      "yesbecause45+5*8=85andhewillneedr90",
+      "45+5*8=85,sohewillnotbeabletobuyit",
+    ]; // Simplified for validation, actual calculation is 45 + 40 = 85. The question asks if he *will* have enough by the 8th week, which is no.
+
+    // Re-evaluating the correct answer for 3b:
+    // At week 8: 45 + 5 * 8 = 45 + 40 = 85.
+    // Phone costs R90. So, NO, he will NOT have enough.
+    const newAnswerCorrect = ["no"];
+    const newExplanationCorrect = [
+      "no,because45+5*8=85,whichislessthanr90",
+      "no,hewillonlyhavesavedr85bytheeighthweek",
+    ];
+
+    if (checkInput("a132q3b_answer", newAnswerCorrect)) score++;
+    if (checkInput("a132q3b_explanation", newExplanationCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q3b",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 3b.`,
+      feedbackType
+    );
+  }
+
+  function checkActivity132_3c() {
+    let score = 0;
+    const totalQuestions = 2;
+    const constCorrect = ["45,5", "45and5", "45, 5"];
+    const varCorrect = ["w,y", "wandy", "w and y"];
+
+    if (checkInput("a132q3c_const", constCorrect)) score++;
+    if (checkInput("a132q3c_var", varCorrect)) score++;
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q3c",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 3c.`,
+      feedbackType
+    );
+  }
+
+  // --- Activity 4: Identify Variables and Constants in Formulae ---
+  function checkActivity132_4() {
+    let score = 0;
+    const totalQuestions = 10; // 5 variables + 5 constants
+    const correctVars = {
+      a132q4a_var: ["x,y", "xandy"],
+      a132q4b_var: ["x,y", "xandy"],
+      a132q4c_var: ["x,y", "xandy"],
+      a132q4d_var: ["x,y", "xandy"],
+      a132q4e_var: ["x,y", "xandy"],
+    };
+    const correctConsts = {
+      a132q4a_const: ["5,7", "5and7"],
+      a132q4b_const: ["100"],
+      a132q4c_const: ["5"],
+      a132q4d_const: ["5"],
+      a132q4e_const: ["0.7,2.3", "0.7and2.3"],
+    };
+
+    for (const id in correctVars) {
+      if (checkInput(id, correctVars[id])) score++;
+    }
+    for (const id in correctConsts) {
+      if (checkInput(id, correctConsts[id])) score++;
+    }
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+    displayFeedback(
+      "feedback-a132q4",
+      `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+        2
+      )}%) for Activity 4.`,
+      feedbackType
+    );
+  }
+</script>

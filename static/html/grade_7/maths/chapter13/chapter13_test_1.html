@@ -1,0 +1,871 @@
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts - Inter -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .container {
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  h1,
+  h2 {
+    color: #343a40;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  .test-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    background-color: #fefefe;
+  }
+  .question-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
+  .question-group label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #495057;
+  }
+  .form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border-color: #ced4da;
+  }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+  }
+  .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+      transform 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-2px);
+  }
+  .feedback-message {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  .feedback-correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .feedback-incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  .feedback-partial {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+  .correct-answer {
+    color: green;
+    font-weight: bold;
+  }
+  .incorrect-answer {
+    color: red;
+    font-weight: bold;
+  }
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container">
+  <h1 class="text-center mb-5">Algebra Test 1</h1>
+  <p class="text-center lead">
+    This test contains 25 questions covering identifying components of algebraic
+    expressions, creating algebraic expressions, and solving equations.
+  </p>
+
+  <!-- Part A: Identifying Components (9 questions) -->
+  <div class="test-section">
+    <h2>Part A: Identifying Components of Algebraic Expressions</h2>
+    <p>
+      For each expression, identify the variable, coefficient, exponent, and
+      constant. Remember that some components might be "invisible" (e.g., a
+      coefficient of 1, an exponent of 1, or a constant of 0).
+    </p>
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Expression</th>
+            <th>Variable</th>
+            <th>Coefficient</th>
+            <th>Exponent</th>
+            <th>Constant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Question A1 -->
+          <tr>
+            <td><code>5y - 7</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q1_var"
+                placeholder="y"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q1_coeff"
+                placeholder="5"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q1_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q1_const"
+                placeholder="-7"
+              />
+            </td>
+          </tr>
+          <!-- Question A2 -->
+          <tr>
+            <td><code>x² + 9</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q2_var"
+                placeholder="x"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q2_coeff"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q2_exp"
+                placeholder="2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q2_const"
+                placeholder="9"
+              />
+            </td>
+          </tr>
+          <!-- Question A3 -->
+          <tr>
+            <td><code>-2ab + 4</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q3_var"
+                placeholder="ab"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q3_coeff"
+                placeholder="-2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q3_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q3_const"
+                placeholder="4"
+              />
+            </td>
+          </tr>
+          <!-- Question A4 -->
+          <tr>
+            <td><code>z/4 - 1</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q4_var"
+                placeholder="z"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q4_coeff"
+                placeholder="1/4"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q4_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q4_const"
+                placeholder="-1"
+              />
+            </td>
+          </tr>
+          <!-- Question A5 -->
+          <tr>
+            <td><code>7m</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q5_var"
+                placeholder="m"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q5_coeff"
+                placeholder="7"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q5_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q5_const"
+                placeholder="0"
+              />
+            </td>
+          </tr>
+          <!-- Question A6 -->
+          <tr>
+            <td><code>-p³</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q6_var"
+                placeholder="p"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q6_coeff"
+                placeholder="-1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q6_exp"
+                placeholder="3"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q6_const"
+                placeholder="0"
+              />
+            </td>
+          </tr>
+          <!-- Question A7 -->
+          <tr>
+            <td><code>(1/5)k + 2.5</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q7_var"
+                placeholder="k"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q7_coeff"
+                placeholder="1/5"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q7_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q7_const"
+                placeholder="2.5"
+              />
+            </td>
+          </tr>
+          <!-- Question A8 -->
+          <tr>
+            <td><code>3x⁴ - 10</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q8_var"
+                placeholder="x"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q8_coeff"
+                placeholder="3"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q8_exp"
+                placeholder="4"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q8_const"
+                placeholder="-10"
+              />
+            </td>
+          </tr>
+          <!-- Question A9 -->
+          <tr>
+            <td><code>y/(-2) + 8</code></td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q9_var"
+                placeholder="y"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q9_coeff"
+                placeholder="-1/2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q9_exp"
+                placeholder="1"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                id="t1q9_const"
+                placeholder="8"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Part B: Creating Algebraic Expressions (8 questions) -->
+  <div class="test-section">
+    <h2>Part B: Creating Algebraic Expressions</h2>
+    <p>
+      Express each computational instruction as an algebraic expression. Use
+      <code>x</code> as your input number (the variable). Remember to consider
+      the order of operations (BODMAS) and use brackets where necessary to
+      ensure the operations are performed in the intended order.
+    </p>
+    <div class="row">
+      <!-- Question B10 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q10">10. Add 10, then multiply by 3.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q10"
+            placeholder="e.g., 3(x + 10)"
+          />
+        </div>
+      </div>
+      <!-- Question B11 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q11">11. Multiply by 5, then add 6.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q11"
+            placeholder="e.g., 5x + 6"
+          />
+        </div>
+      </div>
+      <!-- Question B12 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q12">12. Subtract 2, then divide by 7.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q12"
+            placeholder="e.g., (x - 2) / 7"
+          />
+        </div>
+      </div>
+      <!-- Question B13 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q13">13. Divide by 4, then subtract 5.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q13"
+            placeholder="e.g., x / 4 - 5"
+          />
+        </div>
+      </div>
+      <!-- Question B14 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q14">14. Double a number, then subtract 1.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q14"
+            placeholder="e.g., 2x - 1"
+          />
+        </div>
+      </div>
+      <!-- Question B15 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q15">15. Half a number, then add 3.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q15"
+            placeholder="e.g., x / 2 + 3"
+          />
+        </div>
+      </div>
+      <!-- Question B16 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q16">16. Multiply by -2, then subtract 4.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q16"
+            placeholder="e.g., -2x - 4"
+          />
+        </div>
+      </div>
+      <!-- Question B17 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q17">17. Add 7, then divide by 3.</label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q17"
+            placeholder="e.g., (x + 7) / 3"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part C: Solving Equations (8 questions) -->
+  <div class="test-section">
+    <h2>Part C: Solving Equations</h2>
+    <p>
+      Solve each equation for the unknown variable. Always state your final
+      answer with the "therefore" symbol (∴).
+    </p>
+    <div class="row">
+      <!-- Question C18 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q18">18. <code>x + 5 = 12</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q18"
+            placeholder="e.g., x = 7"
+          />
+        </div>
+      </div>
+      <!-- Question C19 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q19">19. <code>y - 3 = 9</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q19"
+            placeholder="e.g., y = 12"
+          />
+        </div>
+      </div>
+      <!-- Question C20 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q20">20. <code>20 / a = 4</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q20"
+            placeholder="e.g., a = 5"
+          />
+        </div>
+      </div>
+      <!-- Question C21 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q21">21. <code>b / 5 = 6</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q21"
+            placeholder="e.g., b = 30"
+          />
+        </div>
+      </div>
+      <!-- Question C22 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q22">22. <code>3c = 27</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q22"
+            placeholder="e.g., c = 9"
+          />
+        </div>
+      </div>
+      <!-- Question C23 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q23">23. <code>m + 8 = 15</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q23"
+            placeholder="e.g., m = 7"
+          />
+        </div>
+      </div>
+      <!-- Question C24 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q24">24. <code>4k + 1 = 17</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q24"
+            placeholder="e.g., k = 4"
+          />
+        </div>
+      </div>
+      <!-- Question C25 -->
+      <div class="col-md-6 mb-3">
+        <div class="question-group">
+          <label for="t1q25">25. <code>6d - 5 = 7</code></label>
+          <input
+            type="text"
+            class="form-control"
+            id="t1q25"
+            placeholder="e.g., d = 2"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="button" class="btn btn-primary mt-3" onclick="checkTest1()">
+      Submit Test 1
+    </button>
+    <div id="feedback-test1" class="feedback-message mt-3 d-none"></div>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Helper function to normalize string input for comparison
+  function normalizeString(str) {
+    if (typeof str !== "string") return "";
+    return str.toLowerCase().replace(/\s/g, "").replace(/\*\*/g, "^"); // Normalize spaces and ** to ^ for exponents
+  }
+
+  // Helper function to compare numerical values, handling fractions
+  function compareNumbers(input, correct) {
+    input = String(input).trim();
+    correct = String(correct).trim();
+
+    // Handle fractions (e.g., "1/2", "3/4")
+    const parseFraction = (s) => {
+      const parts = s.split("/");
+      if (parts.length === 2) {
+        const num = parseFloat(parts[0]);
+        const den = parseFloat(parts[1]);
+        return den !== 0 ? num / den : NaN;
+      }
+      return parseFloat(s);
+    };
+
+    const parsedInput = parseFraction(input);
+    const parsedCorrect = parseFraction(correct);
+
+    // Use a small epsilon for floating point comparisons
+    return Math.abs(parsedInput - parsedCorrect) < 1e-9;
+  }
+
+  // Function to display feedback
+  function displayFeedback(feedbackId, message, type) {
+    const feedbackDiv = document.getElementById(feedbackId);
+    feedbackDiv.innerHTML = message;
+    feedbackDiv.classList.remove(
+      "d-none",
+      "feedback-correct",
+      "feedback-incorrect",
+      "feedback-partial"
+    );
+    feedbackDiv.classList.add(`feedback-${type}`);
+  }
+
+  // Correct Answers for Test 1
+  const correctAnswersTest1 = {
+    // Part A: Identifying Components (9 questions)
+    t1q1: { var: "y", coeff: "5", exp: "1", const: "-7" },
+    t1q2: { var: "x", coeff: "1", exp: "2", const: "9" },
+    t1q3: { var: "ab", coeff: "-2", exp: "1", const: "4" },
+    t1q4: { var: "z", coeff: "1/4", exp: "1", const: "-1" },
+    t1q5: { var: "m", coeff: "7", exp: "1", const: "0" },
+    t1q6: { var: "p", coeff: "-1", exp: "3", const: "0" },
+    t1q7: { var: "k", coeff: "1/5", exp: "1", const: "2.5" },
+    t1q8: { var: "x", coeff: "3", exp: "4", const: "-10" },
+    t1q9: { var: "y", coeff: "-1/2", exp: "1", const: "8" },
+
+    // Part B: Creating Algebraic Expressions (8 questions)
+    t1q10: ["3(x+10)", "(x+10)*3"],
+    t1q11: ["5x+6", "5*x+6"],
+    t1q12: ["(x-2)/7"],
+    t1q13: ["x/4-5"],
+    t1q14: ["2x-1", "2*x-1"],
+    t1q15: ["x/2+3"],
+    t1q16: ["-2x-4", "-2*x-4"],
+    t1q17: ["(x+7)/3"],
+
+    // Part C: Solving Equations (8 questions)
+    t1q18: ["x=7", "7"],
+    t1q19: ["y=12", "12"],
+    t1q20: ["a=5", "5"],
+    t1q21: ["b=30", "30"],
+    t1q22: ["c=9", "9"],
+    t1q23: ["m=7", "7"],
+    t1q24: ["k=4", "4"],
+    t1q25: ["d=2", "2"],
+  };
+
+  function checkTest1() {
+    let score = 0;
+    let feedbackHtml = "";
+    const totalQuestions = 25; // Fixed total questions for the test
+
+    // Part A: Identifying Components (9 questions)
+    for (let i = 1; i <= 9; i++) {
+      const qId = `t1q${i}`;
+      const correct = correctAnswersTest1[qId];
+      let allCorrectForQ = true;
+
+      feedbackHtml += `<strong>Question ${i} (Part A):</strong><br>`;
+
+      const fields = ["var", "coeff", "exp", "const"];
+      fields.forEach((field) => {
+        const inputElement = document.getElementById(`${qId}_${field}`);
+        const userAnswer = normalizeString(inputElement.value);
+        const correctAnswer = normalizeString(correct[field]);
+
+        let isCorrect = false;
+        if (field === "var") {
+          isCorrect = userAnswer === correctAnswer;
+        } else {
+          isCorrect = compareNumbers(userAnswer, correctAnswer);
+        }
+
+        if (isCorrect) {
+          feedbackHtml += `<span class="correct-answer">${field}: ${inputElement.value} (Correct)</span><br>`;
+          inputElement.classList.remove("is-invalid");
+          inputElement.classList.add("is-valid");
+        } else {
+          feedbackHtml += `<span class="incorrect-answer">${field}: ${inputElement.value} (Incorrect, Correct: ${correct[field]})</span><br>`;
+          inputElement.classList.remove("is-valid");
+          inputElement.classList.add("is-invalid");
+          allCorrectForQ = false;
+        }
+      });
+      if (allCorrectForQ) {
+        score++;
+      }
+      feedbackHtml += "<br>";
+    }
+
+    // Part B: Creating Algebraic Expressions (8 questions, from 10 to 17)
+    for (let i = 10; i <= 17; i++) {
+      const qId = `t1q${i}`;
+      const inputElement = document.getElementById(qId);
+      const userAnswer = normalizeString(inputElement.value);
+      const correctOptions = correctAnswersTest1[qId].map(normalizeString);
+
+      let isCorrect = correctOptions.includes(userAnswer);
+
+      feedbackHtml += `<strong>Question ${i} (Part B):</strong> `;
+      if (isCorrect) {
+        score++;
+        feedbackHtml += `<span class="correct-answer">${inputElement.value} (Correct)</span><br>`;
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+      } else {
+        feedbackHtml += `<span class="incorrect-answer">${
+          inputElement.value
+        } (Incorrect, Correct options: ${correctAnswersTest1[qId].join(
+          " or "
+        )})</span><br>`;
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+      }
+    }
+    feedbackHtml += "<br>";
+
+    // Part C: Solving Equations (8 questions, from 18 to 25)
+    for (let i = 18; i <= 25; i++) {
+      const qId = `t1q${i}`;
+      const inputElement = document.getElementById(qId);
+      const userAnswer = normalizeString(inputElement.value);
+      const correctOptions = correctAnswersTest1[qId].map(normalizeString);
+
+      let isCorrect = correctOptions.includes(userAnswer);
+
+      feedbackHtml += `<strong>Question ${i} (Part C):</strong> `;
+      if (isCorrect) {
+        score++;
+        feedbackHtml += `<span class="correct-answer">${inputElement.value} (Correct)</span><br>`;
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+      } else {
+        feedbackHtml += `<span class="incorrect-answer">${
+          inputElement.value
+        } (Incorrect, Correct options: ${correctAnswersTest1[qId].join(
+          " or "
+        )})</span><br>`;
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+      }
+    }
+    feedbackHtml += "<br>";
+
+    const percentage = (score / totalQuestions) * 100;
+    let feedbackType = "incorrect";
+    if (score === totalQuestions) {
+      feedbackType = "correct";
+    } else if (score > 0) {
+      feedbackType = "partial";
+    }
+
+    const finalMessage = `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(
+      2
+    )}%).<br><br>${feedbackHtml}`;
+    displayFeedback("feedback-test1", finalMessage, feedbackType);
+  }
+</script>
