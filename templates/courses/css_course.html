@@ -1,0 +1,1234 @@
+{% extends "base.html" %} {% block title %}CSS3 Course{% endblock %} {% block
+content %}
+
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">
+          <i class="bi bi-filetype-css text-info me-3"></i>CSS3 Styling
+        </h1>
+        <p class="lead mb-4 fs-4">
+          Master modern CSS3 to create stunning and responsive web designs
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-primary fs-6">Beginner Friendly</span>
+          <span class="badge bg-success fs-6" id="total-lessons-badge"
+            >20 Lessons</span
+          >
+          <span class="badge bg-info fs-6">40+ Exercises</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-3 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center">
+          <div class="progress flex-grow-1" style="height: 20px">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style="width: 0%"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              id="course-progress-bar"
+            >
+              0% Complete
+            </div>
+          </div>
+          <small class="ms-3 fw-bold" id="lessons-complete-text"
+            >0/20 Lessons</small
+          >
+        </div>
+      </div>
+      <div class="col-md-6 text-md-end mt-3 mt-md-0">
+        <button class="btn btn-outline-primary me-2">
+          <i class="bi bi-journal-bookmark me-1"></i>Save Progress
+        </button>
+        <button class="btn btn-primary">
+          <i class="bi bi-share me-1"></i>Share
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-4 mb-5 mb-lg-0">
+      <div class="card shadow-sm sticky-top" style="top: 20px">
+        <div class="card-header bg-primary text-white">
+          <h3 class="h5 mb-0">Course Content</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush" id="course-modules">
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module1"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 1: CSS Fundamentals
+            </div>
+            <div class="collapse show" id="module1">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.1"
+                data-video-id="VIDEO_ID_CSS_1_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.1 Introduction to CSS
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.2"
+                data-video-id="VIDEO_ID_CSS_1_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.2 CSS Syntax and
+                Selectors
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.3"
+                data-video-id="VIDEO_ID_CSS_1_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.3 How to Add CSS
+                (Inline, Internal, External)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.4"
+                data-video-id="VIDEO_ID_CSS_1_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.4 Colors, Backgrounds,
+                and Borders
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module2"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 2: The Box Model &
+              Layout
+            </div>
+            <div class="collapse" id="module2">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.1"
+                data-video-id="VIDEO_ID_CSS_2_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.1 Understanding the CSS
+                Box Model
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.2"
+                data-video-id="VIDEO_ID_CSS_2_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.2 Display Property
+                (Block, Inline, Inline-Block)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.3"
+                data-video-id="VIDEO_ID_CSS_2_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.3 Positioning Elements
+                (Static, Relative, Absolute, Fixed, Sticky)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.4"
+                data-video-id="VIDEO_ID_CSS_2_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.4 Floats and Clearfix
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.5"
+                data-video-id="VIDEO_ID_CSS_2_5"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.5"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.5 Introduction to
+                Flexbox
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.6"
+                data-video-id="VIDEO_ID_CSS_2_6"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.6"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.6 Introduction to CSS
+                Grid
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module3"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 3: Typography &
+              Visuals
+            </div>
+            <div class="collapse" id="module3">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.1"
+                data-video-id="VIDEO_ID_CSS_3_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.1 Font Properties
+                (Family, Size, Weight, Style)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.2"
+                data-video-id="VIDEO_ID_CSS_3_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.2 Text Properties
+                (Alignment, Decoration, Transform)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.3"
+                data-video-id="VIDEO_ID_CSS_3_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.3 Shadows and Gradients
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.4"
+                data-video-id="VIDEO_ID_CSS_3_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.4 Transitions and
+                Animations
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module4"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 4: Advanced CSS &
+              Responsiveness
+            </div>
+            <div class="collapse" id="module4">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.1"
+                data-video-id="VIDEO_ID_CSS_4_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.1 Media Queries for
+                Responsive Design
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.2"
+                data-video-id="VIDEO_ID_CSS_4_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.2 Pseudo-classes and
+                Pseudo-elements
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.3"
+                data-video-id="VIDEO_ID_CSS_4_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.3 CSS Variables (Custom
+                Properties)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.4"
+                data-video-id="VIDEO_ID_CSS_4_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.4 CSS Frameworks
+                (Bootstrap, Tailwind CSS)
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#resources-sidebar"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Resources
+            </div>
+            <div class="collapse" id="resources-sidebar">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-file-earmark-text me-2"></i>Cheat Sheet
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-journal-code me-2"></i>Exercise Files
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-link-45deg me-2"></i>Useful References
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-0">
+          <div class="ratio ratio-16x9">
+            <iframe
+              id="lesson-video-player"
+              src="https://www.youtube.com/embed/VIDEO_ID_CSS_1_1"
+              title="CSS Introduction"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="card-footer bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="h5 mb-0" id="current-lesson-title">
+              1.1 Introduction to CSS
+            </h3>
+            <div>
+              <button class="btn btn-sm btn-outline-secondary me-2">
+                <i class="bi bi-speedometer2 me-1"></i>1.5x
+              </button>
+              <button class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-left-right me-1"></i>CC
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mb-4">
+        <button class="btn btn-primary" id="prev-lesson-btn" disabled>
+          <i class="bi bi-chevron-left me-1"></i>Previous Lesson
+        </button>
+        <button class="btn btn-success" id="mark-complete-btn">
+          Mark Complete <i class="bi bi-check-circle ms-1"></i>
+        </button>
+        <button class="btn btn-primary" id="next-lesson-btn">
+          Next Lesson <i class="bi bi-chevron-right ms-1"></i>
+        </button>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#notes" data-bs-toggle="tab"
+                >Lesson Notes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#transcript" data-bs-toggle="tab"
+                >Transcript</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#lesson-resources" data-bs-toggle="tab"
+                >Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#reading-materials" data-bs-toggle="tab"
+                >Reading Materials</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab-content">
+          <div class="tab-pane fade show active" id="notes">
+            <h4 class="mb-4">What is CSS?</h4>
+            <p>
+              CSS (Cascading Style Sheets) is a stylesheet language used for
+              describing the presentation of a document written in HTML or XML
+              (including XML dialects such as SVG, MathML or XHTML). CSS
+              describes how elements should be rendered on screen, on paper, in
+              speech, or on other media.
+            </p>
+
+            <div class="alert alert-info">
+              <i class="bi bi-info-circle-fill me-2"></i>CSS is essential for
+              making your web pages look good and responsive across different
+              devices.
+            </div>
+
+            <h5 class="mt-4">Basic CSS Rule</h5>
+            <pre><code class="language-css">body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  color: #007bff;
+  text-align: center;
+}</code></pre>
+
+            <h5 class="mt-4">Key Concepts Covered</h5>
+            <ul>
+              <li>CSS defines the style of your web page</li>
+              <li>CSS rules consist of a selector and a declaration block</li>
+              <li>Declarations include a property and a value</li>
+              <li>External stylesheets are recommended for larger projects</li>
+            </ul>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-download me-1"></i>Download Slides
+              </button>
+              <button class="btn btn-outline-success">
+                <i class="bi bi-bookmark me-1"></i>Save Notes
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="transcript">
+            <h5 class="mb-3">Video Transcript</h5>
+            <div class="form-check form-switch mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="autoScroll"
+                checked
+              />
+              <label class="form-check-label" for="autoScroll"
+                >Auto-scroll with video</label
+              >
+            </div>
+            <div
+              class="transcript-content"
+              style="max-height: 400px; overflow-y: auto"
+            >
+              <p data-timestamp="0">
+                <strong>[0:00]</strong> Welcome to the CSS Fundamentals course.
+                In this first lesson, we'll introduce you to what CSS is and why
+                it's so important for web development.
+              </p>
+              <p data-timestamp="30">
+                <strong>[0:30]</strong> CSS, or Cascading Style Sheets, is the
+                language used to describe the presentation of a document written
+                in HTML. It dictates how your HTML elements will look.
+              </p>
+              <p data-timestamp="60" class="bg-light fw-bold">
+                <strong>[1:00]</strong> We'll explore basic CSS syntax,
+                including selectors, properties, and values, and how they
+                combine to style your web pages.
+              </p>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="lesson-resources">
+            <h5 class="mb-4">Lesson Resources</h5>
+            <div class="list-group mb-3">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-file-earmark-code me-2"></i>Starter Code
+                </span>
+                <span class="badge bg-primary rounded-pill">ZIP 30KB</span>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-file-earmark-pdf me-2"></i>CSS Cheat Sheet
+                </span>
+                <span class="badge bg-primary rounded-pill">PDF 1.5MB</span>
+              </a>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+                target="_blank"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-link-45deg me-2"></i>MDN CSS Reference
+                </span>
+                <span class="badge bg-primary rounded-pill">Link</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="reading-materials">
+            <h5 class="mb-4">Recommended Reading for this Topic</h5>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-book me-2"></i>CSS: The Definitive Guide
+                (Chapter 1)
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-book me-2"></i>HTML & CSS: Design and Build
+                Websites (Pages 100-120)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+          <h3 class="h5 mb-0">
+            <i class="bi bi-pencil-square me-2"></i>Practice Exercise
+          </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="mb-3">Style Your First HTML Page</h5>
+          <p>
+            Using what you've learned in this lesson, add some basic CSS to an
+            HTML document:
+          </p>
+          <ul class="mb-4">
+            <li>Change the background color of the body to light gray.</li>
+            <li>Center the main heading (h1) and make its color blue.</li>
+            <li>Change the font size of paragraphs to 18px.</li>
+          </ul>
+
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="mb-0">style.css</h6>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary me-2">
+                  <i class="bi bi-arrow-counterclockwise"></i> Reset
+                </button>
+                <button class="btn btn-sm btn-outline-primary">
+                  <i class="bi bi-files"></i> Show Solution
+                </button>
+              </div>
+            </div>
+            <div class="code-editor border" style="height: 300px">
+              <textarea
+                class="form-control h-100"
+                id="css-code"
+                spellcheck="false"
+              >
+body {
+  /* Add your styles here */
+}
+
+h1 {
+  /* Add your styles here */
+}
+
+p {
+  /* Add your styles here */
+}</textarea
+              >
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <h6 class="mb-2">Live Preview</h6>
+            <div class="border p-3 bg-light" style="min-height: 150px">
+              <iframe
+                id="preview-frame"
+                style="width: 100%; height: 100%; border: none"
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-lightbulb me-1"></i>Get Hint
+            </button>
+            <button class="btn btn-success">
+              <i class="bi bi-check-circle me-1"></i>Submit Exercise
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-4">
+        <div class="card-header bg-white">
+          <h3 class="h5 mb-0">
+            <i class="bi bi-chat-square-text me-2"></i>Discussion
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <textarea
+              class="form-control mb-2"
+              rows="3"
+              placeholder="Ask a question or share your thoughts..."
+            ></textarea>
+            <button class="btn btn-primary">Post Comment</button>
+          </div>
+
+          <div class="d-flex mb-3">
+            <img
+              src="https://randomuser.me/api/portraits/women/45.jpg"
+              class="rounded-circle me-3"
+              width="50"
+              height="50"
+              alt="User"
+            />
+            <div>
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-1">Emily White</h6>
+                <small class="text-muted">3 hours ago</small>
+              </div>
+              <p class="mb-1">
+                I'm confused about the difference between margin and padding.
+                Can anyone clarify?
+              </p>
+              <a href="#" class="text-decoration-none">Reply</a>
+            </div>
+          </div>
+
+          <div class="d-flex mb-3 ps-5">
+            <img
+              src="https://randomuser.me/api/portraits/men/33.jpg"
+              class="rounded-circle me-3"
+              width="40"
+              height="40"
+              alt="User"
+            />
+            <div>
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-1">David Lee (Instructor)</h6>
+                <small class="text-muted">2 hours ago</small>
+              </div>
+              <p class="mb-1">
+                Good question, Emily! Padding is the space *inside* an element,
+                between its content and its border. Margin is the space
+                *outside* an element, between its border and other elements.
+              </p>
+              <a href="#" class="text-decoration-none">Reply</a>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="#" class="btn btn-outline-primary"
+              >View All Comments (8)</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Continue Learning</h2>
+      <p class="lead text-muted">These courses complement your CSS knowledge</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            class="card-img-top"
+            alt="HTML Course"
+          />
+          <div class="card-body">
+            <h5 class="card-title">HTML5 Mastery</h5>
+            <p class="card-text">
+              Learn how to structure your web documents with HTML.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  style="width: 75%"
+                ></div>
+              </div>
+              <small>75%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Continue</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            class="card-img-top"
+            alt="JavaScript Course"
+          />
+          <div class="card-body">
+            <h5 class="card-title">JavaScript Basics</h5>
+            <p class="card-text">
+              Add interactivity to your websites with JavaScript.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  style="width: 10%"
+                ></div>
+              </div>
+              <small>10%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Start Course</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            class="card-img-top"
+            alt="Responsive Design"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Responsive Web Design</h5>
+            <p class="card-text">
+              Create websites that look great on all devices.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <small>65%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Continue</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .code-editor textarea {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    background-color: #f8f9fa;
+  }
+
+  .transcript-content p {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .transcript-content p:hover {
+    background-color: #f8f9fa;
+  }
+
+  .nav-tabs .nav-link.active {
+    font-weight: bold;
+    border-bottom: 3px solid #0d6efd;
+  }
+
+  .list-group-item.active {
+    background-color: #e9f5ff;
+    color: #0d6efd;
+    border-left: 3px solid #0d6efd;
+  }
+
+  .list-group-item.bg-light {
+    background-color: #f8f9fa !important;
+  }
+
+  .sticky-top {
+    z-index: 1;
+  }
+
+  /* Style for checked lessons */
+  .lesson-checkbox:checked + i {
+    color: #198754; /* Green color for checked icon */
+  }
+</style>
+
+<script>
+  // Dummy data for lessons (replace with actual data from a backend/API)
+  const allLessons = [
+    {
+      id: "1.1",
+      title: "1.1 Introduction to CSS",
+      videoId: "AGDDdsiZ0Ko", // Replace with actual YouTube video ID
+      notes: "...",
+      reading: [
+        "https://www.w3schools.com/css/css_intro.asp",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/Introduction_to_CSS",
+      ],
+    },
+    {
+      id: "1.2",
+      title: "1.2 CSS Syntax and Selectors",
+      videoId: "/G8r00ZNopTE",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_syntax.asp"],
+    },
+    {
+      id: "1.3",
+      title: "1.3 How to Add CSS (Inline, Internal, External)",
+      videoId: "VSwaoQ3TFkQ",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_howto.asp"],
+    },
+    {
+      id: "1.4",
+      title: "1.4 Colors, Backgrounds, and Borders",
+      videoId: "q0uWmobMf6I",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_colors.asp"],
+    },
+    {
+      id: "2.1",
+      title: "2.1 Understanding the CSS Box Model",
+      videoId: "VIDEO_ID_CSS_2_1",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_boxmodel.asp"],
+    },
+    {
+      id: "2.2",
+      title: "2.2 Display Property (Block, Inline, Inline-Block)",
+      videoId: "VIDEO_ID_CSS_2_2",
+      notes: "...",
+      reading: ["https://www.w3schools.com/cssref/pr_class_display.asp"],
+    },
+    {
+      id: "2.3",
+      title:
+        "2.3 Positioning Elements (Static, Relative, Absolute, Fixed, Sticky)",
+      videoId: "VIDEO_ID_CSS_2_3",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_positioning.asp"],
+    },
+    {
+      id: "2.4",
+      title: "2.4 Floats and Clearfix",
+      videoId: "VIDEO_ID_CSS_2_4",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_float.asp"],
+    },
+    {
+      id: "2.5",
+      title: "2.5 Introduction to Flexbox",
+      videoId: "VIDEO_ID_CSS_2_5",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css3_flexbox.asp"],
+    },
+    {
+      id: "2.6",
+      title: "2.6 Introduction to CSS Grid",
+      videoId: "VIDEO_ID_CSS_2_6",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_grid.asp"],
+    },
+    {
+      id: "3.1",
+      title: "3.1 Font Properties (Family, Size, Weight, Style)",
+      videoId: "VIDEO_ID_CSS_3_1",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_font.asp"],
+    },
+    {
+      id: "3.2",
+      title: "3.2 Text Properties (Alignment, Decoration, Transform)",
+      videoId: "VIDEO_ID_CSS_3_2",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_text.asp"],
+    },
+    {
+      id: "3.3",
+      title: "3.3 Shadows and Gradients",
+      videoId: "VIDEO_ID_CSS_3_3",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css3_shadows.asp"],
+    },
+    {
+      id: "3.4",
+      title: "3.4 Transitions and Animations",
+      videoId: "VIDEO_ID_CSS_3_4",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css3_transitions.asp"],
+    },
+    {
+      id: "4.1",
+      title: "4.1 Media Queries for Responsive Design",
+      videoId: "VIDEO_ID_CSS_4_1",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_rwd_mediaqueries.asp"],
+    },
+    {
+      id: "4.2",
+      title: "4.2 Pseudo-classes and Pseudo-elements",
+      videoId: "VIDEO_ID_CSS_4_2",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css_pseudo_classes.asp"],
+    },
+    {
+      id: "4.3",
+      title: "4.3 CSS Variables (Custom Properties)",
+      videoId: "VIDEO_ID_CSS_4_3",
+      notes: "...",
+      reading: ["https://www.w3schools.com/css/css3_variables.asp"],
+    },
+    {
+      id: "4.4",
+      title: "4.4 CSS Frameworks (Bootstrap, Tailwind CSS)",
+      videoId: "VIDEO_ID_CSS_4_4",
+      notes: "...",
+      reading: [
+        "https://getbootstrap.com/docs/5.3/getting-started/introduction/",
+      ],
+    },
+  ];
+
+  let currentLessonIndex = 0;
+  const lessonCheckboxes = document.querySelectorAll(".lesson-checkbox");
+  const lessonItems = document.querySelectorAll(".lesson-item");
+  const lessonVideoPlayer = document.getElementById("lesson-video-player");
+  const currentLessonTitle = document.getElementById("current-lesson-title");
+  const prevLessonBtn = document.getElementById("prev-lesson-btn");
+  const nextLessonBtn = document.getElementById("next-lesson-btn");
+  const markCompleteBtn = document.getElementById("mark-complete-btn");
+  const courseProgressBar = document.getElementById("course-progress-bar");
+  const lessonsCompleteText = document.getElementById("lessons-complete-text");
+  const totalLessonsBadge = document.getElementById("total-lessons-badge");
+  const lessonNotesTab = document.getElementById("notes");
+  const readingMaterialsTab = document.getElementById("reading-materials");
+  const cssCodeEditor = document.getElementById("css-code");
+  const previewFrame = document.getElementById("preview-frame");
+
+  function updateProgress() {
+    const completedLessons = Array.from(lessonCheckboxes).filter(
+      (checkbox) => checkbox.checked
+    ).length;
+    const totalLessons = allLessons.length;
+    const progressPercentage = (completedLessons / totalLessons) * 100;
+
+    courseProgressBar.style.width = `${progressPercentage}%`;
+    courseProgressBar.setAttribute("aria-valuenow", progressPercentage);
+    courseProgressBar.textContent = `${Math.round(
+      progressPercentage
+    )}% Complete`;
+    lessonsCompleteText.textContent = `${completedLessons}/${totalLessons} Lessons`;
+    totalLessonsBadge.textContent = `${totalLessons} Lessons`;
+  }
+
+  function loadLessonContent(lesson) {
+    // Update video player
+    lessonVideoPlayer.src = `https://www.youtube.com/embed/${lesson.videoId}`;
+    currentLessonTitle.textContent = lesson.title;
+
+    // Update lesson notes (this is a placeholder, you'd load actual content here)
+    lessonNotesTab.innerHTML = `
+      <h4 class="mb-4">${lesson.title} Notes</h4>
+      <p>Content for ${lesson.title} will go here. This is where you'd detail the concepts discussed in the video.</p>
+      <div class="alert alert-info">
+        <i class="bi bi-info-circle-fill me-2"></i>This is an important note for this lesson.
+      </div>
+      <h5 class="mt-4">Key Takeaways</h5>
+      <ul>
+        <li>Specific point 1</li>
+        <li>Specific point 2</li>
+      </ul>
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-outline-primary">
+          <i class="bi bi-download me-1"></i>Download Slides
+        </button>
+        <button class="btn btn-outline-success">
+          <i class="bi bi-bookmark me-1"></i>Save Notes
+        </button>
+      </div>
+    `;
+
+    // Update reading materials
+    let readingHtml =
+      '<h5 class="mb-4">Recommended Reading for this Topic</h5><div class="list-group">';
+    if (lesson.reading && lesson.reading.length > 0) {
+      lesson.reading.forEach((link) => {
+        readingHtml += `<a href="${link}" target="_blank" class="list-group-item list-group-item-action"><i class="bi bi-book me-2"></i>${link}</a>`;
+      });
+    } else {
+      readingHtml +=
+        "<p>No specific reading materials for this lesson at the moment.</p>";
+    }
+    readingHtml += "</div>";
+    readingMaterialsTab.innerHTML = readingHtml;
+
+    // Update active state in sidebar
+    lessonItems.forEach((item) => item.classList.remove("active"));
+    document
+      .querySelector(`.lesson-item[data-lesson-id="${lesson.id}"]`)
+      .classList.add("active");
+
+    // Update navigation buttons
+    prevLessonBtn.disabled = currentLessonIndex === 0;
+    nextLessonBtn.disabled = currentLessonIndex === allLessons.length - 1;
+
+    // Set checkbox state for the current lesson
+    const currentLessonCheckbox = document.getElementById(
+      `lesson-checkbox-${lesson.id}`
+    );
+    markCompleteBtn.textContent = currentLessonCheckbox.checked
+      ? "Completed"
+      : "Mark Complete";
+    markCompleteBtn.classList.toggle(
+      "btn-success",
+      !currentLessonCheckbox.checked
+    );
+    markCompleteBtn.classList.toggle(
+      "btn-secondary",
+      currentLessonCheckbox.checked
+    );
+  }
+
+  function updatePreview() {
+    const previewDoc =
+      previewFrame.contentDocument || previewFrame.contentWindow.document;
+    previewDoc.open();
+    // For CSS, we need a basic HTML structure to apply the CSS to
+    previewDoc.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>CSS Preview</title>
+        <style>
+          ${cssCodeEditor.value}
+        </style>
+      </head>
+      <body>
+        <h1>Hello CSS!</h1>
+        <p>This is a paragraph to demonstrate CSS styling.</p>
+        <div style="width: 100px; height: 100px; background-color: lightblue; border: 1px solid blue; margin: 10px; padding: 10px;">Box Model</div>
+      </body>
+      </html>
+    `);
+    previewDoc.close();
+  }
+
+  function initializeCourse() {
+    // Load initial lesson (first one)
+    loadLessonContent(allLessons[currentLessonIndex]);
+    updateProgress();
+    updatePreview(); // Initial preview load
+
+    // Event listeners for lesson items
+    lessonItems.forEach((item, index) => {
+      item.addEventListener("click", function (event) {
+        event.preventDefault();
+        // Allow clicking the list item to select the lesson, but prevent default for checkbox
+        if (!event.target.classList.contains("lesson-checkbox")) {
+          currentLessonIndex = allLessons.findIndex(
+            (lesson) => lesson.id === this.dataset.lessonId
+          );
+          loadLessonContent(allLessons[currentLessonIndex]);
+        }
+      });
+    });
+
+    // Event listeners for checkboxes
+    lessonCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        updateProgress();
+        // If the current lesson's checkbox is clicked, update the "Mark Complete" button
+        if (
+          this.id === `lesson-checkbox-${allLessons[currentLessonIndex].id}`
+        ) {
+          markCompleteBtn.textContent = this.checked
+            ? "Completed"
+            : "Mark Complete";
+          markCompleteBtn.classList.toggle("btn-success", !this.checked);
+          markCompleteBtn.classList.toggle("btn-secondary", this.checked);
+        }
+      });
+    });
+
+    // Mark Complete button logic
+    markCompleteBtn.addEventListener("click", function () {
+      const currentLessonCheckbox = document.getElementById(
+        `lesson-checkbox-${allLessons[currentLessonIndex].id}`
+      );
+      currentLessonCheckbox.checked = !currentLessonCheckbox.checked;
+      currentLessonCheckbox.dispatchEvent(new Event("change")); // Trigger change event
+    });
+
+    // Navigation buttons
+    prevLessonBtn.addEventListener("click", () => {
+      if (currentLessonIndex > 0) {
+        currentLessonIndex--;
+        loadLessonContent(allLessons[currentLessonIndex]);
+      }
+    });
+
+    nextLessonBtn.addEventListener("click", () => {
+      if (currentLessonIndex < allLessons.length - 1) {
+        currentLessonIndex++;
+        loadLessonContent(allLessons[currentLessonIndex]);
+      }
+    });
+  }
+
+  // Initial setup when the window loads
+  window.onload = function () {
+    // Transcript click handler
+    document.querySelectorAll(".transcript-content p").forEach((p) => {
+      p.addEventListener("click", function () {
+        const timestamp = this.getAttribute("data-timestamp");
+        // In a real implementation, this would seek the video to the timestamp
+        console.log("Seek to:", timestamp);
+      });
+    });
+
+    initializeCourse();
+  };
+
+  // Update preview frame with code from editor
+  cssCodeEditor.addEventListener("input", updatePreview);
+</script>
+
+{% endblock %}

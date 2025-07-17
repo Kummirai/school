@@ -1,0 +1,1181 @@
+{% extends "base.html" %} {% block title %}Bootstrap Course{% endblock %} {% block
+content %}
+
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1593720219276-0b1e4470ed27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">
+          <i class="bi bi-bootstrap-fill text-purple me-3"></i>Bootstrap Framework
+        </h1>
+        <p class="lead mb-4 fs-4">
+          Master the Bootstrap framework to quickly build responsive and modern web interfaces
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <span class="badge bg-primary fs-6">Beginner Friendly</span>
+          <span class="badge bg-success fs-6" id="total-lessons-badge"
+            >18 Lessons</span
+          >
+          <span class="badge bg-info fs-6">35+ Exercises</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-3 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center">
+          <div class="progress flex-grow-1" style="height: 20px">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style="width: 0%"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              id="course-progress-bar"
+            >
+              0% Complete
+            </div>
+          </div>
+          <small class="ms-3 fw-bold" id="lessons-complete-text"
+            >0/18 Lessons</small
+          >
+        </div>
+      </div>
+      <div class="col-md-6 text-md-end mt-3 mt-md-0">
+        <button class="btn btn-outline-primary me-2">
+          <i class="bi bi-journal-bookmark me-1"></i>Save Progress
+        </button>
+        <button class="btn btn-primary">
+          <i class="bi bi-share me-1"></i>Share
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-4 mb-5 mb-lg-0">
+      <div class="card shadow-sm sticky-top" style="top: 20px">
+        <div class="card-header bg-primary text-white">
+          <h3 class="h5 mb-0">Course Content</h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush" id="course-modules">
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module1"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 1: Bootstrap Basics
+            </div>
+            <div class="collapse show" id="module1">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.1"
+                data-video-id="VIDEO_ID_BOOTSTRAP_1_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.1 Introduction to Bootstrap
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.2"
+                data-video-id="VIDEO_ID_BOOTSTRAP_1_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.2 Grid System
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.3"
+                data-video-id="VIDEO_ID_BOOTSTRAP_1_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.3 Typography
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="1.4"
+                data-video-id="VIDEO_ID_BOOTSTRAP_1_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-1.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>1.4 Colors and Backgrounds
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module2"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 2: Components I
+            </div>
+            <div class="collapse" id="module2">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.1"
+                data-video-id="VIDEO_ID_BOOTSTRAP_2_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.1 Buttons and Alerts
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.2"
+                data-video-id="VIDEO_ID_BOOTSTRAP_2_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.2 Navbar and Jumbotron
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.3"
+                data-video-id="VIDEO_ID_BOOTSTRAP_2_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.3 Cards
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="2.4"
+                data-video-id="VIDEO_ID_BOOTSTRAP_2_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-2.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>2.4 Forms
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module3"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 3: Components II & Utilities
+            </div>
+            <div class="collapse" id="module3">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.1"
+                data-video-id="VIDEO_ID_BOOTSTRAP_3_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.1 Modals
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.2"
+                data-video-id="VIDEO_ID_BOOTSTRAP_3_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.2 Carousels
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.3"
+                data-video-id="VIDEO_ID_BOOTSTRAP_3_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.3 Navs and Tabs
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="3.4"
+                data-video-id="VIDEO_ID_BOOTSTRAP_3_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-3.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>3.4 Utilities for Spacing, Sizing, etc.
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#module4"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Module 4: Customization & Advanced Topics
+            </div>
+            <div class="collapse" id="module4">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.1"
+                data-video-id="VIDEO_ID_BOOTSTRAP_4_1"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.1"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.1 Customizing with Sass
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.2"
+                data-video-id="VIDEO_ID_BOOTSTRAP_4_2"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.2"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.2 JavaScript Plugins
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.3"
+                data-video-id="VIDEO_ID_BOOTSTRAP_4_3"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.3"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.3 Accessibility (A11y)
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action lesson-item"
+                data-lesson-id="4.4"
+                data-video-id="VIDEO_ID_BOOTSTRAP_4_4"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2 lesson-checkbox"
+                  id="lesson-checkbox-4.4"
+                />
+                <i class="bi bi-play-circle me-2"></i>4.4 Building a Responsive Layout Project
+              </a>
+            </div>
+
+            <div
+              class="list-group-item list-group-item-action bg-light fw-bold"
+              data-bs-toggle="collapse"
+              href="#resources-sidebar"
+            >
+              <i class="bi bi-chevron-down me-2"></i>Resources
+            </div>
+            <div class="collapse" id="resources-sidebar">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-file-earmark-text me-2"></i>Cheat Sheet
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-journal-code me-2"></i>Exercise Files
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-link-45deg me-2"></i>Useful References
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-0">
+          <div class="ratio ratio-16x9">
+            <iframe
+              id="lesson-video-player"
+              src="https://www.youtube.com/embed/VIDEO_ID_BOOTSTRAP_1_1"
+              title="Bootstrap Introduction"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="card-footer bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="h5 mb-0" id="current-lesson-title">
+              1.1 Introduction to Bootstrap
+            </h3>
+            <div>
+              <button class="btn btn-sm btn-outline-secondary me-2">
+                <i class="bi bi-speedometer2 me-1"></i>1.5x
+              </button>
+              <button class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-left-right me-1"></i>CC
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mb-4">
+        <button class="btn btn-primary" id="prev-lesson-btn" disabled>
+          <i class="bi bi-chevron-left me-1"></i>Previous Lesson
+        </button>
+        <button class="btn btn-success" id="mark-complete-btn">
+          Mark Complete <i class="bi bi-check-circle ms-1"></i>
+        </button>
+        <button class="btn btn-primary" id="next-lesson-btn">
+          Next Lesson <i class="bi bi-chevron-right ms-1"></i>
+        </button>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#notes" data-bs-toggle="tab"
+                >Lesson Notes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#transcript" data-bs-toggle="tab"
+                >Transcript</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#lesson-resources" data-bs-toggle="tab"
+                >Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#reading-materials" data-bs-toggle="tab"
+                >Reading Materials</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab-content">
+          <div class="tab-pane fade show active" id="notes">
+            <h4 class="mb-4">What is Bootstrap?</h4>
+            <p>
+              Bootstrap is a free and open-source CSS framework directed at
+              responsive, mobile-first front-end web development. It contains
+              HTML, CSS, and JavaScript-based design templates for typography,
+              forms, buttons, navigation, and other interface components.
+            </p>
+
+            <div class="alert alert-info">
+              <i class="bi bi-info-circle-fill me-2"></i>Bootstrap helps you build
+              responsive websites quickly with pre-built components and a grid system.
+            </div>
+
+            <h5 class="mt-4">Basic Bootstrap Example</h5>
+            <pre><code class="language-html">
+&lt;!-- A basic Bootstrap button and alert --&gt;
+&lt;button type="button" class="btn btn-primary"&gt;Primary Button&lt;/button&gt;
+&lt;div class="alert alert-success" role="alert"&gt;
+  This is a success alert—check it out!
+&lt;/div&gt;
+            </code></pre>
+
+            <h5 class="mt-4">Key Concepts Covered</h5>
+            <ul>
+              <li>Bootstrap is a front-end framework</li>
+              <li>Focuses on responsive and mobile-first design</li>
+              <li>Provides pre-built CSS classes and JavaScript components</li>
+              <li>Speeds up web development</li>
+            </ul>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-download me-1"></i>Download Slides
+              </button>
+              <button class="btn btn-outline-success">
+                <i class="bi bi-bookmark me-1"></i>Save Notes
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="transcript">
+            <h5 class="mb-3">Video Transcript</h5>
+            <div class="form-check form-switch mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="autoScroll"
+                checked
+              />
+              <label class="form-check-label" for="autoScroll"
+                >Auto-scroll with video</label
+              >
+            </div>
+            <div
+              class="transcript-content"
+              style="max-height: 400px; overflow-y: auto"
+            >
+              <p data-timestamp="0">
+                <strong>[0:00]</strong> Welcome to the Bootstrap Fundamentals course.
+                In this lesson, we'll introduce you to Bootstrap and its power in
+                building responsive web designs.
+              </p>
+              <p data-timestamp="30">
+                <strong>[0:30]</strong> Bootstrap is the most popular HTML, CSS,
+                and JavaScript framework for developing responsive, mobile-first
+                projects on the web.
+              </p>
+              <p data-timestamp="60" class="bg-light fw-bold">
+                <strong>[1:00]</strong> We'll cover its core features, including
+                its powerful grid system, pre-built components, and utility classes.
+              </p>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="lesson-resources">
+            <h5 class="mb-4">Lesson Resources</h5>
+            <div class="list-group mb-3">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-file-earmark-code me-2"></i>Starter Code
+                </span>
+                <span class="badge bg-primary rounded-pill">ZIP 60KB</span>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-file-earmark-pdf me-2"></i>Bootstrap Cheat Sheet
+                </span>
+                <span class="badge bg-primary rounded-pill">PDF 3.5MB</span>
+              </a>
+              <a
+                href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"
+                target="_blank"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  <i class="bi bi-link-45deg me-2"></i>Bootstrap Official Docs
+                </span>
+                <span class="badge bg-primary rounded-pill">Link</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="reading-materials">
+            <h5 class="mb-4">Recommended Reading for this Topic</h5>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-book me-2"></i>Bootstrap 5: The Official Guide
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-book me-2"></i>Learning Bootstrap 5
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+          <h3 class="h5 mb-0">
+            <i class="bi bi-pencil-square me-2"></i>Practice Exercise
+          </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="mb-3">Create a Responsive Card with Bootstrap</h5>
+          <p>
+            Use Bootstrap classes to create a simple responsive card:
+          </p>
+          <ul class="mb-4">
+            <li>Create a `div` with class `card` and `w-75 mx-auto`.</li>
+            <li>Inside, add a `div` with class `card-body`.</li>
+            <li>Add an `h5` with class `card-title` and text "My Bootstrap Card".</li>
+            <li>Add a `p` with class `card-text` and some dummy text.</li>
+            <li>Add a button with class `btn btn-primary`.</li>
+          </ul>
+
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="mb-0">index.html (Bootstrap Code)</h6>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary me-2">
+                  <i class="bi bi-arrow-counterclockwise"></i> Reset
+                </button>
+                <button class="btn btn-sm btn-outline-primary">
+                  <i class="bi bi-files"></i> Show Solution
+                </button>
+              </div>
+            </div>
+            <div class="code-editor border" style="height: 300px">
+              <textarea
+                class="form-control h-100"
+                id="bootstrap-code"
+                spellcheck="false"
+              >
+<div class="card w-75 mx-auto">
+  <div class="card-body">
+    <h5 class="card-title">My Bootstrap Card</h5>
+    <p class="card-text">This is a simple card demonstrating Bootstrap's styling capabilities.</p>
+    <button class="btn btn-primary">Learn More</button>
+  </div>
+</div>
+</textarea
+              >
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <h6 class="mb-2">Live Preview</h6>
+            <div class="border p-3 bg-light" style="min-height: 150px">
+              <iframe
+                id="preview-frame"
+                style="width: 100%; height: 100%; border: none"
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-lightbulb me-1"></i>Get Hint
+            </button>
+            <button class="btn btn-success">
+              <i class="bi bi-check-circle me-1"></i>Submit Exercise
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-4">
+        <div class="card-header bg-white">
+          <h3 class="h5 mb-0">
+            <i class="bi bi-chat-square-text me-2"></i>Discussion
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <textarea
+              class="form-control mb-2"
+              rows="3"
+              placeholder="Ask a question or share your thoughts..."
+            ></textarea>
+            <button class="btn btn-primary">Post Comment</button>
+          </div>
+
+          <div class="d-flex mb-3">
+            <img
+              src="https://randomuser.me/api/portraits/women/49.jpg"
+              class="rounded-circle me-3"
+              width="50"
+              height="50"
+              alt="User"
+            />
+            <div>
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-1">Sarah Johnson</h6>
+                <small class="text-muted">2 hours ago</small>
+              </div>
+              <p class="mb-1">
+                The grid system is so powerful! It makes responsive design a breeze.
+              </p>
+              <a href="#" class="text-decoration-none">Reply</a>
+            </div>
+          </div>
+
+          <div class="d-flex mb-3 ps-5">
+            <img
+              src="https://randomuser.me/api/portraits/men/37.jpg"
+              class="rounded-circle me-3"
+              width="40"
+              height="40"
+              alt="User"
+            />
+            <div>
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-1">Michael Chen (Instructor)</h6>
+                <small class="text-muted">1 hour ago</small>
+              </div>
+              <p class="mb-1">
+                Indeed, Sarah! The grid system is one of Bootstrap's strongest
+                features. Keep experimenting with different column layouts!
+              </p>
+              <a href="#" class="text-decoration-none">Reply</a>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a href="#" class="btn btn-outline-primary"
+              >View All Comments (12)</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Continue Learning</h2>
+      <p class="lead text-muted">
+        These courses complement your Bootstrap knowledge
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            class="card-img-top"
+            alt="HTML Course"
+          />
+          <div class="card-body">
+            <h5 class="card-title">HTML5 Mastery</h5>
+            <p class="card-text">
+              Learn how to structure your web documents with HTML.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  style="width: 75%"
+                ></div>
+              </div>
+              <small>75%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Continue</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            class="card-img-top"
+            alt="CSS Course"
+          />
+          <div class="card-body">
+            <h5 class="card-title">CSS3 Styling</h5>
+            <p class="card-text">
+              Master modern CSS3 to create stunning and responsive web designs.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  style="width: 50%"
+                ></div>
+              </div>
+              <small>50%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Continue</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80"
+            class="card-img-top"
+            alt="JavaScript Course"
+          />
+          <div class="card-body">
+            <h5 class="card-title">JavaScript Basics</h5>
+            <p class="card-text">
+              Add interactivity to your websites with JavaScript.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="progress flex-grow-1 me-3" style="height: 5px">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 0%"
+                ></div>
+              </div>
+              <small>0%</small>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >Start Course</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .code-editor textarea {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    background-color: #f8f9fa;
+  }
+
+  .transcript-content p {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .transcript-content p:hover {
+    background-color: #f8f9fa;
+  }
+
+  .nav-tabs .nav-link.active {
+    font-weight: bold;
+    border-bottom: 3px solid #0d6efd;
+  }
+
+  .list-group-item.active {
+    background-color: #e9f5ff;
+    color: #0d6efd;
+    border-left: 3px solid #0d6efd;
+  }
+
+  .list-group-item.bg-light {
+    background-color: #f8f9fa !important;
+  }
+
+  .sticky-top {
+    z-index: 1;
+  }
+
+  /* Custom color for Bootstrap icon */
+  .text-purple {
+    color: #7952b3 !important; /* Bootstrap purple */
+  }
+
+  /* Style for checked lessons */
+  .lesson-checkbox:checked + i {
+    color: #198754; /* Green color for checked icon */
+  }
+</style>
+
+<script>
+  // Dummy data for lessons (replace with actual data from a backend/API)
+  const allLessons = [
+    {
+      id: "1.1",
+      title: "1.1 Introduction to Bootstrap",
+      videoId: "VIDEO_ID_BOOTSTRAP_1_1", // Replace with actual YouTube video ID
+      notes: "...",
+      reading: [
+        "https://getbootstrap.com/docs/5.3/getting-started/introduction/",
+        "https://www.w3schools.com/bootstrap5/bootstrap_intro.php",
+      ],
+    },
+    {
+      id: "1.2",
+      title: "1.2 Grid System",
+      videoId: "VIDEO_ID_BOOTSTRAP_1_2",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/layout/grid/"],
+    },
+    {
+      id: "1.3",
+      title: "1.3 Typography",
+      videoId: "VIDEO_ID_BOOTSTRAP_1_3",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/content/typography/"],
+    },
+    {
+      id: "1.4",
+      title: "1.4 Colors and Backgrounds",
+      videoId: "VIDEO_ID_BOOTSTRAP_1_4",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/utilities/colors/"],
+    },
+    {
+      id: "2.1",
+      title: "2.1 Buttons and Alerts",
+      videoId: "VIDEO_ID_BOOTSTRAP_2_1",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/buttons/"],
+    },
+    {
+      id: "2.2",
+      title: "2.2 Navbar and Jumbotron",
+      videoId: "VIDEO_ID_BOOTSTRAP_2_2",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/navbar/"],
+    },
+    {
+      id: "2.3",
+      title: "2.3 Cards",
+      videoId: "VIDEO_ID_BOOTSTRAP_2_3",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/card/"],
+    },
+    {
+      id: "2.4",
+      title: "2.4 Forms",
+      videoId: "VIDEO_ID_BOOTSTRAP_2_4",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/forms/overview/"],
+    },
+    {
+      id: "3.1",
+      title: "3.1 Modals",
+      videoId: "VIDEO_ID_BOOTSTRAP_3_1",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/modal/"],
+    },
+    {
+      id: "3.2",
+      title: "3.2 Carousels",
+      videoId: "VIDEO_ID_BOOTSTRAP_3_2",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/carousel/"],
+    },
+    {
+      id: "3.3",
+      title: "3.3 Navs and Tabs",
+      videoId: "VIDEO_ID_BOOTSTRAP_3_3",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/components/navs-tabs/"],
+    },
+    {
+      id: "3.4",
+      title: "3.4 Utilities for Spacing, Sizing, etc.",
+      videoId: "VIDEO_ID_BOOTSTRAP_3_4",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/utilities/spacing/"],
+    },
+    {
+      id: "4.1",
+      title: "4.1 Customizing with Sass",
+      videoId: "VIDEO_ID_BOOTSTRAP_4_1",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/customize/sass/"],
+    },
+    {
+      id: "4.2",
+      title: "4.2 JavaScript Plugins",
+      videoId: "VIDEO_ID_BOOTSTRAP_4_2",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/getting-started/javascript/"],
+    },
+    {
+      id: "4.3",
+      title: "4.3 Accessibility (A11y)",
+      videoId: "VIDEO_ID_BOOTSTRAP_4_3",
+      notes: "...",
+      reading: ["https://getbootstrap.com/docs/5.3/getting-started/accessibility/"],
+    },
+    {
+      id: "4.4",
+      title: "4.4 Building a Responsive Layout Project",
+      videoId: "VIDEO_ID_BOOTSTRAP_4_4",
+      notes: "...",
+      reading: [],
+    },
+  ];
+
+  let currentLessonIndex = 0;
+  const lessonCheckboxes = document.querySelectorAll(".lesson-checkbox");
+  const lessonItems = document.querySelectorAll(".lesson-item");
+  const lessonVideoPlayer = document.getElementById("lesson-video-player");
+  const currentLessonTitle = document.getElementById("current-lesson-title");
+  const prevLessonBtn = document.getElementById("prev-lesson-btn");
+  const nextLessonBtn = document.getElementById("next-lesson-btn");
+  const markCompleteBtn = document.getElementById("mark-complete-btn");
+  const courseProgressBar = document.getElementById("course-progress-bar");
+  const lessonsCompleteText = document.getElementById("lessons-complete-text");
+  const totalLessonsBadge = document.getElementById("total-lessons-badge");
+  const lessonNotesTab = document.getElementById("notes");
+  const readingMaterialsTab = document.getElementById("reading-materials");
+  const bootstrapCodeEditor = document.getElementById("bootstrap-code");
+  const previewFrame = document.getElementById("preview-frame");
+
+  function updateProgress() {
+    const completedLessons = Array.from(lessonCheckboxes).filter(
+      (checkbox) => checkbox.checked
+    ).length;
+    const totalLessons = allLessons.length;
+    const progressPercentage = (completedLessons / totalLessons) * 100;
+
+    courseProgressBar.style.width = `${progressPercentage}%`;
+    courseProgressBar.setAttribute("aria-valuenow", progressPercentage);
+    courseProgressBar.textContent = `${Math.round(
+      progressPercentage
+    )}% Complete`;
+    lessonsCompleteText.textContent = `${completedLessons}/${totalLessons} Lessons`;
+    totalLessonsBadge.textContent = `${totalLessons} Lessons`;
+  }
+
+  function loadLessonContent(lesson) {
+    // Update video player
+    lessonVideoPlayer.src = `https://www.youtube.com/embed/${lesson.videoId}`;
+    currentLessonTitle.textContent = lesson.title;
+
+    // Update lesson notes (this is a placeholder, you'd load actual content here)
+    lessonNotesTab.innerHTML = `
+      <h4 class="mb-4">${lesson.title} Notes</h4>
+      <p>Content for ${lesson.title} will go here. This is where you'd detail the concepts discussed in the video.</p>
+      <div class="alert alert-info">
+        <i class="bi bi-info-circle-fill me-2"></i>This is an important note for this lesson.
+      </div>
+      <h5 class="mt-4">Key Takeaways</h5>
+      <ul>
+        <li>Specific point 1</li>
+        <li>Specific point 2</li>
+      </ul>
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-outline-primary">
+          <i class="bi bi-download me-1"></i>Download Slides
+        </button>
+        <button class="btn btn-outline-success">
+          <i class="bi bi-bookmark me-1"></i>Save Notes
+        </button>
+      </div>
+    `;
+
+    // Update reading materials
+    let readingHtml =
+      '<h5 class="mb-4">Recommended Reading for this Topic</h5><div class="list-group">';
+    if (lesson.reading && lesson.reading.length > 0) {
+      lesson.reading.forEach((link) => {
+        readingHtml += `<a href="${link}" target="_blank" class="list-group-item list-group-item-action"><i class="bi bi-book me-2"></i>${link}</a>`;
+      });
+    } else {
+      readingHtml +=
+        "<p>No specific reading materials for this lesson at the moment.</p>";
+    }
+    readingHtml += "</div>";
+    readingMaterialsTab.innerHTML = readingHtml;
+
+    // Update active state in sidebar
+    lessonItems.forEach((item) => item.classList.remove("active"));
+    document
+      .querySelector(`.lesson-item[data-lesson-id="${lesson.id}"]`)
+      .classList.add("active");
+
+    // Update navigation buttons
+    prevLessonBtn.disabled = currentLessonIndex === 0;
+    nextLessonBtn.disabled = currentLessonIndex === allLessons.length - 1;
+
+    // Set checkbox state for the current lesson
+    const currentLessonCheckbox = document.getElementById(
+      `lesson-checkbox-${lesson.id}`
+    );
+    markCompleteBtn.textContent = currentLessonCheckbox.checked
+      ? "Completed"
+      : "Mark Complete";
+    markCompleteBtn.classList.toggle(
+      "btn-success",
+      !currentLessonCheckbox.checked
+    );
+    markCompleteBtn.classList.toggle(
+      "btn-secondary",
+      currentLessonCheckbox.checked
+    );
+  }
+
+  function updatePreview() {
+    const previewDoc =
+      previewFrame.contentDocument || previewFrame.contentWindow.document;
+    previewDoc.open();
+    // For Bootstrap, we need to include Bootstrap CSS and JS
+    previewDoc.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Bootstrap Preview</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+          body { font-family: sans-serif; margin: 20px; }
+        </style>
+      </head>
+      <body>
+        ${bootstrapCodeEditor.value}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script>
+          try {
+            // Any specific JS for Bootstrap components can go here if needed for preview
+          } catch (e) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.color = 'red';
+            errorDiv.textContent = 'Error: ' + e.message;
+            document.body.appendChild(errorDiv);
+          }
+        </script>
+      </body>
+      </html>
+    `);
+    previewDoc.close();
+  }
+
+  function initializeCourse() {
+    // Load initial lesson (first one)
+    loadLessonContent(allLessons[currentLessonIndex]);
+    updateProgress();
+    updatePreview(); // Initial preview load
+
+    // Event listeners for lesson items
+    lessonItems.forEach((item, index) => {
+      item.addEventListener("click", function (event) {
+        event.preventDefault();
+        // Allow clicking the list item to select the lesson, but prevent default for checkbox
+        if (!event.target.classList.contains("lesson-checkbox")) {
+          currentLessonIndex = allLessons.findIndex(
+            (lesson) => lesson.id === this.dataset.lessonId
+          );
+          loadLessonContent(allLessons[currentLessonIndex]);
+          updatePreview(); // Update preview when lesson changes
+        }
+      });
+    });
+
+    // Event listeners for checkboxes
+    lessonCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        updateProgress();
+        // If the current lesson's checkbox is clicked, update the "Mark Complete" button
+        if (
+          this.id === `lesson-checkbox-${allLessons[currentLessonIndex].id}`
+        ) {
+          markCompleteBtn.textContent = this.checked
+            ? "Completed"
+            : "Mark Complete";
+          markCompleteBtn.classList.toggle("btn-success", !this.checked);
+          markCompleteBtn.classList.toggle("btn-secondary", this.checked);
+        }
+      });
+    });
+
+    // Mark Complete button logic
+    markCompleteBtn.addEventListener("click", function () {
+      const currentLessonCheckbox = document.getElementById(
+        `lesson-checkbox-${allLessons[currentLessonIndex].id}`
+      );
+      currentLessonCheckbox.checked = !currentLessonCheckbox.checked;
+      currentLessonCheckbox.dispatchEvent(new Event("change")); // Trigger change event
+    });
+
+    // Navigation buttons
+    prevLessonBtn.addEventListener("click", () => {
+      if (currentLessonIndex > 0) {
+        currentLessonIndex--;
+        loadLessonContent(allLessons[currentLessonIndex]);
+        updatePreview(); // Update preview when lesson changes
+      }
+    });
+
+    nextLessonBtn.addEventListener("click", () => {
+      if (currentLessonIndex < allLessons.length - 1) {
+        currentLessonIndex++;
+        loadLessonContent(allLessons[currentLessonIndex]);
+        updatePreview(); // Update preview when lesson changes
+      }
+    });
+  }
+
+  // Initial setup when the window loads
+  window.onload = function () {
+    // Transcript click handler
+    document.querySelectorAll(".transcript-content p").forEach((p) => {
+      p.addEventListener("click", function () {
+        const timestamp = this.getAttribute("data-timestamp");
+        // In a real implementation, this would seek the video to the timestamp
+        console.log("Seek to:", timestamp);
+      });
+    });
+
+    initializeCourse();
+  };
+
+  // Update preview frame with code from editor
+  bootstrapCodeEditor.addEventListener("input", updatePreview);
+</script>
+
+{% endblock %}

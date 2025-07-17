@@ -8,7 +8,7 @@ courses_bp = Blueprint('courses', __name__, template_folder='templates')
 @login_required
 def html_course():
     try:
-        return render_template('html_course.html')
+        return render_template('/courses/html_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -17,7 +17,7 @@ def html_course():
 @login_required
 def css_course():
     try:
-        return render_template('css_course.html')
+        return render_template('/courses/css_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -26,7 +26,7 @@ def css_course():
 @login_required
 def js_course():
     try:
-        return render_template('js_course.html')
+        return render_template('/courses/js_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -35,7 +35,7 @@ def js_course():
 @login_required
 def bootstrap_course():
     try:
-        return render_template('bootstrap_course.html')
+        return render_template('/courses/bootstrap_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -44,7 +44,7 @@ def bootstrap_course():
 @login_required
 def jquery_course():
     try:
-        return render_template('jquery_course.html')
+        return render_template('/courses/jquery_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -53,7 +53,7 @@ def jquery_course():
 @login_required
 def react_course():
     try:
-        return render_template('react_course.html')
+        return render_template('/courses/react_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -62,7 +62,7 @@ def react_course():
 @login_required
 def nodejs_course():
     try:
-        return render_template('node_course.html')
+        return render_template('/courses/node_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -71,7 +71,7 @@ def nodejs_course():
 @login_required
 def express_course():
     try:
-        return render_template('express_course.html')
+        return render_template('/courses/express_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -80,7 +80,7 @@ def express_course():
 @login_required
 def sql_course():
     try:
-        return render_template('sql_course.html')
+        return render_template('/courses/sql_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -89,7 +89,7 @@ def sql_course():
 @login_required
 def mongodb_course():
     try:
-        return render_template('mongodb_course.html')
+        return render_template('/courses/mongodb_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -98,7 +98,7 @@ def mongodb_course():
 @login_required
 def auth_course():
     try:
-        return render_template('auth_course.html')
+        return render_template('/courses/auth_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -107,7 +107,7 @@ def auth_course():
 @login_required
 def deployment_course():
     try:
-        return render_template('deployment_course.html')
+        return render_template('/courses/deployment_course.html')
     except Exception as e:
         abort(500, description=str(e))
 
@@ -116,6 +116,6 @@ def deployment_course():
 @login_required
 def catalog():
     try:
-        return render_template('catalog.html')
+        return render_template('/courses/catalog.html')
     except Exception as e:
         abort(500, description=str(e))
