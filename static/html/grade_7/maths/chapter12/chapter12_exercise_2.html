@@ -1,0 +1,372 @@
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<style>
+  .exercise-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .question {
+    background-color: white;
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+  }
+  .btn-check {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    font-weight: bold;
+  }
+  .result {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .correct {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="text-center mb-4">Exercise 2: Tables and Formulas</h1>
+
+      <div class="exercise-container">
+        <!-- Question 1 -->
+        <div class="question">
+          <p>1. Which formula matches this table?</p>
+          <table class="table table-bordered mb-3">
+            <tr>
+              <th>x</th>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <th>y</th>
+              <td>7</td>
+              <td>10</td>
+              <td>13</td>
+              <td>16</td>
+            </tr>
+          </table>
+          <select class="form-select mb-2 answer-input" data-answer="a">
+            <option value="">Select an option</option>
+            <option value="a">y = 3x + 4</option>
+            <option value="b">y = 4x + 3</option>
+            <option value="c">y = 2x + 5</option>
+          </select>
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+          <p>
+            2. For the formula y = 4x - 2, fill in the table for x = 1, 2, 3, 4.
+          </p>
+          <table class="table table-bordered">
+            <tr>
+              <th>x</th>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <th>y</th>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="2"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="6"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="10"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="14"
+                />
+              </td>
+            </tr>
+          </table>
+          <button class="btn btn-check check-table">Check Table</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+          <p>
+            3. A sequence of black squares follows the pattern 2, 5, 10, 17.
+            What is the formula for the number of black squares (z) in terms of
+            x?
+          </p>
+          <input
+            type="text"
+            class="form-control mb-2 answer-input"
+            data-answer="z = x² + 1"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+          <p>
+            4. If a fare is calculated as F = 0.75d + 200, what is the fare for
+            a 120 km trip?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="290"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+          <p>
+            5. For the formula y = 2(3x + 1), simplify it and find y when x = 2.
+          </p>
+          <div class="mb-2">
+            <p>
+              Simplified formula:
+              <input
+                type="text"
+                class="form-control d-inline-block w-50"
+                data-answer="y = 6x + 2"
+              />
+            </p>
+            <p>
+              When x=2, y=
+              <input
+                type="number"
+                class="form-control d-inline-block w-50"
+                data-answer="14"
+              />
+            </p>
+          </div>
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+          <p>
+            6. Which formula represents "add 5 to the input and then multiply by
+            3"?
+          </p>
+          <select class="form-select mb-2 answer-input" data-answer="b">
+            <option value="">Select an option</option>
+            <option value="a">y = 3x + 5</option>
+            <option value="b">y = 3(x + 5)</option>
+            <option value="c">y = 5x + 3</option>
+          </select>
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+          <p>7. Complete the table for y = x² - 1:</p>
+          <table class="table table-bordered">
+            <tr>
+              <th>x</th>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <th>y</th>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="0"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="3"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="8"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="15"
+                />
+              </td>
+            </tr>
+          </table>
+          <button class="btn btn-check check-table">Check Table</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+          <p>
+            8. If the input (x) is 7 and the output (y) is 22, which formula
+            could fit?
+          </p>
+          <select class="form-select mb-2 answer-input" data-answer="a">
+            <option value="">Select an option</option>
+            <option value="a">y = 3x + 1</option>
+            <option value="b">y = 4x - 6</option>
+            <option value="c">y = 2x + 8</option>
+          </select>
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+          <p>9. For the formula y = ½x + 4, calculate y when x = 6.</p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="7"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+          <p>
+            10. A pattern has red squares following y = 4x + 2 and black squares
+            following z = x² + 3. How many total squares are in Arrangement 3?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="26"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button id="check-all" class="btn btn-success btn-lg">
+          Check All Answers
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Same JavaScript as Exercise 1 (copy the script section)
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check individual answers
+    document.querySelectorAll(".check-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const questionDiv = this.closest(".question");
+        const input = questionDiv.querySelector(".answer-input");
+        const resultDiv = questionDiv.querySelector(".result");
+        const correctAnswer = input.dataset.answer;
+        let userAnswer = input.value.trim();
+
+        if (input.tagName === "SELECT") {
+          userAnswer = input.options[input.selectedIndex].text;
+        }
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+          resultDiv.textContent = "Correct!";
+          resultDiv.className = "result correct";
+        } else {
+          resultDiv.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+          resultDiv.className = "result incorrect";
+        }
+        resultDiv.style.display = "block";
+      });
+    });
+
+    // Check table answers
+    document.querySelectorAll(".check-table").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const questionDiv = this.closest(".question");
+        const inputs = questionDiv.querySelectorAll(".table-input");
+        const resultDiv = questionDiv.querySelector(".result");
+        let allCorrect = true;
+        let results = [];
+
+        inputs.forEach((input) => {
+          const correctAnswer = input.dataset.answer;
+          const userAnswer = input.value.trim();
+
+          if (userAnswer === correctAnswer) {
+            input.style.backgroundColor = "#d4edda";
+            results.push(
+              `✅ ${input.previousElementSibling.textContent}: Correct`
+            );
+          } else {
+            input.style.backgroundColor = "#f8d7da";
+            results.push(
+              `❌ ${input.previousElementSibling.textContent}: Incorrect (Correct: ${correctAnswer})`
+            );
+            allCorrect = false;
+          }
+        });
+
+        resultDiv.innerHTML = results.join("<br>");
+        resultDiv.className = `result ${allCorrect ? "correct" : "incorrect"}`;
+        resultDiv.style.display = "block";
+      });
+    });
+
+    // Check all answers
+    document.getElementById("check-all").addEventListener("click", function () {
+      document.querySelectorAll(".check-btn").forEach((btn) => {
+        btn.click();
+      });
+      document.querySelectorAll(".check-table").forEach((btn) => {
+        btn.click();
+      });
+    });
+  });
+</script>

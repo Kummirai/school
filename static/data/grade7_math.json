@@ -38,7 +38,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_1_whole_numbers_content.html",
+                  "path": "html/grade_7/maths/1_1_whole_numbers_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -50,19 +50,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_1_whole_numbers_study_guide.html",
+                  "path": "html/grade_7/maths/1_1_whole_numbers_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_1_whole_numbers_exercises.html",
+                  "path": "html/grade_7/maths/1_1_whole_numbers_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_1_whole_numbers_test.html",
+                  "path": "html/grade_7/maths/1_1_whole_numbers_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -76,7 +76,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_2_basic_operations__content.html",
+                  "path": "html/grade_7/maths/1_2_basic_operations__content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -88,19 +88,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_2_basic_operations__study_guide.html",
+                  "path": "html/grade_7/maths/1_2_basic_operations__study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_2_basic_operations__exercises.html",
+                  "path": "html/grade_7/maths/1_2_basic_operations__exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_2_basic_operations__test.html",
+                  "path": "html/grade_7/maths/1_2_basic_operations__test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -114,7 +114,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_3_multiples__content.html",
+                  "path": "html/grade_7/maths/1_3_multiples__content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -126,19 +126,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_3_multiples__study_guide.html",
+                  "path": "html/grade_7/maths/1_3_multiples__study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_3_multiples__exercises.html",
+                  "path": "html/grade_7/maths/1_3_multiples__exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_3_multiples__test.html",
+                  "path": "html/grade_7/maths/1_3_multiples__test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -152,7 +152,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_4_multiples_of_powers_content.html",
+                  "path": "html/grade_7/maths/1_4_multiples_of_powers_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -164,19 +164,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_4_multiples_of_powers_study_guide.html",
+                  "path": "html/grade_7/maths/1_4_multiples_of_powers_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_4_multiples_of_powers_exercises.html",
+                  "path": "html/grade_7/maths/1_4_multiples_of_powers_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_4_multiples_of_powers_test.html",
+                  "path": "html/grade_7/maths/1_4_multiples_of_powers_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -190,7 +190,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_5___doubling_and_halving__content.html",
+                  "path": "html/grade_7/maths/1_5___doubling_and_halving__content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -202,19 +202,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_5___doubling_and_halving__study_guide.html",
+                  "path": "html/grade_7/maths/1_5___doubling_and_halving__study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_5___doubling_and_halving__exercises.html",
+                  "path": "html/grade_7/maths/1_5___doubling_and_halving__exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_5___doubling_and_halving__test.html",
+                  "path": "html/grade_7/maths/1_5___doubling_and_halving__test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -228,7 +228,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/1_6_rate_and_ratio__content.html",
+                  "path": "html/grade_7/maths/1_6_rate_and_ratio__content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -240,19 +240,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/1_6_rate_and_ratio__study_guide.html",
+                  "path": "html/grade_7/maths/1_6_rate_and_ratio__study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/1_6_rate_and_ratio__exercises.html",
+                  "path": "html/grade_7/maths/1_6_rate_and_ratio__exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/1_6_rate_and_ratio__test.html",
+                  "path": "html/grade_7/maths/1_6_rate_and_ratio__test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -272,7 +272,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/3_1_geometry_of_straight_lines_content.html",
+                  "path": "html/grade_7/maths/3_1_geometry_of_straight_lines_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -284,19 +284,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/3_1_geometry_of_straight_lines_study_guide.html",
+                  "path": "html/grade_7/maths/3_1_geometry_of_straight_lines_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/3_1_geometry_of_straight_lines_exercises.html",
+                  "path": "html/grade_7/maths/3_1_geometry_of_straight_lines_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/3_1_geometry_of_straight_lines_test.html",
+                  "path": "html/grade_7/maths/3_1_geometry_of_straight_lines_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -310,7 +310,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/3_2_construction_of_geometric_figures_content.html",
+                  "path": "html/grade_7/maths/3_2_construction_of_geometric_figures_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -322,19 +322,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/3_2_construction_of_geometric_figures_study_guide.html",
+                  "path": "html/grade_7/maths/3_2_construction_of_geometric_figures_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/3_2_construction_of_geometric_figures_exercises.html",
+                  "path": "html/grade_7/maths/3_2_construction_of_geometric_figures_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/3_2_construction_of_geometric_figures_test.html",
+                  "path": "html/grade_7/maths/3_2_construction_of_geometric_figures_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -348,7 +348,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/3_3_geometry_of_2d_shapes_content.html",
+                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -360,19 +360,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/3_3_geometry_of_2d_shapes_study_guide.html",
+                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/3_3_geometry_of_2d_shapes_exercises.html",
+                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/3_3_geometry_of_2d_shapes_test.html",
+                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -397,7 +397,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/2_1_common_fractions_mastery_content.html",
+                  "path": "html/grade_7/maths/2_1_common_fractions_mastery_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -409,19 +409,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/2_1_common_fractions_mastery_study_guide.html",
+                  "path": "html/grade_7/maths/2_1_common_fractions_mastery_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/2_1_common_fractions_mastery_exercises.html",
+                  "path": "html/grade_7/maths/2_1_common_fractions_mastery_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/2_1_common_fractions_mastery_test.html",
+                  "path": "html/grade_7/maths/2_1_common_fractions_mastery_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -435,7 +435,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/2_2_decimal_notation_for_fractions_content.html",
+                  "path": "html/grade_7/maths/2_2_decimal_notation_for_fractions_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -447,19 +447,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/2_2_decimal_notation_for_fractions_study_guide.html",
+                  "path": "html/grade_7/maths/2_2_decimal_notation_for_fractions_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/2_2_decimal_notation_for_fractions_exercises.html",
+                  "path": "html/grade_7/maths/2_2_decimal_notation_for_fractions_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/2_2_decimal_notation_for_fractions_test.html",
+                  "path": "html/grade_7/maths/2_2_decimal_notation_for_fractions_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -479,7 +479,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/8_1_relationships_between_variables_content.html",
+                  "path": "html/grade_7/maths/8_1_relationships_between_variables_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -491,19 +491,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/8_1_relationships_between_variables_study_guide.html",
+                  "path": "html/grade_7/maths/8_1_relationships_between_variables_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/8_1_relationships_between_variables_exercises.html",
+                  "path": "html/grade_7/maths/8_1_relationships_between_variables_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/8_1_relationships_between_variables_test.html",
+                  "path": "html/grade_7/maths/8_1_relationships_between_variables_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -523,7 +523,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_content.html",
+                  "path": "html/grade_7/maths/9_1_perimeter_&_area_of_2d_shapes_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -535,19 +535,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_study_guide.html",
+                  "path": "html/grade_7/maths/9_1_perimeter_&_area_of_2d_shapes_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_exercises.html",
+                  "path": "html/grade_7/maths/9_1_perimeter_&_area_of_2d_shapes_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/9_1_perimeter_&_area_of_2d_shapes_test.html",
+                  "path": "html/grade_7/maths/9_1_perimeter_&_area_of_2d_shapes_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -561,7 +561,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_content.html",
+                  "path": "html/grade_7/maths/10_1_surface_area_&_volume_of_3d_objects_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -573,19 +573,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_study_guide.html",
+                  "path": "html/grade_7/maths/10_1_surface_area_&_volume_of_3d_objects_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_exercises.html",
+                  "path": "html/grade_7/maths/10_1_surface_area_&_volume_of_3d_objects_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/10_1_surface_area_&_volume_of_3d_objects_test.html",
+                  "path": "html/grade_7/maths/10_1_surface_area_&_volume_of_3d_objects_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -602,7 +602,7 @@
           "color": "warning",
           "lessons": [
             {
-              "title": "11.1 Numeric & Geometric Patterns",
+              "title": "11 Numeric & Geometric Patterns",
               "duration": "120 min",
               "icon": "bi bi-diagram-3",
               "description": "Discover and analyze numeric and geometric patterns. Learn to identify pattern rules, extend sequences, and recognize visual patterns in mathematics.",
@@ -610,37 +610,37 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/chapter12_1_content.html",
+                  "path": "html/grade_7/maths/chapter12_1_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/-eX1EmsU8Ns",
+                  "path": "https://www.youtube.com/embed/vV7C7bXm4VI",
                   "icon": "play-circle"
                 },
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/11_1_numeric_&_geometric_patterns_study_guide.html",
+                  "path": "html/grade_7/maths/11_1_numeric_&_geometric_patterns_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/11_1_numeric_&_geometric_patterns_exercises.html",
+                  "path": "html/grade_7/maths/11_1_numeric_&_geometric_patterns_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/11_1_numeric_&_geometric_patterns_test.html",
+                  "path": "html/grade_7/maths/11_1_numeric_&_geometric_patterns_test.html",
                   "icon": "clipboard-check"
                 }
               ]
             },
             {
-              "title": "12.1 Functions & Relationships 1",
+              "title": "12 Functions & Relationships",
               "duration": "22 min",
               "icon": "bi bi-arrow-left-right",
               "description": "Introduction to functions through input-output tables and function notation. Understand basic relationships between variables.",
@@ -648,73 +648,46 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/chapter12_1_content.html",
+                  "path": [
+                    "html/grade_7/maths/chapter12/chapter12_1_content.html",
+                    "html/grade_7/maths/chapter12/chapter12_2_content.html"
+                  ],
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
                   "path": [
-                    "https://www.youtube.com/embed/hX_nrH8dgz8",
-                    "https://www.youtube.com/embed/oUrbhXQFWHA",
-                    "https://www.youtube.com/embed/bULJ1hQSRgk"
+                    "https://www.youtube.com/embed/52tpYl2tTqk",
+                    "https://www.youtube.com/embed/8A_NmQWCsq8",
+                    "https://www.youtube.com/embed/WD9-6i8fjm4",
+                    "https://www.youtube.com/embed/rIfb3EJW70s"
                   ],
                   "icon": "play-circle"
                 },
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/chapter12_1_studyguide.html",
+                  "path": "html/grade_7/maths/chapter12/chapter12_1_studyguide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
+                  "path": [
+                    "html/grade_7/maths/chapter12/chapter12_exercise_1.html",
+                    "html/grade_7/maths/chapter12/chapter12_exercise_2.html",
+                    "html/grade_7/maths/chapter12/chapter12_exercise_3.html"
+                  ],
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/13_1_algebraic_expressions_1_test.html",
-                  "icon": "clipboard-check"
-                }
-              ]
-            },
-            {
-              "title": "12.2 What to calculate and how",
-              "duration": "25 min",
-              "icon": "bi bi-calculator",
-              "description": "Learn to represent situations mathematically and use formulae for calculations.",
-              "resources": [
-                {
-                  "type": "lesson_content",
-                  "title": "Lesson Content",
-                  "path": "html/chapter12_2_content.html",
-                  "icon": "file-earmark-text"
-                },
-                {
-                  "type": "video",
-                  "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/hij789",
-                  "icon": "play-circle"
-                },
-                {
-                  "type": "study_guide",
-                  "title": "Study Guide",
-                  "path": "html/13_1_algebraic_expressions_1_study_guide.html",
-                  "icon": "journal-text"
-                },
-                {
-                  "type": "exercises",
-                  "title": "Practice Exercises",
-                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
-                  "icon": "pencil-square"
-                },
-                {
-                  "type": "test",
-                  "title": "Lesson Test",
-                  "path": "html/13_1_algebraic_expressions_1_test.html",
+                  "path": [
+                    "html/grade_7/maths/chapter12/chapter12_test_1.html",
+                    "html/grade_7/maths/chapter12/chapter12_test_2.html"
+                  ],
                   "icon": "clipboard-check"
                 }
               ]
@@ -728,7 +701,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/13_1_algebraic_expressions_1_content.html",
+                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -740,19 +713,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/13_1_algebraic_expressions_1_study_guide.html",
+                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/13_1_algebraic_expressions_1_exercises.html",
+                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/13_1_algebraic_expressions_1_test.html",
+                  "path": "html/grade_7/maths/13_1_algebraic_expressions_1_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -766,7 +739,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/14_1_algebraic_equations_1_content.html",
+                  "path": "html/grade_7/maths/14_1_algebraic_equations_1_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -778,19 +751,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/14_1_algebraic_equations_1_study_guide.html",
+                  "path": "html/grade_7/maths/14_1_algebraic_equations_1_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/14_1_algebraic_equations_1_exercises.html",
+                  "path": "html/grade_7/maths/14_1_algebraic_equations_1_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/14_1_algebraic_equations_1_test.html",
+                  "path": "html/grade_7/maths/14_1_algebraic_equations_1_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -810,7 +783,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/15_1_graphing_&_coordinate_geometry_content.html",
+                  "path": "html/grade_7/maths/15_1_graphing_&_coordinate_geometry_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -822,19 +795,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/15_1_graphing_&_coordinate_geometry_study_guide.html",
+                  "path": "html/grade_7/maths/15_1_graphing_&_coordinate_geometry_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/15_1_graphing_&_coordinate_geometry_exercises.html",
+                  "path": "html/grade_7/maths/15_1_graphing_&_coordinate_geometry_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/15_1_graphing_&_coordinate_geometry_test.html",
+                  "path": "html/grade_7/maths/15_1_graphing_&_coordinate_geometry_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -848,7 +821,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/16_1_transformation_geometry_content.html",
+                  "path": "html/grade_7/maths/16_1_transformation_geometry_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -860,19 +833,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/16_1_transformation_geometry_study_guide.html",
+                  "path": "html/grade_7/maths/16_1_transformation_geometry_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/16_1_transformation_geometry_exercises.html",
+                  "path": "html/grade_7/maths/16_1_transformation_geometry_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/16_1_transformation_geometry_test.html",
+                  "path": "html/grade_7/maths/16_1_transformation_geometry_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -886,7 +859,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/17_1_geometry_of_3d_objects_content.html",
+                  "path": "html/grade_7/maths/17_1_geometry_of_3d_objects_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -898,19 +871,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/17_1_geometry_of_3d_objects_study_guide.html",
+                  "path": "html/grade_7/maths/17_1_geometry_of_3d_objects_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/17_1_geometry_of_3d_objects_exercises.html",
+                  "path": "html/grade_7/maths/17_1_geometry_of_3d_objects_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/17_1_geometry_of_3d_objects_test.html",
+                  "path": "html/grade_7/maths/17_1_geometry_of_3d_objects_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -935,7 +908,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/18_1_integers_content.html",
+                  "path": "html/grade_7/maths/18_1_integers_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -947,19 +920,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/18_1_integers_study_guide.html",
+                  "path": "html/grade_7/maths/18_1_integers_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/18_1_integers_exercises.html",
+                  "path": "html/grade_7/maths/18_1_integers_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/18_1_integers_test.html",
+                  "path": "html/grade_7/maths/18_1_integers_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -973,7 +946,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/19_1_number_patterns_content.html",
+                  "path": "html/grade_7/maths/19_1_number_patterns_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -985,19 +958,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/19_1_number_patterns_study_guide.html",
+                  "path": "html/grade_7/maths/19_1_number_patterns_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/19_1_number_patterns_exercises.html",
+                  "path": "html/grade_7/maths/19_1_number_patterns_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/19_1_number_patterns_test.html",
+                  "path": "html/grade_7/maths/19_1_number_patterns_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1017,7 +990,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/20_1_functions_&_relationships_2_content.html",
+                  "path": "html/grade_7/maths/20_1_functions_&_relationships_2_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1029,19 +1002,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/20_1_functions_&_relationships_2_study_guide.html",
+                  "path": "html/grade_7/maths/20_1_functions_&_relationships_2_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/20_1_functions_&_relationships_2_exercises.html",
+                  "path": "html/grade_7/maths/20_1_functions_&_relationships_2_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/20_1_functions_&_relationships_2_test.html",
+                  "path": "html/grade_7/maths/20_1_functions_&_relationships_2_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1055,7 +1028,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/21_1_algebraic_expressions_2_content.html",
+                  "path": "html/grade_7/maths/21_1_algebraic_expressions_2_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1067,19 +1040,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/21_1_algebraic_expressions_2_study_guide.html",
+                  "path": "html/grade_7/maths/21_1_algebraic_expressions_2_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/21_1_algebraic_expressions_2_exercises.html",
+                  "path": "html/grade_7/maths/21_1_algebraic_expressions_2_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/21_1_algebraic_expressions_2_test.html",
+                  "path": "html/grade_7/maths/21_1_algebraic_expressions_2_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1093,7 +1066,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/22_1_algebraic_equations_2_content.html",
+                  "path": "html/grade_7/maths/22_1_algebraic_equations_2_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1105,19 +1078,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/22_1_algebraic_equations_2_study_guide.html",
+                  "path": "html/grade_7/maths/22_1_algebraic_equations_2_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/22_1_algebraic_equations_2_exercises.html",
+                  "path": "html/grade_7/maths/22_1_algebraic_equations_2_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/22_1_algebraic_equations_2_test.html",
+                  "path": "html/grade_7/maths/22_1_algebraic_equations_2_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1137,7 +1110,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/23_1_collect,_organize_&_summarize_data_content.html",
+                  "path": "html/grade_7/maths/23_1_collect,_organize_&_summarize_data_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1149,19 +1122,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/23_1_collect,_organize_&_summarize_data_study_guide.html",
+                  "path": "html/grade_7/maths/23_1_collect,_organize_&_summarize_data_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/23_1_collect,_organize_&_summarize_data_exercises.html",
+                  "path": "html/grade_7/maths/23_1_collect,_organize_&_summarize_data_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/23_1_collect,_organize_&_summarize_data_test.html",
+                  "path": "html/grade_7/maths/23_1_collect,_organize_&_summarize_data_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1175,7 +1148,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/24_1_represent_data_content.html",
+                  "path": "html/grade_7/maths/24_1_represent_data_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1187,19 +1160,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/24_1_represent_data_study_guide.html",
+                  "path": "html/grade_7/maths/24_1_represent_data_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/24_1_represent_data_exercises.html",
+                  "path": "html/grade_7/maths/24_1_represent_data_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/24_1_represent_data_test.html",
+                  "path": "html/grade_7/maths/24_1_represent_data_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1213,7 +1186,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/25_1_interpret,_analyze_&_report_data_content.html",
+                  "path": "html/grade_7/maths/25_1_interpret,_analyze_&_report_data_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1225,19 +1198,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/25_1_interpret,_analyze_&_report_data_study_guide.html",
+                  "path": "html/grade_7/maths/25_1_interpret,_analyze_&_report_data_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/25_1_interpret,_analyze_&_report_data_exercises.html",
+                  "path": "html/grade_7/maths/25_1_interpret,_analyze_&_report_data_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/25_1_interpret,_analyze_&_report_data_test.html",
+                  "path": "html/grade_7/maths/25_1_interpret,_analyze_&_report_data_test.html",
                   "icon": "clipboard-check"
                 }
               ]
@@ -1251,7 +1224,7 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/26_1_introduction_to_probability_content.html",
+                  "path": "html/grade_7/maths/26_1_introduction_to_probability_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
@@ -1263,19 +1236,19 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/26_1_introduction_to_probability_study_guide.html",
+                  "path": "html/grade_7/maths/26_1_introduction_to_probability_study_guide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/26_1_introduction_to_probability_exercises.html",
+                  "path": "html/grade_7/maths/26_1_introduction_to_probability_exercises.html",
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/26_1_introduction_to_probability_test.html",
+                  "path": "html/grade_7/maths/26_1_introduction_to_probability_test.html",
                   "icon": "clipboard-check"
                 }
               ]

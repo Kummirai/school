@@ -4,7 +4,7 @@ block content %}
 <section
   class="hero-section"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
                 url('{{ subject_data.hero_image }}');
     background-size: cover;
     background-position: center;
@@ -96,7 +96,7 @@ block content %}
             <!-- Single path resource -->
             <button
               type="button"
-              class="list-group-item list-group-item-action resource-btn {% if first_loop %}active{% endif %}"
+              class="list-group-item list-group-item-action resource-btn"
               data-resource-type="{{ resource.type }}"
               data-resource-path="{% if resource.path.startswith('http') %}{{ resource.path }}{% else %}{{ url_for('static', filename=resource.path) }}{% endif %}"
             >
@@ -110,7 +110,7 @@ block content %}
             {% for path in resource.path %}
             <button
               type="button"
-              class="list-group-item list-group-item-action resource-btn {% if first_loop and loop.first %}active{% endif %}"
+              class="list-group-item list-group-item-action resource-btn"
               data-resource-type="{{ resource.type }}"
               data-resource-path="{% if path.startswith('http') %}{{ path }}{% else %}{{ url_for('static', filename=path) }}{% endif %}"
             >

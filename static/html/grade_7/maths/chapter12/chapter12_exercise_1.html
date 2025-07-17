@@ -1,0 +1,310 @@
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<style>
+  .exercise-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .question {
+    background-color: white;
+    border-left: 4px solid #4a90e2;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+  }
+  .btn-check {
+    background: linear-gradient(135deg, #4a90e2, #50e3c2);
+    color: white;
+    font-weight: bold;
+  }
+  .result {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .correct {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="text-center mb-4">Exercise 1: Pattern Recognition</h1>
+
+      <div class="exercise-container">
+        <!-- Question 1 -->
+        <div class="question">
+          <p>
+            1. In a sequence of arrangements, Arrangement 1 has 6 red squares
+            and 3 black squares. If the number of red squares increases by 4
+            each time, how many red squares will be in Arrangement 5?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="22"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+          <p>
+            2. For the same sequence, if the number of black squares follows the
+            pattern 3, 6, 11, 18, what is the number of black squares in
+            Arrangement 6?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="27"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+          <p>
+            3. Which formula correctly represents the number of red squares (y)
+            for Arrangement number (x) if y increases by 4 for each x?
+          </p>
+          <select class="form-select mb-2 answer-input" data-answer="a">
+            <option value="">Select an option</option>
+            <option value="a">y = 4x + 2</option>
+            <option value="b">y = 2x + 4</option>
+            <option value="c">y = x² + 4</option>
+          </select>
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+          <p>
+            4. If the formula for black squares is z = x² + 2, how many black
+            squares are in Arrangement 4?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="18"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+          <p>
+            5. A pattern has red squares following y = 3x - 1. How many red
+            squares are in Arrangement 3?
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="8"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+          <p>
+            6. For the formula m = 60 × h, what does m represent if h is the
+            number of hours?
+          </p>
+          <input
+            type="text"
+            class="form-control mb-2 answer-input"
+            data-answer="minutes"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+          <p>
+            7. Using the formula m = 60 × h, calculate the number of minutes in
+            4.5 hours.
+          </p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="270"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+          <p>
+            8. A bus company charges R300 per trip plus R2 per km. Write the
+            formula for the fare (F) in terms of distance (d).
+          </p>
+          <input
+            type="text"
+            class="form-control mb-2 answer-input"
+            data-answer="F = 2d + 300"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+          <p>9. If y = 5x + 3, what is the value of y when x = 4?</p>
+          <input
+            type="number"
+            class="form-control mb-2 answer-input"
+            data-answer="23"
+          />
+          <button class="btn btn-check check-btn">Check Answer</button>
+          <div class="result"></div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+          <p>10. Complete the table for the formula y = 2x + 1:</p>
+          <table class="table table-bordered">
+            <tr>
+              <th>x</th>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <th>y</th>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="3"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="5"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="7"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control table-input"
+                  data-answer="9"
+                />
+              </td>
+            </tr>
+          </table>
+          <button class="btn btn-check check-table">Check Table</button>
+          <div class="result"></div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button id="check-all" class="btn btn-primary btn-lg">
+          Check All Answers
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check individual answers
+    document.querySelectorAll(".check-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const questionDiv = this.closest(".question");
+        const input = questionDiv.querySelector(".answer-input");
+        const resultDiv = questionDiv.querySelector(".result");
+        const correctAnswer = input.dataset.answer;
+        let userAnswer = input.value.trim();
+
+        // For select inputs, get the text of the selected option
+        if (input.tagName === "SELECT") {
+          userAnswer = input.options[input.selectedIndex].text;
+        }
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+          resultDiv.textContent = "Correct!";
+          resultDiv.className = "result correct";
+        } else {
+          resultDiv.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+          resultDiv.className = "result incorrect";
+        }
+        resultDiv.style.display = "block";
+      });
+    });
+
+    // Check table answers
+    document
+      .querySelector(".check-table")
+      .addEventListener("click", function () {
+        const questionDiv = this.closest(".question");
+        const inputs = questionDiv.querySelectorAll(".table-input");
+        const resultDiv = questionDiv.querySelector(".result");
+        let allCorrect = true;
+        let results = [];
+
+        inputs.forEach((input) => {
+          const correctAnswer = input.dataset.answer;
+          const userAnswer = input.value.trim();
+
+          if (userAnswer === correctAnswer) {
+            input.style.backgroundColor = "#d4edda";
+            results.push(
+              `✅ ${input.previousElementSibling.textContent}: Correct`
+            );
+          } else {
+            input.style.backgroundColor = "#f8d7da";
+            results.push(
+              `❌ ${input.previousElementSibling.textContent}: Incorrect (Correct: ${correctAnswer})`
+            );
+            allCorrect = false;
+          }
+        });
+
+        resultDiv.innerHTML = results.join("<br>");
+        resultDiv.className = `result ${allCorrect ? "correct" : "incorrect"}`;
+        resultDiv.style.display = "block";
+      });
+
+    // Check all answers
+    document.getElementById("check-all").addEventListener("click", function () {
+      document.querySelectorAll(".check-btn").forEach((btn) => {
+        btn.click();
+      });
+      document.querySelector(".check-table").click();
+    });
+  });
+</script>
