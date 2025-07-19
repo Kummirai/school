@@ -33,7 +33,10 @@
       {% else %}
       <div class="alert alert-info">No bookings for this session yet.</div>
       {% endif %}
-      <a href="{{ url_for('manage_sessions') }}" class="btn btn-secondary mt-3">
+      <a
+        href="{{ url_for('sessions.manage_sessions') }}"
+        class="btn btn-secondary mt-3"
+      >
         <i class="fas fa-arrow-left"></i> Back to Classes
       </a>
     </div>

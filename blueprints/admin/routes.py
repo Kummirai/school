@@ -41,7 +41,7 @@ def mark_subscription_paid(subscription_id):
         flash('Subscription marked as paid', 'success')
     else:
         flash('Failed to mark subscription as paid', 'danger')
-    return redirect(url_for('manage_subscriptions'))
+    return redirect(url_for('subscriptions.manage_subscriptions'))
 
 
 @admin_bp.route('/assignments/add', methods=['GET', 'POST'])
@@ -63,27 +63,27 @@ def add_assignment_route():
             # Validate required fields
             if not all([title, description, subject, total_marks, deadline_str]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('add_assignment_route'))
+                return redirect(url_for('assignments.add_ssignment_route'))
 
             # Convert and validate total marks
             try:
                 total_marks = int(total_marks)
                 if total_marks <= 0:
                     flash('Total marks must be positive', 'danger')
-                    return redirect(url_for('add_assignment_route'))
+                    return redirect(url_for('assignments.add_ssignment_route'))
             except ValueError:
                 flash('Total marks must be a number', 'danger')
-                return redirect(url_for('add_assignment_route'))
+                return redirect(url_for('assignments.add_ssignment_route'))
 
             # Validate deadline
             try:
                 deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
                 if deadline <= datetime.utcnow():
                     flash('Deadline must be in the future', 'danger')
-                    return redirect(url_for('add_assignment_route'))
+                    return redirect(url_for('assignments.add_ssignment_route'))
             except ValueError:
                 flash('Invalid deadline format', 'danger')
-                return redirect(url_for('add_assignment_route'))
+                return redirect(url_for('assignments.add_ssignment_route'))
 
             # Get user IDs based on selection
             if assign_to == 'all':
@@ -98,7 +98,7 @@ def add_assignment_route():
                 user_ids = [int(user_id) for user_id in selected_users]
             else:
                 flash('Please select at least one student', 'danger')
-                return redirect(url_for('add_assignment_route'))
+                return redirect(url_for('assignments.add_ssignment_route'))
 
             # Create assignment
             assignment_id = add_assignment(
@@ -111,7 +111,7 @@ def add_assignment_route():
             )
 
             flash('Assignment created successfully!', 'success')
-            return redirect(url_for('manage_assignments'))
+            return redirect(url_for('assignments.manage_assignments'))
 
         except Exception as e:
             flash(f'Error creating assignment: {str(e)}', 'danger')
@@ -172,7 +172,7 @@ def view_assignment_submissions(assignment_id):
         assignment = cur.fetchone()
         if not assignment:
             flash('Assignment not found', 'danger')
-            return redirect(url_for('manage_assignments'))
+            return redirect(url_for('assignments.manage_assignments'))
 
         # Get submissions with student IDs
         cur.execute('''
@@ -207,7 +207,7 @@ def submit_grade(assignment_id, student_id):
         assignment = get_assignment_details(assignment_id)
         if not assignment:
             flash('Assignment not found', 'danger')
-            return redirect(url_for('manage_assignments'))
+            return redirect(url_for('assignments.manage_assignments'))
 
         # total_marks is at index 4
         if marks_obtained < 0 or marks_obtained > assignment[4]:
@@ -246,7 +246,7 @@ def add_student():
         else:
             add_student_to_db(username, password)
             flash('Student added successfully', 'success')
-            return redirect(url_for('manage_students'))
+            return redirect(url_for('students.manage_students'))
 
     return render_template('admin/add_student.html')
 
@@ -257,7 +257,7 @@ def add_student():
 def delete_student(student_id):
     delete_student_by_id(student_id)
     flash('Student deleted successfully', 'success')
-    return redirect(url_for('manage_students'))
+    return redirect(url_for('students.manage_students'))
 
 
 @admin_bp.route('/session-requests')
@@ -277,7 +277,7 @@ def approve_session_request(request_id):
         flash('Session request approved and scheduled!', 'success')
     else:
         flash('Error approving request', 'danger')
-    return redirect(url_for('manage_session_requests'))
+    return redirect(url_for('sessions.manage_session_requests'))
 
 
 @admin_bp.route('/session-requests/<int:request_id>/reject', methods=['POST'])
@@ -289,7 +289,7 @@ def reject_session_request(request_id):
         flash('Session request rejected', 'success')
     else:
         flash('Error rejecting request', 'danger')
-    return redirect(url_for('manage_session_requests'))
+    return redirect(url_for('sessions.manage_session_requests'))
 
 
 @admin_bp.route('/parents/add', methods=['GET', 'POST'])
@@ -347,7 +347,7 @@ def add_parent():
 
                 conn.commit()
                 flash('Parent and linked students added successfully!', 'success')
-                return redirect(url_for('manage_parents'))
+                return redirect(url_for('parents.manage_parents'))
             except Exception as e:
                 conn.rollback()  # Rollback user creation if linking fails
                 flash(
@@ -450,7 +450,7 @@ def admin_add_subscription():
                         conn.close()
 
                 flash('Subscription added successfully', 'success')
-                return redirect(url_for('manage_subscriptions'))
+                return redirect(url_for('subscriptions.manage_subscriptions'))
             else:
                 flash('Error adding subscription', 'danger')
 
@@ -485,7 +485,7 @@ def delete_announcement(announcement_id):
     finally:
         cur.close()
         conn.close()
-    return redirect(url_for('manage_announcements'))
+    return redirect(url_for('announcements.manage_announcements'))
 
 
 @admin_bp.route('/assignments/import', methods=['GET', 'POST'])
@@ -587,7 +587,7 @@ def import_assignments():
                 if imported_count < len(assignments_data):
                     flash(
                         f'{len(assignments_data) - imported_count} assignments could not be imported due to errors.', 'warning')
-                return redirect(url_for('manage_assignments'))
+                return redirect(url_for('assignments.manage_assignments'))
 
             except json.JSONDecodeError:
                 flash('Invalid JSON file. Please ensure it is well-formed.', 'danger')
@@ -809,7 +809,7 @@ def add_announcement():
 
         if not title or not message:
             flash('Title and message are required', 'danger')
-            return redirect(url_for('add_announcement'))
+            return redirect(url_for('announcements.add_announcement'))
 
         try:
             # If "all" is selected, send to all students
@@ -824,10 +824,10 @@ def add_announcement():
             )
 
             flash('Announcement created successfully!', 'success')
-            return redirect(url_for('manage_announcements'))
+            return redirect(url_for('announcements.manage_announcements'))
         except Exception as e:
             flash(f'Error creating announcement: {str(e)}', 'danger')
-            return redirect(url_for('add_announcement'))
+            return redirect(url_for('announcements.add_announcement'))
 
     # GET request - show form
     students = get_students()
@@ -838,7 +838,8 @@ def add_announcement():
 # type: ignore
 # type: ignore
 # type: ignore
-@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST']) #type: ignore
+# type: ignore
+@admin_bp.route('/parents/edit/<int:parent_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def edit_parent(parent_id):
@@ -855,7 +856,7 @@ def edit_parent(parent_id):
 
             if not parent:
                 flash('Parent not found.', 'danger')
-                return redirect(url_for('manage_parents'))
+                return redirect(url_for('parents.manage_parents'))
 
             # Fetch students linked to this parent
             cur.execute('''
@@ -932,7 +933,7 @@ def edit_parent(parent_id):
 
             conn.commit()
             flash('Parent updated successfully!', 'success')
-            return redirect(url_for('manage_parents'))
+            return redirect(url_for('parents.manage_parents'))
 
     except Exception as e:
         conn.rollback()
@@ -949,7 +950,7 @@ def edit_parent(parent_id):
                                    all_students=all_students,
                                    linked_students=linked_students)
         # Fallback if parent not found on error
-        return redirect(url_for('manage_parents'))
+        return redirect(url_for('parents.manage_parents'))
     finally:
         if cur:
             cur.close()
@@ -977,7 +978,7 @@ def link_parent_student_ui(parent_id):
 
         if not parent_info:
             flash('Parent not found.', 'danger')
-            return redirect(url_for('manage_parents'))
+            return redirect(url_for('parents.manage_parents'))
 
         # Get all students to populate the checkboxes
         # Assuming get_students() fetches all students for the admin
@@ -996,7 +997,7 @@ def link_parent_student_ui(parent_id):
 
     except Exception as e:
         flash(f'Error loading student linking page: {str(e)}', 'danger')
-        return redirect(url_for('manage_parents'))
+        return redirect(url_for('parents.manage_parents'))
     finally:
         if cur:
             cur.close()
@@ -1043,7 +1044,7 @@ def update_parent_student_links(parent_id):
         conn.commit()
         flash('Parent-student links updated successfully!', 'success')
         # Redirect back to the parent management page
-        return redirect(url_for('manage_parents'))
+        return redirect(url_for('parents.manage_parents'))
 
     except Exception as e:
         conn.rollback()
@@ -1121,7 +1122,7 @@ def link_parent_student():
         cur.close()
         conn.close()
 
-    return redirect(url_for('manage_parents'))
+    return redirect(url_for('parents.manage_parents'))
 
 
 @admin_bp.route('/tutorials')
@@ -1159,15 +1160,15 @@ def add_tutorial():
 
             if not all([title, url, category_id]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('add_tutorial'))
+                return redirect(url_for('tutorials.add_tutorial'))
 
             add_video(title, url, category_id)
             flash('Tutorial added successfully', 'success')
-            return redirect(url_for('manage_tutorials'))
+            return redirect(url_for('tutorials.manage_tutorials'))
 
         except Exception as e:
             flash(f'Error adding tutorial: {str(e)}', 'danger')
-            return redirect(url_for('add_tutorial'))
+            return redirect(url_for('tutorials.add_tutorial'))
 
     # GET request - show the form
     categories = get_all_categories()
@@ -1180,7 +1181,7 @@ def add_tutorial():
 def delete_tutorial(video_id):
     delete_video(video_id)
     flash('Tutorial video deleted successfully', 'success')
-    return redirect(url_for('manage_tutorials'))
+    return redirect(url_for('tutorials.manage_tutorials'))
 
 
 @admin_bp.route('/')
@@ -1270,7 +1271,7 @@ def add_session():
             create_session(title, description, start_time,
                            end_time, int(max_students))  # type: ignore
             flash('Session created successfully', 'success')
-            return redirect(url_for('manage_sessions'))
+            return redirect(url_for('sessions.manage_sessions'))
         except Exception as e:
             flash(f'Error creating session: {str(e)}', 'danger')
 
@@ -1288,4 +1289,4 @@ def delete_session(session_id):
     cur.close()
     conn.close()
     flash('Session deleted successfully', 'success')
-    return redirect(url_for('manage_sessions'))
+    return redirect(url_for('sessions.manage_sessions'))

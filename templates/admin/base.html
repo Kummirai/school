@@ -11,31 +11,34 @@
       </a>
 
       <a
-        href="{{ url_for('manage_students') }}"
+        href="{{ url_for('students.manage_students') }}"
         class="btn btn-sm {% if request.endpoint == 'manage_students' %}btn-primary{% else %}btn-outline-secondary{% endif %}"
       >
         <i class="bi bi-people me-1"></i> Students
       </a>
       <a
-        href="{{ url_for('manage_tutorials') }}"
+        href="{{ url_for('tutorials.manage_tutorials') }}"
         class="btn btn-sm {% if request.endpoint == 'manage_tutorials' %}btn-primary{% else %}btn-outline-secondary{% endif %}"
       >
         <i class="bi bi-collection-play me-1"></i> Tutorials
       </a>
       <a
-        href="{{ url_for('manage_sessions') }}"
+        href="{{ url_for('sessions.manage_sessions') }}"
         class="btn btn-sm {% if request.endpoint == 'manage_sessions' %}btn-primary{% else %}btn-outline-secondary{% endif %}"
       >
         <i class="bi bi-calendar-event me-1"></i> Sessions
       </a>
       <a
-        href="{{ url_for('manage_assignments') }}"
+        href="{{ url_for('assignments.manage_assignments') }}"
         class="btn btn-sm {% if request.endpoint == 'manage_assignments' %}btn-primary{% else %}btn-outline-secondary{% endif %}"
       >
         <i class="bi bi-journal-bookmark me-1"></i> Assignments
       </a>
 
-      <a class="nav-link" href="{{ url_for('manage_subscriptions') }}">
+      <a
+        class="nav-link"
+        href="{{ url_for('subscriptions.manage_subscriptions') }}"
+      >
         <i class="bi bi-credit-card me-2"></i> Subscriptions
       </a>
     </div>

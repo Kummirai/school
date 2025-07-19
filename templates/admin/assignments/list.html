@@ -9,7 +9,10 @@
       <i class="bi bi-arrow-left"></i> Back to Dashboard
     </a>
   </div>
-  <a href="{{ url_for('add_assignment_route') }}" class="btn btn-primary mb-3">
+  <a
+    href="{{ url_for('assignments.add_ssignment_route') }}"
+    class="btn btn-primary mb-3"
+  >
     <i class="bi bi-plus-circle"></i> Add New Assignment
   </a>
   <a href="{{ url_for('import_assignments') }}" class="btn btn-info mb-3 ms-2">

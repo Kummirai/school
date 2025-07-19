@@ -35,7 +35,9 @@ content %}
           />
         </div>
         <button type="submit" class="btn btn-primary">Create Account</button>
-        <a href="{{ url_for('manage_students') }}" class="btn btn-secondary"
+        <a
+          href="{{ url_for('students.manage_students') }}"
+          class="btn btn-secondary"
           >Cancel</a
         >
       </form>
