@@ -63,27 +63,27 @@ def add_assignment_route():
             # Validate required fields
             if not all([title, description, subject, total_marks, deadline_str]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('assignments.add_ssignment_route'))
+                return redirect(url_for('admin.add_assignment_route'))
 
             # Convert and validate total marks
             try:
                 total_marks = int(total_marks)
                 if total_marks <= 0:
                     flash('Total marks must be positive', 'danger')
-                    return redirect(url_for('assignments.add_ssignment_route'))
+                    return redirect(url_for('admin.add_assignment_route'))
             except ValueError:
                 flash('Total marks must be a number', 'danger')
-                return redirect(url_for('assignments.add_ssignment_route'))
+                return redirect(url_for('admin.add_assignment_route'))
 
             # Validate deadline
             try:
                 deadline = datetime.strptime(deadline_str, '%Y-%m-%dT%H:%M')
                 if deadline <= datetime.utcnow():
                     flash('Deadline must be in the future', 'danger')
-                    return redirect(url_for('assignments.add_ssignment_route'))
+                    return redirect(url_for('admin.add_assignment_route'))
             except ValueError:
                 flash('Invalid deadline format', 'danger')
-                return redirect(url_for('assignments.add_ssignment_route'))
+                return redirect(url_for('admin.add_assignment_route'))
 
             # Get user IDs based on selection
             if assign_to == 'all':
@@ -98,7 +98,7 @@ def add_assignment_route():
                 user_ids = [int(user_id) for user_id in selected_users]
             else:
                 flash('Please select at least one student', 'danger')
-                return redirect(url_for('assignments.add_ssignment_route'))
+                return redirect(url_for('admin.add_assignment_route'))
 
             # Create assignment
             assignment_id = add_assignment(
@@ -1160,11 +1160,11 @@ def add_tutorial():
 
             if not all([title, url, category_id]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('tutorials.add_tutorial'))
+                return redirect(url_for('admin.add_tutorial'))
 
             add_video(title, url, category_id)
             flash('Tutorial added successfully', 'success')
-            return redirect(url_for('tutorials.manage_tutorials'))
+            return redirect(url_for('admin.manage_tutorials'))
 
         except Exception as e:
             flash(f'Error adding tutorial: {str(e)}', 'danger')

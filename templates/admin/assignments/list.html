@@ -10,12 +10,15 @@
     </a>
   </div>
   <a
-    href="{{ url_for('assignments.add_ssignment_route') }}"
+    href="{{ url_for('admin.add_assignment_route') }}"
     class="btn btn-primary mb-3"
   >
     <i class="bi bi-plus-circle"></i> Add New Assignment
   </a>
-  <a href="{{ url_for('import_assignments') }}" class="btn btn-info mb-3 ms-2">
+  <a
+    href="{{ url_for('admin.import_assignments') }}"
+    class="btn btn-info mb-3 ms-2"
+  >
     <i class="bi bi-upload"></i> Import from JSON
   </a>
   <div class="table-responsive">
