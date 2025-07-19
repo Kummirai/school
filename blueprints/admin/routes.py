@@ -277,7 +277,7 @@ def approve_session_request(request_id):
         flash('Session request approved and scheduled!', 'success')
     else:
         flash('Error approving request', 'danger')
-    return redirect(url_for('sessions.manage_session_requests'))
+    return redirect(url_for('admin.manage_session_requests'))
 
 
 @admin_bp.route('/session-requests/<int:request_id>/reject', methods=['POST'])
@@ -289,7 +289,7 @@ def reject_session_request(request_id):
         flash('Session request rejected', 'success')
     else:
         flash('Error rejecting request', 'danger')
-    return redirect(url_for('sessions.manage_session_requests'))
+    return redirect(url_for('admin.manage_session_requests'))
 
 
 @admin_bp.route('/parents/add', methods=['GET', 'POST'])
