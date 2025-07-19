@@ -166,7 +166,9 @@ def advanced_python_course():
     except Exception as e:
         abort(500, description=str(e))
 
-#data_science_course
+# data_science_course
+
+
 @courses_bp.route('/data_science_course')
 @login_required
 def data_science_course():
@@ -175,7 +177,9 @@ def data_science_course():
     except Exception as e:
         abort(500, description=str(e))
 
-#ml_python_course
+# ml_python_course
+
+
 @courses_bp.route('/ml_python_course')
 @login_required
 def ml_python_course():
@@ -185,7 +189,7 @@ def ml_python_course():
         abort(500, description=str(e))
 
 
-#automation_python_course
+# automation_python_course
 @courses_bp.route('/automation_python_course')
 @login_required
 def automation_python_course():
@@ -194,7 +198,9 @@ def automation_python_course():
     except Exception as e:
         abort(500, description=str(e))
 
-#python_deployment_course
+# python_deployment_course
+
+
 @courses_bp.route('/python_deployment_course')
 @login_required
 def python_deployment_course():
@@ -203,7 +209,9 @@ def python_deployment_course():
     except Exception as e:
         abort(500, description=str(e))
 
-#algorithms_python_course
+# algorithms_python_course
+
+
 @courses_bp.route('/algorithms_python_course')
 @login_required
 def algorithms_python_course():
@@ -212,3 +220,11 @@ def algorithms_python_course():
     except Exception as e:
         abort(500, description=str(e))
 
+
+@courses_bp.route('/html_css_projects')
+@login_required
+def html_css_projects():
+    try:
+        return render_template('/courses/html_css_projects.html')
+    except Exception as e:
+        abort(500, description=str(e))

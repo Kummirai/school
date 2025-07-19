@@ -308,7 +308,7 @@ content %}
             <div
               class="list-group-item list-group-item-action bg-light fw-bold"
               data-bs-toggle="collapse"
-              href="#module4"
+              data-bs-target="#module4"
             >
               <i class="bi bi-chevron-down me-2"></i>Module 4: Advanced CSS &
               Responsiveness
@@ -375,7 +375,7 @@ content %}
             <div
               class="list-group-item list-group-item-action bg-light fw-bold"
               data-bs-toggle="collapse"
-              href="#resources-sidebar"
+              data-bs-target="#resources-sidebar"
             >
               <i class="bi bi-chevron-down me-2"></i>Exercise
             </div>
@@ -643,6 +643,27 @@ h1 {
     </div>
 
     <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            class="card-img-top"
+            alt="HTML & CSS Projects"
+          />
+          <div class="card-body">
+            <h5 class="card-title">HTML & CSS Projects</h5>
+            <p class="card-text">
+              Apply your skills with our collection of project templates.
+            </p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="{{ url_for('courses.html_css_projects') }}" class="btn btn-sm btn-outline-primary w-100"
+              >View Projects</a
+            >
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
           <img
@@ -1147,119 +1168,9 @@ h1 {
   }
 
   function initializeCourse() {
-    // Function to load assignment for current lesson
-    function loadAssignment(lessonId) {
-      const assignments = {
-        2.1: {
-          challenge: `<!DOCTYPE html>
-<html>
-<head>
-  <title>CSS Box Model Challenge</title>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-    .requirements { background-color: #e9f7ef; padding: 15px; border-left: 4px solid #2ecc71; margin-bottom: 20px; }
-  </style>
-</head>
-<body>
-  <h1>CSS Box Model Challenge</h1>
-  
-  <div class="requirements">
-    <h2>Requirements</h2>
-    <ol>
-      <li>Create a <code>div</code> with class "box" that:
-        <ul>
-          <li>Has width: 300px and height: 200px</li>
-          <li>Has 20px padding on all sides</li>
-          <li>Has a 5px solid border with color #3498db</li>
-          <li>Has 15px margin on all sides</li>
-        </ul>
-      </li>
-      <li>Create a second <code>div</code> with class "content-box" that demonstrates default box-sizing behavior</li>
-      <li>Create a third <code>div</code> with class "border-box" that uses box-sizing: border-box</li>
-    </ol>
-  </div>
-</body>
-</html>`,
-          solution: `<!DOCTYPE html>
-<html>
-<head>
-  <title>CSS Box Model Solution</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
-    .box { width: 300px; height: 200px; padding: 20px; border: 5px solid #3498db; margin: 15px; }
-    .content-box { width: 300px; height: 200px; padding: 20px; border: 5px solid #2ecc71; margin: 15px; box-sizing: content-box; }
-    .border-box { width: 300px; height: 200px; padding: 20px; border: 5px solid #9b59b6; margin: 15px; box-sizing: border-box; }
-  </style>
-</head>
-<body>
-  <div class="box">Standard Box Model</div>
-  <div class="content-box">content-box (default)</div>
-  <div class="border-box">border-box</div>
-</body>
-</html>`,
-        },
-        // Add more assignments for other lessons here
-      };
-
-      const assignment = assignments[lessonId];
-      if (assignment) {
-        const practiceTab = document.getElementById("practice-tab-content");
-        practiceTab.innerHTML = `
-      <ul class="nav nav-tabs mb-3" id="assignmentTabs">
-        <li class="nav-item">
-          <a class="nav-link active" data-bs-toggle="tab" href="#challenge-tab">Challenge</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" href="#solution-tab">Solution</a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane fade show active" id="challenge-tab">
-          <div class="border p-3 bg-light" style="height: 400px; overflow: auto;">
-            ${assignment.challenge}
-          </div>
-          <button class="btn btn-primary mt-3" onclick="showSolution()">Show Solution</button>
-        </div>
-        <div class="tab-pane fade" id="solution-tab">
-          <div class="border p-3 bg-light" style="height: 400px; overflow: auto;">
-            ${assignment.solution}
-          </div>
-          <button class="btn btn-outline-primary mt-3" onclick="showChallenge()">Back to Challenge</button>
-        </div>
-      </div>
-    `;
-      } else {
-        document.getElementById("practice-tab-content").innerHTML = `
-      <div class="alert alert-info">
-        No practice assignment available for this lesson yet.
-      </div>
-    `;
-      }
-    }
-
-    // Helper functions for tab switching
-    function showSolution() {
-      const tab = new bootstrap.Tab(
-        document.querySelector(
-          '#assignmentTabs .nav-link[href="#solution-tab"]'
-        )
-      );
-      tab.show();
-    }
-
-    function showChallenge() {
-      const tab = new bootstrap.Tab(
-        document.querySelector(
-          '#assignmentTabs .nav-link[href="#challenge-tab"]'
-        )
-      );
-      tab.show();
-    }
     // Load initial lesson (first one)
     loadLessonContent(allLessons[currentLessonIndex]);
     updateProgress();
-    updatePreview(); // Initial preview load
 
     // Event listeners for lesson items
     lessonItems.forEach((item, index) => {
@@ -1319,20 +1230,8 @@ h1 {
 
   // Initial setup when the window loads
   window.onload = function () {
-    // Transcript click handler
-    document.querySelectorAll(".transcript-content p").forEach((p) => {
-      p.addEventListener("click", function () {
-        const timestamp = this.getAttribute("data-timestamp");
-        // In a real implementation, this would seek the video to the timestamp
-        console.log("Seek to:", timestamp);
-      });
-    });
-
     initializeCourse();
   };
-
-  // Update preview frame with code from editor
-  cssCodeEditor.addEventListener("input", updatePreview);
 </script>
 
 {% endblock %}

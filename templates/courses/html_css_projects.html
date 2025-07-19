@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}HTML & CSS Projects{% endblock %}
+{% block content %}
+
+<section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-size: cover; background-position: center; color: white; min-height: 40vh; display: flex; align-items: center; padding: 0;">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4"><i class="bi bi-collection text-warning me-3"></i>HTML & CSS Projects</h1>
+        <p class="lead mb-4 fs-4">Browse our collection of design templates and projects to practice your skills.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Project Cards will be added here -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm project-card">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Project Image">
+          <div class="card-body">
+            <h5 class="card-title">Project One</h5>
+            <p class="card-text">A modern and responsive blog template.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm project-card">
+          <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Project Image">
+          <div class="card-body">
+            <h5 class="card-title">Project Two</h5>
+            <p class="card-text">A stylish e-commerce product page.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm project-card">
+          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" class="card-img-top" alt="Project Image">
+          <div class="card-body">
+            <h5 class="card-title">Project Three</h5>
+            <p class="card-text">A portfolio website with a clean layout.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+</style>
+
+{% endblock %}
