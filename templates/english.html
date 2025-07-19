@@ -1,0 +1,253 @@
+{% extends "base.html" %} {% block title %}{{ subject_data.title }}{% endblock
+%} {% block content %}
+<!-- Hero Section -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('{{ subject_data.hero_image }}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    padding: 0;"
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="{{ subject_data.icon }} display-1 text-primary"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">
+          {{ subject_data.grade }}
+          <span class="text-primary">{{ subject_data.subject }}</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-primary me-2"></i> {{ subject_data.tagline
+          }}
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-primary btn-lg px-4 py-3 fw-bold"
+            href="#lessons"
+            role="button"
+          >
+            <i class="bi bi-collection-play me-2"></i>View Lessons
+          </a>
+          <a
+            class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"
+            href="/study_guides"
+            role="button"
+          >
+            <i class="bi bi-journal-bookmark me-2"></i>Practice Resources
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Course Overview -->
+<section class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2 class="fw-bold mb-4">
+          {{ subject_data.grade }} {{ subject_data.subject }} Curriculum
+        </h2>
+        <p class="lead">{{ subject_data.description }}</p>
+        <p>The curriculum covers these major domains:</p>
+        <ul class="list-group list-group-flush mb-4">
+          {% for domain in subject_data.domains %}
+          <li class="list-group-item bg-light">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>{{ domain
+            }}
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="alert alert-primary">
+          <i class="bi bi-lightbulb-fill me-2"></i>{{ subject_data.feature_note
+          }}
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-primary shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="h4 mb-0">Course Progress</h3>
+          </div>
+          <div class="card-body">
+            {% if 'username' in session %}
+            <div class="mb-4">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Your Progress:</span>
+                <span>{{ progress }}% Complete</span>
+              </div>
+              <div class="progress" style="height: 10px">
+                <div
+                  class="progress-bar bg-primary"
+                  role="progressbar"
+                  style="width: {{ progress }}%;"
+                  aria-valuenow="{{ progress }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+            {% endif %}
+            <h4 class="h5 fw-bold">Course Details</h4>
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                Total Lessons
+                <span class="badge bg-primary rounded-pill"
+                  >{{ subject_data.stats.total_lessons }}</span
+                >
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                Reading Materials
+                <span class="badge bg-primary rounded-pill"
+                  >{{ subject_data.stats.reading_materials }}</span
+                >
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                Writing Exercises
+                <span class="badge bg-primary rounded-pill"
+                  >{{ subject_data.stats.writing_exercises }}</span
+                >
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                Assessments
+                <span class="badge bg-primary rounded-pill"
+                  >{{ subject_data.stats.assessments }}</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Terms Navigation -->
+<section class="py-3 bg-white sticky-top shadow-sm">
+  <div class="container">
+    <div class="d-flex overflow-auto py-2">
+      {% for term in subject_data.terms %}
+      <a
+        href="#term-{{ loop.index }}"
+        class="btn btn-outline-secondary mx-1 text-nowrap"
+      >
+        {{ term.term }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Lessons Section by Term -->
+<section id="lessons" class="py-5">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">
+        {{ subject_data.grade }} {{ subject_data.subject }} Curriculum
+      </h2>
+      <p class="lead text-muted">Structured by term with interactive content</p>
+    </div>
+
+    {% for term in subject_data.terms %} {% set term_index = loop.index0 %}
+    <div id="term-{{ loop.index }}" class="mb-5">
+      <h3
+        class="fw-bold mb-4 text-{{ ['primary', 'success', 'warning', 'info'][loop.index0 % 4] }}"
+      >
+        {{ term.term }}
+      </h3>
+
+      <div class="accordion" id="term{{ loop.index }}Accordion">
+        {% for unit in term.units %} {% set unit_index = loop.index0 %}
+        <div class="accordion-item mb-3 border-{{ unit.color }}">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button bg-{{ unit.color }} {% if unit.color == 'warning' %}text-dark{% else %}text-white{% endif %} fw-bold collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+              aria-expanded="false"
+              aria-controls="unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+            >
+              {{ unit.title }}
+            </button>
+          </h2>
+          <div
+            id="unit{{ term.term|replace(' ', '') }}{{ loop.index }}"
+            class="accordion-collapse collapse"
+            data-bs-parent="#term{{ loop.index }}Accordion"
+          >
+            <div class="accordion-body">
+              <div class="list-group">
+                {% for lesson in unit.lessons %} {% set lesson_index =
+                loop.index0 %}
+                <a
+                  href="{{ url_for('grades.view_grade7_lesson', term_idx=term_index, unit_idx=unit_index, lesson_idx=lesson_index) }}"
+                  class="list-group-item list-group-item-action"
+                >
+                  <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
+                  {{ lesson.title }}
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Practice Resources -->
+<section id="resources" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Practice Resources</h2>
+      <p class="lead text-muted">
+        Reinforce your learning with these additional materials
+      </p>
+    </div>
+
+    <div class="row g-4">
+      {% for resource in subject_data.resources %}
+      <div class="col-md-4">
+        <div class="card h-100 border-{{ resource.color }} shadow-sm">
+          <div class="card-body text-center p-4">
+            <i
+              class="{{ resource.icon }} display-4 text-{{ resource.color }} mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">{{ resource.title }}</h3>
+            <p class="mb-4">{{ resource.description }}</p>
+            <a
+              href="{{ resource.link }}"
+              class="btn btn-outline-{{ resource.button_color }}"
+            >
+              <i class="{{ resource.button_icon }} me-1"></i>{{
+              resource.button_text }}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

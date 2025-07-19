@@ -67,6 +67,29 @@ def grade_7_maths():
         abort(500, description="Invalid file encoding - must be UTF-8")
 
 
+@grades_bp.route('/grade7/english')
+def grade_7_english():
+    try:
+        # Load the JSON data with explicit UTF-8 encoding
+        with open('static/data/grade7_english.json', 'r', encoding='utf-8') as f:
+            subject_data = json.load(f)
+
+        # Calculate progress (you would get this from the database in a real app)
+        progress = 15  # Example value
+
+        return render_template(
+            'english.html',
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+    except UnicodeDecodeError:
+        abort(500, description="Invalid file encoding - must be UTF-8")
+
+
 @grades_bp.route('/grade7/maths/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
 def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
     print(

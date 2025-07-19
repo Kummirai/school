@@ -1,0 +1,609 @@
+{
+  "title": "Grade 7 English Mastery",
+  "grade": "Grade 7",
+  "subject": "English",
+  "hero_image": "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+  "icon": "bi bi-book-fill",
+  "tagline": "Mastering language arts - from grammar fundamentals to advanced writing techniques",
+  "description": "Comprehensive curriculum covering all essential Grade 7 English concepts including grammar, literature, writing, and communication skills.",
+  "domains": [
+    "Grammar Fundamentals",
+    "Reading Comprehension",
+    "Writing Techniques",
+    "Literary Analysis",
+    "Oral Communication",
+    "Research Skills"
+  ],
+  "feature_note": "Each lesson includes interactive exercises, writing workshops, and personalized feedback opportunities.",
+  "stats": {
+    "total_lessons": "78",
+    "reading_materials": "65",
+    "writing_exercises": "45",
+    "assessments": "18"
+  },
+  "terms": [
+    {
+      "term": "Term 1",
+      "units": [
+        {
+          "title": "Grammar Fundamentals",
+          "color": "primary",
+          "lessons": [
+            {
+              "title": "1.1 Nouns & Pronouns",
+              "duration": "25 min",
+              "icon": "bi bi-card-text",
+              "description": "Master the different types of nouns and pronouns, including proper usage and common errors.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/1_1_nouns_pronouns_content.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/example1",
+                  "icon": "play-circle"
+                },
+                {
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/grade_7/english/1_1_nouns_pronouns_study_guide.html",
+                  "icon": "journal-text"
+                }
+              ]
+            },
+            {
+              "title": "1.2 Adjectives & Adverbs",
+              "duration": "20 min",
+              "icon": "bi bi-fonts",
+              "description": "Learn to identify and properly use adjectives and adverbs to enhance your writing.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/1_2_adjectives_adverbs_content.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": "https://www.youtube.com/embed/example2",
+                  "icon": "play-circle"
+                }
+              ]
+            },
+            {
+              "title": "1.3 Verbs & Subject-Verb Agreement",
+              "duration": "30 min",
+              "icon": "bi bi-arrow-repeat",
+              "description": "Understand verb forms and master subject-verb agreement rules.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/1_3_verbs_agreement_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "1.4 Conjunctions & Prepositions",
+              "duration": "20 min",
+              "icon": "bi bi-link-45deg",
+              "description": "Learn how to properly use conjunctions and prepositions in sentences.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/1_4_conjunctions_prepositions_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sentence Structure",
+          "color": "info",
+          "lessons": [
+            {
+              "title": "2.1 Simple & Compound Sentences",
+              "duration": "25 min",
+              "icon": "bi bi-file-text",
+              "description": "Learn to construct and identify simple and compound sentences.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/2_1_simple_compound_sentences_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "2.2 Complex Sentences",
+              "duration": "30 min",
+              "icon": "bi bi-file-text-fill",
+              "description": "Master the construction of complex sentences with dependent and independent clauses.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/2_2_complex_sentences_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "2.3 Active & Passive Voice",
+              "duration": "25 min",
+              "icon": "bi bi-megaphone",
+              "description": "Understand the difference between active and passive voice and when to use each.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/2_3_active_passive_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "Term 2",
+      "units": [
+        {
+          "title": "Literary Elements",
+          "color": "success",
+          "lessons": [
+            {
+              "title": "3.1 Elements of a Story",
+              "duration": "30 min",
+              "icon": "bi bi-book",
+              "description": "Explore plot, setting, characters, theme, and point of view in narratives.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/3_1_story_elements_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "3.2 Elements of Plot",
+              "duration": "25 min",
+              "icon": "bi bi-graph-up",
+              "description": "Understand exposition, rising action, climax, falling action, and resolution.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/3_2_plot_elements_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "3.3 Figures of Speech",
+              "duration": "35 min",
+              "icon": "bi bi-quote",
+              "description": "Learn to identify and use similes, metaphors, personification, and other figures of speech.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/3_3_figures_speech_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Reading Strategies",
+          "color": "warning",
+          "lessons": [
+            {
+              "title": "4.1 Context Clues",
+              "duration": "20 min",
+              "icon": "bi bi-search",
+              "description": "Develop strategies for determining word meanings from context.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/4_1_context_clues_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "4.2 Predicting Outcomes",
+              "duration": "25 min",
+              "icon": "bi bi-lightbulb",
+              "description": "Learn techniques for making logical predictions while reading.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/4_2_predicting_outcomes_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "4.3 Comprehension Strategies",
+              "duration": "30 min",
+              "icon": "bi bi-journal-text",
+              "description": "Master active reading techniques for better comprehension.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/4_3_comprehension_strategies_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "Term 3",
+      "units": [
+        {
+          "title": "Writing Techniques",
+          "color": "danger",
+          "lessons": [
+            {
+              "title": "5.1 Narrative Writing",
+              "duration": "40 min",
+              "icon": "bi bi-pen",
+              "description": "Learn the elements of effective narrative writing and storytelling techniques.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/5_1_narrative_writing_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "5.2 Expository Writing",
+              "duration": "35 min",
+              "icon": "bi bi-file-earmark-text",
+              "description": "Master the structure and techniques of informative writing.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/5_2_expository_writing_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "5.3 Thesis Paragraphs",
+              "duration": "30 min",
+              "icon": "bi bi-file-earmark-richtext",
+              "description": "Learn to craft strong thesis statements and introductory paragraphs.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/5_3_thesis_paragraphs_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "5.4 Cause & Effect Writing",
+              "duration": "25 min",
+              "icon": "bi bi-arrow-left-right",
+              "description": "Understand how to organize and write effective cause-and-effect essays.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/5_4_cause_effect_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Editing & Research",
+          "color": "secondary",
+          "lessons": [
+            {
+              "title": "6.1 Proofreading Techniques",
+              "duration": "25 min",
+              "icon": "bi bi-eyeglasses",
+              "description": "Develop systematic approaches to proofreading and editing your work.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/6_1_proofreading_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "6.2 Summarizing",
+              "duration": "20 min",
+              "icon": "bi bi-file-earmark-minus",
+              "description": "Learn techniques for concise summarization of texts.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/6_2_summarizing_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "6.3 Outlining",
+              "duration": "30 min",
+              "icon": "bi bi-list-nested",
+              "description": "Master the skill of creating effective outlines for writing projects.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/6_3_outlining_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "term": "Term 4",
+      "units": [
+        {
+          "title": "Advanced Language Skills",
+          "color": "warning",
+          "lessons": [
+            {
+              "title": "7.1 Direct & Indirect Speech",
+              "duration": "25 min",
+              "icon": "bi bi-chat-square-quote",
+              "description": "Learn the rules for converting between direct and indirect speech.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/7_1_direct_indirect_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "7.2 Verbals",
+              "duration": "30 min",
+              "icon": "bi bi-chat-square-text",
+              "description": "Understand gerunds, participles, and infinitives and their functions.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/7_2_verbals_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "7.3 Misused Words",
+              "duration": "25 min",
+              "icon": "bi bi-exclamation-triangle",
+              "description": "Identify and correct commonly confused and misused words.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/7_3_misused_words_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "7.4 Synonyms & Vocabulary",
+              "duration": "20 min",
+              "icon": "bi bi-card-list",
+              "description": "Expand vocabulary through synonym study and word relationships.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/7_4_synonyms_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Communication Skills",
+          "color": "info",
+          "lessons": [
+            {
+              "title": "8.1 Impromptu Speaking",
+              "duration": "35 min",
+              "icon": "bi bi-mic",
+              "description": "Develop confidence and skills in spontaneous speaking situations.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/8_1_impromptu_speaking_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "8.2 Punctuation Rules",
+              "duration": "30 min",
+              "icon": "bi bi-pencil",
+              "description": "Master the use of commas, semicolons, colons, and other punctuation marks.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/8_2_punctuation_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            },
+            {
+              "title": "8.3 Capitalization",
+              "duration": "20 min",
+              "icon": "bi bi-type-bold",
+              "description": "Learn and apply proper capitalization rules in writing.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/8_3_capitalization_content.html",
+                  "icon": "file-earmark-text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "title": "Grammar Workbook",
+      "description": "300+ grammar exercises with detailed explanations",
+      "link": "#",
+      "icon": "bi bi-journal-bookmark",
+      "color": "primary",
+      "button_text": "Download Workbook",
+      "button_icon": "bi bi-file-earmark-arrow-down"
+    },
+    {
+      "title": "Writing Lab",
+      "description": "Interactive writing exercises with instant feedback",
+      "link": "#",
+      "icon": "bi bi-pencil-square",
+      "color": "success",
+      "button_text": "Start Writing Lab",
+      "button_icon": "bi bi-joystick"
+    },
+    {
+      "title": "Vocabulary Builder",
+      "description": "Word games and flashcards for vocabulary expansion",
+      "link": "#",
+      "icon": "bi bi-collection",
+      "color": "warning",
+      "button_text": "Build Vocabulary",
+      "button_icon": "bi bi-card-checklist"
+    },
+    {
+      "title": "Literary Analysis Toolkit",
+      "description": "Guides and templates for analyzing literature",
+      "link": "#",
+      "icon": "bi bi-book-half",
+      "color": "info",
+      "button_text": "Access Toolkit",
+      "button_icon": "bi bi-tools"
+    },
+    {
+      "title": "Public Speaking Simulator",
+      "description": "Practice speaking with virtual audiences",
+      "link": "#",
+      "icon": "bi bi-mic-fill",
+      "color": "danger",
+      "button_text": "Practice Speaking",
+      "button_icon": "bi bi-play-circle"
+    },
+    {
+      "title": "Reading Comprehension Exercises",
+      "description": "Leveled passages with comprehension questions",
+      "link": "#",
+      "icon": "bi bi-eyeglasses",
+      "color": "secondary",
+      "button_text": "Start Reading",
+      "button_icon": "bi bi-book"
+    }
+  ],
+  "teacher_resources": [
+    {
+      "title": "Complete Assessment Bank",
+      "description": "Tests, quizzes, and rubrics for all units",
+      "link": "#",
+      "icon": "bi bi-clipboard2-check",
+      "color": "primary",
+      "button_text": "Download Assessments",
+      "button_icon": "bi bi-cloud-arrow-down"
+    },
+    {
+      "title": "Differentiated Lesson Plans",
+      "description": "Tiered activities for diverse learners",
+      "link": "#",
+      "icon": "bi bi-journal-medical",
+      "color": "success",
+      "button_text": "Access Plans",
+      "button_icon": "bi bi-eye"
+    },
+    {
+      "title": "Writing Workshop Materials",
+      "description": "Peer review templates and writing prompts",
+      "link": "#",
+      "icon": "bi bi-file-earmark-text",
+      "color": "warning",
+      "button_text": "Get Materials",
+      "button_icon": "bi bi-download"
+    },
+    {
+      "title": "Literature Discussion Guides",
+      "description": "Questions and activities for class novels",
+      "link": "#",
+      "icon": "bi bi-chat-square-quote",
+      "color": "info",
+      "button_text": "View Guides",
+      "button_icon": "bi bi-collection-play"
+    },
+    {
+      "title": "Grammar Games Collection",
+      "description": "Interactive classroom grammar activities",
+      "link": "#",
+      "icon": "bi bi-joystick",
+      "color": "danger",
+      "button_text": "Browse Games",
+      "button_icon": "bi bi-search"
+    },
+    {
+      "title": "Parent Communication Kit",
+      "description": "Progress reports and home support letters",
+      "link": "#",
+      "icon": "bi bi-house-heart",
+      "color": "dark",
+      "button_text": "Access Kit",
+      "button_icon": "bi bi-envelope"
+    }
+  ],
+  "cta": {
+    "title": "Expert English Tutoring",
+    "subtitle": "Our qualified tutors provide personalized instruction in reading, writing, and grammar",
+    "link": "/video_conference",
+    "icon": "bi bi-person-video2",
+    "button_text": "Schedule Tutoring Session"
+  }
+}
