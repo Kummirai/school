@@ -16,13 +16,12 @@
 <section class="py-5">
   <div class="container">
     <div class="row g-4">
-      <!-- Project Cards will be added here -->
       <div class="col-md-4">
         <div class="card h-100 shadow-sm project-card">
-          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Project Image">
+          <img src="{{ url_for('static', filename='images/html_css_web_templates/coffee_shop_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/coffee_shop_design.jpeg') }}">
           <div class="card-body">
-            <h5 class="card-title">Project One</h5>
-            <p class="card-text">A modern and responsive blog template.</p>
+            <h5 class="card-title">Coffee Shop Design</h5>
+            <p class="card-text">A modern and responsive coffee shop template.</p>
           </div>
           <div class="card-footer bg-white">
             <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
@@ -31,10 +30,10 @@
       </div>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm project-card">
-          <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Project Image">
+          <img src="{{ url_for('static', filename='images/html_css_web_templates/furniture_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/furniture_design.jpeg') }}">
           <div class="card-body">
-            <h5 class="card-title">Project Two</h5>
-            <p class="card-text">A stylish e-commerce product page.</p>
+            <h5 class="card-title">Furniture Design</h5>
+            <p class="card-text">A stylish e-commerce product page for furniture.</p>
           </div>
           <div class="card-footer bg-white">
             <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
@@ -43,9 +42,9 @@
       </div>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm project-card">
-          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" class="card-img-top" alt="Project Image">
+          <img src="{{ url_for('static', filename='images/html_css_web_templates/web_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/web_design.jpeg') }}">
           <div class="card-body">
-            <h5 class="card-title">Project Three</h5>
+            <h5 class="card-title">Web Design</h5>
             <p class="card-text">A portfolio website with a clean layout.</p>
           </div>
           <div class="card-footer bg-white">
@@ -56,6 +55,16 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="" id="modalImage" class="img-fluid w-100">
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
   .hero-section {
@@ -73,6 +82,21 @@
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
   }
+  .card-img-top {
+    cursor: pointer;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var imageModal = document.getElementById('imageModal');
+    imageModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var imgSrc = button.getAttribute('data-img-src');
+      var modalImage = imageModal.querySelector('#modalImage');
+      modalImage.src = imgSrc;
+    });
+  });
+</script>
 
 {% endblock %}
