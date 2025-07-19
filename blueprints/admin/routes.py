@@ -1271,7 +1271,7 @@ def add_session():
             create_session(title, description, start_time,
                            end_time, int(max_students))  # type: ignore
             flash('Session created successfully', 'success')
-            return redirect(url_for('sessions.manage_sessions'))
+            return redirect(url_for('admin.manage_sessions'))
         except Exception as e:
             flash(f'Error creating session: {str(e)}', 'danger')
 
