@@ -407,7 +407,7 @@ def admin_add_subscription():
 
             if not all([student_id, plan_id, start_date_str, duration_days]):
                 flash('All fields are required', 'danger')
-                return redirect(url_for('admin_add_subscription'))
+                return redirect(url_for('admin.admin_add_subscription'))
 
             # Convert data types
             student_id = int(student_id)  # type: ignore
@@ -770,7 +770,7 @@ def approve_request(request_id):
         request.user_email, request.plan_name)  # type: ignore
 
     flash('Request approved successfully!', 'success')
-    return redirect(url_for('admin_dashboard'))
+    return redirect(url_for('admin.admin_dashboard'))
 
 
 @admin_bp.route('/reject_request/<int:request_id>')
@@ -787,7 +787,7 @@ def reject_request(request_id):
         request.user_email, request.plan_name)  # type: ignore
 
     flash('Request rejected.', 'info')
-    return redirect(url_for('admin_dashboard'))
+    return redirect(url_for('admin.admin_dashboard'))
 
 
 @admin_bp.route('/announcements')

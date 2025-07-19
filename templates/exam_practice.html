@@ -26,7 +26,11 @@ content %}
             </li>
           </ul>
           {# Link to start the exam - this route would need to be implemented #}
-          <a href="{{ url_for('take_exam', exam_id=exam.id) }}" class="btn btn-danger mt-3">Start Exam</a>
+          <a
+            href="{{ url_for('exam.take_exam', exam_id=exam.id) }}"
+            class="btn btn-danger mt-3"
+            >Start Exam</a
+          >
         </div>
       </div>
     </div>

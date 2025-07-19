@@ -3,7 +3,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Add New Session</h2>
     <a
-      href="{{ url_for('admin_dashboard') }}"
+      href="{{ url_for('admin.admin_dashboard') }}"
       class="btn btn-outline-secondary"
     >
       <i class="bi bi-arrow-left"></i> Back to Dashboard
@@ -12,7 +12,7 @@
 
   <div class="card">
     <div class="card-body">
-      <form method="POST" action="{{ url_for('add_session') }}">
+      <form method="POST" action="{{ url_for('sessions.add_session') }}">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input

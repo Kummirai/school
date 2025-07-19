@@ -250,7 +250,7 @@ if exam_details else 'Result' }}{% endblock %} {% block content %}
     </a>
     {% if result %}
     <a
-      href="{{ url_for('take_exam', exam_id=exam_details.id) }}"
+      href="{{ url_for('exam.take_exam', exam_id=exam_details.id) }}"
       class="btn btn-primary ms-2"
     >
       Retake This Exam
