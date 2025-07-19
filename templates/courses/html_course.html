@@ -1104,7 +1104,7 @@ content %}
       notes: "<p>Discover tools and techniques for validating your HTML code and debugging issues.</p>",
       reading: [],
       starterCode: ""
-    },
+    }
   ];
 
   let currentLessonIndex = 0;
@@ -1325,23 +1325,7 @@ content %}
   window.onload = function () {
     initializeCourse();
 
-    // Logic for the practice exercise code editor and preview
-    const htmlCode = document.getElementById("html-code");
-    const previewFrame = document.getElementById("preview-frame");
-
-    function updatePreview() {
-        if (previewFrame && htmlCode) {
-            const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-            previewDoc.open();
-            previewDoc.write(htmlCode.value);
-            previewDoc.close();
-        }
-    }
-
-    if (htmlCode && previewFrame) {
-        htmlCode.addEventListener("input", updatePreview);
-        updatePreview(); // Initial render
-    }
+    
 
     // Transcript click handler
     document.querySelectorAll(".transcript-content p").forEach((p) => {

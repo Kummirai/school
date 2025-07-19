@@ -43,6 +43,9 @@ def login():
 
         if user and user.check_password(password):
             login_user(user)
+            session['user_id'] = user.id
+            session['username'] = user.username
+            session['role'] = user.role
             flash('Login successful!', 'success')
 
             # Redirect to next page or dashboard
@@ -58,6 +61,8 @@ def login():
 @login_required
 def logout():
     logout_user()
+    session.pop('username', None)
+    session.pop('role', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('home.home'))
 

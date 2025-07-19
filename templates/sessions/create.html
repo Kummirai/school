@@ -7,7 +7,7 @@
     <div class="card-body">
       <form
         method="POST"
-        action="{{ url_for('create_session_request_route') }}"
+        action="{{ url_for('sessions.create_session_request_route') }}"
       >
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
@@ -54,7 +54,7 @@
         <button type="submit" class="btn btn-danger fw-medium">
           <i class="bi bi-send mx-2"></i>Submit Request
         </button>
-        <a href="{{url_for('view_sessions')}}" class="btn btn-secondary"
+        <a href="{{url_for('sessions.view_sessions')}}" class="btn btn-secondary"
           >Cancel Request</a
         >
       </form>

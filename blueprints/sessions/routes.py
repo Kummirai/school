@@ -5,7 +5,8 @@ from flask import current_app as app
 from .utils import create_session_request, get_session_requests_for_student, cancel_booking, book_session, get_student_bookings, get_all_sessions
 
 # Create a Blueprint for the session routes
-sessions_bp = Blueprint('sessions', __name__, template_folder='templates', static_folder='static')
+sessions_bp = Blueprint('sessions', __name__,
+                        template_folder='templates', static_folder='static')
 
 
 @sessions_bp.route('/request', methods=['GET', 'POST'])
@@ -34,7 +35,7 @@ def create_session_request_route():
 
             if request_id:
                 flash('Session request submitted successfully!', 'success')
-                return redirect(url_for('view_my_session_requests'))
+                return redirect(url_for('sessions.view_my_session_requests'))
             else:
                 flash('Error submitting request', 'danger')
         except ValueError:
@@ -55,19 +56,19 @@ def view_my_session_requests():
 def book_session_route(session_id):
     if session.get('role') != 'student':
         flash('Only students can book sessions', 'danger')
-        return redirect(url_for('view_sessions'))
+        return redirect(url_for('sessions.view_sessions'))
 
     student_id = session.get('user_id')
     if not student_id:
         flash('User not properly authenticated', 'danger')
-        return redirect(url_for('view_sessions'))
+        return redirect(url_for('sessions.view_sessions'))
 
     if book_session(student_id, session_id):
         flash('Session booked successfully!', 'success')
     else:
         flash(
             'Could not book session. It might be full or you already booked it.', 'danger')
-    return redirect(url_for('view_sessions'))
+    return redirect(url_for('sessions.view_sessions'))
 
 
 @sessions_bp.route('/cancel/<int:booking_id>', methods=['POST'])
@@ -77,13 +78,14 @@ def cancel_booking_route(booking_id):
         flash('Booking cancelled successfully', 'success')
     else:
         flash('Could not cancel booking', 'danger')
-    return redirect(url_for('view_sessions'))
+    return redirect(url_for('sessions.view_sessions'))
 
 
 @sessions_bp.route('/')
 @login_required
 def view_sessions():
     student_id = session.get('user_id')
+    print("your student_id is", student_id)
     if not student_id:
         flash('User not properly authenticated', 'danger')
         return redirect(url_for('login'))
