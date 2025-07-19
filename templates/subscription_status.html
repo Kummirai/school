@@ -27,7 +27,7 @@ block content %}
           </p>
         </div>
         {% if subscription[6] != 'paid' %}
-        <a href="{{ url_for('subscribe') }}" class="btn btn-danger">
+        <a href="{{ url_for('subscribe.subscribe') }}" class="btn btn-danger">
           <i class="bi bi-credit-card me-1"></i> Complete Payment
         </a>
         {% endif %}
@@ -38,7 +38,7 @@ block content %}
           <h3 class="h5">No Active Subscription</h3>
           <p class="mb-0">Subscribe to unlock all features</p>
         </div>
-        <a href="{{ url_for('subscribe') }}" class="btn btn-danger">
+        <a href="{{ url_for('subscribe.subscribe') }}" class="btn btn-danger">
           <i class="bi bi-lightning me-1"></i> Subscribe Now
         </a>
       </div>

@@ -59,7 +59,7 @@ def create_subscription(plan_id):
     except Exception as e:
         conn.rollback()
         flash('Error creating subscription: ' + str(e), 'danger')
-        return redirect(url_for('subscribe'))
+        return redirect(url_for('subscribe.subscribe'))
     finally:
         cur.close()
         conn.close()

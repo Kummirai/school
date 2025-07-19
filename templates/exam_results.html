@@ -245,7 +245,7 @@ if exam_details else 'Result' }}{% endblock %} {% block content %}
   {% endif %}
 
   <div class="mt-4">
-    <a href="{{ url_for('exam_practice') }}" class="btn btn-secondary">
+    <a href="{{ url_for('exam.exam_practice') }}" class="btn btn-secondary">
       Back to Exam List
     </a>
     {% if result %}

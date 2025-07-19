@@ -43,12 +43,10 @@
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           {% if 'username' not in session %}
           <a
-            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('home.login') }}"
-            role="button"
-          >
+      href="{{ url_for('home.login') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
             <i class="bi bi-box-arrow-in-right me-2 text-readability"></i>Login
-            To Access More Features
           </a>
           <a
             class="btn btn-outline-light btn-lg px-4 py-3 fw-bold"

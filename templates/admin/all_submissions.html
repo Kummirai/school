@@ -87,7 +87,7 @@ block content %}
           <td>
             {# Link to a grading page if you have one #}
             <a
-              href="{{ url_for('grade_submission', assignment_id=sub.assignment_id, student_id=sub.id) }}"
+              href="{{ url_for('admin.grade_submission', assignment_id=sub.assignment_id, student_id=sub.id) }}"
               class="btn btn-sm btn-warning"
             >
               <i class="bi bi-pencil-fill"></i> Grade

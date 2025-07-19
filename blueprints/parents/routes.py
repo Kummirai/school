@@ -94,7 +94,7 @@ def parent_dashboard():
 
     if not selected_student:
         flash('Invalid student selected', 'danger')
-        return redirect(url_for('parent_dashboard'))
+        return redirect(url_for('parents.parent_dashboard'))
 
     # Get all data for the selected student
     assignments = get_assignments_for_user(selected_student_id)

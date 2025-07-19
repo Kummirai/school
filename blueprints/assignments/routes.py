@@ -164,7 +164,7 @@ def view_submissions():  # Adjust this function name if yours is different
     user_id = session.get('user_id')
     if not user_id:
         flash("Please log in to view your submissions.", "warning")
-        return redirect(url_for('login'))
+        return redirect(url_for('home.login'))
 
     conn = None
     cur = None

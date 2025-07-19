@@ -88,7 +88,7 @@ def view_sessions():
     print("your student_id is", student_id)
     if not student_id:
         flash('User not properly authenticated', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('home.login'))
 
     sessions = get_all_sessions()
     student_bookings = get_student_bookings(student_id)

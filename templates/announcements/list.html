@@ -7,7 +7,7 @@ content %}
   <div class="list-group">
     {% for announcement in announcements %}
     <a
-      href="{{ url_for('view_announcement', announcement_id=announcement.id) }}"
+      href="{{ url_for('announcement_bp.view_announcement', announcement_id=announcement.id) }}"
       class="list-group-item list-group-item-action {% if not announcement.is_read %}list-group-item-primary{% endif %}"
     >
       <div class="d-flex w-100 justify-content-between">

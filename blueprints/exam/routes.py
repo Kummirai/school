@@ -61,7 +61,7 @@ def submit_exam(exam_id):
 
     if not selected_exam:
         flash('Exam not found.', 'danger')
-        return redirect(url_for('exam_practice'))
+        return redirect(url_for('exam.exam_practice'))
 
     # Get user's submitted answers
     user_answers = request.form
@@ -161,7 +161,7 @@ def exam_results(result_id):
     if not result:
         flash('Exam result not found or you do not have permission to view it.', 'danger')
         # Redirect if result not found
-        return redirect(url_for('exam_practice'))
+        return redirect(url_for('exam.exam_practice'))
 
     # Unpack result data
     result_id, result_user_id, exam_json_id, score, total_questions, completion_time = result

@@ -223,7 +223,7 @@ def submit_plan_request():
         request_id = save_plan_request(data)
         if request_id:
             flash('Request submitted successfully!', 'success')
-            return redirect(url_for('confirmation'))
+            return redirect(url_for('utilities.confirmation'))
         else:
             flash('Error submitting request', 'danger')
             return redirect(url_for('utilities.contact_tutor', plan_id=data['plan_id']))

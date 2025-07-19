@@ -64,7 +64,7 @@ block title %}Subscribe{% endblock %} {% block content %}
 
               <form
                 method="POST"
-                action="{{ url_for('create_subscription', plan_id=plan[0]) }}"
+                action="{{ url_for('subscribe.create_subscription', plan_id=plan[0]) }}"
               >
                 {% if not session.user %}
                 <input

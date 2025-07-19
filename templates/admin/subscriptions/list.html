@@ -47,7 +47,7 @@
                 {% if sub[7] != 'paid' %}
                 <form
                   method="POST"
-                  action="{{ url_for('mark_subscription_paid', subscription_id=sub[0]) }}"
+                  action="{{ url_for('admin.mark_subscription_paid', subscription_id=sub[0]) }}"
                   class="d-inline"
                 >
                   <button type="submit" class="btn btn-sm btn-success">

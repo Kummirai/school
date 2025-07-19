@@ -172,7 +172,7 @@ def view_assignment_submissions(assignment_id):
         assignment = cur.fetchone()
         if not assignment:
             flash('Assignment not found', 'danger')
-            return redirect(url_for('assignments.manage_assignments'))
+            return redirect(url_for('admin.manage_assignments'))
 
         # Get submissions with student IDs
         cur.execute('''
@@ -207,7 +207,7 @@ def submit_grade(assignment_id, student_id):
         assignment = get_assignment_details(assignment_id)
         if not assignment:
             flash('Assignment not found', 'danger')
-            return redirect(url_for('assignments.manage_assignments'))
+            return redirect(url_for('admin.manage_assignments'))
 
         # total_marks is at index 4
         if marks_obtained < 0 or marks_obtained > assignment[4]:
@@ -1289,4 +1289,4 @@ def delete_session(session_id):
     cur.close()
     conn.close()
     flash('Session deleted successfully', 'success')
-    return redirect(url_for('sessions.manage_sessions'))
+    return redirect(url_for('admin.manage_sessions'))

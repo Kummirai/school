@@ -34,7 +34,7 @@ def subscription_status():
     if not user_id:
         # This case should be covered by @login_required, but as a fallback:
         flash('User not logged in.', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('home.login'))
 
     subscription = get_user_subscription(user_id)
     return render_template('subscription_status.html', subscription=subscription)

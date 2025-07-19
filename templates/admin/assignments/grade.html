@@ -25,7 +25,7 @@
     <div class="card-body">
       <form
         method="POST"
-        action="{{ url_for('submit_grade', assignment_id=assignment_id, student_id=student.id) }}"
+        action="{{ url_for('admin.submit_grade', assignment_id=assignment_id, student_id=student.id) }}"
       >
         <div class="mb-3">
           <label class="form-label">Student's Work</label>

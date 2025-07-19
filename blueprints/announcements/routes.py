@@ -47,7 +47,7 @@ def view_announcement(announcement_id):
         })
     except Exception as e:
         flash('Error viewing announcement', 'danger')
-        return redirect(url_for('view_announcements'))
+        return redirect(url_for('announcement_bp.view_announcements'))
     finally:
         cur.close()
         conn.close()
