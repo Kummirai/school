@@ -131,7 +131,7 @@ def view_assignment(assignment_id):
 
         if submit_assignment(assignment_id, session['user_id'], submission_text, file_path, interactive_data):
             flash('Assignment submitted successfully!', 'success')
-            return redirect(url_for('view_assignment', assignment_id=assignment_id))
+            return redirect(url_for('assignments.student_assignments'))
         else:
             flash('Error submitting assignment', 'danger')
 

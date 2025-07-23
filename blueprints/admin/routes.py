@@ -111,7 +111,7 @@ def add_assignment_route():
             )
 
             flash('Assignment created successfully!', 'success')
-            return redirect(url_for('assignments.manage_assignments'))
+            return redirect(url_for('admin.manage_assignments'))
 
         except Exception as e:
             flash(f'Error creating assignment: {str(e)}', 'danger')
@@ -131,8 +131,8 @@ def manage_assignments():
     try:
         cur.execute('''
             SELECT a.id, a.title, a.subject, a.deadline, a.total_marks, a.created_at,
-                   COUNT(s.student_id) as assigned_count,
-                   COUNT(s.id) as submission_count
+                   COUNT(DISTINCT au.student_id) as assigned_count,
+                   COUNT(DISTINCT s.id) as submission_count
             FROM assignments a
             LEFT JOIN assignment_students au ON a.id = au.assignment_id
             LEFT JOIN submissions s ON a.id = s.assignment_id
@@ -221,7 +221,7 @@ def submit_grade(assignment_id, student_id):
     except ValueError:
         flash('Invalid marks format', 'danger')
 
-    return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+    return redirect(url_for('admin.view_assignment_submissions', assignment_id=assignment_id))
 
 
 @admin_bp.route('/students')
@@ -587,7 +587,7 @@ def import_assignments():
                 if imported_count < len(assignments_data):
                     flash(
                         f'{len(assignments_data) - imported_count} assignments could not be imported due to errors.', 'warning')
-                return redirect(url_for('assignments.manage_assignments'))
+                return redirect(url_for('admin.manage_assignments'))
 
             except json.JSONDecodeError:
                 flash('Invalid JSON file. Please ensure it is well-formed.', 'danger')
@@ -719,13 +719,13 @@ def grade_submission(assignment_id, student_id):
     student = get_user_by_id(student_id)
     if not student:
         flash('Student not found', 'danger')
-        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+        return redirect(url_for('admin.view_assignment_submissions', assignment_id=assignment_id))
 
     # Get submission and assignment details
     data = get_submission_for_grading(assignment_id, student_id)
     if not data:
         flash('Submission not found', 'danger')
-        return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+        return redirect(url_for('admin.view_assignment_submissions', assignment_id=assignment_id))
 
     if request.method == 'POST':
         marks_obtained = request.form.get('marks_obtained')
@@ -739,7 +739,7 @@ def grade_submission(assignment_id, student_id):
 
             if update_submission_grade(assignment_id, student_id, marks_obtained, feedback):
                 flash('Grade submitted successfully', 'success')
-                return redirect(url_for('view_assignment_submissions', assignment_id=assignment_id))
+                return redirect(url_for('admin.view_assignment_submissions', assignment_id=assignment_id))
             else:
                 flash('Error submitting grade', 'danger')
         except ValueError:

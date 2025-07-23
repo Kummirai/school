@@ -3,12 +3,12 @@
   <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="{{ url_for('assignments.manage_assignments') }}"
+        <a href="{{ url_for('admin.manage_assignments') }}"
           >Assignments</a
         >
       </li>
       <li class="breadcrumb-item">
-        <a href="{{ url_for('view_submissions', assignment_id=assignment_id) }}"
+        <a href="{{ url_for('admin.view_assignment_submissions', assignment_id=assignment_id) }}"
           >Submissions</a
         >
       </li>

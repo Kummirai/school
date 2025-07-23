@@ -5,6 +5,7 @@
   {% if assignments %}
   <div class="row">
     {% for assignment in assignments %}
+    {% if not assignment.submitted %}
     <div class="col-md-6 col-lg-4 mb-4">
       <div class="card h-100 shadow-sm border border-dark-subtle rounded-4">
         <div class="card-body p-4">
@@ -54,7 +55,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
     {% endfor %}
   </div>
   {% else %}

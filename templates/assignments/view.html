@@ -1083,7 +1083,6 @@
             name="submission_text"
             rows="10"
             placeholder="Enter your solutions here..."
-            required
           >
 {% if submission %}{{ submission.submission_text }}{% endif %}</textarea
           >
@@ -1294,13 +1293,13 @@
           }
         });
 
-        if (!hasContent) {
+        /* if (!hasContent) {
           e.preventDefault();
           alert(
             "Please write responses for at least one topic before submitting."
           );
           return false;
-        }
+        } */
 
         // Optional: Confirm submission
         if (
