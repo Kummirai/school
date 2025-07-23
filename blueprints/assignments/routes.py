@@ -29,24 +29,24 @@ def student_assignments():
         cur.execute(
             """
             SELECT
-            a.id,
-            a.title,
-            a.description,
-            a.subject,
-            a.total_marks,
-            a.deadline,
-            a.content,
-            a.created_at,
-            s.grade,                                -- Now fetching grade directly from the joined 'submissions' table
-            (s.id IS NOT NULL) AS submitted_status  -- Check if a submission exists (s.id will be NULL if no submission)
-        FROM
-            assignments a
-        JOIN
-            assignment_students asl ON a.id = asl.assignment_id
-        LEFT JOIN
-            submissions s ON a.id = s.assignment_id AND asl.student_id = s.student_id -- LEFT JOIN to include all assignments, even without submissions
-        WHERE asl.student_id = %s
-        ORDER BY a.deadline DESC;
+                a.id,
+                a.title,
+                a.description,
+                a.subject,
+                a.total_marks,
+                a.deadline,
+                a.content,
+                a.created_at
+            FROM
+                assignments a
+            JOIN
+                assignment_students asl ON a.id = asl.assignment_id
+            LEFT JOIN
+                submissions s ON a.id = s.assignment_id AND s.student_id = asl.student_id
+            WHERE
+                asl.student_id = %s AND s.id IS NULL
+            ORDER BY
+                a.deadline DESC;
             """,
             (user_id,)
         )
@@ -60,8 +60,8 @@ def student_assignments():
                 'deadline': row[5],
                 'content': row[6] if row[6] else None,
                 'created_at': row[7],
-                'submitted': row[8],
-                'grade': row[9]
+                'submitted': False,  # All fetched assignments are unsubmitted
+                'grade': None
             })
 
         for assignment in assignments:

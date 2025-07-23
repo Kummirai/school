@@ -85,6 +85,35 @@ class User(UserMixin):
         """Check if the provided password matches the user's password"""
         return check_password_hash(self.password, password)
 
+    @staticmethod
+    def create(username, password, role):
+        """Create a new user and add them to the database"""
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        try:
+            hashed_password = generate_password_hash(password)
+            cursor.execute(
+                "INSERT INTO users (username, password, role) VALUES (%s, %s, %s) RETURNING id, username, password, role",
+                (username, hashed_password, role)
+            )
+            user_data = cursor.fetchone()
+            conn.commit()
+            if user_data:
+                return User(
+                    id=user_data[0],
+                    username=user_data[1],
+                    password=user_data[2],
+                    role=user_data[3]
+                )
+            return None
+        except Exception as e:
+            print(f"Error creating user: {e}")
+            conn.rollback()
+            return None
+        finally:
+            cursor.close()
+            conn.close()
+
     def is_admin(self):
         """Check if user is an admin"""
         return self.role == 'admin'

@@ -5,7 +5,6 @@
   {% if assignments %}
   <div class="row">
     {% for assignment in assignments %}
-    {% if not assignment.submitted %}
     <div class="col-md-6 col-lg-4 mb-4">
       <div class="card h-100 shadow-sm border border-dark-subtle rounded-4">
         <div class="card-body p-4">
@@ -38,11 +37,7 @@
           <div class="mb-4">
             <i class="bi bi-upload me-2 text-secondary"></i>
             <span class="text-muted">Submission:</span>
-            {% if assignment.submitted %}
-            <span class="badge bg-success rounded-pill">Submitted</span>
-            {% else %}
             <span class="badge bg-warning text-dark rounded-pill">Pending</span>
-            {% endif %}
           </div>
 
           <!-- CTA Button -->
@@ -55,7 +50,6 @@
         </div>
       </div>
     </div>
-    {% endif %}
     {% endfor %}
   </div>
   {% else %}
