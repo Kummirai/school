@@ -99,7 +99,11 @@
             <i class="bi bi-rocket-fill"></i> Unlock premium coding tutorials
           </div>
           {% endif %} {% else %}
-          <span class="display-4 fs-3 fw-normal" style="display: block; margin-bottom: 10px">MiltonTutor+</span>
+          <span
+            class="display-4 fs-3 fw-normal"
+            style="display: block; margin-bottom: 10px"
+            >MiltonTutor+</span
+          >
           <span class="text-danger">Code</span>
           <span class="text-warning">And</span>
           <span class="text-dark">Academics</span>
@@ -150,7 +154,7 @@
             href="{{url_for('tutorials.studyguides_home')}}"
             role="button"
           >
-            <i class="bi bi-flask me-2"></i>Science Labs
+            <i class="bi bi-flask me-2"></i>Practice Exercises
           </a>
           {% endif %}
         </div>
@@ -171,31 +175,47 @@
 <section id="courses" class="py-5 bg-light">
   <div class="container py-5">
     <div class="text-center mb-5">
-      <h2 class="fw-bold" id="features">Grade-Level Learning Paths</h2>
+      <h2 class="fw-bold display-5" id="features">
+        Grade-Level Learning Paths
+      </h2>
       <p class="lead text-muted">
         Structured curriculum aligned with school standards
       </p>
     </div>
 
+    <!-- Middle School Section -->
     <div class="grade-section mb-5">
       <div class="d-flex align-items-center mb-4">
-        <i class="bi bi-7-circle-fill text-danger fs-1 me-3"></i>
-        <h3 class="fw-bold mb-0">Middle School (Grades 7-9)</h3>
+        <h3 class="fw-bold mb-0 display-6 fs-4">Middle School (Grades 7-9)</h3>
       </div>
-      <div class="row g-4">
+      <div class="row g-3">
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-danger shadow-sm">
+          <div class="card h-100 border-2 border-danger shadow-lg hover-effect">
             <div class="card-body text-center p-4">
-              <i class="bi bi-calculator display-4 text-danger mb-3"></i>
-              <h4 class="fw-bold">Mathematics</h4>
-              <ul class="text-start ps-3">
-                <li>Pre-Algebra</li>
-                <li>Algebra I</li>
-                <li>Geometry Basics</li>
+              <div
+                class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-calculator display-4 text-danger"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Mathematics</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Pre-Algebra
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Algebra I
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Geometry Basics
+                </li>
               </ul>
               <a
                 href="{{ url_for('curriculum.math_curriculum') }}"
-                class="btn btn-sm btn-outline-danger mt-2"
+                class="btn btn-danger btn-sm px-3 py-2 stretched-link"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
@@ -204,18 +224,34 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-warning shadow-sm">
+          <div
+            class="card h-100 border-2 border-warning shadow-lg hover-effect"
+          >
             <div class="card-body text-center p-4">
-              <i class="bi bi-flower1 display-4 text-warning mb-3"></i>
-              <h4 class="fw-bold">Science</h4>
-              <ul class="text-start ps-3">
-                <li>Life Science</li>
-                <li>Physical Science</li>
-                <li>Earth Science</li>
+              <div
+                class="icon-wrapper bg-warning bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-flower1 display-4 text-warning"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Science</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Life Science
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Physical Science
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Earth Science
+                </li>
               </ul>
               <a
                 href="{{ url_for('curriculum.science_curriculum') }}"
-                class="btn btn-sm btn-outline-warning mt-2"
+                class="btn btn-warning btn-sm px-3 py-2 stretched-link"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
@@ -224,18 +260,34 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-secondary shadow-sm">
+          <div
+            class="card h-100 border-2 border-secondary shadow-lg hover-effect"
+          >
             <div class="card-body text-center p-4">
-              <i class="bi bi-translate display-4 text-secondary mb-3"></i>
-              <h4 class="fw-bold">English</h4>
-              <ul class="text-start ps-3">
-                <li>Reading Comprehension</li>
-                <li>Writing Fundamentals</li>
-                <li>Grammar Skills</li>
+              <div
+                class="icon-wrapper bg-secondary bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-translate display-4 text-secondary"></i>
+              </div>
+              <h4 class="fw-bold mb-3">English</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  Reading Comprehension
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  Writing Fundamentals
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  Grammar Skills
+                </li>
               </ul>
               <a
                 href="{{ url_for('curriculum.english_curriculum') }}"
-                class="btn btn-sm btn-outline-secondary mt-2"
+                class="btn btn-outline-secondary btn-sm px-3 py-2 stretched-link"
               >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
@@ -244,16 +296,33 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3 mx-lg-auto">
-          <div class="card h-100 border-danger shadow-sm">
+          <div class="card h-100 border-2 border-danger shadow-lg hover-effect">
             <div class="card-body text-center p-4">
-              <i class="bi bi-globe2 display-4 text-danger mb-3"></i>
-              <h4 class="fw-bold">Social Studies</h4>
-              <ul class="text-start ps-3">
-                <li>World Geography</li>
-                <li>American History</li>
-                <li>Civics</li>
+              <div
+                class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-globe2 display-4 text-danger"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Social Studies</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  World Geography
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  American History
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Civics
+                </li>
               </ul>
-              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+              <a
+                href="#"
+                class="btn btn-danger btn-sm px-3 py-2 stretched-link"
+              >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
@@ -262,23 +331,40 @@
       </div>
     </div>
 
-    <div class="grade-section">
+    <!-- High School Section -->
+    <div class="grade-section mb-5">
       <div class="d-flex align-items-center mb-4">
-        <i class="bi bi-1-circle-fill text-danger fs-1 me-3"></i>
-        <h3 class="fw-bold mb-0">High School (Grades 10-12)</h3>
+        <h3 class="fw-bold mb-0 display-6 fs-4">High School (Grades 10-12)</h3>
       </div>
-      <div class="row g-4">
+      <div class="row g-3">
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-danger shadow-sm">
+          <div class="card h-100 border-2 border-danger shadow-lg hover-effect">
             <div class="card-body text-center p-4">
-              <i class="bi bi-graph-up-arrow display-4 text-danger mb-3"></i>
-              <h4 class="fw-bold">Mathematics</h4>
-              <ul class="text-start ps-3">
-                <li>Algebra II</li>
-                <li>Pre-Calculus</li>
-                <li>AP Calculus</li>
+              <div
+                class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-graph-up-arrow display-4 text-danger"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Mathematics</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Algebra II
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Pre-Calculus
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  AP Calculus
+                </li>
               </ul>
-              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+              <a
+                href="#"
+                class="btn btn-danger btn-sm px-3 py-2 stretched-link"
+              >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
@@ -286,16 +372,35 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-warning shadow-sm">
+          <div
+            class="card h-100 border-2 border-warning shadow-lg hover-effect"
+          >
             <div class="card-body text-center p-4">
-              <i class="bi bi-egg-fried display-4 text-warning mb-3"></i>
-              <h4 class="fw-bold">Science</h4>
-              <ul class="text-start ps-3">
-                <li>Biology</li>
-                <li>Chemistry</li>
-                <li>Physics</li>
+              <div
+                class="icon-wrapper bg-warning bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-egg-fried display-4 text-warning"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Science</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Biology
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Chemistry
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-warning me-2"></i>
+                  Physics
+                </li>
               </ul>
-              <a href="#" class="btn btn-sm btn-outline-warning mt-2">
+              <a
+                href="#"
+                class="btn btn-warning btn-sm px-3 py-2 stretched-link"
+              >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
@@ -303,16 +408,35 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card h-100 border-secondary shadow-sm">
+          <div
+            class="card h-100 border-2 border-secondary shadow-lg hover-effect"
+          >
             <div class="card-body text-center p-4">
-              <i class="bi bi-book-half display-4 text-secondary mb-3"></i>
-              <h4 class="fw-bold">English</h4>
-              <ul class="text-start ps-3">
-                <li>American Literature</li>
-                <li>AP English</li>
-                <li>College Writing</li>
+              <div
+                class="icon-wrapper bg-secondary bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-book-half display-4 text-secondary"></i>
+              </div>
+              <h4 class="fw-bold mb-3">English</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  American Literature
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  AP English
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-secondary me-2"></i>
+                  College Writing
+                </li>
               </ul>
-              <a href="#" class="btn btn-sm btn-outline-secondary mt-2">
+              <a
+                href="#"
+                class="btn btn-outline-secondary btn-sm px-3 py-2 stretched-link"
+              >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
@@ -320,16 +444,33 @@
         </div>
 
         <div class="col-md-6 col-lg-4 col-xl-3 mx-lg-auto">
-          <div class="card h-100 border-danger shadow-sm">
+          <div class="card h-100 border-2 border-danger shadow-lg hover-effect">
             <div class="card-body text-center p-4">
-              <i class="bi bi-globe-americas display-4 text-danger mb-3"></i>
-              <h4 class="fw-bold">Social Studies</h4>
-              <ul class="text-start ps-3">
-                <li>World History</li>
-                <li>AP Government</li>
-                <li>Economics</li>
+              <div
+                class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+                style="width: 80px; height: 80px"
+              >
+                <i class="bi bi-globe-americas display-4 text-danger"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Social Studies</h4>
+              <ul class="text-start ps-0 mb-4" style="list-style-type: none">
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  World History
+                </li>
+                <li class="mb-2 d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  AP Government
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-check-circle-fill text-danger me-2"></i>
+                  Economics
+                </li>
               </ul>
-              <a href="#" class="btn btn-sm btn-outline-danger mt-2">
+              <a
+                href="#"
+                class="btn btn-danger btn-sm px-3 py-2 stretched-link"
+              >
                 View Curriculum <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
@@ -337,23 +478,30 @@
         </div>
       </div>
     </div>
+
+    <!-- Technology & Programming Section -->
     <div class="col-12 mt-5">
-      <h3 class="h4 fw-bold mb-4 text-center">
+      <h3 class="h4 fw-bold mb-4 text-center display-6">
         <i class="bi bi-laptop text-warning me-2"></i>Technology & Programming
       </h3>
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 mt-4">
-        <div class="card h-100 border-danger shadow-sm">
+        <div class="card h-100 border-2 border-danger shadow-lg hover-effect">
           <div class="card-body text-center p-4">
-            <i class="bi bi-filetype-html display-4 text-danger mb-3"></i>
-            <h3 class="h4 fw-bold">Web Development</h3>
-            <p class="card-text">
+            <div
+              class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+              style="width: 80px; height: 80px"
+            >
+              <i class="bi bi-filetype-html display-4 text-danger"></i>
+            </div>
+            <h3 class="h4 fw-bold mb-3">Web Development</h3>
+            <p class="card-text mb-4">
               HTML, CSS, and JavaScript for beginners to advanced.
             </p>
             <a
               href="{{url_for('curriculum.web_development_curriculum')}}"
-              class="btn btn-outline-danger mt-3"
+              class="btn btn-danger mt-3 stretched-link"
             >
               <i class="bi bi-arrow-right-circle me-1"></i>Explore
             </a>
@@ -362,16 +510,21 @@
       </div>
 
       <div class="col-md-6 col-lg-4 mt-4">
-        <div class="card h-100 border-warning shadow-sm">
+        <div class="card h-100 border-2 border-warning shadow-lg hover-effect">
           <div class="card-body text-center p-4">
-            <i class="bi bi-filetype-py display-4 text-warning mb-3"></i>
-            <h3 class="h4 fw-bold">Python</h3>
-            <p class="card-text">
+            <div
+              class="icon-wrapper bg-warning bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+              style="width: 80px; height: 80px"
+            >
+              <i class="bi bi-filetype-py display-4 text-warning"></i>
+            </div>
+            <h3 class="h4 fw-bold mb-3">Python</h3>
+            <p class="card-text mb-4">
               Learn Python programming from basics to web development.
             </p>
             <a
               href="{{url_for('curriculum.python_curriculum')}}"
-              class="btn btn-outline-warning mt-3"
+              class="btn btn-warning mt-3 stretched-link"
             >
               <i class="bi bi-arrow-right-circle me-1"></i>Explore
             </a>
@@ -380,14 +533,21 @@
       </div>
 
       <div class="col-md-6 col-lg-4 mt-4 mx-md-auto">
-        <div class="card h-100 border-secondary shadow-sm">
+        <div
+          class="card h-100 border-2 border-secondary shadow-lg hover-effect"
+        >
           <div class="card-body text-center p-4">
-            <i class="bi bi-microsoft display-4 text-secondary mb-3"></i>
-            <h3 class="h4 fw-bold">Microsoft Office</h3>
-            <p class="card-text">
+            <div
+              class="icon-wrapper bg-secondary bg-opacity-10 rounded-circle p-3 mb-3 mx-auto"
+              style="width: 80px; height: 80px"
+            >
+              <i class="bi bi-microsoft display-4 text-secondary"></i>
+            </div>
+            <h3 class="h4 fw-bold mb-3">Microsoft Office</h3>
+            <p class="card-text mb-4">
               Master Word, Excel, PowerPoint for academic success.
             </p>
-            <a href="#" class="btn btn-outline-secondary mt-3">
+            <a href="#" class="btn btn-outline-secondary mt-3 stretched-link">
               <i class="bi bi-arrow-right-circle me-1"></i>Explore
             </a>
           </div>
@@ -396,6 +556,55 @@
     </div>
   </div>
 </section>
+
+<style>
+  .hover-effect {
+    transition: all 0.3s ease;
+    border-top: 3px solid transparent;
+  }
+
+  .hover-effect:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    border-top: 3px solid;
+  }
+
+  .card.border-danger.hover-effect:hover {
+    border-top-color: var(--bs-danger);
+  }
+
+  .card.border-warning.hover-effect:hover {
+    border-top-color: var(--bs-warning);
+  }
+
+  .card.border-secondary.hover-effect:hover {
+    border-top-color: var(--bs-secondary);
+  }
+
+  .icon-wrapper {
+    transition: all 0.3s ease;
+  }
+
+  .card:hover .icon-wrapper {
+    transform: scale(1.1);
+  }
+
+  .stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 2;
+  }
+</style>
+
 <section id="exam-resources" class="py-5">
   <div class="container py-5">
     <div class="text-center mb-5">
