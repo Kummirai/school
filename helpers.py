@@ -433,118 +433,31 @@ def get_students_for_parent(parent_id):
 
 
 def get_student_performance_stats(student_id):
-    """Get comprehensive performance stats for a student"""
-    conn = get_db_connection()
-    cur = conn.cursor()
+    """Get comprehensive performance stats for a student for the parent dashboard."""
     try:
-        # Get assignment stats
-        cur.execute('''
-            SELECT
-                COUNT(*) as total_assignments,
-                COUNT(CASE WHEN s.id IS NOT NULL THEN 1 END) as submitted_count,
-                AVG(s.grade::float/a.total_marks*100) as avg_score_percentage,
-                MAX(s.grade::float/a.total_marks*100) as best_score,
-                MIN(s.grade::float/a.total_marks*100) as worst_score
-            FROM assignments a
-            JOIN assignment_students au ON a.id = au.assignment_id
-            LEFT JOIN submissions s ON a.id = s.assignment_id AND s.student_id = %s
-            WHERE au.student_id = %s
-        ''', (student_id, student_id))  # <--- Changed this line: pass student_id twice!
-        assignment_stats = cur.fetchone()
-
-        # Handle the case where no assignments are found for the student
-        if assignment_stats and assignment_stats[0] is not None and assignment_stats[0] > 0:
-            total_assignments = assignment_stats[0]
-            submitted_count = assignment_stats[1]
-            avg_assignment_score = round(
-                assignment_stats[2], 2) if assignment_stats[2] is not None else None
-            best_assignment_score = round(
-                assignment_stats[3], 2) if assignment_stats[3] is not None else None
-            worst_assignment_score = round(
-                assignment_stats[4], 2) if assignment_stats[4] is not None else None
-        else:
-            total_assignments = 0
-            submitted_count = 0
-            avg_assignment_score = None
-            best_assignment_score = None
-            worst_assignment_score = None
-
-        # Get practice stats
-        cur.execute('''
-            SELECT
-                COUNT(*) as total_practices,
-                AVG(score::float/total_questions*100) as avg_score_percentage,
-                MAX(score::float/total_questions*100) as best_score,
-                MIN(score::float/total_questions*100) as worst_score
-            FROM practice_scores
-            WHERE student_id = %s
-        ''', (student_id,))
-        practice_stats = cur.fetchone()
-
-        if practice_stats and practice_stats[0] is not None and practice_stats[0] > 0:
-            total_practices = practice_stats[0]
-            avg_practice_score = round(
-                practice_stats[1], 2) if practice_stats[1] is not None else None
-            best_practice_score = round(
-                practice_stats[2], 2) if practice_stats[2] is not None else None
-            worst_practice_score = round(
-                practice_stats[3], 2) if practice_stats[3] is not None else None
-        else:
-            total_practices = 0
-            avg_practice_score = None
-            best_practice_score = None
-            worst_practice_score = None
-
-        # Get exam stats
-        cur.execute('''
-            SELECT
-                COUNT(*) as total_exams,
-                AVG(score) as avg_score_percentage,
-                MAX(score) as best_score,
-                MIN(score) as worst_score
-            FROM exam_results
-            WHERE user_id = %s
-        ''', (student_id,))
-        exam_stats = cur.fetchone()
-
-        if exam_stats and exam_stats[0] is not None and exam_stats[0] > 0:
-            total_exams = exam_stats[0]
-            avg_exam_score = round(
-                exam_stats[1], 2) if exam_stats[1] is not None else None
-            best_exam_score = round(
-                exam_stats[2], 2) if exam_stats[2] is not None else None
-            worst_exam_score = round(
-                exam_stats[3], 2) if exam_stats[3] is not None else None
-        else:
-            total_exams = 0
-            avg_exam_score = None
-            best_exam_score = None
-            worst_exam_score = None
+        assignments_data = get_assignments_data(student_id)
+        practice_data = get_practice_data(student_id)
+        exams_data = get_exams_data(student_id)
+        trend_data = get_actual_trend_data(student_id)
+        subject_data = get_actual_subject_data(student_id)
 
         return {
-            'assignments': {
-                'total': total_assignments,
-                'submitted': submitted_count,
-                'avg_score': avg_assignment_score,
-                'best_score': best_assignment_score,
-                'worst_score': worst_assignment_score
-            },
-            'practice': {
-                'total': total_practices,
-                'avg_score': avg_practice_score,
-                'best_score': best_practice_score,
-                'worst_score': worst_practice_score
-            },
-            'exams': {
-                'total': total_exams,
-                'avg_score': avg_exam_score,
-                'best_score': best_exam_score,
-                'worst_score': worst_exam_score
-            }
+            'assignments': assignments_data,
+            'practice': practice_data,
+            'exams': exams_data,
+            'trend': trend_data,
+            'subjects': subject_data
         }
-    finally:
-        cur.close()
-        conn.close()
+    except Exception as e:
+        print(f"Error getting comprehensive student stats: {e}")
+        # Return a default structure in case of error to avoid breaking the frontend
+        return {
+            'assignments': {'avg_score': 0, 'submitted': 0, 'total': 0, 'best_score': 0, 'scores': [], 'labels': []},
+            'practice': {'avg_score': 0, 'total': 0, 'best_score': 0, 'scores': [], 'labels': []},
+            'exams': {'avg_score': 0, 'total': 0, 'best_score': 0, 'scores': [], 'labels': []},
+            'trend': {'labels': [], 'assignments': [], 'practice': [], 'exams': []},
+            'subjects': {'labels': [], 'scores': []}
+        }
 
 
 def load_exams_from_json(filepath='static/js/exams.json'):

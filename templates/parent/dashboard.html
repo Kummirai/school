@@ -265,29 +265,7 @@
         </div>
         <div class="card-body p-0">
           <div class="list-group list-group-flush">
-            {% for activity in recent_activities %}
-            <div class="list-group-item border-0 py-3">
-              <div class="d-flex align-items-center">
-                <div
-                  class="icon-shape bg-light text-primary rounded-circle me-3 p-2"
-                >
-                  <i class="fas fa-{{ activity.icon|default('check') }}"></i>
-                </div>
-                <div class="flex-grow-1">
-                  <h6 class="mb-1">{{ activity.title }}</h6>
-                  <p class="small text-muted mb-0">
-                    {{ activity.description }}
-                  </p>
-                </div>
-                <small class="text-muted">{{ activity.time }}</small>
-              </div>
-            </div>
-            {% else %}
-            <div class="text-center py-4">
-              <i class="fas fa-inbox fs-1 text-muted mb-3"></i>
-              <p class="text-muted">No recent activity</p>
-            </div>
-            {% endfor %}
+            
           </div>
         </div>
       </div>
@@ -342,7 +320,7 @@
     showLoadingStates();
 
     // Fetch data from Flask endpoint
-    fetch(`/api/student/{{ selected_student.id }}/chart_data`)
+    fetch(`{{ url_for('parents.student_chart_data', student_id=selected_student.id) }}`)
       .then((response) => {
         if (!response.ok) throw new Error("Network response was not ok");
         return response.json();

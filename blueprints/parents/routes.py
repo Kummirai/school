@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session, flash, abort, request
+from flask import Blueprint, render_template, redirect, url_for, session, flash, abort, request, jsonify
 import psycopg2.extras
 from flask_login import login_required
 from models import get_db_connection
@@ -7,7 +7,7 @@ from helpers import get_students_for_parent, get_student_submissions, get_studen
 # Update this import to the correct path
 from blueprints.sessions.utils import get_upcoming_sessions, get_student_bookings
 # Add these imports
-from blueprints.assignments.utils import get_student_assignments, get_assignments_for_user
+from blueprints.assignments.utils import get_student_assignments
 from blueprints.announcements.utils import get_user_announcements  # Add this import
 
 
@@ -73,12 +73,7 @@ def parent_dashboard():
         flash('No students linked to your account', 'warning')
         return render_template('parent/dashboard.html',
                                students=[],
-                               selected_student=None,
-                               stats=None,
-                               assignments=[],
-                               submissions=[],
-                               bookings=[],
-                               announcements=[])
+                               selected_student=None)
 
     # Default to first student
     selected_student_id = request.args.get('student_id', students[0]['id'])
@@ -95,21 +90,63 @@ def parent_dashboard():
         flash('Invalid student selected', 'danger')
         return redirect(url_for('parents.parent_dashboard'))
 
-    # Get all data for the selected student
-    assignments = get_assignments_for_user(selected_student_id)
-    submissions = get_student_submissions(selected_student_id)
-    bookings = get_student_bookings(selected_student_id)
-    stats = get_student_performance_stats(selected_student_id)
-    announcements = get_user_announcements(selected_student_id, limit=5)
-
+    # Data is now loaded via API, so we only need to pass student info
     return render_template('parent/dashboard.html',
                            students=students,
-                           selected_student=selected_student,
-                           assignments=assignments,
-                           submissions=submissions,
-                           bookings=bookings,
-                           stats=stats,
-                           announcements=announcements)
+                           selected_student=selected_student)
+
+
+@parents_bp.route('/api/student/<int:student_id>/chart_data')
+@login_required
+def student_chart_data(student_id):
+    if session.get('role') != 'parent':
+        abort(403)
+
+    # Verify parent has access to this student
+    students = get_students_for_parent(session['user_id'])
+    if not any(s['id'] == student_id for s in students):
+        abort(403)
+
+    try:
+        # In a real app, you'd fetch this data from your database.
+        # Using placeholder data that matches the JS expectations.
+        stats = get_student_performance_stats(student_id)
+        submissions = get_student_submissions(student_id)
+        announcements = get_user_announcements(student_id, limit=5)
+
+        # Format activities from various sources
+        activities = []
+        for sub in submissions[:3]:
+            activities.append({
+                "icon": "fa-file-upload",
+                "title": f"Submitted: {sub['title']}",
+                "description": f"Score: {sub['marks_obtained']}/{sub['total_marks']}" if sub.get('marks_obtained') else "Awaiting grade",
+                "time": sub['submitted_at'].strftime('%b %d')
+            })
+
+        for ann in announcements[:2]:
+            activities.append({
+                "icon": "fa-bullhorn",
+                "title": f"Announcement: {ann['title']}",
+                "description": ann['message'][:50] + '...',
+                "time": ann['created_at'].strftime('%b %d')
+            })
+
+        # This data structure should match what your JS expects
+        chart_data = {
+            "assignments": stats.get('assignments', {}),
+            "practice": stats.get('practice', {}),
+            "exams": stats.get('exams', {}),
+            "trend": stats.get('trend', {}),
+            "subjects": stats.get('subjects', {}),
+            "activities": activities
+        }
+
+        return jsonify(chart_data)
+
+    except Exception as e:
+        print(f"Error fetching chart data: {e}")
+        return jsonify({"error": "Could not load student data."}), 500
 
 
 @parents_bp.route('/submissions/<int:student_id>')  # Changed from @app.route
