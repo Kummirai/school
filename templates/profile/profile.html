@@ -23,9 +23,17 @@
                 <div class="card-body">
                     <h5 class="card-title">Profile Information</h5>
                     <hr>
-                    <p><strong>Username:</strong> {{ current_user.username }}</p>
-                    <p><strong>Role:</strong> {{ current_user.role }}</p>
-                    {# Add more user details here as needed #}
+                    <form method="POST" action="{{ url_for('profile.update_profile') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ current_user.username }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank to keep current password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
                 </div>
             </div>
         </div>
