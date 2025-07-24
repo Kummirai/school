@@ -20,6 +20,7 @@ from blueprints.subscribe.routes import subscribe_bp
 from blueprints.grades.routes import grades_bp
 from blueprints.courses.routes import courses_bp
 from blueprints.parents.routes import parents_bp
+from blueprints.profile.routes import profile_bp
 
 
 load_dotenv()
@@ -67,6 +68,7 @@ app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
 app.register_blueprint(grades_bp, url_prefix='/grades')
 app.register_blueprint(courses_bp, url_prefix='/courses')
 app.register_blueprint(parents_bp, url_prefix='/parents')
+app.register_blueprint(profile_bp, url_prefix='/profile')
 
 
 @app.context_processor

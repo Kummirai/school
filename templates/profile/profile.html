@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if current_user.profile_image %}
+                        <img src="{{ url_for('static', filename=current_user.profile_image) }}" alt="User Profile" class="rounded-circle mb-3" width="150">
+                    {% else %}
+                        <i class="bi bi-person-circle" style="font-size: 150px;"></i>
+                    {% endif %}
+                    <h3>{{ current_user.username }}</h3>
+                    <p class="text-muted">{{ current_user.role|capitalize }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Information</h5>
+                    <hr>
+                    <p><strong>Username:</strong> {{ current_user.username }}</p>
+                    <p><strong>Role:</strong> {{ current_user.role }}</p>
+                    {# Add more user details here as needed #}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
