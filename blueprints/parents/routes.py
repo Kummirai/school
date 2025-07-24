@@ -1,21 +1,22 @@
 from flask import Blueprint, render_template, redirect, url_for, session, flash, abort, request
 import psycopg2.extras
 from flask_login import login_required
-from students.utils import get_student_bookings
 from models import get_db_connection
 from flask import current_app as app
-from assignments.utils import get_student_assignments, get_assignments_for_user
 from helpers import get_students_for_parent, get_student_submissions, get_student_performance_stats
-from announcements.utils import get_user_announcements
-from sessions.utils import get_upcoming_sessions
+# Update this import to the correct path
+from blueprints.sessions.utils import get_upcoming_sessions, get_student_bookings
+# Add these imports
+from blueprints.assignments.utils import get_student_assignments, get_assignments_for_user
+from blueprints.announcements.utils import get_user_announcements  # Add this import
+
 
 # Create a Blueprint for the parent routes
-parents_bp = Blueprint('parents', __name__, url_prefix='/parent')
+parents_bp = Blueprint('parents', __name__, url_prefix='/parents')
 
 
-@app.route('/assignments')
+@parents_bp.route('/assignments')  # Changed from @app.route
 @login_required
-# @parent_required # If you have a specific decorator for parent role
 def parent_view_assignments():
     parent_id = session.get('user_id')
     if not parent_id:
@@ -23,7 +24,6 @@ def parent_view_assignments():
         return redirect(url_for('login'))
 
     conn = get_db_connection()
-    # Again, using DictCursor is good for fetching parent's students
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     students_with_assignments = []
     try:
@@ -51,9 +51,8 @@ def parent_view_assignments():
 
     except Exception as e:
         flash(f'Error loading assignments: {str(e)}', 'danger')
-        print(f"Error in parent_view_assignments route: {e}")  # For debugging
-        # Redirect to a safe page on error
-        return redirect(url_for('parent_dashboard'))
+        print(f"Error in parent_view_assignments route: {e}")
+        return redirect(url_for('parents.parent_dashboard'))
     finally:
         if cur:
             cur.close()
@@ -63,7 +62,7 @@ def parent_view_assignments():
     return render_template('parent/assignments.html', students_with_assignments=students_with_assignments)
 
 
-@app.route('/dashboard')
+@parents_bp.route('/dashboard')  # Changed from @app.route
 @login_required
 def parent_dashboard():
     if session.get('role') != 'parent':
@@ -87,7 +86,7 @@ def parent_dashboard():
         selected_student_id = int(selected_student_id)
     except (ValueError, TypeError):
         flash('Invalid student selected', 'danger')
-        return redirect(url_for('parent_dashboard'))
+        return redirect(url_for('parents.parent_dashboard'))
 
     selected_student = next(
         (s for s in students if s['id'] == selected_student_id), None)
@@ -113,9 +112,8 @@ def parent_dashboard():
                            announcements=announcements)
 
 
-@app.route('/submissions/<int:student_id>')
+@parents_bp.route('/submissions/<int:student_id>')  # Changed from @app.route
 @login_required
-# @parent_required
 def parent_view_submissions(student_id):
     # Verify parent has access to this student
     students = get_students_for_parent(session['user_id'])
@@ -147,7 +145,7 @@ def parent_view_submissions(student_id):
             submissions.append({
                 'title': row[0],
                 'subject': row[1],
-                'deadline': row[2],  # This should be a datetime object
+                'deadline': row[2],
                 'submitted_at': row[3],
                 'marks_obtained': row[4],
                 'total_marks': row[5],
@@ -163,7 +161,7 @@ def parent_view_submissions(student_id):
         conn.close()
 
 
-@app.route('/sessions/<int:student_id>')
+@parents_bp.route('/sessions/<int:student_id>')  # Changed from @app.route
 @login_required
 def parent_view_sessions(student_id):
     if session.get('role') != 'parent':
