@@ -22,106 +22,159 @@ def book_session(student_id, session_id):
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Check if session exists and has available spots
-    cur.execute('''
-        SELECT COUNT(sb.id), ts.max_students
-        FROM tutorial_sessions ts
-        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
-        WHERE ts.id = %s
-        GROUP BY ts.id
-    ''', (session_id,))
-    result = cur.fetchone()
+    try:
+        # Check if session exists and has available spots
+        cur.execute('''
+            SELECT ts.max_students, COUNT(sb.id) as current_bookings
+            FROM tutorial_sessions ts
+            LEFT JOIN student_bookings sb ON ts.id = sb.session_id
+            WHERE ts.id = %s
+            GROUP BY ts.id, ts.max_students
+        ''', (session_id,))
+        result = cur.fetchone()
 
-    if not result or result[0] >= result[1]:
+        if not result:
+            print(f"Session {session_id} not found")
+            return False
+
+        max_students, current_bookings = result
+        if current_bookings >= max_students:
+            print(
+                f"Session {session_id} is full ({current_bookings}/{max_students})")
+            return False
+
+        # Check if student already booked this session
+        cur.execute('''
+            SELECT id FROM student_bookings 
+            WHERE student_id = %s AND session_id = %s
+        ''', (student_id, session_id))
+        if cur.fetchone():
+            print(f"Student {student_id} already booked session {session_id}")
+            return False
+
+        # Create booking
+        cur.execute('''
+            INSERT INTO student_bookings (student_id, session_id)
+            VALUES (%s, %s)
+        ''', (student_id, session_id))
+        conn.commit()
+        print(
+            f"Successfully booked session {session_id} for student {student_id}")
+        return True
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error booking session: {e}")
+        return False
+    finally:
         cur.close()
         conn.close()
-        return False
-
-    # Check if student already booked this session
-    cur.execute('''
-        SELECT id FROM student_bookings 
-        WHERE student_id = %s AND session_id = %s
-    ''', (student_id, session_id))
-    if cur.fetchone():
-        cur.close()
-        conn.close()
-        return False
-
-    # Create booking
-    cur.execute('''
-        INSERT INTO student_bookings (student_id, session_id)
-        VALUES (%s, %s)
-    ''', (student_id, session_id))
-    conn.commit()
-    cur.close()
-    conn.close()
-    return True
 
 
 def cancel_booking(booking_id, student_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('''
-        DELETE FROM student_bookings
-        WHERE id = %s AND student_id = %s
-    ''', (booking_id, student_id))
-    affected_rows = cur.rowcount
-    conn.commit()
-    cur.close()
-    conn.close()
-    return affected_rows > 0
+    try:
+        cur.execute('''
+            DELETE FROM student_bookings
+            WHERE id = %s AND student_id = %s
+        ''', (booking_id, student_id))
+        affected_rows = cur.rowcount
+        conn.commit()
+        return affected_rows > 0
+    except Exception as e:
+        conn.rollback()
+        print(f"Error cancelling booking: {e}")
+        return False
+    finally:
+        cur.close()
+        conn.close()
 
 
 def get_all_sessions():
+    """Get all tutorial sessions with booking counts"""
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('''
-        SELECT ts.id, ts.title, ts.description, ts.start_time, ts.end_time, ts.max_students,
-            COUNT(sb.id) as booked_count
-        FROM tutorial_sessions ts
-        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
-        GROUP BY ts.id
-        ORDER BY ts.start_time
-    ''')
-    sessions = cur.fetchall()
-    cur.close()
-    conn.close()
-    return sessions
+    try:
+        cur.execute('''
+            SELECT 
+                ts.id, 
+                ts.title, 
+                ts.description, 
+                ts.start_time, 
+                ts.end_time, 
+                ts.max_students,
+                COALESCE(COUNT(sb.id), 0) as current_bookings
+            FROM tutorial_sessions ts
+            LEFT JOIN student_bookings sb ON ts.id = sb.session_id AND sb.status = 'confirmed'
+            GROUP BY ts.id, ts.title, ts.description, ts.start_time, ts.end_time, ts.max_students
+            ORDER BY ts.start_time
+        ''')
+        sessions = cur.fetchall()
+        print(f"Retrieved {len(sessions)} sessions from database")
+        for session in sessions:
+            print(f"Session: {session}")
+        return sessions
+    except Exception as e:
+        print(f"Error getting sessions: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
 
 
 def get_upcoming_sessions():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('''
-        SELECT ts.id, ts.title, ts.start_time, ts.end_time,
-               COUNT(sb.id) as booked_count, ts.max_students
-        FROM tutorial_sessions ts
-        LEFT JOIN student_bookings sb ON ts.id = sb.session_id
-        WHERE ts.start_time > NOW()
-        GROUP BY ts.id
-        ORDER BY ts.start_time
-        LIMIT 5
-    ''')
-    sessions = cur.fetchall()
-    cur.close()
-    conn.close()
-    return sessions
+    try:
+        cur.execute('''
+            SELECT ts.id, ts.title, ts.start_time, ts.end_time,
+                   COALESCE(COUNT(sb.id), 0) as booked_count, ts.max_students
+            FROM tutorial_sessions ts
+            LEFT JOIN student_bookings sb ON ts.id = sb.session_id AND sb.status = 'confirmed'
+            WHERE ts.start_time > NOW()
+            GROUP BY ts.id, ts.title, ts.start_time, ts.end_time, ts.max_students
+            ORDER BY ts.start_time
+            LIMIT 5
+        ''')
+        sessions = cur.fetchall()
+        return sessions
+    except Exception as e:
+        print(f"Error getting upcoming sessions: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
 
 
-def get_student_bookings(student_id):  # type: ignore
+def get_student_bookings(student_id):
+    """Get all bookings for a specific student"""
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('''
-        SELECT sb.id, ts.title, ts.start_time, ts.end_time
-        FROM student_bookings sb
-        JOIN tutorial_sessions ts ON sb.session_id = ts.id
-        WHERE sb.student_id = %s AND ts.start_time > NOW()
-        ORDER BY ts.start_time
-    ''', (student_id,))
-    bookings = cur.fetchall()
-    cur.close()
-    conn.close()
-    return bookings
+    try:
+        cur.execute('''
+            SELECT 
+                sb.id, 
+                ts.title, 
+                ts.start_time, 
+                ts.end_time,
+                ts.id as session_id
+            FROM student_bookings sb
+            JOIN tutorial_sessions ts ON sb.session_id = ts.id
+            WHERE sb.student_id = %s AND sb.status = 'confirmed'
+            ORDER BY ts.start_time
+        ''', (student_id,))
+        bookings = cur.fetchall()
+        print(f"Retrieved {len(bookings)} bookings for student {student_id}")
+        for booking in bookings:
+            print(f"Booking: {booking}")
+        return bookings
+    except Exception as e:
+        print(f"Error getting student bookings: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
 
 
 def get_student_sessions_data(student_id):
@@ -254,14 +307,14 @@ def update_session_request_status(request_id, status, admin_id, notes=None):
         # If approved, create a tutorial session
         if status == 'approved':
             cur.execute('''
-                SELECT title, description, preferred_time
+                SELECT title, description, preferred_time, student_id
                 FROM session_requests
                 WHERE id = %s
             ''', (request_id,))
             request = cur.fetchone()
 
             if request:
-                title, description, preferred_time = request
+                title, description, preferred_time, student_id = request
                 # Create a session with default duration (1 hour)
                 end_time = preferred_time + timedelta(hours=1)
                 cur.execute('''
@@ -277,10 +330,8 @@ def update_session_request_status(request_id, status, admin_id, notes=None):
                     # Book the student automatically
                     cur.execute('''
                         INSERT INTO student_bookings (student_id, session_id)
-                        SELECT student_id, %s
-                        FROM session_requests
-                        WHERE id = %s
-                    ''', (session_id, request_id))
+                        VALUES (%s, %s)
+                    ''', (student_id, session_id))
                 else:
                     print("Failed to create tutorial session: no session_id returned.")
                     conn.rollback()
@@ -292,6 +343,58 @@ def update_session_request_status(request_id, status, admin_id, notes=None):
         conn.rollback()
         print(f"Error updating session request: {e}")
         return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+def add_sample_sessions():
+    """Add some sample sessions for testing"""
+    from datetime import datetime, timedelta
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    try:
+        # Check if sessions already exist
+        cur.execute('SELECT COUNT(*) FROM tutorial_sessions')
+        count = cur.fetchone()[0]
+
+        if count > 0:
+            print("Sample sessions already exist")
+            return
+
+        # Add sample sessions for the next few days
+        base_date = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)
+
+        sample_sessions = [
+            ("Mathematics Tutoring", "Basic algebra and geometry",
+             base_date + timedelta(days=1), 5),
+            ("Physics Workshop", "Introduction to mechanics",
+             base_date + timedelta(days=1, hours=2), 8),
+            ("Chemistry Lab", "Organic chemistry basics",
+             base_date + timedelta(days=2), 6),
+            ("English Literature", "Shakespeare analysis",
+             base_date + timedelta(days=2, hours=3), 10),
+            ("Computer Science", "Python programming basics",
+             base_date + timedelta(days=3), 12),
+            ("Biology Study Group", "Cell biology review",
+             base_date + timedelta(days=4, hours=1), 7),
+        ]
+
+        for title, description, start_time, max_students in sample_sessions:
+            end_time = start_time + timedelta(hours=1)
+            cur.execute('''
+                INSERT INTO tutorial_sessions (title, description, start_time, end_time, max_students)
+                VALUES (%s, %s, %s, %s, %s)
+            ''', (title, description, start_time, end_time, max_students))
+
+        conn.commit()
+        print(f"Added {len(sample_sessions)} sample sessions")
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error adding sample sessions: {e}")
     finally:
         cur.close()
         conn.close()

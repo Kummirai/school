@@ -136,6 +136,23 @@
   </div>
 </div>
 
+<!-- Debug information -->
+<div class="container mt-3" style="display: none" id="debugInfo">
+  <div class="alert alert-info">
+    <h6>Debug Information:</h6>
+    <p>Sessions count: <span id="sessionsCount">0</span></p>
+    <p>Bookings count: <span id="bookingsCount">0</span></p>
+    <details>
+      <summary>Raw Sessions Data</summary>
+      <pre id="rawSessionsData"></pre>
+    </details>
+    <details>
+      <summary>Raw Bookings Data</summary>
+      <pre id="rawBookingsData"></pre>
+    </details>
+  </div>
+</div>
+
 <style>
   .legend-box {
     width: 20px;
@@ -576,36 +593,61 @@
 </style>
 
 <script>
-  // Convert Flask session data to JavaScript
-  const sessions = [
-    {% for session in sessions %}
-    {
-      id: "{{ session[0] }}",
-      title: "{{ session[1] | safe }}",
-      description: "{{ session[2] or 'No description provided' | safe }}",
-      startTime: new Date("{{ session[3].isoformat() }}"),
-      endTime: new Date("{{ session[4].isoformat() }}"),
-      maxCapacity: "{{ session[5] }}",
-      currentBookings: "{{ session[6] }}"
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ];
+  // Enable debug mode temporarily
+  const DEBUG_MODE = true;
 
-  // Convert Flask booking data to JavaScript
-  const userBookings = [
-    {% for booking in bookings %}
-    {
-      id: "{{ booking[0] }}",
-      sessionId: "{{ booking[4] if booking|length > 4 else '' }}",
-      title: "{{ booking[1] | safe }}",
-      startTime: new Date("{{ booking[2].isoformat() }}"),
-      endTime: new Date("{{ booking[3].isoformat() }}")
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ];
+  // Convert Flask session data to JavaScript with proper error handling
+  let sessions = [];
+  let userBookings = [];
 
-  console.log('Sessions:', sessions);
-  console.log('User Bookings:', userBookings);
+  try {
+    // Parse sessions data safely
+    const sessionsData = {{ sessions | tojson | safe }};
+    console.log('Raw sessions data from Flask:', sessionsData);
+
+    if (Array.isArray(sessionsData)) {
+      sessions = sessionsData.map(session => ({
+        id: String(session.id || ''),
+        title: String(session.title || 'Untitled Session'),
+        description: String(session.description || 'No description provided'),
+        startTime: session.start_time ? new Date(session.start_time) : new Date(),
+        endTime: session.end_time ? new Date(session.end_time) : new Date(),
+        maxCapacity: parseInt(session.max_capacity) || 0,
+        currentBookings: parseInt(session.current_bookings) || 0
+      }));
+    }
+
+    // Parse bookings data safely
+    const bookingsData = {{ bookings | tojson | safe }};
+    console.log('Raw bookings data from Flask:', bookingsData);
+
+    if (Array.isArray(bookingsData)) {
+      userBookings = bookingsData.map(booking => ({
+        id: String(booking.id || ''),
+        sessionId: String(booking.session_id || booking.id || ''),
+        title: String(booking.title || 'Untitled Session'),
+        startTime: booking.start_time ? new Date(booking.start_time) : new Date(),
+        endTime: booking.end_time ? new Date(booking.end_time) : new Date()
+      }));
+    }
+
+  } catch (error) {
+    console.error('Error parsing session/booking data:', error);
+    sessions = [];
+    userBookings = [];
+  }
+
+  console.log('Processed Sessions:', sessions);
+  console.log('Processed User Bookings:', userBookings);
+
+  // Update debug info if enabled
+  if (DEBUG_MODE) {
+    document.getElementById('debugInfo').style.display = 'block';
+    document.getElementById('sessionsCount').textContent = sessions.length;
+    document.getElementById('bookingsCount').textContent = userBookings.length;
+    document.getElementById('rawSessionsData').textContent = JSON.stringify(sessions, null, 2);
+    document.getElementById('rawBookingsData').textContent = JSON.stringify(userBookings, null, 2);
+  }
 
   let currentWeekStart = new Date();
   currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay());
@@ -673,6 +715,8 @@
 
     // Filter time slots to only include those with sessions
     const activeSessions = getActiveSessionsForWeek(weekDates);
+    console.log('Active sessions for week:', activeSessions);
+
     const activeTimeSlots = timeSlots.filter(timeSlot => {
       return activeSessions.some(session => {
         const sessionHour = session.startTime.getHours();
@@ -916,7 +960,10 @@
   });
 
   // Initial render
-  document.addEventListener('DOMContentLoaded', renderCalendar);
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, starting calendar render...');
+    renderCalendar();
+  });
 </script>
 
 {% endblock %}
