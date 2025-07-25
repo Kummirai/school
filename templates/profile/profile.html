@@ -17,6 +17,34 @@
                     <p class="text-muted">{{ current_user.role|capitalize }}</p>
                 </div>
             </div>
+            <div class="card mt-4">
+                <div class="card-header">
+                    Subscription Details
+                </div>
+                <div class="card-body">
+                    {% if subscription %}
+                        <p><strong>Plan:</strong> {{ subscription.plan_name }}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge bg-{% if subscription.is_active %}success{% else %}warning text-dark{% endif %}">
+                                {{ "Active" if subscription.is_active else "Inactive" }}
+                            </span>
+                        </p>
+                        <p><strong>Payment Status:</strong>
+                            <span class="badge bg-{% if subscription.payment_status == 'paid' %}success{% else %}warning text-dark{% endif %}">
+                                {{ subscription.payment_status|capitalize }}
+                            </span>
+                        </p>
+                        {% if subscription.amount_due > 0 %}
+                            <p class="text-danger"><strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.amount_due) }}</p>
+                            <a href="{{ url_for('subscribe.subscribe') }}" class="btn btn-sm btn-danger">Renew Now</a>
+                        {% endif %}
+                        <p class="small text-muted mt-2">Expires on: {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
+                    {% else %}
+                        <p>No active subscription found.</p>
+                        <a href="{{ url_for('subscribe.subscribe') }}" class="btn btn-sm btn-primary">View Plans</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         <div class="col-md-8">
             <div class="card">

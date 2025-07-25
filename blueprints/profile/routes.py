@@ -2,13 +2,15 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from models import User, get_db_connection
 from werkzeug.security import generate_password_hash
+from blueprints.subscriptions.utils import get_user_subscription_details
 
 profile_bp = Blueprint('profile', __name__, template_folder='templates')
 
 @profile_bp.route('/profile')
 @login_required
 def profile():
-    return render_template('profile/profile.html', user=current_user)
+    subscription = get_user_subscription_details(current_user.id)
+    return render_template('profile/profile.html', user=current_user, subscription=subscription)
 
 @profile_bp.route('/profile/update', methods=['POST'])
 @login_required

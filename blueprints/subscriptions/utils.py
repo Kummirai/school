@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models import get_db_connection
+import psycopg2.extras
 
 subscriptions_bp = Blueprint('subscriptions', __name__)
 
@@ -50,6 +51,46 @@ def get_user_subscription(user_id):
     subscription = cur.fetchone()
     cur.close()
     conn.close()
+    return subscription
+
+def get_user_subscription_details(user_id):
+    """
+    Fetches detailed information about a user's latest subscription,
+    including the plan name, price, status, and amount due if pending.
+    """
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    subscription = None
+    try:
+        cur.execute("""
+            SELECT
+                s.id,
+                p.name AS plan_name,
+                p.price,
+                s.start_date,
+                s.end_date,
+                s.is_active,
+                s.payment_status
+            FROM subscriptions s
+            JOIN subscription_plans p ON s.plan_id = p.id
+            WHERE s.user_id = %s
+            ORDER BY s.end_date DESC
+            LIMIT 1
+        """, (user_id,))
+        subscription = cur.fetchone()
+        if subscription:
+            if subscription['payment_status'] == 'pending':
+                subscription['amount_due'] = subscription['price']
+            else:
+                subscription['amount_due'] = 0
+    except Exception as e:
+        print(f"Error fetching user subscription details: {e}")
+        subscription = None
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
     return subscription
 
 
