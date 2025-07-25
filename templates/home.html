@@ -96,9 +96,9 @@
 
         <h1 class="display-4 fw-bold mb-3">
           {% if 'username' in session %} Welcome back,
-          <span class="text-danger">{{ session['username'] }}</span>
+          <span class="text-warning">{{ session['username'] }}</span>
           {% if subscription and subscription[5] %}
-          <div class="mt-2 fs-5 text-success">
+          <div class="mt-2 fs-5 text-white">
             <i class="bi bi-check-circle-fill"></i> {{ subscription[1] }} Plan
             Active!
           </div>
@@ -127,7 +127,7 @@
           %} <i class="bi bi-stars text-danger"></i> Build. Solve. Discover.
           <span class="text-danger">Code</span>,
           <span class="text-warning">calculate</span>,
-          <span class="text-dark">experiment</span>
+          <span class="text-white">experiment</span>
           {% else %}
           <i class="bi bi-stars text-warning"></i>Expert coding and
           <strong class="text-danger">schoolwork</strong>,
@@ -159,7 +159,7 @@
             <i class="bi bi-laptop me-2"></i> Continue Learning
           </a>
           <a
-            class="btn btn-outline-dark btn-lg px-4 py-3 fw-bold"
+            class="btn btn-dark btn-lg px-4 py-3 fw-bold"
             href="{{ url_for('tutorials.studyguides_home') }}"
           >
             <i class="bi bi-flask me-2"></i> Practice Exercises
