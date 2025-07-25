@@ -4,7 +4,7 @@
   class="hero-section position-relative overflow-hidden"
   style="
     background: linear-gradient(
-        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0.96),
         rgba(255, 255, 255, 0.98)
       ),
       url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -18,55 +18,69 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   "
 >
-  <!-- Floating Code Elements -->
-  <div class="code-snippets">
-    <!-- HTML Snippet -->
-    <div class="code-snippet html-snippet" style="top: 15%; left: 5%">
-      <div class="card border-warning shadow-sm" style="width: 220px">
+  <!-- Animated Code Snippets -->
+  <div class="code-snippets position-absolute w-100 h-100" style="z-index: 1">
+    <!-- HTML -->
+    <div
+      class="code-snippet html-snippet position-absolute animate-float"
+      style="top: 15%; left: 5%"
+    >
+      <div class="card border-warning shadow" style="width: 220px">
         <div class="card-header bg-warning text-dark py-1 px-2 fw-bold">
           HTML
         </div>
-        <div class="card-body p-2 bg-dark text-white" style="font-size: 0.7rem">
+        <div
+          class="card-body p-2 bg-dark text-white"
+          style="font-size: 0.75rem"
+        >
           <pre class="mb-0"><code>&lt;div class="alert alert-danger"&gt;
-  &lt;strong&gt;Science!&lt;/strong&gt; 
+  &lt;strong&gt;Science!&lt;/strong&gt;
   E=mc²
 &lt;/div&gt;</code></pre>
         </div>
       </div>
     </div>
 
-    <!-- Python Snippet -->
-    <div class="code-snippet python-snippet" style="top: 25%; right: 5%">
-      <div class="card border-danger shadow-sm" style="width: 250px">
+    <!-- Python -->
+    <div
+      class="code-snippet python-snippet position-absolute animate-float"
+      style="top: 25%; right: 5%"
+    >
+      <div class="card border-danger shadow" style="width: 250px">
         <div class="card-header bg-danger text-white py-1 px-2 fw-bold">
           Python
         </div>
-        <div class="card-body p-2 bg-dark text-white" style="font-size: 0.7rem">
+        <div
+          class="card-body p-2 bg-dark text-white"
+          style="font-size: 0.75rem"
+        >
           <pre class="mb-0"><code>def quadratic_formula(a, b, c):
-    discriminant = b**2 - 4*a*c
-    return (-b + discriminant**0.5)/(2*a)</code></pre>
+  discriminant = b**2 - 4*a*c
+  return (-b + discriminant**0.5)/(2*a)</code></pre>
         </div>
       </div>
     </div>
 
-    <!-- JavaScript Snippet -->
-    <div class="code-snippet js-snippet" style="bottom: 20%; left: 10%">
-      <div class="card border-dark shadow-sm" style="width: 280px">
+    <!-- JavaScript -->
+    <div
+      class="code-snippet js-snippet position-absolute animate-float"
+      style="bottom: 20%; left: 10%"
+    >
+      <div class="card border-dark shadow" style="width: 280px">
         <div class="card-header bg-dark text-white py-1 px-2 fw-bold">
           JavaScript
         </div>
-        <div class="card-body p-2 bg-white text-dark" style="font-size: 0.7rem">
+        <div
+          class="card-body p-2 bg-white text-dark"
+          style="font-size: 0.75rem"
+        >
           <pre class="mb-0"><code>function plotGraph() {
   const ctx = document.getElementById('graph');
   new Chart(ctx, {
     type: 'line',
     data: {
       labels: ['Algebra', 'Geometry', 'Calculus'],
-      datasets: [{
-        label: 'Your Progress',
-        data: [75, 60, 85],
-        borderColor: '#dc3545'
-      }]
+      datasets: [{ label: 'Progress', data: [75, 60, 85], borderColor: '#dc3545' }]
     }
   });
 }</code></pre>
@@ -75,95 +89,95 @@
     </div>
   </div>
 
+  <!-- Main Content -->
   <div class="container py-5 position-relative" style="z-index: 2">
     <div class="row align-items-center">
-      <div class="col-lg-8 mx-auto text-center">
+      <div class="col-lg-10 mx-auto text-center">
         <div class="mb-4">
           <i class="bi bi-mortarboard-fill display-1 text-danger"></i>
         </div>
-        <h1 class="display-4 fw-bold mb-4">
+
+        <h1 class="display-4 fw-bold mb-3">
           {% if 'username' in session %} Welcome back,
           <span class="text-danger">{{ session['username'] }}</span>
           {% if subscription and subscription[5] %}
-          <div class="mt-3 fs-5 text-success">
-            <i class="bi bi-check-circle-fill"></i> Your {{ subscription[1] }}
-            plan is active!
+          <div class="mt-2 fs-5 text-success">
+            <i class="bi bi-check-circle-fill"></i> {{ subscription[1] }} Plan
+            Active!
           </div>
           {% elif subscription and not subscription[5] %}
-          <div class="mt-3 fs-5 text-warning">
+          <div class="mt-2 fs-5 text-warning">
             <i class="bi bi-exclamation-triangle-fill"></i> Renew your {{
-            subscription[1] }} for full access
+            subscription[1] }} plan
           </div>
-          {% elif 'role' in session and session['role'] == 'student' %}
-          <div class="mt-3 fs-5 text-dark">
-            <i class="bi bi-rocket-fill"></i> Unlock premium coding tutorials
+          {% elif session['role'] == 'student' %}
+          <div class="mt-2 fs-5 text-dark">
+            <i class="bi bi-rocket-fill"></i> Unlock exclusive coding
+            challenges!
           </div>
           {% endif %} {% else %}
-          <span
-            class="display-4 fs-3 fw-normal"
-            style="display: block; margin-bottom: 10px"
-            >MiltonTutor+</span
-          >
+          <span class="fs-1 d-block fw-normal">MiltonTutor+</span>
           <span class="text-danger">Code</span>
           <span class="text-warning">And</span>
           <span class="text-dark">Academics</span>
           {% endif %}
         </h1>
 
-        <p class="lead mb-5 fs-5" style="max-width: 700px; margin: 0 auto">
+        <p class="lead mb-5 fs-5 mx-auto" style="max-width: 720px">
           {% if 'username' in session and session['role'] == 'parent' %}
-          <i class="bi bi-stars text-warning"></i> Helping your child excel in
-          STEM subjects {% elif 'username' in session and session['role'] !=
-          'parent' %} <i class="bi bi-stars text-danger"></i> Learn by doing:
-          <span class="text-danger">code</span>,
+          <i class="bi bi-stars text-warning"></i> Supporting your child's STEM
+          journey {% elif 'username' in session and session['role'] != 'parent'
+          %} <i class="bi bi-stars text-danger"></i> Build. Solve. Discover.
+          <span class="text-danger">Code</span>,
           <span class="text-warning">calculate</span>,
           <span class="text-dark">experiment</span>
           {% else %}
-          <i class="bi bi-stars text-warning"></i> The complete platform for
+          <i class="bi bi-stars text-warning"></i> A creative space for future
           <strong class="text-danger">coders</strong>,
           <strong class="text-warning">mathematicians</strong>, and
           <strong class="text-dark">scientists</strong>
           {% endif %}
         </p>
 
+        <!-- CTA Buttons -->
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           {% if 'username' not in session %}
           <a
             href="{{ url_for('home.signup') }}"
             class="btn btn-danger btn-lg px-4 py-3 fw-bold"
           >
-            <i class="bi bi-code-slash me-2"></i>Get Started
+            <i class="bi bi-code-slash me-2"></i> Get Started
           </a>
           <a
             class="btn btn-warning btn-lg px-4 py-3 fw-bold"
             href="{{ url_for('tutorials.tutorials_home') }}"
-            role="button"
           >
-            <i class="bi bi-play me-2"></i>Free Video Tutorials
+            <i class="bi bi-play-circle me-2"></i> Watch Tutorials
           </a>
           {% else %}
           <a
             class="btn btn-danger btn-lg px-4 py-3 fw-bold"
             href="{{ url_for('tutorials.tutorials_home') }}"
-            role="button"
           >
-            <i class="bi bi-laptop me-2"></i>Continue Learning
+            <i class="bi bi-laptop me-2"></i> Continue Learning
           </a>
           <a
             class="btn btn-outline-dark btn-lg px-4 py-3 fw-bold"
-            href="{{url_for('tutorials.studyguides_home')}}"
-            role="button"
+            href="{{ url_for('tutorials.studyguides_home') }}"
           >
-            <i class="bi bi-flask me-2"></i>Practice Exercises
+            <i class="bi bi-flask me-2"></i> Practice Exercises
           </a>
           {% endif %}
         </div>
 
+        <!-- Scroll Prompt -->
         <div class="mt-5 pt-4">
           <a href="#features" class="text-decoration-none text-dark">
             <div class="d-flex flex-column align-items-center">
-              <span class="mb-2">Explore Tutorials</span>
-              <i class="bi bi-chevron-down fs-4 animate-bounce text-danger"></i>
+              <span class="mb-2">Explore More</span>
+              <i
+                class="bi bi-chevron-double-down fs-4 animate-bounce text-danger"
+              ></i>
             </div>
           </a>
         </div>
@@ -171,6 +185,43 @@
     </div>
   </div>
 </section>
+
+<!-- Add animations -->
+<style>
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .code-snippets {
+      display: none !important;
+    }
+  }
+</style>
 
 <section id="courses" class="py-5 bg-light">
   <div class="container py-5">
@@ -869,140 +920,6 @@
     {% endif %}
   </div>
 </section>
-
-<style>
-  .hero-section {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
-  .animate-bounce {
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-
-    40% {
-      transform: translateY(-20px);
-    }
-
-    60% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .feature-card {
-    transition: transform 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-10px);
-  }
-
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-  }
-</style>
-<style>
-  .hero-section {
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
-  .code-snippets {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .code-snippet {
-    position: absolute;
-    opacity: 0.9;
-    animation: float 8s ease-in-out infinite;
-  }
-
-  .html-snippet {
-    animation-delay: 0s;
-  }
-  .python-snippet {
-    animation-delay: 2s;
-  }
-  .js-snippet {
-    animation-delay: 4s;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0) rotate(-2deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(2deg);
-    }
-  }
-
-  .animate-bounce {
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-15px);
-    }
-    60% {
-      transform: translateY(-7px);
-    }
-  }
-
-  .btn {
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .code-snippet {
-      transform: scale(0.8);
-    }
-  }
-  @media (max-width: 768px) {
-    .code-snippets {
-      display: none;
-    }
-  }
-</style>
 
 <script>
   // Simple animation to highlight code snippets
