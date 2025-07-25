@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block title %}{{ subject_data.title }}{% endblock
 %} {% block content %}
-<!-- Hero Section -->
 <section
   class="hero-section"
   style="
@@ -49,7 +48,6 @@
   </div>
 </section>
 
-<!-- Course Overview -->
 <section class="py-5 bg-light">
   <div class="container py-5">
     <div class="row align-items-center">
@@ -138,7 +136,6 @@
   </div>
 </section>
 
-<!-- Terms Navigation -->
 <section class="py-3 bg-white sticky-top shadow-sm">
   <div class="container">
     <div class="d-flex overflow-auto py-2">
@@ -154,7 +151,6 @@
   </div>
 </section>
 
-<!-- Lessons Section by Term -->
 <section id="lessons" class="py-5">
   <div class="container py-5">
     <div class="text-center mb-5">
@@ -197,7 +193,7 @@
                 {% for lesson in unit.lessons %} {% set lesson_index =
                 loop.index0 %}
                 <a
-                  href="{{ url_for('grades.view_grade7_lesson', term_idx=term_index, unit_idx=unit_index, lesson_idx=lesson_index) }}"
+                  href="{{ url_for('grades.view_grade7_english_lesson', term_idx=term_index, unit_idx=unit_index, lesson_idx=lesson_index) }}"
                   class="list-group-item list-group-item-action"
                 >
                   <i class="{{ lesson.icon }} text-{{ unit.color }} me-2"></i>
@@ -215,7 +211,6 @@
   </div>
 </section>
 
-<!-- Practice Resources -->
 <section id="resources" class="py-5 bg-light">
   <div class="container py-5">
     <div class="text-center mb-5">

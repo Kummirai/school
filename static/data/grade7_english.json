@@ -30,7 +30,7 @@
           "color": "primary",
           "lessons": [
             {
-              "title": "1.1 Nouns & Pronouns",
+              "title": "1.1 Nouns",
               "duration": "25 min",
               "icon": "bi bi-card-text",
               "description": "Master the different types of nouns and pronouns, including proper usage and common errors.",
@@ -38,13 +38,13 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/grade_7/english/1_1_nouns_pronouns_content.html",
+                  "path": "html/grade_7/english/1_1_nouns_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/example1",
+                  "path": "https://www.youtube.com/embed/9Uw74gENZgQ",
                   "icon": "play-circle"
                 },
                 {
@@ -56,7 +56,7 @@
               ]
             },
             {
-              "title": "1.2 Adjectives & Adverbs",
+              "title": "1.2 Pronouns",
               "duration": "20 min",
               "icon": "bi bi-fonts",
               "description": "Learn to identify and properly use adjectives and adverbs to enhance your writing.",
@@ -64,13 +64,16 @@
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/grade_7/english/1_2_adjectives_adverbs_content.html",
+                  "path": "html/grade_7/english/chapter_2/1_2_pronouns_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/example2",
+                  "path": [
+                    "https://www.youtube.com/embed/PjhpcGoQPhk",
+                    "https://www.youtube.com/embed/x_QdZgZcoVY"
+                  ],
                   "icon": "play-circle"
                 }
               ]

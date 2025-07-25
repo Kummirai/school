@@ -1,0 +1,1888 @@
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Comprehensive Pronouns Tutorial</title>
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<style>
+  .nav-pills .nav-link.active {
+    background-color: #6c757d;
+  }
+  .progress {
+    height: 25px;
+    margin-bottom: 20px;
+  }
+  .progress-bar {
+    background-color: #6c757d;
+  }
+  .quiz-option {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .quiz-option:hover {
+    background-color: #f8f9fa;
+  }
+  .correct {
+    background-color: #d4edda !important;
+  }
+  .incorrect {
+    background-color: #f8d7da !important;
+  }
+  .section {
+    display: none;
+  }
+  .section.active {
+    display: block;
+  }
+  .example-card {
+    border-left: 4px solid #6c757d;
+  }
+  .drag-item {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    cursor: move;
+  }
+  .drop-zone {
+    min-height: 50px;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  .pronoun-table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .pronoun-table th,
+  .pronoun-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+  }
+  .pronoun-table th {
+    background-color: #f8f9fa;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card shadow">
+        <div class="card-header bg-white">
+          <h1 class="text-center mb-4">Comprehensive Pronouns Tutorial</h1>
+          <ul class="nav nav-pills nav-fill mb-3" id="lessonTabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" data-section="intro"
+                >Introduction</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="types"
+                >Types of Pronouns</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="quiz">Quiz</a>
+            </li>
+          </ul>
+          <div class="progress">
+            <div
+              class="progress-bar"
+              id="progressBar"
+              role="progressbar"
+              style="width: 33%"
+              aria-valuenow="33"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              33%
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Introduction Section -->
+          <div class="section active" id="intro-section">
+            <h2 class="mb-4">What is a Pronoun?</h2>
+            <div class="alert alert-info">
+              A <strong>pronoun</strong> is defined as a
+              <strong>word used to substitute nouns</strong> or a word used
+              <strong>instead of a noun</strong>.
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="card example-card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Example</h5>
+                    <p>
+                      "Missy lost <strong>her</strong> umbrella on
+                      <strong>her</strong> way home. <strong>She</strong> felt
+                      sad because <strong>it</strong> was a gift for
+                      <strong>her</strong> mother."
+                    </p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <strong>her/she</strong> refers to
+                        <strong>Missy</strong>
+                      </li>
+                      <li class="list-group-item">
+                        <strong>it</strong> refers to <strong>umbrella</strong>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Why Pronouns Matter</h5>
+                    <p>Without pronouns, sentences become repetitive:</p>
+                    <p>
+                      <em
+                        >"Missy lost Missy's umbrella on Missy's way home. Missy
+                        felt sad because the umbrella was a gift from Missy's
+                        mother."</em
+                      >
+                    </p>
+                    <p>Pronouns make language more efficient and natural.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-body">
+                <h5 class="card-title">Practice: Identify Pronouns</h5>
+                <p>Underline all pronouns in this sentence:</p>
+                <p id="pronounSentence">
+                  When Sarah saw her brother at the park, she called to him and
+                  they played together with their dog.
+                </p>
+                <div class="btn-group" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="underlineWord('her')"
+                  >
+                    her
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="underlineWord('she')"
+                  >
+                    she
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="underlineWord('him')"
+                  >
+                    him
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="underlineWord('they')"
+                  >
+                    they
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="underlineWord('their')"
+                  >
+                    their
+                  </button>
+                </div>
+                <button
+                  class="btn btn-secondary mt-3"
+                  onclick="checkPronounSelection()"
+                >
+                  Check Answer
+                </button>
+                <div id="pronounFeedback" class="mt-2"></div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary next-section" data-next="types">
+                Continue to Types of Pronouns
+              </button>
+            </div>
+          </div>
+
+          <!-- Types of Pronouns Section -->
+          <div class="section" id="types-section">
+            <h2 class="mb-4">Types of Pronouns</h2>
+
+            <div class="accordion" id="pronounTypesAccordion">
+              <!-- Personal Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#personalPronouns"
+                  >
+                    1. Personal Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="personalPronouns"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Refer to a specific person or thing and show
+                      <strong>gender, number, and person</strong>.
+                    </p>
+
+                    <h5 class="mt-3">Subject vs. Object Pronouns</h5>
+                    <table class="pronoun-table">
+                      <tr>
+                        <th>Type</th>
+                        <th>Singular</th>
+                        <th>Plural</th>
+                      </tr>
+                      <tr>
+                        <td><strong>Subject</strong> (does the action)</td>
+                        <td>I, you, he, she, it</td>
+                        <td>we, you, they</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Object</strong> (receives action)</td>
+                        <td>me, you, him, her, it</td>
+                        <td>us, you, them</td>
+                      </tr>
+                    </table>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h6>Subject Pronoun Examples</h6>
+                            <ul>
+                              <li>"<strong>He</strong> gave it to Soam."</li>
+                              <li>
+                                "<strong>We</strong> agreed to hold a party."
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h6>Object Pronoun Examples</h6>
+                            <ul>
+                              <li>"He gave <strong>it</strong> to Soam."</li>
+                              <li>
+                                "The principal called <strong>them</strong>."
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice: Personal Pronouns</h5>
+                        <p>
+                          Replace the underlined nouns with appropriate
+                          pronouns:
+                        </p>
+                        <div class="mb-3">
+                          <p>
+                            "<u>John</u> gave <u>Mary</u> a book that belonged
+                            to <u>John and Mary</u>."
+                          </p>
+                          <div class="input-group mb-2">
+                            <span class="input-group-text">John →</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="personal1"
+                            />
+                          </div>
+                          <div class="input-group mb-2">
+                            <span class="input-group-text">Mary →</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="personal2"
+                            />
+                          </div>
+                          <div class="input-group">
+                            <span class="input-group-text"
+                              >John and Mary →</span
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="personal3"
+                            />
+                          </div>
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkPersonalBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="personalFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Intensive/Reflexive Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#intensiveReflexive"
+                  >
+                    2. Intensive & Reflexive Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="intensiveReflexive"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Both end with <strong>-self</strong> or
+                      <strong>-selves</strong> but have different functions.
+                    </p>
+
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h6>Intensive Pronouns</h6>
+                            <p>
+                              Emphasize the subject (can be removed without
+                              changing meaning)
+                            </p>
+                            <ul>
+                              <li>
+                                "The principal <strong>herself</strong> gave
+                                awards."
+                              </li>
+                              <li>
+                                "I <strong>myself</strong> saw him copying."
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h6>Reflexive Pronouns</h6>
+                            <p>
+                              Show action reflects back on subject (necessary
+                              for meaning)
+                            </p>
+                            <ul>
+                              <li>"I hurt <strong>myself</strong>."</li>
+                              <li>"She looked at <strong>herself</strong>."</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Practice: Intensive vs. Reflexive
+                        </h5>
+                        <p>
+                          Identify whether each underlined pronoun is intensive
+                          or reflexive:
+                        </p>
+                        <div class="list-group">
+                          <div class="list-group-item">
+                            <p>
+                              "The president <u>himself</u> announced the news."
+                            </p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intensive-reflexive-btn"
+                                data-type="intensive"
+                              >
+                                Intensive
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intensive-reflexive-btn"
+                                data-type="reflexive"
+                              >
+                                Reflexive
+                              </button>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <p>
+                              "They prepared <u>themselves</u> for the exam."
+                            </p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intensive-reflexive-btn"
+                                data-type="intensive"
+                              >
+                                Intensive
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intensive-reflexive-btn"
+                                data-type="reflexive"
+                              >
+                                Reflexive
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="intensiveReflexiveFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Demonstrative Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#demonstrative"
+                  >
+                    3. Demonstrative Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="demonstrative"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Point out specific persons or things:
+                      <strong>this, that, these, those</strong>.
+                    </p>
+
+                    <table class="pronoun-table">
+                      <tr>
+                        <th>Distance</th>
+                        <th>Singular</th>
+                        <th>Plural</th>
+                      </tr>
+                      <tr>
+                        <td>Near</td>
+                        <td>this</td>
+                        <td>these</td>
+                      </tr>
+                      <tr>
+                        <td>Far</td>
+                        <td>that</td>
+                        <td>those</td>
+                      </tr>
+                    </table>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Practice: Demonstrative Pronouns
+                        </h5>
+                        <p>
+                          Fill in the blanks with the correct demonstrative
+                          pronoun:
+                        </p>
+                        <div class="mb-2">
+                          <p>
+                            "<span id="demo1">______</span> is my favorite
+                            book." (pointing to a book in your hand)
+                          </p>
+                          <select
+                            class="form-select form-select-sm demo-select"
+                            id="demoSelect1"
+                          >
+                            <option value="">Select</option>
+                            <option value="this">this</option>
+                            <option value="that">that</option>
+                            <option value="these">these</option>
+                            <option value="those">those</option>
+                          </select>
+                        </div>
+                        <div class="mb-2">
+                          <p>
+                            "Look at <span id="demo2">______</span> birds in the
+                            sky!" (birds flying far away)
+                          </p>
+                          <select
+                            class="form-select form-select-sm demo-select"
+                            id="demoSelect2"
+                          >
+                            <option value="">Select</option>
+                            <option value="this">this</option>
+                            <option value="that">that</option>
+                            <option value="these">these</option>
+                            <option value="those">those</option>
+                          </select>
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkDemoBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="demoFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Possessive Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#possessive"
+                  >
+                    4. Possessive Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="possessive"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Show ownership:
+                      <strong>mine, yours, his, hers, ours, theirs</strong>.
+                    </p>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Practice: Possessive Pronouns
+                        </h5>
+                        <p>
+                          Match each sentence with the correct possessive
+                          pronoun:
+                        </p>
+
+                        <div class="drag-drop-area mb-3">
+                          <div class="drop-zone" id="possessiveDropZone"></div>
+                        </div>
+
+                        <div class="drag-items">
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            data-answer="mine"
+                            >This book is _____.</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            data-answer="yours"
+                            >Is this pencil _____?</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            data-answer="hers"
+                            >The red car is _____.</span
+                          >
+                        </div>
+
+                        <div class="mt-3">
+                          <select class="form-select" id="possessiveSelect">
+                            <option value="">Select a pronoun to use</option>
+                            <option value="mine">mine</option>
+                            <option value="yours">yours</option>
+                            <option value="hers">hers</option>
+                            <option value="his">his</option>
+                            <option value="ours">ours</option>
+                            <option value="theirs">theirs</option>
+                          </select>
+                          <button
+                            class="btn btn-sm btn-secondary mt-2"
+                            id="checkPossessiveBtn"
+                          >
+                            Check Answers
+                          </button>
+                        </div>
+                        <div id="possessiveFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interrogative Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#interrogative"
+                  >
+                    5. Interrogative Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="interrogative"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Used to ask questions:
+                      <strong>who, whom, whose, which, what</strong>.
+                    </p>
+
+                    <table class="pronoun-table">
+                      <tr>
+                        <th>Pronoun</th>
+                        <th>Usage</th>
+                      </tr>
+                      <tr>
+                        <td>who</td>
+                        <td>subject (people)</td>
+                      </tr>
+                      <tr>
+                        <td>whom</td>
+                        <td>object (people)</td>
+                      </tr>
+                      <tr>
+                        <td>whose</td>
+                        <td>possession</td>
+                      </tr>
+                      <tr>
+                        <td>which</td>
+                        <td>choice between options</td>
+                      </tr>
+                      <tr>
+                        <td>what</td>
+                        <td>general questions</td>
+                      </tr>
+                    </table>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Practice: Interrogative Pronouns
+                        </h5>
+                        <p>
+                          Complete each question with the correct interrogative
+                          pronoun:
+                        </p>
+
+                        <div class="mb-3">
+                          <label for="interrogative1" class="form-label"
+                            >"______ is coming to the party?" (asking about the
+                            subject)</label
+                          >
+                          <select class="form-select" id="interrogative1">
+                            <option value="">Select</option>
+                            <option value="who">who</option>
+                            <option value="whom">whom</option>
+                            <option value="whose">whose</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="interrogative2" class="form-label"
+                            >"To ______ should I address this letter?" (asking
+                            about the object)</label
+                          >
+                          <select class="form-select" id="interrogative2">
+                            <option value="">Select</option>
+                            <option value="who">who</option>
+                            <option value="whom">whom</option>
+                            <option value="whose">whose</option>
+                          </select>
+                        </div>
+
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkInterrogativeBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="interrogativeFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Relative Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#relative"
+                  >
+                    6. Relative Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="relative"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Connect clauses to nouns:
+                      <strong>who, whom, whose, which, that</strong>.
+                    </p>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice: Relative Pronouns</h5>
+                        <p>Combine these sentences using relative pronouns:</p>
+
+                        <div class="mb-3">
+                          <p>"The man is my uncle. The man lives next door."</p>
+                          <div class="input-group">
+                            <span class="input-group-text">Combined:</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="relative1"
+                              placeholder="The man who lives next door is my uncle"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <p>"I found the keys. You lost the keys."</p>
+                          <div class="input-group">
+                            <span class="input-group-text">Combined:</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="relative2"
+                              placeholder="I found the keys that you lost"
+                            />
+                          </div>
+                        </div>
+
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkRelativeBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="relativeFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Indefinite Pronouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#indefinite"
+                  >
+                    7. Indefinite Pronouns
+                  </button>
+                </h2>
+                <div
+                  id="indefinite"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#pronounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Refer to non-specific persons or things:
+                      <strong>all, some, any, several, none</strong>.
+                    </p>
+
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Practice: Indefinite Pronouns
+                        </h5>
+                        <p>
+                          Identify whether the indefinite pronoun is singular or
+                          plural:
+                        </p>
+
+                        <div class="list-group">
+                          <div class="list-group-item">
+                            <p>
+                              "<strong>All</strong> of the students are here."
+                            </p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary indefinite-btn"
+                                data-type="singular"
+                              >
+                                Singular
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary indefinite-btn"
+                                data-type="plural"
+                              >
+                                Plural
+                              </button>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <p>
+                              "<strong>Some</strong> of the cake was eaten."
+                            </p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary indefinite-btn"
+                                data-type="singular"
+                              >
+                                Singular
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary indefinite-btn"
+                                data-type="plural"
+                              >
+                                Plural
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="indefiniteFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary next-section" data-next="quiz">
+                Continue to Quiz
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz Section -->
+          <div class="section" id="quiz-section">
+            <h2 class="mb-4">Pronoun Knowledge Quiz</h2>
+            <div class="alert alert-info">
+              Test your understanding of pronouns with this 10-question quiz!
+            </div>
+
+            <form id="pronounQuiz">
+              <!-- Question 1 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 1</h5>
+                  <p class="card-text">
+                    Which type of pronoun is used in this sentence: "<u>She</u>
+                    gave the book to him."?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q1a"
+                      >Personal (subject)</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q1b"
+                      >Personal (object)</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q1c">Possessive</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 2</h5>
+                  <p class="card-text">
+                    Identify the intensive pronoun: "The mayor
+                    <u>himself</u> attended the ceremony."
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q2a">mayor</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q2b">himself</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q2c">ceremony</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 3 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 3</h5>
+                  <p class="card-text">
+                    Choose the correct demonstrative pronoun: "Look at _____
+                    birds over there!"
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q3a">this</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q3b">that</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q3c">those</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 4 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 4</h5>
+                  <p class="card-text">
+                    Which sentence uses a possessive pronoun correctly?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q4a"
+                      >This book is my.</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q4b"
+                      >This book is mine.</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q4c"
+                      >This book is me.</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 5 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 5</h5>
+                  <p class="card-text">
+                    Choose the correct interrogative pronoun: "To _____ did you
+                    give the letter?"
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q5a">who</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q5b">whom</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q5c">whose</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 6 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 6</h5>
+                  <p class="card-text">
+                    Identify the relative pronoun: "The book <u>that</u> you
+                    lent me was fascinating."
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q6a">book</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q6b">that</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q6c">me</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 7 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 7</h5>
+                  <p class="card-text">
+                    Which indefinite pronoun is plural in this context: "<u
+                      >Some</u
+                    >
+                    of the cookies are missing."?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q7a">Some</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q7b">of</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q7c">are</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 8 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 8</h5>
+                  <p class="card-text">
+                    What is the antecedent of "it" in: "The cat chased its tail
+                    until it got dizzy."?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q8a">cat</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q8b">tail</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q8c">dizzy</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 9 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 9</h5>
+                  <p class="card-text">
+                    Which sentence uses a reflexive pronoun correctly?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q9a"
+                      >She gave herself a break.</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q9b"
+                      >Herself took a break.</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q9c"
+                      >The break was given to herself.</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 10 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 10</h5>
+                  <p class="card-text">
+                    What type of pronoun is "whose" in: "Whose book is this?"
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q10a"
+                      >Interrogative</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q10b">Relative</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q10c"
+                      >Demonstrative</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                  Submit Quiz
+                </button>
+              </div>
+            </form>
+
+            <div
+              id="quizResults"
+              class="mt-4 text-center"
+              style="display: none"
+            >
+              <h4>Quiz Results</h4>
+              <div class="display-4" id="quizScore">0</div>
+              <p id="quizFeedback"></p>
+              <button class="btn btn-secondary" id="retryQuizBtn">
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Navigation between sections
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tab navigation
+    const tabs = document.querySelectorAll("#lessonTabs .nav-link");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", function (e) {
+        e.preventDefault();
+        const sectionId = this.getAttribute("data-section") + "-section";
+
+        // Update active tab
+        tabs.forEach((t) => t.classList.remove("active"));
+        this.classList.add("active");
+
+        // Show selected section
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(sectionId).classList.add("active");
+
+        // Update progress bar
+        updateProgressBar(sectionId);
+      });
+    });
+
+    // Next section buttons
+    document.querySelectorAll(".next-section").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const nextSectionId = this.getAttribute("data-next") + "-section";
+
+        // Update active tab
+        tabs.forEach((t) => t.classList.remove("active"));
+        document
+          .querySelector(`[data-section="${this.getAttribute("data-next")}"]`)
+          .classList.add("active");
+
+        // Show next section
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(nextSectionId).classList.add("active");
+
+        // Update progress bar
+        updateProgressBar(nextSectionId);
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      });
+    });
+
+    // Update progress bar based on current section
+    function updateProgressBar(sectionId) {
+      let progress = 33;
+      switch (sectionId) {
+        case "types-section":
+          progress = 66;
+          break;
+        case "quiz-section":
+          progress = 100;
+          break;
+      }
+      document.getElementById("progressBar").style.width = progress + "%";
+      document
+        .getElementById("progressBar")
+        .setAttribute("aria-valuenow", progress);
+      document.getElementById("progressBar").textContent = progress + "%";
+    }
+
+    // Underline words in pronoun identification exercise
+    window.underlineWord = function (word) {
+      const sentence = document.getElementById("pronounSentence");
+      const text = sentence.innerHTML;
+      const regex = new RegExp(`(^|\\s)(${word})(\\s|$)`, "gi");
+
+      if (text.includes(`<u>${word}</u>`)) {
+        // If already underlined, remove underline
+        sentence.innerHTML = text.replace(`<u>${word}</u>`, word);
+      } else {
+        // Underline the word
+        sentence.innerHTML = text.replace(regex, `$1<u>$2</u>$3`);
+      }
+    };
+
+    // Check pronoun selection
+    window.checkPronounSelection = function () {
+      const sentence = document.getElementById("pronounSentence").innerHTML;
+      const correctPronouns = ["her", "she", "him", "they", "their"];
+      let correctCount = 0;
+
+      correctPronouns.forEach((pronoun) => {
+        if (sentence.includes(`<u>${pronoun}</u>`)) {
+          correctCount++;
+        }
+      });
+
+      let feedback = "";
+      if (correctCount === correctPronouns.length) {
+        feedback =
+          '<div class="alert alert-success">Perfect! You identified all the pronouns.</div>';
+      } else if (correctCount > 0) {
+        feedback = `<div class="alert alert-warning">You found ${correctCount} out of ${correctPronouns.length} pronouns. The pronouns are: her, she, him, they, their.</div>`;
+      } else {
+        feedback =
+          '<div class="alert alert-danger">No pronouns identified. Try again!</div>';
+      }
+
+      document.getElementById("pronounFeedback").innerHTML = feedback;
+    };
+
+    // Personal pronouns practice
+    document
+      .getElementById("checkPersonalBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          personal1: "he",
+          personal2: "her",
+          personal3: "them",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 3; i++) {
+          const input = document.getElementById(`personal${i}`);
+          const userAnswer = input.value.trim().toLowerCase();
+
+          if (userAnswer === answers[`personal${i}`]) {
+            correctCount++;
+            input.classList.add("is-valid");
+            input.classList.remove("is-invalid");
+          } else {
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 3) {
+          feedback =
+            '<div class="alert alert-success">All correct! Well done.</div>';
+        } else {
+          feedback = `<div class="alert alert-warning">You got ${correctCount} out of 3 correct. The answers are: he, her, them.</div>`;
+        }
+
+        document.getElementById("personalFeedback").innerHTML = feedback;
+      });
+
+    // Intensive/Reflexive pronouns practice
+    document.querySelectorAll(".intensive-reflexive-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const questionDiv = this.closest(".list-group-item");
+        const correctType =
+          this.getAttribute("data-type") === "intensive"
+            ? "intensive"
+            : "reflexive";
+        const isCorrect =
+          (questionDiv
+            .querySelector("p")
+            .textContent.includes("himself announced") &&
+            correctType === "intensive") ||
+          (questionDiv
+            .querySelector("p")
+            .textContent.includes("themselves for") &&
+            correctType === "reflexive");
+
+        // Reset all buttons for this question
+        questionDiv
+          .querySelectorAll(".intensive-reflexive-btn")
+          .forEach((b) => {
+            b.classList.remove("active", "btn-success", "btn-danger");
+          });
+
+        // Style based on correctness
+        if (isCorrect) {
+          this.classList.add("active", "btn-success");
+          questionDiv.querySelector(".feedback").innerHTML =
+            '<div class="alert alert-success">Correct!</div>';
+        } else {
+          this.classList.add("active", "btn-danger");
+          const correctAnswer = questionDiv
+            .querySelector("p")
+            .textContent.includes("himself announced")
+            ? "Intensive"
+            : "Reflexive";
+          questionDiv.querySelector(
+            ".feedback"
+          ).innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswer}.</div>`;
+        }
+      });
+    });
+
+    // Demonstrative pronouns practice
+    document
+      .getElementById("checkDemoBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          demoSelect1: "this",
+          demoSelect2: "those",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 2; i++) {
+          const select = document.getElementById(`demoSelect${i}`);
+          const userAnswer = select.value;
+
+          if (userAnswer === answers[`demoSelect${i}`]) {
+            correctCount++;
+            select.classList.add("is-valid");
+            select.classList.remove("is-invalid");
+          } else {
+            select.classList.add("is-invalid");
+            select.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 2) {
+          feedback =
+            '<div class="alert alert-success">Correct! Well done.</div>';
+        } else {
+          feedback =
+            '<div class="alert alert-warning">Not quite right. Remember: "this" for singular/near, "those" for plural/far.</div>';
+        }
+
+        document.getElementById("demoFeedback").innerHTML = feedback;
+      });
+
+    // Drag and drop functionality
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.textContent);
+      ev.dataTransfer.setData("source", ev.target.parentElement.className);
+      ev.dataTransfer.setElement(ev.target);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const source = ev.dataTransfer.getData("source");
+      const element = ev.dataTransfer.getElement();
+
+      // Only allow drop if coming from drag-items
+      if (source.includes("drag-items")) {
+        // Remove from previous location if it was in a drop zone
+        if (element.parentElement.classList.contains("drop-zone")) {
+          element.remove();
+        }
+
+        // Create new element in drop zone
+        const newElement = document.createElement("span");
+        newElement.className = "drag-item";
+        newElement.textContent = data;
+        newElement.setAttribute("draggable", "true");
+        newElement.addEventListener("dragstart", drag);
+
+        ev.target.appendChild(newElement);
+      }
+    }
+
+    // Initialize drop zones
+    document.querySelectorAll(".drop-zone").forEach((zone) => {
+      zone.addEventListener("drop", drop);
+      zone.addEventListener("dragover", allowDrop);
+    });
+
+    // Possessive pronouns practice
+    document
+      .getElementById("checkPossessiveBtn")
+      .addEventListener("click", function () {
+        const sentenceItem = document.querySelector(
+          "#possessiveDropZone .drag-item"
+        );
+        const selectedPronoun =
+          document.getElementById("possessiveSelect").value;
+
+        if (!sentenceItem || !selectedPronoun) {
+          document.getElementById("possessiveFeedback").innerHTML =
+            '<div class="alert alert-warning">Please drag a sentence and select a pronoun.</div>';
+          return;
+        }
+
+        const correctAnswer = sentenceItem.getAttribute("data-answer");
+        let feedback = "";
+
+        if (selectedPronoun === correctAnswer) {
+          feedback =
+            '<div class="alert alert-success">Correct! Well done.</div>';
+        } else {
+          feedback = `<div class="alert alert-danger">Incorrect. The correct pronoun is "${correctAnswer}".</div>`;
+        }
+
+        document.getElementById("possessiveFeedback").innerHTML = feedback;
+      });
+
+    // Interrogative pronouns practice
+    document
+      .getElementById("checkInterrogativeBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          interrogative1: "who",
+          interrogative2: "whom",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 2; i++) {
+          const select = document.getElementById(`interrogative${i}`);
+          const userAnswer = select.value;
+
+          if (userAnswer === answers[`interrogative${i}`]) {
+            correctCount++;
+            select.classList.add("is-valid");
+            select.classList.remove("is-invalid");
+          } else {
+            select.classList.add("is-invalid");
+            select.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 2) {
+          feedback =
+            '<div class="alert alert-success">Correct! Well done.</div>';
+        } else {
+          feedback =
+            '<div class="alert alert-warning">Remember: "who" for subject, "whom" for object.</div>';
+        }
+
+        document.getElementById("interrogativeFeedback").innerHTML = feedback;
+      });
+
+    // Relative pronouns practice
+    document
+      .getElementById("checkRelativeBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          relative1: "the man who lives next door is my uncle",
+          relative2: "i found the keys that you lost",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 2; i++) {
+          const input = document.getElementById(`relative${i}`);
+          const userAnswer = input.value.trim().toLowerCase();
+
+          if (userAnswer.includes(answers[`relative${i}`])) {
+            correctCount++;
+            input.classList.add("is-valid");
+            input.classList.remove("is-invalid");
+          } else {
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 2) {
+          feedback =
+            '<div class="alert alert-success">Correct! Well done.</div>';
+        } else {
+          feedback =
+            '<div class="alert alert-warning">Almost there! Check your relative pronouns.</div>';
+        }
+
+        document.getElementById("relativeFeedback").innerHTML = feedback;
+      });
+
+    // Indefinite pronouns practice
+    document.querySelectorAll(".indefinite-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const questionDiv = this.closest(".list-group-item");
+        const selectedType = this.getAttribute("data-type");
+        const isCorrect =
+          (questionDiv.textContent.includes("students") &&
+            selectedType === "plural") ||
+          (questionDiv.textContent.includes("cake") &&
+            selectedType === "singular");
+
+        // Reset all buttons for this question
+        questionDiv.querySelectorAll(".indefinite-btn").forEach((b) => {
+          b.classList.remove("active", "btn-success", "btn-danger");
+        });
+
+        // Style based on correctness
+        if (isCorrect) {
+          this.classList.add("active", "btn-success");
+          questionDiv.querySelector(".feedback").innerHTML =
+            '<div class="alert alert-success">Correct!</div>';
+        } else {
+          this.classList.add("active", "btn-danger");
+          const correctAnswer = questionDiv.textContent.includes("students")
+            ? "Plural"
+            : "Singular";
+          questionDiv.querySelector(
+            ".feedback"
+          ).innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswer}.</div>`;
+        }
+      });
+    });
+
+    // Quiz functionality
+    document
+      .getElementById("pronounQuiz")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const answers = {
+          q1: "a",
+          q2: "b",
+          q3: "c",
+          q4: "b",
+          q5: "b",
+          q6: "b",
+          q7: "a",
+          q8: "a",
+          q9: "a",
+          q10: "a",
+        };
+
+        let score = 0;
+        const totalQuestions = Object.keys(answers).length;
+
+        // Check each question
+        for (let i = 1; i <= totalQuestions; i++) {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const questionDiv = document.querySelector(
+            `.quiz-question:nth-child(${i})`
+          );
+          const feedbackDiv = questionDiv.querySelector(".feedback");
+
+          if (selected) {
+            if (selected.value === answers[`q${i}`]) {
+              score++;
+              feedbackDiv.innerHTML =
+                '<div class="alert alert-success">Correct!</div>';
+            } else {
+              feedbackDiv.innerHTML =
+                '<div class="alert alert-danger">Incorrect.</div>';
+            }
+          } else {
+            feedbackDiv.innerHTML =
+              '<div class="alert alert-warning">No answer selected.</div>';
+          }
+        }
+
+        // Show results
+        const percentage = Math.round((score / totalQuestions) * 100);
+        document.getElementById("quizScore").textContent = `${percentage}%`;
+
+        let feedback = "";
+        if (percentage >= 80) {
+          feedback =
+            "Excellent work! You have a strong understanding of pronouns.";
+        } else if (percentage >= 60) {
+          feedback =
+            "Good job! You understand most pronoun concepts but could use some review.";
+        } else {
+          feedback =
+            "Keep practicing! Review the lesson materials and try again.";
+        }
+
+        document.getElementById("quizFeedback").textContent = feedback;
+        document.getElementById("quizResults").style.display = "block";
+
+        // Scroll to results
+        document
+          .getElementById("quizResults")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+    // Retry quiz button
+    document
+      .getElementById("retryQuizBtn")
+      .addEventListener("click", function () {
+        // Reset quiz
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+          radio.checked = false;
+        });
+
+        document.querySelectorAll(".feedback").forEach((fb) => {
+          fb.innerHTML = "";
+        });
+
+        document.getElementById("quizResults").style.display = "none";
+
+        // Scroll to top of quiz
+        document
+          .getElementById("quiz-section")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+    // Helper function to get dragged element
+    DataTransfer.prototype.getElement = function () {
+      return document.querySelector(
+        `.drag-item:contains('${this.getData("text")}')`
+      );
+    };
+  });
+</script>

@@ -1,0 +1,1725 @@
+<title>Comprehensive Nouns Tutorial</title>
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<style>
+  .nav-pills .nav-link.active {
+    background-color: #6c757d;
+  }
+  .progress {
+    height: 25px;
+    margin-bottom: 20px;
+  }
+  .progress-bar {
+    background-color: #6c757d;
+  }
+  .quiz-option {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .quiz-option:hover {
+    background-color: #f8f9fa;
+  }
+  .correct {
+    background-color: #d4edda !important;
+  }
+  .incorrect {
+    background-color: #f8d7da !important;
+  }
+  .section {
+    display: none;
+  }
+  .section.active {
+    display: block;
+  }
+  .example-card {
+    border-left: 4px solid #6c757d;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card shadow">
+        <div class="card-header bg-white">
+          <h1 class="text-center mb-4">Comprehensive Nouns Tutorial</h1>
+          <ul class="nav nav-pills nav-fill mb-3" id="lessonTabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" data-section="intro"
+                >Introduction</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="types"
+                >Types of Nouns</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="functions"
+                >Functions</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="quiz">Quiz</a>
+            </li>
+          </ul>
+          <div class="progress">
+            <div
+              class="progress-bar"
+              id="progressBar"
+              role="progressbar"
+              style="width: 25%"
+              aria-valuenow="25"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              25%
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Introduction Section -->
+          <div class="section active" id="intro-section">
+            <h2 class="mb-4">What is a Noun?</h2>
+            <div class="alert alert-info">
+              A <strong>noun</strong> is fundamentally defined as
+              <strong
+                >a word or a name used to identify a person, a place, an object,
+                an idea, and more</strong
+              >.
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="card example-card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Examples of Nouns</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <strong>Person:</strong> boy, Alex, teacher
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Place:</strong> room, school, London
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Object:</strong> book, computer, iPhone
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Idea:</strong> love, hope, anger
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Identify the Nouns</h5>
+                    <p class="card-text">
+                      Type all the nouns you can find in this sentence:
+                    </p>
+                    <p>
+                      <em
+                        >"Susan took her dog Max to the park in London where
+                        they played with a ball."</em
+                      >
+                    </p>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="nounInput"
+                        placeholder="Enter nouns separated by commas"
+                      />
+                      <small class="form-text text-muted"
+                        >Example: girl, city, happiness</small
+                      >
+                    </div>
+                    <button class="btn btn-secondary mt-2" id="checkNounsBtn">
+                      Check Answer
+                    </button>
+                    <div id="nounFeedback" class="mt-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn btn-primary next-section" data-next="types">
+                Continue to Types of Nouns
+              </button>
+            </div>
+          </div>
+
+          <!-- Types of Nouns Section -->
+          <div class="section" id="types-section">
+            <h2 class="mb-4">Types of Nouns</h2>
+
+            <div class="accordion" id="nounTypesAccordion">
+              <!-- Common vs Proper -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#commonProper"
+                  >
+                    1. Common Nouns vs. Proper Nouns
+                  </button>
+                </h2>
+                <div
+                  id="commonProper"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#nounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5>Common Nouns</h5>
+                        <p>
+                          General or everyday names for people, places, or
+                          things.
+                        </p>
+                        <ul class="list-group">
+                          <li class="list-group-item">computer</li>
+                          <li class="list-group-item">school</li>
+                          <li class="list-group-item">teacher</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h5>Proper Nouns</h5>
+                        <p>
+                          Specific names that always begin with a capital
+                          letter.
+                        </p>
+                        <ul class="list-group">
+                          <li class="list-group-item">iMac</li>
+                          <li class="list-group-item">
+                            GCF International Christian School
+                          </li>
+                          <li class="list-group-item">Teacher Adam</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice</h5>
+                        <p>Classify these nouns:</p>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div
+                              class="drag-drop-area common-drop"
+                              ondrop="drop(event)"
+                              ondragover="allowDrop(event)"
+                            >
+                              <h6>Common Nouns</h6>
+                              <div class="drop-zone"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div
+                              class="drag-drop-area proper-drop"
+                              ondrop="drop(event)"
+                              ondragover="allowDrop(event)"
+                            >
+                              <h6>Proper Nouns</h6>
+                              <div class="drop-zone"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="drag-items mt-3">
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >city</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >London</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >dog</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >Max</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >teacher</span
+                          >
+                          <span
+                            class="drag-item"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            >Mr. Johnson</span
+                          >
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary mt-2"
+                          id="checkDragDrop"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="dragDropFeedback"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Count vs Non-count -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#countNoncount"
+                  >
+                    2. Count Nouns vs. Non-Count Nouns
+                  </button>
+                </h2>
+                <div
+                  id="countNoncount"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#nounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5>Count Nouns</h5>
+                        <p>Can be counted and have plural forms.</p>
+                        <ul class="list-group">
+                          <li class="list-group-item">dog → dogs</li>
+                          <li class="list-group-item">book → books</li>
+                          <li class="list-group-item">house → houses</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h5>Non-Count Nouns</h5>
+                        <p>Cannot be counted and don't have plural forms.</p>
+                        <ul class="list-group">
+                          <li class="list-group-item">water (not waters)</li>
+                          <li class="list-group-item">happiness</li>
+                          <li class="list-group-item">information</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice</h5>
+                        <p>
+                          Select whether these nouns are countable or
+                          uncountable:
+                        </p>
+                        <div class="list-group">
+                          <div class="list-group-item">
+                            <p class="mb-1">rice</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="rice"
+                                data-type="noncount"
+                              >
+                                Uncountable
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="rice"
+                                data-type="count"
+                              >
+                                Countable
+                              </button>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <p class="mb-1">book</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="book"
+                                data-type="noncount"
+                              >
+                                Uncountable
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="book"
+                                data-type="count"
+                              >
+                                Countable
+                              </button>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <p class="mb-1">information</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="information"
+                                data-type="noncount"
+                              >
+                                Uncountable
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary count-btn"
+                                data-noun="information"
+                                data-type="count"
+                              >
+                                Countable
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="countFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Concrete vs Abstract -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#concreteAbstract"
+                  >
+                    3. Concrete Nouns vs. Abstract Nouns
+                  </button>
+                </h2>
+                <div
+                  id="concreteAbstract"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#nounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5>Concrete Nouns</h5>
+                        <p>Can be perceived by the senses.</p>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            apple (can see, touch, taste)
+                          </li>
+                          <li class="list-group-item">thunder (can hear)</li>
+                          <li class="list-group-item">
+                            flower (can see, smell, touch)
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h5>Abstract Nouns</h5>
+                        <p>Intangible concepts and feelings.</p>
+                        <ul class="list-group">
+                          <li class="list-group-item">love</li>
+                          <li class="list-group-item">fear</li>
+                          <li class="list-group-item">justice</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice</h5>
+                        <p>Identify the abstract noun in this sentence:</p>
+                        <p>
+                          <em
+                            >"The kindness of strangers often brings hope to
+                            people in difficult situations."</em
+                          >
+                        </p>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="abstractChoice"
+                            id="abstractChoice1"
+                            value="strangers"
+                          />
+                          <label class="form-check-label" for="abstractChoice1"
+                            >strangers</label
+                          >
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="abstractChoice"
+                            id="abstractChoice2"
+                            value="kindness"
+                          />
+                          <label class="form-check-label" for="abstractChoice2"
+                            >kindness</label
+                          >
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="abstractChoice"
+                            id="abstractChoice3"
+                            value="situations"
+                          />
+                          <label class="form-check-label" for="abstractChoice3"
+                            >situations</label
+                          >
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary mt-2"
+                          id="checkAbstractBtn"
+                        >
+                          Check Answer
+                        </button>
+                        <div id="abstractFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Collective Nouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collectiveNouns"
+                  >
+                    4. Collective Nouns
+                  </button>
+                </h2>
+                <div
+                  id="collectiveNouns"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#nounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>Names used for groups of people, animals, or things.</p>
+                    <ul class="list-group">
+                      <li class="list-group-item">a team of players</li>
+                      <li class="list-group-item">a flock of birds</li>
+                      <li class="list-group-item">a bunch of bananas</li>
+                    </ul>
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice</h5>
+                        <p>Complete these collective noun phrases:</p>
+                        <div class="mb-2">
+                          <label for="collective1" class="form-label"
+                            >a
+                            <input
+                              type="text"
+                              class="form-control form-control-sm d-inline-block"
+                              style="width: 100px"
+                              id="collective1"
+                            />
+                            of lions</label
+                          >
+                        </div>
+                        <div class="mb-2">
+                          <label for="collective2" class="form-label"
+                            >a
+                            <input
+                              type="text"
+                              class="form-control form-control-sm d-inline-block"
+                              style="width: 100px"
+                              id="collective2"
+                            />
+                            of ships</label
+                          >
+                        </div>
+                        <div class="mb-2">
+                          <label for="collective3" class="form-label"
+                            >a
+                            <input
+                              type="text"
+                              class="form-control form-control-sm d-inline-block"
+                              style="width: 100px"
+                              id="collective3"
+                            />
+                            of grapes</label
+                          >
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkCollectiveBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="collectiveFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compound Nouns -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#compoundNouns"
+                  >
+                    5. Compound Nouns
+                  </button>
+                </h2>
+                <div
+                  id="compoundNouns"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#nounTypesAccordion"
+                >
+                  <div class="accordion-body">
+                    <p>Two or more words that create a single noun.</p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h6>One word</h6>
+                        <ul class="list-group">
+                          <li class="list-group-item">toothbrush</li>
+                          <li class="list-group-item">rainfall</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        <h6>Hyphenated</h6>
+                        <ul class="list-group">
+                          <li class="list-group-item">son-in-law</li>
+                          <li class="list-group-item">jack-in-the-box</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        <h6>Separate words</h6>
+                        <ul class="list-group">
+                          <li class="list-group-item">bus stop</li>
+                          <li class="list-group-item">credit card</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card mt-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Practice</h5>
+                        <p>Combine these words to form compound nouns:</p>
+                        <div class="mb-2">
+                          <span class="compound-part">tooth</span> +
+                          <span class="compound-part">brush</span> =
+                          <input
+                            type="text"
+                            class="form-control form-control-sm d-inline-block"
+                            style="width: 150px"
+                            id="compound1"
+                          />
+                        </div>
+                        <div class="mb-2">
+                          <span class="compound-part">mother</span> +
+                          <span class="compound-part">in</span> +
+                          <span class="compound-part">law</span> =
+                          <input
+                            type="text"
+                            class="form-control form-control-sm d-inline-block"
+                            style="width: 150px"
+                            id="compound2"
+                          />
+                        </div>
+                        <div class="mb-2">
+                          <span class="compound-part">swimming</span> +
+                          <span class="compound-part">pool</span> =
+                          <input
+                            type="text"
+                            class="form-control form-control-sm d-inline-block"
+                            style="width: 150px"
+                            id="compound3"
+                          />
+                        </div>
+                        <button
+                          class="btn btn-sm btn-secondary"
+                          id="checkCompoundBtn"
+                        >
+                          Check Answers
+                        </button>
+                        <div id="compoundFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button
+                class="btn btn-primary next-section"
+                data-next="functions"
+              >
+                Continue to Functions of Nouns
+              </button>
+            </div>
+          </div>
+
+          <!-- Functions of Nouns Section -->
+          <div class="section" id="functions-section">
+            <h2 class="mb-4">Functions of Nouns in a Sentence</h2>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">1. Subject</h5>
+                    <p class="card-text">
+                      The doer of the action or what is being described.
+                    </p>
+                    <p>
+                      <em
+                        >"The <strong>students</strong> went on a field
+                        trip."</em
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">2. Subject Complement</h5>
+                    <p class="card-text">
+                      Completes the meaning after a linking verb.
+                    </p>
+                    <p>
+                      <em>"Andrew is a <strong>musician</strong>."</em>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">3. Direct Object</h5>
+                    <p class="card-text">Receives the action directly.</p>
+                    <p>
+                      <em>"Matthew composed the <strong>song</strong>."</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">4. Indirect Object</h5>
+                    <p class="card-text">
+                      Indicates to whom/for whom the action is done.
+                    </p>
+                    <p>
+                      <em
+                        >"Mark sent his <strong>mother</strong> a package."</em
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">5. Appositive</h5>
+                    <p class="card-text">Gives details about another noun.</p>
+                    <p>
+                      <em
+                        >"My hometown, <strong>Manchester</strong>, is known for
+                        football."</em
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">6. Object of Preposition</h5>
+                    <p class="card-text">Follows a preposition.</p>
+                    <p>
+                      <em
+                        >"John left his keys on the <strong>table</strong>."</em
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-body">
+                <h5 class="card-title">Practice</h5>
+                <p>
+                  Identify the function of the underlined noun in each sentence:
+                </p>
+                <div class="list-group">
+                  <div class="list-group-item">
+                    <p>"The <u>teacher</u> gave the students an assignment."</p>
+                    <select class="form-select form-select-sm function-select">
+                      <option value="">Select function</option>
+                      <option value="subject">Subject</option>
+                      <option value="direct">Direct Object</option>
+                      <option value="indirect">Indirect Object</option>
+                    </select>
+                  </div>
+                  <div class="list-group-item">
+                    <p>"Sarah bought her <u>brother</u> a gift."</p>
+                    <select class="form-select form-select-sm function-select">
+                      <option value="">Select function</option>
+                      <option value="subject">Subject</option>
+                      <option value="direct">Direct Object</option>
+                      <option value="indirect">Indirect Object</option>
+                    </select>
+                  </div>
+                  <div class="list-group-item">
+                    <p>"They visited the <u>museum</u> on Saturday."</p>
+                    <select class="form-select form-select-sm function-select">
+                      <option value="">Select function</option>
+                      <option value="subject">Subject</option>
+                      <option value="direct">Direct Object</option>
+                      <option value="indirect">Indirect Object</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-secondary mt-2" id="checkFunctionBtn">
+                  Check Answers
+                </button>
+                <div id="functionFeedback" class="mt-2"></div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary next-section" data-next="quiz">
+                Continue to Quiz
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz Section -->
+          <div class="section" id="quiz-section">
+            <h2 class="mb-4">Noun Knowledge Quiz</h2>
+            <div class="alert alert-info">
+              Test your understanding of nouns with this 10-question quiz!
+            </div>
+
+            <form id="nounQuiz">
+              <!-- Question 1 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 1</h5>
+                  <p class="card-text">Which of these is a proper noun?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q1a">city</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q1b">Paris</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q1c">building</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 2</h5>
+                  <p class="card-text">Which noun is uncountable?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q2a">book</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q2b">water</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q2c">chair</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 3 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 3</h5>
+                  <p class="card-text">Identify the abstract noun:</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q3a">table</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q3b">freedom</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q3c">computer</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 4 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 4</h5>
+                  <p class="card-text">
+                    What is the collective noun for a group of lions?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q4a">flock</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q4b">pride</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q4c">herd</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 5 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 5</h5>
+                  <p class="card-text">Which is a compound noun?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q5a">toothbrush</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q5b">tooth</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q5c">brush</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 6 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 6</h5>
+                  <p class="card-text">
+                    In "The cat chased the mouse," what is the function of
+                    "mouse"?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q6a">Subject</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q6b"
+                      >Direct Object</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q6c"
+                      >Indirect Object</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 7 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 7</h5>
+                  <p class="card-text">
+                    Which noun can function as both countable and uncountable?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q7a">water</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q7b">paper</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q7c">happiness</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 8 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 8</h5>
+                  <p class="card-text">
+                    In "She gave her friend advice," what is the function of
+                    "friend"?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q8a">Subject</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q8b"
+                      >Direct Object</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q8c"
+                      >Indirect Object</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 9 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 9</h5>
+                  <p class="card-text">Which is NOT a proper noun?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q9a">iPhone</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q9b"
+                      >Eiffel Tower</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q9c">mountain</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <!-- Question 10 -->
+              <div class="card mb-3 quiz-question">
+                <div class="card-body">
+                  <h5 class="card-title">Question 10</h5>
+                  <p class="card-text">
+                    In "My brother, a doctor, lives in Chicago," what is the
+                    function of "doctor"?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q10a">Subject</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q10b"
+                      >Appositive</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q10c"
+                      >Direct Object</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                  Submit Quiz
+                </button>
+              </div>
+            </form>
+
+            <div
+              id="quizResults"
+              class="mt-4 text-center"
+              style="display: none"
+            >
+              <h4>Quiz Results</h4>
+              <div class="display-4" id="quizScore">0</div>
+              <p id="quizFeedback"></p>
+              <button class="btn btn-secondary" id="retryQuizBtn">
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Navigation between sections
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tab navigation
+    const tabs = document.querySelectorAll("#lessonTabs .nav-link");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", function (e) {
+        e.preventDefault();
+        const sectionId = this.getAttribute("data-section") + "-section";
+
+        // Update active tab
+        tabs.forEach((t) => t.classList.remove("active"));
+        this.classList.add("active");
+
+        // Show selected section
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(sectionId).classList.add("active");
+
+        // Update progress bar
+        updateProgressBar(sectionId);
+      });
+    });
+
+    // Next section buttons
+    document.querySelectorAll(".next-section").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const nextSectionId = this.getAttribute("data-next") + "-section";
+
+        // Update active tab
+        tabs.forEach((t) => t.classList.remove("active"));
+        document
+          .querySelector(`[data-section="${this.getAttribute("data-next")}"]`)
+          .classList.add("active");
+
+        // Show next section
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(nextSectionId).classList.add("active");
+
+        // Update progress bar
+        updateProgressBar(nextSectionId);
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      });
+    });
+
+    // Update progress bar based on current section
+    function updateProgressBar(sectionId) {
+      let progress = 25;
+      switch (sectionId) {
+        case "types-section":
+          progress = 50;
+          break;
+        case "functions-section":
+          progress = 75;
+          break;
+        case "quiz-section":
+          progress = 100;
+          break;
+      }
+      document.getElementById("progressBar").style.width = progress + "%";
+      document
+        .getElementById("progressBar")
+        .setAttribute("aria-valuenow", progress);
+      document.getElementById("progressBar").textContent = progress + "%";
+    }
+
+    // Check nouns in sentence
+    document
+      .getElementById("checkNounsBtn")
+      .addEventListener("click", function () {
+        const userInput = document
+          .getElementById("nounInput")
+          .value.toLowerCase();
+        const correctNouns = ["susan", "dog", "max", "park", "london", "ball"];
+        const userNouns = userInput
+          .split(",")
+          .map((n) => n.trim().toLowerCase());
+
+        let correctCount = 0;
+        let feedback = "";
+
+        userNouns.forEach((noun) => {
+          if (correctNouns.includes(noun)) {
+            correctCount++;
+          }
+        });
+
+        if (
+          correctCount === correctNouns.length &&
+          userNouns.length === correctNouns.length
+        ) {
+          feedback =
+            '<div class="alert alert-success">Perfect! You found all the nouns.</div>';
+        } else if (correctCount > 0) {
+          feedback = `<div class="alert alert-warning">You found ${correctCount} out of ${correctNouns.length} nouns. The nouns are: Susan, dog, Max, park, London, ball.</div>`;
+        } else {
+          feedback =
+            '<div class="alert alert-danger">No nouns identified. The nouns in the sentence are: Susan, dog, Max, park, London, ball.</div>';
+        }
+
+        document.getElementById("nounFeedback").innerHTML = feedback;
+      });
+
+    // Drag and drop functionality for common vs proper nouns
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.textContent);
+      ev.dataTransfer.setData("source", ev.target.parentElement.className);
+      ev.dataTransfer.setElement(ev.target);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const source = ev.dataTransfer.getData("source");
+      const element = ev.dataTransfer.getElement();
+
+      // Only allow drop if coming from drag-items
+      if (source.includes("drag-items")) {
+        // Remove from previous location if it was in a drop zone
+        if (element.parentElement.classList.contains("drop-zone")) {
+          element.remove();
+        }
+
+        // Create new element in drop zone
+        const newElement = document.createElement("span");
+        newElement.className = "drag-item";
+        newElement.textContent = data;
+        newElement.setAttribute("draggable", "true");
+        newElement.addEventListener("dragstart", drag);
+
+        ev.target.querySelector(".drop-zone").appendChild(newElement);
+      }
+    }
+
+    // Check drag and drop answers
+    document
+      .getElementById("checkDragDrop")
+      .addEventListener("click", function () {
+        const commonDrop = document.querySelector(".common-drop .drop-zone");
+        const properDrop = document.querySelector(".proper-drop .drop-zone");
+
+        const commonAnswers = ["city", "dog", "teacher"];
+        const properAnswers = ["London", "Max", "Mr. Johnson"];
+
+        let commonCorrect = 0;
+        let properCorrect = 0;
+
+        // Check common nouns
+        commonDrop.querySelectorAll(".drag-item").forEach((item) => {
+          if (commonAnswers.includes(item.textContent)) {
+            commonCorrect++;
+            item.classList.add("correct");
+          } else {
+            item.classList.add("incorrect");
+          }
+        });
+
+        // Check proper nouns
+        properDrop.querySelectorAll(".drag-item").forEach((item) => {
+          if (properAnswers.includes(item.textContent)) {
+            properCorrect++;
+            item.classList.add("correct");
+          } else {
+            item.classList.add("incorrect");
+          }
+        });
+
+        let feedback = "";
+        if (
+          commonCorrect === commonAnswers.length &&
+          properCorrect === properAnswers.length
+        ) {
+          feedback =
+            '<div class="alert alert-success">Perfect! All nouns are correctly classified.</div>';
+        } else {
+          feedback = `<div class="alert alert-warning">You got ${commonCorrect} out of ${commonAnswers.length} common nouns and ${properCorrect} out of ${properAnswers.length} proper nouns correct.</div>`;
+        }
+
+        document.getElementById("dragDropFeedback").innerHTML = feedback;
+      });
+
+    // Countable vs uncountable nouns
+    document.querySelectorAll(".count-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const noun = this.getAttribute("data-noun");
+        const selectedType = this.getAttribute("data-type");
+
+        // Reset all buttons for this noun
+        document
+          .querySelectorAll(`.count-btn[data-noun="${noun}"]`)
+          .forEach((b) => {
+            b.classList.remove("active", "btn-success", "btn-danger");
+          });
+
+        // Check answer
+        const correctType = noun === "book" ? "count" : "noncount";
+        if (selectedType === correctType) {
+          this.classList.add("active", "btn-success");
+          document.getElementById("countFeedback").innerHTML =
+            '<div class="alert alert-success">Correct!</div>';
+        } else {
+          this.classList.add("active", "btn-danger");
+          document.getElementById(
+            "countFeedback"
+          ).innerHTML = `<div class="alert alert-danger">Incorrect. "${noun}" is ${
+            correctType === "count" ? "countable" : "uncountable"
+          }.</div>`;
+        }
+      });
+    });
+
+    // Abstract noun identification
+    document
+      .getElementById("checkAbstractBtn")
+      .addEventListener("click", function () {
+        const selected = document.querySelector(
+          'input[name="abstractChoice"]:checked'
+        );
+        let feedback = "";
+
+        if (!selected) {
+          feedback =
+            '<div class="alert alert-warning">Please select an answer.</div>';
+        } else if (selected.value === "kindness") {
+          feedback =
+            '<div class="alert alert-success">Correct! "Kindness" is an abstract noun.</div>';
+        } else {
+          feedback =
+            '<div class="alert alert-danger">Incorrect. "Kindness" is the abstract noun in this sentence.</div>';
+        }
+
+        document.getElementById("abstractFeedback").innerHTML = feedback;
+      });
+
+    // Collective nouns practice
+    document
+      .getElementById("checkCollectiveBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          collective1: "pride",
+          collective2: "fleet",
+          collective3: "bunch",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 3; i++) {
+          const input = document.getElementById(`collective${i}`);
+          const userAnswer = input.value.trim().toLowerCase();
+
+          if (userAnswer === answers[`collective${i}`]) {
+            correctCount++;
+            input.classList.add("is-valid");
+            input.classList.remove("is-invalid");
+          } else {
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 3) {
+          feedback =
+            '<div class="alert alert-success">All correct! Well done.</div>';
+        } else {
+          feedback = `<div class="alert alert-warning">You got ${correctCount} out of 3 correct. The answers are: pride of lions, fleet of ships, bunch of grapes.</div>`;
+        }
+
+        document.getElementById("collectiveFeedback").innerHTML = feedback;
+      });
+
+    // Compound nouns practice
+    document
+      .getElementById("checkCompoundBtn")
+      .addEventListener("click", function () {
+        const answers = {
+          compound1: "toothbrush",
+          compound2: "mother-in-law",
+          compound3: "swimming pool",
+        };
+
+        let correctCount = 0;
+        let feedback = "";
+
+        for (let i = 1; i <= 3; i++) {
+          const input = document.getElementById(`compound${i}`);
+          const userAnswer = input.value.trim().toLowerCase();
+
+          if (userAnswer === answers[`compound${i}`].toLowerCase()) {
+            correctCount++;
+            input.classList.add("is-valid");
+            input.classList.remove("is-invalid");
+          } else {
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+          }
+        }
+
+        if (correctCount === 3) {
+          feedback =
+            '<div class="alert alert-success">Perfect! All compound nouns are correct.</div>';
+        } else {
+          feedback = `<div class="alert alert-warning">You got ${correctCount} out of 3 correct. The answers are: toothbrush, mother-in-law, swimming pool.</div>`;
+        }
+
+        document.getElementById("compoundFeedback").innerHTML = feedback;
+      });
+
+    // Noun functions practice
+    document
+      .getElementById("checkFunctionBtn")
+      .addEventListener("click", function () {
+        const questions = [
+          { correct: "subject" }, // teacher
+          { correct: "indirect" }, // brother
+          { correct: "direct" }, // museum
+        ];
+
+        const selects = document.querySelectorAll(".function-select");
+        let correctCount = 0;
+        let feedback = "";
+
+        selects.forEach((select, index) => {
+          if (select.value === questions[index].correct) {
+            correctCount++;
+            select.classList.add("is-valid");
+            select.classList.remove("is-invalid");
+          } else {
+            select.classList.add("is-invalid");
+            select.classList.remove("is-valid");
+          }
+        });
+
+        if (correctCount === 3) {
+          feedback =
+            '<div class="alert alert-success">Excellent! All answers are correct.</div>';
+        } else {
+          feedback = `<div class="alert alert-warning">You got ${correctCount} out of 3 correct. The functions are: subject, indirect object, direct object.</div>`;
+        }
+
+        document.getElementById("functionFeedback").innerHTML = feedback;
+      });
+
+    // Quiz functionality
+    document
+      .getElementById("nounQuiz")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const answers = {
+          q1: "b",
+          q2: "b",
+          q3: "b",
+          q4: "b",
+          q5: "a",
+          q6: "b",
+          q7: "b",
+          q8: "c",
+          q9: "c",
+          q10: "b",
+        };
+
+        let score = 0;
+        const totalQuestions = Object.keys(answers).length;
+
+        // Check each question
+        for (let i = 1; i <= totalQuestions; i++) {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const questionDiv = document.querySelector(
+            `.quiz-question:nth-child(${i})`
+          );
+          const feedbackDiv = questionDiv.querySelector(".feedback");
+
+          if (selected) {
+            if (selected.value === answers[`q${i}`]) {
+              score++;
+              feedbackDiv.innerHTML =
+                '<div class="alert alert-success">Correct!</div>';
+            } else {
+              feedbackDiv.innerHTML =
+                '<div class="alert alert-danger">Incorrect.</div>';
+            }
+          } else {
+            feedbackDiv.innerHTML =
+              '<div class="alert alert-warning">No answer selected.</div>';
+          }
+        }
+
+        // Show results
+        const percentage = Math.round((score / totalQuestions) * 100);
+        document.getElementById("quizScore").textContent = `${percentage}%`;
+
+        let feedback = "";
+        if (percentage >= 80) {
+          feedback =
+            "Excellent work! You have a strong understanding of nouns.";
+        } else if (percentage >= 60) {
+          feedback =
+            "Good job! You understand most noun concepts but could use some review.";
+        } else {
+          feedback =
+            "Keep practicing! Review the lesson materials and try again.";
+        }
+
+        document.getElementById("quizFeedback").textContent = feedback;
+        document.getElementById("quizResults").style.display = "block";
+
+        // Scroll to results
+        document
+          .getElementById("quizResults")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+    // Retry quiz button
+    document
+      .getElementById("retryQuizBtn")
+      .addEventListener("click", function () {
+        // Reset quiz
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+          radio.checked = false;
+        });
+
+        document.querySelectorAll(".feedback").forEach((fb) => {
+          fb.innerHTML = "";
+        });
+
+        document.getElementById("quizResults").style.display = "none";
+
+        // Scroll to top of quiz
+        document
+          .getElementById("quiz-section")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+    // Initialize drag items
+    document.querySelectorAll(".drag-item").forEach((item) => {
+      item.addEventListener("dragstart", drag);
+    });
+  });
+
+  // Helper function to get dragged element
+  DataTransfer.prototype.getElement = function () {
+    return document.querySelector(
+      `.drag-item:contains('${this.getData("text")}')`
+    );
+  };
+</script>
