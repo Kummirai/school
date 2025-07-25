@@ -1,5 +1,40 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %} {# The rest of your home.html content #}
+<style>
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .code-snippets {
+      display: none !important;
+    }
+  }
+</style>
 <section
   class="hero-section position-relative overflow-hidden"
   style="
@@ -27,7 +62,7 @@
           HTML
         </div>
         <div
-          class="card-body p-2 bg-dark text-white"
+          class="card-body p-2 bg-dark rounded-0 text-white"
           style="font-size: 0.75rem"
         >
           <pre class="mb-0"><code>&lt;div class="alert alert-danger"&gt;
@@ -48,7 +83,7 @@
           Python
         </div>
         <div
-          class="card-body p-2 bg-dark text-white"
+          class="card-body p-2 bg-dark rounded-0 text-white"
           style="font-size: 0.75rem"
         >
           <pre class="mb-0"><code>def quadratic_formula(a, b, c):
@@ -68,7 +103,7 @@
           JavaScript
         </div>
         <div
-          class="card-body p-2 bg-white text-dark"
+          class="card-body p-2 bg-white rounded-0 text-dark"
           style="font-size: 0.75rem"
         >
           <pre class="mb-0"><code>function plotGraph() {
@@ -184,41 +219,6 @@
 </section>
 
 <!-- Hero section styles -->
-<style>
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .animate-bounce {
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .code-snippets {
-      display: none !important;
-    }
-  }
-</style>
 
 <!--Learning paths-->
 <section id="courses" class="py-5 bg-light">
