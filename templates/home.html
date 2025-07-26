@@ -775,43 +775,11 @@
       </p>
     </div>
 
-    {% if current_sub %}
-    <div
-      class="alert alert-{% if current_sub[5] %}success{% else %}warning{% endif %} mb-4"
-    >
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <i
-            class="bi bi-{% if current_sub[5] %}check-circle{% else %}exclamation-triangle{% endif %} me-2"
-          ></i>
-          You currently have a
-          <strong>{{ current_sub[1] }}</strong> subscription ({{ current_sub[6]
-          }})
-          <br />
-          <small>
-            Valid from {{ current_sub[3].strftime('%Y-%m-%d') }} to {{
-            current_sub[4].strftime('%Y-%m-%d') }} {% if not current_sub[5] %} -
-            <span class="text-danger">Expired</span>
-            {% endif %}
-          </small>
-        </div>
-        {% if not current_sub[5] %}
-        <div class="text-end">
-          <span class="d-block fw-bold"
-            >Amount Due: R{{ "%.2f"|format(current_sub[2]) }}</span
-          >
-          <a
-            href="{{ url_for('subscribe.create_subscription', plan_id=current_sub[0]) }}"
-            class="btn btn-sm btn-danger mt-1"
-          >
-            Renew Now
-          </a>
-        </div>
-        {% endif %}
-      </div>
+    {% if 'username' in session %}
+    <div class="alert alert-info">
+        You are currently subscribed to the <strong>{{ subscription[1] }}</strong> plan.
     </div>
-    {% endif %}
-
+    {% else %}
     <div class="row g-4">
       {% for plan in plans %}
       <!-- Rest of the subscription plans display code remains the same -->
@@ -889,6 +857,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endif %}
   </div>
 </section>
 
