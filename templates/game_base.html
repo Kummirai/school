@@ -1,0 +1,151 @@
+{% extends "base.html" %} {% block title %}MiltonTutor+ Game Hub{% endblock %}
+{% block content %}
+<div class="container-fluid game-hub-container">
+  <!-- Game Header -->
+  <div class="game-header text-center py-4 mb-4">
+    <h1 class="display-4">
+      <i class="bi {% block game_icon %}bi-controller{% endblock %} me-2"></i>
+      {% block game_title %}Educational Game{% endblock %}
+    </h1>
+    <p class="lead mb-0">
+      Grade <span class="fw-bold">{% block game_grade %}7{% endblock %}</span> •
+      <span class="badge bg-primary"
+        >{% block game_subject %}Math{% endblock %}</span
+      >
+    </p>
+  </div>
+
+  <!-- Game Content Block -->
+  <div class="game-content-container">
+    {% block game_content %}
+    <!-- Game-specific content will go here -->
+    {% endblock %}
+  </div>
+</div>
+
+<style>
+  /* Game-specific styling that extends your base.css */
+  .game-hub-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .game-header {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .game-content-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  /* Game elements styling */
+  .question-box {
+    background-color: #e9f7fe;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 120px;
+  }
+
+  .options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .option-btn {
+    padding: 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 18px;
+  }
+
+  .option-btn:hover {
+    background-color: #f1f8ff;
+    border-color: #86b7fe;
+  }
+
+  .option-btn.selected {
+    background-color: #d1e7ff;
+    border-color: #86b7fe;
+  }
+
+  .option-btn.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  .option-btn.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  .player-badge {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    background-color: #f8f9fa;
+  }
+
+  .current-player {
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.5);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .options-container {
+      grid-template-columns: 1fr;
+    }
+
+    .game-content-container {
+      padding: 20px;
+    }
+  }
+</style>
+
+<script>
+  // Base game functionality that all games can use
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize any base game functionality here
+  });
+
+  // Common game functions
+  function updateTimerDisplay(time) {
+    const timerElement = document.getElementById("timer");
+    if (timerElement) timerElement.textContent = time;
+  }
+
+  function updateScoreDisplay(score) {
+    const scoreElement = document.getElementById("score");
+    if (scoreElement) scoreElement.textContent = score;
+  }
+
+  function showFeedback(message, isCorrect) {
+    const feedback = document.getElementById("feedback");
+    if (feedback) {
+      feedback.textContent = message;
+      feedback.className = isCorrect
+        ? "feedback correct-feedback"
+        : "feedback incorrect-feedback";
+    }
+  }
+</script>
+
+{% block game_scripts %}
+<!-- Game-specific scripts will be inserted here by child templates -->
+{% endblock %} {% endblock %} {% block scripts %} {{ super() }}
+<!-- Any additional scripts needed for games can go here -->
+{% endblock %}

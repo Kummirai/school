@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade 7 English Game</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .game-container {
+        max-width: 800px;
+        margin: 30px auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+      .question-box {
+        background-color: #fff8e6;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: 120px;
+      }
+      .options-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .option-btn {
+        padding: 15px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        background-color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 18px;
+        text-align: left;
+      }
+      .option-btn:hover {
+        background-color: #fff3e0;
+        border-color: #ffcc80;
+      }
+      .option-btn.selected {
+        background-color: #ffe0b2;
+        border-color: #ffb74d;
+      }
+      .option-btn.correct {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .option-btn.incorrect {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .progress {
+        height: 10px;
+        margin-bottom: 20px;
+      }
+      .score-display {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0d6efd;
+      }
+      .timer-display {
+        font-size: 24px;
+        font-weight: bold;
+        color: #dc3545;
+      }
+      .feedback {
+        min-height: 30px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .correct-feedback {
+        color: #28a745;
+      }
+      .incorrect-feedback {
+        color: #dc3545;
+      }
+      .game-over {
+        text-align: center;
+        padding: 30px;
+      }
+      .category-btn {
+        margin: 5px;
+      }
+      .fill-blank {
+        font-size: 20px;
+        margin: 15px 0;
+      }
+      .blank-input {
+        border: none;
+        border-bottom: 2px solid #333;
+        width: 100px;
+        text-align: center;
+        font-size: 20px;
+        margin: 0 5px;
+      }
+      .blank-input.correct {
+        border-bottom-color: #28a745;
+        color: #28a745;
+        font-weight: bold;
+      }
+      .blank-input.incorrect {
+        border-bottom-color: #dc3545;
+        color: #dc3545;
+      }
+      @media (max-width: 576px) {
+        .options-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container game-container">
+      <div class="text-center mb-4">
+        <h1 class="display-4">Grade 7 English Game</h1>
+        <p class="lead">
+          Test your English skills with these challenging questions!
+        </p>
+      </div>
+
+      <!-- Category Selection (shown at start) -->
+      <div id="category-selection">
+        <h3 class="mb-3">Choose a Category:</h3>
+        <div class="d-flex flex-wrap justify-content-center">
+          <button class="btn btn-primary category-btn" data-category="all">
+            All Categories
+          </button>
+          <button class="btn btn-success category-btn" data-category="grammar">
+            Grammar
+          </button>
+          <button class="btn btn-info category-btn" data-category="vocabulary">
+            Vocabulary
+          </button>
+          <button class="btn btn-warning category-btn" data-category="reading">
+            Reading
+          </button>
+          <button class="btn btn-danger category-btn" data-category="writing">
+            Writing
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Area (hidden at start) -->
+      <div id="game-area" style="display: none">
+        <div class="d-flex justify-content-between mb-3">
+          <div class="score-display">Score: <span id="score">0</span></div>
+          <div class="timer-display">Time: <span id="timer">60</span>s</div>
+        </div>
+
+        <div class="progress">
+          <div
+            id="progress-bar"
+            class="progress-bar progress-bar-striped"
+            role="progressbar"
+            style="width: 0%"
+          ></div>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <div class="question-box">
+          <div id="question-content">
+            <!-- Question content will be inserted here by JavaScript -->
+          </div>
+        </div>
+
+        <div id="options-container" class="options-container">
+          <!-- Options will be inserted here by JavaScript -->
+        </div>
+
+        <div
+          id="fill-blank-container"
+          class="text-center"
+          style="display: none"
+        >
+          <div id="fill-blank-text" class="fill-blank"></div>
+          <button id="check-blank-btn" class="btn btn-primary">
+            Check Answer
+          </button>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button id="hint-btn" class="btn btn-secondary">Get Hint</button>
+          <button id="next-btn" class="btn btn-primary" disabled>
+            Next Question
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Over Screen (hidden initially) -->
+      <div id="game-over" class="game-over" style="display: none">
+        <h2 class="mb-4">Game Over!</h2>
+        <div class="final-score mb-4">
+          <h3>Your Score: <span id="final-score">0</span></h3>
+          <p id="performance-comment">Keep practicing to improve!</p>
+        </div>
+        <button id="play-again-btn" class="btn btn-primary btn-lg">
+          Play Again
+        </button>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Game variables
+      let currentQuestionIndex = 0;
+      let score = 0;
+      let timer;
+      let timeLeft = 90;
+      let selectedCategory = "all";
+      let questions = [];
+      let blankInputs = [];
+
+      // DOM elements
+      const categorySelection = document.getElementById("category-selection");
+      const gameArea = document.getElementById("game-area");
+      const gameOverScreen = document.getElementById("game-over");
+      const questionContent = document.getElementById("question-content");
+      const optionsContainer = document.getElementById("options-container");
+      const fillBlankContainer = document.getElementById(
+        "fill-blank-container"
+      );
+      const fillBlankText = document.getElementById("fill-blank-text");
+      const checkBlankBtn = document.getElementById("check-blank-btn");
+      const scoreDisplay = document.getElementById("score");
+      const timerDisplay = document.getElementById("timer");
+      const progressBar = document.getElementById("progress-bar");
+      const feedback = document.getElementById("feedback");
+      const nextBtn = document.getElementById("next-btn");
+      const hintBtn = document.getElementById("hint-btn");
+      const finalScoreDisplay = document.getElementById("final-score");
+      const performanceComment = document.getElementById("performance-comment");
+      const playAgainBtn = document.getElementById("play-again-btn");
+      const categoryBtns = document.querySelectorAll(".category-btn");
+
+      // Questions database
+      const allQuestions = [
+        // Grammar questions
+        {
+          category: "grammar",
+          type: "mcq",
+          question: "Which sentence uses the correct form of the verb?",
+          options: [
+            "She don't like apples.",
+            "She doesn't likes apples.",
+            "She doesn't like apples.",
+            "She not like apples.",
+          ],
+          answer: 2,
+          hint: "Remember the third person singular form of verbs in present simple tense.",
+        },
+        {
+          category: "grammar",
+          type: "mcq",
+          question:
+            'Identify the preposition in this sentence: "The book is on the table."',
+          options: ["The", "book", "is", "on", "table"],
+          answer: 3,
+          hint: "Prepositions show the relationship between nouns/pronouns and other words in a sentence.",
+        },
+        {
+          category: "grammar",
+          type: "fillblank",
+          question:
+            "Fill in the blank with the correct pronoun: ______ is going to the park later.",
+          textBefore: "",
+          blank: "She",
+          textAfter: "is going to the park later.",
+          hint: "The pronoun should refer to a female subject.",
+        },
+        {
+          category: "grammar",
+          type: "mcq",
+          question: "Which sentence is in the past perfect tense?",
+          options: [
+            "I have finished my homework.",
+            "I had finished my homework before dinner.",
+            "I finished my homework.",
+            "I will finish my homework.",
+          ],
+          answer: 1,
+          hint: 'Past perfect uses "had" + past participle and shows an action completed before another past action.',
+        },
+
+        // Vocabulary questions
+        {
+          category: "vocabulary",
+          type: "mcq",
+          question: 'What is the best synonym for "benevolent"?',
+          options: ["Cruel", "Kind", "Small", "Confused"],
+          answer: 1,
+          hint: '"Benevolent" describes someone who wants to do good for others.',
+        },
+        {
+          category: "vocabulary",
+          type: "mcq",
+          question: 'What does the word "arduous" mean?',
+          options: [
+            "Fun and easy",
+            "Difficult and tiring",
+            "Quick and simple",
+            "Bright and colorful",
+          ],
+          answer: 1,
+          hint: "Think of activities that require a lot of effort and energy.",
+        },
+        {
+          category: "vocabulary",
+          type: "fillblank",
+          question:
+            "Fill in the blank with the correct word: The detective needed to ______ the mystery.",
+          textBefore: "The detective needed to",
+          blank: "solve",
+          textAfter: "the mystery.",
+          hint: "This word means to find the answer or explanation for something.",
+        },
+        {
+          category: "vocabulary",
+          type: "mcq",
+          question: 'Which word means "to make someone feel less worried"?',
+          options: ["Reassure", "Accuse", "Complicate", "Intensify"],
+          answer: 0,
+          hint: 'This word starts with "re" and is the opposite of making someone anxious.',
+        },
+
+        // Reading comprehension questions
+        {
+          category: "reading",
+          type: "mcq",
+          question:
+            'Read this passage and answer the question: "The storm raged outside as Maria huddled under her blanket. The power had gone out an hour ago, and the only light came from occasional lightning flashes. She wished her parents would return soon." Why was Maria huddled under her blanket?',
+          options: [
+            "She was cold because the power was out.",
+            "She was scared of the storm.",
+            "She was playing hide and seek.",
+            "Both A and B are correct.",
+          ],
+          answer: 3,
+          hint: "Look for clues in the passage about how Maria was feeling.",
+        },
+        {
+          category: "reading",
+          type: "mcq",
+          question:
+            'What is the main idea of this paragraph: "Recycling helps reduce waste in landfills. It also saves energy because making products from recycled materials often uses less energy than making them from new materials. Additionally, recycling helps conserve natural resources like trees and water."',
+          options: [
+            "Recycling is difficult to do.",
+            "Recycling has several important benefits.",
+            "Landfills are bad for the environment.",
+            "Making new products uses a lot of energy.",
+          ],
+          answer: 1,
+          hint: "Look for what all the sentences have in common.",
+        },
+        {
+          category: "reading",
+          type: "fillblank",
+          question:
+            'Complete this famous quote: "To be or not to be, that is the ______."',
+          textBefore: "To be or not to be, that is the",
+          blank: "question",
+          textAfter: "",
+          hint: "This is from Shakespeare's Hamlet.",
+        },
+        {
+          category: "reading",
+          type: "mcq",
+          question:
+            "If a story is written in first-person point of view, what pronoun would you expect to see a lot?",
+          options: ["He", "She", "They", "I"],
+          answer: 3,
+          hint: "First-person means the narrator is a character in the story.",
+        },
+
+        // Writing questions
+        {
+          category: "writing",
+          type: "mcq",
+          question: "Which of these is the best thesis statement for an essay?",
+          options: [
+            "Dogs are animals with four legs.",
+            "Dogs make better pets than cats because they are more loyal, trainable, and social.",
+            "I like dogs.",
+            "Some people prefer dogs while others prefer cats.",
+          ],
+          answer: 1,
+          hint: "A good thesis statement is specific and presents an argument.",
+        },
+        {
+          category: "writing",
+          type: "mcq",
+          question: "Which sentence shows the correct use of a comma?",
+          options: [
+            "After we ate we went to the park.",
+            "After we ate, we went to the park.",
+            "After, we ate we went to the park.",
+            "After we ate we went, to the park.",
+          ],
+          answer: 1,
+          hint: "Commas often follow introductory phrases.",
+        },
+        {
+          category: "writing",
+          type: "fillblank",
+          question:
+            "Fill in the blank with the correct transition word: The weather was terrible; ______, we decided to cancel the picnic.",
+          textBefore: "The weather was terrible;",
+          blank: "therefore",
+          textAfter: "we decided to cancel the picnic.",
+          hint: "This transition word shows a result or consequence.",
+        },
+        {
+          category: "writing",
+          type: "mcq",
+          question: "Which of these is an example of a metaphor?",
+          options: [
+            "The wind howled like a wolf.",
+            "Her smile was sunshine on a cloudy day.",
+            "The trees waved in the breeze.",
+            "The car screeched to a stop.",
+          ],
+          answer: 1,
+          hint: 'A metaphor directly compares two things without using "like" or "as".',
+        },
+
+        // Mixed questions
+        {
+          category: "all",
+          type: "mcq",
+          question: "Which word is spelled correctly?",
+          options: ["Recieve", "Recieve", "Receive", "Receeve"],
+          answer: 2,
+          hint: 'Remember the rule "i before e except after c".',
+        },
+        {
+          category: "all",
+          type: "mcq",
+          question:
+            'What type of figurative language is used here: "The classroom was a zoo."',
+          options: ["Simile", "Metaphor", "Hyperbole", "Alliteration"],
+          answer: 1,
+          hint: 'This is comparing two things directly without using "like" or "as".',
+        },
+        {
+          category: "all",
+          type: "fillblank",
+          question:
+            "Fill in the blank with the correct word: The ______ of the story was unexpected.",
+          textBefore: "The",
+          blank: "ending",
+          textAfter: "of the story was unexpected.",
+          hint: "This is the final part of a story where everything comes together.",
+        },
+        {
+          category: "all",
+          type: "mcq",
+          question: "Which sentence is punctuated correctly?",
+          options: [
+            '"I want to go to the mall," said Sarah.',
+            '"I want to go to the mall" said Sarah.',
+            "I want to go to the mall, said Sarah.",
+            '"I want to go to the mall, said Sarah."',
+          ],
+          answer: 0,
+          hint: "Remember proper punctuation for dialogue.",
+        },
+      ];
+
+      // Event listeners
+      categoryBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedCategory = btn.dataset.category;
+          startGame();
+        });
+      });
+
+      nextBtn.addEventListener("click", showNextQuestion);
+      hintBtn.addEventListener("click", showHint);
+      playAgainBtn.addEventListener("click", resetGame);
+      checkBlankBtn.addEventListener("click", checkFillBlankAnswer);
+
+      // Start the game
+      function startGame() {
+        // Filter questions based on selected category
+        if (selectedCategory === "all") {
+          questions = [...allQuestions];
+        } else {
+          questions = allQuestions.filter(
+            (q) => q.category === selectedCategory
+          );
+        }
+
+        // Shuffle questions
+        shuffleQuestions();
+
+        // Hide category selection and show game area
+        categorySelection.style.display = "none";
+        gameArea.style.display = "block";
+
+        // Reset game variables
+        score = 0;
+        timeLeft = 90;
+        currentQuestionIndex = 0;
+
+        // Update displays
+        scoreDisplay.textContent = score;
+        timerDisplay.textContent = timeLeft;
+
+        // Start timer
+        startTimer();
+
+        // Show first question
+        showQuestion();
+      }
+
+      // Shuffle questions
+      function shuffleQuestions() {
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+      }
+
+      // Start the countdown timer
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          timeLeft--;
+          timerDisplay.textContent = timeLeft;
+
+          if (timeLeft <= 0) {
+            endGame();
+          }
+        }, 1000);
+      }
+
+      // Display the current question
+      function showQuestion() {
+        // Reset UI elements
+        feedback.textContent = "";
+        feedback.className = "feedback";
+        nextBtn.disabled = true;
+        hintBtn.disabled = false;
+
+        // Hide/show appropriate containers
+        optionsContainer.style.display = "grid";
+        fillBlankContainer.style.display = "none";
+
+        // Update progress bar
+        const progress = (currentQuestionIndex / questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+
+        // Get current question
+        const question = questions[currentQuestionIndex];
+
+        // Display question
+        questionContent.innerHTML = `<h3>${question.question}</h3>`;
+
+        // Handle different question types
+        if (question.type === "mcq") {
+          // Clear previous options
+          optionsContainer.innerHTML = "";
+
+          // Create option buttons
+          question.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.className = "option-btn";
+            button.textContent = option;
+            button.dataset.index = index;
+            button.addEventListener("click", selectOption);
+            optionsContainer.appendChild(button);
+          });
+        } else if (question.type === "fillblank") {
+          // Set up fill-in-the-blank question
+          optionsContainer.style.display = "none";
+          fillBlankContainer.style.display = "block";
+
+          // Clear previous inputs
+          blankInputs = [];
+          fillBlankText.innerHTML = "";
+
+          // Add text before blank
+          if (question.textBefore) {
+            const span = document.createElement("span");
+            span.textContent = question.textBefore + " ";
+            fillBlankText.appendChild(span);
+          }
+
+          // Add input for blank
+          const input = document.createElement("input");
+          input.type = "text";
+          input.className = "blank-input";
+          input.dataset.correctAnswer = question.blank.toLowerCase();
+          blankInputs.push(input);
+          fillBlankText.appendChild(input);
+
+          // Add text after blank
+          if (question.textAfter) {
+            const span = document.createElement("span");
+            span.textContent = " " + question.textAfter;
+            fillBlankText.appendChild(span);
+          }
+        }
+      }
+
+      // Handle option selection for MCQ
+      function selectOption(e) {
+        const selectedBtn = e.target;
+        const selectedIndex = parseInt(selectedBtn.dataset.index);
+        const question = questions[currentQuestionIndex];
+
+        // Disable all options
+        const optionBtns = document.querySelectorAll(".option-btn");
+        optionBtns.forEach((btn) => {
+          btn.disabled = true;
+          btn.classList.remove("selected");
+        });
+
+        // Mark selected option
+        selectedBtn.classList.add("selected");
+
+        // Check if answer is correct
+        if (selectedIndex === question.answer) {
+          selectedBtn.classList.add("correct");
+          feedback.textContent = "Correct! Well done!";
+          feedback.className = "feedback correct-feedback";
+          score += 10;
+          scoreDisplay.textContent = score;
+        } else {
+          selectedBtn.classList.add("incorrect");
+          // Highlight correct answer
+          optionBtns[question.answer].classList.add("correct");
+          feedback.textContent = `Incorrect. The correct answer is: ${
+            question.options[question.answer]
+          }`;
+          feedback.className = "feedback incorrect-feedback";
+        }
+
+        // Enable next button
+        nextBtn.disabled = false;
+      }
+
+      // Check fill-in-the-blank answer
+      function checkFillBlankAnswer() {
+        const question = questions[currentQuestionIndex];
+        let allCorrect = true;
+
+        blankInputs.forEach((input) => {
+          const userAnswer = input.value.trim().toLowerCase();
+          const correctAnswer = input.dataset.correctAnswer.toLowerCase();
+
+          if (userAnswer === correctAnswer) {
+            input.classList.add("correct");
+            input.classList.remove("incorrect");
+          } else {
+            input.classList.add("incorrect");
+            input.classList.remove("correct");
+            allCorrect = false;
+          }
+        });
+
+        if (allCorrect) {
+          feedback.textContent = "Correct! Well done!";
+          feedback.className = "feedback correct-feedback";
+          score += 10;
+          scoreDisplay.textContent = score;
+        } else {
+          feedback.textContent = `Incorrect. The correct answer is: ${question.blank}`;
+          feedback.className = "feedback incorrect-feedback";
+        }
+
+        // Disable input and check button
+        blankInputs.forEach((input) => {
+          input.disabled = true;
+        });
+        checkBlankBtn.disabled = true;
+
+        // Enable next button
+        nextBtn.disabled = false;
+      }
+
+      // Show hint for current question
+      function showHint() {
+        const question = questions[currentQuestionIndex];
+        feedback.textContent = `Hint: ${question.hint}`;
+        feedback.className = "feedback";
+
+        // Disable hint button after use
+        hintBtn.disabled = true;
+      }
+
+      // Show next question or end game
+      function showNextQuestion() {
+        // Move to next question or end game
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          endGame();
+        }
+      }
+
+      // End the game
+      function endGame() {
+        clearInterval(timer);
+        gameArea.style.display = "none";
+        gameOverScreen.style.display = "block";
+
+        // Display final score
+        finalScoreDisplay.textContent = score;
+
+        // Performance comment
+        const percentage = (score / (questions.length * 10)) * 100;
+        if (percentage >= 80) {
+          performanceComment.textContent =
+            "Excellent work! You're an English expert!";
+        } else if (percentage >= 50) {
+          performanceComment.textContent =
+            "Good job! Keep practicing to improve!";
+        } else {
+          performanceComment.textContent =
+            "Keep trying! Reading more will help!";
+        }
+      }
+
+      // Reset the game
+      function resetGame() {
+        gameOverScreen.style.display = "none";
+        categorySelection.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

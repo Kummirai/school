@@ -1,0 +1,325 @@
+{% extends "game_base.html" %} {% block game_icon %}bi-calculator{%
+endblock %} {% block game_title %}Math Challenge{% endblock %} {% block
+game_grade %}7{% endblock %} {% block game_subject %}Math{% endblock %} {% block
+game_content %}
+<div class="game-container">
+  <!-- Player display for multiplayer -->
+  {% if players > 1 %}
+  <div class="player-display mb-4">
+    <h4>Players:</h4>
+    <div class="d-flex flex-wrap" id="player-badges">
+      {% for name in player_names %}
+      <div
+        class="player-badge m-2 p-2 {% if loop.first %}current-player{% endif %}"
+        data-player="{{ loop.index }}"
+      >
+        <span class="player-score">0</span> - {{ name }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Game Area -->
+  <div id="game-area">
+    <div class="d-flex justify-content-between mb-3">
+      <div class="score-display">Score: <span id="score">0</span></div>
+      <div class="timer-display">Time: <span id="timer">60</span>s</div>
+    </div>
+
+    <div class="progress">
+      <div
+        id="progress-bar"
+        class="progress-bar progress-bar-striped"
+        role="progressbar"
+        style="width: 0%"
+      ></div>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <div class="question-box">
+      <h3 id="question-text">Question will appear here</h3>
+    </div>
+
+    <div id="options-container" class="options-container">
+      <!-- Options will be inserted here by JavaScript -->
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button id="hint-btn" class="btn btn-secondary">
+        <i class="bi bi-lightbulb me-1"></i>Get Hint
+      </button>
+      <button id="next-btn" class="btn btn-primary" disabled>
+        Next Question <i class="bi bi-arrow-right ms-1"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="game-over" class="game-over text-center" style="display: none">
+    <h2 class="mb-4"><i class="bi bi-trophy me-2"></i>Game Over!</h2>
+    <div class="final-score mb-4">
+      <h3>Final Scores:</h3>
+      <div id="final-scores-list" class="mb-4"></div>
+      <div id="performance-comment" class="alert alert-info"></div>
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+      <button id="play-again-btn" class="btn btn-primary btn-lg">
+        <i class="bi bi-arrow-repeat me-1"></i>Play Again
+      </button>
+      <button id="exit-game-btn" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-house-door me-1"></i>Exit to Hub
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block game_scripts %}
+<script>
+  // Game configuration from Flask template variables
+  const gameConfig = {
+      grade: {{ grade }},
+      players: {{ players }},
+      playerNames: {{ player_names|tojson }},
+      currentPlayer: 0,
+      selectedCategory: 'all'
+  };
+
+  // Game state variables
+  let currentQuestionIndex = 0;
+  let playerScores = Array(gameConfig.players).fill(0);
+  let timer;
+  let timeLeft = 60;
+  let questions = [];
+
+  // DOM elements
+  const gameArea = document.getElementById('game-area');
+  const gameOverScreen = document.getElementById('game-over');
+  const questionText = document.getElementById('question-text');
+  const optionsContainer = document.getElementById('options-container');
+  const scoreDisplay = document.getElementById('score');
+  const timerDisplay = document.getElementById('timer');
+  const progressBar = document.getElementById('progress-bar');
+  const feedback = document.getElementById('feedback');
+  const nextBtn = document.getElementById('next-btn');
+  const hintBtn = document.getElementById('hint-btn');
+  const finalScoresList = document.getElementById('final-scores-list');
+  const performanceComment = document.getElementById('performance-comment');
+  const playAgainBtn = document.getElementById('play-again-btn');
+  const exitGameBtn = document.getElementById('exit-game-btn');
+
+  // Grade 7 Math Questions
+  const allQuestions = [
+      // Algebra questions
+      {
+          category: 'algebra',
+          question: 'Solve for x: 3x + 5 = 20',
+          options: ['x = 5', 'x = 6', 'x = 4', 'x = 7'],
+          answer: 0,
+          hint: 'Subtract 5 from both sides first, then divide by 3.'
+      },
+      {
+          category: 'algebra',
+          question: 'Simplify: 2(x + 3) + 4x',
+          options: ['6x + 3', '6x + 6', '4x + 6', '2x + 10'],
+          answer: 1,
+          hint: 'First distribute the 2, then combine like terms.'
+      },
+      // Add more questions...
+  ];
+
+  // Initialize game when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+      startGame();
+
+      // Event listeners
+      nextBtn.addEventListener('click', showNextQuestion);
+      hintBtn.addEventListener('click', showHint);
+      playAgainBtn.addEventListener('click', startGame);
+      exitGameBtn.addEventListener('click', function() {
+          window.location.href = "{{ url_for('gamehub.game_hub') }}";
+      });
+  });
+
+  function startGame() {
+      questions = [...allQuestions];
+      shuffleQuestions();
+
+      // Reset game state
+      currentQuestionIndex = 0;
+      playerScores = Array(gameConfig.players).fill(0);
+      timeLeft = 60;
+
+      // Update UI
+      updatePlayerDisplay();
+      scoreDisplay.textContent = playerScores[gameConfig.currentPlayer];
+      timerDisplay.textContent = timeLeft;
+      gameArea.style.display = 'block';
+      gameOverScreen.style.display = 'none';
+
+      // Start timer and show first question
+      startTimer();
+      showQuestion();
+  }
+
+  function shuffleQuestions() {
+      for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [questions[i], questions[j]] = [questions[j], questions[i]];
+      }
+  }
+
+  function updatePlayerDisplay() {
+      if (gameConfig.players > 1) {
+          const badges = document.querySelectorAll('.player-badge');
+          badges.forEach((badge, index) => {
+              badge.classList.toggle('current-player', index === gameConfig.currentPlayer);
+              badge.querySelector('.player-score').textContent = playerScores[index];
+          });
+      }
+      scoreDisplay.textContent = playerScores[gameConfig.currentPlayer];
+  }
+
+  function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+          timeLeft--;
+          timerDisplay.textContent = timeLeft;
+
+          if (timeLeft <= 0) {
+              endGame();
+          }
+      }, 1000);
+  }
+
+  function showQuestion() {
+      // Reset UI
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+      nextBtn.disabled = true;
+      hintBtn.disabled = false;
+
+      // Update progress
+      const progress = (currentQuestionIndex / questions.length) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      // Display question
+      const question = questions[currentQuestionIndex];
+      questionText.textContent = question.question;
+
+      // Create options
+      optionsContainer.innerHTML = '';
+      question.options.forEach((option, index) => {
+          const button = document.createElement('button');
+          button.className = 'option-btn';
+          button.textContent = option;
+          button.dataset.index = index;
+          button.addEventListener('click', selectOption);
+          optionsContainer.appendChild(button);
+      });
+  }
+
+  function selectOption(e) {
+      const selectedBtn = e.target;
+      const selectedIndex = parseInt(selectedBtn.dataset.index);
+      const question = questions[currentQuestionIndex];
+
+      // Disable all options
+      document.querySelectorAll('.option-btn').forEach(btn => {
+          btn.disabled = true;
+          btn.classList.remove('selected');
+      });
+
+      // Mark selected option
+      selectedBtn.classList.add('selected');
+
+      // Check answer
+      if (selectedIndex === question.answer) {
+          selectedBtn.classList.add('correct');
+          showFeedback('Correct! Well done!', true);
+          playerScores[gameConfig.currentPlayer] += 10;
+      } else {
+          selectedBtn.classList.add('incorrect');
+          // Highlight correct answer
+          document.querySelectorAll('.option-btn')[question.answer].classList.add('correct');
+          showFeedback(`Incorrect. The correct answer is: ${question.options[question.answer]}`, false);
+      }
+
+      updatePlayerDisplay();
+      nextBtn.disabled = false;
+  }
+
+  function showHint() {
+      const question = questions[currentQuestionIndex];
+      showFeedback(`Hint: ${question.hint}`, false);
+      hintBtn.disabled = true;
+  }
+
+  function showNextQuestion() {
+      // Move to next player or question
+      if (gameConfig.players > 1) {
+          gameConfig.currentPlayer = (gameConfig.currentPlayer + 1) % gameConfig.players;
+          updatePlayerDisplay();
+
+          // Only advance question if all players have gone
+          if (gameConfig.currentPlayer === 0) {
+              currentQuestionIndex++;
+          }
+      } else {
+          currentQuestionIndex++;
+      }
+
+      if (currentQuestionIndex < questions.length) {
+          showQuestion();
+      } else {
+          endGame();
+      }
+  }
+
+  function endGame() {
+      clearInterval(timer);
+      gameArea.style.display = 'none';
+      gameOverScreen.style.display = 'block';
+
+      // Display final scores
+      finalScoresList.innerHTML = '';
+      playerScores.forEach((score, index) => {
+          const playerDiv = document.createElement('div');
+          playerDiv.className = 'mb-3';
+          playerDiv.innerHTML = `
+              <h5>${gameConfig.playerNames[index]}: ${score} points</h5>
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar"
+                       style="width: ${(score / (questions.length * 10)) * 100}%"
+                       aria-valuenow="${(score / (questions.length * 10)) * 100}"
+                       aria-valuemin="0"
+                       aria-valuemax="100">
+                  </div>
+              </div>
+          `;
+          finalScoresList.appendChild(playerDiv);
+      });
+
+      // Performance comment
+      const maxScore = Math.max(...playerScores);
+      const bestPlayers = gameConfig.playerNames.filter((_, i) => playerScores[i] === maxScore);
+
+      if (maxScore >= (questions.length * 10) * 0.8) {
+          performanceComment.innerHTML = `
+              <i class="bi bi-stars me-2"></i>
+              ${bestPlayers.join(' and ')} ${bestPlayers.length > 1 ? 'are' : 'is'} math whiz${bestPlayers.length > 1 ? 'zes' : ''}!
+          `;
+      } else if (maxScore >= (questions.length * 10) * 0.5) {
+          performanceComment.innerHTML = `
+              <i class="bi bi-emoji-smile me-2"></i>
+              Good effort! ${bestPlayers.join(' and ')} did well!
+          `;
+      } else {
+          performanceComment.innerHTML = `
+              <i class="bi bi-emoji-frown me-2"></i>
+              Keep practicing! You'll improve with more practice!
+          `;
+      }
+  }
+</script>
+{% endblock %}
