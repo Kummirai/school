@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+{% block title %}Microsoft Office Curriculum{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="mb-4">
+          <i class="bi bi-microsoft display-1 text-warning"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">
+          Microsoft Office <span class="text-warning">Curriculum</span>
+        </h1>
+        <p class="lead mb-5 fs-4">
+          <i class="bi bi-stars text-warning me-2"></i> Master essential productivity tools for academic and professional success
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a
+            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+            href="#word"
+            role="button"
+          >
+            <i class="bi bi-file-earmark-word me-2"></i>Word
+          </a>
+          <a
+            class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+            href="#excel"
+            role="button"
+          >
+            <i class="bi bi-file-earmark-excel me-2"></i>Excel
+          </a>
+          <a
+            class="btn btn-info btn-lg px-4 py-3 fw-bold"
+            href="#powerpoint"
+            role="button"
+          >
+            <i class="bi bi-file-earmark-ppt me-2"></i>PowerPoint
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Word Section -->
+<section id="word" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Microsoft Word</h2>
+      <p class="lead text-muted">
+        Create professional documents with ease
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Word Basics</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Document Creation & Editing</li>
+              <li class="list-group-item">Formatting Text & Paragraphs</li>
+              <li class="list-group-item">Inserting Images & Shapes</li>
+              <li class="list-group-item">Page Layout & Printing</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Advanced Word</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Styles & Themes</li>
+              <li class="list-group-item">Table of Contents & Indexing</li>
+              <li class="list-group-item">Mail Merge</li>
+              <li class="list-group-item">Collaboration & Review Features</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Excel Section -->
+<section id="excel" class="py-5">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Microsoft Excel</h2>
+      <p class="lead text-muted">
+        Analyze and visualize data with powerful spreadsheets
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">Excel Basics</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Spreadsheet Navigation & Data Entry</li>
+              <li class="list-group-item">Basic Formulas & Functions</li>
+              <li class="list-group-item">Formatting Cells & Worksheets</li>
+              <li class="list-group-item">Creating Simple Charts</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Advanced Excel</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Data Validation & Conditional Formatting</li>
+              <li class="list-group-item">Lookup Functions (VLOOKUP, HLOOKUP)</li>
+              <li class="list-group-item">Pivot Tables & Charts</li>
+              <li class="list-group-item">Macros & VBA Basics</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PowerPoint Section -->
+<section id="powerpoint" class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Microsoft PowerPoint</h2>
+      <p class="lead text-muted">
+        Design impactful presentations that captivate your audience
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-danger shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h3 class="h4 fw-bold mb-0 text-center">PowerPoint Basics</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-danger">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Slide Creation & Layouts</li>
+              <li class="list-group-item">Adding Text, Images & Multimedia</li>
+              <li class="list-group-item">Applying Themes & Designs</li>
+              <li class="list-group-item">Basic Animations & Transitions</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-warning shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h3 class="h4 fw-bold mb-0 text-center">Advanced PowerPoint</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="h5 fw-bold text-warning">Key Topics</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Master Slides & Templates</li>
+              <li class="list-group-item">Custom Animations & Timings</li>
+              <li class="list-group-item">Embedding Data from Excel</li>
+              <li class="list-group-item">Interactive Presentations</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-light text-center">
+            <a
+              href="#"
+              class="btn btn-outline-warning btn-sm"
+            >
+              <i class="bi bi-collection-play me-1"></i>View Lessons
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Resources -->
+<section class="py-5">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Microsoft Office Learning Resources</h2>
+      <p class="lead text-muted">
+        Supplemental materials to enhance your Office skills
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-danger shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-file-earmark-richtext display-4 text-danger mb-3"></i>
+            <h3 class="h4 fw-bold">Templates & Examples</h3>
+            <p class="mb-4">
+              Download ready-to-use templates for various documents, spreadsheets, and presentations
+            </p>
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-download me-1"></i>Browse Templates
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-warning shadow-sm">
+          <div class="card-body text-center p-4">
+            <i class="bi bi-lightbulb display-4 text-warning mb-3"></i>
+            <h3 class="h4 fw-bold">Tips & Tricks</h3>
+            <p class="mb-4">
+              Discover shortcuts and advanced techniques to boost your productivity
+            </p>
+            <a
+              href="#"
+              class="btn btn-outline-warning"
+            >
+              <i class="bi bi-journal-code me-1"></i>Explore Tips
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-secondary shadow-sm">
+          <div class="card-body text-center p-4">
+            <i
+              class="bi bi-question-circle display-4 text-secondary mb-3"
+            ></i>
+            <h3 class="h4 fw-bold">FAQs & Troubleshooting</h3>
+            <p class="mb-4">
+              Find answers to common questions and solutions to typical problems
+            </p>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="bi bi-life-preserver me-1"></i>Get Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-warning">
+  <div class="container py-4 text-center">
+    <h2 class="display-5 fw-bold mb-4">Ready to Master Microsoft Office?</h2>
+    <p class="lead mb-5">
+      Our comprehensive curriculum will equip you with the skills needed for academic and professional success
+    </p>
+    {% if 'username' not in session %}
+    <a
+      href="{{ url_for('home.login') }}"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-box-arrow-in-right me-2"></i>Login to Get Started
+    </a>
+    {% else %}
+    <a
+      href="#"
+      class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+    >
+      <i class="bi bi-collection-play me-2"></i>Browse Office Tutorials
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .list-group-item {
+    border-left: none;
+    border-right: none;
+  }
+
+  .card-header {
+    border-bottom: none;
+  }
+</style>
+
+{% endblock %}

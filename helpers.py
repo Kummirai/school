@@ -2,14 +2,11 @@ from models import get_db_connection
 from datetime import datetime, timedelta
 import json
 import psycopg2.extras
-from flask import current_app, session, jsonify
+from flask import current_app as app, session, jsonify
 from psycopg2.extras import DictCursor
 from werkzeug.security import generate_password_hash
 from flask import Flask
 from blueprints.assignments.utils import get_assignments_data
-
-
-app = Flask(__name__)
 
 
 def update_request_status(request_id, status):
@@ -159,7 +156,7 @@ def log_student_activity(student_id, activity_type, description=None, icon=None,
                         ))
             conn.commit()
     except Exception as e:
-        current_app.logger.error(f"Failed to log activity: {e}")
+        app.logger.error(f"Failed to log activity: {e}")
         conn.rollback()
 
 

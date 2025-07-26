@@ -36,3 +36,15 @@ def python_curriculum():
         return render_template('python_curriculum.html')
     except Exception as e:
         abort(500, description=str(e))
+
+
+@curriculum_bp.route('/social_studies')
+@login_required
+def social_studies_curriculum():
+    return render_template('social_studies_curriculum.html')
+
+
+@curriculum_bp.route('/microsoft_office')
+@login_required
+def microsoft_office_curriculum():
+    return render_template('microsoft_office_curriculum.html')
