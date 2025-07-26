@@ -1,225 +1,187 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %} {# The rest of your home.html content #}
-<style>
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .animate-bounce {
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .code-snippets {
-      display: none !important;
-    }
-  }
-</style>
 <section
   class="hero-section position-relative overflow-hidden"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-      url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+      url('https://images.pexels.com/photos/5088193/pexels-photo-5088193.jpeg');
     background-size: cover;
     background-position: center;
     color: #fff;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   "
 >
-  <!-- Animated Code Snippets -->
-  <div class="code-snippets position-absolute w-100 h-100" style="z-index: 1">
-    <!-- HTML -->
-    <div
-      class="code-snippet html-snippet position-absolute animate-float"
-      style="top: 15%; left: 5%"
-    >
-      <div class="card border-warning shadow" style="width: 220px">
-        <div class="card-header bg-warning text-dark py-1 px-2 fw-bold">
-          HTML
-        </div>
-        <div
-          class="card-body p-2 bg-dark rounded-0 text-white"
-          style="font-size: 0.75rem"
-        >
-          <pre class="mb-0"><code>&lt;div class="alert alert-danger"&gt;
-  &lt;strong&gt;Science!&lt;/strong&gt;
-  E=mc²
-&lt;/div&gt;</code></pre>
-        </div>
-      </div>
+  <!-- Main Content - Carousel -->
+  <div
+    id="heroCarousel"
+    class="carousel slide h-100"
+    data-bs-ride="carousel"
+    data-bs-interval="5000"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide-to="3"
+        aria-label="Slide 4"
+      ></button>
     </div>
-
-    <!-- Python -->
-    <div
-      class="code-snippet python-snippet position-absolute animate-float"
-      style="top: 25%; right: 5%"
-    >
-      <div class="card border-danger shadow" style="width: 250px">
-        <div class="card-header bg-danger text-white py-1 px-2 fw-bold">
-          Python
-        </div>
-        <div
-          class="card-body p-2 bg-dark rounded-0 text-white"
-          style="font-size: 0.75rem"
-        >
-          <pre class="mb-0"><code>def quadratic_formula(a, b, c):
-  discriminant = b**2 - 4*a*c
-  return (-b + discriminant**0.5)/(2*a)</code></pre>
-        </div>
-      </div>
-    </div>
-
-    <!-- JavaScript -->
-    <div
-      class="code-snippet js-snippet position-absolute animate-float"
-      style="bottom: 20%; left: 10%"
-    >
-      <div class="card border-dark shadow" style="width: 280px">
-        <div class="card-header bg-dark text-white py-1 px-2 fw-bold">
-          JavaScript
-        </div>
-        <div
-          class="card-body p-2 bg-white rounded-0 text-dark"
-          style="font-size: 0.75rem"
-        >
-          <pre class="mb-0"><code>function plotGraph() {
-  const ctx = document.getElementById('graph');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Algebra', 'Geometry', 'Calculus'],
-      datasets: [{ label: 'Progress', data: [75, 60, 85], borderColor: '#dc3545' }]
-    }
-  });
-}</code></pre>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="container py-5 position-relative" style="z-index: 2">
-    <div class="row align-items-center">
-      <div class="col-lg-10 mx-auto text-center">
-        <div class="mb-4">
-          <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
-        </div>
-
-        <h1 class="display-6 fw-bold mb-3">
-          {% if 'username' in session %} Welcome back,
-          <span class="text-warning">{{ session['username'] }}</span>
-          {% if subscription and subscription[5] %}
-          <div class="mt-2 fs-5 text-white">
-            <i class="bi bi-check-circle-fill"></i> {{ subscription[1] }} Plan
-            Active!
-          </div>
-          {% elif subscription and not subscription[5] %}
-          <div class="mt-2 fs-5 text-warning">
-            <i class="bi bi-exclamation-triangle-fill"></i> Renew your {{
-            subscription[1] }} plan
-          </div>
-          {% elif session['role'] == 'student' %}
-          <div class="mt-2 fs-5 text-dark">
-            <i class="bi bi-rocket-fill"></i> Unlock exclusive coding
-            challenges!
-          </div>
-          {% endif %} {% else %}
-          <!-- <span class="fs-1 d-block fw-normal">MiltonTutor+</span> -->
-          <span class="text-danger">Code</span>
-          <span class="text-warning">And</span>
-          <span class="text-white">School Work Help</span>
-          {% endif %}
-        </h1>
-
-        <p class="lead mb-5 fs-5 mx-auto" style="max-width: 720px">
-          {% if 'username' in session and session['role'] == 'parent' %}
-          <i class="bi bi-stars text-warning"></i> Supporting your child's STEM
-          journey {% elif 'username' in session and session['role'] != 'parent'
-          %} <i class="bi bi-stars text-danger"></i> Build. Solve. Discover.
-          <span class="text-danger">Code</span>,
-          <span class="text-warning">calculate</span>,
-          <span class="text-white">experiment</span>
-          {% else %}
-          <i class="bi bi-stars text-warning"></i>
-          <strong class="text-white">Need coding or</strong>
-          <strong class="text-danger fw-bold">schoolwork help?</strong>
-          <strong class="text-warning">Get support quick</strong>
-          <strong class="text-white">and hassle-free.</strong>
-          {% endif %}
-        </p>
-
-        <!-- CTA Buttons -->
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-          {% if 'username' not in session %}
-          <a
-            href="{{ url_for('home.signup') }}"
-            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
-          >
-            <i class="bi bi-code-slash me-2"></i> Get Started
-          </a>
-          <a
-            class="btn btn-warning btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('tutorials.tutorials_home') }}"
-          >
-            <i class="bi bi-play-circle me-2"></i> Watch Tutorials
-          </a>
-          {% else %}
-          <a
-            class="btn btn-danger btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('tutorials.tutorials_home') }}"
-          >
-            <i class="bi bi-laptop me-2"></i> Continue Learning
-          </a>
-          <a
-            class="btn btn-dark btn-lg px-4 py-3 fw-bold"
-            href="{{ url_for('tutorials.studyguides_home') }}"
-          >
-            <i class="bi bi-flask me-2"></i> Practice Exercises
-          </a>
-          {% endif %}
-        </div>
-
-        <!-- Scroll Prompt -->
-        <div class="mt-5 pt-4">
-          <a href="#features" class="text-decoration-none text-dark">
-            <div class="d-flex flex-column align-items-center">
-              <span class="mb-2 text-white">Explore More</span>
-              <i
-                class="bi bi-chevron-double-down fs-4 animate-bounce text-white"
-              ></i>
+    <div class="carousel-inner h-100">
+      <!-- Slide 1: Educational Gamehub -->
+      <div class="carousel-item active h-100">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row align-items-center w-100">
+            <div class="col-lg-10 mx-auto text-center">
+              <div class="mb-4">
+                <i class="bi bi-controller display-1 text-warning"></i>
+              </div>
+              <h1 class="display-6 fw-bold mb-3 text-white image-text">
+                Educational Gamehub
+              </h1>
+              <p
+                class="lead mb-5 fs-5 mx-auto text-white image-text"
+                style="max-width: 720px"
+              >
+                Learn and grow with interactive and fun educational games!
+              </p>
+              <a
+                href="{{ url_for('gamehub.game_hub') }}"
+                class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+              >
+                <i class="bi bi-play-fill me-2"></i> Play Now
+              </a>
             </div>
-          </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Exam Practice -->
+      <div class="carousel-item h-100">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row align-items-center w-100">
+            <div class="col-lg-10 mx-auto text-center">
+              <div class="mb-4">
+                <i class="bi bi-journal-check display-1 text-warning"></i>
+              </div>
+              <h1 class="display-6 fw-bold mb-3 text-white image-text">
+                Exam Practice
+              </h1>
+              <p
+                class="lead mb-5 fs-5 mx-auto text-white image-text"
+                style="max-width: 720px"
+              >
+                Prepare for your exams with comprehensive practice tests and
+                detailed solutions.
+              </p>
+              <a
+                href="{{ url_for('exam.exam_practice') }}"
+                class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+              >
+                <i class="bi bi-pencil-square me-2"></i> Start Practicing
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Video Tutorials -->
+      <div class="carousel-item h-100">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row align-items-center w-100">
+            <div class="col-lg-10 mx-auto text-center">
+              <div class="mb-4">
+                <i class="bi bi-camera-video display-1 text-warning"></i>
+              </div>
+              <h1 class="display-6 fw-bold mb-3 text-white image-text">Video Tutorials</h1>
+              <p
+                class="lead mb-5 fs-5 mx-auto text-white image-text"
+                style="max-width: 720px"
+              >
+                Master new concepts with engaging video lessons from expert
+                instructors.
+              </p>
+              <a
+                href="{{ url_for('tutorials.tutorials_home') }}"
+                class="btn btn-danger btn-lg px-4 py-3 fw-bold"
+              >
+                <i class="bi bi-play-circle me-2"></i> Watch Tutorials
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Practice Exercises -->
+      <div class="carousel-item h-100">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="row align-items-center w-100">
+            <div class="col-lg-10 mx-auto text-center">
+              <div class="mb-4">
+                <i class="bi bi-lightbulb display-1 text-warning"></i>
+              </div>
+              <h1 class="display-6 fw-bold mb-3 text-white image-text">
+                Practice Exercises
+              </h1>
+              <p
+                class="lead mb-5 fs-5 mx-auto text-white image-text"
+                style="max-width: 720px"
+              >
+                Reinforce your learning with a wide range of practice exercises
+                and quizzes.
+              </p>
+              <a
+                href="{{ url_for('tutorials.studyguides_home') }}"
+                class="btn btn-warning btn-lg px-4 py-3 fw-bold"
+              >
+                <i class="bi bi-flask me-2"></i> Start Practicing
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#heroCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#heroCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </section>
-
-<!-- Hero section styles -->
 
 <!--Learning paths-->
 <section id="courses" class="py-5 bg-light">
@@ -597,7 +559,10 @@
             <p class="card-text mb-4">
               Master Word, Excel, PowerPoint for academic success.
             </p>
-            <a href="{{ url_for('curriculum.microsoft_office_curriculum') }}" class="btn btn-outline-secondary mt-3 stretched-link">
+            <a
+              href="{{ url_for('curriculum.microsoft_office_curriculum') }}"
+              class="btn btn-outline-secondary mt-3 stretched-link"
+            >
               <i class="bi bi-arrow-right-circle me-1"></i>Explore
             </a>
           </div>
@@ -999,26 +964,5 @@
     {% endif %}
   </div>
 </section>
-
-<script>
-  // Simple animation to highlight code snippets
-  document.addEventListener("DOMContentLoaded", function () {
-    const snippets = document.querySelectorAll(".code-snippet");
-
-    snippets.forEach((snippet) => {
-      snippet.addEventListener("mouseenter", () => {
-        snippet.style.transform = "scale(1.05)";
-        snippet.style.zIndex = "10";
-        snippet.style.opacity = "1";
-      });
-
-      snippet.addEventListener("mouseleave", () => {
-        snippet.style.transform = "";
-        snippet.style.zIndex = "";
-        snippet.style.opacity = "0.9";
-      });
-    });
-  });
-</script>
 
 {% endblock %}

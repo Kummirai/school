@@ -2,6 +2,152 @@
 block game_title %}English Challenge{% endblock %} {% block game_grade %}7{%
 endblock %} {% block game_subject %}English{% endblock %} {% block game_content
 %}
+<style>
+  :root {
+    --dark-color: #212529;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --white-color: #ffffff;
+    --light-bg: #f8f9fa;
+  }
+
+  .game-container {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+  }
+
+  .player-badge {
+    background-color: var(--white-color);
+    border: 1px solid var(--dark-color);
+    color: var(--dark-color);
+  }
+
+  .player-badge.current-player {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: var(--dark-color);
+  }
+
+  .score-display,
+  .timer-display {
+    color: var(--dark-color);
+  }
+
+  .progress-bar {
+    background-color: var(--warning-color);
+  }
+
+  .feedback {
+    color: var(--dark-color);
+  }
+
+  .correct-feedback {
+    color: var(--dark-color);
+    background-color: rgba(25, 135, 84, 0.1);
+    border-left: 4px solid #198754;
+  }
+
+  .incorrect-feedback {
+    color: var(--dark-color);
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid var(--danger-color);
+  }
+
+  .question-box {
+    background-color: var(--white-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .options-container {
+    display: grid;
+    gap: 10px;
+  }
+
+  .option-btn {
+    background-color: var(--white-color);
+    border: 1px solid var(--dark-color);
+    color: var(--dark-color);
+    transition: all 0.2s;
+  }
+
+  .option-btn:hover {
+    background-color: var(--light-bg);
+  }
+
+  .option-btn.selected {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+  }
+
+  .option-btn.correct {
+    background-color: #198754;
+    color: var(--white-color);
+    border-color: #198754;
+  }
+
+  .option-btn.incorrect {
+    background-color: var(--danger-color);
+    color: var(--white-color);
+    border-color: var(--danger-color);
+  }
+
+  .blank-input.correct {
+    border-color: #198754;
+    background-color: rgba(25, 135, 84, 0.1);
+  }
+
+  .blank-input.incorrect {
+    border-color: var(--danger-color);
+    background-color: rgba(220, 53, 69, 0.1);
+  }
+
+  .btn-primary {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: var(--dark-color);
+  }
+
+  .btn-primary:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+  }
+
+  .btn-secondary {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+    color: var(--white-color);
+  }
+
+  .btn-secondary:hover {
+    background-color: #424649;
+    border-color: #424649;
+  }
+
+  .btn-outline-primary {
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--danger-color);
+    color: var(--white-color);
+  }
+
+  .game-over {
+    background-color: var(--white-color);
+  }
+
+  .final-score {
+    color: var(--dark-color);
+  }
+
+  .alert-info {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--dark-color);
+    border-left: 4px solid #0d6efd;
+  }
+</style>
+
 <div class="game-container">
   <!-- Player display for multiplayer -->
   {% if players > 1 %}
