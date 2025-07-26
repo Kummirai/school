@@ -29,7 +29,7 @@ block content %}
         <div class="d-flex justify-content-center gap-3">
           {% if prev_lesson %}
           <a
-            href="{{ url_for('grades.view_grade7_lesson', term_idx=prev_lesson.term_idx, unit_idx=prev_lesson.unit_idx, lesson_idx=prev_lesson.lesson_idx) }}"
+            href="{{ url_for('grades.view_lesson', subject=subject, term_idx=prev_lesson.term_idx, unit_idx=prev_lesson.unit_idx, lesson_idx=prev_lesson.lesson_idx) }}"
             class="btn btn-outline-light"
           >
             <i class="bi bi-chevron-left me-1"></i> Previous
@@ -37,7 +37,7 @@ block content %}
           {% endif %}
 
           <a
-            href="{{ url_for('grades.grade_7_maths') }}"
+            href="{{ url_for('grades.grade_7_subject', subject=subject) }}"
             class="btn btn-outline-light"
           >
             <i class="bi bi-list-ul me-1"></i> All Lessons
@@ -45,7 +45,7 @@ block content %}
 
           {% if next_lesson %}
           <a
-            href="{{ url_for('grades.view_grade7_lesson', term_idx=next_lesson.term_idx, unit_idx=next_lesson.unit_idx, lesson_idx=next_lesson.lesson_idx) }}"
+            href="{{ url_for('grades.view_lesson', subject=subject, term_idx=next_lesson.term_idx, unit_idx=next_lesson.unit_idx, lesson_idx=next_lesson.lesson_idx) }}"
             class="btn btn-outline-light"
           >
             Next <i class="bi bi-chevron-right ms-1"></i>

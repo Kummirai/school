@@ -44,60 +44,41 @@ def study_guide_page(grade_num, chapter_num, filename):
     return render_template(template_path, lesson=lesson_data)
 
 
-@grades_bp.route('/grade7/maths')
-def grade_7_maths():
+@grades_bp.route('/grade7/<string:subject>')
+def grade_7_subject(subject):
+    if subject not in ['maths', 'english']:
+        abort(404)
     try:
-        # Load the JSON data with explicit UTF-8 encoding
-        with open('static/data/grade7_math.json', 'r', encoding='utf-8') as f:
-            subject_data = json.load(f)
-
-        # Calculate progress (you would get this from the database in a real app)
-        progress = 15  # Example value
-
-        return render_template(
-            'maths.html',
-            subject_data=subject_data,
-            progress=progress
-        )
-    except FileNotFoundError:
-        abort(404, description="Curriculum not found")
-    except json.JSONDecodeError:
-        abort(500, description="Error loading curriculum data")
-    except UnicodeDecodeError:
-        abort(500, description="Invalid file encoding - must be UTF-8")
-
-
-@grades_bp.route('/grade7/english')
-def grade_7_english():
-    try:
-        # Load the JSON data with explicit UTF-8 encoding
-        with open('static/data/grade7_english.json', 'r', encoding='utf-8') as f:
-            subject_data = json.load(f)
-
-        # Calculate progress (you would get this from the database in a real app)
-        progress = 15  # Example value
-
-        return render_template(
-            'english.html',
-            subject_data=subject_data,
-            progress=progress
-        )
-    except FileNotFoundError:
-        abort(404, description="Curriculum not found")
-    except json.JSONDecodeError:
-        abort(500, description="Error loading curriculum data")
-    except UnicodeDecodeError:
-        abort(500, description="Invalid file encoding - must be UTF-8")
-
-
-@grades_bp.route('/grade7/maths/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
-def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
-    print(
-        f"Loading lesson for Term: {term_idx}, Unit: {unit_idx}, Lesson: {lesson_idx}")
-    try:
-        # Load the JSON data for Grade 7 Maths
         json_file_path = os.path.join(
-            app.root_path, 'static', 'data', 'grade7_math.json')
+            app.root_path, 'static', 'data', f'grade7_{subject}.json')
+        with open(json_file_path, 'r', encoding='utf-8') as f:
+            subject_data = json.load(f)
+
+        progress = 0
+
+        template_name = f'{subject}.html'
+
+        return render_template(
+            template_name,
+            subject_data=subject_data,
+            progress=progress
+        )
+    except FileNotFoundError:
+        abort(404, description="Curriculum not found")
+    except json.JSONDecodeError:
+        abort(500, description="Error loading curriculum data")
+    except UnicodeDecodeError:
+        abort(500, description="Invalid file encoding - must be UTF-8")
+
+
+@grades_bp.route('/grade7/<string:subject>/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
+def view_lesson(subject, term_idx, unit_idx, lesson_idx):
+    print(
+        f"Loading {subject} lesson for Term: {term_idx}, Unit: {unit_idx}, Lesson: {lesson_idx}")
+    try:
+        # Load the JSON data for the given subject
+        json_file_path = os.path.join(
+            app.root_path, 'static', 'data', f'grade7_{subject}.json')
         with open(json_file_path, 'r', encoding='utf-8') as f:
             subject_data = json.load(f)
 
@@ -195,6 +176,7 @@ def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
             'lesson_detail.html',
             lesson=lesson,
             subject_data=subject_data,
+            subject=subject,
             term_idx=term_idx,
             unit_idx=unit_idx,
             lesson_idx=lesson_idx,
@@ -204,133 +186,13 @@ def view_grade7_lesson(term_idx, unit_idx, lesson_idx):
         )
 
     except FileNotFoundError:
-        abort(404, description="Grade 7 Mathematics data not found.")
+        abort(
+            404, description=f"Grade 7 {subject.capitalize()} data not found.")
     except json.JSONDecodeError:
-        abort(500, description="Error loading Grade 7 Mathematics data.")
+        abort(
+            500, description=f"Error loading Grade 7 {subject.capitalize()} data.")
     except Exception as e:
-        print(f"An error occurred while loading lesson: {e}")
-        abort(500, description="An internal server error occurred.")
-
-
-@grades_bp.route('/grade7/english/lesson/<int:term_idx>/<int:unit_idx>/<int:lesson_idx>')
-def view_grade7_english_lesson(term_idx, unit_idx, lesson_idx):
-    print(
-        f"Loading English lesson for Term: {term_idx}, Unit: {unit_idx}, Lesson: {lesson_idx}")
-    try:
-        # Load the JSON data for Grade 7 English
-        json_file_path = os.path.join(
-            app.root_path, 'static', 'data', 'grade7_english.json')
-        with open(json_file_path, 'r', encoding='utf-8') as f:
-            subject_data = json.load(f)
-
-        # Validate term index
-        terms = subject_data.get('terms', [])
-        if term_idx < 0 or term_idx >= len(terms):
-            abort(404, description="Term not found")
-        term = terms[term_idx]
-
-        # Validate unit index
-        units = term.get('units', [])
-        if unit_idx < 0 or unit_idx >= len(units):
-            abort(404, description="Unit not found")
-        unit = units[unit_idx]
-
-        # Validate lesson index
-        lessons = unit.get('lessons', [])
-        if lesson_idx < 0 or lesson_idx >= len(lessons):
-            abort(404, description="Lesson not found")
-        lesson = lessons[lesson_idx]
-
-        # Calculate global lesson number
-        global_lesson_num = 0
-        for t in terms[:term_idx]:
-            for u in t.get('units', []):
-                global_lesson_num += len(u.get('lessons', []))
-
-        for u in units[:unit_idx]:
-            global_lesson_num += len(u.get('lessons', []))
-
-        global_lesson_num += lesson_idx + 1  # +1 to make it 1-based index
-
-        # Get previous and next lessons for navigation
-        prev_lesson = next_lesson = None
-
-        # Previous lesson logic
-        if lesson_idx > 0:
-            prev_lesson = {
-                'term_idx': term_idx,
-                'unit_idx': unit_idx,
-                'lesson_idx': lesson_idx - 1
-            }
-        elif unit_idx > 0:
-            prev_unit = units[unit_idx - 1]
-            prev_unit_lessons = prev_unit.get('lessons', [])
-            if prev_unit_lessons:
-                prev_lesson = {
-                    'term_idx': term_idx,
-                    'unit_idx': unit_idx - 1,
-                    'lesson_idx': len(prev_unit_lessons) - 1
-                }
-        elif term_idx > 0:
-            prev_term = terms[term_idx - 1]
-            prev_term_units = prev_term.get('units', [])
-            if prev_term_units:
-                prev_unit = prev_term_units[-1]
-                prev_unit_lessons = prev_unit.get('lessons', [])
-                if prev_unit_lessons:
-                    prev_lesson = {
-                        'term_idx': term_idx - 1,
-                        'unit_idx': len(prev_term_units) - 1,
-                        'lesson_idx': len(prev_unit_lessons) - 1
-                    }
-
-        # Next lesson logic
-        if lesson_idx < len(lessons) - 1:
-            next_lesson = {
-                'term_idx': term_idx,
-                'unit_idx': unit_idx,
-                'lesson_idx': lesson_idx + 1
-            }
-        elif unit_idx < len(units) - 1:
-            next_unit = units[unit_idx + 1]
-            next_unit_lessons = next_unit.get('lessons', [])
-            if next_unit_lessons:
-                next_lesson = {
-                    'term_idx': term_idx,
-                    'unit_idx': unit_idx + 1,
-                    'lesson_idx': 0
-                }
-        elif term_idx < len(terms) - 1:
-            next_term = terms[term_idx + 1]
-            next_term_units = next_term.get('units', [])
-            if next_term_units:
-                next_unit = next_term_units[0]
-                next_unit_lessons = next_unit.get('lessons', [])
-                if next_unit_lessons:
-                    next_lesson = {
-                        'term_idx': term_idx + 1,
-                        'unit_idx': 0,
-                        'lesson_idx': 0
-                    }
-
-        return render_template(
-            'lesson_detail.html',
-            lesson=lesson,
-            subject_data=subject_data,
-            term_idx=term_idx,
-            unit_idx=unit_idx,
-            lesson_idx=lesson_idx,
-            global_lesson_num=global_lesson_num,
-            prev_lesson=prev_lesson,
-            next_lesson=next_lesson
-        )
-
-    except FileNotFoundError:
-        abort(404, description="Grade 7 English data not found.")
-    except json.JSONDecodeError:
-        abort(500, description="Error loading Grade 7 English data.")
-    except Exception as e:
-        print(f"An error occurred while loading English lesson: {e}")
+        print(f"An error occurred while loading {subject} lesson: {e}")
         abort(500, description="An internal server error occurred.")
 
 

@@ -77,7 +77,7 @@ endblock %} {% block content %}
           </div>
           <div class="card-footer bg-light text-center">
             <a
-              href="{{url_for('grades.grade_7_maths')}}"
+              href="{{url_for('grades.grade_7_subject', subject='maths')}}"
               class="btn btn-outline-danger btn-sm"
             >
               <i class="bi bi-collection-play me-1"></i>View Lessons
@@ -258,7 +258,9 @@ endblock %} {% block content %}
               <li class="list-group-item">Limits & Continuity</li>
               <li class="list-group-item">Differentiation & Applications</li>
               <li class="list-group-item">Integration & Applications</li>
-              <li class="list-group-item">Differential Equations & Series (BC)</li>
+              <li class="list-group-item">
+                Differential Equations & Series (BC)
+              </li>
             </ul>
           </div>
           <div class="card-footer bg-light text-center">
