@@ -38,8 +38,8 @@
 <section
   class="hero-section position-relative overflow-hidden"
   style="
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)),
-      url('https://images.unsplash.com/photo-1623479322729-28b25c16b011?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+      url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -126,7 +126,7 @@
     <div class="row align-items-center">
       <div class="col-lg-10 mx-auto text-center">
         <div class="mb-4">
-          <i class="bi bi-mortarboard-fill display-1 text-danger"></i>
+          <i class="bi bi-mortarboard-fill display-1 text-warning"></i>
         </div>
 
         <h1 class="display-6 fw-bold mb-3">
@@ -148,7 +148,7 @@
             challenges!
           </div>
           {% endif %} {% else %}
-          <span class="fs-1 d-block fw-normal">MiltonTutor+</span>
+          <!-- <span class="fs-1 d-block fw-normal">MiltonTutor+</span> -->
           <span class="text-danger">Code</span>
           <span class="text-warning">And</span>
           <span class="text-white">School Work Help</span>
@@ -769,49 +769,87 @@
   <div class="container col-lg-12">
     <div class="text-center mb-4">
       <h3 class="fw-bold">Subscription Plans</h3>
-      <p class="lead">
-        Choose the plan that best fits your learning needs
-      </p>
+      <p class="lead">Choose the plan that best fits your learning needs</p>
     </div>
 
     {% if 'username' in session and subscription %}
     <div class="p-5 rounded-3 bg-light text-dark shadow-lg">
-        <h2 class="display-5 fw-bold mb-4">{% if is_default_subscription %}Unlock Premium Features{% elif is_trial %}Your Trial Subscription{% else %}Your Current Subscription{% endif %}</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <p class="fs-5"><strong>Plan:</strong> {{ subscription.plan_name }}</p>
-                {% if not is_default_subscription %}
-                <p class="fs-5"><strong>Status:</strong>
-                    {% if subscription.is_active %}
-                        <span class="badge bg-success">Active</span>
-                    {% elif is_trial %}
-                        <span class="badge bg-info">Trial</span>
-                    {% else %}
-                        <span class="badge bg-warning text-dark">Inactive / {{ subscription.payment_status|capitalize }}</span>
-                    {% endif %}
-                </p>
-                <p class="fs-5"><strong>Start Date:</strong> {{ subscription.start_date.strftime('%Y-%m-%d') }}</p>
-                <p class="fs-5"><strong>End Date:</strong> {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
-                {% endif %}
-            </div>
-            <div class="col-md-6">
-                {% if is_default_subscription %}
-                    <p class="fs-5"><strong>Price:</strong> R{{ "%.2f"|format(subscription.price) }} / month</p>
-                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-danger btn-lg mt-3">Subscribe Now</a>
-                {% elif is_trial %}
-                    <p class="fs-5"><strong>Days Remaining:</strong> {{ subscription.days_remaining }}</p>
-                    <p class="fs-5"><strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.price) }}</p>
-                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-success btn-lg mt-3">Upgrade Now</a>
-                {% elif subscription.payment_status == 'pending' %}
-                    <p class="fs-5"><strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.amount_due) }}</p>
-                    <p class="fs-5"><strong>Next Payment Due:</strong> {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
-                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-danger btn-lg mt-3">Renew Now</a>
-                {% else %}
-                    <p class="fs-5"><strong>Next Payment Due:</strong> N/A (Active)</p>
-                    <p class="fs-5"><strong>Amount Due:</strong> R0.00</p>
-                {% endif %}
-            </div>
+      <h2 class="display-5 fw-bold mb-4">
+        {% if is_default_subscription %}Unlock Premium Features{% elif is_trial
+        %}Your Trial Subscription{% else %}Your Current Subscription{% endif %}
+      </h2>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="fs-5">
+            <strong>Plan:</strong> {{ subscription.plan_name }}
+          </p>
+          {% if not is_default_subscription %}
+          <p class="fs-5">
+            <strong>Status:</strong>
+            {% if subscription.is_active %}
+            <span class="badge bg-success">Active</span>
+            {% elif is_trial %}
+            <span class="badge bg-info">Trial</span>
+            {% else %}
+            <span class="badge bg-warning text-dark"
+              >Inactive / {{ subscription.payment_status|capitalize }}</span
+            >
+            {% endif %}
+          </p>
+          <p class="fs-5">
+            <strong>Start Date:</strong> {{
+            subscription.start_date.strftime('%Y-%m-%d') }}
+          </p>
+          <p class="fs-5">
+            <strong>End Date:</strong> {{
+            subscription.end_date.strftime('%Y-%m-%d') }}
+          </p>
+          {% endif %}
         </div>
+        <div class="col-md-6">
+          {% if is_default_subscription %}
+          <p class="fs-5">
+            <strong>Price:</strong> R{{ "%.2f"|format(subscription.price) }} /
+            month
+          </p>
+          <a
+            href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}"
+            class="btn btn-danger btn-lg mt-3"
+            >Subscribe Now</a
+          >
+          {% elif is_trial %}
+          <p class="fs-5">
+            <strong>Days Remaining:</strong> {{ subscription.days_remaining }}
+          </p>
+          <p class="fs-5">
+            <strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.price)
+            }}
+          </p>
+          <a
+            href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}"
+            class="btn btn-success btn-lg mt-3"
+            >Upgrade Now</a
+          >
+          {% elif subscription.payment_status == 'pending' %}
+          <p class="fs-5">
+            <strong>Amount Due:</strong> R{{
+            "%.2f"|format(subscription.amount_due) }}
+          </p>
+          <p class="fs-5">
+            <strong>Next Payment Due:</strong> {{
+            subscription.end_date.strftime('%Y-%m-%d') }}
+          </p>
+          <a
+            href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}"
+            class="btn btn-danger btn-lg mt-3"
+            >Renew Now</a
+          >
+          {% else %}
+          <p class="fs-5"><strong>Next Payment Due:</strong> N/A (Active)</p>
+          <p class="fs-5"><strong>Amount Due:</strong> R0.00</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
     {% else %}
     <div class="row g-4">
