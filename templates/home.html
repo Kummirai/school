@@ -765,52 +765,54 @@
 </section>
 
 <!-- Subscription Plans section -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-warning text-dark">
   <div class="container col-lg-12">
     <div class="text-center mb-4">
       <h3 class="fw-bold">Subscription Plans</h3>
-      <p class="text-muted">
+      <p class="lead">
         Choose the plan that best fits your learning needs
       </p>
     </div>
 
-    {% if 'username' in session %}
-    <div class="bg-light p-5 rounded-4 shadow-sm border border-2">
-      <div
-        class="d-flex flex-column flex-md-row justify-content-between align-items-start"
-      >
-        <div class="me-md-4">
-          <h2 class="display-6 fw-semibold mb-3">
-            You are currently subscribed to the
-            <span class="text-danger fw-bold">{{ subscription[1] }}</span> plan.
-          </h2>
-
-          <div class="mt-3">
-            <p class="mb-2">
-              <span class="fw-semibold">Start date:</span>
-              {{ subscription[3].strftime('%b %d, %Y') }}
-            </p>
-            <p class="mb-2">
-              <span class="fw-semibold">End date:</span>
-              {{ subscription[4].strftime('%b %d, %Y') }}
-            </p>
-            <p class="mb-2">
-              <span class="fw-semibold">Amount Due:</span>
-              R{{ "%.2f"|format(subscription[2]) }}
-            </p>
-            <p class="mb-0">
-              <span class="fw-semibold">Next payment:</span>
-              {{ subscription[4].strftime('%b %d, %Y') }}
-            </p>
-          </div>
+    {% if 'username' in session and subscription %}
+    <div class="p-5 rounded-3 bg-light text-dark shadow-lg">
+        <h2 class="display-5 fw-bold mb-4">{% if is_default_subscription %}Unlock Premium Features{% elif is_trial %}Your Trial Subscription{% else %}Your Current Subscription{% endif %}</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="fs-5"><strong>Plan:</strong> {{ subscription.plan_name }}</p>
+                {% if not is_default_subscription %}
+                <p class="fs-5"><strong>Status:</strong>
+                    {% if subscription.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% elif is_trial %}
+                        <span class="badge bg-info">Trial</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Inactive / {{ subscription.payment_status|capitalize }}</span>
+                    {% endif %}
+                </p>
+                <p class="fs-5"><strong>Start Date:</strong> {{ subscription.start_date.strftime('%Y-%m-%d') }}</p>
+                <p class="fs-5"><strong>End Date:</strong> {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if is_default_subscription %}
+                    <p class="fs-5"><strong>Price:</strong> R{{ "%.2f"|format(subscription.price) }} / month</p>
+                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-danger btn-lg mt-3">Subscribe Now</a>
+                {% elif is_trial %}
+                    <p class="fs-5"><strong>Days Remaining:</strong> {{ subscription.days_remaining }}</p>
+                    <p class="fs-5"><strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.price) }}</p>
+                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-success btn-lg mt-3">Upgrade Now</a>
+                {% elif subscription.payment_status == 'pending' %}
+                    <p class="fs-5"><strong>Amount Due:</strong> R{{ "%.2f"|format(subscription.amount_due) }}</p>
+                    <p class="fs-5"><strong>Next Payment Due:</strong> {{ subscription.end_date.strftime('%Y-%m-%d') }}</p>
+                    <a href="{{ url_for('subscribe.create_subscription', plan_id=subscription.id) }}" class="btn btn-danger btn-lg mt-3">Renew Now</a>
+                {% else %}
+                    <p class="fs-5"><strong>Next Payment Due:</strong> N/A (Active)</p>
+                    <p class="fs-5"><strong>Amount Due:</strong> R0.00</p>
+                {% endif %}
+            </div>
         </div>
-
-        <div class="mt-4 mt-md-0">
-          <span class="badge bg-success fs-6 px-4 py-2">Active</span>
-        </div>
-      </div>
     </div>
-
     {% else %}
     <div class="row g-4">
       {% for plan in plans %}

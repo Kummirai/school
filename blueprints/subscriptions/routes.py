@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session
 from flask_login import login_required
-from .utils import get_subscription_plans, get_user_subscription, get_all_subscriptions, mark_subscription_as_paid
+from .utils import get_subscription_plans, get_user_subscription_details, get_all_subscriptions, mark_subscription_as_paid
 
 
 # Create a Blueprint for the subscriptions routes
@@ -36,5 +36,5 @@ def subscription_status():
         flash('User not logged in.', 'danger')
         return redirect(url_for('home.login'))
 
-    subscription = get_user_subscription(user_id)
+    subscription = get_user_subscription_details(user_id)
     return render_template('subscription_status.html', subscription=subscription)

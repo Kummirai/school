@@ -39,9 +39,9 @@ def manage_subscriptions():
 def mark_subscription_paid(subscription_id):
     if mark_subscription_as_paid(subscription_id):
         flash('Subscription marked as paid', 'success')
+        return redirect(url_for('subscriptions.subscriptions'))
     else:
-        flash('Failed to mark subscription as paid', 'danger')
-    return redirect(url_for('subscriptions.manage_subscriptions'))
+        return redirect(url_for('subscriptions.subscriptions'))
 
 
 @admin_bp.route('/assignments/add', methods=['GET', 'POST'])

@@ -53,6 +53,22 @@ def get_user_subscription(user_id):
     conn.close()
     return subscription
 
+def get_plan_by_name(plan_name):
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    plan = None
+    try:
+        cur.execute("SELECT * FROM subscription_plans WHERE name = %s", (plan_name,))
+        plan = cur.fetchone()
+    except Exception as e:
+        print(f"Error fetching plan by name: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+    return plan
+
 def get_user_subscription_details(user_id):
     """
     Fetches detailed information about a user's latest subscription,

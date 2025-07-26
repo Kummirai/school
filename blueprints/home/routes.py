@@ -8,7 +8,7 @@ from blueprints.students.utils import get_user_by_username
 from werkzeug.security import check_password_hash
 from decorators.decorator import login_required
 from blueprints.students.utils import get_students
-from blueprints.subscriptions.utils import get_subscription_plans, add_subscription_to_db
+from blueprints.subscriptions.utils import get_user_subscription_details, get_subscription_plans, add_subscription_to_db, get_plan_by_name
 from datetime import datetime, timedelta
 
 
@@ -19,15 +19,29 @@ home_bp = Blueprint(
 
 @home_bp.route('/')
 def home():
-    # Initialize subscription to None
     subscription = None
-    # Check if user is logged in and 'user_id' is in session
-    if 'user_id' in session:
-        # Call the function and pass the result to the template
-        subscription = get_user_subscription(session['user_id'])
+    is_default_subscription = False
+    is_trial = False
 
-    # Pass the subscription variable to the render_template function
-    return render_template('home.html', subscription=subscription, plans=get_subscription_plans())
+    if 'user_id' in session:
+        subscription = get_user_subscription_details(session['user_id'])
+        if subscription:
+            if subscription['payment_status'] == 'trial':
+                is_trial = True
+                # Calculate days remaining
+                days_remaining = (subscription['end_date'] - datetime.utcnow()).days
+                subscription['days_remaining'] = days_remaining
+
+            elif not subscription['is_active']:
+                # If no active subscription, suggest the Premium plan
+                premium_plan = get_plan_by_name('Premium')
+                if premium_plan:
+                    subscription = premium_plan
+                    is_default_subscription = True
+
+    print(f"DEBUG: Subscription object type: {type(subscription)}")
+    print(f"DEBUG: Subscription object content: {subscription}")
+    return render_template('home.html', subscription=subscription, plans=get_subscription_plans(), is_default_subscription=is_default_subscription, is_trial=is_trial)
 
 
 @home_bp.route('/signup', methods=['GET', 'POST'])
