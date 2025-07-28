@@ -82,10 +82,21 @@ block content %}
 <!-- Main Lesson Content Section -->
 <section class="lesson-content-section py-5">
   <div class="container">
+    <!-- Mobile-only button to open resources modal -->
+    <div class="d-lg-none mb-3 text-center">
+      <button
+        class="btn btn-primary w-100"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#resourcesModal"
+      >
+        <i class="bi bi-list-task me-2"></i> View Lesson Resources
+      </button>
+    </div>
+
     <div class="row">
-      <!-- Lesson Navigation/Resources -->
-      <!-- Lesson Navigation/Resources -->
-      <div class="col-lg-3">
+      <!-- Lesson Navigation/Resources (Sidebar for large screens) -->
+      <div class="col-lg-3 d-none d-lg-block">
         <div class="card shadow-sm mb-4">
           <div class="card-header bg-primary text-white">
             <i class="bi bi-list-task me-2"></i> Lesson Resources
@@ -127,8 +138,7 @@ block content %}
       </div>
 
       <!-- Dynamic Lesson Content Display Area -->
-      <!-- Dynamic Lesson Content Display Area -->
-      <div class="col-lg-9">
+      <div class="col-12 col-lg-9">
         <div class="card shadow-sm">
           <div
             class="card-header bg-light d-flex justify-content-between align-items-center"
@@ -180,6 +190,65 @@ block content %}
     </div>
   </div>
 </section>
+
+<!-- Resources Modal (for mobile) -->
+<div
+  class="modal fade"
+  id="resourcesModal"
+  tabindex="-1"
+  aria-labelledby="resourcesModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resourcesModalLabel">Lesson Resources</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group list-group-flush">
+          {% for resource in lesson.resources %} {% if resource.path is string
+          %}
+          <!-- Single path resource -->
+          <button
+            type="button"
+            class="list-group-item list-group-item-action resource-btn"
+            data-resource-type="{{ resource.type }}"
+            data-resource-path="{% if resource.path.startswith('http') %}{{ resource.path }}{% else %}{{ url_for('static', filename=resource.path) }}{% endif %}"
+            data-bs-dismiss="modal"
+          >
+            <i
+              class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+            ></i>
+            {{ resource.title }}
+          </button>
+          {% else %}
+          <!-- Multiple paths resource -->
+          {% for path in resource.path %}
+          <button
+            type="button"
+            class="list-group-item list-group-item-action resource-btn"
+            data-resource-type="{{ resource.type }}"
+            data-resource-path="{% if path.startswith('http') %}{{ path }}{% else %}{{ url_for('static', filename=path) }}{% endif %}"
+            data-bs-dismiss="modal"
+          >
+            <i
+              class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+            ></i>
+            {{ resource.title }}{% if resource.path|length > 1 %} - Part {{
+            loop.index }}{% endif %}
+          </button>
+          {% endfor %} {% endif %} {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
