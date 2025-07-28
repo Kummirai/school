@@ -1,13 +1,30 @@
-{% extends "base.html" %}
-{% block title %}HTML & CSS Projects{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}HTML & CSS Projects{% endblock %} {%
+block content %}
 
-<section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-size: cover; background-position: center; color: white; min-height: 40vh; display: flex; align-items: center; padding: 0;">
+<section
+  class="hero-section"
+  style="
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  "
+>
   <div class="container py-5">
     <div class="row align-items-center">
       <div class="col-lg-8 mx-auto text-center">
-        <h1 class="display-4 fw-bold mb-4"><i class="bi bi-collection text-warning me-3"></i>HTML & CSS Projects</h1>
-        <p class="lead mb-4 fs-4">Browse our collection of design templates and projects to practice your skills.</p>
+        <h1 class="display-4 fw-bold mb-4">
+          <i class="bi bi-collection text-warning me-3"></i>HTML & CSS Projects
+        </h1>
+        <p class="lead mb-4 fs-4">
+          Browse our collection of design templates and projects to practice
+          your skills.
+        </p>
       </div>
     </div>
   </div>
@@ -16,55 +33,164 @@
 <section class="py-5">
   <div class="container">
     <div class="row g-4">
-      <div class="col-md-4">
+      <div class="col-lg-3 col-md-6">
         <div class="card h-100 shadow-sm project-card">
-          <img src="{{ url_for('static', filename='images/html_css_web_templates/coffee_shop_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/coffee_shop_design.jpeg') }}">
+          <img
+            src="/static/images/projects/project_1.jpeg"
+            alt="Project Image"
+          />
           <div class="card-body">
-            <h5 class="card-title">Coffee Shop Design</h5>
-            <p class="card-text">A modern and responsive coffee shop template.</p>
+            <h5 class="card-title">Project 1</h5>
+            <p class="card-text">
+              A modern and responsive coffee shop template.
+            </p>
           </div>
           <div class="card-footer bg-white">
-            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+            <a
+              href="/static/images/projects/project_1.jpeg"
+              target="_blank"
+              class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-3 col-md-6">
         <div class="card h-100 shadow-sm project-card">
-          <img src="{{ url_for('static', filename='images/html_css_web_templates/furniture_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/furniture_design.jpeg') }}">
+          <img
+            src="/static/images/projects/project_2.jpeg"
+            class="card-img-top"
+            alt="Project Image"
+          />
           <div class="card-body">
-            <h5 class="card-title">Furniture Design</h5>
-            <p class="card-text">A stylish e-commerce product page for furniture.</p>
+            <h5 class="card-title">Project 2</h5>
+            <p class="card-text">
+              A stylish e-commerce product page for furniture.
+            </p>
           </div>
           <div class="card-footer bg-white">
-            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+            <a
+              href="/static/images/projects/project_2.jpeg"
+              target="_blank"
+              class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-3 col-md-6">
         <div class="card h-100 shadow-sm project-card">
-          <img src="{{ url_for('static', filename='images/html_css_web_templates/web_design.jpeg') }}" class="card-img-top" alt="Project Image" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="{{ url_for('static', filename='images/html_css_web_templates/web_design.jpeg') }}">
+          <img
+            src="{{ url_for('static', filename='images/html_css_web_templates/web_design.jpeg') }}"
+            class="card-img-top"
+            alt="Project Image"
+          />
           <div class="card-body">
             <h5 class="card-title">Web Design</h5>
             <p class="card-text">A portfolio website with a clean layout.</p>
           </div>
           <div class="card-footer bg-white">
-            <a href="#" class="btn btn-sm btn-outline-primary w-100">View Project</a>
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 shadow-sm project-card">
+          <img
+            src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
+            class="card-img-top"
+            alt="Project Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Landing Page</h5>
+            <p class="card-text">A professional landing page for a startup.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 shadow-sm project-card">
+          <img
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80"
+            class="card-img-top"
+            alt="Project Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Admin Dashboard</h5>
+            <p class="card-text">
+              A data-driven dashboard with charts and tables.
+            </p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 shadow-sm project-card">
+          <img
+            src="https://images.unsplash.com/photo-1555774698-0b77e0ab53e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            class="card-img-top"
+            alt="Project Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Blog Template</h5>
+            <p class="card-text">A clean and minimal blog layout.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 shadow-sm project-card">
+          <img
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            class="card-img-top"
+            alt="Project Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Team Page</h5>
+            <p class="card-text">A page to showcase your team members.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card h-100 shadow-sm project-card">
+          <img
+            src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            class="card-img-top"
+            alt="Project Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Contact Form</h5>
+            <p class="card-text">A stylish and functional contact form.</p>
+          </div>
+          <div class="card-footer bg-white">
+            <a href="#" class="btn btn-sm btn-outline-primary w-100"
+              >View Project</a
+            >
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <img src="" id="modalImage" class="img-fluid w-100">
-      </div>
-    </div>
-  </div>
-</div>
 
 <style>
   .hero-section {
@@ -86,17 +212,5 @@
     cursor: pointer;
   }
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var imageModal = document.getElementById('imageModal');
-    imageModal.addEventListener('show.bs.modal', function (event) {
-      var button = event.relatedTarget;
-      var imgSrc = button.getAttribute('data-img-src');
-      var modalImage = imageModal.querySelector('#modalImage');
-      modalImage.src = imgSrc;
-    });
-  });
-</script>
 
 {% endblock %}
