@@ -30,13 +30,14 @@ block content %}
   </div>
 </section>
 
-<section class="py-5">
+<section class="py-5 projects">
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-3 col-md-6">
         <div class="card h-100 shadow-sm project-card">
           <img
             src="/static/images/projects/project_1.webp"
+            class="card-img-top"
             alt="Project Image"
           />
           <div class="card-body">
@@ -223,6 +224,8 @@ block content %}
   }
   .card-img-top {
     cursor: pointer;
+    height: 200px;
+    object-fit: cover;
   }
 </style>
 
