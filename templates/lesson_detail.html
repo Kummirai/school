@@ -97,42 +97,44 @@ block content %}
     <div class="row">
       <!-- Lesson Navigation/Resources (Sidebar for large screens) -->
       <div class="col-lg-3 d-none d-lg-block">
-        <div class="card shadow-sm mb-4">
-          <div class="card-header bg-primary text-white">
-            <i class="bi bi-list-task me-2"></i> Lesson Resources
-          </div>
-          <div class="list-group list-group-flush">
-            {% set first_loop = true %} {% for resource in lesson.resources %}
-            {% if resource.path is string %}
-            <!-- Single path resource -->
-            <button
-              type="button"
-              class="list-group-item list-group-item-action resource-btn"
-              data-resource-type="{{ resource.type }}"
-              data-resource-path="{% if resource.path.startswith('http') %}{{ resource.path }}{% else %}{{ url_for('static', filename=resource.path) }}{% endif %}"
-            >
-              <i
-                class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
-              ></i>
-              {{ resource.title }}
-            </button>
-            {% set first_loop = false %} {% else %}
-            <!-- Multiple paths resource -->
-            {% for path in resource.path %}
-            <button
-              type="button"
-              class="list-group-item list-group-item-action resource-btn"
-              data-resource-type="{{ resource.type }}"
-              data-resource-path="{% if path.startswith('http') %}{{ path }}{% else %}{{ url_for('static', filename=path) }}{% endif %}"
-            >
-              <i
-                class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
-              ></i>
-              {{ resource.title }}{% if resource.path|length > 1 %} - Part {{
-              loop.index }}{% endif %}
-            </button>
-            {% if loop.first %}{% set first_loop = false %}{% endif %} {% endfor
-            %} {% endif %} {% endfor %}
+        <div class="position-sticky" style="top: 80px;">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+              <i class="bi bi-list-task me-2"></i> Lesson Resources
+            </div>
+            <div class="list-group list-group-flush">
+              {% set first_loop = true %} {% for resource in lesson.resources %}
+              {% if resource.path is string %}
+              <!-- Single path resource -->
+              <button
+                type="button"
+                class="list-group-item list-group-item-action resource-btn"
+                data-resource-type="{{ resource.type }}"
+                data-resource-path="{% if resource.path.startswith('http') %}{{ resource.path }}{% else %}{{ url_for('static', filename=resource.path) }}{% endif %}"
+              >
+                <i
+                  class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+                ></i>
+                {{ resource.title }}
+              </button>
+              {% set first_loop = false %} {% else %}
+              <!-- Multiple paths resource -->
+              {% for path in resource.path %}
+              <button
+                type="button"
+                class="list-group-item list-group-item-action resource-btn"
+                data-resource-type="{{ resource.type }}"
+                data-resource-path="{% if path.startswith('http') %}{{ path }}{% else %}{{ url_for('static', filename=path) }}{% endif %}"
+              >
+                <i
+                  class="bi bi-{{ resource.icon or 'file-earmark-text' }} me-2"
+                ></i>
+                {{ resource.title }}{% if resource.path|length > 1 %} - Part {{
+                loop.index }}{% endif %}
+              </button>
+              {% if loop.first %}{% set first_loop = false %}{% endif %} {% endfor
+              %} {% endif %} {% endfor %}
+            </div>
           </div>
         </div>
       </div>
