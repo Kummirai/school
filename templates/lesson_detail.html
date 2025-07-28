@@ -251,33 +251,46 @@ block content %}
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const resourceButtons = document.querySelectorAll(".resource-btn");
-      const contentDisplay = document.getElementById("lessonContentDisplay");
-      const lessonContentTitle = document.getElementById("lessonContentTitle");
-      const markCompleteBtn = document.getElementById("markCompleteBtn");
-      const zoomInBtn = document.getElementById("zoomInBtn");
-      const zoomOutBtn = document.getElementById("zoomOutBtn");
-      let currentZoom = 100;
+  document.addEventListener("DOMContentLoaded", function () {
+    const resourceButtons = document.querySelectorAll(".resource-btn");
+    const contentDisplay = document.getElementById("lessonContentDisplay");
+    const lessonContentTitle = document.getElementById("lessonContentTitle");
+    const markCompleteBtn = document.getElementById("markCompleteBtn");
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    let currentZoom = 100;
 
-      // Handle resource switching
-  resourceButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      resourceButtons.forEach((btn) => btn.classList.remove("active"));
-      this.classList.add("active");
+    function resizeIframe(iframe) {
+      iframe.onload = function () {
+        iframe.style.height =
+          iframe.contentWindow.document.body.scrollHeight + "px";
+      };
+    }
 
-      const resourcePath = this.dataset.resourcePath;
-      const resourceType = this.dataset.resourceType;
-      const resourceTitle = this.textContent.trim();
+    // Initial setup for the first iframe
+    const initialFrame = document.getElementById("contentFrame");
+    if (initialFrame) {
+      resizeIframe(initialFrame);
+    }
 
-      // Clear previous content
-      contentDisplay.innerHTML = '';
+    // Handle resource switching
+    resourceButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        resourceButtons.forEach((btn) => btn.classList.remove("active"));
+        this.classList.add("active");
 
-      if (resourcePath.startsWith('http')) {
-        // Handle YouTube/video content
-        const videoEmbed = document.createElement('div');
-        videoEmbed.className = 'ratio ratio-16x9';
-        videoEmbed.innerHTML = `
+        const resourcePath = this.dataset.resourcePath;
+        const resourceType = this.dataset.resourceType;
+        const resourceTitle = this.textContent.trim();
+
+        // Clear previous content
+        contentDisplay.innerHTML = "";
+
+        if (resourcePath.startsWith("http")) {
+          // Handle YouTube/video content
+          const videoEmbed = document.createElement("div");
+          videoEmbed.className = "ratio ratio-16x9";
+          videoEmbed.innerHTML = `
           <iframe
             src="${resourcePath}"
             frameborder="0"
@@ -285,74 +298,79 @@ block content %}
             allowfullscreen>
           </iframe>
         `;
-        contentDisplay.appendChild(videoEmbed);
-      } else {
-        // Handle local content
-        const contentFrame = document.createElement('iframe');
-        contentFrame.src = resourcePath;
-        contentFrame.style.width = '100%';
-        contentFrame.style.height = '600px';
-        contentFrame.style.border = 'none';
-        contentFrame.id = 'contentFrame';
-        contentDisplay.appendChild(contentFrame);
-      }
+          contentDisplay.appendChild(videoEmbed);
+        } else {
+          // Handle local content
+          const contentFrame = document.createElement("iframe");
+          contentFrame.src = resourcePath;
+          contentFrame.style.width = "100%";
+          contentFrame.style.border = "none";
+          contentFrame.id = "contentFrame";
+          contentFrame.scrolling = "no";
+          resizeIframe(contentFrame);
+          contentDisplay.appendChild(contentFrame);
+        }
 
-      lessonContentTitle.textContent = resourceTitle;
+        lessonContentTitle.textContent = resourceTitle;
+      });
     });
-  });
 
-      // Zoom functionality (only for local content)
-      zoomInBtn.addEventListener("click", () => {
-        const contentFrame = document.getElementById("contentFrame");
-        if (contentFrame) {
-          currentZoom += 10;
-          contentFrame.style.transform = `scale(${currentZoom / 100})`;
-          contentFrame.style.transformOrigin = '0 0';
-        }
-      });
+    // Zoom functionality (only for local content)
+    zoomInBtn.addEventListener("click", () => {
+      const contentFrame = document.getElementById("contentFrame");
+      if (contentFrame) {
+        currentZoom += 10;
+        contentFrame.style.transform = `scale(${currentZoom / 100})`;
+        contentFrame.style.transformOrigin = "0 0";
+      }
+    });
 
-      zoomOutBtn.addEventListener("click", () => {
-        const contentFrame = document.getElementById("contentFrame");
-        if (contentFrame && currentZoom > 50) {
-          currentZoom -= 10;
-          contentFrame.style.transform = `scale(${currentZoom / 100})`;
-          contentFrame.style.transformOrigin = '0 0';
-        }
-      });
+    zoomOutBtn.addEventListener("click", () => {
+      const contentFrame = document.getElementById("contentFrame");
+      if (contentFrame && currentZoom > 50) {
+        currentZoom -= 10;
+        contentFrame.style.transform = `scale(${currentZoom / 100})`;
+        contentFrame.style.transformOrigin = "0 0";
+      }
+    });
 
-      // Mark as complete functionality
-      markCompleteBtn.addEventListener("click", function () {
-        fetch("{{ url_for('grades.mark_lesson_complete') }}", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            term_idx: {{ term_idx }},
-            unit_idx: {{ unit_idx }},
-            lesson_idx: {{ lesson_idx }}
-          }),
-        })
-        .then(response => response.json())
-        .then(data => {
+    // Mark as complete functionality
+    markCompleteBtn.addEventListener("click", function () {
+      fetch("{{ url_for('grades.mark_lesson_complete') }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          term_idx: {{ term_idx }},
+          unit_idx: {{ unit_idx }},
+          lesson_idx: {{ lesson_idx }},
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
           if (data.success) {
             showToast("Lesson marked as complete!", "success");
             // Update UI
             markCompleteBtn.disabled = true;
-            markCompleteBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Completed';
+            markCompleteBtn.innerHTML =
+              '<i class="bi bi-check-circle-fill me-1"></i> Completed';
           } else {
-            showToast(data.message || "Error marking lesson complete", "danger");
+            showToast(
+              data.message || "Error marking lesson complete",
+              "danger"
+            );
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error:", error);
           showToast("Failed to mark lesson complete", "danger");
         });
-      });
+    });
 
-      function showToast(message, type) {
-        const toastContainer = document.createElement("div");
-        toastContainer.innerHTML = `
+    function showToast(message, type) {
+      const toastContainer = document.createElement("div");
+      toastContainer.innerHTML = `
           <div class="toast align-items-center text-white bg-${type} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
               <div class="toast-body">${message}</div>
@@ -360,10 +378,10 @@ block content %}
             </div>
           </div>
         `;
-        document.body.appendChild(toastContainer);
-        setTimeout(() => toastContainer.remove(), 3000);
-      }
-    });
+      document.body.appendChild(toastContainer);
+      setTimeout(() => toastContainer.remove(), 3000);
+    }
+  });
 </script>
 
 <!-- Toast Notification -->
