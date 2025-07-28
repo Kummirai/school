@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Triangle Properties Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .correct {
+        background-color: #d4edda !important;
+      }
+      .incorrect {
+        background-color: #f8d7da !important;
+      }
+      .feedback {
+        display: none;
+      }
+      .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+      .form-control {
+        max-width: 200px;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card shadow">
+            <div class="card-header bg-success text-white">
+              <h2 class="text-center">Triangle Properties Practice</h2>
+            </div>
+            <div class="card-body">
+              <p class="lead">
+                Answer questions about triangle properties and calculations.
+              </p>
+
+              <div id="quiz-container">
+                <!-- Question 1 -->
+                <div class="question" id="q1">
+                  <p>
+                    1. What is the sum of the interior angles in any triangle?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q1-answer"
+                      placeholder="Enter degrees"
+                    />
+                    <span class="input-group-text">°</span>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" id="q2">
+                  <p>
+                    2. If two angles of a triangle measure 45° and 45°, what is
+                    the measure of the third angle?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q2-answer"
+                      placeholder="Enter degrees"
+                    />
+                    <span class="input-group-text">°</span>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question" id="q3">
+                  <p>
+                    3. In a right-angled triangle, what is the name of the side
+                    opposite the right angle?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q3a">Adjacent</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q3b">Hypotenuse</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q3c">Opposite</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question" id="q4">
+                  <p>
+                    4. If a triangle has sides of length 3cm, 4cm, and 5cm, what
+                    type of triangle is it?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q4a">Acute</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q4b"
+                      >Right-angled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q4c">Obtuse</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question" id="q5">
+                  <p>
+                    5. In an equilateral triangle, what is the measure of each
+                    angle?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q5-answer"
+                      placeholder="Enter degrees"
+                    />
+                    <span class="input-group-text">°</span>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" id="q6">
+                  <p>
+                    6. Can a triangle have sides of length 2cm, 3cm, and 6cm?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q6a">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q6b">No</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" id="q7">
+                  <p>
+                    7. If one angle of an isosceles triangle measures 100°, what
+                    are the measures of the other two angles?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q7-answer"
+                      placeholder="Enter degrees"
+                    />
+                    <span class="input-group-text"
+                      >° each (they are equal)</span
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" id="q8">
+                  <p>
+                    8. What is the perimeter of a triangle with sides 5cm, 12cm,
+                    and 13cm?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q8-answer"
+                      placeholder="Enter cm"
+                    />
+                    <span class="input-group-text">cm</span>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" id="q9">
+                  <p>
+                    9. In triangle ABC, angle A = 30° and angle B = 60°. What is
+                    angle C?
+                  </p>
+                  <div class="input-group mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="q9-answer"
+                      placeholder="Enter degrees"
+                    />
+                    <span class="input-group-text">°</span>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" id="q10">
+                  <p>10. What is the name of a triangle with no sides equal?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q10a">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q10b"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q10c">Scalene</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button id="check-answers" class="btn btn-success">
+                  Check Answers
+                </button>
+                <button id="reset-quiz" class="btn btn-secondary">
+                  Reset Quiz
+                </button>
+              </div>
+
+              <div
+                id="results"
+                class="mt-4 p-3 bg-light border rounded"
+                style="display: none"
+              >
+                <h4>Results</h4>
+                <p>You scored <span id="score">0</span> out of 10.</p>
+                <p id="result-message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const correctAnswers = {
+          q1: 180,
+          q2: 90,
+          q3: "b",
+          q4: "b",
+          q5: 60,
+          q6: "b",
+          q7: 40,
+          q8: 30,
+          q9: 90,
+          q10: "c",
+        };
+
+        const explanations = {
+          q1: "The sum of interior angles in any triangle is always 180°.",
+          q2: "180° - 45° - 45° = 90°. The third angle is 90°.",
+          q3: "The hypotenuse is the side opposite the right angle in a right-angled triangle.",
+          q4: "A 3-4-5 triangle is a right-angled triangle because 3² + 4² = 5² (9 + 16 = 25).",
+          q5: "In an equilateral triangle, all three angles are equal to 60°.",
+          q6: "No, because 2 + 3 = 5 which is less than 6. The sum of any two sides must be greater than the third side.",
+          q7: "(180° - 100°) ÷ 2 = 40°. The other two angles are each 40°.",
+          q8: "5 + 12 + 13 = 30cm. The perimeter is 30cm.",
+          q9: "180° - 30° - 60° = 90°. Angle C is 90°.",
+          q10: "A scalene triangle has no sides equal.",
+        };
+
+        document
+          .getElementById("check-answers")
+          .addEventListener("click", function () {
+            let score = 0;
+
+            // Check Q1
+            const q1Answer = parseInt(
+              document.getElementById("q1-answer").value
+            );
+            const q1Feedback = document.querySelector("#q1 .feedback");
+            if (q1Answer === correctAnswers.q1) {
+              score++;
+              q1Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q1}</div>`;
+              document.getElementById("q1").classList.add("correct");
+              document.getElementById("q1").classList.remove("incorrect");
+            } else {
+              q1Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q1}°. ${explanations.q1}</div>`;
+              document.getElementById("q1").classList.add("incorrect");
+              document.getElementById("q1").classList.remove("correct");
+            }
+            q1Feedback.style.display = "block";
+
+            // Check Q2
+            const q2Answer = parseInt(
+              document.getElementById("q2-answer").value
+            );
+            const q2Feedback = document.querySelector("#q2 .feedback");
+            if (q2Answer === correctAnswers.q2) {
+              score++;
+              q2Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q2}</div>`;
+              document.getElementById("q2").classList.add("correct");
+              document.getElementById("q2").classList.remove("incorrect");
+            } else {
+              q2Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q2}°. ${explanations.q2}</div>`;
+              document.getElementById("q2").classList.add("incorrect");
+              document.getElementById("q2").classList.remove("correct");
+            }
+            q2Feedback.style.display = "block";
+
+            // Check Q3
+            const q3Selected = document.querySelector(
+              'input[name="q3"]:checked'
+            );
+            const q3Feedback = document.querySelector("#q3 .feedback");
+            if (q3Selected) {
+              if (q3Selected.value === correctAnswers.q3) {
+                score++;
+                q3Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q3}</div>`;
+                document.getElementById("q3").classList.add("correct");
+                document.getElementById("q3").classList.remove("incorrect");
+              } else {
+                q3Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is Hypotenuse. ${explanations.q3}</div>`;
+                document.getElementById("q3").classList.add("incorrect");
+                document.getElementById("q3").classList.remove("correct");
+              }
+            } else {
+              q3Feedback.innerHTML =
+                '<div class="alert alert-warning">Please select an answer.</div>';
+            }
+            q3Feedback.style.display = "block";
+
+            // Check Q4
+            const q4Selected = document.querySelector(
+              'input[name="q4"]:checked'
+            );
+            const q4Feedback = document.querySelector("#q4 .feedback");
+            if (q4Selected) {
+              if (q4Selected.value === correctAnswers.q4) {
+                score++;
+                q4Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q4}</div>`;
+                document.getElementById("q4").classList.add("correct");
+                document.getElementById("q4").classList.remove("incorrect");
+              } else {
+                q4Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is Right-angled. ${explanations.q4}</div>`;
+                document.getElementById("q4").classList.add("incorrect");
+                document.getElementById("q4").classList.remove("correct");
+              }
+            } else {
+              q4Feedback.innerHTML =
+                '<div class="alert alert-warning">Please select an answer.</div>';
+            }
+            q4Feedback.style.display = "block";
+
+            // Check Q5
+            const q5Answer = parseInt(
+              document.getElementById("q5-answer").value
+            );
+            const q5Feedback = document.querySelector("#q5 .feedback");
+            if (q5Answer === correctAnswers.q5) {
+              score++;
+              q5Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q5}</div>`;
+              document.getElementById("q5").classList.add("correct");
+              document.getElementById("q5").classList.remove("incorrect");
+            } else {
+              q5Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q5}°. ${explanations.q5}</div>`;
+              document.getElementById("q5").classList.add("incorrect");
+              document.getElementById("q5").classList.remove("correct");
+            }
+            q5Feedback.style.display = "block";
+
+            // Check Q6
+            const q6Selected = document.querySelector(
+              'input[name="q6"]:checked'
+            );
+            const q6Feedback = document.querySelector("#q6 .feedback");
+            if (q6Selected) {
+              if (q6Selected.value === correctAnswers.q6) {
+                score++;
+                q6Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q6}</div>`;
+                document.getElementById("q6").classList.add("correct");
+                document.getElementById("q6").classList.remove("incorrect");
+              } else {
+                q6Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is No. ${explanations.q6}</div>`;
+                document.getElementById("q6").classList.add("incorrect");
+                document.getElementById("q6").classList.remove("correct");
+              }
+            } else {
+              q6Feedback.innerHTML =
+                '<div class="alert alert-warning">Please select an answer.</div>';
+            }
+            q6Feedback.style.display = "block";
+
+            // Check Q7
+            const q7Answer = parseInt(
+              document.getElementById("q7-answer").value
+            );
+            const q7Feedback = document.querySelector("#q7 .feedback");
+            if (q7Answer === correctAnswers.q7) {
+              score++;
+              q7Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q7}</div>`;
+              document.getElementById("q7").classList.add("correct");
+              document.getElementById("q7").classList.remove("incorrect");
+            } else {
+              q7Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q7}°. ${explanations.q7}</div>`;
+              document.getElementById("q7").classList.add("incorrect");
+              document.getElementById("q7").classList.remove("correct");
+            }
+            q7Feedback.style.display = "block";
+
+            // Check Q8
+            const q8Answer = parseInt(
+              document.getElementById("q8-answer").value
+            );
+            const q8Feedback = document.querySelector("#q8 .feedback");
+            if (q8Answer === correctAnswers.q8) {
+              score++;
+              q8Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q8}</div>`;
+              document.getElementById("q8").classList.add("correct");
+              document.getElementById("q8").classList.remove("incorrect");
+            } else {
+              q8Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q8}cm. ${explanations.q8}</div>`;
+              document.getElementById("q8").classList.add("incorrect");
+              document.getElementById("q8").classList.remove("correct");
+            }
+            q8Feedback.style.display = "block";
+
+            // Check Q9
+            const q9Answer = parseInt(
+              document.getElementById("q9-answer").value
+            );
+            const q9Feedback = document.querySelector("#q9 .feedback");
+            if (q9Answer === correctAnswers.q9) {
+              score++;
+              q9Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q9}</div>`;
+              document.getElementById("q9").classList.add("correct");
+              document.getElementById("q9").classList.remove("incorrect");
+            } else {
+              q9Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q9}°. ${explanations.q9}</div>`;
+              document.getElementById("q9").classList.add("incorrect");
+              document.getElementById("q9").classList.remove("correct");
+            }
+            q9Feedback.style.display = "block";
+
+            // Check Q10
+            const q10Selected = document.querySelector(
+              'input[name="q10"]:checked'
+            );
+            const q10Feedback = document.querySelector("#q10 .feedback");
+            if (q10Selected) {
+              if (q10Selected.value === correctAnswers.q10) {
+                score++;
+                q10Feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q10}</div>`;
+                document.getElementById("q10").classList.add("correct");
+                document.getElementById("q10").classList.remove("incorrect");
+              } else {
+                q10Feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is Scalene. ${explanations.q10}</div>`;
+                document.getElementById("q10").classList.add("incorrect");
+                document.getElementById("q10").classList.remove("correct");
+              }
+            } else {
+              q10Feedback.innerHTML =
+                '<div class="alert alert-warning">Please select an answer.</div>';
+            }
+            q10Feedback.style.display = "block";
+
+            // Show results
+            document.getElementById("score").textContent = score;
+            document.getElementById("results").style.display = "block";
+
+            let resultMessage = "";
+            if (score === 10) {
+              resultMessage = "Perfect score! You're a triangle expert!";
+            } else if (score >= 7) {
+              resultMessage =
+                "Well done! You understand triangle properties well.";
+            } else if (score >= 5) {
+              resultMessage = "Good effort! Review the concepts to improve.";
+            } else {
+              resultMessage =
+                "Keep practicing! You'll get better with more study.";
+            }
+            document.getElementById("result-message").textContent =
+              resultMessage;
+          });
+
+        document
+          .getElementById("reset-quiz")
+          .addEventListener("click", function () {
+            // Clear all inputs
+            const numberInputs = document.querySelectorAll(
+              'input[type="number"]'
+            );
+            numberInputs.forEach((input) => {
+              input.value = "";
+            });
+
+            const radioButtons = document.querySelectorAll(
+              'input[type="radio"]'
+            );
+            radioButtons.forEach((button) => {
+              button.checked = false;
+            });
+
+            // Hide all feedback
+            const feedbackDivs = document.querySelectorAll(".feedback");
+            feedbackDivs.forEach((div) => {
+              div.style.display = "none";
+              div.innerHTML = "";
+            });
+
+            // Remove coloring
+            const questions = document.querySelectorAll(".question");
+            questions.forEach((question) => {
+              question.classList.remove("correct", "incorrect");
+            });
+
+            // Hide results
+            document.getElementById("results").style.display = "none";
+          });
+      });
+    </script>
+  </body>
+</html>

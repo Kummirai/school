@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Types of Triangles Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .correct {
+        background-color: #d4edda !important;
+      }
+      .incorrect {
+        background-color: #f8d7da !important;
+      }
+      .feedback {
+        display: none;
+      }
+      .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+              <h2 class="text-center">Types of Triangles Practice</h2>
+            </div>
+            <div class="card-body">
+              <p class="lead">
+                Identify the type of triangle based on the given description.
+              </p>
+
+              <div id="quiz-container">
+                <!-- Question 1 -->
+                <div class="question" id="q1">
+                  <p>
+                    1. A triangle with all three sides equal in length is
+                    called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q1a">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q1b">Scalene</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q1c"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" id="q2">
+                  <p>
+                    2. A triangle with one angle measuring exactly 90° is
+                    called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q2a">Acute</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q2b"
+                      >Right-angled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q2c">Obtuse</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question" id="q3">
+                  <p>3. A triangle with two sides equal in length is called:</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q3a">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q3b">Scalene</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q3c"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question" id="q4">
+                  <p>
+                    4. A triangle with all three sides of different lengths is
+                    called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q4a">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q4b">Scalene</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q4c"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question" id="q5">
+                  <p>
+                    5. A triangle with all three angles less than 90° is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q5a">Acute</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q5b"
+                      >Right-angled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q5c">Obtuse</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" id="q6">
+                  <p>
+                    6. A triangle with one angle greater than 90° is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q6a">Acute</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q6b"
+                      >Right-angled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q6c">Obtuse</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" id="q7">
+                  <p>7. Which type of triangle has all angles equal to 60°?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q7a">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q7b"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q7c">Scalene</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" id="q8">
+                  <p>8. Can a triangle have two right angles?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q8a">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q8b">No</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" id="q9">
+                  <p>
+                    9. If a triangle has sides of 5cm, 5cm, and 7cm, what type
+                    is it?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q9a"
+                      >Equilateral</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q9b">Isosceles</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q9c">Scalene</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" id="q10">
+                  <p>
+                    10. Which statement is true about all equilateral triangles?
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q10a"
+                      >They are all right-angled</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q10b"
+                      >They are all isosceles</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q10c"
+                      >They are all acute</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button id="check-answers" class="btn btn-primary">
+                  Check Answers
+                </button>
+                <button id="reset-quiz" class="btn btn-secondary">
+                  Reset Quiz
+                </button>
+              </div>
+
+              <div
+                id="results"
+                class="mt-4 p-3 bg-light border rounded"
+                style="display: none"
+              >
+                <h4>Results</h4>
+                <p>You scored <span id="score">0</span> out of 10.</p>
+                <p id="result-message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const correctAnswers = {
+          q1: "c",
+          q2: "b",
+          q3: "a",
+          q4: "b",
+          q5: "a",
+          q6: "c",
+          q7: "b",
+          q8: "b",
+          q9: "b",
+          q10: "c",
+        };
+
+        const explanations = {
+          q1: "An equilateral triangle has all three sides equal in length.",
+          q2: "A right-angled triangle has one angle measuring exactly 90°.",
+          q3: "An isosceles triangle has two sides equal in length.",
+          q4: "A scalene triangle has all three sides of different lengths.",
+          q5: "An acute triangle has all three angles less than 90°.",
+          q6: "An obtuse triangle has one angle greater than 90°.",
+          q7: "An equilateral triangle has all angles equal to 60°.",
+          q8: "A triangle cannot have two right angles because the sum of angles in a triangle is 180°.",
+          q9: "A triangle with two equal sides (5cm, 5cm) is isosceles.",
+          q10: "All equilateral triangles are acute because all their angles are 60°.",
+        };
+
+        document
+          .getElementById("check-answers")
+          .addEventListener("click", function () {
+            let score = 0;
+
+            for (let i = 1; i <= 10; i++) {
+              const questionId = "q" + i;
+              const selectedOption = document.querySelector(
+                `input[name="${questionId}"]:checked`
+              );
+              const feedbackDiv = document.querySelector(
+                `#${questionId} .feedback`
+              );
+
+              if (selectedOption) {
+                if (selectedOption.value === correctAnswers[questionId]) {
+                  score++;
+                  feedbackDiv.innerHTML = `<div class="alert alert-success">Correct! ${explanations[questionId]}</div>`;
+                  document.getElementById(questionId).classList.add("correct");
+                  document
+                    .getElementById(questionId)
+                    .classList.remove("incorrect");
+                } else {
+                  feedbackDiv.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${
+                    document.querySelector(
+                      `#${questionId} input[value="${correctAnswers[questionId]}"]`
+                    ).nextElementSibling.textContent
+                  }. ${explanations[questionId]}</div>`;
+                  document
+                    .getElementById(questionId)
+                    .classList.add("incorrect");
+                  document
+                    .getElementById(questionId)
+                    .classList.remove("correct");
+                }
+                feedbackDiv.style.display = "block";
+              } else {
+                feedbackDiv.innerHTML =
+                  '<div class="alert alert-warning">Please select an answer.</div>';
+                feedbackDiv.style.display = "block";
+              }
+            }
+
+            document.getElementById("score").textContent = score;
+            document.getElementById("results").style.display = "block";
+
+            let resultMessage = "";
+            if (score === 10) {
+              resultMessage = "Perfect! You know your triangles very well!";
+            } else if (score >= 7) {
+              resultMessage =
+                "Good job! You have a solid understanding of triangles.";
+            } else if (score >= 5) {
+              resultMessage =
+                "Not bad, but you might want to review triangle types.";
+            } else {
+              resultMessage =
+                "Keep practicing! You'll get better with more study.";
+            }
+            document.getElementById("result-message").textContent =
+              resultMessage;
+          });
+
+        document
+          .getElementById("reset-quiz")
+          .addEventListener("click", function () {
+            const radioButtons = document.querySelectorAll(
+              'input[type="radio"]'
+            );
+            radioButtons.forEach((button) => {
+              button.checked = false;
+            });
+
+            const feedbackDivs = document.querySelectorAll(".feedback");
+            feedbackDivs.forEach((div) => {
+              div.style.display = "none";
+              div.innerHTML = "";
+            });
+
+            const questions = document.querySelectorAll(".question");
+            questions.forEach((question) => {
+              question.classList.remove("correct", "incorrect");
+            });
+
+            document.getElementById("results").style.display = "none";
+          });
+      });
+    </script>
+  </body>
+</html>

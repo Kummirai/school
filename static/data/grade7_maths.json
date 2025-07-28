@@ -340,39 +340,46 @@
               ]
             },
             {
-              "title": "3.3 Geometry of 2D Shapes",
-              "duration": "52 min",
+              "title": "5.1 Geometry of 2D Shapes - Triangles",
+              "duration": "120 min",
               "icon": "bi bi-square",
-              "description": "Explore the properties of 2D shapes, including polygon classification, angle sums, and systematic approaches to shape analysis.",
+              "description": "Triangles",
               "resources": [
                 {
                   "type": "lesson_content",
                   "title": "Lesson Content",
-                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_content.html",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_content.html",
                   "icon": "file-earmark-text"
                 },
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": "https://www.youtube.com/embed/Ke9bQFtxkzE",
+                  "path": [
+                    "https://www.youtube.com/embed/mLeNaZcy-hE",
+                    "https://www.youtube.com/embed/04LM5RZfbNQ"
+                  ],
                   "icon": "play-circle"
                 },
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_study_guide.html",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_studyguide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
-                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_exercises.html",
+                  "path": [
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_1.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_2.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_3.html"
+                  ],
                   "icon": "pencil-square"
                 },
                 {
                   "type": "test",
                   "title": "Lesson Test",
-                  "path": "html/grade_7/maths/3_3_geometry_of_2d_shapes_test.html",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_test_1.html",
                   "icon": "clipboard-check"
                 }
               ]

@@ -151,6 +151,16 @@ def initialize_database():
     conn = get_db_connection()
     cur = conn.cursor()
 
+    # Create users table
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        role VARCHAR(50) NOT NULL
+    )
+    ''')
+
     # Add this after your other table creations
     cur.execute('''
         CREATE TABLE IF NOT EXISTS announcements (
@@ -232,16 +242,6 @@ def initialize_database():
             read_at TIMESTAMP,
             PRIMARY KEY (announcement_id, user_id)
         )
-    ''')
-
-    # Create users table
-    cur.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(255) UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        role VARCHAR(50) NOT NULL
-    )
     ''')
 
     # Subscription tables
@@ -347,8 +347,8 @@ def initialize_database():
     cur.execute('''
         CREATE TABLE IF NOT EXISTS assignment_students (
             assignment_id INTEGER NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
-            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-            PRIMARY KEY (assignment_id, user_id)
+            student_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            PRIMARY KEY (assignment_id, student_id)
         )
     ''')
 

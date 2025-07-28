@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Triangle Identification Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .correct {
+        background-color: #d4edda !important;
+      }
+      .incorrect {
+        background-color: #f8d7da !important;
+      }
+      .feedback {
+        display: none;
+      }
+      .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+      .triangle-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+      }
+      .triangle {
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .triangle:hover {
+        transform: scale(1.05);
+      }
+      .selected {
+        filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.5));
+      }
+      .triangle-label {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card shadow">
+            <div class="card-header bg-info text-white">
+              <h2 class="text-center">Triangle Identification Practice</h2>
+            </div>
+            <div class="card-body">
+              <p class="lead">
+                Identify the types of triangles shown in the diagrams.
+              </p>
+
+              <div id="quiz-container">
+                <!-- Question 1 -->
+                <div class="question" id="q1">
+                  <p>1. Use the following triangles to answer the questions:</p>
+                  <div class="triangle-container">
+                    <div class="triangle-option" data-triangle="A">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="50,10 90,90 10,90" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">A</div>
+                    </div>
+                    <div class="triangle-option" data-triangle="B">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="20,20 80,20 50,80" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">B</div>
+                    </div>
+                    <div class="triangle-option" data-triangle="C">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="10,10 10,90 80,90" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">C</div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3">
+                    <p>(a) Which triangle has only two sides that are equal?</p>
+                    <div class="btn-group" role="group" id="q1a-options">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="A"
+                      >
+                        A
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="B"
+                      >
+                        B
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="C"
+                      >
+                        C
+                      </button>
+                    </div>
+                    <div class="mt-2">
+                      <label for="q1a-type" class="form-label"
+                        >What is this type of triangle called?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q1a-type"
+                        placeholder="Enter triangle type"
+                      />
+                    </div>
+                    <div class="feedback mt-2" id="q1a-feedback"></div>
+                  </div>
+
+                  <div class="mt-3">
+                    <p>(b) Which triangle has all three sides equal?</p>
+                    <div class="btn-group" role="group" id="q1b-options">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="A"
+                      >
+                        A
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="B"
+                      >
+                        B
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="C"
+                      >
+                        C
+                      </button>
+                    </div>
+                    <div class="mt-2">
+                      <label for="q1b-type" class="form-label"
+                        >What is this type of triangle called?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q1b-type"
+                        placeholder="Enter triangle type"
+                      />
+                    </div>
+                    <div class="feedback mt-2" id="q1b-feedback"></div>
+                  </div>
+
+                  <div class="mt-3">
+                    <p>(c) Which triangle has an angle equal to 90°?</p>
+                    <div class="btn-group" role="group" id="q1c-options">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="A"
+                      >
+                        A
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="B"
+                      >
+                        B
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary triangle-select"
+                        data-answer="C"
+                      >
+                        C
+                      </button>
+                    </div>
+                    <div class="mt-2">
+                      <label for="q1c-type" class="form-label"
+                        >What is this type of triangle called?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q1c-type"
+                        placeholder="Enter triangle type"
+                      />
+                    </div>
+                    <div class="feedback mt-2" id="q1c-feedback"></div>
+                  </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" id="q2">
+                  <p>2. Identify the type of each triangle:</p>
+                  <div class="triangle-container">
+                    <div class="triangle-option" data-triangle="B">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="20,20 80,20 50,80" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">B</div>
+                    </div>
+                    <div class="triangle-option" data-triangle="D">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="10,10 50,90 90,10" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">D</div>
+                    </div>
+                    <div class="triangle-option" data-triangle="E">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="10,10 10,90 90,90" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">E</div>
+                    </div>
+                    <div class="triangle-option" data-triangle="F">
+                      <svg
+                        class="triangle"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                      >
+                        <polygon points="10,10 90,10 50,50" fill="#6c757d" />
+                      </svg>
+                      <div class="triangle-label">F</div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <label for="q2-b" class="form-label">Triangle B:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q2-b"
+                        placeholder="Enter type"
+                      />
+                      <div class="feedback mt-2" id="q2-b-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="q2-d" class="form-label">Triangle D:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q2-d"
+                        placeholder="Enter type"
+                      />
+                      <div class="feedback mt-2" id="q2-d-feedback"></div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <label for="q2-e" class="form-label">Triangle E:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q2-e"
+                        placeholder="Enter type"
+                      />
+                      <div class="feedback mt-2" id="q2-e-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="q2-f" class="form-label">Triangle F:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="q2-f"
+                        placeholder="Enter type"
+                      />
+                      <div class="feedback mt-2" id="q2-f-feedback"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button id="check-answers" class="btn btn-primary">
+                  Check Answers
+                </button>
+                <button id="reset-quiz" class="btn btn-secondary">
+                  Reset Quiz
+                </button>
+              </div>
+
+              <div
+                id="results"
+                class="mt-4 p-3 bg-light border rounded"
+                style="display: none"
+              >
+                <h4>Results</h4>
+                <p>You scored <span id="score">0</span> out of 7.</p>
+                <p id="result-message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Correct answers
+        const correctAnswers = {
+          q1a: { letter: "B", type: "isosceles" },
+          q1b: { letter: "A", type: "equilateral" },
+          q1c: { letter: "C", type: "right-angled" },
+          q2b: "isosceles",
+          q2d: "scalene",
+          q2e: "right-angled",
+          q2f: "isosceles",
+        };
+
+        // Explanations
+        const explanations = {
+          q1a: "Triangle B is isosceles because it has two equal sides.",
+          q1b: "Triangle A is equilateral because all three sides are equal.",
+          q1c: "Triangle C is right-angled because it has one 90° angle.",
+          q2b: "Triangle B has two equal sides, making it isosceles.",
+          q2d: "Triangle D has all sides of different lengths, making it scalene.",
+          q2e: "Triangle E has a right angle, making it right-angled.",
+          q2f: "Triangle F has two equal sides, making it isosceles.",
+        };
+
+        // Select triangle buttons
+        document.querySelectorAll(".triangle-select").forEach((button) => {
+          button.addEventListener("click", function () {
+            const questionId = this.closest(".btn-group").id.replace(
+              "-options",
+              ""
+            );
+            document
+              .querySelectorAll(`#${questionId}-options button`)
+              .forEach((btn) => {
+                btn.classList.remove("active", "btn-primary");
+                btn.classList.add("btn-outline-primary");
+              });
+            this.classList.add("active", "btn-primary");
+            this.classList.remove("btn-outline-primary");
+          });
+        });
+
+        // Check answers button
+        document
+          .getElementById("check-answers")
+          .addEventListener("click", function () {
+            let score = 0;
+
+            // Check Q1a
+            const q1aSelected = document.querySelector("#q1a-options .active");
+            const q1aType = document
+              .getElementById("q1a-type")
+              .value.toLowerCase();
+            const q1aFeedback = document.getElementById("q1a-feedback");
+
+            if (
+              q1aSelected &&
+              q1aSelected.dataset.answer === correctAnswers.q1a.letter &&
+              q1aType.includes(correctAnswers.q1a.type)
+            ) {
+              score++;
+              q1aFeedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q1a}</div>`;
+            } else {
+              q1aFeedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q1a.letter} (${correctAnswers.q1a.type}). ${explanations.q1a}</div>`;
+            }
+            q1aFeedback.style.display = "block";
+
+            // Check Q1b
+            const q1bSelected = document.querySelector("#q1b-options .active");
+            const q1bType = document
+              .getElementById("q1b-type")
+              .value.toLowerCase();
+            const q1bFeedback = document.getElementById("q1b-feedback");
+
+            if (
+              q1bSelected &&
+              q1bSelected.dataset.answer === correctAnswers.q1b.letter &&
+              q1bType.includes(correctAnswers.q1b.type)
+            ) {
+              score++;
+              q1bFeedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q1b}</div>`;
+            } else {
+              q1bFeedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q1b.letter} (${correctAnswers.q1b.type}). ${explanations.q1b}</div>`;
+            }
+            q1bFeedback.style.display = "block";
+
+            // Check Q1c
+            const q1cSelected = document.querySelector("#q1c-options .active");
+            const q1cType = document
+              .getElementById("q1c-type")
+              .value.toLowerCase();
+            const q1cFeedback = document.getElementById("q1c-feedback");
+
+            if (
+              q1cSelected &&
+              q1cSelected.dataset.answer === correctAnswers.q1c.letter &&
+              q1cType.includes(correctAnswers.q1c.type)
+            ) {
+              score++;
+              q1cFeedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations.q1c}</div>`;
+            } else {
+              q1cFeedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers.q1c.letter} (${correctAnswers.q1c.type}). ${explanations.q1c}</div>`;
+            }
+            q1cFeedback.style.display = "block";
+
+            // Check Q2 answers
+            const checkQ2Answer = (inputId, feedbackId) => {
+              const answer = document
+                .getElementById(inputId)
+                .value.toLowerCase();
+              const feedback = document.getElementById(feedbackId);
+
+              if (answer.includes(correctAnswers[inputId])) {
+                score++;
+                feedback.innerHTML = `<div class="alert alert-success">Correct! ${explanations[inputId]}</div>`;
+              } else {
+                feedback.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${correctAnswers[inputId]}. ${explanations[inputId]}</div>`;
+              }
+              feedback.style.display = "block";
+            };
+
+            checkQ2Answer("q2-b", "q2-b-feedback");
+            checkQ2Answer("q2-d", "q2-d-feedback");
+            checkQ2Answer("q2-e", "q2-e-feedback");
+            checkQ2Answer("q2-f", "q2-f-feedback");
+
+            // Show results
+            document.getElementById("score").textContent = score;
+            document.getElementById("results").style.display = "block";
+
+            let resultMessage = "";
+            if (score === 7) {
+              resultMessage =
+                "Perfect score! You can identify triangles perfectly!";
+            } else if (score >= 5) {
+              resultMessage = "Well done! You know most triangle types.";
+            } else if (score >= 3) {
+              resultMessage =
+                "Good effort! Review the different triangle types.";
+            } else {
+              resultMessage =
+                "Keep practicing! You'll get better with more study.";
+            }
+            document.getElementById("result-message").textContent =
+              resultMessage;
+          });
+
+        // Reset quiz button
+        document
+          .getElementById("reset-quiz")
+          .addEventListener("click", function () {
+            // Reset buttons
+            document.querySelectorAll(".triangle-select").forEach((button) => {
+              button.classList.remove("active", "btn-primary");
+              button.classList.add("btn-outline-primary");
+            });
+
+            // Clear text inputs
+            document.querySelectorAll('input[type="text"]').forEach((input) => {
+              input.value = "";
+            });
+
+            // Hide feedback
+            document.querySelectorAll(".feedback").forEach((feedback) => {
+              feedback.style.display = "none";
+              feedback.innerHTML = "";
+            });
+
+            // Hide results
+            document.getElementById("results").style.display = "none";
+          });
+
+        // Triangle hover effect
+        document.querySelectorAll(".triangle-option").forEach((option) => {
+          option.addEventListener("mouseenter", function () {
+            this.querySelector(".triangle").classList.add("selected");
+          });
+          option.addEventListener("mouseleave", function () {
+            this.querySelector(".triangle").classList.remove("selected");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

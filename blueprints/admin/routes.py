@@ -246,7 +246,7 @@ def add_student():
         else:
             add_student_to_db(username, password)
             flash('Student added successfully', 'success')
-            return redirect(url_for('students.manage_students'))
+            return redirect(url_for('admin.manage_students'))
 
     return render_template('admin/add_student.html')
 
@@ -1207,7 +1207,6 @@ def admin_dashboard():
     cur.close()
     conn.close()
 
-    print(assignments[0][0])
     return render_template('admin/dashboard.html',
                            assignments=assignments,
                            student_count=len(students),
