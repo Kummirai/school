@@ -1,4 +1,5 @@
 from flask import Flask
+import waitress
 import os
 from dotenv import load_dotenv
 from flask_login import LoginManager
@@ -99,13 +100,14 @@ def inject_functions():
         get_unsubmitted_assignments_count=get_unsubmitted_assignments_count
     )
 
-# if __name__ == '__main__':
-#     from waitress import serve
-#     initialize_database()
-#     serve(app, host="0.0.0.0", port=5000)
-
 
 if __name__ == '__main__':
-    app.debug = True
+    from waitress import serve
     initialize_database()
-    app.run(host='0.0.0.0', port=5000)
+    serve(app, host="0.0.0.0", port=5000)
+
+
+# if __name__ == '__main__':
+#     app.debug = True
+#     initialize_database()
+#     app.run(host='0.0.0.0', port=5000)
