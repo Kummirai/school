@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ exam.title }}{% endblock %}
+{% block content %}
+<head>
+    <meta name="exam-title" content="Grade 9 History Exam">
+    <meta name="exam-grade" content="9">
+    <meta name="exam-subject" content="History">
+    <meta name="exam-description" content="A practice exam for Grade 9 History.">
+    <meta name="exam-duration" content="60">
+    <meta name="exam-difficulty" content="Hard">
+</head>
+<div class="container mt-4">
+    <h1 class="mb-4">{{ exam.title }}</h1>
+    <p>{{ exam.description }}</p>
+    <form action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}" method="post">
+        <div id="questions-container">
+            <div class="card mb-3 question">
+                <div class="card-body">
+                    <p class="card-text">1. Who was the first President of the United States?</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_1" id="q1_option1" value="Abraham Lincoln">
+                        <label class="form-check-label" for="q1_option1">Abraham Lincoln</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_1" id="q1_option2" value="George Washington" correct="true">
+                        <label class="form-check-label" for="q1_option2">George Washington</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_1" id="q1_option3" value="Thomas Jefferson">
+                        <label class="form-check-label" for="q1_option3">Thomas Jefferson</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3 question">
+                <div class="card-body">
+                    <p class="card-text">2. In what year did World War II end?</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_2" id="q2_option1" value="1942">
+                        <label class="form-check-label" for="q2_option1">1942</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_2" id="q2_option2" value="1945" correct="true">
+                        <label class="form-check-label" for="q2_option2">1945</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_2" id="q2_option3" value="1950">
+                        <label class="form-check-label" for="q2_option3">1950</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Exam</button>
+    </form>
+</div>
+{% endblock %}
