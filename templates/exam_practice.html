@@ -1,49 +1,53 @@
 {% extends "base.html" %}
 {% block title %}Exam Practice{% endblock %}
 {% block content %}
-<div class="container mt-4">
-  <h1 class="mb-4">Exam Practice Area</h1>
+<div class="container mt-4 mb-5">
+  <h1 class="mb-4 text-center display-6 fw-bold">Exam Practice Area</h1>
 
   {% if categorized_exams %}
-    <div class="accordion" id="gradesAccordion">
+    <div class="accordion accordion-flush" id="gradesAccordion">
       {% for grade, subjects in categorized_exams.items() %}
-        <div class="accordion-item">
+        <div class="accordion-item border rounded-3 mb-3 shadow-sm">
           <h2 class="accordion-header" id="heading{{ grade }}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ grade }}" aria-expanded="false" aria-controls="collapse{{ grade }}">
+            <button class="accordion-button collapsed bg-light text-dark fw-bold fs-6 rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ grade }}" aria-expanded="false" aria-controls="collapse{{ grade }}">
               Grade {{ grade }}
             </button>
           </h2>
           <div id="collapse{{ grade }}" class="accordion-collapse collapse" aria-labelledby="heading{{ grade }}" data-bs-parent="#gradesAccordion">
-            <div class="accordion-body">
+            <div class="accordion-body p-4">
               {% for subject, exams in subjects.items() %}
-                <h4 class="mt-4">{{ subject }}</h4>
+                <h4 class="mt-4 mb-3 border-bottom pb-2">{{ subject }}</h4>
                 {% if exams %}
                   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     {% for exam in exams %}
                       <div class="col">
-                        <div class="card h-100 shadow-sm">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ exam.title }}</h5>
-                            <p class="card-text">{{ exam.description }}</p>
-                            <ul class="list-unstyled small text-muted">
-                              <li>
-                                <i class="bi bi-question-circle me-1"></i> {{ exam.questions_count }} Questions
+                        <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                          <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title mb-2 text-danger fw-bold fs-6">{{ exam.title }}</h5>
+                            <p class="card-text text-muted text-sm flex-grow-1">{{ exam.description }}</p>
+                            <ul class="list-unstyled text-secondary mt-3">
+                              <li class="mb-1">
+                                <i class="bi bi-question-circle-fill me-2 text-warning"></i> {{ exam.questions_count }} Questions
+                              </li>
+                              <li class="mb-1">
+                                <i class="bi bi-clock-fill me-2 text-dark"></i> {{ exam.duration_minutes }} Minutes
                               </li>
                               <li>
-                                <i class="bi bi-clock me-1"></i> {{ exam.duration_minutes }} Minutes
-                              </li>
-                              <li>
-                                <i class="bi bi-bar-chart-fill me-1"></i> Difficulty: {{ exam.difficulty }}
+                                <i class="bi bi-bar-chart-fill me-2 text-danger"></i> Difficulty: <span class="fw-bold">{{ exam.difficulty }}</span>
                               </li>
                             </ul>
-                            <a href="{{ url_for('exam.take_exam', exam_id=exam.id) }}" class="btn btn-danger mt-3">Start Exam</a>
+                            <div class="mt-auto pt-3">
+                                <a href="{{ url_for('exam.take_exam', exam_id=exam.id) }}" class="btn btn-danger btn-md w-100 rounded-pill">Start Exam <i class="bi bi-arrow-right-circle-fill ms-2"></i></a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     {% endfor %}
                   </div>
                 {% else %}
-                  <p>No exams available for this subject.</p>
+                  <div class="alert alert-light text-center mt-3" role="alert">
+                    No exams available for this subject yet. Check back soon!
+                  </div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -52,8 +56,11 @@
       {% endfor %}
     </div>
   {% else %}
-    <div class="alert alert-info" role="alert">
-      No exam practice materials are available at the moment.
+    <div class="alert alert-info text-center py-4" role="alert">
+      <h4 class="alert-heading">No Exam Materials Available</h4>
+      <p>It looks like there are no practice exams loaded at the moment. Please check back later!</p>
+      <hr>
+      <p class="mb-0">If you believe this is an error, please contact support.</p>
     </div>
   {% endif %}
 </div>

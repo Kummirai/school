@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ exam.title }}{% endblock %}
+{% block content %}
+<head>
+    <meta name="exam-title" content="Grade 9 History Exam - World Wars">
+    <meta name="exam-grade" content="9">
+    <meta name="exam-subject" content="History">
+    <meta name="exam-description" content="A second practice exam for Grade 9 History, focusing on World Wars.">
+    <meta name="exam-duration" content="75">
+    <meta name="exam-difficulty" content="Hard">
+</head>
+<div class="container mt-4">
+    <h1 class="mb-4">{{ exam.title }}</h1>
+    <p>{{ exam.description }}</p>
+    <form action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}" method="post">
+        <div id="questions-container">
+            <div class="card mb-3 question">
+                <div class="card-body">
+                    <p class="card-text">1. When did World War I begin?</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww1_1" id="q1_option1" value="1910">
+                        <label class="form-check-label" for="q1_option1">1910</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww1_1" id="q1_option2" value="1914" correct="true">
+                        <label class="form-check-label" for="q1_option2">1914</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww1_1" id="q1_option3" value="1918">
+                        <label class="form-check-label" for="q1_option3">1918</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3 question">
+                <div class="card-body">
+                    <p class="card-text">2. Who was the leader of Nazi Germany during World War II?</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww2_2" id="q2_option1" value="Benito Mussolini">
+                        <label class="form-check-label" for="q2_option1">Benito Mussolini</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww2_2" id="q2_option2" value="Joseph Stalin">
+                        <label class="form-check-label" for="q2_option2">Joseph Stalin</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_ww2_2" id="q2_option3" value="Adolf Hitler" correct="true">
+                        <label class="form-check-label" for="q2_option3">Adolf Hitler</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Exam</button>
+    </form>
+</div>
+{% endblock %}

@@ -109,8 +109,14 @@ def submit_exam(exam_id):
     # Prepare data for exam_results.html
     questions_for_review = []
 
-    for i, question_html in enumerate(questions_html):
-        question_id = f'question_{i+1}'
+    for question_html in questions_html:
+        # Find the name attribute of the radio buttons within this question to use as question_id
+        # Assuming all radio buttons for a single question share the same 'name'
+        first_radio_button = question_html.find('input', {'type': 'radio'})
+        if not first_radio_button:
+            continue # Skip if no radio buttons found in this question block
+        
+        question_id = first_radio_button.get('name')
         question_text = str(question_html.find('p', class_='card-text')) if question_html.find('p', class_='card-text') else ''
         
         correct_answer_element = question_html.find('input', {'type': 'radio', 'correct': 'true'})
@@ -214,8 +220,11 @@ def exam_results(result_id):
             with open(exam_filepath, 'r', encoding='utf-8') as f:
                 soup = BeautifulSoup(f.read(), 'html.parser')
             questions_html = soup.find_all('div', {'class': 'question'})
-            for i, question_html in enumerate(questions_html):
-                question_id = f'question_{i+1}'
+            for question_html in questions_html:
+                first_radio_button = question_html.find('input', {'type': 'radio'})
+                if not first_radio_button:
+                    continue
+                question_id = first_radio_button.get('name')
                 question_text = str(question_html.find('p', class_='card-text')) if question_html.find('p', class_='card-text') else ''
                 correct_answer_element = question_html.find('input', {'type': 'radio', 'correct': 'true'})
                 correct_answer_value = correct_answer_element['value'] if correct_answer_element else 'N/A'
