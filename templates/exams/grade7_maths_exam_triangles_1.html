@@ -1,0 +1,1103 @@
+{% extends "base.html" %} {% block title %}{{ exam.title }}{% endblock %} {%
+block content %}
+<head>
+  <meta name="exam-title" content="Grade 7 Maths Exam Triangles 1" />
+  <meta name="exam-grade" content="7" />
+  <meta name="exam-subject" content="Mathematics" />
+  <meta
+    name="exam-description"
+    content="Comprehensive exam on triangle types and properties for Grade 7 Mathematics."
+  />
+  <meta name="exam-duration" content="45" />
+  <meta name="exam-difficulty" content="Medium" />
+  <style>
+    .correct .form-check-label {
+      color: #198754; /* Bootstrap success green */
+      font-weight: bold;
+    }
+    .incorrect .form-check-label {
+      color: #dc3545; /* Bootstrap danger red */
+      text-decoration: line-through;
+    }
+    .correct-answer .form-check-label {
+        color: #198754;
+        font-weight: bold;
+    }
+    .feedback {
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+    .correct-feedback {
+        color: #198754;
+    }
+    .incorrect-feedback {
+        color: #dc3545;
+    }
+  </style>
+</head>
+<div class="container mt-4">
+  <h1 class="mb-4">{{ exam.title }}</h1>
+  <p>{{ exam.description }}</p>
+  <form
+    action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}"
+    method="post"
+    id="exam-form"
+  >
+    <div id="questions-container">
+      <!-- Section 1: Types of Triangles (1-10) -->
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            1. A triangle with all three sides equal in length is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_1"
+              id="q1_option1"
+              value="Isosceles"
+            />
+            <label class="form-check-label" for="q1_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_1"
+              id="q1_option2"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q1_option2">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_1"
+              id="q1_option3"
+              value="Equilateral"
+              correct="true"
+            />
+            <label class="form-check-label" for="q1_option3">Equilateral</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            2. A triangle with one angle measuring exactly 90° is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_2"
+              id="q2_option1"
+              value="Acute"
+            />
+            <label class="form-check-label" for="q2_option1">Acute</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_2"
+              id="q2_option2"
+              value="Right-angled"
+              correct="true"
+            />
+            <label class="form-check-label" for="q2_option2"
+              >Right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_2"
+              id="q2_option3"
+              value="Obtuse"
+            />
+            <label class="form-check-label" for="q2_option3">Obtuse</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            3. A triangle with two sides equal in length is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_3"
+              id="q3_option1"
+              value="Isosceles"
+              correct="true"
+            />
+            <label class="form-check-label" for="q3_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_3"
+              id="q3_option2"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q3_option2">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_3"
+              id="q3_option3"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q3_option3">Equilateral</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            4. A triangle with all three sides of different lengths is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_4"
+              id="q4_option1"
+              value="Isosceles"
+            />
+            <label class="form-check-label" for="q4_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_4"
+              id="q4_option2"
+              value="Scalene"
+              correct="true"
+            />
+            <label class="form-check-label" for="q4_option2">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_4"
+              id="q4_option3"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q4_option3">Equilateral</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            5. A triangle with all three angles less than 90° is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_5"
+              id="q5_option1"
+              value="Acute"
+              correct="true"
+            />
+            <label class="form-check-label" for="q5_option1">Acute</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_5"
+              id="q5_option2"
+              value="Right-angled"
+            />
+            <label class="form-check-label" for="q5_option2"
+              >Right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_5"
+              id="q5_option3"
+              value="Obtuse"
+            />
+            <label class="form-check-label" for="q5_option3">Obtuse</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            6. A triangle with one angle greater than 90° is called:
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_6"
+              id="q6_option1"
+              value="Acute"
+            />
+            <label class="form-check-label" for="q6_option1">Acute</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_6"
+              id="q6_option2"
+              value="Right-angled"
+            />
+            <label class="form-check-label" for="q6_option2"
+              >Right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_6"
+              id="q6_option3"
+              value="Obtuse"
+              correct="true"
+            />
+            <label class="form-check-label" for="q6_option3">Obtuse</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            7. Which type of triangle has all angles equal to 60°?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_7"
+              id="q7_option1"
+              value="Isosceles"
+            />
+            <label class="form-check-label" for="q7_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_7"
+              id="q7_option2"
+              value="Equilateral"
+              correct="true"
+            />
+            <label class="form-check-label" for="q7_option2">Equilateral</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_7"
+              id="q7_option3"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q7_option3">Scalene</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">8. Can a triangle have two right angles?</p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_8"
+              id="q8_option1"
+              value="Yes"
+            />
+            <label class="form-check-label" for="q8_option1">Yes</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_8"
+              id="q8_option2"
+              value="No"
+              correct="true"
+            />
+            <label class="form-check-label" for="q8_option2">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            9. If a triangle has sides of 5cm, 5cm, and 7cm, what type is it?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_9"
+              id="q9_option1"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q9_option1">Equilateral</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_9"
+              id="q9_option2"
+              value="Isosceles"
+              correct="true"
+            />
+            <label class="form-check-label" for="q9_option2">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_9"
+              id="q9_option3"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q9_option3">Scalene</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            10. Which statement is true about all equilateral triangles?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_10"
+              id="q10_option1"
+              value="They are all right-angled"
+            />
+            <label class="form-check-label" for="q10_option1"
+              >They are all right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_10"
+              id="q10_option2"
+              value="They are all isosceles"
+            />
+            <label class="form-check-label" for="q10_option2"
+              >They are all isosceles</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_10"
+              id="q10_option3"
+              value="They are all acute"
+              correct="true"
+            />
+            <label class="form-check-label" for="q10_option3"
+              >They are all acute</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Triangle Properties (11-20) -->
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            11. What is the sum of the interior angles in any triangle?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_11"
+              id="q11_option1"
+              value="90°"
+            />
+            <label class="form-check-label" for="q11_option1">90°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_11"
+              id="q11_option2"
+              value="180°"
+              correct="true"
+            />
+            <label class="form-check-label" for="q11_option2">180°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_11"
+              id="q11_option3"
+              value="360°"
+            />
+            <label class="form-check-label" for="q11_option3">360°</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            12. If two angles of a triangle measure 45° and 45°, what is the
+            measure of the third angle?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_12"
+              id="q12_option1"
+              value="45°"
+            />
+            <label class="form-check-label" for="q12_option1">45°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_12"
+              id="q12_option2"
+              value="90°"
+              correct="true"
+            />
+            <label class="form-check-label" for="q12_option2">90°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_12"
+              id="q12_option3"
+              value="135°"
+            />
+            <label class="form-check-label" for="q12_option3">135°</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            13. In a right-angled triangle, what is the name of the side
+            opposite the right angle?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_13"
+              id="q13_option1"
+              value="Adjacent"
+            />
+            <label class="form-check-label" for="q13_option1">Adjacent</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_13"
+              id="q13_option2"
+              value="Hypotenuse"
+              correct="true"
+            />
+            <label class="form-check-label" for="q13_option2">Hypotenuse</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_13"
+              id="q13_option3"
+              value="Opposite"
+            />
+            <label class="form-check-label" for="q13_option3">Opposite</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            14. If a triangle has sides of length 3cm, 4cm, and 5cm, what type
+            of triangle is it?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_14"
+              id="q14_option1"
+              value="Acute"
+            />
+            <label class="form-check-label" for="q14_option1">Acute</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_14"
+              id="q14_option2"
+              value="Right-angled"
+              correct="true"
+            />
+            <label class="form-check-label" for="q14_option2"
+              >Right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_14"
+              id="q14_option3"
+              value="Obtuse"
+            />
+            <label class="form-check-label" for="q14_option3">Obtuse</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            15. In an equilateral triangle, what is the measure of each angle?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_15"
+              id="q15_option1"
+              value="30°"
+            />
+            <label class="form-check-label" for="q15_option1">30°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_15"
+              id="q15_option2"
+              value="60°"
+              correct="true"
+            />
+            <label class="form-check-label" for="q15_option2">60°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_15"
+              id="q15_option3"
+              value="90°"
+            />
+            <label class="form-check-label" for="q15_option3">90°</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            16. Can a triangle have sides of length 2cm, 3cm, and 6cm?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_16"
+              id="q16_option1"
+              value="Yes"
+            />
+            <label class="form-check-label" for="q16_option1">Yes</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_16"
+              id="q16_option2"
+              value="No"
+              correct="true"
+            />
+            <label class="form-check-label" for="q16_option2">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            17. If one angle of an isosceles triangle measures 100°, what are
+            the measures of the other two angles?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_17"
+              id="q17_option1"
+              value="30° each"
+            />
+            <label class="form-check-label" for="q17_option1">30° each</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_17"
+              id="q17_option2"
+              value="40° each"
+              correct="true"
+            />
+            <label class="form-check-label" for="q17_option2">40° each</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_17"
+              id="q17_option3"
+              value="50° each"
+            />
+            <label class="form-check-label" for="q17_option3">50° each</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            18. What is the perimeter of a triangle with sides 5cm, 12cm, and
+            13cm?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_18"
+              id="q18_option1"
+              value="20cm"
+            />
+            <label class="form-check-label" for="q18_option1">20cm</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_18"
+              id="q18_option2"
+              value="25cm"
+            />
+            <label class="form-check-label" for="q18_option2">25cm</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_18"
+              id="q18_option3"
+              value="30cm"
+              correct="true"
+            />
+            <label class="form-check-label" for="q18_option3">30cm</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            19. In triangle ABC, angle A = 30° and angle B = 60°. What is angle
+            C?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_19"
+              id="q19_option1"
+              value="30°"
+            />
+            <label class="form-check-label" for="q19_option1">30°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_19"
+              id="q19_option2"
+              value="60°"
+            />
+            <label class="form-check-label" for="q19_option2">60°</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_19"
+              id="q19_option3"
+              value="90°"
+              correct="true"
+            />
+            <label class="form-check-label" for="q19_option3">90°</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            20. What is the name of a triangle with no sides equal?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_20"
+              id="q20_option1"
+              value="Isosceles"
+            />
+            <label class="form-check-label" for="q20_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_20"
+              id="q20_option2"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q20_option2"
+              >Equilateral</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_20"
+              id="q20_option3"
+              value="Scalene"
+              correct="true"
+            />
+            <label class="form-check-label" for="q20_option3">Scalene</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Triangle Identification (21-25) -->
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            21. Which type of triangle has two equal sides and two equal angles?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_21"
+              id="q21_option1"
+              value="Isosceles"
+              correct="true"
+            />
+            <label class="form-check-label" for="q21_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_21"
+              id="q21_option2"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q21_option2">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_21"
+              id="q21_option3"
+              value="Right-angled"
+            />
+            <label class="form-check-label" for="q21_option3"
+              >Right-angled</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            22. Which type of triangle can also be right-angled or
+            obtuse-angled?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_22"
+              id="q22_option1"
+              value="Isosceles"
+              correct="true"
+            />
+            <label class="form-check-label" for="q22_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_22"
+              id="q22_option2"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q22_option2"
+              >Equilateral</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_22"
+              id="q22_option3"
+              value="Acute"
+            />
+            <label class="form-check-label" for="q22_option3">Acute</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            23. Which type of triangle is always acute-angled?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_23"
+              id="q23_option1"
+              value="Scalene"
+            />
+            <label class="form-check-label" for="q23_option1">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_23"
+              id="q23_option2"
+              value="Equilateral"
+              correct="true"
+            />
+            <label class="form-check-label" for="q23_option2"
+              >Equilateral</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_23"
+              id="q23_option3"
+              value="Right-angled"
+            />
+            <label class="form-check-label" for="q23_option3"
+              >Right-angled</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            24. Which triangle has sides that satisfy the Pythagorean theorem?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_24"
+              id="q24_option1"
+              value="Acute"
+            />
+            <label class="form-check-label" for="q24_option1">Acute</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_24"
+              id="q24_option2"
+              value="Right-angled"
+              correct="true"
+            />
+            <label class="form-check-label" for="q24_option2"
+              >Right-angled</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_24"
+              id="q24_option3"
+              value="Obtuse"
+            />
+            <label class="form-check-label" for="q24_option3">Obtuse</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 question">
+        <div class="card-body">
+          <p class="card-text">
+            25. Which type of triangle can have angles of 30°, 60°, and 90°?
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_25"
+              id="q25_option1"
+              value="Isosceles"
+            />
+            <label class="form-check-label" for="q25_option1">Isosceles</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_25"
+              id="q25_option2"
+              value="Scalene"
+              correct="true"
+            />
+            <label class="form-check-label" for="q25_option2">Scalene</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question_triangles_25"
+              id="q25_option3"
+              value="Equilateral"
+            />
+            <label class="form-check-label" for="q25_option3"
+              >Equilateral</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="results" class="mt-4"></div>
+    <button type="button" id="check-answers-btn" class="btn btn-primary">Check Answers</button>
+    <button type="submit" id="submit-btn" class="btn btn-success" style="display:none;">Submit Exam</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkBtn = document.getElementById('check-answers-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const resultsContainer = document.getElementById('results');
+    const questions = document.querySelectorAll('.question');
+    const form = document.getElementById('exam-form');
+
+    checkBtn.addEventListener('click', function () {
+        let score = 0;
+        const totalQuestions = questions.length;
+
+        questions.forEach((question) => {
+            const selectedOption = question.querySelector('input[type="radio"]:checked');
+            const correctOption = question.querySelector('input[correct="true"]');
+            const allOptions = question.querySelectorAll('input[type="radio"]');
+            
+            const feedbackEl = document.createElement('div');
+            feedbackEl.classList.add('feedback', 'mt-2');
+
+            allOptions.forEach(opt => opt.disabled = true);
+
+            if (selectedOption) {
+                if (selectedOption.hasAttribute('correct')) {
+                    score++;
+                    selectedOption.parentElement.classList.add('correct');
+                    feedbackEl.textContent = 'Correct!';
+                    feedbackEl.classList.add('correct-feedback');
+                } else {
+                    selectedOption.parentElement.classList.add('incorrect');
+                    if (correctOption) {
+                        correctOption.parentElement.classList.add('correct-answer');
+                    }
+                    feedbackEl.textContent = 'Incorrect. The correct answer is highlighted below.';
+                    feedbackEl.classList.add('incorrect-feedback');
+                }
+            } else {
+                if (correctOption) {
+                    correctOption.parentElement.classList.add('correct-answer');
+                }
+                feedbackEl.textContent = 'No answer selected. The correct answer is highlighted below.';
+                feedbackEl.classList.add('text-warning');
+            }
+            question.querySelector('.card-body').appendChild(feedbackEl);
+        });
+
+        const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(2) : 0;
+        resultsContainer.innerHTML = `
+            <div class="alert alert-info">
+                <h4>Your Score: ${score} / ${totalQuestions} (${percentage}%)</h4>
+                <p>You can now submit your score to save your progress.</p>
+            </div>
+        `;
+
+        checkBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+    });
+});
+</script>
+{% endblock %}
