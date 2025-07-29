@@ -140,10 +140,9 @@ def get_db_connection():
             port=os.getenv('5432'),
             # sslmode='require'
         )
-        print("✅ Successfully connected to Database!")
         return conn
     except Exception as e:
-        print(f"❌ Connection failed: {e}")
+        print(f"Connection failed: {e}")
         raise
 
 
@@ -259,7 +258,7 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS exam_results (
                 id SERIAL PRIMARY KEY,
                 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-                exam_id INTEGER NOT NULL, -- Storing the JSON exam ID
+                exam_id VARCHAR(255) NOT NULL, -- Storing the HTML file-based exam ID
                 score DECIMAL(5,2) NOT NULL, -- Store score as a percentage or points
                 total_questions INTEGER NOT NULL,
                 completion_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
