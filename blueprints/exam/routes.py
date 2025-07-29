@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from flask_login import login_required
 import json
+import psycopg2.extras
 from models import get_db_connection
 from bs4 import BeautifulSoup
 
@@ -39,8 +40,41 @@ def load_exams_from_html():
 @exam_bp.route('/exam_practice')
 @login_required
 def exam_practice():
-    """Renders the exam practice page with categorized exams."""
+    """Renders the exam practice page with categorized exams and user's results."""
+    user_id = session.get('user_id')
     exams = load_exams_from_html()
+    
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    # Fetch all results for the current user
+    cur.execute("SELECT * FROM exam_results WHERE user_id = %s", (user_id,))
+    results = cur.fetchall()
+    
+    # Create a dictionary for easy lookup of results by exam_id
+    results_map = {}
+    for result in results:
+        exam_id = result['exam_id']
+        if exam_id not in results_map:
+            results_map[exam_id] = []
+        results_map[exam_id].append(result)
+    
+    # Enhance exam data with latest score and attempts
+    for exam in exams:
+        exam_id = exam['id']
+        if exam_id in results_map:
+            # Sort results by completion time to find the latest
+            latest_result = sorted(results_map[exam_id], key=lambda r: r['completion_time'], reverse=True)[0]
+            exam['latest_score'] = float(latest_result['score'])
+            exam['attempts'] = len(results_map[exam_id])
+        else:
+            exam['latest_score'] = None
+            exam['attempts'] = 0
+
+    cur.close()
+    conn.close()
+
+    # Categorize exams for display
     categorized_exams = {}
     for exam in exams:
         grade = exam.get('grade')
@@ -52,6 +86,7 @@ def exam_practice():
                 categorized_exams[grade][subject] = []
             categorized_exams[grade][subject].append(exam)
 
+    # Sort grades and subjects for ordered display
     try:
         sorted_grades = sorted(categorized_exams.keys(), key=lambda g: int(g))
     except (ValueError, TypeError):
@@ -119,10 +154,19 @@ def submit_exam(exam_id):
         question_id = first_radio_button.get('name')
         question_text = str(question_html.find('p', class_='card-text')) if question_html.find('p', class_='card-text') else ''
         
-        correct_answer_element = question_html.find('input', {'type': 'radio', 'correct': 'true'})
-        correct_answer_value = correct_answer_element['value'] if correct_answer_element else 'N/A'
+        correct_answer_value = 'N/A' # Default
+        all_options = question_html.find_all('input', {'type': 'radio', 'name': question_id})
+        for option in all_options:
+            if option.get('correct') == 'true':
+                correct_answer_value = option.get('value')
+                break # Found the correct answer, no need to check other options
         
         user_submitted_answer = user_answers.get(question_id)
+
+        print(f"Question ID: {question_id}")
+        print(f"User Submitted Answer: {user_submitted_answer}")
+        print(f"Correct Answer Value: {correct_answer_value}")
+        print(f"Comparison Result: {user_submitted_answer == correct_answer_value}")
 
         if user_submitted_answer == correct_answer_value:
             correct_answers_count += 1

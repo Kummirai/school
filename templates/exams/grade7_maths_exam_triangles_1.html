@@ -1061,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const feedbackEl = document.createElement('div');
             feedbackEl.classList.add('feedback', 'mt-2');
 
-            allOptions.forEach(opt => opt.disabled = true);
+            // allOptions.forEach(opt => opt.disabled = true); // Removed this line
 
             if (selectedOption) {
                 if (selectedOption.hasAttribute('correct')) {
