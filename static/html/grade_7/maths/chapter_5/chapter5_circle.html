@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade 7 Mathematics: Parts of a Circle</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      body {
+        padding-top: 20px;
+        background-color: #f8f9fa;
+      }
+      .container {
+        max-width: 900px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .section-title {
+        color: #0056b3;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+      .subsection-title {
+        color: #007bff;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+      .question-card {
+        background-color: #e9ecef;
+        border-left: 5px solid #007bff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+      .question-card label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .feedback {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      .correct {
+        color: green;
+      }
+      .incorrect {
+        color: red;
+      }
+      .explanation {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f0f8ff;
+        border-left: 3px solid #6c757d;
+        border-radius: 4px;
+        display: none;
+      }
+      .show-explanation {
+        display: block;
+      }
+      .image-container {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .properties-list li {
+        margin-bottom: 5px;
+      }
+      .interactive-circle-container {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+      }
+      .interactive-circle {
+        position: relative;
+        width: 400px;
+        height: 400px;
+      }
+      .circle-svg {
+        width: 100%;
+        height: 100%;
+      }
+      .circle-part {
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .circle-part:hover {
+        stroke-width: 3;
+        filter: brightness(1.2);
+      }
+      .part-info {
+        position: absolute;
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        display: none;
+        max-width: 300px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+      }
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+      }
+      .legend-color {
+        width: 20px;
+        height: 3px;
+        margin-right: 10px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section>
+        <h2 class="section-title">Parts of a Circle</h2>
+        <p>
+          A circle is a perfectly round shape where all points on its boundary
+          are equidistant from its center. Understanding the different parts of
+          a circle is fundamental to geometry and helps in solving various
+          mathematical problems involving circles.
+        </p>
+
+        <h3 class="subsection-title">Interactive Circle</h3>
+        <p class="text-muted">
+          Hover over different parts to learn more about them:
+        </p>
+
+        <div class="interactive-circle-container">
+          <div class="interactive-circle">
+            <svg class="circle-svg" viewBox="0 0 400 400">
+              <!-- Circle outline -->
+              <circle
+                cx="200"
+                cy="200"
+                r="150"
+                fill="none"
+                stroke="#333"
+                stroke-width="2"
+              />
+
+              <!-- Center point -->
+              <circle
+                cx="200"
+                cy="200"
+                r="5"
+                fill="red"
+                class="circle-part"
+                onmouseover="showPartInfo('center', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Radius -->
+              <line
+                x1="200"
+                y1="200"
+                x2="350"
+                y2="200"
+                stroke="blue"
+                stroke-width="3"
+                class="circle-part"
+                onmouseover="showPartInfo('radius', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Diameter -->
+              <line
+                x1="50"
+                y1="200"
+                x2="350"
+                y2="200"
+                stroke="green"
+                stroke-width="3"
+                class="circle-part"
+                onmouseover="showPartInfo('diameter', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Chord -->
+              <line
+                x1="120"
+                y1="120"
+                x2="280"
+                y2="280"
+                stroke="purple"
+                stroke-width="3"
+                class="circle-part"
+                onmouseover="showPartInfo('chord', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Tangent line -->
+              <line
+                x1="100"
+                y1="50"
+                x2="300"
+                y2="50"
+                stroke="orange"
+                stroke-width="3"
+                class="circle-part"
+                onmouseover="showPartInfo('tangent', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Arc (visual representation) -->
+              <path
+                d="M 290 110 A 150 150 0 0 1 290 290"
+                fill="none"
+                stroke="brown"
+                stroke-width="4"
+                stroke-dasharray="5,5"
+                class="circle-part"
+                onmouseover="showPartInfo('arc', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Sector -->
+              <path
+                d="M 200 200 L 350 200 A 150 150 0 0 1 306 306 Z"
+                fill="rgba(0, 255, 0, 0.3)"
+                stroke="rgba(0, 255, 0, 0.8)"
+                stroke-width="2"
+                class="circle-part"
+                onmouseover="showPartInfo('sector', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Segment -->
+              <path
+                d="M 120 120 L 280 280 A 150 150 0 1 0 120 120 Z"
+                fill="rgba(255, 0, 0, 0.2)"
+                stroke="rgba(255, 0, 0, 0.6)"
+                stroke-width="2"
+                class="circle-part"
+                onmouseover="showPartInfo('segment', event)"
+                onmouseout="hidePartInfo()"
+              />
+
+              <!-- Labels -->
+              <text
+                x="205"
+                y="190"
+                font-size="12"
+                font-weight="bold"
+                fill="#333"
+              >
+                Center
+              </text>
+              <text
+                x="270"
+                y="190"
+                font-size="12"
+                font-weight="bold"
+                fill="blue"
+              >
+                Radius
+              </text>
+              <text
+                x="190"
+                y="180"
+                font-size="12"
+                font-weight="bold"
+                fill="green"
+              >
+                Diameter
+              </text>
+              <text
+                x="220"
+                y="220"
+                font-size="12"
+                font-weight="bold"
+                fill="purple"
+              >
+                Chord
+              </text>
+              <text
+                x="190"
+                y="40"
+                font-size="12"
+                font-weight="bold"
+                fill="orange"
+              >
+                Tangent
+              </text>
+              <text
+                x="310"
+                y="180"
+                font-size="12"
+                font-weight="bold"
+                fill="brown"
+              >
+                Arc
+              </text>
+              <text
+                x="250"
+                y="250"
+                font-size="12"
+                font-weight="bold"
+                fill="green"
+              >
+                Sector
+              </text>
+              <text
+                x="160"
+                y="160"
+                font-size="12"
+                font-weight="bold"
+                fill="red"
+              >
+                Segment
+              </text>
+            </svg>
+
+            <!-- Information popup -->
+            <div id="part-info" class="part-info"></div>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: red"></div>
+            <span><strong>Center:</strong> Fixed central point</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: blue"></div>
+            <span><strong>Radius:</strong> Center to edge</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: green"></div>
+            <span><strong>Diameter:</strong> Across the center</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: purple"></div>
+            <span><strong>Chord:</strong> Line across circle</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: orange"></div>
+            <span><strong>Tangent:</strong> Touches at one point</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: brown"></div>
+            <span><strong>Arc:</strong> Part of circumference</span>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Definitions and Properties</h3>
+        <ul class="properties-list">
+          <li>
+            <strong>Center:</strong> The fixed point equidistant from all points
+            on the circle.
+          </li>
+          <li>
+            <strong>Radius:</strong> A line segment from the center to any point
+            on the circle. All radii of a circle are equal in length.
+          </li>
+          <li>
+            <strong>Diameter:</strong> A chord that passes through the center.
+            It is twice the length of the radius.
+          </li>
+          <li>
+            <strong>Chord:</strong> A line segment whose endpoints lie on the
+            circle.
+          </li>
+          <li>
+            <strong>Tangent:</strong> A line that touches the circle at exactly
+            one point (the point of tangency).
+          </li>
+          <li>
+            <strong>Arc:</strong> A portion of the circumference of the circle.
+          </li>
+          <li>
+            <strong>Sector:</strong> A region bounded by two radii and an arc.
+          </li>
+          <li>
+            <strong>Segment:</strong> A region bounded by a chord and an arc.
+          </li>
+          <li>
+            <strong>Circumference:</strong> The perimeter or distance around the
+            circle.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mt-5">
+        <h2 class="section-title">Practice Questions: Parts of a Circle</h2>
+
+        <div class="question-card" id="q_circle1">
+          <label for="q_circle1_answer"
+            >1. What is the name for a line segment that connects two points on
+            a circle and passes through the center?</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="q_circle1_answer"
+            placeholder="Enter your answer"
+          />
+          <button
+            class="btn btn-primary mt-2"
+            onclick="checkTextAnswer('q_circle1', 'diameter', true)"
+          >
+            Check Answer
+          </button>
+          <div class="feedback" id="q_circle1_feedback"></div>
+          <div class="explanation" id="q_circle1_explanation">
+            <p>
+              <strong>Explanation:</strong> A diameter is a special chord that
+              passes through the center of the circle. It is the longest
+              possible chord in a circle.
+            </p>
+          </div>
+        </div>
+
+        <div class="question-card" id="q_circle2">
+          <label for="q_circle2_answer"
+            >2. What is the relationship between the radius and diameter of a
+            circle?</label
+          >
+          <select class="form-select" id="q_circle2_answer">
+            <option value="">Select...</option>
+            <option value="radius_half">The radius is half the diameter</option>
+            <option value="diameter_half">
+              The diameter is half the radius
+            </option>
+            <option value="same">They are the same length</option>
+            <option value="no_relation">There is no relationship</option>
+          </select>
+          <button
+            class="btn btn-primary mt-2"
+            onclick="checkTextAnswer('q_circle2', 'radius_half')"
+          >
+            Check Answer
+          </button>
+          <div class="feedback" id="q_circle2_feedback"></div>
+          <div class="explanation" id="q_circle2_explanation">
+            <p>
+              <strong>Explanation:</strong> The diameter is always twice the
+              length of the radius (d = 2r), which means the radius is always
+              half the length of the diameter (r = d/2).
+            </p>
+          </div>
+        </div>
+
+        <div class="question-card" id="q_circle3">
+          <label for="q_circle3_answer"
+            >3. How many points does a tangent line touch on a circle?</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="q_circle3_answer"
+            placeholder="Enter number"
+          />
+          <button
+            class="btn btn-primary mt-2"
+            onclick="checkTextAnswer('q_circle3', '1')"
+          >
+            Check Answer
+          </button>
+          <div class="feedback" id="q_circle3_feedback"></div>
+          <div class="explanation" id="q_circle3_explanation">
+            <p>
+              <strong>Explanation:</strong> By definition, a tangent touches the
+              circle at exactly one point, called the point of tangency.
+            </p>
+          </div>
+        </div>
+
+        <div class="question-card" id="q_circle4">
+          <label>4. Which of the following is NOT part of a circle?</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="q_circle4_options"
+              id="q_circle4_option1"
+              value="vertex"
+            />
+            <label class="form-check-label" for="q_circle4_option1"
+              >Vertex</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="q_circle4_options"
+              id="q_circle4_option2"
+              value="sector"
+            />
+            <label class="form-check-label" for="q_circle4_option2"
+              >Sector</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="q_circle4_options"
+              id="q_circle4_option3"
+              value="chord"
+            />
+            <label class="form-check-label" for="q_circle4_option3"
+              >Chord</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="q_circle4_options"
+              id="q_circle4_option4"
+              value="arc"
+            />
+            <label class="form-check-label" for="q_circle4_option4">Arc</label>
+          </div>
+          <button
+            class="btn btn-primary mt-2"
+            onclick="checkRadioAnswer('q_circle4', 'vertex')"
+          >
+            Check Answer
+          </button>
+          <div class="feedback" id="q_circle4_feedback"></div>
+          <div class="explanation" id="q_circle4_explanation">
+            <p>
+              <strong>Explanation:</strong> A vertex is a corner point of a
+              polygon (like a triangle or quadrilateral), not a part of a
+              circle. All other options are valid parts of a circle.
+            </p>
+          </div>
+        </div>
+
+        <div class="question-card" id="q_circle5">
+          <label for="q_circle5_answer"
+            >5. True or False: All chords of a circle are diameters.</label
+          >
+          <select class="form-select" id="q_circle5_answer">
+            <option value="">Select...</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+          <button
+            class="btn btn-primary mt-2"
+            onclick="checkTextAnswer('q_circle5', 'false', true)"
+          >
+            Check Answer
+          </button>
+          <div class="feedback" id="q_circle5_feedback"></div>
+          <div class="explanation" id="q_circle5_explanation">
+            <p>
+              <strong>Explanation:</strong> False. While all diameters are
+              chords (because they connect two points on the circle), not all
+              chords are diameters. Only chords that pass through the center are
+              diameters.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function normalizeText(text, removeSpacesAndPunctuation = false) {
+        text = String(text).toLowerCase().trim();
+        if (removeSpacesAndPunctuation) {
+          text = text.replace(/[^a-z0-9]/g, "");
+        }
+        return text;
+      }
+
+      function checkTextAnswer(
+        questionId,
+        correctAnswer,
+        normalizeInput = false
+      ) {
+        let userAnswer = document.getElementById(`${questionId}_answer`).value;
+        const feedbackElement = document.getElementById(
+          `${questionId}_feedback`
+        );
+        const explanationElement = document.getElementById(
+          `${questionId}_explanation`
+        );
+
+        let normalizedUserAnswer = normalizeText(userAnswer, normalizeInput);
+        let normalizedCorrectAnswer = normalizeText(
+          correctAnswer,
+          normalizeInput
+        );
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          feedbackElement.textContent = "Correct! Well done.";
+          feedbackElement.className = "feedback correct";
+        } else {
+          feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+          feedbackElement.className = "feedback incorrect";
+        }
+        explanationElement.classList.add("show-explanation");
+      }
+
+      function checkRadioAnswer(questionId, correctAnswerValue) {
+        const selectedOption = document.querySelector(
+          `input[name="${questionId}_options"]:checked`
+        );
+        const feedbackElement = document.getElementById(
+          `${questionId}_feedback`
+        );
+        const explanationElement = document.getElementById(
+          `${questionId}_explanation`
+        );
+
+        if (selectedOption && selectedOption.value === correctAnswerValue) {
+          feedbackElement.textContent = "Correct! Well done.";
+          feedbackElement.className = "feedback correct";
+        } else {
+          feedbackElement.textContent = `Incorrect. Please review the explanation.`;
+          feedbackElement.className = "feedback incorrect";
+        }
+        explanationElement.classList.add("show-explanation");
+      }
+
+      // Functions for interactive circle
+      function showPartInfo(part, event) {
+        const infoElement = document.getElementById("part-info");
+        const definitions = {
+          center:
+            "The fixed point equidistant from all points on the circle. This is the exact middle of the circle.",
+          radius:
+            "A line segment from the center to any point on the circle. All radii are equal in length. In this circle, the radius is shown in blue.",
+          diameter:
+            "A chord that passes through the center. It is twice the length of the radius (d = 2r). The diameter is the longest chord possible in a circle.",
+          chord:
+            "A line segment whose endpoints lie on the circle. The purple line shows a chord that does not pass through the center.",
+          tangent:
+            "A line that touches the circle at exactly one point (the point of tangency). The orange line shows a tangent at the top of the circle.",
+          arc: "A portion of the circumference of the circle. The dashed brown line shows an arc on the right side of the circle.",
+          sector:
+            "A 'pie slice' region bounded by two radii and an arc. The green shaded area shows a sector.",
+          segment:
+            "A region bounded by a chord and an arc. The red shaded area shows a segment.",
+        };
+
+        infoElement.innerHTML = `<strong>${
+          part.charAt(0).toUpperCase() + part.slice(1)
+        }:</strong><br>${definitions[part]}`;
+        infoElement.style.display = "block";
+
+        // Position the info box relative to the container
+        const rect = event.target
+          .closest(".interactive-circle")
+          .getBoundingClientRect();
+        const containerRect = document
+          .querySelector(".interactive-circle-container")
+          .getBoundingClientRect();
+
+        infoElement.style.left = event.clientX - containerRect.left + 10 + "px";
+        infoElement.style.top = event.clientY - containerRect.top + 10 + "px";
+      }
+
+      function hidePartInfo() {
+        document.getElementById("part-info").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

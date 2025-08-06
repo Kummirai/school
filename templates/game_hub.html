@@ -293,6 +293,17 @@ block content %}
                 >
                 History Quest
               </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action game-card"
+                data-game="countdown_snake"
+                data-grade="{{ grade }}"
+              >
+                <span class="badge bg-info text-dark subject-badge"
+                  >Mixed</span
+                >
+                Countdown Snake
+              </a>
             </div>
           </div>
         </div>
@@ -502,6 +513,9 @@ block content %}
         break;
       case "history":
         gameUrl = "{{ url_for('gamehub.history_game') }}";
+        break;
+      case "countdown_snake":
+        gameUrl = "{{ url_for('gamehub.countdown_snake_game') }}";
         break;
       default:
         gameUrl = "{{ url_for('gamehub.math_game') }}";

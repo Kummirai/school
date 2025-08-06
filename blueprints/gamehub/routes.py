@@ -94,3 +94,15 @@ def history_game():
                            grade=grade,
                            players=players,
                            player_names=player_names)
+
+
+@gamehub_bp.route('/countdown-snake-game')
+def countdown_snake_game():
+    grade = request.args.get('grade', default=7, type=int)
+    players = request.args.get('players', default=1, type=int)
+    player_names = [request.args.get(
+        f'player{i+1}', f'Player {i+1}') for i in range(players)]
+    return render_template('countdown_snake_game.html',
+                           grade=grade,
+                           players=players,
+                           player_names=player_names)

@@ -383,6 +383,96 @@
                   "icon": "clipboard-check"
                 }
               ]
+            },
+            {
+              "title": "5.2 Geometry of 2D Shapes - Quadrilaterals",
+              "duration": "120 min",
+              "icon": "bi bi-square",
+              "description": "Quadrilaterals",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_quadrilaterals.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": [
+                    "https://www.youtube.com/embed/yiREqzDsMP8",
+                    "https://www.youtube.com/embed/icAo-MqkVjo"
+                  ],
+                  "icon": "play-circle"
+                },
+                {
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_studyguide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": [
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_1.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_2.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_3.html"
+                  ],
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_test_1.html",
+                  "icon": "clipboard-check"
+                }
+              ]
+            },
+            {
+              "title": "5.3 Geometry of 2D Shapes - Circle",
+              "duration": "120 min",
+              "icon": "bi bi-square",
+              "description": "Circle",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_circle.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": [
+                    "https://www.youtube.com/embed/yiREqzDsMP8",
+                    "https://www.youtube.com/embed/icAo-MqkVjo"
+                  ],
+                  "icon": "play-circle"
+                },
+                {
+                  "type": "study_guide",
+                  "title": "Study Guide",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_studyguide.html",
+                  "icon": "journal-text"
+                },
+                {
+                  "type": "exercises",
+                  "title": "Practice Exercises",
+                  "path": [
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_1.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_2.html",
+                    "html/grade_7/maths/chapter_5/chapter5_exercise_3.html"
+                  ],
+                  "icon": "pencil-square"
+                },
+                {
+                  "type": "test",
+                  "title": "Lesson Test",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_test_1.html",
+                  "icon": "clipboard-check"
+                }
+              ]
             }
           ]
         }
