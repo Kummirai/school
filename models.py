@@ -351,12 +351,17 @@ def initialize_database():
         )
     ''')
 
-    # Create tutorial_videos table
+    # Create videos table (formerly tutorial_videos)
     cur.execute('''
-    CREATE TABLE IF NOT EXISTS tutorial_videos (
+    CREATE TABLE IF NOT EXISTS videos (
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         url TEXT NOT NULL,
+        description TEXT,
+        grade VARCHAR(50),
+        subject VARCHAR(100),
+        youtubeid VARCHAR(255),
+        thumbnail VARCHAR(255),
         category_id INTEGER NOT NULL REFERENCES tutorial_categories(id) ON DELETE CASCADE
     )
     ''')

@@ -1,15 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from .utils import get_videos_by_category, get_category_name
+from .utils import get_videos_by_category, get_category_name, get_all_videos_details
 # Create a Blueprint for the tutorials routes
 tutorials_bp = Blueprint('tutorials', __name__,
                          template_folder='templates', static_folder='static')
 
 
 @tutorials_bp.route('/')
-# @login_required
 def tutorials_home():
-    return render_template('tutorials/video_tutorials.html')
+    all_videos = get_all_videos_details()
+    return render_template('tutorials/video_tutorials.html', all_videos=all_videos)
 
 
 @tutorials_bp.route('/study_guides')

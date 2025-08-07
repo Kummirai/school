@@ -1132,18 +1132,7 @@ def manage_tutorials():
     videos = get_all_videos()  # This should return a list of videos
     categories = get_all_categories()  # This should return a list of categories
 
-    # Convert to the structure your template expects
-    tutorials_dict = {
-        category[1]: {  # category name as key
-            # videos for this category
-            'videos': [v for v in videos if v[3] == category[1]],
-            'id': category[0]  # category id
-        }
-        for category in categories
-    }
-
     return render_template('admin/tutorials.html',
-                           tutorials=tutorials_dict,
                            videos=videos,
                            categories=categories)
 
@@ -1156,13 +1145,18 @@ def add_tutorial():
         try:
             title = request.form.get('title', '').strip()
             url = request.form.get('url', '').strip()
+            description = request.form.get('description', '').strip()
+            grade = request.form.get('grade', '').strip()
+            subject = request.form.get('subject', '').strip()
+            youtubeid = request.form.get('youtubeid', '').strip()
+            thumbnail = request.form.get('thumbnail', '').strip()
             category_id = request.form.get('category_id', '').strip()
 
-            if not all([title, url, category_id]):
+            if not all([title, url, description, grade, subject, youtubeid, thumbnail, category_id]):
                 flash('All fields are required', 'danger')
                 return redirect(url_for('admin.add_tutorial'))
 
-            add_video(title, url, category_id)
+            add_video(title, url, description, grade, subject, youtubeid, thumbnail, category_id)
             flash('Tutorial added successfully', 'success')
             return redirect(url_for('admin.manage_tutorials'))
 

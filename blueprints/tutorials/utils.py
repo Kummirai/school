@@ -1,30 +1,25 @@
 from models import get_db_connection
+import psycopg2.extras
 
 
 def get_videos_by_category(category_id):
     conn = get_db_connection()
-    cur = conn.cursor()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(
-        'SELECT id, title, url FROM tutorial_videos WHERE category_id = %s', (category_id,))
-    rows = cur.fetchall()
+        'SELECT id, title, url, description, grade, subject, youtubeid, thumbnail FROM videos WHERE category_id = %s', (category_id,))
+    videos = cur.fetchall()
     cur.close()
     conn.close()
-
-    # Convert to list of dictionaries
-    videos = [
-        {'id': row[0], 'title': row[1], 'url': row[2]}
-        for row in rows
-    ]
     return videos
 
 
 def get_all_videos():
     conn = get_db_connection()
-    cur = conn.cursor()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute('''
-        SELECT tv.id, tv.title, tv.url, tc.name 
-        FROM tutorial_videos tv
-        JOIN tutorial_categories tc ON tv.category_id = tc.id
+        SELECT v.id, v.title, v.url, v.description, v.grade, v.subject, v.youtubeid, v.thumbnail, tc.name as category_name
+        FROM videos v
+        JOIN tutorial_categories tc ON v.category_id = tc.id
     ''')
     videos = cur.fetchall()
     cur.close()
@@ -32,11 +27,42 @@ def get_all_videos():
     return videos
 
 
-def add_video(title, url, category_id):
+def get_all_videos_details():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute('''
+            SELECT
+                v.id,
+                v.title,
+                v.description,
+                v.grade,
+                v.subject,
+                v.youtubeid,
+                v.thumbnail,
+                tc.name as category_name
+            FROM
+                videos v
+            JOIN
+                tutorial_categories tc ON v.category_id = tc.id
+            ORDER BY
+                v.grade, v.subject, v.title
+        ''')
+        videos = cur.fetchall()
+        return videos
+    except Exception as e:
+        print(f"Error fetching all video details: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def add_video(title, url, description, grade, subject, youtubeid, thumbnail, category_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('INSERT INTO tutorial_videos (title, url, category_id) VALUES (%s, %s, %s)',
-                (title, url, category_id))
+    cur.execute('INSERT INTO videos (title, url, description, grade, subject, youtubeid, thumbnail, category_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+                (title, url, description, grade, subject, youtubeid, thumbnail, category_id))
     conn.commit()
     cur.close()
     conn.close()
@@ -45,7 +71,7 @@ def add_video(title, url, category_id):
 def delete_video(video_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('DELETE FROM tutorial_videos WHERE id = %s', (video_id,))
+    cur.execute('DELETE FROM videos WHERE id = %s', (video_id,))
     conn.commit()
     cur.close()
     conn.close()

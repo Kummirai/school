@@ -408,16 +408,14 @@
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/grade_7/maths/chapter_5/chapter5_studyguide.html",
+                  "path": "html/grade_7/maths/chapter_5/chapter5_quadrilaterals_studyguide.html",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
                   "path": [
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_1.html",
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_2.html",
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_3.html"
+                    "html/grade_7/maths/chapter_5/chapter5_quadrilaterals_exercise.html"
                   ],
                   "icon": "pencil-square"
                 },
@@ -444,25 +442,20 @@
                 {
                   "type": "video",
                   "title": "Video Lesson",
-                  "path": [
-                    "https://www.youtube.com/embed/yiREqzDsMP8",
-                    "https://www.youtube.com/embed/icAo-MqkVjo"
-                  ],
+                  "path": ["https://www.youtube.com/embed/IUBENMwZImA"],
                   "icon": "play-circle"
                 },
                 {
                   "type": "study_guide",
                   "title": "Study Guide",
-                  "path": "html/grade_7/maths/chapter_5/chapter5_studyguide.html",
+                  "path": "",
                   "icon": "journal-text"
                 },
                 {
                   "type": "exercises",
                   "title": "Practice Exercises",
                   "path": [
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_1.html",
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_2.html",
-                    "html/grade_7/maths/chapter_5/chapter5_exercise_3.html"
+                    "html/grade_7/maths/chapter_5/chapter5_circle_exercise.html"
                   ],
                   "icon": "pencil-square"
                 },

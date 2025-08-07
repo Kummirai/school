@@ -49,27 +49,34 @@
       <thead>
         <tr>
           <th>Title</th>
+          <th>Description</th>
+          <th>Grade</th>
+          <th>Subject</th>
+          <th>YouTube ID</th>
+          <th>Thumbnail</th>
           <th>Category</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <!-- In your admin/tutorials.html template -->
-        {% for video in videos %} {% if video[3] == language %}
+        {% for video in videos %}
         <tr>
-          <td>{{ video[1] }}</td>
-          <!-- title -->
-          <td>{{ video[3] }}</td>
-          <!-- category_name -->
+          <td>{{ video.title }}</td>
+          <td>{{ video.description }}</td>
+          <td>{{ video.grade }}</td>
+          <td>{{ video.subject }}</td>
+          <td><a href="https://www.youtube.com/watch?v={{ video.youtubeid }}" target="_blank">{{ video.youtubeid }}</a></td>
+          <td><img src="{{ video.thumbnail }}" alt="{{ video.title }}" width="100"></td>
+          <td>{{ video.category_name }}</td>
           <td>
             <a
-              href="{{ url_for('admin.delete_tutorial', video_id=video[0]) }}"
+              href="{{ url_for('admin.delete_tutorial', video_id=video.id) }}"
               class="btn btn-danger btn-sm"
               >Delete</a
             >
           </td>
         </tr>
-        {%endif%} {% endfor %}
+        {% endfor %}
       </tbody>
     </table>
   </div>

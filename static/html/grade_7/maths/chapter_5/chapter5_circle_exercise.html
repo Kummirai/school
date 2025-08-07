@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parts of a Circle Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .correct {
+        background-color: #d4edda !important;
+      }
+      .incorrect {
+        background-color: #f8d7da !important;
+      }
+      .feedback {
+        display: none;
+      }
+      .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+              <h2 class="text-center">Parts of a Circle Practice</h2>
+            </div>
+            <div class="card-body">
+              <p class="lead">
+                Identify the part of the circle based on the given description.
+              </p>
+
+              <div id="quiz-container">
+                <!-- Question 1 -->
+                <div class="question" id="q1">
+                  <p>
+                    1. A line segment from the center to any point on the circle is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q1a">Diameter</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q1b">Radius</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q1"
+                      id="q1c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q1c"
+                      >Chord</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" id="q2">
+                  <p>
+                    2. A chord that passes through the center of the circle is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q2a">Tangent</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q2b"
+                      >Diameter</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q2"
+                      id="q2c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q2c">Arc</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question" id="q3">
+                  <p>3. A line that touches the circle at exactly one point is called:</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q3a">Tangent</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q3b">Secant</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q3"
+                      id="q3c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q3c"
+                      >Chord</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question" id="q4">
+                  <p>
+                    4. A portion of the circumference of the circle is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q4a">Sector</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q4b">Arc</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q4"
+                      id="q4c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q4c"
+                      >Segment</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question" id="q5">
+                  <p>
+                    5. The distance around the circle is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q5a">Circumference</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q5b"
+                      >Area</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q5"
+                      id="q5c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q5c">Diameter</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" id="q6">
+                  <p>
+                    6. A region bounded by two radii and an arc is called:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q6a">Segment</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q6b"
+                      >Chord</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q6"
+                      id="q6c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q6c">Sector</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" id="q7">
+                  <p>7. What is the relationship between the diameter and the radius?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q7a">The radius is twice the diameter</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q7b"
+                      >The diameter is twice the radius</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q7"
+                      id="q7c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q7c">They are equal</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" id="q8">
+                  <p>8. A region bounded by a chord and an arc is called:</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q8a">Sector</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q8"
+                      id="q8b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q8b">Segment</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" id="q9">
+                  <p>
+                    9. The longest chord in a circle is the:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q9a"
+                      >Radius</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q9b">Diameter</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q9"
+                      id="q9c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q9c">Tangent</label>
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" id="q10">
+                  <p>
+                    10. All radii of a circle are:
+                  </p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10a"
+                      value="a"
+                    />
+                    <label class="form-check-label" for="q10a"
+                      >Different lengths</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10b"
+                      value="b"
+                    />
+                    <label class="form-check-label" for="q10b"
+                      >Equal in length</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="q10"
+                      id="q10c"
+                      value="c"
+                    />
+                    <label class="form-check-label" for="q10c"
+                      >Parallel to each other</label
+                    >
+                  </div>
+                  <div class="feedback mt-2"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button id="check-answers" class="btn btn-primary">
+                  Check Answers
+                </button>
+                <button id="reset-quiz" class="btn btn-secondary">
+                  Reset Quiz
+                </button>
+              </div>
+
+              <div
+                id="results"
+                class="mt-4 p-3 bg-light border rounded"
+                style="display: none"
+              >
+                <h4>Results</h4>
+                <p>You scored <span id="score">0</span> out of 10.</p>
+                <p id="result-message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const correctAnswers = {
+          q1: "b",
+          q2: "b",
+          q3: "a",
+          q4: "b",
+          q5: "a",
+          q6: "c",
+          q7: "b",
+          q8: "b",
+          q9: "b",
+          q10: "b",
+        };
+
+        const explanations = {
+          q1: "A radius is a line segment from the center to any point on the circle.",
+          q2: "A diameter is a chord that passes through the center of the circle.",
+          q3: "A tangent is a line that touches the circle at exactly one point.",
+          q4: "An arc is a portion of the circumference of the circle.",
+          q5: "The circumference is the distance around the circle.",
+          q6: "A sector is a region bounded by two radii and an arc.",
+          q7: "The diameter is always twice the length of the radius (d = 2r).",
+          q8: "A segment is a region bounded by a chord and an arc.",
+          q9: "The diameter is the longest chord in a circle.",
+          q10: "All radii of a circle are equal in length by definition.",
+        };
+
+        document
+          .getElementById("check-answers")
+          .addEventListener("click", function () {
+            let score = 0;
+
+            for (let i = 1; i <= 10; i++) {
+              const questionId = "q" + i;
+              const selectedOption = document.querySelector(
+                `input[name="${questionId}"]:checked`
+              );
+              const feedbackDiv = document.querySelector(
+                `#${questionId} .feedback`
+              );
+
+              if (selectedOption) {
+                if (selectedOption.value === correctAnswers[questionId]) {
+                  score++;
+                  feedbackDiv.innerHTML = `<div class="alert alert-success">Correct! ${explanations[questionId]}</div>`;
+                  document.getElementById(questionId).classList.add("correct");
+                  document
+                    .getElementById(questionId)
+                    .classList.remove("incorrect");
+                } else {
+                  feedbackDiv.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${
+                    document.querySelector(
+                      `#${questionId} input[value="${correctAnswers[questionId]}"]`
+                    ).nextElementSibling.textContent
+                  }. ${explanations[questionId]}</div>`;
+                  document
+                    .getElementById(questionId)
+                    .classList.add("incorrect");
+                  document
+                    .getElementById(questionId)
+                    .classList.remove("correct");
+                }
+                feedbackDiv.style.display = "block";
+              } else {
+                feedbackDiv.innerHTML =
+                  '<div class="alert alert-warning">Please select an answer.</div>';
+                feedbackDiv.style.display = "block";
+              }
+            }
+
+            document.getElementById("score").textContent = score;
+            document.getElementById("results").style.display = "block";
+
+            let resultMessage = "";
+            if (score === 10) {
+              resultMessage = "Perfect! You know your circle parts very well!";
+            } else if (score >= 7) {
+              resultMessage =
+                "Good job! You have a solid understanding of circle parts.";
+            } else if (score >= 5) {
+              resultMessage =
+                "Not bad, but you might want to review the definitions.";
+            } else {
+              resultMessage =
+                "Keep practicing! You'll get better with more study.";
+            }
+            document.getElementById("result-message").textContent =
+              resultMessage;
+          });
+
+        document
+          .getElementById("reset-quiz")
+          .addEventListener("click", function () {
+            const radioButtons = document.querySelectorAll(
+              'input[type="radio"]'
+            );
+            radioButtons.forEach((button) => {
+              button.checked = false;
+            });
+
+            const feedbackDivs = document.querySelectorAll(".feedback");
+            feedbackDivs.forEach((div) => {
+              div.style.display = "none";
+              div.innerHTML = "";
+            });
+
+            const questions = document.querySelectorAll(".question");
+            questions.forEach((question) => {
+              question.classList.remove("correct", "incorrect");
+            });
+
+            document.getElementById("results").style.display = "none";
+          });
+      });
+    </script>
+  </body>
+</html>

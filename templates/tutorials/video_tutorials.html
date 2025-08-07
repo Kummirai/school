@@ -89,7 +89,8 @@
 <script>
   // Video Tutorials Page Script
   document.addEventListener("DOMContentLoaded", function () {
-    let allVideos = [];
+    // allVideos is now passed directly from the Flask backend
+    let allVideos = {{ all_videos | tojson | safe }};
     let currentFilters = {
       grade: "",
       subject: "",
@@ -102,6 +103,8 @@
     function initializeUI() {
       // Setup filter and search functionality
       setupFiltersAndSearch();
+      // Display all videos initially
+      displayVideos(allVideos);
     }
 
     function toggleLoadingSpinner(show) {
@@ -151,7 +154,7 @@
                           </div>
                       </div>
                       <div class="card-footer bg-transparent">
-                          <button class="btn btn-sm btn-primary watch-btn w-100" data-video-id="${video.youtubeId}">
+                          <button class="btn btn-sm btn-primary watch-btn w-100" data-video-id="${video.youtubeid}">
                               <i class="bi bi-play-fill"></i> Watch Now
                           </button>
                       </div>
@@ -216,22 +219,28 @@
 
       // Get unique subjects from videos filtered by selected grade
       const selectedGrade = document.getElementById("grade-select").value;
-      const filteredVideos = videos.filter((video) => {
-        if (video.grade.includes("-")) {
-          const gradeRange = video.grade.replace("Grade ", "").split("-");
-          const startGrade = parseInt(gradeRange[0]);
-          const endGrade = parseInt(gradeRange[1]);
-          return (
-            parseInt(selectedGrade) >= startGrade &&
-            parseInt(selectedGrade) <= endGrade
-          );
-        } else {
-          return video.grade === `Grade ${selectedGrade}`;
-        }
-      });
+      let filteredVideosByGrade = videos;
+
+      if (selectedGrade) {
+        filteredVideosByGrade = videos.filter((video) => {
+          // Handle grade ranges like "Grade 10-12"
+          if (video.grade.includes("-")) {
+            const gradeRange = video.grade.replace("Grade ", "").split("-");
+            const startGrade = parseInt(gradeRange[0]);
+            const endGrade = parseInt(gradeRange[1]);
+            return (
+              parseInt(selectedGrade) >= startGrade &&
+              parseInt(selectedGrade) <= endGrade
+            );
+          } else {
+            // Handle exact grade matches
+            return video.grade === `Grade ${selectedGrade}`;
+          }
+        });
+      }
 
       const subjects = [
-        ...new Set(filteredVideos.map((video) => video.subject)),
+        ...new Set(filteredVideosByGrade.map((video) => video.subject)),
       ];
 
       // Clear existing options except the first one
@@ -255,29 +264,12 @@
       const searchInput = document.getElementById("video-search");
       const searchBtn = document.getElementById("search-btn");
 
+      // Populate subject dropdown initially with all videos
+      populateSubjectDropdown(allVideos);
+
       // Update subjects when grade changes
-      gradeSelect.addEventListener("change", async function () {
-        if (!this.value) return;
-
-        try {
-          toggleLoadingSpinner(true);
-
-          // Load videos if not already loaded
-          if (allVideos.length === 0) {
-            const response = await fetch("/static/js/video_tutorials.json");
-            if (!response.ok) {
-              throw new Error("Failed to load videos");
-            }
-            const data = await response.json();
-            allVideos = data.videos;
-          }
-
-          populateSubjectDropdown(allVideos);
-          toggleLoadingSpinner(false);
-        } catch (error) {
-          console.error("Error loading videos:", error);
-          showErrorMessage("Failed to load videos. Please try again later.");
-        }
+      gradeSelect.addEventListener("change", function () {
+        populateSubjectDropdown(allVideos);
       });
 
       // Apply filters when button is clicked
@@ -293,37 +285,26 @@
       // Apply filters when search button is clicked
       searchBtn.addEventListener("click", applyFilters);
 
-      async function applyFilters() {
-        if (!gradeSelect.value || !subjectSelect.value) {
-          alert("Please select both grade and subject");
+      function applyFilters() {
+        const selectedGrade = gradeSelect.value;
+        const selectedSubject = subjectSelect.value;
+        const searchTerm = searchInput.value.toLowerCase();
+
+        if (!selectedGrade && !selectedSubject && !searchTerm) {
+          alert("Please select a grade, subject, or enter a search term.");
           return;
         }
 
-        try {
-          toggleLoadingSpinner(true);
+        toggleLoadingSpinner(true);
 
-          // Load videos if not already loaded
-          if (allVideos.length === 0) {
-            const response = await fetch("/static/js/video_tutorials.json");
-            if (!response.ok) {
-              throw new Error("Failed to load videos");
-            }
-            const data = await response.json();
-            allVideos = data.videos;
-          }
+        currentFilters.grade = selectedGrade;
+        currentFilters.subject = selectedSubject;
+        currentFilters.searchTerm = searchTerm;
 
-          currentFilters.grade = gradeSelect.value;
-          currentFilters.subject = subjectSelect.value;
-          currentFilters.searchTerm = searchInput.value.toLowerCase();
+        const filteredVideos = filterVideos(allVideos, currentFilters);
+        displayVideos(filteredVideos);
 
-          const filteredVideos = filterVideos(allVideos, currentFilters);
-          displayVideos(filteredVideos);
-
-          toggleLoadingSpinner(false);
-        } catch (error) {
-          console.error("Error loading videos:", error);
-          showErrorMessage("Failed to load videos. Please try again later.");
-        }
+        toggleLoadingSpinner(false);
       }
     }
 
@@ -331,24 +312,28 @@
       let filteredVideos = [...videos];
 
       // Filter by grade
-      filteredVideos = filteredVideos.filter((video) => {
-        if (video.grade.includes("-")) {
-          const gradeRange = video.grade.replace("Grade ", "").split("-");
-          const startGrade = parseInt(gradeRange[0]);
-          const endGrade = parseInt(gradeRange[1]);
-          return (
-            parseInt(filters.grade) >= startGrade &&
-            parseInt(filters.grade) <= endGrade
-          );
-        } else {
-          return video.grade === `Grade ${filters.grade}`;
-        }
-      });
+      if (filters.grade) {
+        filteredVideos = filteredVideos.filter((video) => {
+          if (video.grade.includes("-")) {
+            const gradeRange = video.grade.replace("Grade ", "").split("-");
+            const startGrade = parseInt(gradeRange[0]);
+            const endGrade = parseInt(gradeRange[1]);
+            return (
+              parseInt(filters.grade) >= startGrade &&
+              parseInt(filters.grade) <= endGrade
+            );
+          } else {
+            return video.grade === `Grade ${filters.grade}`;
+          }
+        });
+      }
 
       // Filter by subject
-      filteredVideos = filteredVideos.filter(
-        (video) => video.subject === filters.subject
-      );
+      if (filters.subject) {
+        filteredVideos = filteredVideos.filter(
+          (video) => video.subject === filters.subject
+        );
+      }
 
       // Apply search term if exists
       if (filters.searchTerm) {
