@@ -14,7 +14,7 @@ from blueprints.subscriptions.utils import get_subscription_plans
 from blueprints.students.utils import get_user_by_username, get_students
 from werkzeug.security import generate_password_hash
 from blueprints.announcements.utils import get_all_announcements, create_announcement
-from blueprints.tutorials.utils import get_all_categories, get_all_videos, add_video, delete_video
+from blueprints.tutorials.utils import get_all_subjects, get_all_videos, add_video, delete_video
 from blueprints.sessions.utils import get_upcoming_sessions, create_session, get_all_sessions
 from blueprints.sessions.utils import get_all_session_requests, update_session_request_status
 from blueprints.students.utils import add_student_to_db, delete_student_by_id
@@ -1130,11 +1130,11 @@ def link_parent_student():
 @admin_required
 def manage_tutorials():
     videos = get_all_videos()  # This should return a list of videos
-    categories = get_all_categories()  # This should return a list of categories
+    subjects = get_all_subjects()  # This should return a list of subjects
 
     return render_template('admin/tutorials.html',
                            videos=videos,
-                           categories=categories)
+                           subjects=subjects)
 
 
 @admin_bp.route('/tutorials/add', methods=['GET', 'POST'])
@@ -1150,13 +1150,12 @@ def add_tutorial():
             subject = request.form.get('subject', '').strip()
             youtubeid = request.form.get('youtubeid', '').strip()
             thumbnail = request.form.get('thumbnail', '').strip()
-            category_id = request.form.get('category_id', '').strip()
 
-            if not all([title, url, description, grade, subject, youtubeid, thumbnail, category_id]):
+            if not all([title, url, description, grade, subject, youtubeid, thumbnail]):
                 flash('All fields are required', 'danger')
                 return redirect(url_for('admin.add_tutorial'))
 
-            add_video(title, url, description, grade, subject, youtubeid, thumbnail, category_id)
+            add_video(title, url, description, grade, subject, youtubeid, thumbnail)
             flash('Tutorial added successfully', 'success')
             return redirect(url_for('admin.manage_tutorials'))
 
@@ -1165,8 +1164,8 @@ def add_tutorial():
             return redirect(url_for('tutorials.add_tutorial'))
 
     # GET request - show the form
-    categories = get_all_categories()
-    return render_template('admin/add_tutorial.html', categories=categories)
+    subjects = get_all_subjects()
+    return render_template('admin/add_tutorial.html', subjects=subjects)
 
 
 @admin_bp.route('/tutorials/delete/<int:video_id>')
@@ -1183,7 +1182,7 @@ def delete_tutorial(video_id):
 @admin_required
 def admin_dashboard():
     students = get_students()
-    categories = get_all_categories()
+    subjects = get_all_subjects()
     upcoming_sessions = get_upcoming_sessions()
 
     # Get active subscription count
@@ -1204,7 +1203,7 @@ def admin_dashboard():
     return render_template('admin/dashboard.html',
                            assignments=assignments,
                            student_count=len(students),
-                           category_count=len(categories),
+                           subject_count=len(subjects),
                            upcoming_sessions=upcoming_sessions,
                            active_subscriptions_count=active_subscriptions_count)
 

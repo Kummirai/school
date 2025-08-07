@@ -2,11 +2,11 @@ from models import get_db_connection
 import psycopg2.extras
 
 
-def get_videos_by_category(category_id):
+def get_videos_by_subject(subject):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(
-        'SELECT id, title, url, description, grade, subject, youtubeid, thumbnail FROM videos WHERE category_id = %s', (category_id,))
+        'SELECT id, title, url, description, grade, subject, youtubeid, thumbnail FROM videos WHERE subject = %s', (subject,))
     videos = cur.fetchall()
     cur.close()
     conn.close()
@@ -16,11 +16,7 @@ def get_videos_by_category(category_id):
 def get_all_videos():
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute('''
-        SELECT v.id, v.title, v.url, v.description, v.grade, v.subject, v.youtubeid, v.thumbnail, tc.name as category_name
-        FROM videos v
-        JOIN tutorial_categories tc ON v.category_id = tc.id
-    ''')
+    cur.execute('SELECT id, title, url, description, grade, subject, youtubeid, thumbnail, subject as category_name FROM videos')
     videos = cur.fetchall()
     cur.close()
     conn.close()
@@ -33,20 +29,18 @@ def get_all_videos_details():
     try:
         cur.execute('''
             SELECT
-                v.id,
-                v.title,
-                v.description,
-                v.grade,
-                v.subject,
-                v.youtubeid,
-                v.thumbnail,
-                tc.name as category_name
+                id,
+                title,
+                description,
+                grade,
+                subject,
+                youtubeid,
+                thumbnail,
+                subject as category_name
             FROM
-                videos v
-            JOIN
-                tutorial_categories tc ON v.category_id = tc.id
+                videos
             ORDER BY
-                v.grade, v.subject, v.title
+                grade, subject, title
         ''')
         videos = cur.fetchall()
         return videos
@@ -58,11 +52,11 @@ def get_all_videos_details():
         conn.close()
 
 
-def add_video(title, url, description, grade, subject, youtubeid, thumbnail, category_id):
+def add_video(title, url, description, grade, subject, youtubeid, thumbnail):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('INSERT INTO videos (title, url, description, grade, subject, youtubeid, thumbnail, category_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-                (title, url, description, grade, subject, youtubeid, thumbnail, category_id))
+    cur.execute('INSERT INTO videos (title, url, description, grade, subject, youtubeid, thumbnail) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+                (title, url, description, grade, subject, youtubeid, thumbnail))
     conn.commit()
     cur.close()
     conn.close()
@@ -77,22 +71,11 @@ def delete_video(video_id):
     conn.close()
 
 
-def get_all_categories():
+def get_all_subjects():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT id, name FROM tutorial_categories')
-    categories = cur.fetchall()
+    cur.execute('SELECT DISTINCT subject FROM videos ORDER BY subject')
+    subjects = [row[0] for row in cur.fetchall()]
     cur.close()
     conn.close()
-    return categories
-
-
-def get_category_name(category_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(
-        'SELECT name FROM tutorial_categories WHERE id = %s', (category_id,))
-    category = cur.fetchone()
-    cur.close()
-    conn.close()
-    return category[0] if category else "Unknown Category"
+    return subjects

@@ -14,20 +14,7 @@ content %}
   <div class="card">
     <div class="card-body">
       <form method="POST">
-        <div class="mb-3">
-          <label for="category_id" class="form-label">Category</label>
-          <select
-            class="form-select"
-            id="category_id"
-            name="category_id"
-            required
-          >
-            <option value="" disabled selected>Select a category</option>
-            {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
+        
         <div class="mb-3">
           <label for="title" class="form-label">Video Title</label>
           <input
@@ -61,14 +48,17 @@ content %}
         </div>
         <div class="mb-3">
           <label for="subject" class="form-label">Subject</label>
-          <input
-            type="text"
-            class="form-control"
+          <select
+            class="form-select"
             id="subject"
             name="subject"
-            placeholder="e.g., Mathematics, Physical Science"
             required
-          />
+          >
+            <option value="" disabled selected>Select a subject</option>
+            {% for subject in subjects %}
+            <option value="{{ subject }}">{{ subject }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="mb-3">
           <label for="youtubeid" class="form-label">YouTube Video ID</label>
