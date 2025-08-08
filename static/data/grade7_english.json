@@ -137,6 +137,26 @@
                   "icon": "play-circle"
                 }
               ]
+            },
+            {
+              "title": "1.6 Antonyms And Synonyms",
+              "duration": "20 min",
+              "icon": "bi bi-link-45deg",
+              "description": "Synonyms are words or phrases that have the same or very similar meanings, while antonyms are words that have opposite meanings.",
+              "resources": [
+                {
+                  "type": "lesson_content",
+                  "title": "Lesson Content",
+                  "path": "html/grade_7/english/chapter_1/1_6_antonym_synonym_content.html",
+                  "icon": "file-earmark-text"
+                },
+                {
+                  "type": "video",
+                  "title": "Video Lesson",
+                  "path": ["https://www.youtube.com/embed/MlHQZbb-Brs"],
+                  "icon": "play-circle"
+                }
+              ]
             }
           ]
         },

@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antonyms & Synonyms Tutorial</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .nav-pills .nav-link.active {
+        background-color: #6c757d;
+      }
+      .progress {
+        height: 25px;
+        margin-bottom: 20px;
+      }
+      .progress-bar {
+        background-color: #6c757d;
+      }
+      .quiz-option {
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .quiz-option:hover {
+        background-color: #f8f9fa;
+      }
+      .correct {
+        background-color: #d4edda !important;
+      }
+      .incorrect {
+        background-color: #f8d7da !important;
+      }
+      .section {
+        display: none;
+      }
+      .section.active {
+        display: block;
+      }
+      .example-card {
+        border-left: 4px solid #6c757d;
+      }
+      .drag-item {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 5px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+        cursor: move;
+      }
+      .drop-zone {
+        min-height: 50px;
+        border: 2px dashed #6c757d;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .word-card {
+        transition: all 0.3s;
+      }
+      .word-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid py-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="card shadow">
+            <div class="card-header bg-white">
+              <h1 class="text-center mb-4">Antonyms & Synonyms Tutorial</h1>
+              <ul class="nav nav-pills nav-fill mb-3" id="lessonTabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#" data-section="intro"
+                    >Introduction</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-section="synonyms"
+                    >Synonyms</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-section="antonyms"
+                    >Antonyms</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-section="quiz">Quiz</a>
+                </li>
+              </ul>
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  id="progressBar"
+                  role="progressbar"
+                  style="width: 25%"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  25%
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Introduction Section -->
+              <div class="section active" id="intro-section">
+                <h2 class="mb-4">Understanding Word Relationships</h2>
+                <div class="alert alert-info">
+                  <strong>Synonyms</strong> are words with similar meanings,
+                  while <strong>antonyms</strong> are words with opposite
+                  meanings. Understanding these relationships helps improve
+                  vocabulary and writing skills.
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <div class="card example-card mb-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Examples</h5>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">
+                            <strong>Synonyms:</strong> happy/joyful, big/large
+                          </li>
+                          <li class="list-group-item">
+                            <strong>Antonyms:</strong> hot/cold, up/down
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Quick Practice</h5>
+                        <p class="card-text">
+                          Identify whether these word pairs are synonyms or
+                          antonyms:
+                        </p>
+                        <div class="list-group">
+                          <div class="list-group-item">
+                            <p class="mb-1">fast - quick</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intro-btn"
+                                data-pair="fast-quick"
+                                data-type="synonym"
+                              >
+                                Synonyms
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intro-btn"
+                                data-pair="fast-quick"
+                                data-type="antonym"
+                              >
+                                Antonyms
+                              </button>
+                            </div>
+                          </div>
+                          <div class="list-group-item">
+                            <p class="mb-1">light - dark</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intro-btn"
+                                data-pair="light-dark"
+                                data-type="synonym"
+                              >
+                                Synonyms
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-secondary intro-btn"
+                                data-pair="light-dark"
+                                data-type="antonym"
+                              >
+                                Antonyms
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="introFeedback" class="mt-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-4">
+                  <button
+                    class="btn btn-primary next-section"
+                    data-next="synonyms"
+                  >
+                    Continue to Synonyms
+                  </button>
+                </div>
+              </div>
+
+              <!-- Synonyms Section -->
+              <div class="section" id="synonyms-section">
+                <h2 class="mb-4">Synonyms</h2>
+                <div class="alert alert-secondary">
+                  Synonyms are words that have similar meanings but may differ
+                  in intensity, formality, or usage context.
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Types of Synonyms</h5>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            <strong>Absolute:</strong> identical meaning (e.g.,
+                            sofa/couch)
+                          </li>
+                          <li class="list-group-item">
+                            <strong>Near:</strong> similar but not identical
+                            (e.g., happy/joyful)
+                          </li>
+                          <li class="list-group-item">
+                            <strong>Contextual:</strong> similar only in certain
+                            contexts
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Why Use Synonyms?</h5>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            Avoid repetition in writing
+                          </li>
+                          <li class="list-group-item">
+                            Add variety and precision
+                          </li>
+                          <li class="list-group-item">
+                            Adjust for different audiences
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Synonym Matching</h5>
+                    <p>Drag each word to match it with its synonym:</p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div
+                          class="drag-drop-area"
+                          ondrop="drop(event)"
+                          ondragover="allowDrop(event)"
+                        >
+                          <h6>Words</h6>
+                          <div class="drop-zone" id="synonymWords">
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="happy"
+                              >happy</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="tiny"
+                              >tiny</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="smart"
+                              >smart</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div
+                          class="drag-drop-area"
+                          ondrop="drop(event)"
+                          ondragover="allowDrop(event)"
+                        >
+                          <h6>Synonyms</h6>
+                          <div class="drop-zone" id="synonymMatches">
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="smart"
+                              >intelligent</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="happy"
+                              >joyful</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="tiny"
+                              >small</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary mt-2"
+                      id="checkSynonymsBtn"
+                    >
+                      Check Answers
+                    </button>
+                    <div id="synonymFeedback" class="mt-2"></div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Synonym Identification</h5>
+                    <p>Select the word that is a synonym for the given word:</p>
+                    <div class="list-group">
+                      <div class="list-group-item">
+                        <p class="mb-1">Beautiful</p>
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="beautiful"
+                            data-choice="ugly"
+                          >
+                            Ugly
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="beautiful"
+                            data-choice="pretty"
+                          >
+                            Pretty
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="beautiful"
+                            data-choice="large"
+                          >
+                            Large
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-group-item">
+                        <p class="mb-1">Angry</p>
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="angry"
+                            data-choice="calm"
+                          >
+                            Calm
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="angry"
+                            data-choice="furious"
+                          >
+                            Furious
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary synonym-btn"
+                            data-word="angry"
+                            data-choice="happy"
+                          >
+                            Happy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="synonymChoiceFeedback" class="mt-2"></div>
+                  </div>
+                </div>
+
+                <div class="text-center mt-4">
+                  <button
+                    class="btn btn-primary next-section"
+                    data-next="antonyms"
+                  >
+                    Continue to Antonyms
+                  </button>
+                </div>
+              </div>
+
+              <!-- Antonyms Section -->
+              <div class="section" id="antonyms-section">
+                <h2 class="mb-4">Antonyms</h2>
+                <div class="alert alert-secondary">
+                  Antonyms are words with opposite meanings. They can be
+                  classified into different types based on their opposition.
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-6">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <h5 class="card-title">Types of Antonyms</h5>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            <strong>Graded:</strong> opposites on a spectrum
+                            (hot/cold)
+                          </li>
+                          <li class="list-group-item">
+                            <strong>Complementary:</strong> absolute opposites
+                            (alive/dead)
+                          </li>
+                          <li class="list-group-item">
+                            <strong>Relational:</strong> opposite roles
+                            (buy/sell, parent/child)
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Using Antonyms</h5>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+                            Create contrast in writing
+                          </li>
+                          <li class="list-group-item">
+                            Explain concepts by opposition
+                          </li>
+                          <li class="list-group-item">
+                            Enhance vocabulary precision
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Antonym Pairs</h5>
+                    <p>Match each word with its antonym:</p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div
+                          class="drag-drop-area"
+                          ondrop="drop(event)"
+                          ondragover="allowDrop(event)"
+                        >
+                          <h6>Words</h6>
+                          <div class="drop-zone" id="antonymWords">
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="hot"
+                              >hot</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="happy"
+                              >happy</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="light"
+                              >light</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div
+                          class="drag-drop-area"
+                          ondrop="drop(event)"
+                          ondragover="allowDrop(event)"
+                        >
+                          <h6>Antonyms</h6>
+                          <div class="drop-zone" id="antonymMatches">
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="happy"
+                              >sad</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="hot"
+                              >cold</span
+                            >
+                            <span
+                              class="drag-item"
+                              draggable="true"
+                              ondragstart="drag(event)"
+                              data-match="light"
+                              >heavy</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary mt-2"
+                      id="checkAntonymsBtn"
+                    >
+                      Check Answers
+                    </button>
+                    <div id="antonymFeedback" class="mt-2"></div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Antonym Identification</h5>
+                    <p>
+                      Select the word that is an antonym for the given word:
+                    </p>
+                    <div class="list-group">
+                      <div class="list-group-item">
+                        <p class="mb-1">Fast</p>
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="fast"
+                            data-choice="quick"
+                          >
+                            Quick
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="fast"
+                            data-choice="slow"
+                          >
+                            Slow
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="fast"
+                            data-choice="rapid"
+                          >
+                            Rapid
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-group-item">
+                        <p class="mb-1">Friend</p>
+                        <div class="btn-group btn-group-sm" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="friend"
+                            data-choice="enemy"
+                          >
+                            Enemy
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="friend"
+                            data-choice="companion"
+                          >
+                            Companion
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary antonym-btn"
+                            data-word="friend"
+                            data-choice="ally"
+                          >
+                            Ally
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="antonymChoiceFeedback" class="mt-2"></div>
+                  </div>
+                </div>
+
+                <div class="text-center mt-4">
+                  <button class="btn btn-primary next-section" data-next="quiz">
+                    Continue to Quiz
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quiz Section -->
+              <div class="section" id="quiz-section">
+                <h2 class="mb-4">Antonyms & Synonyms Quiz</h2>
+                <div class="alert alert-info">
+                  Test your understanding with this 10-question quiz!
+                </div>
+
+                <form id="wordQuiz">
+                  <!-- Question 1 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 1</h5>
+                      <p class="card-text">
+                        Which word is a synonym for "happy"?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q1"
+                          id="q1a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q1a">Sad</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q1"
+                          id="q1b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q1b">Joyful</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q1"
+                          id="q1c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q1c">Angry</label>
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 2 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 2</h5>
+                      <p class="card-text">
+                        Which word is an antonym for "light"?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q2"
+                          id="q2a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q2a">Bright</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q2"
+                          id="q2b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q2b">Heavy</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q2"
+                          id="q2c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q2c">Dark</label>
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 3 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 3</h5>
+                      <p class="card-text">Which pair are synonyms?</p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q3"
+                          id="q3a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q3a"
+                          >Hot - Cold</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q3"
+                          id="q3b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q3b"
+                          >Big - Large</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q3"
+                          id="q3c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q3c"
+                          >Up - Down</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 4 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 4</h5>
+                      <p class="card-text">Which pair are antonyms?</p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q4"
+                          id="q4a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q4a"
+                          >Happy - Joyful</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q4"
+                          id="q4b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q4b"
+                          >Fast - Quick</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q4"
+                          id="q4c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q4c"
+                          >Buy - Sell</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 5 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 5</h5>
+                      <p class="card-text">What is the antonym of "begin"?</p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q5"
+                          id="q5a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q5a">Start</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q5"
+                          id="q5b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q5b">End</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q5"
+                          id="q5c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q5c"
+                          >Continue</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 6 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 6</h5>
+                      <p class="card-text">
+                        Which is NOT a synonym for "beautiful"?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q6"
+                          id="q6a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q6a">Pretty</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q6"
+                          id="q6b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q6b">Ugly</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q6"
+                          id="q6c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q6c">Lovely</label>
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 7 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 7</h5>
+                      <p class="card-text">
+                        Which is a relational antonym pair?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q7"
+                          id="q7a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q7a"
+                          >Hot - Cold</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q7"
+                          id="q7b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q7b"
+                          >Teacher - Student</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q7"
+                          id="q7c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q7c"
+                          >Happy - Sad</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 8 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 8</h5>
+                      <p class="card-text">Which is a near synonym pair?</p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q8"
+                          id="q8a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q8a"
+                          >Sofa - Couch</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q8"
+                          id="q8b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q8b"
+                          >Happy - Joyful</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q8"
+                          id="q8c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q8c"
+                          >Alive - Dead</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 9 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 9</h5>
+                      <p class="card-text">
+                        What is the antonym of "increase"?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q9"
+                          id="q9a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q9a">Grow</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q9"
+                          id="q9b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q9b"
+                          >Decrease</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q9"
+                          id="q9c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q9c">Expand</label>
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question 10 -->
+                  <div class="card mb-3 quiz-question">
+                    <div class="card-body">
+                      <h5 class="card-title">Question 10</h5>
+                      <p class="card-text">
+                        Which is a complementary antonym pair?
+                      </p>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q10"
+                          id="q10a"
+                          value="a"
+                        />
+                        <label class="form-check-label" for="q10a"
+                          >Hot - Cold</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q10"
+                          id="q10b"
+                          value="b"
+                        />
+                        <label class="form-check-label" for="q10b"
+                          >Alive - Dead</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="q10"
+                          id="q10c"
+                          value="c"
+                        />
+                        <label class="form-check-label" for="q10c"
+                          >Buy - Sell</label
+                        >
+                      </div>
+                      <div class="feedback mt-2"></div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                      Submit Quiz
+                    </button>
+                  </div>
+                </form>
+
+                <div
+                  id="quizResults"
+                  class="mt-4 text-center"
+                  style="display: none"
+                >
+                  <h4>Quiz Results</h4>
+                  <div class="display-4" id="quizScore">0</div>
+                  <p id="quizFeedback"></p>
+                  <button class="btn btn-secondary" id="retryQuizBtn">
+                    Try Again
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Navigation between sections
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tab navigation
+        const tabs = document.querySelectorAll("#lessonTabs .nav-link");
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function (e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute("data-section") + "-section";
+
+            // Update active tab
+            tabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            // Show selected section
+            document
+              .querySelectorAll(".section")
+              .forEach((s) => s.classList.remove("active"));
+            document.getElementById(sectionId).classList.add("active");
+
+            // Update progress bar
+            updateProgressBar(sectionId);
+          });
+        });
+
+        // Next section buttons
+        document.querySelectorAll(".next-section").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const nextSectionId = this.getAttribute("data-next") + "-section";
+
+            // Update active tab
+            tabs.forEach((t) => t.classList.remove("active"));
+            document
+              .querySelector(
+                `[data-section="${this.getAttribute("data-next")}"]`
+              )
+              .classList.add("active");
+
+            // Show next section
+            document
+              .querySelectorAll(".section")
+              .forEach((s) => s.classList.remove("active"));
+            document.getElementById(nextSectionId).classList.add("active");
+
+            // Update progress bar
+            updateProgressBar(nextSectionId);
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+          });
+        });
+
+        // Update progress bar based on current section
+        function updateProgressBar(sectionId) {
+          let progress = 25;
+          switch (sectionId) {
+            case "synonyms-section":
+              progress = 50;
+              break;
+            case "antonyms-section":
+              progress = 75;
+              break;
+            case "quiz-section":
+              progress = 100;
+              break;
+          }
+          document.getElementById("progressBar").style.width = progress + "%";
+          document
+            .getElementById("progressBar")
+            .setAttribute("aria-valuenow", progress);
+          document.getElementById("progressBar").textContent = progress + "%";
+        }
+
+        // Introduction practice
+        document.querySelectorAll(".intro-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const pair = this.getAttribute("data-pair");
+            const selectedType = this.getAttribute("data-type");
+
+            // Reset all buttons for this pair
+            document
+              .querySelectorAll(`.intro-btn[data-pair="${pair}"]`)
+              .forEach((b) => {
+                b.classList.remove("active", "btn-success", "btn-danger");
+              });
+
+            // Check answer
+            const correctType = pair === "fast-quick" ? "synonym" : "antonym";
+            if (selectedType === correctType) {
+              this.classList.add("active", "btn-success");
+              document.getElementById("introFeedback").innerHTML =
+                '<div class="alert alert-success">Correct!</div>';
+            } else {
+              this.classList.add("active", "btn-danger");
+              document.getElementById("introFeedback").innerHTML =
+                '<div class="alert alert-danger">Incorrect. "' +
+                (pair === "fast-quick" ? "Fast - quick" : "Light - dark") +
+                '" are ' +
+                (correctType === "synonym" ? "synonyms" : "antonyms") +
+                ".</div>";
+            }
+          });
+        });
+
+        // Drag and drop functionality
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+
+        function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.textContent);
+          ev.dataTransfer.setData("source", ev.target.parentElement.id);
+          ev.dataTransfer.setData(
+            "match",
+            ev.target.getAttribute("data-match")
+          );
+          ev.dataTransfer.setElement(ev.target);
+        }
+
+        function drop(ev) {
+          ev.preventDefault();
+          const data = ev.dataTransfer.getData("text");
+          const source = ev.dataTransfer.getData("source");
+          const match = ev.dataTransfer.getData("match");
+          const element = ev.dataTransfer.getElement();
+
+          // Only allow drop if coming from a different container
+          if (!ev.target.id.includes(source)) {
+            // Remove from previous location if it was in a drop zone
+            if (element.parentElement.classList.contains("drop-zone")) {
+              element.remove();
+            }
+
+            // Create new element in drop zone
+            const newElement = document.createElement("span");
+            newElement.className = "drag-item";
+            newElement.textContent = data;
+            newElement.setAttribute("draggable", "true");
+            newElement.setAttribute("data-match", match);
+            newElement.addEventListener("dragstart", drag);
+
+            ev.target.querySelector(".drop-zone").appendChild(newElement);
+          }
+        }
+
+        // Check synonym matching answers
+        document
+          .getElementById("checkSynonymsBtn")
+          .addEventListener("click", function () {
+            const wordZone = document.getElementById("synonymWords");
+            const matchZone = document.getElementById("synonymMatches");
+            let correctPairs = 0;
+            const totalPairs = 3;
+
+            // Check if words are matched with their synonyms
+            const words = wordZone.querySelectorAll(".drag-item");
+            const matches = matchZone.querySelectorAll(".drag-item");
+
+            words.forEach((word) => {
+              const wordMatch = word.getAttribute("data-match");
+              matches.forEach((match) => {
+                if (match.getAttribute("data-match") === wordMatch) {
+                  if (
+                    (word.textContent === "happy" &&
+                      match.textContent === "joyful") ||
+                    (word.textContent === "tiny" &&
+                      match.textContent === "small") ||
+                    (word.textContent === "smart" &&
+                      match.textContent === "intelligent")
+                  ) {
+                    correctPairs++;
+                    word.classList.add("correct");
+                    match.classList.add("correct");
+                  } else {
+                    word.classList.add("incorrect");
+                    match.classList.add("incorrect");
+                  }
+                }
+              });
+            });
+
+            let feedback = "";
+            if (correctPairs === totalPairs) {
+              feedback =
+                '<div class="alert alert-success">Perfect! All synonyms matched correctly.</div>';
+            } else {
+              feedback = `<div class="alert alert-warning">You matched ${correctPairs} out of ${totalPairs} synonyms correctly.</div>`;
+            }
+
+            document.getElementById("synonymFeedback").innerHTML = feedback;
+          });
+
+        // Synonym identification
+        document.querySelectorAll(".synonym-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const word = this.getAttribute("data-word");
+            const choice = this.getAttribute("data-choice");
+
+            // Reset all buttons for this word
+            document
+              .querySelectorAll(`.synonym-btn[data-word="${word}"]`)
+              .forEach((b) => {
+                b.classList.remove("active", "btn-success", "btn-danger");
+              });
+
+            // Check answer
+            const correctChoices = {
+              beautiful: "pretty",
+              angry: "furious",
+            };
+
+            if (choice === correctChoices[word]) {
+              this.classList.add("active", "btn-success");
+              document.getElementById("synonymChoiceFeedback").innerHTML =
+                '<div class="alert alert-success">Correct! "' +
+                choice +
+                '" is a synonym for "' +
+                word +
+                '".</div>';
+            } else {
+              this.classList.add("active", "btn-danger");
+              document.getElementById("synonymChoiceFeedback").innerHTML =
+                '<div class="alert alert-danger">Incorrect. "' +
+                correctChoices[word] +
+                '" is a synonym for "' +
+                word +
+                '".</div>';
+            }
+          });
+        });
+
+        // Check antonym matching answers
+        document
+          .getElementById("checkAntonymsBtn")
+          .addEventListener("click", function () {
+            const wordZone = document.getElementById("antonymWords");
+            const matchZone = document.getElementById("antonymMatches");
+            let correctPairs = 0;
+            const totalPairs = 3;
+
+            // Check if words are matched with their antonyms
+            const words = wordZone.querySelectorAll(".drag-item");
+            const matches = matchZone.querySelectorAll(".drag-item");
+
+            words.forEach((word) => {
+              const wordMatch = word.getAttribute("data-match");
+              matches.forEach((match) => {
+                if (match.getAttribute("data-match") === wordMatch) {
+                  if (
+                    (word.textContent === "hot" &&
+                      match.textContent === "cold") ||
+                    (word.textContent === "happy" &&
+                      match.textContent === "sad") ||
+                    (word.textContent === "light" &&
+                      match.textContent === "heavy")
+                  ) {
+                    correctPairs++;
+                    word.classList.add("correct");
+                    match.classList.add("correct");
+                  } else {
+                    word.classList.add("incorrect");
+                    match.classList.add("incorrect");
+                  }
+                }
+              });
+            });
+
+            let feedback = "";
+            if (correctPairs === totalPairs) {
+              feedback =
+                '<div class="alert alert-success">Perfect! All antonyms matched correctly.</div>';
+            } else {
+              feedback = `<div class="alert alert-warning">You matched ${correctPairs} out of ${totalPairs} antonyms correctly.</div>`;
+            }
+
+            document.getElementById("antonymFeedback").innerHTML = feedback;
+          });
+
+        // Antonym identification
+        document.querySelectorAll(".antonym-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const word = this.getAttribute("data-word");
+            const choice = this.getAttribute("data-choice");
+
+            // Reset all buttons for this word
+            document
+              .querySelectorAll(`.antonym-btn[data-word="${word}"]`)
+              .forEach((b) => {
+                b.classList.remove("active", "btn-success", "btn-danger");
+              });
+
+            // Check answer
+            const correctChoices = {
+              fast: "slow",
+              friend: "enemy",
+            };
+
+            if (choice === correctChoices[word]) {
+              this.classList.add("active", "btn-success");
+              document.getElementById("antonymChoiceFeedback").innerHTML =
+                '<div class="alert alert-success">Correct! "' +
+                choice +
+                '" is an antonym for "' +
+                word +
+                '".</div>';
+            } else {
+              this.classList.add("active", "btn-danger");
+              document.getElementById("antonymChoiceFeedback").innerHTML =
+                '<div class="alert alert-danger">Incorrect. "' +
+                correctChoices[word] +
+                '" is an antonym for "' +
+                word +
+                '".</div>';
+            }
+          });
+        });
+
+        // Quiz functionality
+        document
+          .getElementById("wordQuiz")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const answers = {
+              q1: "b", // Joyful
+              q2: "b", // Heavy
+              q3: "b", // Big - Large
+              q4: "c", // Buy - Sell
+              q5: "b", // End
+              q6: "b", // Ugly
+              q7: "b", // Teacher - Student
+              q8: "b", // Happy - Joyful
+              q9: "b", // Decrease
+              q10: "b", // Alive - Dead
+            };
+
+            let score = 0;
+            const totalQuestions = Object.keys(answers).length;
+
+            // Check each question
+            for (let i = 1; i <= totalQuestions; i++) {
+              const selected = document.querySelector(
+                `input[name="q${i}"]:checked`
+              );
+              const questionDiv = document.querySelector(
+                `.quiz-question:nth-child(${i})`
+              );
+              const feedbackDiv = questionDiv.querySelector(".feedback");
+
+              if (selected) {
+                if (selected.value === answers[`q${i}`]) {
+                  score++;
+                  feedbackDiv.innerHTML =
+                    '<div class="alert alert-success">Correct!</div>';
+                } else {
+                  feedbackDiv.innerHTML =
+                    '<div class="alert alert-danger">Incorrect.</div>';
+                }
+              } else {
+                feedbackDiv.innerHTML =
+                  '<div class="alert alert-warning">No answer selected.</div>';
+              }
+            }
+
+            // Show results
+            const percentage = Math.round((score / totalQuestions) * 100);
+            document.getElementById("quizScore").textContent = `${percentage}%`;
+
+            let feedback = "";
+            if (percentage >= 80) {
+              feedback =
+                "Excellent work! You have a strong understanding of antonyms and synonyms.";
+            } else if (percentage >= 60) {
+              feedback =
+                "Good job! You understand most concepts but could use some review.";
+            } else {
+              feedback =
+                "Keep practicing! Review the lesson materials and try again.";
+            }
+
+            document.getElementById("quizFeedback").textContent = feedback;
+            document.getElementById("quizResults").style.display = "block";
+
+            // Scroll to results
+            document
+              .getElementById("quizResults")
+              .scrollIntoView({ behavior: "smooth" });
+          });
+
+        // Retry quiz button
+        document
+          .getElementById("retryQuizBtn")
+          .addEventListener("click", function () {
+            // Reset quiz
+            document
+              .querySelectorAll('input[type="radio"]')
+              .forEach((radio) => {
+                radio.checked = false;
+              });
+
+            document.querySelectorAll(".feedback").forEach((fb) => {
+              fb.innerHTML = "";
+            });
+
+            document.getElementById("quizResults").style.display = "none";
+
+            // Scroll to top of quiz
+            document
+              .getElementById("quiz-section")
+              .scrollIntoView({ behavior: "smooth" });
+          });
+
+        // Initialize drag items
+        document.querySelectorAll(".drag-item").forEach((item) => {
+          item.addEventListener("dragstart", drag);
+        });
+      });
+
+      // Helper function to get dragged element
+      DataTransfer.prototype.getElement = function () {
+        const text = this.getData("text");
+        return document.querySelector(`.drag-item:contains('${text}')`);
+      };
+    </script>
+  </body>
+</html>
