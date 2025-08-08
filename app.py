@@ -101,13 +101,13 @@ def inject_functions():
     )
 
 
-if __name__ == '__main__':
-    from waitress import serve
-    initialize_database()
-    serve(app, host="0.0.0.0", port=5000)
-
-
 # if __name__ == '__main__':
-#     app.debug = True
+#     from waitress import serve
 #     initialize_database()
-#     app.run(host='0.0.0.0', port=5000)
+#     serve(app, host="0.0.0.0", port=5000)
+
+
+if __name__ == '__main__':
+    app.debug = True
+    initialize_database()
+    app.run(host='0.0.0.0', port=5000)

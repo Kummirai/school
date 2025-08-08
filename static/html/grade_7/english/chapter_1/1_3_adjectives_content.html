@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Adjectives Tutorial</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .nav-pills .nav-link.active {
+            background-color: #6c757d;
+        }
+        .progress {
+            height: 25px;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            background-color: #6c757d;
+        }
+        .quiz-option {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            background-color: #f8f9fa;
+        }
+        .correct {
+            background-color: #d4edda !important;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .example-card {
+            border-left: 4px solid #6c757d;
+        }
+        .drag-item {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            cursor: move;
+        }
+        .drop-zone {
+            min-height: 50px;
+            border: 2px dashed #6c757d;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .word-card {
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .adjective-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fuild py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-white">
+                    <h1 class="text-center mb-4">Comprehensive Adjectives Tutorial</h1>
+                    <ul class="nav nav-pills nav-fill mb-3" id="lessonTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-section="intro">Introduction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="types">Types of Adjectives</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="degrees">Degrees of Comparison</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="quiz">Quiz</a>
+                        </li>
+                    </ul>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Introduction Section -->
+                    <div class="section active" id="intro-section">
+                        <h2 class="mb-4">What is an Adjective?</h2>
+                        <div class="alert alert-info">
+                            An <strong>adjective</strong> is a word that describes or modifies a noun or pronoun by providing more information about its qualities, characteristics, or attributes.
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card example-card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Examples of Adjectives</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <strong>Descriptive:</strong> blue, tall, delicious
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Quantitative:</strong> three, many, few
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Demonstrative:</strong> this, that, those
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Possessive:</strong> my, your, their
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Identify the Adjectives</h5>
+                                        <p class="card-text">
+                                            Type all the adjectives you can find in this sentence:
+                                        </p>
+                                        <p>
+                                            <em>"The quick brown fox jumps over the lazy dog near five small trees."</em>
+                                        </p>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="adjectiveInput" placeholder="Enter adjectives separated by commas">
+                                            <small class="form-text text-muted">Example: happy, blue, three</small>
+                                        </div>
+                                        <button class="btn btn-secondary mt-2" id="checkAdjectivesBtn">Check Answer</button>
+                                        <div id="adjectiveFeedback" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary next-section" data-next="types">
+                                Continue to Types of Adjectives
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Types of Adjectives Section -->
+                    <div class="section" id="types-section">
+                        <h2 class="mb-4">Types of Adjectives</h2>
+                        <div class="alert alert-secondary">
+                            Adjectives can be categorized based on their function and the type of information they provide about nouns.
+                        </div>
+
+                        <div class="accordion" id="adjectiveTypesAccordion">
+                            <!-- Descriptive Adjectives -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#descriptiveAdjectives">
+                                        1. Descriptive Adjectives
+                                    </button>
+                                </h2>
+                                <div id="descriptiveAdjectives" class="accordion-collapse collapse show" data-bs-parent="#adjectiveTypesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Describe qualities or states of nouns (color, size, shape, etc.).</p>
+                                        <div class="row">
+                                            <div class="col-md-4 text-center">
+                                                <div class="adjective-circle bg-primary">Blue</div>
+                                                <p class="mt-2">Color</p>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <div class="adjective-circle bg-success">Tall</div>
+                                                <p class="mt-2">Size</p>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <div class="adjective-circle bg-warning">Round</div>
+                                                <p class="mt-2">Shape</p>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Practice</h5>
+                                                <p>Identify the descriptive adjective in each sentence:</p>
+                                                <div class="list-group">
+                                                    <div class="list-group-item">
+                                                        <p>"She wore a <u>beautiful</u> dress to the party."</p>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="descriptive1" id="descriptive1a" value="dress">
+                                                            <label class="form-check-label" for="descriptive1a">dress</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="descriptive1" id="descriptive1b" value="beautiful">
+                                                            <label class="form-check-label" for="descriptive1b">beautiful</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <p>"The <u>ancient</u> castle stood on the hill."</p>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="descriptive2" id="descriptive2a" value="castle">
+                                                            <label class="form-check-label" for="descriptive2a">castle</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="descriptive2" id="descriptive2b" value="ancient">
+                                                            <label class="form-check-label" for="descriptive2b">ancient</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-sm btn-secondary mt-2" id="checkDescriptiveBtn">Check Answers</button>
+                                                <div id="descriptiveFeedback" class="mt-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quantitative Adjectives -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#quantitativeAdjectives">
+                                        2. Quantitative Adjectives
+                                    </button>
+                                </h2>
+                                <div id="quantitativeAdjectives" class="accordion-collapse collapse" data-bs-parent="#adjectiveTypesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Indicate quantity or amount (exact or approximate).</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6>Definite Quantity</h6>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">three apples</li>
+                                                    <li class="list-group-item">ten students</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Indefinite Quantity</h6>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">many books</li>
+                                                    <li class="list-group-item">some water</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Practice</h5>
+                                                <p>Classify these quantitative adjectives:</p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="drag-drop-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                            <h6>Definite</h6>
+                                                            <div class="drop-zone"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="drag-drop-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                            <h6>Indefinite</h6>
+                                                            <div class="drop-zone"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="drag-items mt-3">
+                                                    <span class="drag-item" draggable="true" ondragstart="drag(event)">seven</span>
+                                                    <span class="drag-item" draggable="true" ondragstart="drag(event)">many</span>
+                                                    <span class="drag-item" draggable="true" ondragstart="drag(event)">twelve</span>
+                                                    <span class="drag-item" draggable="true" ondragstart="drag(event)">some</span>
+                                                    <span class="drag-item" draggable="true" ondragstart="drag(event)">few</span>
+                                                </div>
+                                                <button class="btn btn-sm btn-secondary mt-2" id="checkQuantitativeBtn">Check Answers</button>
+                                                <div id="quantitativeFeedback" class="mt-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Demonstrative Adjectives -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#demonstrativeAdjectives">
+                                        3. Demonstrative Adjectives
+                                    </button>
+                                </h2>
+                                <div id="demonstrativeAdjectives" class="accordion-collapse collapse" data-bs-parent="#adjectiveTypesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Point out specific nouns (this, that, these, those).</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6>Singular</h6>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">this book</li>
+                                                    <li class="list-group-item">that car</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Plural</h6>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">these books</li>
+                                                    <li class="list-group-item">those cars</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Practice</h5>
+                                                <p>Complete the sentences with the correct demonstrative adjective:</p>
+                                                <div class="mb-2">
+                                                    <label class="form-label">"<select class="form-select form-select-sm d-inline-block" style="width: 80px" id="demo1">
+                                                        <option value="">Select</option>
+                                                        <option value="this">this</option>
+                                                        <option value="that">that</option>
+                                                        <option value="these">these</option>
+                                                        <option value="those">those</option>
+                                                    </select> flowers in my hand are beautiful."</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label class="form-label">"Look at <select class="form-select form-select-sm d-inline-block" style="width: 80px" id="demo2">
+                                                        <option value="">Select</option>
+                                                        <option value="this">this</option>
+                                                        <option value="that">that</option>
+                                                        <option value="these">these</option>
+                                                        <option value="those">those</option>
+                                                    </select> mountain in the distance!"</label>
+                                                </div>
+                                                <button class="btn btn-sm btn-secondary" id="checkDemonstrativeBtn">Check Answers</button>
+                                                <div id="demonstrativeFeedback" class="mt-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Types -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#otherAdjectives">
+                                        4. Other Types of Adjectives
+                                    </button>
+                                </h2>
+                                <div id="otherAdjectives" class="accordion-collapse collapse" data-bs-parent="#adjectiveTypesAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Possessive Adjectives</h5>
+                                                <p>Show ownership or possession.</p>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">my book</li>
+                                                    <li class="list-group-item">your house</li>
+                                                    <li class="list-group-item">their dog</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Interrogative Adjectives</h5>
+                                                <p>Used to ask questions about nouns.</p>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Which color?</li>
+                                                    <li class="list-group-item">What time?</li>
+                                                    <li class="list-group-item">Whose bag?</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Practice</h5>
+                                                <p>Identify the type of adjective in each sentence:</p>
+                                                <div class="list-group">
+                                                    <div class="list-group-item">
+                                                        <p>"<u>Whose</u> jacket is this?"</p>
+                                                        <select class="form-select form-select-sm adjective-type-select">
+                                                            <option value="">Select type</option>
+                                                            <option value="possessive">Possessive</option>
+                                                            <option value="interrogative">Interrogative</option>
+                                                            <option value="descriptive">Descriptive</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <p>"<u>Our</u> team won the championship."</p>
+                                                        <select class="form-select form-select-sm adjective-type-select">
+                                                            <option value="">Select type</option>
+                                                            <option value="possessive">Possessive</option>
+                                                            <option value="interrogative">Interrogative</option>
+                                                            <option value="descriptive">Descriptive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-sm btn-secondary mt-2" id="checkOtherTypesBtn">Check Answers</button>
+                                                <div id="otherTypesFeedback" class="mt-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary next-section" data-next="degrees">
+                                Continue to Degrees of Comparison
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Degrees of Comparison Section -->
+                    <div class="section" id="degrees-section">
+                        <h2 class="mb-4">Degrees of Comparison</h2>
+                        <div class="alert alert-secondary">
+                            Adjectives can change form to show different degrees of the quality they describe.
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Positive Degree</h5>
+                                        <p>The basic form of the adjective</p>
+                                        <div class="adjective-circle bg-primary">Tall</div>
+                                        <p class="mt-2">"John is <strong>tall</strong>."</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Comparative Degree</h5>
+                                        <p>Used to compare two things</p>
+                                        <div class="adjective-circle bg-success">Taller</div>
+                                        <p class="mt-2">"John is <strong>taller</strong> than Mike."</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Superlative Degree</h5>
+                                        <p>Used to compare three or more things</p>
+                                        <div class="adjective-circle bg-warning">Tallest</div>
+                                        <p class="mt-2">"John is the <strong>tallest</strong> in his class."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Forming Comparative and Superlative</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Adjective Type</th>
+                                                <th>Comparative</th>
+                                                <th>Superlative</th>
+                                                <th>Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1-2 syllable adjectives</td>
+                                                <td>+ -er</td>
+                                                <td>+ -est</td>
+                                                <td>tall → taller → tallest</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adjectives ending in -y</td>
+                                                <td>-y + -ier</td>
+                                                <td>-y + -iest</td>
+                                                <td>happy → happier → happiest</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3+ syllable adjectives</td>
+                                                <td>more + adjective</td>
+                                                <td>most + adjective</td>
+                                                <td>beautiful → more beautiful → most beautiful</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Irregular adjectives</td>
+                                                <td colspan="2">Special forms</td>
+                                                <td>good → better → best</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Practice</h5>
+                                <p>Complete the table with the correct forms:</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Positive</th>
+                                                <th>Comparative</th>
+                                                <th>Superlative</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>big</td>
+                                                <td><input type="text" class="form-control form-control-sm" id="comp1"></td>
+                                                <td><input type="text" class="form-control form-control-sm" id="sup1"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>friendly</td>
+                                                <td><input type="text" class="form-control form-control-sm" id="comp2"></td>
+                                                <td><input type="text" class="form-control form-control-sm" id="sup2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>intelligent</td>
+                                                <td><input type="text" class="form-control form-control-sm" id="comp3"></td>
+                                                <td><input type="text" class="form-control form-control-sm" id="sup3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>bad</td>
+                                                <td><input type="text" class="form-control form-control-sm" id="comp4"></td>
+                                                <td><input type="text" class="form-control form-control-sm" id="sup4"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-secondary mt-2" id="checkDegreesBtn">Check Answers</button>
+                                <div id="degreesFeedback" class="mt-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary next-section" data-next="quiz">
+                                Continue to Quiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Section -->
+                    <div class="section" id="quiz-section">
+                        <h2 class="mb-4">Adjectives Knowledge Quiz</h2>
+                        <div class="alert alert-info">
+                            Test your understanding of adjectives with this 10-question quiz!
+                        </div>
+
+                        <form id="adjectiveQuiz">
+                            <!-- Question 1 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 1</h5>
+                                    <p class="card-text">Which word is an adjective?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1a" value="a">
+                                        <label class="form-check-label" for="q1a">run</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1b" value="b">
+                                        <label class="form-check-label" for="q1b">quickly</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1c" value="c">
+                                        <label class="form-check-label" for="q1c">happy</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 2 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 2</h5>
+                                    <p class="card-text">Which is a demonstrative adjective?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2a" value="a">
+                                        <label class="form-check-label" for="q2a">my</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2b" value="b">
+                                        <label class="form-check-label" for="q2b">this</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2c" value="c">
+                                        <label class="form-check-label" for="q2c">many</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 3 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 3</h5>
+                                    <p class="card-text">What is the comparative form of "good"?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q3" id="q3a" value="a">
+                                        <label class="form-check-label" for="q3a">gooder</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q3" id="q3b" value="b">
+                                        <label class="form-check-label" for="q3b">better</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q3" id="q3c" value="c">
+                                        <label class="form-check-label" for="q3c">more good</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 4 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 4</h5>
+                                    <p class="card-text">Which is the superlative form of "beautiful"?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q4" id="q4a" value="a">
+                                        <label class="form-check-label" for="q4a">beautifullest</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q4" id="q4b" value="b">
+                                        <label class="form-check-label" for="q4b">most beautiful</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q4" id="q4c" value="c">
+                                        <label class="form-check-label" for="q4c">more beautiful</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 5 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 5</h5>
+                                    <p class="card-text">Which sentence uses a possessive adjective?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q5" id="q5a" value="a">
+                                        <label class="form-check-label" for="q5a">That car is fast.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q5" id="q5b" value="b">
+                                        <label class="form-check-label" for="q5b">Our team won the game.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q5" id="q5c" value="c">
+                                        <label class="form-check-label" for="q5c">She has three cats.</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 6 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 6</h5>
+                                    <p class="card-text">What is the positive form of "worst"?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q6" id="q6a" value="a">
+                                        <label class="form-check-label" for="q6a">bad</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q6" id="q6b" value="b">
+                                        <label class="form-check-label" for="q6b">worse</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q6" id="q6c" value="c">
+                                        <label class="form-check-label" for="q6c">worst</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 7 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 7</h5>
+                                    <p class="card-text">Which is an interrogative adjective?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q7" id="q7a" value="a">
+                                        <label class="form-check-label" for="q7a">many</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q7" id="q7b" value="b">
+                                        <label class="form-check-label" for="q7b">which</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q7" id="q7c" value="c">
+                                        <label class="form-check-label" for="q7c">blue</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 8 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 8</h5>
+                                    <p class="card-text">What is the comparative form of "little" (amount)?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q8" id="q8a" value="a">
+                                        <label class="form-check-label" for="q8a">littler</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q8" id="q8b" value="b">
+                                        <label class="form-check-label" for="q8b">less</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q8" id="q8c" value="c">
+                                        <label class="form-check-label" for="q8c">least</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 9 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 9</h5>
+                                    <p class="card-text">Which is a quantitative adjective?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q9" id="q9a" value="a">
+                                        <label class="form-check-label" for="q9a">happy</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q9" id="q9b" value="b">
+                                        <label class="form-check-label" for="q9b">five</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q9" id="q9c" value="c">
+                                        <label class="form-check-label" for="q9c">this</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Question 10 -->
+                            <div class="card mb-3 quiz-question">
+                                <div class="card-body">
+                                    <h5 class="card-title">Question 10</h5>
+                                    <p class="card-text">Which sentence uses an adjective in the superlative degree?</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q10" id="q10a" value="a">
+                                        <label class="form-check-label" for="q10a">She is taller than her brother.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q10" id="q10b" value="b">
+                                        <label class="form-check-label" for="q10b">This is the most interesting book I've read.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q10" id="q10c" value="c">
+                                        <label class="form-check-label" for="q10c">I have a blue car.</label>
+                                    </div>
+                                    <div class="feedback mt-2"></div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                            </div>
+                        </form>
+
+                        <div id="quizResults" class="mt-4 text-center" style="display: none">
+                            <h4>Quiz Results</h4>
+                            <div class="display-4" id="quizScore">0</div>
+                            <p id="quizFeedback"></p>
+                            <button class="btn btn-secondary" id="retryQuizBtn">Try Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Navigation between sections
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tab navigation
+        const tabs = document.querySelectorAll("#lessonTabs .nav-link");
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", function (e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute("data-section") + "-section";
+
+                // Update active tab
+                tabs.forEach((t) => t.classList.remove("active"));
+                this.classList.add("active");
+
+                // Show selected section
+                document.querySelectorAll(".section").forEach((s) => s.classList.remove("active"));
+                document.getElementById(sectionId).classList.add("active");
+
+                // Update progress bar
+                updateProgressBar(sectionId);
+            });
+        });
+
+        // Next section buttons
+        document.querySelectorAll(".next-section").forEach((btn) => {
+            btn.addEventListener("click", function () {
+                const nextSectionId = this.getAttribute("data-next") + "-section";
+
+                // Update active tab
+                tabs.forEach((t) => t.classList.remove("active"));
+                document.querySelector(`[data-section="${this.getAttribute("data-next")}"]`).classList.add("active");
+
+                // Show next section
+                document.querySelectorAll(".section").forEach((s) => s.classList.remove("active"));
+                document.getElementById(nextSectionId).classList.add("active");
+
+                // Update progress bar
+                updateProgressBar(nextSectionId);
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Update progress bar based on current section
+        function updateProgressBar(sectionId) {
+            let progress = 25;
+            switch (sectionId) {
+                case "types-section":
+                    progress = 50;
+                    break;
+                case "degrees-section":
+                    progress = 75;
+                    break;
+                case "quiz-section":
+                    progress = 100;
+                    break;
+            }
+            document.getElementById("progressBar").style.width = progress + "%";
+            document.getElementById("progressBar").setAttribute("aria-valuenow", progress);
+            document.getElementById("progressBar").textContent = progress + "%";
+        }
+
+        // Check adjectives in sentence
+        document.getElementById("checkAdjectivesBtn").addEventListener("click", function () {
+            const userInput = document.getElementById("adjectiveInput").value.toLowerCase();
+            const correctAdjectives = ["quick", "brown", "lazy", "small", "five"];
+            const userAdjectives = userInput.split(",").map((a) => a.trim().toLowerCase());
+
+            let correctCount = 0;
+            let feedback = "";
+
+            userAdjectives.forEach((adj) => {
+                if (correctAdjectives.includes(adj)) {
+                    correctCount++;
+                }
+            });
+
+            if (correctCount === correctAdjectives.length && userAdjectives.length === correctAdjectives.length) {
+                feedback = '<div class="alert alert-success">Perfect! You found all the adjectives.</div>';
+            } else if (correctCount > 0) {
+                feedback = `<div class="alert alert-warning">You found ${correctCount} out of ${correctAdjectives.length} adjectives. The adjectives are: quick, brown, lazy, small, five.</div>`;
+            } else {
+                feedback = '<div class="alert alert-danger">No adjectives identified. The adjectives in the sentence are: quick, brown, lazy, small, five.</div>';
+            }
+
+            document.getElementById("adjectiveFeedback").innerHTML = feedback;
+        });
+
+        // Descriptive adjectives practice
+        document.getElementById("checkDescriptiveBtn").addEventListener("click", function () {
+            const q1Answer = document.querySelector('input[name="descriptive1"]:checked');
+            const q2Answer = document.querySelector('input[name="descriptive2"]:checked');
+            let feedback = "";
+
+            if (!q1Answer || !q2Answer) {
+                feedback = '<div class="alert alert-warning">Please answer both questions.</div>';
+            } else if (q1Answer.value === "beautiful" && q2Answer.value === "ancient") {
+                feedback = '<div class="alert alert-success">Correct! Both answers are right.</div>';
+            } else {
+                let incorrectAnswers = [];
+                if (q1Answer.value !== "beautiful") incorrectAnswers.push("1");
+                if (q2Answer.value !== "ancient") incorrectAnswers.push("2");
+                feedback = `<div class="alert alert-danger">Incorrect answers for question${incorrectAnswers.length > 1 ? "s" : ""} ${incorrectAnswers.join(" and ")}.</div>`;
+            }
+
+            document.getElementById("descriptiveFeedback").innerHTML = feedback;
+        });
+
+        // Drag and drop functionality
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.textContent);
+            ev.dataTransfer.setData("source", ev.target.parentElement.className);
+            ev.dataTransfer.setElement(ev.target);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const source = ev.dataTransfer.getData("source");
+            const element = ev.dataTransfer.getElement();
+
+            // Only allow drop if coming from drag-items
+            if (source.includes("drag-items")) {
+                // Remove from previous location if it was in a drop zone
+                if (element.parentElement.classList.contains("drop-zone")) {
+                    element.remove();
+                }
+
+                // Create new element in drop zone
+                const newElement = document.createElement("span");
+                newElement.className = "drag-item";
+                newElement.textContent = data;
+                newElement.setAttribute("draggable", "true");
+                newElement.addEventListener("dragstart", drag);
+
+                ev.target.querySelector(".drop-zone").appendChild(newElement);
+            }
+        }
+
+        // Check quantitative adjectives answers
+        document.getElementById("checkQuantitativeBtn").addEventListener("click", function () {
+            const definiteDrop = document.querySelector(".col-md-6:first-child .drop-zone");
+            const indefiniteDrop = document.querySelector(".col-md-6:last-child .drop-zone");
+
+            const definiteAnswers = ["seven", "twelve"];
+            const indefiniteAnswers = ["many", "some", "few"];
+
+            let definiteCorrect = 0;
+            let indefiniteCorrect = 0;
+
+            // Check definite quantitative adjectives
+            definiteDrop.querySelectorAll(".drag-item").forEach((item) => {
+                if (definiteAnswers.includes(item.textContent)) {
+                    definiteCorrect++;
+                    item.classList.add("correct");
+                } else {
+                    item.classList.add("incorrect");
+                }
+            });
+
+            // Check indefinite quantitative adjectives
+            indefiniteDrop.querySelectorAll(".drag-item").forEach((item) => {
+                if (indefiniteAnswers.includes(item.textContent)) {
+                    indefiniteCorrect++;
+                    item.classList.add("correct");
+                } else {
+                    item.classList.add("incorrect");
+                }
+            });
+
+            let feedback = "";
+            if (definiteCorrect === definiteAnswers.length && indefiniteCorrect === indefiniteAnswers.length) {
+                feedback = '<div class="alert alert-success">Perfect! All quantitative adjectives are correctly classified.</div>';
+            } else {
+                feedback = `<div class="alert alert-warning">You got ${definiteCorrect} out of ${definiteAnswers.length} definite and ${indefiniteCorrect} out of ${indefiniteAnswers.length} indefinite quantitative adjectives correct.</div>`;
+            }
+
+            document.getElementById("quantitativeFeedback").innerHTML = feedback;
+        });
+
+        // Check demonstrative adjectives answers
+        document.getElementById("checkDemonstrativeBtn").addEventListener("click", function () {
+            const demo1 = document.getElementById("demo1").value;
+            const demo2 = document.getElementById("demo2").value;
+            let feedback = "";
+
+            if (!demo1 || !demo2) {
+                feedback = '<div class="alert alert-warning">Please answer both questions.</div>';
+            } else if (demo1 === "these" && demo2 === "that") {
+                feedback = '<div class="alert alert-success">Correct! "These" is used for plural nouns nearby, and "that" for singular nouns far away.</div>';
+            } else {
+                let incorrectAnswers = [];
+                if (demo1 !== "these") incorrectAnswers.push("1");
+                if (demo2 !== "that") incorrectAnswers.push("2");
+                feedback = `<div class="alert alert-danger">Incorrect answer${incorrectAnswers.length > 1 ? "s" : ""} for question${incorrectAnswers.length > 1 ? "s" : ""} ${incorrectAnswers.join(" and ")}.</div>`;
+            }
+
+            document.getElementById("demonstrativeFeedback").innerHTML = feedback;
+        });
+
+        // Check other types of adjectives
+        document.getElementById("checkOtherTypesBtn").addEventListener("click", function () {
+            const selects = document.querySelectorAll(".adjective-type-select");
+            let correctCount = 0;
+            let feedback = "";
+
+            if (selects[0].value === "interrogative") correctCount++;
+            if (selects[1].value === "possessive") correctCount++;
+
+            if (correctCount === 2) {
+                feedback = '<div class="alert alert-success">Excellent! Both answers are correct.</div>';
+            } else if (correctCount === 1) {
+                feedback = '<div class="alert alert-warning">You got 1 out of 2 correct. "Whose" is interrogative and "our" is possessive.</div>';
+            } else if (selects[0].value === "" || selects[1].value === "") {
+                feedback = '<div class="alert alert-warning">Please answer both questions.</div>';
+            } else {
+                feedback = '<div class="alert alert-danger">Incorrect answers. "Whose" is interrogative and "our" is possessive.</div>';
+            }
+
+            document.getElementById("otherTypesFeedback").innerHTML = feedback;
+        });
+
+        // Check degrees of comparison
+        document.getElementById("checkDegreesBtn").addEventListener("click", function () {
+            const answers = {
+                comp1: "bigger",
+                sup1: "biggest",
+                comp2: "friendlier",
+                sup2: "friendliest",
+                comp3: "more intelligent",
+                sup3: "most intelligent",
+                comp4: "worse",
+                sup4: "worst"
+            };
+
+            let correctCount = 0;
+            let feedback = "";
+
+            for (let i = 1; i <= 4; i++) {
+                const comp = document.getElementById(`comp${i}`).value.toLowerCase();
+                const sup = document.getElementById(`sup${i}`).value.toLowerCase();
+
+                if (comp === answers[`comp${i}`]) correctCount++;
+                if (sup === answers[`sup${i}`]) correctCount++;
+            }
+
+            if (correctCount === 8) {
+                feedback = '<div class="alert alert-success">Perfect! All forms are correct.</div>';
+            } else {
+                feedback = `<div class="alert alert-warning">You got ${correctCount} out of 8 correct. The answers are:<br>
+                    big → bigger → biggest<br>
+                    friendly → friendlier → friendliest<br>
+                    intelligent → more intelligent → most intelligent<br>
+                    bad → worse → worst</div>`;
+            }
+
+            document.getElementById("degreesFeedback").innerHTML = feedback;
+        });
+
+        // Quiz functionality
+        document.getElementById("adjectiveQuiz").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const answers = {
+                q1: "c", // happy
+                q2: "b", // this
+                q3: "b", // better
+                q4: "b", // most beautiful
+                q5: "b", // Our team won the game
+                q6: "a", // bad
+                q7: "b", // which
+                q8: "b", // less
+                q9: "b", // five
+                q10: "b" // This is the most interesting book I've read
+            };
+
+            let score = 0;
+            const totalQuestions = Object.keys(answers).length;
+
+            // Check each question
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const questionDiv = document.querySelector(`.quiz-question:nth-child(${i})`);
+                const feedbackDiv = questionDiv.querySelector(".feedback");
+
+                if (selected) {
+                    if (selected.value === answers[`q${i}`]) {
+                        score++;
+                        feedbackDiv.innerHTML = '<div class="alert alert-success">Correct!</div>';
+                    } else {
+                        feedbackDiv.innerHTML = '<div class="alert alert-danger">Incorrect.</div>';
+                    }
+                } else {
+                    feedbackDiv.innerHTML = '<div class="alert alert-warning">No answer selected.</div>';
+                }
+            }
+
+            // Show results
+            const percentage = Math.round((score / totalQuestions) * 100);
+            document.getElementById("quizScore").textContent = `${percentage}%`;
+
+            let feedback = "";
+            if (percentage >= 80) {
+                feedback = "Excellent work! You have a strong understanding of adjectives.";
+            } else if (percentage >= 60) {
+                feedback = "Good job! You understand most adjective concepts but could use some review.";
+            } else {
+                feedback = "Keep practicing! Review the lesson materials and try again.";
+            }
+
+            document.getElementById("quizFeedback").textContent = feedback;
+            document.getElementById("quizResults").style.display = "block";
+
+            // Scroll to results
+            document.getElementById("quizResults").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Retry quiz button
+        document.getElementById("retryQuizBtn").addEventListener("click", function () {
+            // Reset quiz
+            document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.checked = false;
+            });
+
+            document.querySelectorAll(".feedback").forEach((fb) => {
+                fb.innerHTML = "";
+            });
+
+            document.getElementById("quizResults").style.display = "none";
+
+            // Scroll to top of quiz
+            document.getElementById("quiz-section").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Initialize drag items
+        document.querySelectorAll(".drag-item").forEach((item) => {
+            item.addEventListener("dragstart", drag);
+        });
+    });
+
+    // Helper function to get dragged element
+    DataTransfer.prototype.getElement = function () {
+        return document.querySelector(`.drag-item:contains('${this.getData("text")}')`);
+    };
+</script>
+</body>
+</html>
