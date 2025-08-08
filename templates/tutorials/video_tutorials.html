@@ -86,313 +86,291 @@
   <h4 class="mt-3">No videos found</h4>
   <p>Try adjusting your search criteria</p>
 </div>
+
+<!-- Error Message -->
+<div id="error-message" class="alert alert-danger d-none">
+  <i class="bi bi-exclamation-triangle-fill"></i> <span id="error-text"></span>
+</div>
 <script>
-  // Video Tutorials Page Script
   document.addEventListener("DOMContentLoaded", function () {
-    // allVideos is now passed directly from the Flask backend
-    let allVideos = {{ all_videos | tojson | safe }};
-    let currentFilters = {
+    // State object to track current filters
+    const state = {
       grade: "",
       subject: "",
       searchTerm: "",
     };
 
-    // Initialize UI components
-    initializeUI();
+    // ========== UTILITY FUNCTIONS (defined first) ==========
 
-    function initializeUI() {
-      // Setup filter and search functionality
-      setupFiltersAndSearch();
-      // Display all videos initially
-      displayVideos(allVideos);
+    function populateSubjectDropdown(subjects) {
+      const subjectSelect = document.getElementById("subject-select");
+      subjectSelect.innerHTML =
+        '<option value="" disabled selected>Select Subject</option>';
+
+      subjects.forEach((subject) => {
+        const option = new Option(subject.name, subject.name);
+        subjectSelect.add(option);
+      });
     }
 
-    function toggleLoadingSpinner(show) {
-      const spinner = document.getElementById("loading-spinner");
-      if (show) {
-        spinner.classList.remove("d-none");
-      } else {
-        spinner.classList.add("d-none");
+    function showLoading(show) {
+      document
+        .getElementById("loading-spinner")
+        .classList.toggle("d-none", !show);
+    }
+
+    function showError(message) {
+      document.getElementById("error-text").textContent = message;
+      document.getElementById("error-message").classList.remove("d-none");
+    }
+
+    function clearError() {
+      document.getElementById("error-message").classList.add("d-none");
+    }
+
+    function showNoResults() {
+      document.getElementById("videos-container").innerHTML = "";
+      document.getElementById("no-results").classList.remove("d-none");
+    }
+
+    function showInitialMessage() {
+      document.getElementById("videos-container").innerHTML = `
+        <div class="col-12 text-center">
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle-fill"></i> Please select a grade and subject to view available video lessons.
+          </div>
+        </div>`;
+      document.getElementById("no-results").classList.add("d-none");
+      clearError();
+    }
+
+    // ========== CORE FUNCTIONALITY ==========
+
+    async function fetchAndPopulateSubjects(grade) {
+      try {
+        showLoading(true);
+        const response = await fetch(
+          `/tutorials/api/subjects?grade=${encodeURIComponent(grade)}`
+        );
+        const data = await response.json();
+
+        if (!response.ok)
+          throw new Error(data.error || "Failed to fetch subjects");
+
+        populateSubjectDropdown(data.subjects);
+      } catch (error) {
+        showError("Failed to load subjects. Please try again.");
+        console.error("Subject fetch error:", error);
+      } finally {
+        showLoading(false);
       }
     }
 
-    function showErrorMessage(message) {
-      const videosContainer = document.getElementById("videos-container");
-      videosContainer.innerHTML = `
-              <div class="col-12">
-                  <div class="alert alert-danger">${message}</div>
-              </div>
-          `;
+    async function fetchAndDisplayVideos() {
+      try {
+        showLoading(true);
+        clearError();
+
+        const params = new URLSearchParams();
+        params.append("grade", state.grade);
+        params.append("subject", state.subject);
+        if (state.searchTerm) params.append("search", state.searchTerm);
+
+        const response = await fetch(
+          `/tutorials/api/videos?${params.toString()}`
+        );
+        const data = await response.json();
+
+        if (!response.ok)
+          throw new Error(data.error || "Failed to fetch videos");
+
+        if (data.videos.length === 0) {
+          showNoResults();
+        } else {
+          displayVideos(data.videos);
+        }
+      } catch (error) {
+        showError("Failed to load videos. Please try again.");
+        console.error("Video fetch error:", error);
+      } finally {
+        showLoading(false);
+      }
     }
 
     function displayVideos(videos) {
       const container = document.getElementById("videos-container");
       container.innerHTML = "";
 
-      if (videos.length === 0) {
-        document.getElementById("no-results").classList.remove("d-none");
-        return;
-      }
-
-      document.getElementById("no-results").classList.add("d-none");
-
-      const fragment = document.createDocumentFragment();
-
       videos.forEach((video) => {
-        const videoCol = document.createElement("div");
-        videoCol.className = "col-md-4 col-lg-3 mb-4";
-
-        videoCol.innerHTML = `
-                  <div class="card video-card h-100">
-                      <img data-src="${video.thumbnail}" class="card-img-top lazy loading" alt="${video.title}" style="height: 180px; object-fit: cover;">
-                      <div class="card-body">
-                          <h5 class="card-title" style="font-size: 1rem;">${video.title}</h5>
-                          <p class="card-text" style="font-size: 0.9rem;">${video.description}</p>
-                          <div class="d-flex justify-content-between align-items-center">
-                              <span class="badge bg-primary subject-badge" style="font-size: 0.75rem">${video.subject}</span>
-                              <span class="badge bg-secondary subject-badge" style="font-size: 0.75rem">${video.grade}</span>
-                          </div>
-                      </div>
-                      <div class="card-footer bg-transparent">
-                          <button class="btn btn-sm btn-primary watch-btn w-100" data-video-id="${video.youtubeid}">
-                              <i class="bi bi-play-fill"></i> Watch Now
-                          </button>
-                      </div>
-                  </div>
-              `;
-
-        fragment.appendChild(videoCol);
+        const col = document.createElement("div");
+        col.className = "col-md-4 col-lg-3 mb-4";
+        col.innerHTML = `
+          <div class="card video-card h-100">
+            <img data-src="${video.thumbnail}" class="card-img-top lazy" alt="${video.title}">
+            <div class="card-body">
+              <h5 class="card-title">${video.title}</h5>
+              <p class="card-text">${video.description}</p>
+              <div class="d-flex justify-content-between">
+                <span class="badge bg-primary">${video.subject}</span>
+                <span class="badge bg-secondary">${video.grade}</span>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-primary watch-btn w-100" data-video-id="${video.youtubeid}">
+                <i class="bi bi-play-fill"></i> Watch Now
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(col);
       });
 
-      container.appendChild(fragment);
-
-      // Add event listeners to watch buttons
+      // Set up watch buttons
       setupWatchButtons();
-
-      // Initialize lazy loading
       initLazyLoading();
-    }
-
-    function initLazyLoading() {
-      const lazyImages = document.querySelectorAll("img.lazy");
-
-      if ("IntersectionObserver" in window) {
-        const lazyImageObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const lazyImage = entry.target;
-                lazyImage.src = lazyImage.dataset.src;
-                lazyImage.classList.remove("lazy", "loading");
-                lazyImageObserver.unobserve(lazyImage);
-              }
-            });
-          },
-          {
-            rootMargin: "100px 0px",
-          }
-        );
-
-        lazyImages.forEach((lazyImage) => {
-          lazyImageObserver.observe(lazyImage);
-        });
-      } else {
-        // Fallback for older browsers
-        lazyImages.forEach((lazyImage) => {
-          lazyImage.src = lazyImage.dataset.src;
-          lazyImage.classList.remove("lazy", "loading");
-        });
-      }
     }
 
     function setupWatchButtons() {
       document.querySelectorAll(".watch-btn").forEach((btn) => {
         btn.addEventListener("click", function () {
-          const videoId = this.getAttribute("data-video-id");
-          openVideoModal(videoId);
+          openVideoModal(this.dataset.videoId);
         });
       });
     }
 
-    function populateSubjectDropdown(videos) {
-      const subjectSelect = document.getElementById("subject-select");
+    function initLazyLoading() {
+      const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
-      // Get unique subjects from videos filtered by selected grade
-      const selectedGrade = document.getElementById("grade-select").value;
-      let filteredVideosByGrade = videos;
+      if ("IntersectionObserver" in window) {
+        const lazyImageObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              const lazyImage = entry.target;
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove("lazy");
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
 
-      if (selectedGrade) {
-        filteredVideosByGrade = videos.filter((video) => {
-          // Handle grade ranges like "Grade 10-12"
-          if (video.grade.includes("-")) {
-            const gradeRange = video.grade.replace("Grade ", "").split("-");
-            const startGrade = parseInt(gradeRange[0]);
-            const endGrade = parseInt(gradeRange[1]);
-            return (
-              parseInt(selectedGrade) >= startGrade &&
-              parseInt(selectedGrade) <= endGrade
-            );
-          } else {
-            // Handle exact grade matches
-            return video.grade === `Grade ${selectedGrade}`;
-          }
+        lazyImages.forEach(function (lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        lazyImages.forEach(function (lazyImage) {
+          lazyImage.src = lazyImage.dataset.src;
         });
       }
-
-      const subjects = [
-        ...new Set(filteredVideosByGrade.map((video) => video.subject)),
-      ];
-
-      // Clear existing options except the first one
-      while (subjectSelect.options.length > 1) {
-        subjectSelect.remove(1);
-      }
-
-      // Add subjects to dropdown
-      subjects.sort().forEach((subject) => {
-        const option = document.createElement("option");
-        option.value = subject;
-        option.textContent = subject;
-        subjectSelect.appendChild(option);
-      });
-    }
-
-    function setupFiltersAndSearch() {
-      const gradeSelect = document.getElementById("grade-select");
-      const subjectSelect = document.getElementById("subject-select");
-      const applyFiltersBtn = document.getElementById("apply-filters");
-      const searchInput = document.getElementById("video-search");
-      const searchBtn = document.getElementById("search-btn");
-
-      // Populate subject dropdown initially with all videos
-      populateSubjectDropdown(allVideos);
-
-      // Update subjects when grade changes
-      gradeSelect.addEventListener("change", function () {
-        populateSubjectDropdown(allVideos);
-      });
-
-      // Apply filters when button is clicked
-      applyFiltersBtn.addEventListener("click", applyFilters);
-
-      // Apply filters when Enter is pressed in search
-      searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          applyFilters();
-        }
-      });
-
-      // Apply filters when search button is clicked
-      searchBtn.addEventListener("click", applyFilters);
-
-      function applyFilters() {
-        const selectedGrade = gradeSelect.value;
-        const selectedSubject = subjectSelect.value;
-        const searchTerm = searchInput.value.toLowerCase();
-
-        if (!selectedGrade && !selectedSubject && !searchTerm) {
-          alert("Please select a grade, subject, or enter a search term.");
-          return;
-        }
-
-        toggleLoadingSpinner(true);
-
-        currentFilters.grade = selectedGrade;
-        currentFilters.subject = selectedSubject;
-        currentFilters.searchTerm = searchTerm;
-
-        const filteredVideos = filterVideos(allVideos, currentFilters);
-        displayVideos(filteredVideos);
-
-        toggleLoadingSpinner(false);
-      }
-    }
-
-    function filterVideos(videos, filters) {
-      let filteredVideos = [...videos];
-
-      // Filter by grade
-      if (filters.grade) {
-        filteredVideos = filteredVideos.filter((video) => {
-          if (video.grade.includes("-")) {
-            const gradeRange = video.grade.replace("Grade ", "").split("-");
-            const startGrade = parseInt(gradeRange[0]);
-            const endGrade = parseInt(gradeRange[1]);
-            return (
-              parseInt(filters.grade) >= startGrade &&
-              parseInt(filters.grade) <= endGrade
-            );
-          } else {
-            return video.grade === `Grade ${filters.grade}`;
-          }
-        });
-      }
-
-      // Filter by subject
-      if (filters.subject) {
-        filteredVideos = filteredVideos.filter(
-          (video) => video.subject === filters.subject
-        );
-      }
-
-      // Apply search term if exists
-      if (filters.searchTerm) {
-        filteredVideos = filteredVideos.filter(
-          (video) =>
-            video.title.toLowerCase().includes(filters.searchTerm) ||
-            video.description.toLowerCase().includes(filters.searchTerm) ||
-            video.subject.toLowerCase().includes(filters.searchTerm) ||
-            video.grade.toLowerCase().includes(filters.searchTerm)
-        );
-      }
-
-      return filteredVideos;
     }
 
     function openVideoModal(videoId) {
-      // Create modal structure
       const modalHTML = `
-          <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true" style="display: none;">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">Video Tutorial</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body p-0">
-                          <div class="video-container">
-                              <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1"
-                                      frameborder="0"
-                                      allowfullscreen
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-                              </iframe>
-                          </div>
-                      </div>
-                  </div>
+        <div class="modal fade" id="videoModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Video Tutorial</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+              <div class="modal-body p-0">
+                <div class="ratio ratio-16x9">
+                  <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                          allowfullscreen 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                  </iframe>
+                </div>
+              </div>
+            </div>
           </div>
-          `;
+        </div>
+      `;
 
-      // Remove any existing modal first
+      // Remove existing modal if any
       const existingModal = document.getElementById("videoModal");
       if (existingModal) existingModal.remove();
 
-      // Add new modal to DOM
+      // Add new modal
       document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-      // Initialize and show modal
-      const videoModal = new bootstrap.Modal(
-        document.getElementById("videoModal")
-      );
-      videoModal.show();
+      // Show modal
+      const modal = new bootstrap.Modal(document.getElementById("videoModal"));
+      modal.show();
 
-      // Clean up when modal closes
+      // Clean up on close
       document
         .getElementById("videoModal")
         .addEventListener("hidden.bs.modal", function () {
           this.remove();
         });
     }
+
+    // ========== EVENT HANDLERS ==========
+
+    function setupEventListeners() {
+      // Grade select change
+      document
+        .getElementById("grade-select")
+        .addEventListener("change", async function () {
+          state.grade = this.value;
+          if (state.grade) {
+            await fetchAndPopulateSubjects(state.grade);
+          }
+        });
+
+      // Subject select change
+      document
+        .getElementById("subject-select")
+        .addEventListener("change", function () {
+          state.subject = this.value;
+        });
+
+      // Search input
+      document
+        .getElementById("video-search")
+        .addEventListener("input", function () {
+          state.searchTerm = this.value.trim();
+        });
+
+      // Apply filters button
+      document
+        .getElementById("apply-filters")
+        .addEventListener("click", function () {
+          if (!state.grade) {
+            showError("Please select a grade first");
+            return;
+          }
+          if (!state.subject) {
+            showError("Please select a subject");
+            return;
+          }
+          fetchAndDisplayVideos();
+        });
+
+      // Search button and Enter key
+      document
+        .getElementById("search-btn")
+        .addEventListener("click", function () {
+          fetchAndDisplayVideos();
+        });
+      document
+        .getElementById("video-search")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") fetchAndDisplayVideos();
+        });
+    }
+
+    // ========== INITIALIZATION ==========
+
+    async function initialize() {
+      setupEventListeners();
+      showInitialMessage();
+      // Populate subjects on initial load
+      await fetchAndPopulateSubjects(''); 
+    }
+
+    // Start the application
+    initialize();
   });
 </script>
 {% endblock %}

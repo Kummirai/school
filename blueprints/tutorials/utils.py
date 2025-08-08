@@ -73,9 +73,120 @@ def delete_video(video_id):
 
 def get_all_subjects():
     conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT DISTINCT subject FROM videos ORDER BY subject')
-    subjects = [row[0] for row in cur.fetchall()]
-    cur.close()
-    conn.close()
-    return subjects
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("SELECT DISTINCT subject as name FROM videos ORDER BY name")
+        subjects_from_db = cur.fetchall()
+        subjects = []
+        for i, subject in enumerate(subjects_from_db):
+            subjects.append({'id': i + 1, 'name': subject['name']})
+        return subjects
+    except Exception as e:
+        print(f"Error fetching all subjects: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_subjects_by_grade(grade):
+    """Get subjects available for a specific grade"""
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    try:
+        # Handle non-numeric grades (Python, Javascript, etc.)
+        if not grade.isdigit():
+            query = "SELECT DISTINCT subject as name FROM videos WHERE grade = %s ORDER BY subject"
+            cur.execute(query, (grade,))
+        else:
+            # Handle numeric grades and grade ranges
+            grade_num = int(grade)
+            query = """
+                SELECT DISTINCT subject as name 
+                FROM videos 
+                WHERE 
+                    (grade = %s OR 
+                     grade LIKE %s OR
+                     (grade LIKE '%-%' AND 
+                      CAST(SPLIT_PART(grade, '-', 1) AS INTEGER) <= %s AND 
+                      CAST(SPLIT_PART(grade, '-', 2) AS INTEGER) >= %s))
+                ORDER BY subject
+            """
+            cur.execute(query, (str(grade_num), f"Grade {grade_num}", grade_num, grade_num))
+        
+        subjects_from_db = cur.fetchall()
+        
+        subjects = []
+        for i, subject in enumerate(subjects_from_db):
+            subjects.append({'id': i + 1, 'name': subject['name']})
+        
+        return subjects
+        
+    except Exception as e:
+        print(f"Error fetching subjects by grade: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_filtered_videos(grade=None, subject=None, search_term=None):
+    """Enhanced filtering with better grade handling"""
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    query = """
+        SELECT
+            id,
+            title,
+            description,
+            grade,
+            subject,
+            youtubeid,
+            thumbnail,
+            subject as category_name
+        FROM
+            videos
+        WHERE 1=1
+    """
+    params = []
+
+    if grade:
+        # Handle non-numeric grades (Python, Javascript, HTML, etc.)
+        if not grade.isdigit():
+            query += " AND grade = %s"
+            params.append(grade)
+        else:
+            # Handle numeric grades and grade ranges
+            grade_num = int(grade)
+            query += """ AND (
+                grade = %s OR 
+                grade = %s OR
+                (grade LIKE '%-%' AND 
+                 CAST(SPLIT_PART(grade, '-', 1) AS INTEGER) <= %s AND 
+                 CAST(SPLIT_PART(grade, '-', 2) AS INTEGER) >= %s)
+            )"""
+            params.extend([str(grade_num), f"Grade {grade_num}", grade_num, grade_num])
+
+    if subject:
+        query += " AND subject = %s"
+        params.append(subject)
+
+    if search_term:
+        search_pattern = f'%{search_term}%'
+        query += " AND (title ILIKE %s OR description ILIKE %s OR subject ILIKE %s OR grade ILIKE %s)"
+        params.extend([search_pattern, search_pattern, search_pattern, search_pattern])
+
+    query += " ORDER BY grade, subject, title"
+
+    try:
+        cur.execute(query, tuple(params))
+        videos = cur.fetchall()
+        return videos
+    except Exception as e:
+        print(f"Error fetching filtered video details: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
