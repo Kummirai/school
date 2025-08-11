@@ -5,6 +5,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">{{ exam.title }}</h1>
     <p>Duration: {{ exam.duration_minutes }} minutes</p>
+    <div id="timer" class="alert alert-info fw-bold text-center fs-4">Time Remaining: <span id="countdown"></span></div>
     
     <form action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}" method="POST">
         {% for section, section_questions in questions | groupby('section') %}
@@ -73,4 +74,42 @@
         <button type="submit" class="btn btn-primary mt-4">Submit Exam</button>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const countdownElement = document.getElementById('countdown');
+    const examForm = document.querySelector('form');
+    const durationMinutes = {{ exam.duration_minutes }};
+    const examId = '{{ exam.id }}';
+    const endTimeStorageKey = `examEndTime_${examId}`;
+
+    let endTime = localStorage.getItem(endTimeStorageKey);
+
+    if (!endTime) {
+        endTime = Date.now() + durationMinutes * 60 * 1000;
+        localStorage.setItem(endTimeStorageKey, endTime);
+    }
+
+    function updateCountdown() {
+        const now = Date.now();
+        const remainingTime = endTime - now;
+
+        if (remainingTime <= 0) {
+            countdownElement.textContent = 'Time is up!';
+            clearInterval(timerInterval);
+            localStorage.removeItem(endTimeStorageKey);
+            examForm.submit();
+            return;
+        }
+
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+});
+</script>
 {% endblock %}
