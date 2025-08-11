@@ -7,67 +7,70 @@
     <p>Duration: {{ exam.duration_minutes }} minutes</p>
     
     <form action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}" method="POST">
-        {% for question in questions %}
-        <div class="card mb-3">
-            <div class="card-header">
-                Question {{ question.number }}
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ question.question_text | safe }}</p>
-                
-                {% if question.image_url %}
-                <img src="{{ question.image_url }}" class="img-fluid mb-3" alt="Question Image">
-                {% endif %}
-
-                                <!-- Debug: Type={{ question.type }}, Options={{ question.options }} -->
-                {% if (question.type == 'mcq' or question.type == 'multiple_choice') and question.options %}
-                    {# Multiple Choice #}
-                    {% for option in question.options %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="option_{{ question.id }}_{{ loop.index }}" value="{{ option }}" required>
-                        <label class="form-check-label" for="option_{{ question.id }}_{{ loop.index }}">
-                            {{ option }}
-                        </label>
+        {% for section, section_questions in questions | groupby('section') %}
+            <h2 class="mt-5 mb-3">Section {{ section }}</h2>
+            {% for question in section_questions %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Question {{ question.number }}
                     </div>
-                    {% endfor %}
-                {% elif question.type == 'short' %}
-                    {# Short Answer #}
-                    <input type="text" name="question_{{ question.id }}" class="form-control" required>
-                {% elif question.type == 'essay' or question.type == 'text' %}
-                    {# Essay #}
-                    <textarea name="question_{{ question.id }}" class="form-control" rows="5" required></textarea>
-                {% elif question.type == 'matching' and question.options %}
-                    {# Matching #}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <strong>Stems</strong>
-                            <ul class="list-group">
-                            {% for stem in question.options.stems %}
-                                <li class="list-group-item">{{ stem }}</li>
-                            {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Choices</strong>
-                            {% for stem in question.options.stems %}
-                            <div class="input-group mb-2">
-                                <span class="input-group-text" style="width: 150px;">{{ stem }}</span>
-                                <select name="question_{{ question.id }}_{{ loop.index }}" class="form-select" required>
-                                    <option value="">Select a match</option>
-                                    {% for choice in question.options.choices %}
-                                    <option value="{{ choice }}">{{ choice }}</option>
-                                    {% endfor %}
-                                </select>
+                    <div class="card-body">
+                        <p class="card-text">{{ question.question_text | safe }}</p>
+                        
+                        {% if question.image_url %}
+                        <img src="{{ question.image_url }}" class="img-fluid mb-3" alt="Question Image">
+                        {% endif %}
+
+                        <!-- Debug: Type={{ question.type }}, Options={{ question.options }} -->
+                        {% if (question.type == 'mcq' or question.type == 'multiple_choice') and question.options %}
+                            {# Multiple Choice #}
+                            {% for option in question.options %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="option_{{ question.id }}_{{ loop.index }}" value="{{ option }}" required>
+                                <label class="form-check-label" for="option_{{ question.id }}_{{ loop.index }}">
+                                    {{ option }}
+                                </label>
                             </div>
                             {% endfor %}
-                        </div>
+                        {% elif question.type == 'short' %}
+                            {# Short Answer #}
+                            <input type="text" name="question_{{ question.id }}" class="form-control" required>
+                        {% elif question.type == 'essay' or question.type == 'text' %}
+                            {# Essay #}
+                            <textarea name="question_{{ question.id }}" class="form-control" rows="5" required></textarea>
+                        {% elif question.type == 'matching' and question.options %}
+                            {# Matching #}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>Stems</strong>
+                                    <ul class="list-group">
+                                    {% for stem in question.options.stems %}
+                                        <li class="list-group-item">{{ stem }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Choices</strong>
+                                    {% for stem in question.options.stems %}
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text" style="width: 150px;">{{ stem }}</span>
+                                        <select name="question_{{ question.id }}_{{ loop.index }}" class="form-select" required>
+                                            <option value="">Select a match</option>
+                                            {% for choice in question.options.choices %}
+                                            <option value="{{ choice }}">{{ choice }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
-            </div>
-        </div>
+                </div>
+            {% endfor %}
         {% endfor %}
         
-        <button type="submit" class="btn btn-primary">Submit Exam</button>
+        <button type="submit" class="btn btn-primary mt-4">Submit Exam</button>
     </form>
 </div>
 {% endblock %}
