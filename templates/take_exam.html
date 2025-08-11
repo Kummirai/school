@@ -12,7 +12,7 @@
             {% for question in section_questions %}
                 <div class="card mb-3">
                     <div class="card-header">
-                        Question {{ question.number }}
+                        <strong style="color: #2F4F4F;">Question {{ question.number }}</strong>
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ question.question_text | safe }}</p>
