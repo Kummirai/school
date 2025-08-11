@@ -3,8 +3,24 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="mb-4">{{ exam.title }}</h1>
-    <p>Duration: {{ exam.duration_minutes }} minutes</p>
+    <div class="card mb-4 border-2 shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <h2 class="card-title text-center mb-0 py-2 h4">{{ exam.subject }} - {{ exam.paper }}</h2>
+      </div>
+      <div class="card-body bg-light">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <strong class="text-muted">Grade:</strong><br> {{ exam.grade }}
+          </div>
+          <div class="col-md-4">
+            <strong class="text-muted">Date:</strong><br> {{ exam.month }} {{ exam.year }}
+          </div>
+          <div class="col-md-4">
+            <strong class="text-muted">Duration:</strong><br> {{ exam.duration_minutes }} minutes
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="timer" class="alert alert-info fw-bold text-center fs-4">Time Remaining: <span id="countdown"></span></div>
     
     <form action="{{ url_for('exam.submit_exam', exam_id=exam.id) }}" method="POST">

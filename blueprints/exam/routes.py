@@ -129,7 +129,7 @@ def exam_practice():
 def take_exam(exam_id):
     """Renders a specific exam by fetching questions from the database."""
     try:
-        grade, subject, year, month = exam_id.split('|')
+        grade, subject_full, year, month = exam_id.split('|')
     except ValueError:
         flash('Invalid exam identifier.', 'danger')
         return redirect(url_for('exam.exam_practice'))
@@ -138,7 +138,7 @@ def take_exam(exam_id):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(
         "SELECT * FROM questions WHERE grade = %s AND subject = %s AND year = %s AND month = %s ORDER BY section, number",
-        (grade, subject, year, month)
+        (grade, subject_full, year, month)
     )
     questions = cur.fetchall()
     cur.close()
@@ -148,11 +148,16 @@ def take_exam(exam_id):
         flash('Exam not found or has no questions.', 'danger')
         return redirect(url_for('exam.exam_practice'))
 
+    subject_parts = subject_full.rsplit(' ', 1)
+    subject_name = subject_parts[0]
+    paper = subject_parts[1] if len(subject_parts) > 1 else 'Paper 1'
+
     exam_details = {
         'id': exam_id,
-        'title': f"{subject} - {month} {year}",
+        'title': f"{subject_name} {paper} - {month} {year}",
         'grade': grade,
-        'subject': subject,
+        'subject': subject_name,
+        'paper': paper,
         'year': year,
         'month': month,
         'duration_minutes': 60 # Default
