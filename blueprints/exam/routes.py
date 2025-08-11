@@ -91,25 +91,35 @@ def exam_practice():
     categorized_exams = {}
     for exam in exams:
         grade = exam.get('grade')
-        subject = exam.get('subject')
-        if grade and subject:
+        subject_full = exam.get('subject', '')
+
+        subject_parts = subject_full.rsplit(' ', 1)
+        subject_name = subject_parts[0]
+        paper = subject_parts[1] if len(subject_parts) > 1 else 'Paper 1' # Default paper
+
+        if grade and subject_name:
             if grade not in categorized_exams:
                 categorized_exams[grade] = {}
-            if subject not in categorized_exams[grade]:
-                categorized_exams[grade][subject] = []
-            categorized_exams[grade][subject].append(exam)
+            if subject_name not in categorized_exams[grade]:
+                categorized_exams[grade][subject_name] = {}
+            if paper not in categorized_exams[grade][subject_name]:
+                categorized_exams[grade][subject_name][paper] = []
+            
+            categorized_exams[grade][subject_name][paper].append(exam)
 
-    # Sort grades and subjects for ordered display
+    # Sort grades, subjects, and papers for ordered display
+    sorted_categorized_exams = {}
     try:
         sorted_grades = sorted(categorized_exams.keys(), key=lambda g: int(g))
     except (ValueError, TypeError):
         sorted_grades = sorted(categorized_exams.keys())
 
-    sorted_categorized_exams = {grade: categorized_exams[grade] for grade in sorted_grades}
-
-    for grade in sorted_categorized_exams:
-        sorted_subjects = sorted(sorted_categorized_exams[grade].keys())
-        sorted_categorized_exams[grade] = {subject: sorted_categorized_exams[grade][subject] for subject in sorted_subjects}
+    for grade in sorted_grades:
+        sorted_subjects = sorted(categorized_exams[grade].keys())
+        sorted_categorized_exams[grade] = {}
+        for subject in sorted_subjects:
+            sorted_papers = sorted(categorized_exams[grade][subject].keys())
+            sorted_categorized_exams[grade][subject] = {paper: categorized_exams[grade][subject][paper] for paper in sorted_papers}
 
     return render_template('exam_practice.html', categorized_exams=sorted_categorized_exams)
 

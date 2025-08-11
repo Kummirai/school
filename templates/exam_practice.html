@@ -8,54 +8,71 @@
     <div class="accordion accordion-flush" id="gradesAccordion">
       {% for grade, subjects in categorized_exams.items() %}
         <div class="accordion-item border rounded-3 mb-3 shadow-sm">
-          <h2 class="accordion-header" id="heading{{ grade }}">
-            <button class="accordion-button collapsed bg-light text-dark fw-bold fs-6 rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ grade }}" aria-expanded="false" aria-controls="collapse{{ grade }}">
+          <h2 class="accordion-header" id="heading-grade-{{ grade }}">
+            <button class="accordion-button collapsed bg-light text-dark fw-bold fs-6 rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-grade-{{ grade }}" aria-expanded="false" aria-controls="collapse-grade-{{ grade }}">
               Grade {{ grade }}
             </button>
           </h2>
-          <div id="collapse{{ grade }}" class="accordion-collapse collapse" aria-labelledby="heading{{ grade }}" data-bs-parent="#gradesAccordion">
-            <div class="accordion-body p-4">
-              {% for subject, exams in subjects.items() %}
-                <h4 class="mt-4 mb-3 border-bottom pb-2">{{ subject }}</h4>
-                {% if exams %}
-                  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    {% for exam in exams %}
-                      <div class="col">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-                          <div class="card-body d-flex flex-column p-4">
-                            <h5 class="card-title mb-2 text-danger fw-bold fs-6">{{ exam.title }}</h5>
-                            <p class="card-text text-muted text-sm flex-grow-1">{{ exam.description }}</p>
-                            <ul class="list-unstyled text-secondary mt-3">
-                              <li class="mb-1">
-                                <i class="bi bi-question-circle-fill me-2 text-warning"></i> {{ exam.questions_count }} Questions
-                              </li>
-                              <li class="mb-1">
-                                <i class="bi bi-clock-fill me-2 text-dark"></i> {{ exam.duration_minutes }} Minutes
-                              </li>
-                              <li>
-                                <i class="bi bi-bar-chart-fill me-2 text-danger"></i> Difficulty: <span class="fw-bold">{{ exam.difficulty }}</span>
-                              </li>
-                              <li class="mb-1">
-                                <i class="bi bi-check-circle-fill me-2 text-success"></i> Latest Score: <span class="fw-bold">{% if exam.latest_score is not none %}{{ exam.latest_score }}%{% else %}N/A{% endif %}</span>
-                              </li>
-                              <li>
-                                <i class="bi bi-arrow-repeat me-2 text-primary"></i> Attempts: <span class="fw-bold">{{ exam.attempts | default(0) }}</span>
-                              </li>
-                            </ul>
-                            <div class="mt-auto pt-3">
-                                <a href="{{ url_for('exam.take_exam', exam_id=exam.id) }}" class="btn btn-danger btn-md w-100 rounded-pill">Start Exam <i class="bi bi-arrow-right-circle-fill ms-2"></i></a>
+          <div id="collapse-grade-{{ grade }}" class="accordion-collapse collapse" aria-labelledby="heading-grade-{{ grade }}" data-bs-parent="#gradesAccordion">
+            <div class="accordion-body p-2 p-md-4">
+              <div class="accordion accordion-flush" id="subjectsAccordion-{{ grade }}">
+                {% for subject, papers in subjects.items() %}
+                  <div class="accordion-item border rounded-3 mb-3">
+                    <h2 class="accordion-header" id="heading-subject-{{ grade }}-{{ subject|replace(' ', '-') }}">
+                      <button class="accordion-button collapsed bg-white text-dark fw-semibold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-subject-{{ grade }}-{{ subject|replace(' ', '-') }}" aria-expanded="false" aria-controls="collapse-subject-{{ grade }}-{{ subject|replace(' ', '-') }}">
+                        {{ subject }}
+                      </button>
+                    </h2>
+                    <div id="collapse-subject-{{ grade }}-{{ subject|replace(' ', '-') }}" class="accordion-collapse collapse" aria-labelledby="heading-subject-{{ grade }}-{{ subject|replace(' ', '-') }}" data-bs-parent="#subjectsAccordion-{{ grade }}">
+                      <div class="accordion-body p-2 p-md-3">
+                        <div class="accordion accordion-flush" id="papersAccordion-{{ grade }}-{{ subject|replace(' ', '-') }}">
+                          {% for paper, exams in papers.items() %}
+                            <div class="accordion-item border rounded-3 mb-2">
+                              <h2 class="accordion-header" id="heading-paper-{{ grade }}-{{ subject|replace(' ', '-') }}-{{ paper|replace(' ', '-') }}">
+                                <button class="accordion-button collapsed bg-white text-secondary fw-semibold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-paper-{{ grade }}-{{ subject|replace(' ', '-') }}-{{ paper|replace(' ', '-') }}" aria-expanded="false" aria-controls="collapse-paper-{{ grade }}-{{ subject|replace(' ', '-') }}-{{ paper|replace(' ', '-') }}">
+                                  {{ paper }}
+                                </button>
+                              </h2>
+                              <div id="collapse-paper-{{ grade }}-{{ subject|replace(' ', '-') }}-{{ paper|replace(' ', '-') }}" class="accordion-collapse collapse show" aria-labelledby="heading-paper-{{ grade }}-{{ subject|replace(' ', '-') }}-{{ paper|replace(' ', '-') }}" data-bs-parent="#papersAccordion-{{ grade }}-{{ subject|replace(' ', '-') }}">
+                                <div class="accordion-body">
+                                  {% if exams %}
+                                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                                      {% for exam in exams %}
+                                        <div class="col">
+                                          <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                                            <div class="card-body d-flex flex-column p-4">
+                                              <h5 class="card-title mb-2 text-danger fw-bold fs-6">{{ exam.title }}</h5>
+                                              <p class="card-text text-muted text-sm flex-grow-1">{{ exam.description }}</p>
+                                              <ul class="list-unstyled text-secondary mt-3">
+                                                <li class="mb-1"><i class="bi bi-question-circle-fill me-2 text-warning"></i> {{ exam.questions_count }} Questions</li>
+                                                <li class="mb-1"><i class="bi bi-clock-fill me-2 text-dark"></i> {{ exam.duration_minutes }} Minutes</li>
+                                                <li><i class="bi bi-bar-chart-fill me-2 text-danger"></i> Difficulty: <span class="fw-bold">{{ exam.difficulty }}</span></li>
+                                                <li class="mb-1"><i class="bi bi-check-circle-fill me-2 text-success"></i> Latest Score: <span class="fw-bold">{% if exam.latest_score is not none %}{{ "%.2f"|format(exam.latest_score) }}%{% else %}N/A{% endif %}</span></li>
+                                                <li><i class="bi bi-arrow-repeat me-2 text-primary"></i> Attempts: <span class="fw-bold">{{ exam.attempts | default(0) }}</span></li>
+                                              </ul>
+                                              <div class="mt-auto pt-3">
+                                                <a href="{{ url_for('exam.take_exam', exam_id=exam.id) }}" class="btn btn-danger btn-md w-100 rounded-pill">Start Exam <i class="bi bi-arrow-right-circle-fill ms-2"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      {% endfor %}
+                                    </div>
+                                  {% else %}
+                                    <div class="alert alert-light text-center mt-3" role="alert">
+                                      No exams available for this paper yet. Check back soon!
+                                    </div>
+                                  {% endif %}
+                                </div>
+                              </div>
                             </div>
-                          </div>
+                          {% endfor %}
                         </div>
                       </div>
-                    {% endfor %}
+                    </div>
                   </div>
-                {% else %}
-                  <div class="alert alert-light text-center mt-3" role="alert">
-                    No exams available for this subject yet. Check back soon!
-                  </div>
-                {% endif %}
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
