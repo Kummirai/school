@@ -20,9 +20,27 @@
             </div>
             <div class="card-body">
                 <p class="card-text">{{ question.question_text | safe }}</p>
-                <p>Your answer: {{ question.user_answer if question.user_answer else "No answer provided" }}</p>
-                {% if not question.is_correct %}
-                <p>Correct answer: {{ question.correct_answer }}</p>
+                
+                {% if question.type == 'matching' %}
+                    <strong>Your Answers:</strong>
+                    <ul>
+                    {% for stem, answer in question.user_answer.items() %}
+                        <li>{{ stem }}: {{ answer }}</li>
+                    {% endfor %}
+                    </ul>
+                    {% if not question.is_correct %}
+                    <strong>Correct Answers:</strong>
+                    <ul>
+                    {% for stem, answer in question.correct_answer.items() %}
+                        <li>{{ stem }}: {{ answer }}</li>
+                    {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% else %}
+                    <p>Your answer: {{ question.user_answer if question.user_answer else "No answer provided" }}</p>
+                    {% if not question.is_correct %}
+                    <p>Correct answer: {{ question.correct_answer }}</p>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

@@ -181,7 +181,7 @@ def submit_exam(exam_id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(
-        "SELECT id, number, answer, question_text, options FROM questions WHERE grade = %s AND subject = %s AND year = %s AND month = %s",
+        "SELECT id, number, type, answer, question_text, options FROM questions WHERE grade = %s AND subject = %s AND year = %s AND month = %s",
         (grade, subject, year, month)
     )
     db_questions = cur.fetchall()
@@ -198,8 +198,26 @@ def submit_exam(exam_id):
 
     for question in db_questions:
         question_id = str(question['id'])
+        question_type = question['type']
         correct_answer = question['answer']
-        user_submitted_answer = user_answers.get(f'question_{question_id}')
+        options = json.loads(question['options']) if question.get('options') and question['options'] else {}
+
+        user_submitted_answer = None
+        if question_type == 'matching':
+            matching_answers = {}
+            stems = options.get('stems', [])
+            for i, stem in enumerate(stems, 1):
+                answer_key = f'question_{question_id}_{i}'
+                matching_answers[stem] = user_answers.get(answer_key)
+            user_submitted_answer = json.dumps(matching_answers, sort_keys=True)
+            
+            try:
+                correct_answer_dict = json.loads(correct_answer)
+                correct_answer = json.dumps(correct_answer_dict, sort_keys=True)
+            except (json.JSONDecodeError, TypeError):
+                pass
+        else:
+            user_submitted_answer = user_answers.get(f'question_{question_id}')
 
         is_correct = user_submitted_answer == correct_answer
         if is_correct:
@@ -208,8 +226,9 @@ def submit_exam(exam_id):
         questions_for_review.append({
             'id': question_id,
             'number': question['number'],
+            'type': question_type,
             'question_text': question['question_text'],
-            'options': json.loads(question['options']) if question['options'] else [],
+            'options': options,
             'correct_answer': correct_answer,
             'user_answer': user_submitted_answer,
             'is_correct': is_correct
@@ -299,10 +318,22 @@ def exam_results(result_id):
 
     if review_data and review_data['exam_id'] == exam_id_from_db:
         questions_for_review = review_data['questions_for_review']
+        for q in questions_for_review:
+            if q.get('type') == 'matching':
+                if isinstance(q.get('user_answer'), str):
+                    try:
+                        q['user_answer'] = json.loads(q['user_answer'])
+                    except (json.JSONDecodeError, TypeError):
+                        q['user_answer'] = {}
+                if isinstance(q.get('correct_answer'), str):
+                    try:
+                        q['correct_answer'] = json.loads(q['correct_answer'])
+                    except (json.JSONDecodeError, TypeError):
+                        q['correct_answer'] = {}
     else:
         if exam_details:
             cur.execute(
-                "SELECT id, number, question_text, answer, options FROM questions WHERE grade = %s AND subject = %s AND year = %s AND month = %s",
+                "SELECT id, number, type, question_text, answer, options FROM questions WHERE grade = %s AND subject = %s AND year = %s AND month = %s",
                 (grade, subject, year, month)
             )
             db_questions = cur.fetchall()
@@ -310,8 +341,9 @@ def exam_results(result_id):
                 questions_for_review.append({
                     'id': q['id'],
                     'number': q['number'],
+                    'type': q['type'],
                     'question_text': q['question_text'],
-                    'options': json.loads(q['options']) if q['options'] else [],
+                    'options': json.loads(q['options']) if q.get('options') and q['options'] else {},
                     'correct_answer': q['answer'],
                     'user_answer': 'Not available (session expired)',
                     'is_correct': False
