@@ -279,10 +279,10 @@ def submit_exam(exam_id):
             'options': options,
             'correct_answer': correct_answer,
             'user_answer': user_submitted_answer,
-            'is_correct': is_correct
+            'is_correct': is_current_question_correct
         })
 
-    score = (correct_answers_count / total_questions) * 100 if total_questions > 0 else 0
+    score = (correct_answers_count / total_auto_gradable_questions) * 100 if total_auto_gradable_questions > 0 else 0
 
     result_id = None
     try:
@@ -290,7 +290,7 @@ def submit_exam(exam_id):
             INSERT INTO exam_results (user_id, exam_id, score, total_questions, completion_time)
             VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP)
             RETURNING id;
-        ''', (user_id, exam_id, score, total_questions))
+        ''', (user_id, exam_id, score, total_auto_gradable_questions))
         result_id = cur.fetchone()[0]
         conn.commit()
         flash('Exam submitted and graded successfully!', 'success')
