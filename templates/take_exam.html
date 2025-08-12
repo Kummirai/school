@@ -40,6 +40,7 @@
 
                         <!-- Debug: Type={{ question.type }}, Options={{ question.options }} -->
                         {% if (question.type == 'mcq' or question.type == 'multiple_choice') and question.options %}
+                            <!-- Debug: MCQ Options Type: {{ question.options.__class__.__name__ }}, Content: {{ question.options }} -->
                             {# Multiple Choice #}
                             {% for option in question.options %}
                             <div class="form-check">

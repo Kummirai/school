@@ -167,10 +167,15 @@ def take_exam(exam_id):
     for q in questions:
         new_q = dict(q)
         if new_q.get('options'):
-            try:
-                new_q['options'] = json.loads(new_q['options'])
-            except (json.JSONDecodeError, TypeError):
-                new_q['options'] = []
+            if isinstance(new_q['options'], (str, bytes, bytearray)):
+                try:
+                    new_q['options'] = json.loads(new_q['options'])
+                except (json.JSONDecodeError, TypeError):
+                    new_q['options'] = {}
+            elif isinstance(new_q['options'], (list, dict)):
+                pass # Already in correct format
+            else:
+                new_q['options'] = {} # Default for other types
         processed_questions.append(new_q)
 
     return render_template('take_exam.html', exam=exam_details, questions=processed_questions)
@@ -215,7 +220,15 @@ def submit_exam(exam_id):
         question_id = str(question['id'])
         question_type = question['type']
         correct_answer = question['answer']
-        options = json.loads(question['options']) if question.get('options') and question['options'] else {}
+        options = {}
+        if question.get('options'):
+            if isinstance(question['options'], (str, bytes, bytearray)):
+                try:
+                    options = json.loads(question['options'])
+                except (json.JSONDecodeError, TypeError):
+                    options = {}
+            elif isinstance(question['options'], (list, dict)):
+                options = question['options']
 
         user_submitted_answer = None
         if question_type == 'matching':
@@ -358,7 +371,7 @@ def exam_results(result_id):
                     'number': q['number'],
                     'type': q['type'],
                     'question_text': q['question_text'],
-                    'options': json.loads(q['options']) if q.get('options') and q['options'] else {},
+                    'options': (json.loads(q['options']) if isinstance(q['options'], (str, bytes, bytearray)) else q['options']) if q.get('options') else {},
                     'correct_answer': q['answer'],
                     'user_answer': 'Not available (session expired)',
                     'is_correct': False
