@@ -172,17 +172,17 @@ def take_exam(exam_id):
                 try:
                     parsed_data = json.loads(new_q['options'])
                     if isinstance(parsed_data, list): # If it's a list from JSON string
-                        processed_options = {'stems': [], 'choices': parsed_data}
+                        processed_options = parsed_data # Keep it as a list of choices
                     elif isinstance(parsed_data, dict): # If it's already a dict with stems/choices
-                        processed_options = parsed_data
+                        processed_options = parsed_data.get('choices', [])
                     else:
                         processed_options = {} # Fallback for unexpected JSON content
                 except (json.JSONDecodeError, TypeError):
                     processed_options = {} # Fallback for invalid JSON string
             elif isinstance(new_q['options'], list): # If it's already a list (jsonb)
-                processed_options = {'stems': [], 'choices': new_q['options']}
+                processed_options = new_q['options'] # Keep it as a list of choices
             elif isinstance(new_q['options'], dict): # If it's already a dict
-                processed_options = new_q['options']
+                processed_options = new_q['options'].get('choices', [])
             else:
                 processed_options = {} # Default for other types
             new_q['options'] = processed_options
@@ -237,17 +237,17 @@ def submit_exam(exam_id):
                 try:
                     parsed_data = json.loads(question['options'])
                     if isinstance(parsed_data, list): # If it's a list from JSON string
-                        processed_options = {'stems': [], 'choices': parsed_data}
+                        processed_options = parsed_data # Keep it as a list of choices
                     elif isinstance(parsed_data, dict): # If it's already a dict with stems/choices
-                        processed_options = parsed_data
+                        processed_options = parsed_data.get('choices', [])
                     else:
                         processed_options = {} # Fallback for unexpected JSON content
                 except (json.JSONDecodeError, TypeError):
                     processed_options = {} # Fallback for invalid JSON string
             elif isinstance(question['options'], list): # If it's already a list (jsonb)
-                processed_options = {'stems': [], 'choices': question['options']}
+                processed_options = question['options'] # Keep it as a list of choices
             elif isinstance(question['options'], dict): # If it's already a dict
-                processed_options = question['options']
+                processed_options = question['options'].get('choices', [])
             else:
                 processed_options = {} # Default for other types
             options = processed_options
@@ -394,17 +394,17 @@ def exam_results(result_id):
                         try:
                             parsed_data = json.loads(q['options'])
                             if isinstance(parsed_data, list):
-                                processed_options = {'stems': [], 'choices': parsed_data}
-                            elif isinstance(parsed_data, dict):
                                 processed_options = parsed_data
+                            elif isinstance(parsed_data, dict):
+                                processed_options = parsed_data.get('choices', [])
                             else:
                                 processed_options = {}
                         except (json.JSONDecodeError, TypeError):
                             processed_options = {}
                     elif isinstance(q['options'], list):
-                        processed_options = {'stems': [], 'choices': q['options']}
-                    elif isinstance(q['options'], dict):
                         processed_options = q['options']
+                    elif isinstance(q['options'], dict):
+                        processed_options = q['options'].get('choices', [])
                     else:
                         processed_options = {}
                 questions_for_review.append({

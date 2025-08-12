@@ -58,27 +58,18 @@
                         {% elif question.type == 'matching' and question.options %}
                             {# Matching #}
                             <div class="row">
-                                <div class="col-md-6">
-                                    <strong>Stems</strong>
-                                    <ul class="list-group">
-                                    {% for stem in question.options.stems %}
-                                        <li class="list-group-item">{{ stem }}</li>
-                                    {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>Choices</strong>
-                                    {% for stem in question.options.stems %}
+                                <div class="col-md-12">
+                                    <p>Match the following:</p>
+                                    {# Assuming each 'question' object is a single matching item #}
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text" style="width: 150px;">{{ stem }}</span>
-                                        <select name="question_{{ question.id }}_{{ loop.index }}" class="form-select" required>
+                                        <span class="input-group-text" style="width: 250px;">{{ question.question_text | safe }}</span>
+                                        <select name="question_{{ question.id }}" class="form-select" required>
                                             <option value="">Select a match</option>
-                                            {% for choice in question.options.choices %}
+                                            {% for choice in question.options %}
                                             <option value="{{ choice }}">{{ choice }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
-                                    {% endfor %}
                                 </div>
                             </div>
                         {% endif %}
