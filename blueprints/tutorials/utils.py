@@ -182,7 +182,7 @@ def get_filtered_videos(grade=None, subject=None, search_term=None):
 
     if search_term:
         search_pattern = f'%{search_term}%'
-        where_clauses.append("(title ILIKE %s OR description ILIKE %s OR subject ILIKE %s OR grade ILIKE %s)")
+        where_clauses.append("(title ILIKE %s OR description ILIKE %s OR subject ILIKE %s OR CAST(grade AS TEXT) ILIKE %s)")
         params.extend([search_pattern, search_pattern, search_pattern, search_pattern])
 
     final_query = base_query
