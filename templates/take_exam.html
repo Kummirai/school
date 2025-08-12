@@ -30,6 +30,11 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <strong style="color: #2F4F4F;">Question {{ question.number }}</strong>
+                        {% if question.marks %}
+                        <span class="badge bg-info float-end">{{ question.marks }} Marks</span>
+                        {% elif question.points %}
+                        <span class="badge bg-info float-end">{{ question.points }} Points</span>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         {% if question.image_url %}
