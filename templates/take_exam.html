@@ -32,11 +32,11 @@
                         <strong style="color: #2F4F4F;">Question {{ question.number }}</strong>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">{{ question.question_text | safe }}</p>
-                        
                         {% if question.image_url %}
                         <img src="{{ question.image_url }}" class="img-fluid mb-3" alt="Question Image">
                         {% endif %}
+                        
+                        <p class="card-text">{{ question.question_text | safe }}</p>
 
                         <!-- Debug: Type={{ question.type }}, Options={{ question.options }} -->
                         {% if (question.type == 'mcq' or question.type == 'multiple_choice') and question.options %}
