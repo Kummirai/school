@@ -41,16 +41,17 @@
       async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
-    <link rel="stylesheet" href="../static/css/curriculum.css" />
-    <link rel="stylesheet" href="../static/css/video-tutorial.css" />
-    <script src="../static/js/grade8/partsOfSpeech.js" defer></script>
-    <script src="../static/js/grade7/fractions.js" defer></script>
-    <script src="../static/js/grade8/algebraicExpressions.js" defer></script>
-    <script src="../static/js/grade10/rational.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curriculum.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/video-tutorial.css') }}" />
+    <script src="{{ url_for('static', filename='js/grade8/partsOfSpeech.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/grade7/fractions.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/grade8/algebraicExpressions.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/grade10/rational.js') }}" defer></script>
     <!-- <script src="../static/js/video_tutorials.js" defer></script> -->
-    <script src="../static/js/studyGuide.js" defer></script>
-    <script src="../static/js/study_guides_interactive.js" defer></script>
-    <script src="../static/data/algebra_calculator.js" defer></script>
+    <script src="{{ url_for('static', filename='js/studyGuide.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/study_guides_interactive.js') }}" defer></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='data/algebra_calculator.js') }}" defer></script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
