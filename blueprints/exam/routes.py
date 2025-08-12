@@ -222,7 +222,7 @@ def submit_exam(exam_id):
         conn.close()
         return redirect(url_for('exam.exam_practice'))
 
-    total_questions = len(db_questions)
+    total_auto_gradable_questions = 0
     correct_answers_count = 0
     questions_for_review = []
 
@@ -252,26 +252,24 @@ def submit_exam(exam_id):
                 processed_options = {} # Default for other types
             options = processed_options
 
-        user_submitted_answer = None
-        if question_type == 'matching':
-            matching_answers = {}
-            stems = options.get('stems', [])
-            for i, stem in enumerate(stems, 1):
-                answer_key = f'question_{question_id}_{i}'
-                matching_answers[stem] = user_answers.get(answer_key)
-            user_submitted_answer = json.dumps(matching_answers, sort_keys=True)
-            
-            try:
-                correct_answer_dict = json.loads(correct_answer)
-                correct_answer = json.dumps(correct_answer_dict, sort_keys=True)
-            except (json.JSONDecodeError, TypeError):
-                pass
-        else:
-            user_submitted_answer = user_answers.get(f'question_{question_id}')
+        user_submitted_answer = user_answers.get(f'question_{question_id}')
 
-        is_correct = user_submitted_answer == correct_answer
-        if is_correct:
-            correct_answers_count += 1
+        is_current_question_correct = False
+        if question_type == 'essay':
+            # Essay questions are not auto-graded for correctness
+            # They are considered "answered" if there's any text
+            if user_submitted_answer and user_submitted_answer.strip() != '':
+                is_current_question_correct = True # Mark as answered for review purposes
+            # Do not increment total_auto_gradable_questions or correct_answers_count for essays
+        else:
+            total_auto_gradable_questions += 1 # Only count auto-gradable questions
+            if user_submitted_answer is None or user_submitted_answer == '':
+                is_current_question_correct = False
+            else:
+                is_current_question_correct = user_submitted_answer == correct_answer
+            
+            if is_current_question_correct:
+                correct_answers_count += 1
 
         questions_for_review.append({
             'id': question_id,
