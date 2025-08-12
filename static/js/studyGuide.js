@@ -49,7 +49,7 @@ class StudyGuideApp {
 
   async loadData() {
     try {
-      const response = await fetch("static/js/studyGuide.json");
+      const response = await fetch("/static/data/studyGuide.json");
       if (!response.ok) throw new Error("Network response was not ok");
       this.studyData = await response.json();
       this.populateSubjectDropdown();
