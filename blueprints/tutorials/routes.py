@@ -80,6 +80,23 @@ def get_subjects_for_grade():
         }), 500
 
 
+@tutorials_bp.route('/api/debug_grades_subjects')
+def debug_grades_subjects():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("SELECT DISTINCT grade FROM videos ORDER BY grade")
+        grades = [row['grade'] for row in cur.fetchall()]
+        cur.execute("SELECT DISTINCT subject FROM videos ORDER BY subject")
+        subjects = [row['subject'] for row in cur.fetchall()]
+        return jsonify({'grades': grades, 'subjects': subjects})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+
 @tutorials_bp.route('/study_guides')
 @login_required
 def studyguides_home():

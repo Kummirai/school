@@ -24,14 +24,15 @@
           <option value="10">Grade 10</option>
           <option value="11">Grade 11</option>
           <option value="12">Grade 12</option>
-          <option value="Python">Grade Python</option>
-          <option value="Javascript">Grade Javascript</option>
-          <option value="HTML">Grade HTML</option>
-          <option value="CSS">Grade CSS</option>
-          <option value="Excel">Grade Excel</option>
-          <option value="Ms Word">Grade Ms Word</option>
-          <option value="Powerpoint">Grade Powerpoint</option>
-          <option value="Machine Learning">Grade Machine Learning</option>
+          <option value="13">Python</option>
+          <option value="14">Javascript</option>
+          <option value="15">HTML</option>
+          <option value="16">CSS</option>
+          <option value="17">Excel</option>
+          <option value="18">Ms Word</option>
+          <option value="19">Powerpoint</option>
+          <option value="20">Machine Learning</option>
+          <option value="21">Node JS</option>
         </select>
       </div>
       <div class="col-md-5">
@@ -39,6 +40,20 @@
           <option value="" disabled selected>Select Subject</option>
           <option value="Mathematics">Mathematics</option>
           <option value="Physical Sciences">Physical Sciences</option>
+          <option value="Accounting">Accounting</option>
+          <option value="Economics">Economics</option>
+          <option value="Business Studies">Business Studies</option>
+          <option value="Geography">Geography</option>
+          <option value="History">History</option>
+          <option value="Life Orientation">Life Orientation</option>
+          <option value="Computer Studies">Computer Studies</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Agricultural Sciences">Agricultural Sciences</option>
+          <option value="Tourism">Tourism</option>
+          <option value="Visual Arts">Visual Arts</option>
+          <option value="Economic Management Sciences">
+            Economic Management Sciences
+          </option>
           <option value="Life Sciences">Life Sciences</option>
           <option value="English">English</option>
           <option value="Python">Python</option>
@@ -83,8 +98,7 @@
 </div>
 
 <!-- Videos Container -->
-<div id="videos-container" class="row g-4 p-3">
-</div>
+<div id="videos-container" class="row g-4 p-3"></div>
 
 <!-- No Results Message -->
 <div id="no-results" class="text-center my-5 d-none">
@@ -107,8 +121,6 @@
     };
 
     // ========== UTILITY FUNCTIONS (defined first) ==========
-
-    
 
     function showLoading(show) {
       document
@@ -142,8 +154,6 @@
     }
 
     // ========== CORE FUNCTIONALITY ==========
-
-    
 
     async function fetchAndDisplayVideos() {
       // Only fetch if both grade and subject are selected

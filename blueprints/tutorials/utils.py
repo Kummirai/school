@@ -106,20 +106,10 @@ def get_subjects_by_grade(grade):
 
         if normalized_grade_input.isdigit():
             grade_num = int(normalized_grade_input)
-            # Match '7' or 'grade 7' or 'Grade 7'
-            query_conditions.append("TRIM(LOWER(grade)) = %s")
-            params.append(normalized_grade_input) # '7'
+            # Match exact integer grade
+            query_conditions.append("grade = %s")
+            params.append(grade_num)
             
-            query_conditions.append("TRIM(LOWER(grade)) = %s")
-            params.append(f"grade {grade_num}") # 'grade 7'
-
-            # Match ranges like '10-12'
-            query_conditions.append("""
-                (TRIM(LOWER(grade)) LIKE '%-%' AND 
-                 CAST(SPLIT_PART(TRIM(grade), '-', 1) AS INTEGER) <= %s AND 
-                 CAST(SPLIT_PART(TRIM(grade), '-', 2) AS INTEGER) >= %s)
-            """)
-            params.extend([grade_num, grade_num])
         else:
             # For non-numeric grades like 'Python', 'HTML', 'Ms Word'
             query_conditions.append("TRIM(LOWER(grade)) = %s")
@@ -149,7 +139,7 @@ def get_filtered_videos(grade=None, subject=None, search_term=None):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     
-    query = """
+    base_query = """
         SELECT
             id,
             title,
@@ -161,40 +151,48 @@ def get_filtered_videos(grade=None, subject=None, search_term=None):
             subject as category_name
         FROM
             videos
-        WHERE 1=1
     """
+    where_clauses = []
     params = []
 
     if grade:
-        # Handle non-numeric grades (Python, Javascript, HTML, etc.)
-        if not grade.isdigit():
-            query += " AND grade = %s"
-            params.append(grade)
-        else:
-            # Handle numeric grades and grade ranges
+        # Conditions for grade filtering
+        grade_conditions = []
+        
+        # If the input grade is a digit (e.g., '7', '10')
+        if grade.isdigit():
             grade_num = int(grade)
-            query += """ AND (
-                grade = %s OR 
-                grade = %s OR
-                (grade LIKE '%-%' AND 
-                 CAST(SPLIT_PART(grade, '-', 1) AS INTEGER) <= %s AND 
-                 CAST(SPLIT_PART(grade, '-', 2) AS INTEGER) >= %s)
-            )"""
-            params.extend([str(grade_num), f"Grade {grade_num}", grade_num, grade_num])
+            # Match exact integer grade
+            grade_conditions.append("grade = %s")
+            params.append(grade_num)
+            
+        else:
+            # For non-numeric grades like 'Python', 'HTML', 'Ms Word'
+            # Assuming these are stored as strings in the 'grade' column
+            grade_conditions.append("TRIM(LOWER(grade)) = %s")
+            params.append(grade.strip().lower())
+        
+        # Combine all grade-related conditions with OR
+        if grade_conditions:
+            where_clauses.append(f"({' OR '.join(grade_conditions)})")
 
     if subject:
-        query += " AND subject = %s"
-        params.append(subject)
+        where_clauses.append("TRIM(LOWER(subject)) = %s") # Make subject filter case-insensitive
+        params.append(subject.strip().lower())
 
     if search_term:
         search_pattern = f'%{search_term}%'
-        query += " AND (title ILIKE %s OR description ILIKE %s OR subject ILIKE %s OR grade ILIKE %s)"
+        where_clauses.append("(title ILIKE %s OR description ILIKE %s OR subject ILIKE %s OR grade ILIKE %s)")
         params.extend([search_pattern, search_pattern, search_pattern, search_pattern])
 
-    query += " ORDER BY grade, subject, title"
+    final_query = base_query
+    if where_clauses:
+        final_query += " WHERE " + " AND ".join(where_clauses)
+    
+    final_query += " ORDER BY grade, subject, title"
 
     try:
-        cur.execute(query, tuple(params))
+        cur.execute(final_query, tuple(params))
         videos = cur.fetchall()
         return videos
     except Exception as e:
