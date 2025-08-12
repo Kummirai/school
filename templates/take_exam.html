@@ -56,7 +56,6 @@
                             {# Essay #}
                             <textarea name="question_{{ question.id }}" class="form-control" rows="5" required></textarea>
                         {% elif question.type == 'matching' and question.options %}
-                            <!-- Debug: Matching Options Type: {{ question.options.__class__.__name__ }}, Content: {{ question.options }} -->
                             {# Matching #}
                             <div class="row">
                                 <div class="col-md-6">
