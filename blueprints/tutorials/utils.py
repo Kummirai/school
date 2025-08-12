@@ -95,26 +95,39 @@ def get_subjects_by_grade(grade):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     
     try:
-        # Handle non-numeric grades (Python, Javascript, etc.)
-        if not grade.isdigit():
-            query = "SELECT DISTINCT subject as name FROM videos WHERE grade = %s ORDER BY subject"
-            cur.execute(query, (grade,))
+        if not grade: # If grade is empty, return all subjects
+            return get_all_subjects()
+
+        params = []
+        query_conditions = []
+
+        # Normalize incoming grade for comparison
+        normalized_grade_input = grade.strip().lower()
+
+        if normalized_grade_input.isdigit():
+            grade_num = int(normalized_grade_input)
+            # Match '7' or 'grade 7' or 'Grade 7'
+            query_conditions.append("TRIM(LOWER(grade)) = %s")
+            params.append(normalized_grade_input) # '7'
+            
+            query_conditions.append("TRIM(LOWER(grade)) = %s")
+            params.append(f"grade {grade_num}") # 'grade 7'
+
+            # Match ranges like '10-12'
+            query_conditions.append("""
+                (TRIM(LOWER(grade)) LIKE '%-%' AND 
+                 CAST(SPLIT_PART(TRIM(grade), '-', 1) AS INTEGER) <= %s AND 
+                 CAST(SPLIT_PART(TRIM(grade), '-', 2) AS INTEGER) >= %s)
+            """)
+            params.extend([grade_num, grade_num])
         else:
-            # Handle numeric grades and grade ranges
-            grade_num = int(grade)
-            query = """
-                SELECT DISTINCT subject as name 
-                FROM videos 
-                WHERE 
-                    (grade = %s OR 
-                     grade LIKE %s OR
-                     (grade LIKE '%-%' AND 
-                      CAST(SPLIT_PART(grade, '-', 1) AS INTEGER) <= %s AND 
-                      CAST(SPLIT_PART(grade, '-', 2) AS INTEGER) >= %s))
-                ORDER BY subject
-            """
-            cur.execute(query, (str(grade_num), f"Grade {grade_num}", grade_num, grade_num))
+            # For non-numeric grades like 'Python', 'HTML', 'Ms Word'
+            query_conditions.append("TRIM(LOWER(grade)) = %s")
+            params.append(normalized_grade_input)
+
+        query = f"SELECT DISTINCT subject as name FROM videos WHERE {' OR '.join(query_conditions)} ORDER BY subject"
         
+        cur.execute(query, tuple(params))
         subjects_from_db = cur.fetchall()
         
         subjects = []

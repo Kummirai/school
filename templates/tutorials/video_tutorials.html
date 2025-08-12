@@ -37,6 +37,18 @@
       <div class="col-md-5">
         <select id="subject-select" class="form-select" required>
           <option value="" disabled selected>Select Subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Physical Sciences">Physical Sciences</option>
+          <option value="Life Sciences">Life Sciences</option>
+          <option value="English">English</option>
+          <option value="Python">Python</option>
+          <option value="Javascript">Javascript</option>
+          <option value="HTML">HTML</option>
+          <option value="CSS">CSS</option>
+          <option value="Excel">Excel</option>
+          <option value="Ms Word">Ms Word</option>
+          <option value="Powerpoint">Powerpoint</option>
+          <option value="Machine Learning">Machine Learning</option>
         </select>
       </div>
       <div class="col-md-3">
@@ -72,12 +84,6 @@
 
 <!-- Videos Container -->
 <div id="videos-container" class="row g-4 p-3">
-  <div class="col-12 text-center">
-    <div class="alert alert-info">
-      <i class="bi bi-info-circle-fill"></i> Please select a grade and subject
-      to view available video lessons.
-    </div>
-  </div>
 </div>
 
 <!-- No Results Message -->
@@ -102,16 +108,7 @@
 
     // ========== UTILITY FUNCTIONS (defined first) ==========
 
-    function populateSubjectDropdown(subjects) {
-      const subjectSelect = document.getElementById("subject-select");
-      subjectSelect.innerHTML =
-        '<option value="" disabled selected>Select Subject</option>';
-
-      subjects.forEach((subject) => {
-        const option = new Option(subject.name, subject.name);
-        subjectSelect.add(option);
-      });
-    }
+    
 
     function showLoading(show) {
       document
@@ -146,27 +143,15 @@
 
     // ========== CORE FUNCTIONALITY ==========
 
-    async function fetchAndPopulateSubjects(grade) {
-      try {
-        showLoading(true);
-        const response = await fetch(
-          `/tutorials/api/subjects?grade=${encodeURIComponent(grade)}`
-        );
-        const data = await response.json();
-
-        if (!response.ok)
-          throw new Error(data.error || "Failed to fetch subjects");
-
-        populateSubjectDropdown(data.subjects);
-      } catch (error) {
-        showError("Failed to load subjects. Please try again.");
-        console.error("Subject fetch error:", error);
-      } finally {
-        showLoading(false);
-      }
-    }
+    
 
     async function fetchAndDisplayVideos() {
+      // Only fetch if both grade and subject are selected
+      if (!state.grade || !state.subject) {
+        showInitialMessage();
+        return;
+      }
+
       try {
         showLoading(true);
         clearError();
@@ -311,11 +296,9 @@
       // Grade select change
       document
         .getElementById("grade-select")
-        .addEventListener("change", async function () {
+        .addEventListener("change", function () {
           state.grade = this.value;
-          if (state.grade) {
-            await fetchAndPopulateSubjects(state.grade);
-          }
+          fetchAndDisplayVideos(); // Directly call fetchAndDisplayVideos
         });
 
       // Subject select change
@@ -323,6 +306,7 @@
         .getElementById("subject-select")
         .addEventListener("change", function () {
           state.subject = this.value;
+          fetchAndDisplayVideos(); // Trigger video fetch on subject change
         });
 
       // Search input
@@ -364,9 +348,6 @@
 
     async function initialize() {
       setupEventListeners();
-      showInitialMessage();
-      // Populate subjects on initial load
-      await fetchAndPopulateSubjects(''); 
     }
 
     // Start the application
