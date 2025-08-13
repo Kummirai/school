@@ -36,35 +36,8 @@
         </select>
       </div>
       <div class="col-md-5">
-        <select id="subject-select" class="form-select" required>
-          <option value="" disabled selected>Select Subject</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Physical Sciences">Physical Sciences</option>
-          <option value="Accounting">Accounting</option>
-          <option value="Economics">Economics</option>
-          <option value="Business Studies">Business Studies</option>
-          <option value="Geography">Geography</option>
-          <option value="History">History</option>
-          <option value="Life Orientation">Life Orientation</option>
-          <option value="Computer Studies">Computer Studies</option>
-          <option value="Information Technology">Information Technology</option>
-          <option value="Agricultural Sciences">Agricultural Sciences</option>
-          <option value="Tourism">Tourism</option>
-          <option value="Visual Arts">Visual Arts</option>
-          <option value="Economic Management Sciences">
-            Economic Management Sciences
-          </option>
-          <option value="Life Sciences">Life Sciences</option>
-          <option value="English">English</option>
-          <option value="Python">Python</option>
-          <option value="Javascript">Javascript</option>
-          <option value="HTML 101">HTML</option>
-          <option value="CSS">CSS</option>
-          <option value="Excel 103">Excel</option>
-          <option value="Ms Word 101">Ms Word</option>
-          <option value="Powerpoint">Powerpoint</option>
-          <option value="Machine Learning 101">Machine Learning</option>
-          <option value="Node Auth Tutorial">Node JS</option>
+        <select id="subject-select" class="form-select" required disabled>
+          <option value="" disabled selected>Select Grade First</option>
         </select>
       </div>
       <div class="col-md-3">
@@ -226,6 +199,48 @@
       initLazyLoading();
     }
 
+    async function updateSubjectDropdown(grade) {
+        const subjectSelect = document.getElementById("subject-select");
+        subjectSelect.disabled = true;
+        subjectSelect.innerHTML = '<option value="" disabled selected>Loading subjects...</option>';
+        let subjectsFound = false;
+
+        if (!grade) {
+            subjectSelect.innerHTML = '<option value="" disabled selected>Select Grade First</option>';
+            subjectSelect.disabled = true; // Keep it disabled
+            return;
+        }
+
+        try {
+            const response = await fetch(`/tutorials/api/subjects?grade=${encodeURIComponent(grade)}`);
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Failed to fetch subjects");
+            }
+
+            subjectSelect.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+            if (data.subjects.length > 0) {
+                subjectsFound = true;
+                data.subjects.forEach(subject => {
+                    const option = document.createElement("option");
+                    option.value = subject.name;
+                    option.textContent = subject.name;
+                    subjectSelect.appendChild(option);
+                });
+            } else {
+                subjectSelect.innerHTML = '<option value="" disabled selected>No subjects found</option>';
+            }
+
+        } catch (error) {
+            console.error("Error fetching subjects:", error);
+            showError("Could not load subjects for the selected grade.");
+            subjectSelect.innerHTML = '<option value="" disabled selected>Error loading</option>';
+        } finally {
+            subjectSelect.disabled = !subjectsFound;
+        }
+    }
+
     function setupWatchButtons() {
       document.querySelectorAll(".watch-btn").forEach((btn) => {
         btn.addEventListener("click", function () {
@@ -308,8 +323,11 @@
       document
         .getElementById("grade-select")
         .addEventListener("change", function () {
-          state.grade = this.value;
-          fetchAndDisplayVideos(); // Directly call fetchAndDisplayVideos
+            state.grade = this.value;
+            state.subject = ""; // Reset subject
+            document.getElementById("subject-select").value = ""; // Reset dropdown
+            showInitialMessage(); // Reset video view
+            updateSubjectDropdown(state.grade);
         });
 
       // Subject select change
@@ -359,6 +377,10 @@
 
     async function initialize() {
       setupEventListeners();
+      showInitialMessage();
+      const subjectSelect = document.getElementById("subject-select");
+      subjectSelect.disabled = true;
+      subjectSelect.innerHTML = '<option value="" disabled selected>Select Grade First</option>';
     }
 
     // Start the application
