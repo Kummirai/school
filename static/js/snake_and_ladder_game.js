@@ -250,8 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get game parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
     const numPlayers = parseInt(urlParams.get('players')) || 1;
-    const grade = parseInt(urlParams.get('grade')) || 7;
+    // Grade will be selected via modal, not from URL
 
+    // Initialize players without grade for now
     for (let i = 0; i < numPlayers; i++) {
         const playerName = urlParams.get(`player${i + 1}`) || `Player ${i + 1}`;
         players.push({
@@ -259,11 +260,39 @@ document.addEventListener('DOMContentLoaded', () => {
             name: playerName,
             position: 1,
             color: playerColors[i % playerColors.length],
-            grade: grade // Store grade for fetching questions
+            grade: null // Grade will be set after selection
         });
     }
 
     drawBoard();
     updatePlayerInfo();
-    displayQuestion(); // Start the first question
+
+    // Show grade selection modal
+    const gradeSelectionModal = new bootstrap.Modal(document.getElementById('gradeSelectionModal'));
+    gradeSelectionModal.show();
+
+    const questionGradeSelect = document.getElementById('questionGradeSelect');
+    const startGameWithGradeBtn = document.getElementById('startGameWithGradeBtn');
+
+    questionGradeSelect.addEventListener('change', function() {
+        if (this.value) {
+            startGameWithGradeBtn.disabled = false;
+        } else {
+            startGameWithGradeBtn.disabled = true;
+        }
+    });
+
+    startGameWithGradeBtn.addEventListener('click', function() {
+        const selectedGrade = parseInt(questionGradeSelect.value);
+        if (selectedGrade) {
+            // Set the selected grade for all players
+            players.forEach(player => {
+                player.grade = selectedGrade;
+            });
+            gradeSelectionModal.hide();
+            displayQuestion(); // Start the first question with the selected grade
+        } else {
+            alert("Please select a grade to start the game.");
+        }
+    });
 });

@@ -25,6 +25,42 @@
 </div>
 {% endblock %}
 
+<!-- Grade Selection Modal -->
+<div class="modal fade" id="gradeSelectionModal" tabindex="-1" aria-labelledby="gradeSelectionModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="gradeSelectionModalLabel">Select Question Grade</h5>
+      </div>
+      <div class="modal-body">
+        <p>Please select the grade level for the questions you'd like to answer:</p>
+        <select class="form-select" id="questionGradeSelect" aria-label="Select question grade">
+          <option value="" selected disabled>Choose Grade...</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+          <!-- Add more options as needed, e.g., for Python, Javascript etc. -->
+          <option value="13">Python</option>
+          <option value="14">Javascript</option>
+          <option value="15">HTML</option>
+          <option value="16">CSS</option>
+          <option value="17">Excel</option>
+          <option value="18">Ms Word</option>
+          <option value="19">Powerpoint</option>
+          <option value="20">Machine Learning</option>
+          <option value="21">Node JS</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="startGameWithGradeBtn" disabled>Start Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% block game_scripts %}
 <script src="{{ url_for('static', filename='js/snake_and_ladder_game.js') }}"></script>
 <script src="{{ url_for('static', filename='js/subject_game.js') }}"></script>

@@ -239,7 +239,6 @@ block content %}
     </div>
   </div>
 
-  <h3 class="mb-4 text-center">Select Grade Level:</h3>
   <div class="row justify-content-center">
     <div class="col-md-4 mb-4">
       <div class="card grade-card h-100" id="game-card-snake-ladder">
@@ -334,7 +333,6 @@ block content %}
   // Game configuration
   let currentConfig = {
     players: 1,
-    grade: 7,
     game: "math",
     playerNames: [],
   };
@@ -431,7 +429,6 @@ block content %}
   function launchGame() {
     // Construct URL with query parameters
     const params = new URLSearchParams();
-    params.append("grade", currentConfig.grade);
     params.append("players", currentConfig.players);
     currentConfig.playerNames.forEach((name, index) => {
       params.append(`player${index + 1}`, name);
