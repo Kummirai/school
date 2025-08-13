@@ -268,31 +268,36 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlayerInfo();
 
     // Show grade selection modal
-    const gradeSelectionModal = new bootstrap.Modal(document.getElementById('gradeSelectionModal'));
+    const gradeSelectionModalElement = document.getElementById('gradeSelectionModal');
+    console.log('Before Modal Init - gradeSelectionModalElement:', gradeSelectionModalElement); // New debug line
+    const gradeSelectionModal = new bootstrap.Modal(gradeSelectionModalElement);
     gradeSelectionModal.show();
 
-    const questionGradeSelect = document.getElementById('questionGradeSelect');
-    const startGameWithGradeBtn = document.getElementById('startGameWithGradeBtn');
+        const questionGradeSelect = document.getElementById('questionGradeSelect');
+        const startGameWithGradeBtn = document.getElementById('startGameWithGradeBtn');
 
-    questionGradeSelect.addEventListener('change', function() {
-        if (this.value) {
-            startGameWithGradeBtn.disabled = false;
-        } else {
-            startGameWithGradeBtn.disabled = true;
-        }
-    });
+        questionGradeSelect.addEventListener('change', function() {
+            if (this.value) {
+                startGameWithGradeBtn.disabled = false;
+            } else {
+                startGameWithGradeBtn.disabled = true;
+            }
+        });
 
-    startGameWithGradeBtn.addEventListener('click', function() {
-        const selectedGrade = parseInt(questionGradeSelect.value);
-        if (selectedGrade) {
-            // Set the selected grade for all players
-            players.forEach(player => {
-                player.grade = selectedGrade;
-            });
-            gradeSelectionModal.hide();
-            displayQuestion(); // Start the first question with the selected grade
-        } else {
-            alert("Please select a grade to start the game.");
-        }
-    });
+        startGameWithGradeBtn.addEventListener('click', function() {
+            const selectedGrade = parseInt(questionGradeSelect.value);
+            if (selectedGrade) {
+                // Set the selected grade for all players
+                players.forEach(player => {
+                    player.grade = selectedGrade;
+                });
+                gradeSelectionModal.hide();
+                displayQuestion(); // Start the first question with the selected grade
+            } else {
+                alert("Please select a grade to start the game.");
+            }
+        });
+    } else {
+        console.error("Grade selection modal element not found!");
+    }
 });

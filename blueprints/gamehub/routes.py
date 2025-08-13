@@ -122,3 +122,8 @@ def get_question():
         return jsonify(question_dict)
     else:
         return jsonify({'error': 'No questions found for this grade or an error occurred'}), 404
+
+
+@gamehub_bp.route('/test_modal')
+def test_modal():
+    return render_template('test_modal.html')
