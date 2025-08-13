@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request, render_template
+from flask import Blueprint, request, render_template, current_app
 from models import get_db_connection
 import psycopg2
 import psycopg2.extras
+import json
 
 practice_bp = Blueprint('practice_bp', __name__)
 
@@ -23,7 +24,7 @@ def get_grades():
     grades = [row[0] for row in cursor.fetchall()]
     cursor.close()
     conn.close()
-    return jsonify(grades)
+    return current_app.response_class(json.dumps(grades), mimetype='application/json')
 
 
 @practice_bp.route('/topics')
@@ -37,11 +38,12 @@ def get_topics():
     topics = [row[0] for row in cursor.fetchall()]
     cursor.close()
     conn.close()
-    return jsonify(topics)
+    return current_app.response_class(json.dumps(topics), mimetype='application/json')
 
 
 @practice_bp.route('/questions')
 def get_questions():
+    print("DEBUG: Entering get_questions function.")
     grade = request.args.get('grade')
     subject = request.args.get('subject')
     topic = request.args.get('topic')
@@ -57,7 +59,7 @@ def get_questions():
 
         if grade:
             query += " AND grade = %s"
-            params.append(grade)
+            params.append(int(grade))
         if subject:
             query += " AND subject = %s"
             params.append(subject)
@@ -68,18 +70,28 @@ def get_questions():
             query += " AND sub_topic = %s"
             params.append(sub_topic)
 
+        print(f"DEBUG: Executing query: {query} with params: {params}")
         cursor.execute(query, tuple(params))
         questions_raw = cursor.fetchall()
+        print(f"DEBUG: Fetched {len(questions_raw)} rows from database.")
         
         questions = []
         for row in questions_raw:
             questions.append(dict(row))
 
         cursor.close()
-        return jsonify(questions)
+        
+        print(f"DEBUG: Questions prepared for JSON serialization: {questions[:1]}") # Print first question for brevity
+        json_response = json.dumps(questions, default=str)
+        print("DEBUG: JSON serialization successful.")
+        return current_app.response_class(json_response, mimetype='application/json')
+
     except Exception as e:
-        print(f"Error in get_questions: {e}")
-        return jsonify({"error": f"An error occurred: {e}"}), 500
+        print(f"DEBUG: An exception occurred in get_questions: {e}")
+        error_payload = json.dumps({"error": f"An error occurred: {e}"})
+        return current_app.response_class(error_payload, mimetype='application/json', status=500)
     finally:
         if conn:
             conn.close()
+            print("DEBUG: Database connection closed.")
+    print("DEBUG: Exiting get_questions function.")
