@@ -23,6 +23,7 @@ from blueprints.courses.routes import courses_bp
 from blueprints.parents.routes import parents_bp
 from blueprints.profile.routes import profile_bp
 from blueprints.gamehub.routes import gamehub_bp
+from blueprints.practice.routes import practice_bp
 
 
 load_dotenv()
@@ -72,6 +73,7 @@ app.register_blueprint(courses_bp, url_prefix='/courses')
 app.register_blueprint(parents_bp, url_prefix='/parents')
 app.register_blueprint(profile_bp, url_prefix='/profile')
 app.register_blueprint(gamehub_bp, url_prefix='/gamehub')
+app.register_blueprint(practice_bp, url_prefix='/practice')
 
 
 @app.context_processor
