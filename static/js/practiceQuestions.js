@@ -129,12 +129,26 @@ document.addEventListener('DOMContentLoaded', function () {
             const questionCard = document.createElement('div');
             questionCard.className = 'card mb-3';
             
-            let optionsHtml = '';
-            const options = question.options || {}; // Default to an empty object if options is null/undefined
+            console.log("Question Type:", question.question_type); // Keep this for now, as user is still debugging
 
-            Object.values(options).forEach(option => {
-                optionsHtml += `<div class="quiz-option p-2 my-1 border rounded" data-question-id="${question.id}">${option}</div>`;
-            });
+            let questionBodyContent = '';
+
+            if (question.question_type === 'Numerical') {
+                questionBodyContent = `
+                    <p class="card-text">${question.question_text}</p>
+                    <input type="number" class="form-control numeric-answer-input" placeholder="Enter your answer">
+                `;
+            } else {
+                let optionsHtml = '';
+                const options = question.options || {};
+                Object.entries(options).forEach(([key, value]) => {
+                    optionsHtml += `<div class="quiz-option p-2 my-1 border rounded" data-question-id="${question.id}" data-option-key="${key}">${key}) ${value}</div>`;
+                });
+                questionBodyContent = `
+                    <p class="card-text">${question.question_text}</p>
+                    <div class="options-container">${optionsHtml}</div>
+                `;
+            }
 
             questionCard.innerHTML = `
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -142,8 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <span class="badge bg-secondary">${question.difficulty || 'Medium'}</span>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">${question.question_text}</p>
-                    <div class="options-container">${optionsHtml}</div>
+                    ${questionBodyContent}
                     <div class="feedback mt-2"></div>
                 </div>
                 <div class="card-footer text-end">
@@ -152,36 +165,60 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             contentArea.appendChild(questionCard);
 
-            const optionsContainer = questionCard.querySelector('.options-container');
-            optionsContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('quiz-option')) {
-                    // Remove selected from siblings
-                    Array.from(optionsContainer.children).forEach(child => child.classList.remove('bg-primary', 'text-white'));
-                    // Add selected style
-                    e.target.classList.add('bg-primary', 'text-white');
+            // Event listener for quiz options (for MCQ type)
+            if (question.question_type !== 'Numerical') {
+                const optionsContainer = questionCard.querySelector('.options-container');
+                // Add a check for optionsContainer before adding event listener
+                if (optionsContainer) {
+                    optionsContainer.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('quiz-option')) {
+                            Array.from(optionsContainer.children).forEach(child => child.classList.remove('bg-primary', 'text-white'));
+                            e.target.classList.add('bg-primary', 'text-white');
+                        }
+                    });
                 }
-            });
+            }
 
+            // Event listener for check answer button
             questionCard.querySelector('.check-answer-btn').addEventListener('click', () => {
-                const selectedOption = optionsContainer.querySelector('.quiz-option.bg-primary');
                 const feedbackDiv = questionCard.querySelector('.feedback');
-                if (!selectedOption) {
-                    feedbackDiv.innerHTML = '<div class="alert alert-warning">Please select an answer.</div>';
-                    return;
+                let userAnswer;
+
+                if (question.question_type === 'Numerical') {
+                    const inputField = questionCard.querySelector('.numeric-answer-input');
+                    userAnswer = inputField.value;
+                    if (userAnswer === '') {
+                        feedbackDiv.innerHTML = '<div class="alert alert-warning">Please enter an answer.</div>';
+                        return;
+                    }
+                    userAnswer = parseFloat(userAnswer);
+                } else {
+                    const selectedOption = questionCard.querySelector('.quiz-option.bg-primary');
+                    if (!selectedOption) {
+                        feedbackDiv.innerHTML = '<div class="alert alert-warning">Please select an answer.</div>';
+                        return;
+                    }
+                    userAnswer = selectedOption.dataset.optionKey; // FIX: Get the key directly
                 }
                 
-                const answer = selectedOption.textContent;
-                
-                // In a real app, you would get the correct answer from a secure endpoint.
-                // For now, we'll compare against the answer in the question object.
-                if (answer === question.correct_answer) {
+                // console.log("DEBUG: userAnswer:", userAnswer); // Remove debug logs
+                // console.log("DEBUG: question.answer:", question.answer); // Remove debug logs
+                // console.log("DEBUG: Comparison result:", userAnswer == question.answer); // Remove debug logs
+
+                if (userAnswer == question.answer) {
                     feedbackDiv.innerHTML = '<div class="alert alert-success">Correct!</div>';
-                    selectedOption.classList.remove('bg-primary');
-                    selectedOption.classList.add('bg-success', 'text-white');
+                    if (question.question_type !== 'Numerical') { // FIX: 'numeric' to 'Numerical'
+                        const selectedOption = questionCard.querySelector('.quiz-option.bg-primary');
+                        selectedOption.classList.remove('bg-primary');
+                        selectedOption.classList.add('bg-success', 'text-white');
+                    }
                 } else {
-                    feedbackDiv.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${question.correct_answer}.</div>`;
-                    selectedOption.classList.remove('bg-primary');
-                    selectedOption.classList.add('bg-danger', 'text-white');
+                    feedbackDiv.innerHTML = `<div class="alert alert-danger">Incorrect. The correct answer is ${question.answer}.</div>`;
+                    if (question.question_type !== 'Numerical') { // FIX: 'numeric' to 'Numerical'
+                        const selectedOption = questionCard.querySelector('.quiz-option.bg-primary');
+                        selectedOption.classList.remove('bg-primary');
+                        selectedOption.classList.add('bg-danger', 'text-white');
+                    }
                 }
             });
         });
