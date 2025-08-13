@@ -133,10 +133,30 @@ async function fetchQuestion(grade) {
 // Function to display question
 async function displayQuestion() {
     currentQuestion = await fetchQuestion(players[currentPlayerIndex].grade);
+
+    if (!currentQuestion) {
+        document.getElementById('question-text').textContent = "Failed to load question. Please try another grade.";
+        document.getElementById('options-container').innerHTML = ''; // Clear options
+        document.getElementById('next-question-btn').style.display = 'block'; // Allow to proceed
+        stopTimer(); // Stop any running timer
+        return;
+    }
+
     document.getElementById('question-text').textContent = currentQuestion.question;
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
-    currentQuestion.options.forEach(option => {
+    
+    // Filter out any null or empty options before creating buttons
+    const validOptions = currentQuestion.options.filter(option => option !== null && option !== undefined && option.trim() !== '');
+
+    if (validOptions.length === 0) {
+        document.getElementById('question-text').textContent = "No valid options for this question. Please try another grade.";
+        document.getElementById('next-question-btn').style.display = 'block';
+        stopTimer();
+        return;
+    }
+
+    validOptions.forEach(option => {
         const button = document.createElement('button');
         button.className = 'option-btn';
         button.textContent = option;

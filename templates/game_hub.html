@@ -240,32 +240,29 @@ block content %}
   </div>
 
   <h3 class="mb-4 text-center">Select Grade Level:</h3>
-  <div class="row">
-    {% for grade in range(7, 13) %}
+  <div class="row justify-content-center">
     <div class="col-md-4 mb-4">
-      <div class="card grade-card h-100" id="grade-{{ grade }}">
+      <div class="card grade-card h-100" id="game-card-snake-ladder">
         <div class="card-body text-center">
-          <h2 class="card-title">Grade {{ grade }}</h2>
-          <div class="game-list mt-3" style="display: none">
-            <h5 class="mb-3">Available Games:</h5>
+          <h2 class="card-title">Snake and Ladder</h2>
+          <div class="game-list mt-3" style="display: block">
+            <h5 class="mb-3">Available Game:</h5>
             <div class="list-group list-group-flush">
               <a
                 href="#"
                 class="list-group-item list-group-item-action game-card"
                 data-game="snake_and_ladder"
-                data-grade="{{ grade }}"
               >
                 <span class="badge bg-info text-dark subject-badge"
                   >Mixed</span
                 >
-                Snake and Ladder
+                Play Now
               </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 
@@ -358,22 +355,7 @@ block content %}
     });
   });
 
-  // Grade selection - show/hide game lists
-  document.querySelectorAll(".grade-card").forEach((card) => {
-    card.addEventListener("click", function () {
-      // Hide all game lists first
-      document.querySelectorAll(".game-list").forEach((list) => {
-        list.style.display = "none";
-      });
-
-      // Show game list for this grade
-      const gameList = this.querySelector(".game-list");
-      gameList.style.display = "block";
-
-      // Store grade level
-      currentConfig.grade = parseInt(this.id.split("-")[1]);
-    });
-  });
+  
 
   // Game selection
   document.querySelectorAll(".game-card").forEach((card) => {
