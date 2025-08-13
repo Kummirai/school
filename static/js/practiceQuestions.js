@@ -130,10 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
             questionCard.className = 'card mb-3';
             
             let optionsHtml = '';
-            // Ensure options is an array
-            const options = Array.isArray(question.options) ? question.options : JSON.parse(question.options || '[]');
+            const options = question.options || {}; // Default to an empty object if options is null/undefined
 
-            options.forEach(option => {
+            Object.values(options).forEach(option => {
                 optionsHtml += `<div class="quiz-option p-2 my-1 border rounded" data-question-id="${question.id}">${option}</div>`;
             });
 
