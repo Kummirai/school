@@ -252,57 +252,13 @@ block content %}
               <a
                 href="#"
                 class="list-group-item list-group-item-action game-card"
-                data-game="math"
-                data-grade="{{ grade }}"
-              >
-                <span class="badge bg-warning text-dark subject-badge"
-                  >Math</span
-                >
-                Math Challenge
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action game-card"
-                data-game="english"
-                data-grade="{{ grade }}"
-              >
-                <span class="badge bg-danger text-white subject-badge"
-                  >English</span
-                >
-                English Adventure
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action game-card"
-                data-game="science"
-                data-grade="{{ grade }}"
-              >
-                <span class="badge bg-dark text-white subject-badge"
-                  >Science</span
-                >
-                Science Explorer
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action game-card"
-                data-game="history"
-                data-grade="{{ grade }}"
-              >
-                <span class="badge bg-secondary text-white subject-badge"
-                  >History</span
-                >
-                History Quest
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action game-card"
-                data-game="countdown_snake"
+                data-game="snake_and_ladder"
                 data-grade="{{ grade }}"
               >
                 <span class="badge bg-info text-dark subject-badge"
                   >Mixed</span
                 >
-                Countdown Snake
+                Snake and Ladder
               </a>
             </div>
           </div>
@@ -514,8 +470,8 @@ block content %}
       case "history":
         gameUrl = "{{ url_for('gamehub.history_game') }}";
         break;
-      case "countdown_snake":
-        gameUrl = "{{ url_for('gamehub.countdown_snake_game') }}";
+      case "snake_and_ladder":
+        gameUrl = "{{ url_for('gamehub.snake_and_ladder_game') }}";
         break;
       default:
         gameUrl = "{{ url_for('gamehub.math_game') }}";

@@ -3,6 +3,7 @@ import json
 import os
 from flask_login import login_required
 from flask import current_app as app
+from .utils import get_random_question
 
 # Create a Blueprint for the grades routes
 gamehub_bp = Blueprint('gamehub', __name__,
@@ -96,13 +97,28 @@ def history_game():
                            player_names=player_names)
 
 
-@gamehub_bp.route('/countdown-snake-game')
-def countdown_snake_game():
+@gamehub_bp.route('/snake-and-ladder-game')
+def snake_and_ladder_game():
     grade = request.args.get('grade', default=7, type=int)
     players = request.args.get('players', default=1, type=int)
     player_names = [request.args.get(
         f'player{i+1}', f'Player {i+1}') for i in range(players)]
-    return render_template('countdown_snake_game.html',
+    return render_template('snake_and_ladder_game.html',
                            grade=grade,
                            players=players,
                            player_names=player_names)
+
+
+@gamehub_bp.route('/api/get_question')
+def get_question():
+    grade = request.args.get('grade', type=int)
+    if not grade:
+        return jsonify({'error': 'Grade parameter is required'}), 400
+
+    question_data = get_random_question(grade)
+    if question_data:
+        # Convert DictRow to a regular dictionary for JSON serialization
+        question_dict = dict(question_data)
+        return jsonify(question_dict)
+    else:
+        return jsonify({'error': 'No questions found for this grade or an error occurred'}), 404

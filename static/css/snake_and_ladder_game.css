@@ -1,0 +1,79 @@
+/* snake_and_ladder_game.css */
+
+#gameBoard {
+    border: 2px solid #333;
+    background-color: #f0f0f0;
+}
+
+#question-area {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e9f7fe;
+    margin-bottom: 20px;
+}
+
+#timer-display {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+}
+
+.option-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.option-btn.selected {
+    background-color: #d1e7ff;
+    border-color: #86b7fe;
+}
+
+.option-btn.correct {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.option-btn.incorrect {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+#player-info {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.player-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.player-color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #333;
+}

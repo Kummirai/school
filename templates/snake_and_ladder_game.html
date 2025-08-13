@@ -1,0 +1,31 @@
+{% extends "game_base.html" %}
+
+{% block game_title %}Snake and Ladder{% endblock %}
+
+{% block game_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/snake_and_ladder_game.css') }}">
+<div class="row">
+    <div class="col-md-8">
+        <canvas id="gameBoard" width="600" height="600"></canvas>
+    </div>
+    <div class="col-md-4">
+        <div id="question-area">
+            <h4>Question:</h4>
+            <p id="question-text"></p>
+            <div id="options-container" class="options-container"></div>
+            <div id="timer-display">Time left: <span id="timer">30</span>s</div>
+            <button id="next-question-btn" class="btn btn-primary mt-3" style="display:none;">Next Question</button>
+        </div>
+        <div id="feedback" class="mt-3"></div>
+        <div id="player-info" class="mt-3">
+            <h4>Players:</h4>
+            <div id="player-list"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block game_scripts %}
+<script src="{{ url_for('static', filename='js/snake_and_ladder_game.js') }}"></script>
+<script src="{{ url_for('static', filename='js/subject_game.js') }}"></script>
+{% endblock %}
