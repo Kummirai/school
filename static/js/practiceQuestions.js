@@ -129,8 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const questionCard = document.createElement('div');
             questionCard.className = 'card mb-3';
             
-            console.log("Question Type:", question.question_type); // Keep this for now, as user is still debugging
-
             let questionBodyContent = '';
 
             if (question.question_type === 'Numerical') {

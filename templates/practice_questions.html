@@ -134,16 +134,22 @@
   /* Custom accordion styling */
   .accordion-button:not(.collapsed) {
     color: white;
-    background-color: #dc3545;
+    background-color: #343a40; /* Bootstrap dark color */
   }
 
   .accordion-button:focus {
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
   }
 
+  .accordion-button:not(.collapsed)::after {
+    filter: brightness(0) invert(1); /* This makes the arrow white */
+  }
+
   .list-group-item {
     border-left: 0;
     border-right: 0;
+    background-color: #f8f9fa; /* A very light gray, Bootstrap's light color */
+    color: #212529; /* Bootstrap's dark color */
   }
 
   .list-group-item:first-child {
@@ -156,6 +162,18 @@
 
   .card-body {
     padding: 1rem 0.4rem;
+  }
+
+  .list-group-item-action.active {
+    color: #fff;
+    background-color: #dc3545; /* Bootstrap danger color */
+    border-color: #dc3545;
+  }
+
+  .list-group-item-action:hover,
+  .list-group-item-action:focus {
+    color: #fff; /* Keep text white on hover */
+    background-color: #bb2d3b; /* A slightly darker danger color */
   }
 </style>
 
