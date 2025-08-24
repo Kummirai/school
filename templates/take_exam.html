@@ -47,11 +47,12 @@
                         <!-- Debug: Type={{ question.type }}, Options={{ question.options }} -->
                         {% if (question.type == 'mcq' or question.type == 'multiple_choice') and question.options %}
                             {# Multiple Choice #}
+                            {% set alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
                             {% for option in question.options %}
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="option_{{ question.id }}_{{ loop.index }}" value="{{ option }}" required>
+                                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="option_{{ question.id }}_{{ loop.index }}" value="{{ alphabet[loop.index0] }}" required>
                                 <label class="form-check-label" for="option_{{ question.id }}_{{ loop.index }}">
-                                    {{ option }}
+                                    {{ alphabet[loop.index0] }}. {{ option }}
                                 </label>
                             </div>
                             {% endfor %}

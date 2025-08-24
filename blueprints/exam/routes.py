@@ -266,8 +266,32 @@ def submit_exam(exam_id):
             if user_submitted_answer is None or user_submitted_answer == '':
                 is_current_question_correct = False
             else:
-                is_current_question_correct = user_submitted_answer == correct_answer
-            
+                if question_type in ['mcq', 'multiple_choice']:
+                    submitted_letter = user_submitted_answer.strip().upper()
+                    is_current_question_correct = False # Default to incorrect
+
+                    # Case 1: The correct answer in the DB is the letter itself (e.g., 'B').
+                    if submitted_letter == str(correct_answer).strip().upper():
+                        is_current_question_correct = True
+                    
+                    # Case 2: The correct answer in the DB is the full option text (e.g., "Rhombus").
+                    else:
+                        try:
+                            # Find the index of the correct answer text in the options list.
+                            correct_option_index = options.index(correct_answer)
+                            # Convert index to a letter ('A', 'B', ...)
+                            correct_option_letter = chr(ord('A') + correct_option_index)
+                            # Compare the submitted letter with the derived correct letter.
+                            if submitted_letter == correct_option_letter:
+                                is_current_question_correct = True
+                        except (ValueError, TypeError):
+                            # This fails if correct_answer is not in the options list, which is expected
+                            # if the answer is a letter. The result from Case 1 is used.
+                            pass
+                else:
+                    # For other question types (short answer, etc.), do a direct comparison
+                    is_current_question_correct = (user_submitted_answer == correct_answer)
+
             if is_current_question_correct:
                 correct_answers_count += 1
 
