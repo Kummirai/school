@@ -298,7 +298,7 @@ def submit_exam(exam_id):
         session['last_exam_review_data'] = {
             'exam_id': exam_id,
             'score': score,
-            'total_questions': total_questions,
+            'total_questions': total_auto_gradable_questions,
             'correct_answers_count': correct_answers_count,
             'questions_for_review': questions_for_review
         }

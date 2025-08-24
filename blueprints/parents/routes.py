@@ -114,23 +114,76 @@ def student_chart_data(student_id):
         submissions = get_student_submissions(student_id)
         announcements = get_user_announcements(student_id, limit=5)
 
-        # Format activities from various sources
-        activities = []
-        for sub in submissions[:3]:
-            activities.append({
-                "icon": "fa-file-upload",
-                "title": f"Submitted: {sub['title']}",
-                "description": f"Score: {sub['marks_obtained']}/{sub['total_marks']}" if sub.get('marks_obtained') else "Awaiting grade",
-                "time": sub['submitted_at'].strftime('%b %d')
+        # Fetch recent exam results
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        cur.execute("""
+            SELECT exam_id, score, completion_time
+            FROM exam_results
+            WHERE user_id = %s
+            ORDER BY completion_time DESC
+            LIMIT 5
+        """, (student_id,))
+        exam_results = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        # Combine and sort activities
+        all_activities = []
+        for sub in submissions:
+            all_activities.append({
+                "type": "assignment",
+                "timestamp": sub['submitted_at'],
+                "data": sub
+            })
+        for ann in announcements:
+            all_activities.append({
+                "type": "announcement",
+                "timestamp": ann['created_at'],
+                "data": ann
+            })
+        for res in exam_results:
+            all_activities.append({
+                "type": "exam",
+                "timestamp": res['completion_time'],
+                "data": res
             })
 
-        for ann in announcements[:2]:
-            activities.append({
-                "icon": "fa-bullhorn",
-                "title": f"Announcement: {ann['title']}",
-                "description": ann['message'][:50] + '...',
-                "time": ann['created_at'].strftime('%b %d')
-            })
+        all_activities.sort(key=lambda x: x['timestamp'], reverse=True)
+
+        # Format the top 5 activities for the frontend
+        formatted_activities = []
+        for activity in all_activities[:5]:
+            if activity['type'] == 'assignment':
+                sub = activity['data']
+                formatted_activities.append({
+                    "icon": "fa-file-upload",
+                    "title": f"Submitted: {sub['title']}",
+                    "description": f"Score: {sub.get('marks_obtained', 'N/A')}/{sub.get('total_marks', 'N/A')}" if sub.get('marks_obtained') is not None else "Awaiting grade",
+                    "time": activity['timestamp'].strftime('%b %d')
+                })
+            elif activity['type'] == 'announcement':
+                ann = activity['data']
+                formatted_activities.append({
+                    "icon": "fa-bullhorn",
+                    "title": f"Announcement: {ann['title']}",
+                    "description": ann['message'][:50] + '...',
+                    "time": activity['timestamp'].strftime('%b %d')
+                })
+            elif activity['type'] == 'exam':
+                res = activity['data']
+                try:
+                    _grade, subject, year, month = res['exam_id'].split('|')
+                    title = f"Exam: {subject} ({month} {year})"
+                except (ValueError, IndexError):
+                    title = f"Exam taken: {res['exam_id']}"
+                
+                formatted_activities.append({
+                    "icon": "fa-file-alt",
+                    "title": title,
+                    "description": f"Score: {res['score']:.0f}%",
+                    "time": activity['timestamp'].strftime('%b %d')
+                })
 
         # This data structure should match what your JS expects
         chart_data = {
@@ -139,7 +192,7 @@ def student_chart_data(student_id):
             "exams": stats.get('exams', {}),
             "trend": stats.get('trend', {}),
             "subjects": stats.get('subjects', {}),
-            "activities": activities
+            "activities": formatted_activities
         }
 
         return jsonify(chart_data)
