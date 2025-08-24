@@ -41,8 +41,6 @@ login_manager.login_view = 'home.login'  # type: ignore
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
 
-# User loader callbac
-
 
 @login_manager.user_loader
 def load_user(user_id):
