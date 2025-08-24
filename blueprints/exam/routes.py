@@ -318,6 +318,8 @@ def submit_exam(exam_id):
         result_id = cur.fetchone()[0]
         conn.commit()
         flash('Exam submitted and graded successfully!', 'success')
+
+        session['exam_just_completed'] = exam_id
         
         session['last_exam_review_data'] = {
             'exam_id': exam_id,

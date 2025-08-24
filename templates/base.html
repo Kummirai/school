@@ -418,5 +418,11 @@
         }
       });
     </script>
+    {% if session.exam_just_completed %}
+    <script>
+      localStorage.removeItem('examEndTime_{{ session.exam_just_completed }}');
+    </script>
+    {% set _ = session.pop('exam_just_completed', None) %}
+    {% endif %}
   </body>
 </html>
